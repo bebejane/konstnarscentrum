@@ -25,6 +25,7 @@ export default function Upload(data) {
   const onChange = async (formData) => {
     const files = []
     const images = []
+    
     for(var pair of formData.entries())
       files.push(pair[1])
     
