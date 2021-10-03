@@ -13,48 +13,50 @@ import 'swiper/css/scrollbar';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
+const initialStatus = {status:"idle", totalProgress:0, item:0, percent:0, total:0, images:[]}
 
 export default function Upload(data) {
   
-  const [uploadProgress, setUploadProgress] = useState({status:"idle", totalProgress:0, item:0, percent:0})
-  const [progress, setProgress] = useState({status:"idle", totalProgress:0, item:0, percent:0, total:0, images:[]})
+  const [progress, setProgress] = useState(initialStatus)
   const [error, setError] = useState()
   const [swiper, setSwiper] = useState()
-  
+  const token = 'hej token'
+
   const onChange = async (formData) => {
+    const files = []
+    const images = []
+    for(var pair of formData.entries())
+      files.push(pair[1])
     
-    setProgress({status:"uploading", totalProgress:0, item:0, percent:0, images:[]})
-    try{
-      const response = await axios.post('/api/upload', formData, {
-        headers: { 'content-type': 'multipart/form-data' },
-        responseType: 'stream', 
-        onUploadProgress: (event) => setUploadProgress({
-          ...progress, 
+    for (let idx = 0; idx < files.length; idx++) {
+      const file = files[idx]
+      const {name : filename} = file
+      setProgress(progress => {return {...progress, item:idx+1, total:files.length, percent:0, status: "requesting"}})
+      let res = await axios.post('/api/s3upload', {filename, token})
+      const {id, s3url} = res.data;
+      res = await axios.put(s3url, file, { headers: {'Content-Type': file.type},
+        onUploadProgress: (event) => setProgress({
           status: "uploading",
-          totalProgress: Math.round((event.loaded * 100) / event.total)
-        }),
-        onDownloadProgress: progressEvent => {
-          if(!progressEvent.currentTarget.response) 
-            return 
-          try{
-            const chunks = progressEvent.currentTarget.response.split("###").filter(o => o).map(o => JSON.parse(o))
-            const p = chunks[chunks.length-1]
-            if(p && p.status)
-              setProgress({...progress, ...p})
-            else if(p && p.error){
-              setError(p.error)
-            }
-            
-          }catch(err){
-            console.log(progressEvent.currentTarget.response)
-            console.log(err)
-          }
-        }
-      });
-      console.log('done')
-    }catch(err){
-      setError(err)
+          percent: Math.round((event.loaded * 100) / event.total),
+          totalProgress: Math.round((idx/files.length)*100) + (Math.round((event.loaded * 100) / event.total)/files.length),
+          item:idx+1,
+          total:files.length,
+          images:[]
+        })
+      })
+      setProgress(progress => { return {...progress, status:"creating"}})
+      res = await axios.post('/api/s3upload', {s3url, id})
+      images.push(res.data)
+      setProgress(progress => { return {...progress, images}})
     }
+    setProgress({
+      status: "done",
+      percent: 100,
+      totalProgress: 100,
+      item:files.length,
+      total:files.length,
+      images
+    })
   };
   const handleSwiper = (swiper) => {
     console.log(swiper)
@@ -68,13 +70,10 @@ export default function Upload(data) {
           <div><h2>Upload</h2></div>
         </div>
         <h2>Uploading</h2>
-        <progress value={uploadProgress.totalProgress} max={100}/>
-        <div className={styles.status}>Status: {uploadProgress.status} {uploadProgress.totalProgress}%</div>
-
-        <h2>Processing</h2>
-        <progress value={progress.totalProgress} max={100}/> 
+        <progress value={progress.percent} max={100}/>
+        <progress value={progress.totalProgress} max={100}/>
         <div className={styles.status}>
-          Status: {progress.status} {progress.item}/{progress.total} ({progress.percent}%)
+          Status: {progress.status} {progress.item}/{progress.total} ({progress.progress}%)  
         </div>
         {progress.status === 'done' && <h2>Done!</h2>}
         {error && <div className={styles.error}>{error.message}</div>}
