@@ -2,6 +2,5 @@
 .env
 .env.local
 /.next
-package-lock.json
 TODO
 .DS_Store
