@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"node_modules": true,
+			".env": true,
+			".env.local": true,
+			".gitignore": true,
+			"jsconfig.json": true,
+			"next.config.js": true,
+			"package-lock.json": true,
+			"package.json": true,
+			".next": true,
+			"Konst Centrum.code-workspace": true,
+			"README.md": true
+		},
+		"workspace.isHidden": true
+	}
+}

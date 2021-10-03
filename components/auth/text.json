@@ -1,0 +1,22 @@
+{ 
+  "send" : "Skicka",
+  "apply" : "Ansök om medlemskap",
+  "signIn": "Logga in",
+  "signOut": "Logga ut",
+  "goHome": "Gå hem",
+  "requestPasswordReset": "Begär nytt lösenord",
+  "updatePassword": "Ändra lösenord",
+  "forgotPassword": "Glömt lösenordet?",
+  "email":"E-post",
+  "firstName" : "Första namn",
+  "lastName" : "Andra namn",
+  "password" : "Lösenord",
+  "reTypePassword" : "Upprepa lösenordet",
+  "message" : "Meddelande",  
+  "thanksForRegistering":"Tack för din anmälan!",
+  "reviewYourRegistration":"Vi har tagit emot din anmälan och kommer at återkomma snarast",
+  "yourPasswordHasBeenUpdated" : "Ditt lösenord har blivit uppdaterat",
+  "passwordEmailSent" : "Vi har skickat ett mail till dig fōr att återställa ditt lösenord",
+  "thanksSigningUp": "Tack för din sign up!",
+  "goToYourPage": "Gå till din sida"
+}

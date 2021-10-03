@@ -1,0 +1,22 @@
+#import "./fragments/ImageFragment.graphql"
+
+query GetFrontPage{
+  frontPage {
+    intro {
+      headline
+      id
+      image{
+        ...ImageFragment
+      }
+    }
+    slideshow {
+      headline
+      id
+      image{
+        ...ImageFragment
+      }
+    }
+    summary
+    price
+  }
+}

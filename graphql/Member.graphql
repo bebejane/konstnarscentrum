@@ -1,0 +1,18 @@
+query GetAllMembers {
+  members: allMembers {
+    id
+    firstName
+    lastName
+    email
+    _status
+    _firstPublishedAt
+  }
+}
+query GetMember($email: String!){
+  member(filter: {email: {eq: $email}}){
+    id
+    email
+    firstName
+    lastName
+  }
+}
