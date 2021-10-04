@@ -1,0 +1,52 @@
+.container {
+  width: 100%;
+  position:relative;
+}
+
+.block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  width:100%;
+  position:relative;
+  &:nth-child(odd){
+    background-color: green;
+  }
+  &:nth-child(even){
+    background-color:hotpink;
+  }
+  .status{
+    position: absolute;
+    top:0;
+    right: 0px;
+    margin:2%;
+    color:#fff;
+    &.middle{
+      top:unset;
+      bottom:unset;
+    }
+    &.out{
+      top:unset;
+      bottom:0;
+    }
+  }
+  .box{
+    background-color: indigo;
+    width:100px;
+    height:100px;
+    border-radius: 50px;
+  }
+  .boxAnim{
+    animation: boxy 1s linear forwards;
+  }
+}
+
+@keyframes boxy {
+  from{
+    transform: scale(1);
+  }
+  to{
+    transform: scale(4);
+  }
+}
