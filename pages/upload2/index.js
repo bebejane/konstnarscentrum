@@ -23,41 +23,47 @@ export default function Upload(data) {
   const token = 'hej token'
 
   const onChange = async (formData) => {
-    const files = []
-    const images = []
-    
-    for(var pair of formData.entries())
-      files.push(pair[1])
-    
-    for (let idx = 0; idx < files.length; idx++) {
-      const file = files[idx]
-      const {name : filename} = file
-      setProgress(progress => {return {...progress, item:idx+1, total:files.length, percent:0, status: "requesting"}})
-      let res = await axios.post('/api/s3upload', {filename, token})
-      const {id, s3url} = res.data;
-      res = await axios.put(s3url, file, { headers: {'Content-Type': file.type},
-        onUploadProgress: (event) => setProgress({
-          status: "uploading",
-          percent: Math.round((event.loaded * 100) / event.total),
-          totalProgress: Math.round((idx/files.length)*100) + (Math.round((event.loaded * 100) / event.total)/files.length),
-          item:idx+1,
-          total:files.length,
-          images:[]
+
+    try{
+
+      const files = []
+      const images = []
+      
+      for(var pair of formData.entries())
+        files.push(pair[1])
+      
+      for (let idx = 0; idx < files.length; idx++) {
+        const file = files[idx]
+        const {name : filename} = file
+        setProgress(progress => {return {...progress, item:idx+1, total:files.length, percent:0, status: "requesting"}})
+        let res = await axios.post('/api/s3upload', {filename, token})
+        const {id, s3url} = res.data;
+        res = await axios.put(s3url, file, { headers: {'Content-Type': file.type},
+          onUploadProgress: (event) => setProgress(progress => { return {
+            ...progress,
+            status: "uploading",
+            percent: Math.round((event.loaded * 100) / event.total),
+            totalProgress: Math.round((idx/files.length)*100) + (Math.round((event.loaded * 100) / event.total)/files.length),
+            item:idx+1,
+            total:files.length,
+          }})
         })
+        setProgress(progress => { return {...progress, status:"processing"}})
+        res = await axios.post('/api/s3upload', {s3url, id})
+        images.push(res.data)
+        setProgress(progress => { return {...progress, images}})
+      }
+      setProgress({
+        status: "done",
+        percent: 100,
+        totalProgress: 100,
+        item:files.length,
+        total:files.length,
+        images
       })
-      setProgress(progress => { return {...progress, status:"creating"}})
-      res = await axios.post('/api/s3upload', {s3url, id})
-      images.push(res.data)
-      setProgress(progress => { return {...progress, images}})
+    }catch(err){
+      setError(err)
     }
-    setProgress({
-      status: "done",
-      percent: 100,
-      totalProgress: 100,
-      item:files.length,
-      total:files.length,
-      images
-    })
   };
   const handleSwiper = (swiper) => {
     console.log(swiper)
@@ -74,7 +80,7 @@ export default function Upload(data) {
         <progress value={progress.percent} max={100}/>
         <progress value={progress.totalProgress} max={100}/>
         <div className={styles.status}>
-          Status: {progress.status} {progress.item}/{progress.total} ({progress.progress}%)  
+          Status: {progress.status} {progress.item}/{progress.total} ({progress.percent}%)  
         </div>
         {progress.status === 'done' && <h2>Done!</h2>}
         {error && <div className={styles.error}>{error.message}</div>}
