@@ -34,13 +34,14 @@ export function SubmitButton({ loading, children, onClick }) {
 }
 
 export function AuthError({ error }) {
+  const message = typeof error === "string" ? error : error.message || error.toString()
 	return (
     <div className={styles.error}>
       <h1 className={styles.errorHeader}>
         Authentication Error
       </h1>
       <div className={styles.errorBox}>
-        {error}
+        {message}
       </div>
     </div>
 
