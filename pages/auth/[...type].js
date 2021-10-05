@@ -18,19 +18,18 @@ export async function getServerSideProps(context) {
 	const token = context.query.token || null;
 	const csrfToken = await getCsrfToken(context);
 
-	if(!pages.filter(p => p.id === type).length) 
-		return {notFound:true}
+	if(!pages.filter(p => p.id === type).length) return { notFound:true }
 	
 	const props = {
 		type,
 		token,
 		csrfToken
 	}
-	
-	if(type === 'signup' && token)
-		props.application =  await applicationController.getByToken(token);
+
 	if(['apply', 'signup'].includes(type))
 		props.roles =  await roleController.all()
+	if(type === 'signup' && token)
+		props.application =  await applicationController.getByToken(token);
 
 	return {props}
 }

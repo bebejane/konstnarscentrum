@@ -25,16 +25,10 @@ export default function Auth(data) {
   )
 }
 
-export function SubmitButton({ loading, children, onClick }) {
-	return (
-    <button className={styles.submitButton} type="submit" onClick={onClick}>
-      {!loading ? children : <div className={styles.loader}></div>}
-    </button>
-  )
-}
-
 export function AuthError({ error }) {
+  console.log(error)
   const message = typeof error === "string" ? error : error.message || error.toString()
+  
 	return (
     <div className={styles.error}>
       <h1 className={styles.errorHeader}>
@@ -45,5 +39,13 @@ export function AuthError({ error }) {
       </div>
     </div>
 
+  )
+}
+
+export function SubmitButton({ loading, children, onClick }) {
+	return (
+    <button className={styles.submitButton} type="submit" onClick={onClick}>
+      {!loading ? children : <div className={styles.loader}></div>}
+    </button>
   )
 }
