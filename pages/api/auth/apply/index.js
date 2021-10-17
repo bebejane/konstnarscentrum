@@ -26,6 +26,7 @@ export default catchErrorsFrom( async (req, res) => {
     lastName,
     message,
     approvalToken,
+    media:null,
     approved:false
   });
   await Email.sendApplicationEmail(email)
