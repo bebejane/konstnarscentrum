@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
-import Link from "next/link";
 
 export default function SignIn({ csrfToken, domain }) {
 	const router = useRouter();
@@ -17,6 +16,7 @@ export default function SignIn({ csrfToken, domain }) {
 	} = useForm();
 
 	const onSubmitSignIn = async ({ username, password }) => {
+		
 		await signIn("credentials", {
 			callbackUrl: `${window.location.origin}/member`,
 			username,
@@ -35,7 +35,7 @@ export default function SignIn({ csrfToken, domain }) {
 				action="/api/auth/callback/credentials"
 				onSubmit={handleSubmit(onSubmitSignIn)}
 			>
-				<input name="csrfToken" type="hidden" defaultValue={csrfToken} />
+				<input name="csrfToken" type="hidden" value={csrfToken} />
 				<input
 					{...register("username", { required: true })}
 					placeholder={`${text.email}...`}

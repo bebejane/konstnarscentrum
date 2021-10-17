@@ -70,7 +70,7 @@ export function AuthLinks({type, domain}) {
       </p>
       <p className={styles.authDomain}>
         <Link href={'/'}>
-          <a>{domain}</a>
+          <a>Konstnärscentrum</a>
         </Link>
       </p>
     </>
