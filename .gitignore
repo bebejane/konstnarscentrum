@@ -4,3 +4,4 @@
 /.next
 TODO
 .DS_Store
+*.code-workspace

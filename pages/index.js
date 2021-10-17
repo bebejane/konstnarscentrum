@@ -11,12 +11,13 @@ export default function Home(data) {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
+	
 	const frontPage  = await frontPageController.get();	
 	return {
 		props: {
 			...frontPage,
-		},
-		revalidate:30
+		}
+		//revalidate:30
 	}
 }
