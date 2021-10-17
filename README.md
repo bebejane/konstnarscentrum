@@ -1,3 +1,3 @@
-## Konstnärs Centrum
+## Konstnärscentrum
 
 Website

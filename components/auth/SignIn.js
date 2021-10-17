@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-export default function SignIn({ csrfToken }) {
+export default function SignIn({ csrfToken, domain }) {
 	const router = useRouter();
 	const [error, setError] = useState(false);
 	const {
@@ -52,14 +52,6 @@ export default function SignIn({ csrfToken }) {
 				/>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
 				{error && <p className={styles.formError}>{`${error.error || error.message || error}`}</p>}
-				<p className={styles.formLinks}>
-					<Link href={"/auth/apply"}>
-						<a>{text.apply}</a>
-					</Link>
-					<Link href={"/auth/reset"}>
-						<a>{text.forgotPassword}</a>
-					</Link>
-				</p>
 			</form>
 		</div>
 	);

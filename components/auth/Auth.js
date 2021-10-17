@@ -1,4 +1,6 @@
 import styles from "./Auth.module.scss";
+import text from './text'
+import Link from "next/link";
 import Apply from "./Apply";
 import Reset from "./Reset";
 import SignIn from "./SignIn";
@@ -18,10 +20,13 @@ export default function Auth(data) {
   const AuthComponent = components[type]
 
   if(!AuthComponent) 
-    return AuthError({error:`Authentication type ${type} not found`})
+    return AuthError({error:`Authentication type ${type} not found!`})
 
   return (
-    <AuthComponent {...data}/>
+    <>
+    <AuthComponent {...data} />
+    <AuthLinks {...data} />
+    </>
   )
 }
 
@@ -42,6 +47,35 @@ export function AuthError({ error }) {
   )
 }
 
+export function AuthLinks({type, domain}) {
+  console.log(type)
+  const links = []
+  
+  if(['apply', 'reset', 'signup', 'signout'].includes(type))
+    links.push({title:text.signIn, href:'/auth/signin'})
+  else if(type === 'signin'){
+    links.push({title:text.apply, href:'/auth/apply'})
+    links.push({title:text.forgotPassword, href:'/auth/reset'})
+  }
+
+  return (
+    <>
+      <p className={styles.authLinks}>
+        {links.map(({title, href}, idx)=>
+          <Link href={href} key={idx}>
+            <a>{title}</a>
+          </Link>
+        )}
+        
+      </p>
+      <p className={styles.authDomain}>
+        <Link href={'/'}>
+          <a>{domain}</a>
+        </Link>
+      </p>
+    </>
+  )
+}
 export function SubmitButton({ loading, children, onClick }) {
 	return (
     <button className={styles.submitButton} type="submit" onClick={onClick}>

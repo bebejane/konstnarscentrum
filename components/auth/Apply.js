@@ -87,11 +87,6 @@ const ApplicationForm = ({ roles, setApplication }) => {
 				{error && 
 					<p className={styles.formError}>{`${error.error || error.message || error}`}</p>
 				}
-				<p className={styles.formLinks}>
-					<Link href={"/auth/signin"}>
-						<a>{text.signIn}</a>
-					</Link>
-				</p>
 			</form>
 		</>
 	);
