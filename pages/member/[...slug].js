@@ -1,5 +1,5 @@
 import { requireAuthentication } from '/lib/auth'
-import Member from '/components/pages/member/Member'
+import Member from '/components/pages/member'
 
 export default Member;
 

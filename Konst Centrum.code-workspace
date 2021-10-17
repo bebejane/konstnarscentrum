@@ -6,17 +6,17 @@
 	],
 	"settings": {
 		"files.exclude": {
-			"node_modules": true,
-			".env": true,
-			".env.local": true,
-			".gitignore": true,
-			"jsconfig.json": true,
-			"next.config.js": true,
-			"package-lock.json": true,
-			"package.json": true,
-			".next": true,
-			"Konst Centrum.code-workspace": true,
-			"README.md": true
+			"node_modules": false,
+			".env": false,
+			".env.local": false,
+			".gitignore": false,
+			"jsconfig.json": false,
+			"next.config.js": false,
+			"package-lock.json": false,
+			"package.json": false,
+			".next": false,
+			"Konst Centrum.code-workspace": false,
+			"README.md": false
 		},
 		"workspace.isHidden": true
 	}
