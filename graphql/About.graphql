@@ -24,3 +24,28 @@ query GetAbout {
     }
   }
 }
+
+query GetAllAbouts {
+  abouts : allAbouts {
+    title
+    id
+    content {
+      blocks {
+        ... on HeadlineRecord {
+          __typename
+          id
+          headline
+          createdAt
+        }
+        ... on ImageRecord {
+          __typename
+          id
+          image{
+            ...ImageFragment
+          }
+        }
+      }
+      value
+    }
+  }
+}
