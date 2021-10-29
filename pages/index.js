@@ -1,6 +1,5 @@
 import styles from "./index.module.scss";
 import Link from "next/link"
-import { frontPageController } from "/controllers";
 
 export default function Home(data) {
 	return (
@@ -11,13 +10,10 @@ export default function Home(data) {
   )
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	
-	const frontPage  = await frontPageController.get();	
 	return {
-		props: {
-			...frontPage,
-		}
-		//revalidate:30
+		props: {},
+		revalidate:30
 	}
 }

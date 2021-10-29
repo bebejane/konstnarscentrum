@@ -26,4 +26,4 @@ Router.events.on("routeChangeStart", load);
 Router.events.on("routeChangeComplete", stop);
 Router.events.on("routeChangeError", stop);
 
-export default function () {return null;}
+export default function TopProgressBar() { return null; }
