@@ -1,34 +1,92 @@
 import styles from "./Scroller.module.scss";
 import useVisibility from "/lib/hooks/useVisibility"
 import cn from 'classnames'
+import { useState, useEffect } from "react";
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import lottieSearch from './83948-search.json'
+import lottiePharmacy from './22477-pharmacy-store-drug-home-building-maison-mocca-animation.json'
+import lottieFloating from './83030-floating-app-loading.json'
+import lottieHubit from './83685-hubit.json'
 
 export default function Scroller({page}) {
-  const blocks = new Array(20).fill({})
 	return (
 		<div className={styles.container}>
-      {blocks.map((b, index) => <Block key={index} {...{index}}/>)}
+			<div className={styles.header}>top</div>
+      <TextBlock/>
+			<Animation src={lottieSearch}/>
+			<Animation src={lottiePharmacy}/>
+			<Animation src={lottieFloating} loop={true} autoplay={true} id={'last'}/>
+			<Animation src={lottieHubit} loop={false} autoplay={false} id={'last'}/>
+			<div className={styles.header}>
+				bottom
+			</div>
 		</div>
 	);
 }
 
-const Block  = ({index, odd}) => {
+const TextBlock = ({index, odd}) => {
 
-	const [ref, state] =  useVisibility(index, 0.3, 100)
-	const { wasPassed, wasVisible, direction : dir , ratio, step} = state;
-	const scrollStyle = {}
-	const statusStyle = cn(styles.status, dir === 'out' && styles.out)
-	const boxStyle = cn(styles.box, {
-		[styles.out] : dir === 'out',
-		[styles.in] : dir === 'in' && ratio > 0.7,
-		[styles.reset] : dir === 'out',
+	const [ref, state] =  useVisibility(index, 0, 100)
+	const { wasPassed, wasVisible, direction : dir , ratio, pageRatio, step} = state;
+	const scrollStyle = {padding:'5%'}
+	
+	const content = 'Die frühere Grünen-Kanzlerkandidatin Annalena Baerbock will die Inbetriebnahme der mittlerweile zu Ende gebauten Erdgastrasse „Nord Stream 2“ verhindern, u. a. wegen eines Pokerspiels mit dem Gaspreis, das sie Präsident Putin unterstellt. Sie beweist damit eine Ideologisierung der grünen Außenpolitik, die hoffen lässt, dass in der Ampelkoalition das Auswärtige Amt durch eine kompetente Person aus den Reihen von SPD oder FDP besetzt wird.'
+	const words = content.split(' ');
+	const end = Math.floor(words.length*pageRatio)
+	const text = words.filter((w, idx)=> idx < end).join(' ')
 
-	})
 	return (
 		<div className={styles.block} ref={ref} >
-			<div className={statusStyle}>{}<br/>{step}<br/>{ratio.toFixed(2)}</div>
-			<div className={boxStyle} style={scrollStyle}>
-				{step}
+			<Status {...state} />
+			<div style={scrollStyle} >
+				{text}
 			</div>
+		</div>
+	)
+}
+
+
+const Animation  = ({src, loop = true, autoplay = false, id}) => {
+
+	const [ref, state] =  useVisibility('anim', 0, 100)
+	const { wasPassed, wasVisible, direction : dir , ratio, pageRatio, step} = state;
+	const [player, setPlayer] = useState()
+	const [style, setStyle] = useState({})
+
+	useEffect(()=>{
+		if( !player ) return
+		if( autoplay ) return wasVisible && player.isPaused && player.play()
+
+		const { totalFrames } = player
+		//const frame = wasPassed ? totalFrames : Math.min(totalFrames*(pageRatio*2), totalFrames)
+		const frame = Math.min(totalFrames*(pageRatio), totalFrames)
+		player.setCurrentRawFrameValue(frame)
+		setStyle({
+			transform: `translateX(${(-1 + (pageRatio*4))*50}%)`
+		})
+	}, [pageRatio, wasVisible])
+
+	return (
+		<div className={cn(styles.block, styles.center)} ref={ref} >
+			<Player
+        lottieRef={(p)=>setPlayer(p)}
+        loop={loop}
+        controls={false}
+				keepLastFrame={true}
+				src={src}
+        
+      />
+			<Status {...state} />
+		</div>
+	)
+}
+
+const Status = ({step, ratio, pageRatio, direction}) =>{
+	const statusStyle = cn(styles.status, direction === 'out' && styles.out)
+	
+	return (
+		<div className={statusStyle}>
+			Dir: {direction} Step: {step}, Ratio: {ratio.toFixed(2)}, PageRatio: {(pageRatio*100).toFixed(0)}%
 		</div>
 	)
 }

@@ -13,7 +13,7 @@ export default function Home(data) {
 export async function getStaticProps() {
 	
 	return {
-		props: {},
+		props: {data:['dsfdasd']},
 		revalidate:30
 	}
 }
