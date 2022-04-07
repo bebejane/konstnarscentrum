@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node ./generateRoles",
+    "prebuild": "node ./prebuild",
     "build": "next build",
     "start": "next start -p $PORT",
     "deploy": "git push heroku master",

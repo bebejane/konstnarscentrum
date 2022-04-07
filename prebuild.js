@@ -1,6 +1,6 @@
 require('dotenv').config({path:'./.env.local'})
 const fs = require("fs")
-const {SiteClient} = require('datocms-client');
+const { SiteClient } = require('datocms-client');
 const Dato = new SiteClient(process.env.GRAPHQL_API_TOKEN);
 
 (async ()=>{
