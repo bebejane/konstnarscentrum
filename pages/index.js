@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import Link from "next/link"
 
-export default function Home(data) {
+export default function Home(props) {
 	return (
     <div className={styles.container}>
       <div><h2>Konstnärscentrum</h2></div>
@@ -13,7 +13,9 @@ export default function Home(data) {
 export async function getStaticProps() {
 	
 	return {
-		props: {data:['dsfdasd']},
+		props: {
+
+    },
 		revalidate:30
 	}
 }

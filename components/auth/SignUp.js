@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import Link from 'next/link'
 
 export default function SignUp({roles = [], application, token }) {
+	
 	const [member, setMember] = useState();
 	return (
 		<div className={styles.container}>

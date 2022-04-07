@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Apply({ roles = [] }) {
+	console.log(roles)
 	const [application, setApplication] = useState();
 	return (
 		<div className={styles.container}>

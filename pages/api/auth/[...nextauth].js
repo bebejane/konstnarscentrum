@@ -40,27 +40,19 @@ const options = {
           },
         });
         const user = users && users.length === 1 ? users[0] : undefined 
-        if (user) {
-          const checkPassword = await comparePassword(password, user.password);
-          // Any object returned will be saved in `user` property of the JWT
-          if(!checkPassword){
-            console.error('not valid password')
-            return null
-          }
-          
-          // Login passed, return user
-          return {
-            id:user.id,
-            email:user.email,
-            firstName:user.firstName,
-            lastName:user.lastName
-          }
-        } else {
-          // If you return null or false then the credentials will be rejected
+        if (!user) return null
+        const checkPassword = await comparePassword(password, user.password);
+
+        if(!checkPassword){
+          console.error('not valid password')
           return null
-          // You can also Reject this callback with an Error or with a URL:
-          // throw new Error('error message') // Redirect to error page
-          // throw '/path/to/redirect'        // Redirect to a URL
+        }
+        // Login passed, return user. Any object returned will be saved in `user` property of the JWT
+        return {
+          id:user.id,
+          email:user.email,
+          firstName:user.firstName,
+          lastName:user.lastName
         }
       }
     })

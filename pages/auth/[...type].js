@@ -1,6 +1,7 @@
 import Auth from "/components/auth";
 import { getCsrfToken } from "next-auth/react";
 import { roleController, applicationController } from "/controllers";
+import roles from '/roles.json'
 
 const pages = [
 	{ id: "apply" },
@@ -17,7 +18,7 @@ export async function getServerSideProps(context) {
   const type = context.query.type ? context.query.type[0] : null;	
 	const token = context.query.token || null;
 	const csrfToken = await getCsrfToken(context);
-
+	
 	if(!pages.filter(p => p.id === type).length) 
 		return { notFound:true }
 	
@@ -29,7 +30,7 @@ export async function getServerSideProps(context) {
 	}
 
 	if(['apply', 'signup'].includes(type))
-		props.roles =  await roleController.all()
+		props.roles =  roles//await roleController.all()
 	if(type === 'signup' && token)
 		props.application =  await applicationController.getByToken(token);
 
