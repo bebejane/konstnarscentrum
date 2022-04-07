@@ -10,6 +10,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  &.white{
+    background-color: #fff;
+    color:#000;
+  }
 }
 .block {
   display: flex;
@@ -28,6 +32,14 @@
   &.center{
     align-items: center;
     justify-content: center;
+  }
+  &.left{
+    align-items: center;
+    justify-content: flex-start;
+  }
+  &.right{
+    align-items: center;
+    justify-content: flex-end;
   }
   .status{
     position: absolute;

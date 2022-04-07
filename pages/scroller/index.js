@@ -13,9 +13,9 @@ export default function Scroller({page}) {
 		<div className={styles.container}>
 			<div className={styles.header}>top</div>
       <TextBlock/>
-			<Animation src={lottieSearch}/>
-			<Animation src={lottiePharmacy}/>
-			<Animation src={lottieFloating} loop={true} autoplay={true} id={'last'}/>
+			<Animation src={lottieSearch} position="left"/>
+			<Animation src={lottiePharmacy} position="right"/>
+			<Animation src={lottieFloating} loop={true} autoplay={true} id={'last'} position="left"/>
 			<Animation src={lottieHubit} loop={false} autoplay={false} id={'last'}/>
 			<div className={styles.header}>
 				bottom
@@ -46,10 +46,10 @@ const TextBlock = ({index, odd}) => {
 }
 
 
-const Animation  = ({src, loop = true, autoplay = false, id}) => {
+const Animation  = ({src, loop = true, autoplay = false, id, position = 'center'}) => {
 
-	const [ref, state] =  useVisibility('anim', 0, 100)
-	const { wasPassed, wasVisible, direction : dir , ratio, pageRatio, step} = state;
+	const [ref, state] =  useVisibility('anim', 0, 10)
+	const { wasPassed, wasVisible, direction : dir , ratio, scrollRatio, step} = state;
 	const [player, setPlayer] = useState()
 	const [style, setStyle] = useState({})
 
@@ -59,34 +59,34 @@ const Animation  = ({src, loop = true, autoplay = false, id}) => {
 
 		const { totalFrames } = player
 		//const frame = wasPassed ? totalFrames : Math.min(totalFrames*(pageRatio*2), totalFrames)
-		const frame = Math.min(totalFrames*(pageRatio), totalFrames)
+		const frame = Math.min(totalFrames*(scrollRatio), totalFrames)
 		player.setCurrentRawFrameValue(frame)
 		setStyle({
-			transform: `translateX(${(-1 + (pageRatio*4))*50}%)`
+			transform: `translateX(${(-2 + (scrollRatio*4))*50}%)`
 		})
-	}, [pageRatio, wasVisible])
+	}, [scrollRatio, wasVisible])
 
 	return (
-		<div className={cn(styles.block, styles.center)} ref={ref} >
+		<div className={cn(styles.block, styles[position])} ref={ref} >
 			<Player
         lottieRef={(p)=>setPlayer(p)}
         loop={loop}
         controls={false}
 				keepLastFrame={true}
 				src={src}
-        
+        //style={style}
       />
 			<Status {...state} />
 		</div>
 	)
 }
 
-const Status = ({step, ratio, pageRatio, direction}) =>{
+const Status = ({step, ratio, scrollRatio, direction}) =>{
 	const statusStyle = cn(styles.status, direction === 'out' && styles.out)
 	
 	return (
 		<div className={statusStyle}>
-			Dir: {direction} Step: {step}, Ratio: {ratio.toFixed(2)}, PageRatio: {(pageRatio*100).toFixed(0)}%
+			Dir: {direction} Step: {step}, Ratio: {ratio.toFixed(2)}, scrollRatio: {(scrollRatio*100).toFixed(0)}%
 		</div>
 	)
 }

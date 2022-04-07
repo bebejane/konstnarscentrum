@@ -1,5 +1,5 @@
 import Dato, { apiQuery } from "/lib/dato";
-import { GetAllMembers, GetMember } from "/graphql/Member.graphql";
+import { GetAllMembers, GetMember, GetMemberByPasswordToken } from "/graphql/Member.graphql";
 
 export default {
   all: async (preview) => {
@@ -8,6 +8,10 @@ export default {
 	},
 	get: async (email, preview) => {
 		const {member} = await apiQuery(GetMember, {email}, preview);
+		return member
+	},
+	getByPasswordToken: async (token, preview) => {
+		const {member} = await apiQuery(GetMemberByPasswordToken, {token}, preview);
 		return member
 	},
 	exists: async (email, preview) => {

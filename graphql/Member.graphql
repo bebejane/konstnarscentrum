@@ -16,3 +16,11 @@ query GetMember($email: String!){
     lastName
   }
 }
+query GetMemberByPasswordToken($token: String!){
+  member(filter: {resettoken: {eq: $token}}){
+    id
+    email
+    firstName
+    lastName
+  }
+}
