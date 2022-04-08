@@ -8,7 +8,7 @@ const applicationModelId = "1185976"
 
 export default catchErrorsFrom( async (req, res) => {
 
-  const {email, firstName, lastName, message, roleId} = req.body
+  const { email, firstName, lastName, message, roleId } = req.body
   const memberExist = await memberController.exists(email)
 
   if(memberExist) 
@@ -17,8 +17,6 @@ export default catchErrorsFrom( async (req, res) => {
   const roleAPIToken = (await Dato.accessTokens.all()).filter((t) => t.role === roleId )[0].token
   const approvalToken =  await generateToken(email)
   const RoleClient = new DatoClient(roleAPIToken);
-
-  //const application = await Dato.role(roleAPIToken).items.create({
   const application = await RoleClient.items.create({
     itemType:applicationModelId,
     email,

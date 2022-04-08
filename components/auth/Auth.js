@@ -48,7 +48,8 @@ export function AuthError({ error }) {
 }
 
 export function AuthLinks({type, domain}) {
-  console.log(type)
+  console.log('auth:', type)
+  
   const links = []
   
   if(['apply', 'reset', 'signup', 'signout'].includes(type))

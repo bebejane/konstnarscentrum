@@ -5,7 +5,7 @@ import { signIn, signOut } from 'next-auth/react'
 import { format } from 'date-fns'
 
 export default function Member({session, news}){
-  console.log(session, news)
+  //console.log(session, news)
   return (
     <div className={styles.container}>
       <h1>Medlems sida</h1>

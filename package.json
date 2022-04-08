@@ -1,11 +1,12 @@
 {
-  "name": "konstcentrum",
+  "name": "konstnarscentrum",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "prebuild": "node ./prebuild",
     "build": "next build",
+    "prebuild": "node ./prebuild",
+    "predev": "node ./prebuild",
     "start": "next start -p $PORT",
     "deploy": "git push heroku master",
     "lint": "next lint"
@@ -17,7 +18,7 @@
     "bcryptjs": "^2.4.3",
     "classnames": "^2.3.1",
     "date-fns": "^2.24.0",
-    "datocms-client": "^3.4.16",
+    "datocms-client": "^3.5.19",
     "dotenv": "^16.0.0",
     "graphql": "^15.6.0",
     "graphql-request": "^3.5.0",
@@ -32,14 +33,10 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nprogress": "^0.2.0",
     "react": "17.0.2",
-    "react-datocms": "^1.6.3",
+    "react-datocms": "^3.0.12",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.15.4",
-    "react-slick": "^0.28.1",
-    "sass": "^1.41.1",
-    "slick-carousel": "^1.8.1",
-    "swiper": "^7.0.7",
-    "uuid": "^8.3.2"
+    "sass": "^1.41.1"
   },
   "devDependencies": {
     "eslint": "7.32.0",
