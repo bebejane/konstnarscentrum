@@ -1,4 +1,4 @@
-import Dato from "/lib/dato/api";
+import { Dato } from "/lib/dato/api";
 
 export default {
   all: async () => {

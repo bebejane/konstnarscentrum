@@ -1,4 +1,4 @@
-import Dato from '/lib/dato/api'
+import { Dato } from '/lib/dato/api'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { comparePassword } from '/lib/auth'
@@ -10,9 +10,9 @@ const options = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {    
-    signIn: '/auth/signin',    
-    signOut: '/auth/signout',    
-    //error: '/auth/error', // Error code passed in query string as ?error=    
+    signIn: '/auth?type=signin',    
+    signOut: '/auth?type=signout',    
+    error: '/auth?type=error', // Error code passed in query string as ?error=    
     //verifyRequest: '/auth/verify-request', // (used for check email message)    
     //newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)  }
   },
@@ -39,12 +39,15 @@ const options = {
             }
           },
         });
+
         const user = users && users.length === 1 ? users[0] : undefined 
+        
         if (!user) return null
+        
         const checkPassword = await comparePassword(password, user.password);
 
         if(!checkPassword){
-          console.error('not valid password')
+          console.error('not a valid password!')
           return null
         }
         // Login passed, return user. Any object returned will be saved in `user` property of the JWT
