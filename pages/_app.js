@@ -3,7 +3,6 @@ import { SessionProvider } from "next-auth/react"
 import '/styles/globals.scss'
 import "nprogress/nprogress.css";
 
-
 function App({ Component, pageProps}) {
   return (
     <SessionProvider session={pageProps.session}>

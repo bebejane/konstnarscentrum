@@ -1,17 +1,9 @@
 import Auth from "/components/auth";
 import { getCsrfToken } from "next-auth/react";
 import { roleController, applicationController } from "/controllers";
-import roles from '/roles.json'
+import districts from '/districts.json'
 
-const pages = [
-	{ id: "apply" },
-	{ id: "signup" },
-	{ id: "signin" },
-	{ id: "reset" },
-	{ id: "signout" },
-];
-
-export default Auth;
+const pages = [{ id: "apply" }, { id: "signup" }, { id: "signin" }, { id: "reset" }, { id: "signout" }];
 
 export async function getServerSideProps(context) {
 	const { host: domain } = context.req.headers
@@ -19,20 +11,16 @@ export async function getServerSideProps(context) {
 	const token = context.query.token || null;
 	const csrfToken = await getCsrfToken(context);
 	
-	if(!pages.filter(p => p.id === type).length) 
-		return { notFound:true }
+	if(!pages.filter(p => p.id === type).length) return { notFound:true }
 	
-	const props = {
-		type,
-		token,
-		csrfToken,
-		domain
-	}
+	const props = { type, token, csrfToken, domain };
 
 	if(['apply', 'signup'].includes(type))
-		props.roles =  roles//await roleController.all()
+		props.districts = districts//await roleController.all()
 	if(type === 'signup' && token)
 		props.application =  await applicationController.getByToken(token);
 
-	return {props}
+	return { props }
 }
+
+export default Auth;

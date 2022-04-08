@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from 'next/link'
 
-export default function SignUp({roles = [], application, token }) {
+export default function SignUp({districts = [], application, token }) {
 	
 	const [member, setMember] = useState();
 	return (
 		<div className={styles.container}>
 			{!member ? (
-				<SignupForm roles={roles} setMember={setMember} application={application}/>
+				<SignupForm districts={districts} setMember={setMember} application={application}/>
 			) : (
 				<div className={styles.success}>
           <h1>{text.thanksSigningUp}</h1>
@@ -27,7 +27,7 @@ export default function SignUp({roles = [], application, token }) {
 	);
 }
 
-const SignupForm = ({ roles, application, setMember }) => {
+const SignupForm = ({ districts, application, setMember }) => {
 	const [error, setError] = useState();
 	const { register, handleSubmit, formState: { errors, isSubmitting }, reset} = useForm();
 
@@ -53,7 +53,7 @@ const SignupForm = ({ roles, application, setMember }) => {
 				<input placeholder={`${text.firstName}...`} {...register("firstName", { required: true })} className={errors.firstName && styles.error} />
 				<input placeholder={`${text.lastName}...`} {...register("lastName", { required: true })} className={errors.lastName && styles.error} />
 				<select placeholder={`${text.district}...`} {...register("roleId", { required: true })} className={errors.roleId && styles.error}>
-					{roles.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
+					{districts.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
 				</select>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
 				{error && <p className={styles.formError}>{`${error.error || error.message || error}`}</p>}
