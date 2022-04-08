@@ -1,6 +1,6 @@
 import styles from "./Upload.module.scss";
 import Link from "next/link"
-import {useState, useEffect, useRef} from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { Image } from 'react-datocms';
 

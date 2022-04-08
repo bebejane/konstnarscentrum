@@ -1,6 +1,5 @@
-import { apiQuery } from "/lib/dato";
+import { apiQuery } from "/lib/dato/api";
 import { GetAllNews, GetNews } from "/graphql/News.graphql";
-import Dato from "lib/dato";
 
 export default {
 	all: async (preview) => {

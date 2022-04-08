@@ -1,7 +1,7 @@
 import Dato from '/lib/dato'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import {comparePassword} from '/lib/auth'
+import { comparePassword } from '/lib/auth'
 
 const options = {
   site: process.env.NEXTAUTH_URL,

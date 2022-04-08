@@ -1,5 +1,5 @@
 import catchErrorsFrom from '/lib/utils/catchErrorsFrom'
-import Dato, { DatoClient } from '/lib/dato'
+import Dato, { DatoClient } from '/lib/dato/api'
 import { generateToken } from '/lib/auth'
 import Email from "/lib/utils/email";
 import { memberController} from '/controllers';

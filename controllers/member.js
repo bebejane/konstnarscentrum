@@ -1,4 +1,4 @@
-import Dato, { apiQuery } from "/lib/dato";
+import Dato, { apiQuery } from "/lib/dato/api";
 import { GetAllMembers, GetMember, GetMemberByPasswordToken } from "/graphql/Member.graphql";
 
 export default {

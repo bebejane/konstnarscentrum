@@ -1,4 +1,4 @@
-import { apiQuery } from "/lib/dato";
+import { apiQuery } from "/lib/dato/api";
 import { GetAbout, GetAllAbouts } from "/graphql/About.graphql";
 
 export default {

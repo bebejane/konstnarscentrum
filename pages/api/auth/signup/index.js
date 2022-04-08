@@ -1,6 +1,6 @@
 import { validateSignUp, hashPassword } from '/lib/auth'
 import catchErrorsFrom from '/lib/utils/catchErrorsFrom'
-import Dato, { DatoClient } from '/lib/dato'
+import Dato, { DatoClient } from '/lib/dato/api'
 
 const applicationModelId = "1185543"
 
