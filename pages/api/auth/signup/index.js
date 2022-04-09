@@ -21,7 +21,7 @@ export default catchErrorsFrom( async(req, res) => {
     else if(!application.approved)
       throw 'Application has not been approved yet'
     else if(!accessToken)
-      throw `Access token invalid`
+      throw `Access token is empty`
 
     const hashedPassword = await hashPassword(password)
     const RoleClient = new DatoClient(accessToken);

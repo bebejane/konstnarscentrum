@@ -17,6 +17,8 @@
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.3.1",
+    "cookie-cutter": "^0.2.0",
+    "cookies": "^0.8.0",
     "date-fns": "^2.24.0",
     "datocms-client": "^3.5.19",
     "dotenv": "^16.0.0",
@@ -37,6 +39,7 @@
     "react-dom": "17.0.2",
     "react-hook-form": "^7.15.4",
     "sass": "^1.41.1",
+    "slugify": "^1.6.5",
     "swiper": "^8.0.7",
     "uuid": "^8.3.2"
   },
