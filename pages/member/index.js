@@ -25,7 +25,7 @@ export default function Member({session}){
 }
 
 
-export const getServerSideProps = requireAuthentication( async (context, session) => {
+export const getServerSideProps = requireAuthentication(async (context, session) => {
 	return { 
 		props: { 
 			session

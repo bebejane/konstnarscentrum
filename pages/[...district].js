@@ -23,8 +23,9 @@ export async function getStaticProps(context) {
 	const district = context.params.district[0];
 	const token = process.env[`GRAPHQL_API_TOKEN_${district.toUpperCase()}`]
 	const { news } = await apiQuery(GetAllNews, {}, false, token);
+
 	return {
-		props: {news},
-		revalidate:30
+		props: { news },
+		revalidate: 30
 	}
 }
