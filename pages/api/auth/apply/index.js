@@ -1,5 +1,7 @@
 import catchErrorsFrom from '/lib/utils/catchErrorsFrom'
-import { Dato, DatoClient } from '/lib/dato/api'
+import { Dato } from '/lib/dato/api'
+import SiteClient from 'datocms-client';
+
 import Email from "/lib/utils/email";
 import { generateToken } from '/lib/auth'
 import { memberController } from '/controllers';
@@ -15,7 +17,7 @@ export default catchErrorsFrom( async (req, res) => {
   
   const roleAPIToken = (await Dato.accessTokens.all()).filter((t) => t.role === roleId )[0].token
   const approvalToken =  await generateToken(email)
-  const RoleClient = new DatoClient(roleAPIToken);
+  const RoleClient = new SiteClient(roleAPIToken);
   const application = await RoleClient.items.create({
     itemType:applicationModelId,
     email,

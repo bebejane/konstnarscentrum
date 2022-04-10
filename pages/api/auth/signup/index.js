@@ -1,6 +1,7 @@
 import { validateSignUp, hashPassword } from '/lib/auth'
 import catchErrorsFrom from '/lib/utils/catchErrorsFrom'
-import { Dato, DatoClient } from '/lib/dato/api'
+import { Dato } from '/lib/dato/api'
+import SiteClient from 'datocms-client';
 
 const applicationModelId = "1185543"
 
@@ -24,7 +25,7 @@ export default catchErrorsFrom( async(req, res) => {
       throw `Access token is empty`
 
     const hashedPassword = await hashPassword(password)
-    const RoleClient = new DatoClient(accessToken);
+    const RoleClient = new SiteClient(accessToken);
 
     const member = await RoleClient.items.create({
       firstName,
