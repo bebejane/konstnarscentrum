@@ -1,5 +1,5 @@
 import Dato, { apiQuery } from "/lib/dato/api";
-import { GetAllMembers, GetMember, GetMemberByPasswordToken } from "/graphql/Member.graphql";
+import { GetAllMembers, GetMember, GetMemberByPasswordToken } from "/graphql/member.graphql";
 
 export default {
   all: async (preview) => {

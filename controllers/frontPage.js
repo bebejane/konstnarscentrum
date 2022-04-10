@@ -1,5 +1,5 @@
 import { apiQuery } from "/lib/dato/api";
-import { GetFrontPage } from "/graphql/FrontPage.graphql";
+import { GetFrontPage } from "/graphql/frontpage.graphql";
 
 export default {
 	get: async (preview) => {

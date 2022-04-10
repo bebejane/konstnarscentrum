@@ -1,4 +1,4 @@
-import frontPageController from './frontPage'
+import frontPageController from './frontpage'
 import memberController from './member'
 import roleController from './role'
 import applicationController from './application'
