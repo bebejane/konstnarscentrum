@@ -4,8 +4,7 @@ import Link from "next/link"
 export default function Home(props) {
 	return (
     <div className={styles.container}>
-      <div><h2>Konstnärscentrum</h2></div>
-      <div><Link href={"/member"}>Medlemmar</Link></div>
+      Home
     </div>
   )
 }

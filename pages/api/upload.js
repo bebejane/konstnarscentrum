@@ -1,6 +1,6 @@
 import nextConnect from 'next-connect';
 import multer from 'multer';
-import Dato from '/lib/dato/api'
+import { Dato } from '/lib/dato/api'
 import fs from 'fs'
 import { v4 as uuidv4 } from 'uuid';
 

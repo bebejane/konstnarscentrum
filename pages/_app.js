@@ -1,13 +1,14 @@
-import TopProgressBar from "/components/common/TopProgressBar";
+import Menu from "/components/common/Menu";
 import { SessionProvider } from "next-auth/react"
-import '/styles/globals.scss'
-import "nprogress/nprogress.css";
+import '/styles/index.scss'
 
 function App({ Component, pageProps}) {
   return (
     <SessionProvider session={pageProps.session}>
-      <TopProgressBar />
-      <Component {...pageProps} />
+      <Menu/>
+      <main>
+        <Component {...pageProps} />
+      </main>
     </SessionProvider>
   );
 }

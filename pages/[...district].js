@@ -5,10 +5,8 @@ import { apiQuery } from "/lib/dato/api";
 import { GetAllNews } from "/graphql/news.graphql"
 
 export default function DistrictHome({district, news}) {
-  console.log(news)
 	return (
     <div className={styles.container}>
-      <div><h2>Konstnärscentrum</h2></div>
 			<District district={district} news={news}/>
     </div>
   )
@@ -16,15 +14,15 @@ export default function DistrictHome({district, news}) {
 
 export async function getStaticPaths(context) {
 	const paths = districts.map(({slug}) => ({params:{district:[slug]}}) )
-  //console.log(paths)
 	return {
 		paths,
 		fallback: false
 	}
 }
 export async function getStaticProps(context) {
-	const district = districts.filter(({slug}) => slug === context.params.district[0])[0]
-	const { news } = await apiQuery(GetAllNews, {}, false, district.token.token);
+	const district = context.params.district[0];
+	const token = process.env[`GRAPHQL_API_TOKEN_${district.toUpperCase()}`]
+	const { news } = await apiQuery(GetAllNews, {}, false, token);
 	return {
 		props: {news},
 		revalidate:30

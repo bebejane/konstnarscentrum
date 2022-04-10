@@ -1,4 +1,4 @@
-import Dato from '/lib/dato/api'
+import { Dato } from '/lib/dato/api'
 import url from 'url'
 
 export default async function(req, res){
