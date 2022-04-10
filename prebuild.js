@@ -5,9 +5,8 @@ const { SiteClient } = require('datocms-client');
 const Dato = new SiteClient(process.env.GRAPHQL_API_TOKEN);
 
 (async ()=>{
-  console.log('generate ./districts.json')
+  console.log('generate "districts.json"')
   const roles = await Dato.roles.all() 
-  const apiTokens = await Dato.accessTokens.all();
   const editor = roles.filter(r => r.name.toLowerCase() === 'editor')[0]
   const districts = roles.filter(r => r.inheritsPermissionsFrom && r.inheritsPermissionsFrom.includes(editor.id)).sort((a, b) => a.name < b.name ? -1 : 1)
 
@@ -15,6 +14,5 @@ const Dato = new SiteClient(process.env.GRAPHQL_API_TOKEN);
     id, 
     name, 
     slug:slugify(name, {lower:true}),
-    //token: apiTokens.filter(t => slugify(t.name, {lower:true}) === slugify(name, {lower:true}))[0]
   }))))
 })()
