@@ -17,7 +17,7 @@ export default function Menu({message}){
     <div className={styles.container}>
       <div><b><Link href={"/"}>Konstnärscentrum</Link></b></div>
       <div>
-        <Link href={"/member"}>Medlemmar</Link>
+        <Link href={"/auth?type=signin"}>Medlemmar</Link>
         <select 
           id="district" 
           className={styles.districts} 
