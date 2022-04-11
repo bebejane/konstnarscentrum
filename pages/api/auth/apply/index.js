@@ -1,27 +1,26 @@
 import catchErrorsFrom from '/lib/utils/catchErrorsFrom'
 import { Dato } from '/lib/dato/api'
-import SiteClient from 'datocms-client';
+import { SiteClient } from 'datocms-client'
 
 import Email from "/lib/utils/email";
 import { generateToken } from '/lib/auth'
-import { memberController } from '/controllers';
+import { memberController, applicationController } from '/controllers';
 
 const applicationModelId = "1185976"
 
 export default catchErrorsFrom( async (req, res) => {
-  console.log(req.body)
+  
   const { email, firstName, lastName, message, roleId, roleSlug } = req.body
   const memberExist = await memberController.exists(email)
-
   if(memberExist) throw 'User already exists!'
-  console.log('whaat')
-  const roles = await Dato.accessTokens.all();
-  const roleAPIToken = roles.filter((t) => t.role === roleId)[0].token
+  
+  const applicationExist = await applicationController.exists(email)
+  
+  if(applicationExist) throw 'You have already applied for membership!'
+
+  const tokens = await Dato.accessTokens.all();
+  const roleAPIToken = tokens.filter((t) => t.role === roleId)[0].token
   const approvalToken =  await generateToken(email)
-
-  console.log(roleAPIToken, roleId)
-  console.log(roles)
-
   const RoleClient = new SiteClient(roleAPIToken);
   
   const application = await RoleClient.items.create({
