@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm prebuild && next build",
+    "build": "npm run prebuild && next build",
     "prebuild": "node ./prebuild",
     "predev": "node ./prebuild",
     "start": "next start -p $PORT",

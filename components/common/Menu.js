@@ -13,6 +13,11 @@ export default function Menu({message}){
     router.push(`/${district}`)
   }, [district])
   
+  useEffect(()=>{
+    districts.forEach((d)=>{
+      router.prefetch(`/${d.slug}`)
+    })
+  }, [])
   return (
     <div className={styles.container}>
       <div><b><Link href={"/"}>Konstnärscentrum</Link></b></div>

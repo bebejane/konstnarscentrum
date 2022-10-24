@@ -4,9 +4,7 @@ const fs = require("fs")
 const slugify = require('slugify')
 const { buildClient } = require('@datocms/cma-client-node')
 
-console.log('generate districts.json')
-
-const prebuild = async ()=>{
+const prebuild = async () => {
   
   const client  = buildClient({apiToken:process.env.GRAPHQL_API_TOKEN});
   const roles = await client.roles.list()
