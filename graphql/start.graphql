@@ -1,0 +1,15 @@
+
+query Start{ 
+  start{
+    headline
+    intro
+  }
+  startMitt{
+    headline
+    intro
+  }
+  startNord{
+    headline
+    intro
+  }
+}

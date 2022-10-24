@@ -1,31 +1,35 @@
 import styles from "./index.module.scss";
-import districts from '/districts.json'
-import District from "/components/district";
+import districts from "/districts.json";
 import { apiQuery } from "/lib/dato/api";
-import { GetAllNews } from "/graphql/news.graphql"
+import { Start } from "/graphql/start.graphql";
+import { propByDistrict } from "lib/utils/district";
 
-export default function DistrictHome({district, news}) {
+import Markdown from "lib/dato/components/Markdown";
+
+export default function DistrictHome({ district, start }) {
+	if(!start) return null
 	return (
-    <div className={styles.container}>
-			<District district={district} news={news}/>
-    </div>
-  )
+		<div className={styles.container}>
+			{start.headline}
+			<Markdown>{start.intro}</Markdown>
+		</div>
+	);
 }
 
 export async function getStaticPaths(context) {
-	const paths = districts.map(({slug}) => ({params:{district:[slug]}}) )
+	const paths = districts.map(({ slug }) => ({ params: { district: [slug] } }));
 	return {
 		paths,
-		fallback: false
-	}
+		fallback: false,
+	};
 }
 export async function getStaticProps(context) {
 	const district = context.params.district[0];
-	const token = process.env[`GRAPHQL_API_TOKEN_${district.toUpperCase()}`]
-	const { news } = await apiQuery(GetAllNews, {}, false, token);
-
+	const res = await apiQuery(Start, {}, false);
+	const start = propByDistrict(res, district, 'start')
+	
 	return {
-		props: { news },
-		revalidate: 30
-	}
+		props: { start },
+		revalidate: 30,
+	};
 }
