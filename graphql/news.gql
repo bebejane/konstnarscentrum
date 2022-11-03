@@ -1,0 +1,22 @@
+#import "./fragments/ImageFragment.gql"
+
+query GetAllNews{
+  news: allNews {
+    header
+    createdAt
+    image{
+       ...ImageFragment
+    }
+  }    
+}
+
+query GetNews($id: ItemId!){
+  news(filter: {id: {eq: $id}}){
+    header
+    body
+    createdAt
+    image{
+       ...ImageFragment
+    }
+  }
+}

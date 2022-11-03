@@ -1,0 +1,51 @@
+#import "./fragments/ImageFragment.gql"
+
+query GetAbout {
+  about {
+    title
+    id
+    content {
+      blocks {
+        ... on HeadlineRecord {
+          __typename
+          id
+          headline
+          createdAt
+        }
+        ... on ImageRecord {
+          __typename
+          id
+          image{
+            ...ImageFragment
+          }
+        }
+      }
+      value
+    }
+  }
+}
+
+query GetAllAbouts {
+  abouts : allAbouts {
+    title
+    id
+    content {
+      blocks {
+        ... on HeadlineRecord {
+          __typename
+          id
+          headline
+          createdAt
+        }
+        ... on ImageRecord {
+          __typename
+          id
+          image{
+            ...ImageFragment
+          }
+        }
+      }
+      value
+    }
+  }
+}

@@ -1,5 +1,4 @@
-const withPlugins = require('next-compose-plugins');
-const graphql = require('next-plugin-graphql')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({enabled: process.env.ANALYZE === 'true'})
 
 const sassOptions = {
   includePaths: ['./components', './pages'],
@@ -12,14 +11,33 @@ const sassOptions = {
   `
 }
 const nextOptions = {
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   devIndicators: {
     buildActivity: false
   },
   experimental: {
     scrollRestoration: true
   },
-  onDemandEntries: { maxInactiveAge: 60 * 1000, pagesBufferLength: 10000}
+  webpack: (config, ctx) => {
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader',
+    });
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ['@svgr/webpack'],
+    })
+    
+    return config;
+  },
 }
 
-const config = withPlugins([graphql], { sassOptions, ...nextOptions })
-module.exports = config
+const config = { sassOptions, ...nextOptions }
+module.exports = withBundleAnalyzer(config);
