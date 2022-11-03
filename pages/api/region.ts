@@ -1,6 +1,5 @@
-
 import Cookies from 'cookies'
-import districts from '/districts.json'
+import { districts } from "/lib/district";
 
 const handler = async (req, res) => {
   const { district } = req.query

@@ -1,5 +1,5 @@
 import styles from './Menu.module.scss'
-import districts from '/districts.json'
+import { districts } from "/lib/district";
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'

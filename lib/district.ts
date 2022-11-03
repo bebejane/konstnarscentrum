@@ -1,7 +1,7 @@
 import districts from '/districts.json'
 import { capitalize } from "lodash-es";
 
-export const accessToken = (id) => {
+export const accessToken = (id : string) => {
   const district = districts.filter(({slug}) => slug === id)[0]
   return district.token.token
 }

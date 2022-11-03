@@ -1,7 +1,7 @@
-import districts from '/districts.json'
-import Auth from "../components/auth";
+import Auth from "/components/auth";
 import { getCsrfToken } from "next-auth/react";
 import { applicationController } from "/lib/controllers";
+import { districts } from "/lib/district";
 
 const types = [{ id: "apply" }, { id: "signup" }, { id: "signin" }, { id: "reset" }, { id: "signout" }, { id: "error" }];
 

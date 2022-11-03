@@ -1,5 +1,5 @@
-import styles from "./index.module.scss";
-import districts from "/districts.json";
+import styles from "./[...district].module.scss";
+import { districts } from "/lib/district";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { Start } from "/lib/graphql/start.gql";
 import { propByDistrict } from "/lib/district";
