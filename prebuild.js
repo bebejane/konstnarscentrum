@@ -1,4 +1,4 @@
-const env = require('dotenv').config({path:'./.env.local'})
+const env = require('dotenv')
 const fs = require("fs")
 const slugify = require('slugify')
 const { buildClient } = require('@datocms/cma-client-node')
@@ -7,7 +7,7 @@ const prebuild = async () => {
 
   console.log('generate districts.json')
 
-  const client  = buildClient({apiToken:process.env.gql_API_TOKEN});
+  const client  = buildClient({apiToken:process.env.GRAPHQL_API_TOKEN});
   client.items.rawCreate
   const roles = await client.roles.list()
   const editor = roles.filter(r => r.name.toLowerCase() === 'editor')[0] 
