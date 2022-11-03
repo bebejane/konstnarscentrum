@@ -1,4 +1,5 @@
 const withBundleAnalyzer = require('@next/bundle-analyzer')({enabled: process.env.ANALYZE === 'true'})
+const webpack = require('webpack');
 
 const sassOptions = {
   includePaths: ['./components', './pages'],
@@ -35,7 +36,9 @@ const nextOptions = {
       exclude: /node_modules/,
       use: ['@svgr/webpack'],
     })
-    
+    config.plugins.push(new webpack.DefinePlugin({
+      __DEV__: process.env.NODE_ENV === "development"
+    }))
     return config;
   },
 }

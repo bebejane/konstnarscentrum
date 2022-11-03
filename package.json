@@ -42,7 +42,7 @@
     "lodash-es": "4.17.21",
     "markdown-truncate": "^1.0.4",
     "multer": "^1.4.3",
-    "next": "^12.3.1",
+    "next": "12.3.1",
     "next-auth": "^4.14.0",
     "next-compose-plugins": "^2.2.1",
     "next-connect": "^0.10.2",
