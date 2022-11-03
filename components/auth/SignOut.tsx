@@ -1,5 +1,5 @@
 import styles from "./Auth.module.scss";
-import text from "./text"
+import text from "./text.json"
 import { SubmitButton } from "./Auth";
 import {signOut} from 'next-auth/react'
 import { useState } from "react";

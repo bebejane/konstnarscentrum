@@ -1,4 +1,4 @@
-import '/styles/index.scss'
+import '/lib/styles/index.scss'
 import { Menu } from "/components";
 import { SessionProvider } from "next-auth/react"
 

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "133331",
+    "name": "Mitt",
+    "slug": "mitt"
+  },
+  {
+    "id": "133332",
+    "name": "Nord",
+    "slug": "nord"
+  },
+  {
+    "id": "133333",
+    "name": "Syd",
+    "slug": "syd"
+  },
+  {
+    "id": "111106",
+    "name": "Väst",
+    "slug": "vast"
+  },
+  {
+    "id": "111107",
+    "name": "Öst",
+    "slug": "ost"
+  }
+]

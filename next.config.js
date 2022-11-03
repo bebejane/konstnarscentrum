@@ -4,10 +4,10 @@ const sassOptions = {
   includePaths: ['./components', './pages'],
   prependData: `
     @use "sass:math";
-    @import "./styles/partials/mediaqueries"; 
-    @import "./styles/partials/styles";
-    @import "./styles/partials/variables";
-    @import "./styles/partials/fonts";
+    @import "./lib/styles/partials/mediaqueries"; 
+    @import "./lib/styles/partials/styles";
+    @import "./lib/styles/partials/variables";
+    @import "./lib/styles/partials/fonts";
   `
 }
 const nextOptions = {
@@ -32,6 +32,7 @@ const nextOptions = {
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
+      exclude: /node_modules/,
       use: ['@svgr/webpack'],
     })
     

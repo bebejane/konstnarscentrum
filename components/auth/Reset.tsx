@@ -1,7 +1,7 @@
 import styles from "./Auth.module.scss";
 import text from "./text.json";
 import { SubmitButton } from "./Auth";
-import memberService from "/services/member";
+import memberService from "/lib/services/member";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from "next/link";

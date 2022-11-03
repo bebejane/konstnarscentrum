@@ -7,6 +7,5 @@ yarn.lock
 TODO
 .DS_Store
 *.code-workspace
-/districts.json
 /package-lock.json
 .vercel

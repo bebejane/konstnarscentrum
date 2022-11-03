@@ -1,6 +1,6 @@
 import styles from "./Auth.module.scss";
-import text from './text'
-import memberService from "/services/member";
+import text from './text.json'
+import memberService from "/lib/services/member";
 import Link from "next/link";
 import { SubmitButton } from "./Auth";
 import { useEffect, useState } from "react";
@@ -29,10 +29,10 @@ export default function Apply({ districts = [] }) {
 }
 
 const ApplicationForm = ({ districts, setApplication }) => {
-	const [error, setError] = useState();
+	const [error, setError] = useState<undefined | Error>();
 	const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm();
 
-	useEffect(() => isSubmitting && setError(false), [isSubmitting]);
+	useEffect(() => isSubmitting && setError(undefined), [isSubmitting]);
 
 	const onSubmitApplication = async ({ email, firstName, lastName, message, roleId }) => {
 		try {

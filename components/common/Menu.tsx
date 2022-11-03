@@ -12,13 +12,13 @@ export default function Menu({message}){
   useEffect(()=>{
     if(!district || district == '-1') return
     router.push(`/${district}`)
-  }, [district, router])
+  }, [district])
   
   useEffect(()=>{
     districts.forEach((d)=>{
-      //router.prefetch(`/${d.slug}`)
+      router.prefetch(`/${d.slug}`)
     })
-  }, [router])
+  }, [])
 
   return (
     <div className={styles.container}>

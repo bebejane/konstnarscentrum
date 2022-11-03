@@ -1,3 +1,4 @@
+import type { NextApiRequest, NextApiResponse } from 'next'
 import client from '/lib/client'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
@@ -27,30 +28,39 @@ const options = {
         username: { label: "Username", type: "text"},
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
-        const { username: email, password } = credentials
-
-        const users = await client.items.list({filter: {type: "member", fields: { email: { eq: email}}}});
-        const user = users && users.length === 1 ? users[0] : undefined 
+      async authorize(credentials, req : NextApiRequest) {
         
-        if (!user) return null
-        
-        const checkPassword = await comparePassword(password, user.password);
+        try{
 
-        if(!checkPassword){
-          console.error('not a valid password!')
+          const { username: email, password } = credentials
+          const users = await client.items.list({filter: {type: "member", fields: { email: { eq: email}}}});
+          const user = users && users.length === 1 ? users[0] : undefined 
+          
+          if (!user) return null
+          
+          const checkPassword = await comparePassword(password, user.password);
+
+          if(!checkPassword){
+            console.error('not a valid password!')
+            return null
+          }
+
+          // Login passed, return user. 
+          // Any object returned will be saved in `user` property of the JWT
+          return {
+            id:user.id,
+            email:user.email,
+            firstName:user.firstName,
+            lastName:user.lastName
+          }
+        }catch(err){
+          console.error(err)
           return null
-        }
-        // Login passed, return user. Any object returned will be saved in `user` property of the JWT
-        return {
-          id:user.id,
-          email:user.email,
-          firstName:user.firstName,
-          lastName:user.lastName
         }
       }
     })
   ]
 }
 
-export default (req, res) => NextAuth(req, res, options)
+const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
+export default handler

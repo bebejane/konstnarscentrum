@@ -1,5 +1,5 @@
 import styles from "./News.module.scss";
-import { newsController } from "/controllers";
+import { newsController } from "../../lib/controllers";
 
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";

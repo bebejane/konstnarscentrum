@@ -4,7 +4,7 @@ import { SiteClient } from 'datocms-client'
 
 import Email from "/lib/email";
 import { generateToken } from '/lib/auth'
-import { memberController, applicationController } from '/controllers';
+import { memberController, applicationController } from '../../../lib/controllers';
 
 const applicationModelId = "1185976"
 

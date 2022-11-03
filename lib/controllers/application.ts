@@ -1,6 +1,6 @@
 import client from '/lib/client'
 
-export default {
+const applicationController = {
   all: async () => {
 		const applications = await client.items.list({filter:{type:'application'}})
 		return applications;
@@ -19,3 +19,5 @@ export default {
 		return applications.length === 1 ? applications[0] : null;
 	}
 }
+
+export default applicationController;

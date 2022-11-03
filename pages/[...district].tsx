@@ -1,7 +1,7 @@
 import styles from "./index.module.scss";
 import districts from "/districts.json";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { Start } from "/graphql/start.gql";
+import { Start } from "/lib/graphql/start.gql";
 import { propByDistrict } from "/lib/district";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 

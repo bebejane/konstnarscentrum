@@ -16,12 +16,14 @@ export default function SignIn({ csrfToken, domain }) {
 	} = useForm();
 
 	const onSubmitSignIn = async ({ username, password }) => {
+		console.log('signin');
 		
 		await signIn("credentials", {
 			callbackUrl: `${window.location.origin}/member`,
 			username,
 			password,
 		});
+		console.log('signin done');
 	};
 
 	useEffect(() => router.query.error && setError("Username or password incorrect"), [router]);

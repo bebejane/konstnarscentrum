@@ -1,6 +1,6 @@
 import styles from "./Auth.module.scss";
-import text from "./text"
-import memberService from "/services/member";
+import text from "./text.json"
+import memberService from "/lib/services/member";
 import { SubmitButton } from "./Auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -31,7 +31,7 @@ const SignupForm = ({ districts, application, setMember }) => {
 	const [error, setError] = useState();
 	const { register, handleSubmit, formState: { errors, isSubmitting }, reset} = useForm();
 
-	useEffect(() => isSubmitting && setError(false), [isSubmitting]);
+	useEffect(() => isSubmitting && setError(undefined), [isSubmitting]);
 
 	const onSubmitSignup = async ({ email, password, password2, firstName, lastName, roleId }) => {
 		try {
