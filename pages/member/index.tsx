@@ -33,3 +33,6 @@ export const getServerSideProps = requireAuthentication(async (context, session)
 	};
 });
 
+export const config = {
+	runtime:'experimental-edge'
+}
