@@ -2,7 +2,7 @@
 import Cookies from 'cookies'
 import districts from '/districts.json'
 
-const handler = async(req, res){
+const handler = async (req, res) => {
   const { district } = req.query
   const cookies = new Cookies(req, res)
   // Get a cookie
