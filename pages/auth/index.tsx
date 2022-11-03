@@ -7,7 +7,7 @@ const types = [{ id: "apply" }, { id: "signup" }, { id: "signin" }, { id: "reset
 
 export async function getServerSideProps(context) {
 	const authType = context.query.type;
-
+	
 	if(!types.filter(p => p.id === authType).length) 
 		return { notFound:true }
 
@@ -21,6 +21,10 @@ export async function getServerSideProps(context) {
 	Object.keys(props).forEach(k => props[k] === undefined && delete props[k]) // Remove undefined props
 
 	return { props }
+}
+
+export const config = {
+	runtime:'experimental-edge'
 }
 
 export default Auth;
