@@ -33,3 +33,7 @@ export async function getServerSideProps(context) {
 		},
 	};
 }
+
+export const config = {
+	runtime:'experimental-edge'
+}
