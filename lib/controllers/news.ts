@@ -1,9 +1,9 @@
 import { apiQuery } from "dato-nextjs-utils/api";
-import { GetAllNews, GetNews } from "/lib/graphql/news.gql";
+import { AllNewsDocument } from "/graphql";
 
 const newsController =  {
 	all: async () => {
-		const { news } = await apiQuery(GetAllNews);
+		const { news } = await apiQuery(AllNewsDocument);
 		return news
 	},
 }

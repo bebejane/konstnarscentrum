@@ -21,11 +21,9 @@ type Scalars = {
   UploadId: any;
 };
 
-type AboutModelContentBlocksField = HeadlineRecord | ImageRecord;
-
 type AboutModelContentField = {
   __typename?: 'AboutModelContentField';
-  blocks: Array<AboutModelContentBlocksField>;
+  blocks: Array<ImageRecord>;
   links: Array<Scalars['String']>;
   value: Scalars['JsonField'];
 };
@@ -43,7 +41,6 @@ type AboutModelFilter = {
   content?: InputMaybe<StructuredTextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  settingsJson?: InputMaybe<JsonFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -92,8 +89,6 @@ type AboutRecord = RecordInterface & {
   content?: Maybe<AboutModelContentField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  settingsJson?: Maybe<Scalars['JsonField']>;
-  test: Array<AttributeRecord>;
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -814,32 +809,6 @@ type GlobalSeoField = {
   siteName?: Maybe<Scalars['String']>;
   titleSuffix?: Maybe<Scalars['String']>;
   twitterAccount?: Maybe<Scalars['String']>;
-};
-
-/** Block of type Headline (headline) */
-type HeadlineRecord = RecordInterface & {
-  __typename?: 'HeadlineRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  headline?: Maybe<Scalars['String']>;
-  id: Scalars['ItemId'];
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Block of type Headline (headline) */
-type HeadlineRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Block of type Image (image) */
@@ -3842,48 +3811,55 @@ type focalPoint = {
   y: Scalars['FloatType'];
 };
 
-type GetAboutQueryVariables = Exact<{ [key: string]: never; }>;
+type AboutQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GetAboutQuery = { __typename?: 'Query', about?: { __typename?: 'AboutRecord', title: string, id: any, content?: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'HeadlineRecord', id: any, headline?: string | null, createdAt: any } | { __typename: 'ImageRecord', id: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> } | null } | null };
+type AboutQuery = { __typename?: 'Query', about?: { __typename?: 'AboutRecord', title: string, id: any, content?: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'ImageRecord', id: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> } | null } | null };
 
-type GetAllAboutsQueryVariables = Exact<{ [key: string]: never; }>;
+type AllAboutsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GetAllAboutsQuery = { __typename?: 'Query', abouts: Array<{ __typename?: 'AboutRecord', title: string, id: any, content?: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'HeadlineRecord', id: any, headline?: string | null, createdAt: any } | { __typename: 'ImageRecord', id: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> } | null }> };
+type AllAboutsQuery = { __typename?: 'Query', abouts: Array<{ __typename?: 'AboutRecord', title: string, id: any, content?: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'ImageRecord', id: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> } | null }> };
 
 type ImageFragment = { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null };
 
-type GetAllMembersQueryVariables = Exact<{ [key: string]: never; }>;
+type SiteFragment = { __typename?: 'Site', favicon: Array<{ __typename?: 'Tag', attributes?: any | null, content?: string | null, tag: string }>, globalSeo?: { __typename?: 'GlobalSeoField', facebookPageUrl?: string | null, siteName?: string | null, titleSuffix?: string | null, twitterAccount?: string | null, fallbackSeo?: { __typename?: 'SeoField', description?: string | null, title?: string | null, twitterCard?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null } | null } | null };
+
+type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GetAllMembersQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, _status: ItemStatus, _firstPublishedAt?: any | null }> };
+type GlobalQuery = { __typename?: 'Query', site: { __typename?: 'Site', favicon: Array<{ __typename?: 'Tag', attributes?: any | null, content?: string | null, tag: string }>, globalSeo?: { __typename?: 'GlobalSeoField', facebookPageUrl?: string | null, siteName?: string | null, titleSuffix?: string | null, twitterAccount?: string | null, fallbackSeo?: { __typename?: 'SeoField', description?: string | null, title?: string | null, twitterCard?: string | null, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null } | null } | null } };
 
-type GetMemberQueryVariables = Exact<{
+type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllMembersQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, _status: ItemStatus, _firstPublishedAt?: any | null }> };
+
+type MemberQueryVariables = Exact<{
   email: Scalars['String'];
 }>;
 
 
-type GetMemberQuery = { __typename?: 'Query', member?: { __typename?: 'MemberRecord', id: any, email: string, firstName: string, lastName: string } | null };
+type MemberQuery = { __typename?: 'Query', member?: { __typename?: 'MemberRecord', id: any, email: string, firstName: string, lastName: string } | null };
 
-type GetMemberByPasswordTokenQueryVariables = Exact<{
+type MemberByPasswordTokenQueryVariables = Exact<{
   token: Scalars['String'];
 }>;
 
 
-type GetMemberByPasswordTokenQuery = { __typename?: 'Query', member?: { __typename?: 'MemberRecord', id: any, email: string, firstName: string, lastName: string } | null };
+type MemberByPasswordTokenQuery = { __typename?: 'Query', member?: { __typename?: 'MemberRecord', id: any, email: string, firstName: string, lastName: string } | null };
 
-type GetAllNewsQueryVariables = Exact<{ [key: string]: never; }>;
+type AllNewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type GetAllNewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsRecord', header?: string | null, createdAt: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> };
+type AllNewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsRecord', header?: string | null, createdAt: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null }> };
 
-type GetNewsQueryVariables = Exact<{
+type NewsQueryVariables = Exact<{
   id: Scalars['ItemId'];
 }>;
 
 
-type GetNewsQuery = { __typename?: 'Query', news?: { __typename?: 'NewsRecord', header?: string | null, body?: string | null, createdAt: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null } | null };
+type NewsQuery = { __typename?: 'Query', news?: { __typename?: 'NewsRecord', header?: string | null, body?: string | null, createdAt: any, image?: { __typename?: 'FileField', alt?: string | null, basename: string, format: string, height?: any | null, id: any, mimeType: string, size: any, title?: string | null, url: string, width?: any | null, responsiveImage?: { __typename?: 'ResponsiveImage', alt?: string | null, aspectRatio: any, base64?: string | null, bgColor?: string | null, height: any, sizes: string, src: string, srcSet: string, webpSrcSet: string, title?: string | null, width: any } | null } | null } | null };
 
 type StartQueryVariables = Exact<{ [key: string]: never; }>;
 

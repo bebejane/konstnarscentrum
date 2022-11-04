@@ -1,6 +1,6 @@
 #import "./fragments/ImageFragment.gql"
 
-query GetAllNews{
+query AllNews{
   news: allNews {
     header
     createdAt
@@ -10,7 +10,7 @@ query GetAllNews{
   }    
 }
 
-query GetNews($id: ItemId!){
+query News($id: ItemId!){
   news(filter: {id: {eq: $id}}){
     header
     body

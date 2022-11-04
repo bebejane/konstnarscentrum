@@ -1,7 +1,7 @@
 import styles from "./[...district].module.scss";
 import { districts } from "/lib/district";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { Start } from "/lib/graphql/start.gql";
+import { StartDocument } from "/graphql";
 import { propByDistrict } from "/lib/district";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 
@@ -25,7 +25,7 @@ export async function getStaticPaths(context) {
 
 export async function getStaticProps(context) {
 	const district = context.params.district[0];
-	const res = await apiQuery(Start, {preview:false});
+	const res = await apiQuery(StartDocument);
 	const start = propByDistrict(res, district, 'start')
 
 	return {

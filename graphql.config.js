@@ -18,7 +18,7 @@ module.exports = {
 			},
 		},
 	},
-  documents: "lib/graphql/**/*.gql",
+  documents: "graphql/**/*.gql",
 	extensions: {
 		codegen: {
 			overwrite: true,
@@ -30,7 +30,7 @@ module.exports = {
 					],
 					config:{...config, noExport: true}
 				},
-        "lib/graphql/index.ts": {
+        "graphql/index.ts": {
           plugins: ["typed-document-node"],
 					config
         },

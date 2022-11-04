@@ -1,17 +1,11 @@
 #import "./fragments/ImageFragment.gql"
 
-query GetAbout {
+query About {
   about {
     title
     id
     content {
       blocks {
-        ... on HeadlineRecord {
-          __typename
-          id
-          headline
-          createdAt
-        }
         ... on ImageRecord {
           __typename
           id
@@ -25,18 +19,12 @@ query GetAbout {
   }
 }
 
-query GetAllAbouts {
+query AllAbouts {
   abouts : allAbouts {
     title
     id
     content {
       blocks {
-        ... on HeadlineRecord {
-          __typename
-          id
-          headline
-          createdAt
-        }
         ... on ImageRecord {
           __typename
           id

@@ -2,8 +2,8 @@
 declare module '*/about.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetAbout: DocumentNode;
-export const GetAllAbouts: DocumentNode;
+  export const About: DocumentNode;
+export const AllAbouts: DocumentNode;
 
   export default defaultDocument;
 }
@@ -18,12 +18,30 @@ declare module '*/ImageFragment.gql' {
 }
     
 
+declare module '*/SiteFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SiteFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/global.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Global: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/member.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetAllMembers: DocumentNode;
-export const GetMember: DocumentNode;
-export const GetMemberByPasswordToken: DocumentNode;
+  export const AllMembers: DocumentNode;
+export const Member: DocumentNode;
+export const MemberByPasswordToken: DocumentNode;
 
   export default defaultDocument;
 }
@@ -32,8 +50,8 @@ export const GetMemberByPasswordToken: DocumentNode;
 declare module '*/news.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const GetAllNews: DocumentNode;
-export const GetNews: DocumentNode;
+  export const AllNews: DocumentNode;
+export const News: DocumentNode;
 
   export default defaultDocument;
 }

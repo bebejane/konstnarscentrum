@@ -1,4 +1,4 @@
-query GetAllMembers {
+query AllMembers {
   members: allMembers {
     id
     firstName
@@ -8,7 +8,7 @@ query GetAllMembers {
     _firstPublishedAt
   }
 }
-query GetMember($email: String!){
+query Member($email: String!){
   member(filter: {email: {eq: $email}}){
     id
     email
@@ -16,7 +16,7 @@ query GetMember($email: String!){
     lastName
   }
 }
-query GetMemberByPasswordToken($token: String!){
+query MemberByPasswordToken($token: String!){
   member(filter: {resettoken: {eq: $token}}){
     id
     email

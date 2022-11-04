@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import client from '/lib/client'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
+import GoogleProvider from "next-auth/providers/google";
 import { comparePassword } from '/lib/auth'
 
 const options = {
@@ -18,6 +19,10 @@ const options = {
     //newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)  }
   },
   providers: [
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
+    }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: 'Credentials',

@@ -6,7 +6,9 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 
-export default function SignIn({ csrfToken, domain }) {
+export default function SignIn({ csrfToken, domain, providers}) {
+	console.log(providers);
+	
 	const router = useRouter();
 	const [error, setError] = useState<undefined | string | Error>();
 	const {
