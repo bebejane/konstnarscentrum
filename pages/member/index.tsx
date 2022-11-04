@@ -1,9 +1,11 @@
 import styles from './Member.module.scss'
 import { requireAuthentication } from "/lib/auth";
+import { useSession } from "next-auth/react"
 import { signIn, signOut } from 'next-auth/react'
 
-export default function Member({session}){
-  
+export default function Member(){
+  const { data: session, status } = useSession()
+
   return (
     <div className={styles.container}>
       <h1>Medlems sida</h1>
@@ -23,7 +25,7 @@ export default function Member({session}){
     </div>
   )
 }
-
+/*
 
 export const getServerSideProps = requireAuthentication(async (context, session) => {
 	return { 
@@ -32,6 +34,7 @@ export const getServerSideProps = requireAuthentication(async (context, session)
 		}
 	};
 });
+*/
 
 export const config = {
 	runtime:'experimental-edge'
