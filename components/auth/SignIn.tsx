@@ -1,5 +1,5 @@
 import styles from "./Auth.module.scss";
-import text from "./text";
+import text from "./text.json";
 import { SubmitButton } from "./Auth";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -8,7 +8,7 @@ import { signIn } from "next-auth/react";
 
 export default function SignIn({ csrfToken, domain }) {
 	const router = useRouter();
-	const [error, setError] = useState(false);
+	const [error, setError] = useState<undefined | string | Error>();
 	const {
 		register,
 		handleSubmit,
@@ -26,7 +26,9 @@ export default function SignIn({ csrfToken, domain }) {
 		console.log('signin done');
 	};
 
-	useEffect(() => router.query.error && setError("Username or password incorrect"), [router]);
+	useEffect(() => {
+		router.query.error && setError("Username or password incorrect")
+	}, [router]);
 
 	return (
 		<div className={styles.container}>
@@ -52,8 +54,14 @@ export default function SignIn({ csrfToken, domain }) {
 					type="password"
 					className={errors.password && styles.error}
 				/>
-				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
-				{error && <p className={styles.formError}>{`${error.error || error.message || error}`}</p>}
+				<SubmitButton loading={isSubmitting}>
+					{text.send}
+				</SubmitButton>
+				{error && 
+					<p className={styles.formError}>
+						{`${typeof error === 'string' ? error : error.message }`}
+					</p>
+				}
 			</form>
 		</div>
 	);

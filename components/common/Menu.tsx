@@ -6,12 +6,11 @@ import { useRouter } from 'next/router'
 
 export default function Menu({message}){
   const router = useRouter()
-  const [district, setDistrict] = useState(router.asPath.split('/')[1])
-  
+  const [district, setDistrict] = useState(router?.asPath.split('/')[1])
 
   useEffect(()=>{
-    if(!district || district == '-1') return
-    router.push(`/${district}`)
+    if(district !== '-1')
+      router.push('/'+ district)
   }, [district])
   
   useEffect(()=>{

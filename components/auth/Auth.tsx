@@ -6,6 +6,7 @@ import SignIn from "./SignIn";
 import SignOut from "./SignOut";
 import SignUp from "./SignUp";
 import Link from "next/link";
+import React from "react";
 
 const components = {
   'apply': Apply,
@@ -62,20 +63,20 @@ export function AuthLinks({type, domain}) {
       <p className={styles.authLinks}>
         {links.map(({title, href}, idx)=>
           <Link href={href} key={idx}>
-            <a>{title}</a>
+            {title}
           </Link>
         )}
         
       </p>
       <p className={styles.authDomain}>
         <Link href={'/'}>
-          <a>Konstnärscentrum</a>
+          Konstnärscentrum
         </Link>
       </p>
     </>
   )
 }
-export function SubmitButton({ loading, children, onClick }) {
+export function SubmitButton({ loading, children, onClick } : {loading:boolean, children: React.ReactNode, onClick?: ()=> void}) {
 	return (
     <button className={styles.submitButton} type="submit" onClick={onClick}>
       {!loading ? children : <div className={styles.loader}></div>}

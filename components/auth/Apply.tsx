@@ -19,7 +19,7 @@ export default function Apply({ districts = [] }) {
 					<p>{text.reviewYourRegistration}</p>
 					<p>
 						<Link href={"/"}>
-							<a>{text.goHome}</a>
+							{text.goHome}
 						</Link>
 					</p>
 				</div>

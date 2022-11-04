@@ -6,7 +6,7 @@ export default function requireAuthentication(getServerSideProps){
 		if (!session) {
 			return {
 				props: {},
-				redirect: { destination: "/auth?type=signin", permanent: false }
+				redirect: { destination: `${process.env.NEXTAUTH_URL}/auth?type=signin`, permanent: false }
 			};
 		}
 		// Passed auth, call page getServerSideProps

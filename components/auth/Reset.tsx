@@ -106,7 +106,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 				</p>
 				<p className={styles.formLinks}>
 					<Link href={"/auth/signin"}>
-						<a>{text.signIn}</a>
+						{text.signIn}
 					</Link>
 				</p>
 			</form>

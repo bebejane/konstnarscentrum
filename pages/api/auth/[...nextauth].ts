@@ -28,7 +28,7 @@ const options = {
         username: { label: "Username", type: "text"},
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req : NextApiRequest) {
+      async authorize(credentials, req) {
         
         try{
 

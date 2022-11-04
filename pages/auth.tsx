@@ -8,7 +8,7 @@ const types = [{ id: "apply" }, { id: "signup" }, { id: "signin" }, { id: "reset
 export async function getServerSideProps(context) {
 	const authType = context.query.type;
 	
-	if(!types.filter(p => p.id === authType).length) 
+	if(!types.find(p => p.id === authType)) 
 		return { notFound:true }
 
   const { type, token, error } = context.query;	
