@@ -1,27 +1,14 @@
-fragment ImageFragment on FileField {
+fragment VideoFragment on FileField {
+  id
   alt
   basename
   format
-  height
-  id
   mimeType
   size
   title
   url
   width
-  responsiveImage {
-    alt
-    aspectRatio
-    base64
-    bgColor
-    height
-    sizes
-    src
-    srcSet
-    webpSrcSet
-    title
-    width
-  }
+  height
   video {
     thumbnailUrl
     streamingUrl
@@ -29,6 +16,6 @@ fragment ImageFragment on FileField {
     mp4med: mp4Url(res: medium)
     mp4low: mp4Url(res: low)
     framerate
-    duration
+    duration 
   }
 }

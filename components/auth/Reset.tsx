@@ -1,4 +1,4 @@
-import styles from "./Auth.module.scss";
+import styles from "./index.module.scss";
 import text from "./text.json";
 import { SubmitButton } from "./Auth";
 import memberService from "/lib/services/member";
@@ -35,7 +35,9 @@ const ResetForm = ({ setStatus }) => {
 		formState: { errors, isSubmitting }
 	} = useForm();
 
-	useEffect(() => isSubmitting && setError(false), [isSubmitting]);
+	useEffect(() => {
+		isSubmitting && setError(false)
+	}, [isSubmitting]);
 
 	const onSubmitReset = async ({ email }) => {
 		try {
@@ -74,7 +76,9 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 		reset,
 	} = useForm();
 
-	useEffect(() => isSubmitting && setError(false), [isSubmitting]);
+	useEffect(() => {
+		isSubmitting && setError(false)
+	}, [isSubmitting]);
 
 	const onSubmitUpdate = async ({ password, password2 }) => {
 		try {

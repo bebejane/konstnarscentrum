@@ -1,6 +1,10 @@
 import styles from './Loader.module.scss'
 
-export default function Loader({message}){
+type Props = {
+  message?: string
+}
+
+export default function Loader({message}: Props){
   return (
     <div className={styles.container}>
       {message}

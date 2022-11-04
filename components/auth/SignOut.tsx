@@ -1,4 +1,4 @@
-import styles from "./Auth.module.scss";
+import styles from "./index.module.scss";
 import text from "./text.json"
 import { SubmitButton } from "./Auth";
 import {signOut} from 'next-auth/react'

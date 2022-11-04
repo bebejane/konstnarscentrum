@@ -25,16 +25,6 @@ export default function Member(){
     </div>
   )
 }
-/*
-
-export const getServerSideProps = requireAuthentication(async (context, session) => {
-	return { 
-		props: { 
-			session
-		}
-	};
-});
-*/
 
 export const config = {
 	runtime:'experimental-edge'

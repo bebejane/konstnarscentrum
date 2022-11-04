@@ -1,23 +1,14 @@
 import jwt from 'jsonwebtoken';
 import { hash, compare } from 'bcryptjs';
-import requireAuthentication from './requireAuthentication'
-import { validateEmail, validatePassword, validateSignUp } from './validate';
+export { default as requireAuthentication } from './requireAuthentication'
+export { validateEmail, validatePassword, validateSignUp } from './validate';
 
-const generateToken = async (email) => {
+export const generateToken = async (email: string) => {
   return await jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
 }
-const hashPassword = async (password) => {
+export const hashPassword = async (password: string) => {
   return await hash(password, 12)
 }
-const comparePassword = async (password, password2) => {
+export const comparePassword = async (password, password2) => {
   return await compare(password, password2);
-}
-export {
-  requireAuthentication,
-  generateToken,
-  hashPassword,
-  validateEmail, 
-  validatePassword, 
-  validateSignUp,
-  comparePassword
 }

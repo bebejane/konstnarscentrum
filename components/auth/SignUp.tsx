@@ -1,4 +1,4 @@
-import styles from "./Auth.module.scss";
+import styles from "./index.module.scss";
 import text from "./text.json"
 import memberService from "/lib/services/member";
 import { SubmitButton } from "./Auth";
@@ -31,7 +31,9 @@ const SignupForm = ({ districts, application, setMember }) => {
 	const [error, setError] = useState();
 	const { register, handleSubmit, formState: { errors, isSubmitting }, reset} = useForm();
 
-	useEffect(() => isSubmitting && setError(undefined), [isSubmitting]);
+	useEffect(() => {
+		isSubmitting && setError(undefined)
+	}, [isSubmitting]);
 
 	const onSubmitSignup = async ({ email, password, password2, firstName, lastName, roleId }) => {
 		try {

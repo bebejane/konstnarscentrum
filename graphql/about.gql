@@ -1,39 +1,13 @@
-#import "./fragments/ImageFragment.gql"
+#import "./fragments/AboutFragment.gql"
 
-query About {
-  about {
-    title
-    id
-    content {
-      blocks {
-        ... on ImageRecord {
-          __typename
-          id
-          image{
-            ...ImageFragment
-          }
-        }
-      }
-      value
-    }
-  }
+query About($slug: String!) {
+	about(filter: { slug: { eq: $slug } }) {
+		...AboutFragment
+	}
 }
 
 query AllAbouts {
-  abouts : allAbouts {
-    title
-    id
-    content {
-      blocks {
-        ... on ImageRecord {
-          __typename
-          id
-          image{
-            ...ImageFragment
-          }
-        }
-      }
-      value
-    }
-  }
+	abouts: allAbouts {
+		...AboutFragment
+	}
 }

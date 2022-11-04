@@ -1,4 +1,4 @@
-import styles from "./Auth.module.scss";
+import styles from "./index.module.scss";
 import text from './text.json'
 import memberService from "/lib/services/member";
 import Link from "next/link";
@@ -32,7 +32,9 @@ const ApplicationForm = ({ districts, setApplication }) => {
 	const [error, setError] = useState<undefined | Error>();
 	const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm();
 
-	useEffect(() => isSubmitting && setError(undefined), [isSubmitting]);
+	useEffect(() => {
+		isSubmitting && setError(undefined)
+	}, [isSubmitting]);
 
 	const onSubmitApplication = async ({ email, firstName, lastName, message, roleId }) => {
 		try {

@@ -1,4 +1,4 @@
-import styles from "./Auth.module.scss";
+import styles from "./index.module.scss";
 import text from "./text.json";
 import { SubmitButton } from "./Auth";
 import { useState, useEffect } from "react";
@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 
-export default function SignIn({ csrfToken, domain, providers}) {
+export default function SignIn({ csrfToken, providers}) {
 	console.log(providers);
 	
 	const router = useRouter();
@@ -59,6 +59,13 @@ export default function SignIn({ csrfToken, domain, providers}) {
 				<SubmitButton loading={isSubmitting}>
 					{text.send}
 				</SubmitButton>
+				<ul className={styles.providers}>
+					{Object.keys(providers).filter(id => id !== 'credentials').map((id, idx) => 
+						<li key={idx} onClick={()=>signIn(id)}>
+							{providers[id].name}
+						</li>
+					)}
+				</ul>
 				{error && 
 					<p className={styles.formError}>
 						{`${typeof error === 'string' ? error : error.message }`}
