@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer'
 import sgTransport from 'nodemailer-sendgrid-transport';
+import { resetPassword } from './templates';
 
 const allowed = [process.env.SENDGRID_FROM_EMAIL, 'bjornthief@gmail.com', 'mattias@konst-teknik.se', 'bjorn@konst-teknik.se', 'bebejanedev@gmail.com']
 //const transporter = nodemailer.createTransport(sgTransport({auth: {api_key: process.env.SENDGRID_API_KEY}}));
@@ -19,11 +20,12 @@ const send = async (options) => {
   const message = {
     //from: `"${process.env.SENDGRID_FROM_NAME}" ${process.env.SENDGRID_FROM_EMAIL}`,
     from: `"${process.env.SMTP_FROM_NAME}" ${process.env.SMTP_EMAIL}`,
-    to: allowed.includes(options.to) ? options.to : process.env.SENDGRID_FROM_EMAIL,
+    to: allowed.includes(options.to) ? options.to : process.env.SMTP_EMAIL,
     subject: options.subject,
-    text: options.message
+    text: options.message,
+    html:options.html
   }
-  console.log('send email', message)
+  console.log('send email', options.to)
   const info = await transporter.sendMail(message);
   return info;
 }
@@ -32,7 +34,8 @@ const sendApprovalEmail = async (email, token) => {
   return send({
     to:`${email}`,
     subject:'You have been approved',
-    message: `Please signup here ${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`
+    message: `Please signup here ${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`,
+
   })
 }
 const sendApplicationEmail = async (email) => {
@@ -46,11 +49,15 @@ const sendResetPasswordEmail = async (email, token) => {
   return send({
     to:`${email}`,
     subject:'Reset your account',
-    message: `Reset your account password here ${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`
-
+    message: `Reset your account password here ${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`,
+    html: resetPassword({
+      button:'Reset password',
+      message:'Click the link to reset your password',
+      href:`${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`
+    })
   })
 }
-export default {
+export{
   send,
   sendApprovalEmail,
   sendApplicationEmail,

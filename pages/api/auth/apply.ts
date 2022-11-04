@@ -1,7 +1,7 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
 
-import Email from "/lib/email";
+import Email from "../../../lib/email";
 import { generateToken } from '/lib/auth'
 import { memberController, applicationController } from '/lib/controllers';
 
@@ -19,8 +19,6 @@ export default catchErrorsFrom( async (req, res) => {
     throw 'You have already applied for membership!'
 
   const tokens = await client.accessTokens.list();
-  console.log(tokens, roleId);
-  
   const roleApiToken = tokens.find((t) => t.role && t.role.id === roleId).token
   const approvalToken =  await generateToken(email)
   const roleClient = buildClient({apiToken:roleApiToken});

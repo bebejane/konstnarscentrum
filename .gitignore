@@ -9,3 +9,5 @@ TODO
 *.code-workspace
 /package-lock.json
 .vercel
+
+.mailing

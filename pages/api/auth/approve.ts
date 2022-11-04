@@ -1,5 +1,5 @@
 import { catchErrorsFrom } from '/lib/utils'
-import Email from "/lib/email";
+import Email from "../../../lib/email";
 
 export default catchErrorsFrom(async (req, res) => {
 	const { entity, previous_entity } = req.body;

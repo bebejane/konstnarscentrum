@@ -1,6 +1,6 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client from '/lib/client'
-import Email from "/lib/email";
+import Email from "../../../lib/email";
 import { memberController } from '/lib/controllers';
 import { hashPassword, generateToken } from '/lib/auth'
 
