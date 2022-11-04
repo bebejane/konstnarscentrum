@@ -12,9 +12,10 @@ export default catchErrorsFrom(async(req, res) => {
 
 const requestReset = async (email) => {
   const member = await memberController.get(email)
+  
   if(!member) 
     return false
-  const resettoken =  await generateToken(email)
+  const resettoken = await generateToken(email)
   const updatedMember = await client.items.update(member.id, {resettoken});
   await Email.sendResetPasswordEmail(email, resettoken)
   return true

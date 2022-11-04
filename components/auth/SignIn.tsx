@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 
 export default function SignIn({ csrfToken, providers}) {
-	console.log(providers);
 	
 	const router = useRouter();
 	const [error, setError] = useState<undefined | string | Error>();
@@ -18,7 +17,6 @@ export default function SignIn({ csrfToken, providers}) {
 	} = useForm();
 
 	const onSubmitSignIn = async ({ username, password }) => {
-		console.log('signin');
 		
 		await signIn("credentials", {
 			callbackUrl: `${window.location.origin}/member`,
