@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import sgTransport from 'nodemailer-sendgrid-transport';
-import { resetPassword } from './templates';
+import { resetPassword, interpolateTemplate } from './templates';
 
 const allowed = [process.env.SENDGRID_FROM_EMAIL, 'bjornthief@gmail.com', 'mattias@konst-teknik.se', 'bjorn@konst-teknik.se', 'bebejanedev@gmail.com']
 //const transporter = nodemailer.createTransport(sgTransport({auth: {api_key: process.env.SENDGRID_API_KEY}}));
@@ -46,23 +46,25 @@ const sendApplicationEmail = async (email) => {
   })
 }
 const sendResetPasswordEmail = async (email, token) => {
+  const html = await interpolateTemplate('reset-password', {
+    button:'Reset password',
+    message:'Click the link to reset your password',
+    href:`${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`
+  })
+  console.log(html);
+  
   return send({
     to:`${email}`,
     subject:'Reset your account',
     message: `Reset your account password here ${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`,
-    html: resetPassword({
-      button:'Reset password',
-      message:'Click the link to reset your password',
-      href:`${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`
-    })
+    html
   })
 }
-export{
+
+const Email = {
   send,
   sendApprovalEmail,
   sendApplicationEmail,
   sendResetPasswordEmail
 }
-
-
-
+export default Email;
