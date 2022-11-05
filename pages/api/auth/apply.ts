@@ -1,7 +1,6 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
-
-import Email from "../../../lib/email";
+import Email from "/emails";
 import { generateToken } from '/lib/auth'
 import { memberController, applicationController } from '/lib/controllers';
 
@@ -35,6 +34,6 @@ export default catchErrorsFrom( async (req, res) => {
     approval_token: approvalToken,
     approved: false
   });
-  await Email.applicationSubmitted({email})
+  await Email.applicationSubmitted({email, name:firstName})
   res.status(200).json(application)
 })

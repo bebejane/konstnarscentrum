@@ -11,10 +11,7 @@ export default function Footer() {
           fontSize={textSm}
           color={grayDark}
         >
-          © {new Date().getFullYear()} BookBook&nbsp;&nbsp;·&nbsp;&nbsp;
-          <a href="https://www.mailing.run" target="_blank" rel="noreferrer">
-            Unsubscribe
-          </a>
+          © {new Date().getFullYear()} Konstnäscentrum&nbsp;&nbsp;·&nbsp;&nbsp;
         </MjmlText>
       </MjmlColumn>
     </MjmlSection>

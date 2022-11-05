@@ -1,6 +1,7 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client from '/lib/client'
-import Email from "/lib/email";
+import Email from "/emails";
+import sendMail from '/emails';
 import { memberController } from '/lib/controllers';
 import { hashPassword, generateToken } from '/lib/auth'
 
@@ -15,6 +16,7 @@ const requestReset = async (email) => {
   
   if(!member) 
     return false
+    
   const token = await generateToken(email)
   const updatedMember = await client.items.update(member.id, {resettoken:token});
   await Email.resetPassword({email, token})

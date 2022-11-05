@@ -16,13 +16,13 @@ import {
 } from "mjml-react";
 
 type ResetPasswordProps = {
-  name: string;
+  link: string,
   body: ReactElement;
   ctaText: string;
 };
 
 const ResetPassword: React.FC<ResetPasswordProps> = ({
-  name,
+  link,
   body,
   ctaText,
 }) => {
@@ -40,14 +40,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               padding="8px 0 16px 0"
             ></MjmlDivider>
             <MjmlText
-              padding="16px 0"
-              fontSize={textBase}
-              lineHeight={leadingRelaxed}
-              cssClass="paragraph"
-            >
-              Hello {name},
-            </MjmlText>
-            <MjmlText
               cssClass="paragraph"
               padding="0"
               fontSize={textBase}
@@ -56,7 +48,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               <>{body}</>
             </MjmlText>
             <MjmlSpacer height="24px" />
-            <ButtonPrimary link="https://www.mailing.run" uiText={ctaText} />
+            <ButtonPrimary link={link} uiText={ctaText} />
             <MjmlSpacer height="8px" />
             <MjmlText
               padding="16px 0"
@@ -64,9 +56,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               lineHeight={leadingRelaxed}
               cssClass="paragraph"
             >
-              ♥,
+              ♥
               <br />
-              The BookBook Team
+              Konstnärscentrum
             </MjmlText>
             <MjmlDivider
               borderColor="#666"

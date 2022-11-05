@@ -24,7 +24,6 @@
     "@svgr/webpack": "^6.5.0",
     "@types/mjml": "^4.7.0",
     "@types/node": "^18.11.6",
-    "@types/nodemailer": "^6.4.6",
     "axios": "^0.21.4",
     "bcryptjs": "^2.4.3",
     "classnames": "^2.3.2",
@@ -41,6 +40,8 @@
     "hamburger-react": "^2.5.0",
     "jsonwebtoken": "^8.5.1",
     "lodash-es": "4.17.21",
+    "mailing": "^0.8.13",
+    "mailing-core": "^0.8.13",
     "markdown-truncate": "^1.0.4",
     "mjml": "^4.13.0",
     "mjml-react": "^2.0.8",
@@ -87,10 +88,12 @@
     "@types/lodash-es": "^4.17.6",
     "@types/react": "^18.0.23",
     "apollo": "^2.34.0",
+    "encoding": "^0.1.13",
     "eslint": "^8.26.0",
     "eslint-config-next": "^12.3.1",
     "glob": "^8.0.3",
     "typescript": "^4.8.4",
+    "uglify-js": "^3.17.4",
     "watch": "^1.0.2"
   }
 }
