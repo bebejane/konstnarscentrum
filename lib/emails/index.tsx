@@ -1,8 +1,8 @@
 import nodemailer from "nodemailer";
 import { buildSendMail } from "mailing-core";
-import ResetPassword from '/emails/ResetPassword'
-import ApplicationSubmitted from '/emails/ApplicationSubmitted'
-import ApplicationApproved from '/emails/ApplicationApproved'
+import ResetPassword from './ResetPassword'
+import ApplicationSubmitted from './ApplicationSubmitted'
+import ApplicationApproved from './ApplicationApproved'
 
 
 const transport = nodemailer.createTransport({

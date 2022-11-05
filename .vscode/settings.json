@@ -3,7 +3,8 @@
     ".next": true,
     ".vercel": true,
     ".vscode": true,
-    "node_modules": true
+    "node_modules": true,
+    ".mailing": true
   },
   "workspace.isHidden": true
 }

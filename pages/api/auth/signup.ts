@@ -2,7 +2,6 @@ import { validateSignUp, hashPassword } from '/lib/auth'
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
 
-
 export default catchErrorsFrom(async (req, res) => {
   const { email, password, password2, firstName, lastName, roleId } = req.body
   try {

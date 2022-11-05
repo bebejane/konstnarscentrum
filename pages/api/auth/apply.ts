@@ -1,6 +1,6 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
-import Email from "/emails";
+import Email from "../../../lib/emails";
 import { generateToken } from '/lib/auth'
 import { memberController, applicationController } from '/lib/controllers';
 
