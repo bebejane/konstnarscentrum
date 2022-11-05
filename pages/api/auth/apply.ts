@@ -35,6 +35,6 @@ export default catchErrorsFrom( async (req, res) => {
     approval_token: approvalToken,
     approved: false
   });
-  await Email.sendApplicationEmail(email)
+  await Email.applicationSubmitted({email})
   res.status(200).json(application)
 })

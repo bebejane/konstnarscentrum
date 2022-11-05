@@ -6,7 +6,7 @@ export default catchErrorsFrom(async (req, res) => {
 	const approved = entity && previous_entity && (entity.attributes.approved && !previous_entity.attributes.approved);
 	if (approved) {
 		const { email, approval_token } = entity.attributes
-		await Email.sendApprovalEmail(email, approval_token);
+		await Email.applicationApproved({email, token: approval_token});
 	} else {
 		console.log('no approval')
 	}
