@@ -2,7 +2,7 @@ import styles from "./News.module.scss";
 import { newsController } from "../../lib/controllers";
 import { format } from "date-fns";
 import { useSession } from "next-auth/react";
-import { Loader } from "/components/common";
+import { Loader } from "/components";
 
 export default function News({ news }) {
 	const { data: session, status } = useSession();
