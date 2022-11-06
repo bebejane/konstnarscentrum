@@ -1,5 +1,5 @@
 import '/lib/styles/index.scss'
-import { Menu } from "/components";
+import Menu from "/components/nav/Menu";
 import { SessionProvider } from "next-auth/react"
 
 function App({ Component, pageProps}) {

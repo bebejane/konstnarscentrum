@@ -33,7 +33,7 @@ const options = {
       // if(account.type !== 'credentials' && !(await findUser(user.email)))
         // throw new Error('Access denied. Please registered for your account first.')
       return true
-    }
+    },
   },
   providers: [
     GoogleProvider({

@@ -1,5 +1,4 @@
 import styles from './Member.module.scss'
-import { requireAuthentication } from "/lib/auth";
 import { useSession } from "next-auth/react"
 import { signIn, signOut } from 'next-auth/react'
 

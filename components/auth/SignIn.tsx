@@ -59,7 +59,7 @@ export default function SignIn({ csrfToken, providers}) {
 				</SubmitButton>
 				<ul className={styles.providers}>
 					{Object.keys(providers).filter(id => id !== 'credentials').map((id, idx) => 
-						<li key={idx} onClick={()=>signIn(id)}>
+						<li key={idx} onClick={()=>signIn(id, {callbackUrl: `${window.location.origin}/member`})}>
 							{providers[id].name}
 						</li>
 					)}

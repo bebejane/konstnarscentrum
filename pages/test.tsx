@@ -1,8 +1,7 @@
-import styles from "./index.module.scss";
+//import styles from "./index.module.scss";
 import { GetStaticProps } from "next";
 import withGlobalProps from "/lib/withGlobalProps";
 import { AllAboutsDocument } from "/graphql";
-import Link from "next/link";
 
 type AboutsProps = {
 	abouts: AboutRecord[]
@@ -11,13 +10,8 @@ type AboutsProps = {
 export default function Abouts({ abouts } : AboutsProps) {
 	
 	return (
-		<div className={styles.container}>
-			<h1>Abouts</h1>
-			{abouts.map(({slug, title}, idx) => 
-				<Link key={idx} href={`/about/${slug}`}>
-					{title}
-				</Link>
-			)}
+		<div>
+			test
 		</div>
 	);
 }
