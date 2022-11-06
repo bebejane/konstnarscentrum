@@ -1,25 +1,22 @@
-.imageGallery {
+.gallery{
   position: relative;
-  display: flex;
-  flex-direction: row;
-
-  figure {
-    cursor: pointer;
+  max-width: 100%;
+  min-width: 100%;
+  .swiper{
     position: relative;
-    margin-right: 3.5%;
-    &:last-of-type {
-      margin-right: 0;
-    }
-    div {
-      aspect-ratio: 4/3;
+    max-width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    >div{
       display: flex;
-    }
-    img {
-      object-fit: contain;
-    }
-    background-color: white;
-    .image{
-      
+      flex-direction: row;
+      .slide{
+        position: relative;  
+        .image, picture {
+          
+        }
+      }
     }
   }
 }

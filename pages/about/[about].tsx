@@ -1,4 +1,4 @@
-import styles from "./[...about].module.scss";
+import styles from "./[about].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
@@ -12,23 +12,24 @@ type AboutProps = {
 }
 
 export default function About({ about } : AboutProps) {
-	console.log(about);
 	
 	return (
 		<div className={styles.container}>
-      {about.title}
+      <h1>{about.title}</h1>
 			<Markdown>{about.intro}</Markdown>
-			{ about.image && <Image data={about.image.responsiveImage}/>}
+			{ about.image && 
+				<Image data={about.image.responsiveImage}/>
+			}
 			<StructuredContent content={about.content}/>
 		</div>
 	);
 }
 
 
-export async function getStaticPaths(context) {
+export async function getStaticPaths() {
   const { abouts } = await apiQuery(AllAboutsDocument)
-	const paths = abouts.map(({ slug }) => ({ params: { about: [slug] } }));
-
+	const paths = abouts.map(({ slug }) => ({ params: { about: slug } }));
+	
 	return {
 		paths,
 		fallback: false,
@@ -36,8 +37,9 @@ export async function getStaticPaths(context) {
 }
 
 export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
+	console.log(context);
 	
-	const slug = context.params.about[0];
+	const slug = context.params.about;
 	const { about } = await apiQuery(AboutDocument, {variables:{slug}});
 	
 	return {

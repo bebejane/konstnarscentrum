@@ -6,11 +6,12 @@ import { propByDistrict } from "/lib/district";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 
 export default function DistrictHome({ district, start }) {
-	if (!start) return null
+	
 	return (
 		<div className={styles.container}>
-			{start.headline}
-			<Markdown>{start.intro}</Markdown>
+			<h1>Nyheter {district}</h1>
+			{start?.headline}
+			<Markdown>{start?.intro}</Markdown>
 		</div>
 	);
 }
@@ -29,7 +30,7 @@ export async function getStaticProps(context) {
 	const start = propByDistrict(res, district, 'start')
 
 	return {
-		props: { start },
+		props: { start,district  },
 		revalidate: 30,
 	};
 }

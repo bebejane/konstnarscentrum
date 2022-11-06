@@ -1,3 +1,20 @@
-.image{
-  
+.single{
+  margin:0;
+  .image{
+    
+  }
+}
+.double{
+  display: flex;
+  flex-direction: row;
+  figure{
+    margin:0;
+    margin-right: 1rem;
+    &:last-child{
+      margin-right: 0;
+    }
+    .image{
+      
+    }
+  }
 }

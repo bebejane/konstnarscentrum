@@ -10,12 +10,6 @@ export default function Menu({message}){
   const [district, setDistrict] = useState(router?.asPath.split('/')[1])
   const { data: session } = useSession();
 
-
-  useEffect(()=>{
-    if(district !== '-1')
-      router.push('/'+ district)
-  }, [district])
-  
   useEffect(()=>{
     districts.forEach((d)=>{
       router.prefetch(`/${d.slug}`)
@@ -39,7 +33,10 @@ export default function Menu({message}){
         <select 
           id="district" 
           className={styles.districts} 
-          onChange={({target:{value}}) => setDistrict(value)}
+          onChange={({target:{value}}) => {
+            setDistrict(value)
+            router.push('/'+ value)
+          }}
           value={district}
         >
           <option value={-1}>Distrikt</option>

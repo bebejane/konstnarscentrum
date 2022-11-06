@@ -1,21 +1,38 @@
 import styles from './ImageGallery.module.scss'
+import cn from 'classnames'
 import React from 'react'
+import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
+import type { Swiper } from 'swiper';
 import { Image } from 'react-datocms'
+import { useState, useRef, useEffect } from 'react';
 
-type ImageGalleryBlockProps = { data: ImageGalleryRecord , onClick:Function}
+export type ImageGalleryBlockProps = { id: string, images: FileField[], onClick?: Function }
 
-export default function ImageGallery({ data: { gallery }, onClick }: ImageGalleryBlockProps) {
+export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockProps) {
 
+	const swiperRef = useRef<Swiper | null>(null)
+	const [index, setIndex] = useState(0)
+	
 	return (
-		<div className={styles.imageGallery}>
-			{gallery.map((image, idx) =>
-				<figure key={idx} onClick={()=>onClick(image.id)} data-image-zoom={gallery.length >=4 ? 'small' : 'medium'}>
-					<Image
-						data={image.responsiveImage}
-						className={styles.image}
-					/>
-				</figure>
-			)}
+		<div className={styles.gallery}>
+			<SwiperReact
+				id={`${id}-swiper-wrap`}
+				className={cn(styles.swiper)}
+				loop={true}
+				noSwiping={false}
+				simulateTouch={true}
+				slidesPerView={4}
+				spaceBetween={20}
+				initialSlide={index}
+				onSlideChange={({ realIndex }) => setIndex(realIndex)}
+				onSwiper={(swiper) => swiperRef.current = swiper}
+			>
+				{images.map((item, idx) =>
+					<SwiperSlide key={`${idx}`} className={cn(styles.slide)}>
+						<Image data={item.responsiveImage} className={styles.image}/>
+					</SwiperSlide>
+				)}
+			</SwiperReact>
 		</div>
 	)
 }

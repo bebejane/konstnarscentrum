@@ -4,10 +4,10 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { AllAboutsDocument } from "/graphql";
 
 type AboutsProps = {
-	abouts: AboutRecord[]
+	content: AboutRecord[]
 }
 
-export default function Abouts({ abouts } : AboutsProps) {
+export default function Test({ content } : AboutsProps) {
 	
 	return (
 		<div>
