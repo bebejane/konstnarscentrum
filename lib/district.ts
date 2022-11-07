@@ -1,10 +1,7 @@
 import districts from '/districts.json'
 import { capitalize } from "lodash-es";
 
-export const accessToken = (id : string) => {
-  const district = districts.filter(({slug}) => slug === id)[0]
-  return district.token.token
-}
+export const apiTokenByDistrict = (id: string) => process.env[`GRAPHQL_API_TOKEN_${id.toUpperCase()}`]
 
 export const propByDistrict = (res, district, prop) => res[`${prop}${capitalize(district)}`] || null
 

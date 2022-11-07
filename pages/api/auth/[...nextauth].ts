@@ -5,15 +5,7 @@ import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
-import { comparePassword } from '/lib/auth'
-
-const findUser = async (email:string) => {
-  if(!email) 
-    throw new Error('E-mail is not defined!')
-
-  const users = await client.items.list({filter: {type: "member", fields: { email: { eq: email}}}});
-  return users[0]
-}
+import { comparePassword, findUser } from '/lib/auth'
 
 const options = {
   site: process.env.NEXTAUTH_URL,
@@ -54,7 +46,7 @@ const options = {
         username: { label: "Username", type: "text"},
         password: {  label: "Password", type: "password" }
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         
         try{
 
