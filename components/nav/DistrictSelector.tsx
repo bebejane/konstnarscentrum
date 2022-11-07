@@ -34,7 +34,7 @@ export default function DistrictSelector({}){
       </div>
       <ul className={cn(s.districts, open && s.show)}>
         {[defaultDistict, ...districts].map((d, idx) => 
-          <Link href={{pathname:`/${d.slug}`, query: {district:d.slug}}}  key={idx} onClick={handleClick}>
+          <Link href={`/${d.slug}`}  key={idx} onClick={handleClick}>
             <li data-slug={d.slug} data-selected={selected.id === d.id}>
               {d.name}
             </li>

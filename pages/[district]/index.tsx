@@ -1,4 +1,6 @@
 import styles from "./index.module.scss";
+import withGlobalProps from "/lib/withGlobalProps";
+import { GetStaticProps } from "next";
 import { districts } from "/lib/district";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { StartDocument } from "/graphql";
@@ -12,7 +14,9 @@ export default function DistrictHome({ district, start }) {
 		<div className={styles.container}>
 			<h1>{district.name}</h1>
 			<p>
-			<Link href={`/${district.slug}/nyheter`}>Go to Nyheter</Link>
+				<Link href={`/${district.slug}/nyheter`}>
+					Go to Nyheter
+				</Link>
 			</p>
 			<h2>Start</h2>
 			{start?.headline}
@@ -22,30 +26,25 @@ export default function DistrictHome({ district, start }) {
 }
 
 export async function getStaticPaths(context) {
-	const paths = districts.reduce((p, {slug}) => {
-		p.push({ params: { district: slug } })
-		//p.push({ params: { district: [slug, 'nyheter'] } })
-		return p
-	}, []);
-	
+	const paths = districts.map(({slug}) => ({ params: { district: slug } }))
 	return {
 		paths,
 		fallback: false,
 	};
 }
 
-export async function getStaticProps(context) {
-	console.log(context.params);
+export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
 	
 	const slug = context.params.district;
 	const res = await apiQuery(StartDocument);
 	const start = propByDistrict(res, slug, 'start')
 
 	return {
-		props: { 
+		props: {
+			...props,
 			start, 
 			district: districts.find(d => d.slug === slug) 
 		},
-		revalidate: 30,
+		revalidate
 	};
-}
+});

@@ -1,4 +1,6 @@
 import styles from "./News.module.scss";
+import withGlobalProps from "/lib/withGlobalProps";
+import { GetStaticProps } from "next";
 import { districts, apiTokenByDistrict } from "/lib/district";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument } from "/graphql";
@@ -22,8 +24,10 @@ export default function News({ news, district }) {
 	);
 }
 
-export async function getServerSideProps(context) {
+export { getStaticPaths } from '../index'
 
+export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
+	
 	const district = districts.find(d => d.slug === context.params.district)
 	console.log(apiTokenByDistrict(district.slug));
 	
@@ -35,7 +39,7 @@ export async function getServerSideProps(context) {
 			district
 		},
 	};
-}
+});
 
 export const config = {
 	//runtime:'experimental-edge'
