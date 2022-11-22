@@ -13,27 +13,21 @@ export type MenuDesktopProps = { items: Menu }
 
 export default function MenuDesktop({ items }: MenuDesktopProps) {
 
-
 	const ref = useRef();
 	const router = useRouter()
-	const [subMarginLeft, setSubMarginLeft] = useState<string>('100px')
+	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
 
 	useEffect(() => {
-		if (typeof selected === 'undefined') return
-		const bounds = document.querySelector(`[data-menu-type="${selected.type}"]`).getBoundingClientRect()
-
-		setSubMarginLeft(`${bounds.left}px`)
+		if (typeof selected === 'undefined')
+			return
+		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
+		setMarginLeft(`${el.offsetLeft}px`)
 	}, [selected])
-	console.log(selected);
 
 	return (
 		<>
-			<nav
-				id="menu"
-				ref={ref}
-				className={s.menu}
-			>
+			<nav id="menu" ref={ref} className={s.menu}>
 				<ul className={s.nav} onMouseLeave={() => setSelected(undefined)}>
 					{items.map((item, idx) =>
 						<li
@@ -48,27 +42,29 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 						<DistrictSelector />
 					</li>
 				</ul>
+				<div>
+					{items.map((item, i) => {
+						return (
+							<ul
+								key={i}
+								data-sub-type={item.type}
+								style={{ marginLeft }}
+								className={cn(s.sub, selected?.type === item.type && s.show)}
+								onMouseLeave={() => setSelected(undefined)}
+								onMouseMove={() => setSelected(item)}
+							>
+								{item.sub?.map(({ slug, label }, idx) =>
+									<li key={idx}>
+										<Link href={slug}>
+											{label}
+										</Link>
+									</li>
+								)}
+							</ul>
+						)
+					})}
+				</div>
 			</nav>
-			{items.map((item, i) => {
-				return (
-					<ul
-						key={i}
-						data-sub-type={item.type}
-						style={{ left: subMarginLeft }}
-						className={cn(s.sub, selected?.type === item.type && s.show)}
-						onMouseLeave={() => setSelected(undefined)}
-						onMouseMove={() => setSelected(item)}
-					>
-						{item.sub?.map(({ slug, label }, idx) =>
-							<li key={idx}>
-								<Link href={slug}>
-									{label}
-								</Link>
-							</li>
-						)}
-					</ul>
-				)
-			})}
 		</>
 	)
 }

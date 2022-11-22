@@ -9,7 +9,7 @@ function App({ Component, pageProps }) {
 
   return (
     <SessionProvider session={session}>
-      <Layout menu={menu} title="Page title">
+      <Layout menu={menu || []} title="Page title">
         <Component {...pageProps} />
       </Layout>
     </SessionProvider>
