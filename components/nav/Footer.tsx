@@ -16,35 +16,29 @@ export default function Footer({ menu }: FooterProps) {
 	return (
 		<>
 			<footer className={cn(styles.footer)} id="footer">
-				<div className={styles.wrapperTop}>
-					<div className={styles.brand}>
-						<div className={styles.tagline}>
-							<span>Locally<br />crafted<br />lighting</span>
-						</div>
-					</div>
-					<nav className={styles.menu}>
-						<ul>
-							{menu.map((item, idx) => {
-								return (
-									<li key={idx}>
-										<ul className={styles.category}>
-											<>
-												<li>{item.label}</li>
-												{item.sub?.map((subItem, subidx) =>
-													<li key={subidx}>
-														<Link scroll={false} href={subItem.slug}>
-															{subItem.label}
-														</Link>
-													</li>
-												)}
-											</>
-										</ul>
-									</li>
-								)
-							})}
-						</ul>
-					</nav>
-				</div>
+				<nav className={styles.menu}>
+					<ul>
+						{menu.map((item, idx) => {
+							return (
+								<li key={idx}>
+
+									<ul className={styles.category}>
+										<>
+											<li>{item.label}</li>
+											{item.sub?.map((subItem, subidx) =>
+												<li key={subidx}>
+													<Link scroll={false} href={subItem.slug}>
+														{subItem.label}
+													</Link>
+												</li>
+											)}
+										</>
+									</ul>
+								</li>
+							)
+						})}
+					</ul>
+				</nav>
 			</footer>
 		</>
 	)

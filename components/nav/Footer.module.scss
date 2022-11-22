@@ -1,4 +1,22 @@
 .footer {
   width: 100%;
   background-color: var(--black);
+  color: var(--white);
+
+  nav {
+    ul {
+      list-style: none;
+    }
+
+    >ul {
+      display: flex;
+      flex-direction: row;
+
+      >li {
+        ul {
+          li {}
+        }
+      }
+    }
+  }
 }

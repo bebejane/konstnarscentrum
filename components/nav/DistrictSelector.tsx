@@ -13,6 +13,7 @@ export type District = {
 const defaultDistict = { id: 'riks', name: 'Riks', slug: '/' }
 
 export default function DistrictSelector({ }) {
+
   const router = useRouter()
   const [selected, setSelected] = useState<District>(defaultDistict)
   const [open, setOpen] = useState(false)
@@ -27,19 +28,18 @@ export default function DistrictSelector({ }) {
     setDistrict(router?.asPath.split('/')[1])
   }, [router, setSelected])
 
-
   return (
     <div className={s.container}>
       <div className={s.selected} onClick={() => setOpen(!open)}>
         {selected?.name}
       </div>
-      <ul className={cn(s.districts, open && s.show)}>
+      <ul className={cn(open && s.show)}>
         {[defaultDistict, ...districts].map((d, idx) =>
-          <Link href={`/${d.slug}`} key={idx} onClick={handleClick}>
-            <li data-slug={d.slug} data-selected={selected.id === d.id}>
+          <li key={idx} data-slug={d.slug} data-selected={selected.id === d.id}>
+            <Link href={`/${d.slug}`} onClick={handleClick}>
               {d.name}
-            </li>
-          </Link>
+            </Link>
+          </li>
         )}
       </ul>
     </div>
