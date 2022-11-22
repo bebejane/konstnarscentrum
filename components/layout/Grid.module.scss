@@ -1,0 +1,27 @@
+.grid {
+  padding: var(--outer-margin);
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000000;
+
+  .gridWrapper {
+    background: rgba(9, 255, 0, 0.296);
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 100000;
+    width: 100%;
+    height: 100%;
+  }
+
+  .gridItem {
+
+    background: rgba(9, 255, 0, 0.417);
+
+    &:last-of-type() {
+      padding-left: 0;
+    }
+  }
+}

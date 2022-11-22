@@ -3,8 +3,6 @@
   display: flex;
   flex-direction: row;
   padding: 10px;
-  background-color: var(--white);
-  color: var(--black);
   div {
     display: flex;
     flex: 1 1 auto;
@@ -13,17 +11,20 @@
       flex: 0 0 auto;
     }
   }
+
   .menu {
     > ul {
       list-style: none;
       display: flex;
       flex-direction: row;
+
       li {
         margin-right: 20px;
         cursor: pointer;
       }
     }
   }
+
   .districts {
     margin-left: 20px;
   }

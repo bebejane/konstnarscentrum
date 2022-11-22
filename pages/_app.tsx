@@ -1,14 +1,17 @@
 import '/lib/styles/index.scss'
 import Menu from "/components/nav/Menu";
+import { Layout } from '/components';
 import { SessionProvider } from "next-auth/react"
 
-function App({ Component, pageProps}) {
+function App({ Component, pageProps }) {
+
+  const { menu, session } = pageProps;
+
   return (
-    <SessionProvider session={pageProps.session}>
-      <Menu message={''}/>
-      <main>
+    <SessionProvider session={session}>
+      <Layout menu={menu} title="Page title">
         <Component {...pageProps} />
-      </main>
+      </Layout>
     </SessionProvider>
   );
 }

@@ -1,5 +1,7 @@
 import { datoError } from "dato-nextjs-utils/api";
 
+export const isServer = typeof window === 'undefined';
+
 export const catchErrorsFrom = (handler) => {
   return async (req, res) => {
     return handler(req, res).catch((error) => {

@@ -8,12 +8,12 @@ type AboutsProps = {
 	abouts: AboutRecord[]
 }
 
-export default function Abouts({ abouts } : AboutsProps) {
-	
+export default function Abouts({ abouts }: AboutsProps) {
+
 	return (
 		<div className={styles.container}>
 			<h1>Abouts</h1>
-			{abouts.map(({slug, title}, idx) => 
+			{abouts.map(({ slug, title }, idx) =>
 				<Link key={idx} href={`/about/${slug}`}>
 					{title}
 				</Link>
@@ -23,15 +23,14 @@ export default function Abouts({ abouts } : AboutsProps) {
 }
 
 
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[AllAboutsDocument]}, async ({props, revalidate, context } : any) => {
-	
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllAboutsDocument] }, async ({ props, revalidate, context }: any) => {
+
 	return {
 		props,
 		revalidate
 	};
 });
 
-
 export const config = {
-	runtime:'experimental-edge'
+	//runtime: 'experimental-edge'
 }
