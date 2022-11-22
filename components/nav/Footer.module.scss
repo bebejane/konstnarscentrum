@@ -4,20 +4,43 @@
   color: var(--white);
   padding: var(--outer-margin);
 
+  section {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: var(--small-space);
+  }
+
   nav {
-    ul {
-      list-style: none;
-    }
+    width: 100%;
 
     >ul {
       display: flex;
       flex-direction: row;
+      list-style: none;
 
       >li {
+        width: calc(var(--grid-unit) * 2);
+
         ul {
-          li {}
+          list-style: none;
         }
       }
     }
   }
+
+  .about,
+  .social {
+    div {
+      width: calc(var(--grid-unit) * 6);
+    }
+  }
+
+  .logo {
+    display: flex;
+    justify-content: flex-end;
+
+
+
+  }
+
 }

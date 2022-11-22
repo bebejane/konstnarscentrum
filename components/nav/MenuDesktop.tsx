@@ -29,8 +29,12 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 	return (
 		<>
-			<nav id={'menu'} ref={ref} className={s.menu}>
-				<ul className={s.nav} >
+			<nav
+				id="menu"
+				ref={ref}
+				className={s.menu}
+			>
+				<ul className={s.nav} onMouseLeave={() => setSelected(undefined)}>
 					{items.map((item, idx) =>
 						<li
 							key={idx}
@@ -45,16 +49,17 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 					</li>
 				</ul>
 			</nav>
-			{items.map(({ sub, slug, type }, i) => {
+			{items.map((item, i) => {
 				return (
 					<ul
 						key={i}
-						data-sub-type={type}
+						data-sub-type={item.type}
 						style={{ left: subMarginLeft }}
-						className={cn(s.sub, selected?.type === type && s.show)}
+						className={cn(s.sub, selected?.type === item.type && s.show)}
 						onMouseLeave={() => setSelected(undefined)}
+						onMouseMove={() => setSelected(item)}
 					>
-						{sub?.map(({ slug, label }, idx) =>
+						{item.sub?.map(({ slug, label }, idx) =>
 							<li key={idx}>
 								<Link href={slug}>
 									{label}

@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 export default function Home(props) {
 	return (
 		<div className={styles.container}>
-			Home
+			Content
 		</div>
 	)
 }
