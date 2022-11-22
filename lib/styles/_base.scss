@@ -1,8 +1,18 @@
+:root {
+	--black: #121212;
+	--white: #ffffff;
+	--outer-margin: 3.333vw;
+	--grid-unit: calc(100% / 12);
+	--space: 2rem;
+	--line-height: 1.4em;
+}
+
 body {
 	width: 100%;
 	font-size: 100%;
-	color: $black;
-	background-color: $white;
+	line-height: 1em;
+	color: var(--black);
+	background-color: var(--white);
 	font-family: $body-font;
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
@@ -45,8 +55,4 @@ a {
 	&:visited {
 		color: var(--black);
 	}
-}
-
-:root {
-	--black: #121212;
 }

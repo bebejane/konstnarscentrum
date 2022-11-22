@@ -1,0 +1,17 @@
+html,
+body {
+  font-size: 18px;
+  font-weight: normal;
+  @include mq($from: tablet) {
+    font-size: 20px;
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: normal;
+}
+
+p {
+  line-height: var(--line-height);
+}

@@ -1,14 +1,14 @@
-const withBundleAnalyzer = require('@next/bundle-analyzer')({enabled: process.env.ANALYZE === 'true'})
+const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' })
 const webpack = require('webpack');
 
 const sassOptions = {
   includePaths: ['./components', './pages'],
   prependData: `
     @use "sass:math";
-    @import "./lib/styles/partials/mediaqueries"; 
-    @import "./lib/styles/partials/styles";
-    @import "./lib/styles/partials/variables";
-    @import "./lib/styles/partials/fonts";
+    @import "./lib/styles/mediaqueries"; 
+    @import "./lib/styles/styles";
+    @import "./lib/styles/variables";
+    @import "./lib/styles/fonts";
   `
 }
 const nextOptions = {
