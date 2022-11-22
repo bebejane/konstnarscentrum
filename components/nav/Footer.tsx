@@ -26,7 +26,7 @@ export default function Footer({ menu }: FooterProps) {
 
 										<ul className={s.category}>
 											<>
-												<li>{item.label}</li>
+												<li><strong>{item.label}</strong></li>
 												{item.sub?.map((subItem, subidx) =>
 													<li key={subidx}>
 														<Link scroll={false} href={subItem.slug}>
@@ -57,17 +57,15 @@ export default function Footer({ menu }: FooterProps) {
 						<span>Instagram</span>
 						<span>Facebook</span>
 					</div>
-					<div>
-						Copyright Konstnärscentrum 2022   GDPR & Cookies
+					<div className={s.copyright}>
+						<span>Copyright Konstnärscentrum 2022</span><span>GDPR & Cookies</span>
 					</div>
 				</section>
 
 				<section className={s.support}>
-
 					Med stöd av
-				</section>
-				<section className={s.logo}>
-					<Logo />
+					<div></div>
+					<div><Logo /></div>
 				</section>
 			</footer>
 		</>

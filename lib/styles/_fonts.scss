@@ -10,8 +10,15 @@ $body-font-italic: "CooperItalic";
 }
 
 @font-face {
+    font-family: "Jazz-Bold";
+    src: url("../../public/fonts/JazzTrialSN-Bold.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
     font-family: "Logo";
-    src: url("../../public/fonts/JazzTrialSN-Medium.otf") format("otf");
+    src: url("../../public/fonts/JazzTrialSN-Medium.otf") format("opentype");
     font-weight: normal;
     font-style: normal;
 }

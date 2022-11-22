@@ -3,6 +3,8 @@
   background-color: var(--black);
   color: var(--white);
   padding: var(--outer-margin);
+  padding-top: var(--small-space);
+  padding-bottom: var(--small-space);
 
   a {
     color: var(--white);
@@ -34,17 +36,23 @@
   }
 
   .about,
-  .social {
+  .social,
+  .copyright {
+    line-height: var(--line-height);
     div {
       width: calc(var(--grid-unit) * 6);
       span {
         padding-right: 1em;
       }
+      &:first-child {
+        padding-right: 2em;
+      }
     }
   }
 
-  .logo {
+  .support {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    margin-bottom: 0;
   }
 }
