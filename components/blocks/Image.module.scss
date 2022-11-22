@@ -1,15 +1,28 @@
 .single {
+  margin-top: var(--space);
   margin-bottom: var(--space);
 
-  .image {
+  @include mq($from: tablet) {
+    width: calc(100% + (var(--grid-unit) * 2));
+    margin-left: calc(-1 * var(--grid-unit));
+    margin-left: calc(-1 * var(--grid-unit));
   }
 }
 .double {
   display: flex;
   flex-direction: row;
+  margin-top: var(--space);
+  margin-bottom: var(--space);
+
+  @include mq($from: tablet) {
+    width: calc(100% + (var(--grid-unit) * 2));
+    margin-left: calc(-1 * var(--grid-unit));
+    margin-left: calc(-1 * var(--grid-unit));
+  }
+
   figure {
     margin: 0;
-    margin-right: 1rem;
+    margin-right: var(--gutter);
     &:last-child {
       margin-right: 0;
     }

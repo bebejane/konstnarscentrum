@@ -8,42 +8,42 @@ import type { GetStaticProps } from 'next'
 import { StructuredContent } from "/components";
 
 type AboutProps = {
-  about: AboutRecord
+	about: AboutRecord
 }
 
-export default function About({ about } : AboutProps) {
-	
+export default function About({ about }: AboutProps) {
+
 	return (
 		<div className={styles.container}>
-      <h1>{about.title}</h1>
-			<Markdown>{about.intro}</Markdown>
-			{ about.image && 
-				<Image data={about.image.responsiveImage}/>
+			<h1>{about.title}</h1>
+			<Markdown className="intro">{about.intro}</Markdown>
+			{about.image &&
+				<Image data={about.image.responsiveImage} />
 			}
-			<StructuredContent content={about.content}/>
+			<StructuredContent content={about.content} />
 		</div>
 	);
 }
 
 
 export async function getStaticPaths() {
-  const { abouts } = await apiQuery(AllAboutsDocument)
+	const { abouts } = await apiQuery(AllAboutsDocument)
 	const paths = abouts.map(({ slug }) => ({ params: { about: slug } }));
-	
+
 	return {
 		paths,
 		fallback: false,
 	};
 }
 
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 	console.log(context);
-	
+
 	const slug = context.params.about;
-	const { about } = await apiQuery(AboutDocument, {variables:{slug}});
-	
+	const { about } = await apiQuery(AboutDocument, { variables: { slug } });
+
 	return {
-		props:{
+		props: {
 			...props,
 			about
 		},

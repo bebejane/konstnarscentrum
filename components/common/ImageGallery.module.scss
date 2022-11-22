@@ -1,20 +1,22 @@
-.gallery{
+.gallery {
   position: relative;
   max-width: 100%;
   min-width: 100%;
-  .swiper{
+  margin-top: var(--space);
+  margin-bottom: var(--space);
+  .swiper {
     position: relative;
     max-width: 100%;
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    >div{
+    > div {
       display: flex;
       flex-direction: row;
-      .slide{
-        position: relative;  
-        .image, picture {
-          
+      .slide {
+        position: relative;
+        .image,
+        picture {
         }
       }
     }
