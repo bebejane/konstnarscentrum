@@ -21,13 +21,13 @@
 	textarea {
 		font-size: 1rem;
 		&.error {
-			border-bottom: 1px solid $red;
+			border-bottom: 1px solid var(--black);
 		}
 	}
 	.formError {
 		text-align: center;
 		max-width: 300px;
-		color: $red;
+		color: var(--black);
 		word-break: break-all;
 		margin-bottom: 0px;
 	}
@@ -105,10 +105,10 @@
 	line-height: 2rem;
 }
 
-.providers{
+.providers {
 	list-style: none;
-	padding:0;
-	li{
+	padding: 0;
+	li {
 		display: inline;
 		text-align: center;
 		border: 1px solid gray;

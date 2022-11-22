@@ -1,4 +1,4 @@
-.container{
+.container {
   position: relative;
   min-width: 4em;
   > ul {
@@ -7,25 +7,23 @@
     flex-direction: column !important;
     position: absolute;
     z-index: 10;
-    padding:0;
-    top:0.5rem;
-    left:0;
-    background-color: $white;
-    &.show{
+    padding: 0;
+    top: 0.5rem;
+    left: 0;
+    background-color: var(--white);
+    &.show {
       display: flex;
     }
-    a{
-      li{
-        &[data-selected=true]{
-          color:rgb(245, 27, 223);
+    a {
+      li {
+        &[data-selected="true"] {
+          color: rgb(245, 27, 223);
         }
       }
     }
   }
-  .selected{
+  .selected {
     position: relative;
     cursor: pointer;
   }
-  
-  
 }

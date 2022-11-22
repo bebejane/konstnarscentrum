@@ -6,8 +6,6 @@ const sassOptions = {
   prependData: `
     @use "sass:math";
     @import "./lib/styles/mediaqueries"; 
-    @import "./lib/styles/styles";
-    @import "./lib/styles/variables";
     @import "./lib/styles/fonts";
   `
 }
