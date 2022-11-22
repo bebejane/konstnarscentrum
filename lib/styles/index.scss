@@ -1,60 +1,15 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  background-color: $white;  
-  color:$black;
-  height: 100%;
-  font-size: 16px;
-  padding:0px;
-  > div {
-    height: 100%;
-  }
-}
+@import "partials/normalize";
 
-a {
-  
-  color: $black;
-  text-decoration: none;
-  &:hover{
-    color: $black;
-  }
-}
+@import "partials/mediaqueries";
 
-* {
-  box-sizing: border-box;
-}
-hr{
-  width: 100%;
-  height: 1px;
-  background-color: #fff;
-  color: #fff;
-}
-input, textarea, select {
-  border:1px solid rgba(255,255,255,0.2);
-  padding:10px;
-  margin-bottom:0px;
-  background-color: transparent;
-}
-button, input[type=submit]{
-  
-}
-.errorPageContainer{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
+@import "partials/variables";
 
-h1,h2,h3,h4{
-  margin:0;
-  margin-bottom:10px;
-}
+@import "partials/fonts";
 
-main{
-  padding: 20px;
-}
+@import "partials/mixins";
+
+@import "partials/typography";
+
+@import "partials/styles";
+
+@import "base/base";
