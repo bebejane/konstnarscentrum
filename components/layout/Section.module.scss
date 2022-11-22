@@ -1,0 +1,55 @@
+.section {
+  position: relative;
+  width: 100%;
+  padding-left: var(--outer-margin);
+  padding-right: var(--outer-margin);
+  transition: background-color 1.2s ease-in-out;
+
+  .wrap {
+    position: relative;
+    padding-left: spanGridWithGutter(4);
+    width: 100%;
+  }
+
+  &[data-type="full"] {
+    padding-left: 0;
+    padding-right: 0;
+
+    .wrap {
+      padding-left: 0;
+    }
+  }
+
+  &[data-type="margin"] {
+    padding-left: var(--outer-margin);
+    padding-right: var(--outer-margin);
+
+    .wrap {
+      padding-left: 0;
+    }
+  }
+
+  &[data-type="margin-left"] {
+    padding-left: var(--outer-margin);
+    padding-right: 0;
+
+    .wrap {
+      padding-left: 0;
+    }
+  }
+
+  &[data-top="true"] {
+
+    @include mq($from: tablet) {
+      margin-top: 4rem;
+    }
+  }
+
+
+  @include mq($until: tablet) {
+    .wrap {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}

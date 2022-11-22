@@ -1,17 +1,18 @@
 import styles from "./index.module.scss";
+import withGlobalProps from "/lib/withGlobalProps";
 
 export default function Home(props) {
 	return (
-    <div className={styles.container}>
-      Home
-    </div>
-  )
+		<div className={styles.container}>
+			Home
+		</div>
+	)
 }
 
-export async function getStaticProps() {
-	
+export const getStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate }: any) => {
+
 	return {
-		props: {},
-		revalidate:30
-	}
-}
+		props,
+		revalidate
+	};
+});

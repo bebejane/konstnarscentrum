@@ -1,31 +1,34 @@
-.container{
+.container {
   width: 100%;
   display: flex;
   flex-direction: row;
   padding: 10px;
-  background-color: $white;
-  color: $black;
-  div{
+
+  div {
     display: flex;
     flex: 1 1 auto;
     align-items: center;
-    &:last-child{
+
+    &:last-child {
       flex: 0 0 auto;
     }
   }
-  .menu{
-    > ul{
+
+  .menu {
+    >ul {
       list-style: none;
       display: flex;
       flex-direction: row;
-      li{
+
+      li {
         margin-right: 20px;
         cursor: pointer;
       }
-      
+
     }
   }
-  .districts{
-    margin-left:20px;
-  } 
+
+  .districts {
+    margin-left: 20px;
+  }
 }
