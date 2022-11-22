@@ -1,8 +1,12 @@
 .video {
   display: block;
+  margin-top: var(--space);
+  margin-bottom: var(--space);
 
   @include mq($from: tablet) {
-    width: 100%;
     height: auto;
+    width: calc(100% + (var(--grid-unit) * 2));
+    margin-left: calc(-1 * var(--grid-unit));
+    margin-left: calc(-1 * var(--grid-unit));
   }
 }
