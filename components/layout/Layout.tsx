@@ -1,6 +1,6 @@
 import styles from './Layout.module.scss'
 import React, { useEffect } from 'react'
-import { Content, Footer, MenuDesktop, MenuMobile } from '/components'
+import { Content, Footer, MenuDesktop, MenuMobile, Logo } from '/components'
 import { usePage } from '/lib/context/page'
 import type { MenuItem } from '/lib/menu'
 import { useStore, shallow } from '/lib/store'
@@ -20,9 +20,10 @@ export default function Layout({ children, menu: menuFromProps, title }: LayoutP
 
 	return (
 		<>
+			<MenuDesktop items={menu} />
+			<MenuMobile items={menu} />
 			<div className={styles.layout}>
-				<MenuDesktop items={menu} />
-				<MenuMobile items={menu} />
+				<Logo />
 				<Content>
 					{children}
 				</Content>

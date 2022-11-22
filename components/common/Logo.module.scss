@@ -1,0 +1,32 @@
+.logo {
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  margin: var(--outer-margin);
+  min-width: var(--navbar-height);
+  font-size: var(--logo-size);
+  color: var(--black);
+  white-space: pre;
+
+  .vertical,
+  .horizontal {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .vertical {
+    writing-mode: vertical-rl;
+    transform: rotate(-180deg);
+    text-align: right;
+  }
+
+  .horizontal {
+    text-align: left;
+  }
+
+  .space {
+    visibility: hidden;
+  }
+}

@@ -1,4 +1,4 @@
-import styles from './Footer.module.scss'
+import s from './Footer.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
 import type { MenuItem } from '/lib/menu'
@@ -6,6 +6,7 @@ import { usePage } from '/lib/context/page'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import useStore, { shallow } from '/lib/store'
+import Logo from '/public/images/logo-round.svg'
 
 export type FooterProps = { menu: MenuItem[] }
 
@@ -15,19 +16,15 @@ export default function Footer({ menu }: FooterProps) {
 
 	return (
 		<>
-			<footer className={cn(styles.footer)} id="footer">
-				<div className={styles.wrapperTop}>
-					<div className={styles.brand}>
-						<div className={styles.tagline}>
-							<span>Locally<br />crafted<br />lighting</span>
-						</div>
-					</div>
-					<nav className={styles.menu}>
+			<footer className={cn(s.footer)} id="footer">
+				<section>
+					<nav className={s.menu}>
 						<ul>
 							{menu.map((item, idx) => {
 								return (
 									<li key={idx}>
-										<ul className={styles.category}>
+
+										<ul className={s.category}>
 											<>
 												<li>{item.label}</li>
 												{item.sub?.map((subItem, subidx) =>
@@ -44,7 +41,34 @@ export default function Footer({ menu }: FooterProps) {
 							})}
 						</ul>
 					</nav>
-				</div>
+				</section>
+				<section className={s.about}>
+					<div>
+						Konstnärscentrum verkar för konsten och konstnärernas plats i samhällets gemensamma rum. Vår organisation drivs av våra medlemmar och erbjuder bland annat konstnärlig fortbildning, mentorskapsprogram och studiecirklar.
+					</div>
+					<div>
+						Konstnärscentrum är den enda rikstäckande, konstnärsdrivna organisationen som både skapar och förmedlar offentliga gestaltningsuppdrag till konstnärer.
+					</div>
+				</section>
+
+				<section className={s.social}>
+					<div>
+						<span>Följ oss</span>
+						<span>Instagram</span>
+						<span>Facebook</span>
+					</div>
+					<div>
+						Copyright Konstnärscentrum 2022   GDPR & Cookies
+					</div>
+				</section>
+
+				<section className={s.support}>
+
+					Med stödj av
+				</section>
+				<section className={s.logo}>
+					<Logo />
+				</section>
 			</footer>
 		</>
 	)

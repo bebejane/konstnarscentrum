@@ -4,5 +4,12 @@
   flex-direction: column;
   flex: 1 1 auto;
   width: 100%;
-  padding-top: 4rem;
+  background-color: green;
+
+  article {
+    padding: var(--navbar-height);
+    padding-bottom: 0;
+  }
+
+
 }

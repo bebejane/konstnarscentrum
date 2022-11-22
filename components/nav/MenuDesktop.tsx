@@ -1,4 +1,4 @@
-import styles from './MenuDesktop.module.scss'
+import s from './MenuDesktop.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -13,26 +13,57 @@ export type MenuDesktopProps = { items: Menu }
 
 export default function MenuDesktop({ items }: MenuDesktopProps) {
 
-
 	const ref = useRef();
 	const router = useRouter()
+	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
+
+	useEffect(() => {
+		if (typeof selected === 'undefined')
+			return
+		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
+		setMarginLeft(`${el.offsetLeft}px`)
+	}, [selected])
 
 	return (
 		<>
-			<nav id={'menu'} ref={ref} className={styles.menu}>
-				<ul className={styles.nav} >
+			<nav id="menu" ref={ref} className={s.menu}>
+				<ul className={s.nav} onMouseLeave={() => setSelected(undefined)}>
 					{items.map((item, idx) =>
 						<li
 							key={idx}
+							data-menu-type={item.type}
 							onMouseEnter={() => setSelected(item)}
-							onMouseLeave={() => setSelected(undefined)}
 						>
 							{item.label}
 						</li>
 					)}
+					<li>
+						<DistrictSelector />
+					</li>
 				</ul>
-				<DistrictSelector />
+				<div>
+					{items.map((item, i) => {
+						return (
+							<ul
+								key={i}
+								data-sub-type={item.type}
+								style={{ marginLeft }}
+								className={cn(s.sub, selected?.type === item.type && s.show)}
+								onMouseLeave={() => setSelected(undefined)}
+								onMouseMove={() => setSelected(item)}
+							>
+								{item.sub?.map(({ slug, label }, idx) =>
+									<li key={idx}>
+										<Link href={slug}>
+											{label}
+										</Link>
+									</li>
+								)}
+							</ul>
+						)
+					})}
+				</div>
 			</nav>
 		</>
 	)

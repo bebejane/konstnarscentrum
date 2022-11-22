@@ -1,19 +1,22 @@
 .container {
   position: relative;
   min-width: 4em;
-  > ul {
+
+  ul {
     list-style: none;
     display: none;
     flex-direction: column !important;
     position: absolute;
     z-index: 10;
     padding: 0;
-    top: 0.5rem;
+    top: 1rem;
     left: 0;
     background-color: var(--white);
+
     &.show {
       display: flex;
     }
+
     a {
       li {
         &[data-selected="true"] {
@@ -22,6 +25,7 @@
       }
     }
   }
+
   .selected {
     position: relative;
     cursor: pointer;
