@@ -20,7 +20,7 @@ export default function DistrictSelector({ }) {
 
   const handleClick = (e) => setDistrict(e.target.dataset.slug)
   const setDistrict = (slug) => {
-    setSelected(districts.find(d => d.slug === slug) || defaultDistict)
+    setSelected(districts.find(d => d.slug === slug))
     setOpen(false)
   }
 
@@ -31,12 +31,12 @@ export default function DistrictSelector({ }) {
   return (
     <div className={s.container}>
       <div className={s.selected} onClick={() => setOpen(!open)}>
-        {selected?.name}
+        {selected?.name || 'Region'}
       </div>
       <ul className={cn(open && s.show)}>
         {[defaultDistict, ...districts].map((d, idx) =>
-          <li key={idx} data-slug={d.slug} data-selected={selected.id === d.id}>
-            <Link href={`/${d.slug}`} onClick={handleClick}>
+          <li key={idx} data-slug={d.slug} data-selected={selected?.id === d.id}>
+            <Link href={`${d.slug}`} onClick={handleClick}>
               {d.name}
             </Link>
           </li>

@@ -3,23 +3,60 @@
   display: flex;
   align-items: flex-start;
   flex-direction: row;
-  width: 100%;
   top: 0;
   left: 0;
   z-index: 100;
   padding-top: 1rem;
   padding-bottom: 1rem;
   transition: transform 0.3s ease;
+  width: 100%;
+  padding-left: calc(var(--outer-margin) + calc(var(--grid-unit) * 2));
+  padding-right: calc(var(--outer-margin));
 
-  ul {
+  >ul {
     position: relative;
     list-style: none;
     display: flex;
     flex-direction: row;
+    width: 100%;
 
-    li {
-      flex: 1 1 auto;
+    >li {
+      flex: 0 0;
       margin-right: 1rem;
+      white-space: pre;
+      z-index: 100;
+
+      &:last-child {
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        margin-right: 0;
+        flex: 1 1 auto;
+      }
+
     }
+
   }
+
+}
+
+.sub {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-top: 2rem;
+  z-index: 99;
+  margin-left: 0;
+  width: auto;
+  white-space: pre;
+
+  &.show {
+    display: flex;
+  }
+
+  >li {}
+
 }
