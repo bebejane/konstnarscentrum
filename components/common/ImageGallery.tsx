@@ -12,7 +12,7 @@ export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockP
 
 	const swiperRef = useRef<Swiper | null>(null)
 	const [index, setIndex] = useState(0)
-	
+
 	return (
 		<div className={styles.gallery}>
 			<SwiperReact
@@ -21,7 +21,7 @@ export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockP
 				loop={true}
 				noSwiping={false}
 				simulateTouch={true}
-				slidesPerView={4}
+				slidesPerView={3}
 				spaceBetween={20}
 				initialSlide={index}
 				onSlideChange={({ realIndex }) => setIndex(realIndex)}
@@ -29,7 +29,7 @@ export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockP
 			>
 				{images.map((item, idx) =>
 					<SwiperSlide key={`${idx}`} className={cn(styles.slide)}>
-						<Image data={item.responsiveImage} className={styles.image}/>
+						<Image data={item.responsiveImage} className={styles.image} />
 					</SwiperSlide>
 				)}
 			</SwiperReact>

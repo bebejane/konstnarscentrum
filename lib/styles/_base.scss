@@ -10,6 +10,8 @@
 	--space: 2.5rem;
 	--line-height: 1.4em;
 	--gutter: 1rem;
+	--nav-height: 7rem;
+	--logo-size: 2rem;
 
 	@include mq($from: tablet) {
 		--space: 4rem;
