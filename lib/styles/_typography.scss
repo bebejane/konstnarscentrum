@@ -23,8 +23,15 @@ p.intro,
 h2 {
   font-size: 1.2rem;
   font-weight: normal;
+  padding-bottom: 0;
 }
 
 h2 {
   padding-bottom: 1em;
+}
+
+nav {
+  @include mq($from: tablet) {
+    font-size: 0.9rem;
+  }
 }

@@ -1,12 +1,19 @@
 :root {
 	--black: #121212;
 	--white: #ffffff;
+	--dark-beige: #807a6e;
+	--light-beige: #e1dcd230;
+	--mid-beige: #e1dcd25f;
 	--outer-margin: 3.333vw;
 	--grid-unit: calc(100% / 12);
-	--small-space: 2rem;
-	--space: 4rem;
+	--small-space: 3rem;
+	--space: 2.5rem;
 	--line-height: 1.4em;
 	--gutter: 1rem;
+
+	@include mq($from: tablet) {
+		--space: 4rem;
+	}
 }
 
 body {
@@ -57,4 +64,8 @@ a {
 	&:visited {
 		color: var(--black);
 	}
+}
+
+.intro {
+	margin-bottom: var(--small-space);
 }
