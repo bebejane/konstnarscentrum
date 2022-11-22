@@ -1,4 +1,5 @@
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
+import { isServer } from '/lib/utils'
 import styles from './Logo.module.scss'
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
@@ -8,7 +9,7 @@ export default function Logo() {
   const { scrolledPosition, viewportHeight, isPageBottom, isPageTop, isScrolledUp } = useScrollInfo()
   const ratio = Math.min(scrolledPosition / viewportHeight, 1)
   const vertical = letters.filter((el, idx) => (idx / letters.length) < ratio)
-  const horizontal = letters.filter((el, idx) => (idx / letters.length) >= ratio)
+  const horizontal = letters.filter((el, idx) => (idx / letters.length) >= ratio || isServer)
 
   return (
     <div className={styles.logo}>
