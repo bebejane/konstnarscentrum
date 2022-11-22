@@ -9,9 +9,10 @@
 	--small-space: 3rem;
 	--space: 2.5rem;
 	--line-height: 1.4em;
+	--line-height-nav: 1.6em;
 	--gutter: 1rem;
 	--logo-size: 2rem;
-	--navbar-height: calc(var(--logo-size) + calc(var(--outer-margin) * 2));
+	--navbar-height: calc(var(--logo-size) + calc(var(--outer-margin)));
 
 	@include mq($from: tablet) {
 		--space: 4rem;

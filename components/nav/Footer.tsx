@@ -64,7 +64,7 @@ export default function Footer({ menu }: FooterProps) {
 
 				<section className={s.support}>
 
-					Med stödj av
+					Med stöd av
 				</section>
 				<section className={s.logo}>
 					<Logo />

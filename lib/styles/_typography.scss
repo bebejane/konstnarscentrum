@@ -30,6 +30,13 @@ h2 {
   padding-bottom: 1em;
 }
 
+.small,
+.small p,
+footer,
+footer nav {
+  font-size: 0.75rem;
+}
+
 nav {
   @include mq($from: tablet) {
     font-size: 0.9rem;
