@@ -2,15 +2,12 @@ import s from './Footer.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
 import type { MenuItem } from '/lib/menu'
-import { useRouter } from 'next/router'
 import Logo from '/public/images/logo-round.svg'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 
 export type FooterProps = { menu: MenuItem[], footer: FooterRecord }
 
 export default function Footer({ menu, footer }: FooterProps) {
-
-	const router = useRouter()
 
 	return (
 		<>
