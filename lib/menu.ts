@@ -5,6 +5,7 @@ export type Menu = MenuItem[]
 
 export type MenuItem = {
   type: string,
+  index?: boolean
   label: string,
   slug?: string,
   sub?: MenuItem[]
@@ -31,7 +32,7 @@ const base: Menu = [
     ]
   },
   {
-    type: 'initiative', label: 'Våra initiativ', sub: [
+    type: 'initiative', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [
       { type: 'initiative', label: 'Konstdepartementet', slug: '/initiativ/konstdepartementet' },
       { type: 'initiative', label: 'Galleri KC', slug: '/initiativ/galleri-kc' },
       { type: 'initiative', label: 'BRAK', slug: '/initiativ/brak' },
@@ -40,10 +41,10 @@ const base: Menu = [
     ]
   },
   {
-    type: 'news', label: 'Nyheter', sub: []
+    type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, sub: []
   },
   {
-    type: 'contact', label: 'Kontakt', sub: [
+    type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, sub: [
       { type: 'contact', label: 'Förbundet', slug: '/kontakt/forbundet' },
       { type: 'contact', label: 'Våra regioner', slug: '/kontakt/regioner' }
     ]
