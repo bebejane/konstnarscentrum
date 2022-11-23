@@ -17,5 +17,10 @@
       padding-left: calc(2 * var(--grid-unit));
       padding-right: calc(2 * var(--grid-unit));
     }
+
+    @include mq($until: tablet) {
+      padding-top: var(--navbar-height);
+
+    }
   }
 }
