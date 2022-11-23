@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useMediaQuery } from 'usehooks-ts'
 import { useStore } from '/lib/store'
 import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
 
@@ -15,19 +16,17 @@ export type Props = {
 export default function Logo({ disabled }: Props) {
 
 
-  const [showMenuMobile] = useStore((state) => [state.showMenuMobile])
+  const router = useRouter()
+  const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [ratio, setRatio] = useState(0)
 
-
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
     let r = ratio;
-    console.log('manual', ratio, dir);
 
     setManualMode(true)
-
     const interval = setInterval(() => {
       if (r > 1 || r < 0) {
         setRatio(r > 1 ? 1 : 0)
@@ -38,10 +37,19 @@ export default function Logo({ disabled }: Props) {
   }, [setManualMode, ratio])
 
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
+    const l = letters.length;
+
+    if (disabled) {
+      if (isMobile && !manualMode)
+        return direction === 'horizontal' ? letters : []
+      if (!isMobile && !manualMode)
+        return direction === 'vertical' ? letters : []
+    }
+
     if (direction === 'vertical')
-      return letters.filter((el, idx) => ((idx / letters.length) < ratio || disabled))
+      return letters.filter((el, idx) => (((idx / l) < ratio)))
     else
-      return letters.filter((el, idx) => ((idx / letters.length) >= ratio || isServer) && !disabled)
+      return letters.filter((el, idx) => ((idx / l) >= ratio || isServer))
   }
 
   const vertical = letterReducer('vertical')
@@ -60,6 +68,10 @@ export default function Logo({ disabled }: Props) {
     if (isMobile) return
     setManualMode(false)
   }, [scrolledPosition, isMobile])
+
+  useEffect(() => {
+    setShowMenuMobile(false)
+  }, [router, setShowMenuMobile])
 
   return (
     <div className={s.logo}>
