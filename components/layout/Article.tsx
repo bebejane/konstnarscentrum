@@ -20,7 +20,10 @@ export default function Article({ children, title, text, image, content, showIma
       {image && showImage ?
         <header>
           <h1 className={s.title}>{title}</h1>
-          <Image className={s.image} data={image.responsiveImage} />
+          <Image
+            className={s.image}
+            data={image.responsiveImage}
+          />
         </header>
         :
         <h1 className={s.title}> {title}</h1>

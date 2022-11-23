@@ -64,7 +64,7 @@ specifiers:
   nodemailer-sendgrid-transport: ^0.2.0
   nprogress: ^0.2.0
   react: ^18.2.0
-  react-datocms: ^3.1.3
+  react-datocms: 4.0.7
   react-dom: ^18.2.0
   react-hook-form: ^7.15.4
   react-intersection-observer: ^9.4.0
@@ -128,7 +128,7 @@ dependencies:
   nodemailer-sendgrid-transport: 0.2.0
   nprogress: 0.2.0
   react: 18.2.0
-  react-datocms: 3.1.3_react@18.2.0
+  react-datocms: 4.0.7_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.38.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
@@ -10303,8 +10303,8 @@ packages:
       performance-now: 2.1.0
     dev: false
 
-  /react-datocms/3.1.3_react@18.2.0:
-    resolution: {integrity: sha512-rHSV9ITtJIWx6AivYUJPGWuAq4tKEM7N40qpkdIgvovIroeTENwzbnQsJDuovYPksUAD4uz9vIppmuQWua+EaQ==}
+  /react-datocms/4.0.7_react@18.2.0:
+    resolution: {integrity: sha512-Wie8JpLAtCZBJmzN51efKZEGl2no599Zwoy2ua1TOdLAZ1T+dr5by4yEqI7OYZEuPCr/SgLyf16irzN8iUOOIw==}
     peerDependencies:
       react: '>= 16.12.0'
     dependencies:
