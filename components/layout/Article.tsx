@@ -5,7 +5,7 @@ import { StructuredContent } from "/components";
 import { Image } from 'react-datocms';
 
 export type ArticleProps = {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   title: string,
   text: string,
   image?: FileField,
@@ -15,24 +15,22 @@ export type ArticleProps = {
 export default function Article({ children, title, text, image, content }: ArticleProps) {
 
   return (
-    <article className={s.article}>
-      {image &&
+    <div className={s.article}>
+      {image ?
         <header>
           <h1>{title}</h1>
-          <Image data={image.responsiveImage} />
+          <Image className={s.image} data={image.responsiveImage} />
         </header>
-      }
-      {!image &&
-        < h1 > {title}</h1>
+        :
+        <h1> {title}</h1>
       }
       <Markdown className="intro">
         {text}
       </Markdown>
-
       {content &&
         <StructuredContent content={content} />
       }
       {children}
-    </article>
+    </div>
   )
 }

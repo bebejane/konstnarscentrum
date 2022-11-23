@@ -5,26 +5,21 @@ import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { AboutDocument, AllAboutsDocument } from "/graphql";
 import { Image } from 'react-datocms'
 import type { GetStaticProps } from 'next'
-import { StructuredContent } from "/components";
+import { StructuredContent, Article } from "/components";
 
 type AboutProps = {
 	about: AboutRecord
 }
 
-export default function About({ about }: AboutProps) {
+export default function About({ about: { title, image, intro, content } }: AboutProps) {
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.topImage}>
-				<h1>{about.title}</h1>
-				{about.image &&
-					<Image className={styles.image} data={about.image.responsiveImage} />
-				}
-			</div>
-			<Markdown className="intro">{about.intro}</Markdown>
-
-			<StructuredContent content={about.content} />
-		</div>
+		<Article
+			title={title}
+			image={image}
+			text={intro}
+			content={content}
+		/>
 	);
 }
 

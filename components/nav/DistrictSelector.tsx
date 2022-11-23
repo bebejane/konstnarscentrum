@@ -5,12 +5,13 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
+const defaultDistict = { id: 'riks', name: 'Riks', slug: '/' }
+
 export type District = {
   id: string,
   name: string,
   slug: string,
 }
-const defaultDistict = { id: 'riks', name: 'Riks', slug: '/' }
 
 export default function DistrictSelector({ }) {
 
@@ -27,7 +28,6 @@ export default function DistrictSelector({ }) {
   useEffect(() => {
     setDistrict(router?.asPath.split('/')[1])
   }, [router, setSelected])
-  console.log(selected);
 
   return (
     <div className={s.container}>
