@@ -23,7 +23,7 @@ export default function Layout({ children, menu: menuFromProps, title }: LayoutP
 			<MenuDesktop items={menu} />
 			<MenuMobile items={menu} />
 			<div className={styles.layout}>
-				<Logo />
+				<Logo disabled={true} />
 				<Content>
 					{children}
 				</Content>

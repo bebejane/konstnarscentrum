@@ -3,11 +3,15 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useRef, useEffect, useCallback } from 'react'
+import { districts } from "/lib/district";
 import { useStore, shallow } from '/lib/store'
 import { useWindowSize } from 'rooks'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
 import { DistrictSelector } from '/components'
+
+const districtMenuItem = { type: 'district', label: 'Region' }
+const defaultDistict = { id: 'riks', name: 'Riks', slug: '/' }
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -17,18 +21,28 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const router = useRouter()
 	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
+	const [district, setDistrict] = useState<string | undefined>()
 
 	useEffect(() => {
 		if (typeof selected === 'undefined')
 			return
+
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
 		setMarginLeft(`${el.offsetLeft}px`)
 	}, [selected])
 
+	useEffect(() => {
+		const path = router?.asPath.split('/')[1];
+		setDistrict(districts.find(el => el.slug === path)?.slug)
+	}, [router, setDistrict])
+
 	return (
 		<>
 			<nav id="menu" ref={ref} className={s.menu}>
-				<ul className={s.nav} onMouseLeave={() => setSelected(undefined)}>
+				<ul
+					className={s.nav}
+					onMouseLeave={() => setSelected(undefined)}
+				>
 					{items.map((item, idx) =>
 						<li
 							key={idx}
@@ -38,11 +52,16 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							{item.label}
 						</li>
 					)}
-					<li>
-						<DistrictSelector />
+					<li
+						className={s.district}
+						data-menu-type="district"
+						onClick={() => setSelected(selected?.type === districtMenuItem.type ? undefined : districtMenuItem)}
+					>
+						{districts.find(el => el.slug === district)?.name || 'Region'} <img src="/images/caret.png" />
 					</li>
 				</ul>
 				<div>
+
 					{items.map((item, i) => {
 						return (
 							<ul
@@ -63,6 +82,21 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							</ul>
 						)
 					})}
+					<ul
+						data-sub-type="district"
+						style={{ marginLeft }}
+						className={cn(s.sub, selected?.type === 'district' && s.show)}
+						onMouseLeave={() => setSelected(undefined)}
+						onMouseMove={() => setSelected(districtMenuItem)}
+					>
+						{[defaultDistict, ...districts].map((d, idx) =>
+							<li key={idx} data-slug={d.slug} data-sub-type="district">
+								<Link href={`/${d.slug}`}>
+									{d.name}
+								</Link>
+							</li>
+						)}
+					</ul>
 				</div>
 			</nav>
 		</>

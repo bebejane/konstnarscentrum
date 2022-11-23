@@ -1,17 +1,6 @@
 import create from "zustand";
 import shallow from "zustand/shallow"
 
-export type SectionId = {
-  title: string,
-  id: string
-}
-
-export type GalleryProps = {
-  images: FileField[],
-  index?: number,
-  padImagesWithTitle?: boolean
-}
-
 export interface StoreState {
   showMenu: boolean,
   showSubMenu: boolean,
@@ -20,7 +9,6 @@ export interface StoreState {
   invertSidebar: boolean,
   invertMenu: boolean,
   searchProducts: string,
-  gallery: GalleryProps,
   transitioning: boolean,
   showSiteSearch: boolean,
   setCurrentSection: (currentSection: string) => void,
@@ -30,11 +18,8 @@ export interface StoreState {
   setInvertSidebar: (invertSidebar: boolean) => void,
   setInvertMenu: (invertMenu: boolean) => void,
   setSearchProducts: (searchProducts: string) => void,
-  setGallery: (gallery: GalleryProps) => void,
-  setGalleryId: (id: string) => void,
   setTransitioning: (transitioning: boolean) => void,
   setShowSiteSearch: (showSiteSearch: boolean) => void,
-
 }
 
 const useStore = create<StoreState>((set) => ({
@@ -83,23 +68,6 @@ const useStore = create<StoreState>((set) => ({
   setSearchProducts: (searchProducts: string) =>
     set((state) => ({
       searchProducts
-    })
-    ),
-  setGallery: (gallery: GalleryProps) =>
-    set((state) => ({
-      gallery: {
-        images: gallery.images,
-        index: gallery.index !== undefined ? gallery.index : undefined,
-        padImagesWithTitle: gallery.padImagesWithTitle || false
-      }
-    })
-    ),
-  setGalleryId: (id: string) =>
-    set((state) => ({
-      gallery: {
-        ...state.gallery,
-        index: state.gallery?.images?.findIndex((i) => i.id === id) ?? state.gallery?.index
-      }
     })
     ),
   setTransitioning: (transitioning) =>

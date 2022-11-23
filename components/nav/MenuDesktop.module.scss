@@ -27,12 +27,18 @@
       white-space: pre;
       z-index: 100;
 
-      &:last-child {
+      &:nth-last-child(2) {
+        flex: 1 1 100%;
+      }
+
+      &.district {
         display: flex;
-        justify-content: flex-end;
-        width: 100%;
-        margin-right: 0;
-        flex: 1 1 auto;
+        align-items: center;
+
+        img {
+          width: 7px;
+          height: 4px;
+        }
       }
     }
   }
