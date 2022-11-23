@@ -36,7 +36,7 @@
       list-style: none;
 
       > li {
-        width: calc(var(--grid-unit) * 2);
+        width: calc(100% / 6);
         line-height: var(--line-height-nav);
 
         ul {
@@ -55,7 +55,7 @@
     }
     div {
       @include mq($from: tablet) {
-        width: calc(var(--grid-unit) * 6);
+        width: 50%;
         span {
           padding-right: 1em;
         }
