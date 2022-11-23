@@ -4,6 +4,7 @@ declare module '*/about.gql' {
   const defaultDocument: DocumentNode;
   export const About: DocumentNode;
 export const AllAbouts: DocumentNode;
+export const AllAboutsMenu: DocumentNode;
 
   export default defaultDocument;
 }
