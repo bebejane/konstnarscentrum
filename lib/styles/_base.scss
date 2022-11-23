@@ -7,7 +7,7 @@
 	--outer-margin: 3.333vw;
 	--logo-size: 2rem;
 	--total-outer-margin: calc((var(--outer-margin) * 2) + var(--logo-size));
-	--grid-unit: calc(100% / 12);
+	--grid-unit: calc(((100vw - (2 * var(--total-outer-margin))) / 12));
 	--small-space: 3rem;
 	--space: 2.5rem;
 	--line-height: 1.4em;

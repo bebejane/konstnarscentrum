@@ -170,7 +170,7 @@ enum ApplicationModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC'
 }
 
-/** Record of type Application (application) */
+/** Record of type Ansökning (application) */
 type ApplicationRecord = RecordInterface & {
   __typename?: 'ApplicationRecord';
   _createdAt: Scalars['DateTime'];
@@ -197,13 +197,13 @@ type ApplicationRecord = RecordInterface & {
 };
 
 
-/** Record of type Application (application) */
+/** Record of type Ansökning (application) */
 type ApplicationRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
 
-/** Record of type Application (application) */
+/** Record of type Ansökning (application) */
 type ApplicationRecordmessageArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
@@ -613,31 +613,6 @@ type CreatedAtFilter = {
   neq?: InputMaybe<Scalars['DateTime']>;
 };
 
-/** Record of type Easy to read (easy_to_read) */
-type EasyToReadRecord = RecordInterface & {
-  __typename?: 'EasyToReadRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Easy to read (easy_to_read) */
-type EasyToReadRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
 type EmployeeModelFilter = {
   OR?: InputMaybe<Array<InputMaybe<EmployeeModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
@@ -685,7 +660,7 @@ enum EmployeeModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC'
 }
 
-/** Record of type Employees (employee) */
+/** Record of type Personal (employee) */
 type EmployeeRecord = RecordInterface & {
   __typename?: 'EmployeeRecord';
   _createdAt: Scalars['DateTime'];
@@ -708,7 +683,7 @@ type EmployeeRecord = RecordInterface & {
 };
 
 
-/** Record of type Employees (employee) */
+/** Record of type Personal (employee) */
 type EmployeeRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -882,6 +857,38 @@ type FileFilter = {
   neq?: InputMaybe<Scalars['UploadId']>;
   /** Filter records that do not have one of the specified uploads */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
+};
+
+/** Record of type Sidfot (footer) */
+type FooterRecord = RecordInterface & {
+  __typename?: 'FooterRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  aboutKc?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Sidfot (footer) */
+type FooterRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Sidfot (footer) */
+type FooterRecordaboutKcArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 type ForArtistModelFilter = {
@@ -2532,6 +2539,31 @@ type InUseFilter = {
   eq?: InputMaybe<Scalars['BooleanType']>;
 };
 
+/** Record of type Intro våra initiativ (intro_initiative) */
+type IntroInitiativeRecord = RecordInterface & {
+  __typename?: 'IntroInitiativeRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Intro våra initiativ (intro_initiative) */
+type IntroInitiativeRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by ID */
 type ItemIdFilter = {
   /** Search the record with the specified ID */
@@ -2626,7 +2658,7 @@ enum MemberModelOrderBy {
   updatedAt_DESC = 'updatedAt_DESC'
 }
 
-/** Record of type Member (member) */
+/** Record of type Medlem (member) */
 type MemberRecord = RecordInterface & {
   __typename?: 'MemberRecord';
   _createdAt: Scalars['DateTime'];
@@ -2652,7 +2684,7 @@ type MemberRecord = RecordInterface & {
 };
 
 
-/** Record of type Member (member) */
+/** Record of type Medlem (member) */
 type MemberRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
@@ -3077,10 +3109,10 @@ type Query = {
   commisionCategory?: Maybe<CommisionCategoryRecord>;
   /** Returns a specific record */
   consult?: Maybe<ConsultRecord>;
-  /** Returns the single instance record */
-  easyToRead?: Maybe<EasyToReadRecord>;
   /** Returns a specific record */
   employee?: Maybe<EmployeeRecord>;
+  /** Returns the single instance record */
+  footer?: Maybe<FooterRecord>;
   /** Returns a specific record */
   forArtist?: Maybe<ForArtistRecord>;
   /** Returns a specific record */
@@ -3089,6 +3121,8 @@ type Query = {
   frontPage?: Maybe<FrontPageRecord>;
   /** Returns the single instance record */
   inEnglish?: Maybe<InEnglishRecord>;
+  /** Returns the single instance record */
+  introInitiative?: Maybe<IntroInitiativeRecord>;
   /** Returns a specific record */
   member?: Maybe<MemberRecord>;
   /** Returns a specific record */
@@ -3435,18 +3469,18 @@ type QueryconsultArgs = {
 
 
 /** The query root for this schema */
-type QueryeasyToReadArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
 type QueryemployeeArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<EmployeeModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<EmployeeModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryfooterArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -3477,6 +3511,13 @@ type QueryfrontPageArgs = {
 
 /** The query root for this schema */
 type QueryinEnglishArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type QueryintroInitiativeArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   locale?: InputMaybe<SiteLocale>;
 };

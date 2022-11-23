@@ -6,15 +6,12 @@
   width: 100%;
   background-color: rgb(214, 208, 255);
 
-  .wrapper {
+  article {
     margin-left: calc(var(--total-outer-margin));
     margin-right: calc(var(--total-outer-margin));
-  }
-
-  article {
     padding-top: var(--navbar-height);
     padding-left: calc(2 * var(--grid-unit));
     padding-right: calc(2 * var(--grid-unit));
-    padding-bottom: 0;
+    padding-bottom: var(--space);
   }
 }
