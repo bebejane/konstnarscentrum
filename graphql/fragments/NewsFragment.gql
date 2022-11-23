@@ -1,0 +1,12 @@
+#import "./ImageFragment.gql"
+
+fragment NewsFragment on NewsRecord {
+	id
+	title
+	content
+	slug
+	createdAt
+	image {
+		...ImageFragment
+	}
+}

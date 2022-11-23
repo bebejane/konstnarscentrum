@@ -1,22 +1,17 @@
 #import "./fragments/ImageFragment.gql"
+#import "./fragments/NewsFragment.gql"
 
-query AllNews{
-  news: allNews{
-    header
-    createdAt
-    image{
-       ...ImageFragment
-    }
-  }
+query AllNews($first: IntType = 10, $skip: IntType = 0) {
+	news: allNews(orderBy: [createdAt_DESC], first: $first, skip: $skip) {
+		...NewsFragment
+	}
+	pagination: _allNewsMeta {
+		count
+	}
 }
 
-query News($id: ItemId!){
-  news(filter: {id: {eq: $id}}){
-    header
-    body
-    createdAt
-    image{
-       ...ImageFragment
-    }
-  }
+query News($id: ItemId!) {
+	news(filter: { id: { eq: $id } }) {
+		...NewsFragment
+	}
 }

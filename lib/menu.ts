@@ -1,5 +1,5 @@
 import { apiQuery } from 'dato-nextjs-utils/api';
-//import { MenuDocument } from "/graphql";
+import { AllNewsDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -21,28 +21,28 @@ const base: Menu = [
     ]
   },
   {
-    type: 'hire-us', label: 'Anlita oss', sub: [
-      { type: 'hire-us', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar' },
-      { type: 'hire-us', label: 'Rådgivning', slug: '/anlita-oss/radgivning' },
-      { type: 'hire-us', label: 'Uppdragsgivare', slug: '/anlita-oss/uppdragsgivare' },
-      { type: 'hire-us', label: 'Offentlig konst', slug: '/anlita-oss/offentlig-konst' }
+    type: 'consult', label: 'Anlita oss', sub: [
+      { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar' },
+      { type: 'consult', label: 'Rådgivning', slug: '/anlita-oss/radgivning' },
+      { type: 'consult', label: 'Uppdragsgivare', slug: '/anlita-oss/uppdragsgivare' },
+      { type: 'consult', label: 'Offentlig konst', slug: '/anlita-oss/offentlig-konst' }
     ]
   },
   {
-    type: 'konstnar', label: 'För artister', sub: [
-      { type: 'konstnar', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
-      { type: 'konstnar', label: 'Logga in', slug: '/konstnar/logga-in' },
-      { type: 'konstnar', label: 'Aktuellt', slug: '/konstnar/aktuellt' },
-      { type: 'konstnar', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med--oss' }
+    type: 'artist', label: 'För konstnärer', sub: [
+      { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
+      { type: 'artist', label: 'Logga in', slug: '/konstnar/logga-in' },
+      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt' },
+      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med--oss' }
     ]
   },
   {
-    type: 'initiatives', label: 'Våra initiativ', sub: [
-      { type: 'initiatives', label: 'Konstdepartementet', slug: '/initiativ/konstdepartementet' },
-      { type: 'initiatives', label: 'Galleri KC', slug: '/initiativ/galleri-kc' },
-      { type: 'initiatives', label: 'BRAK', slug: '/initiativ/brak' },
-      { type: 'initiatives', label: 'X - sites', slug: '/initiativ/x-sites' },
-      { type: 'initiatives', label: 'Plattform Syd', slug: '/initiativ/plattform-syd' }
+    type: 'initiative', label: 'Våra initiativ', sub: [
+      { type: 'initiative', label: 'Konstdepartementet', slug: '/initiativ/konstdepartementet' },
+      { type: 'initiative', label: 'Galleri KC', slug: '/initiativ/galleri-kc' },
+      { type: 'initiative', label: 'BRAK', slug: '/initiativ/brak' },
+      { type: 'initiative', label: 'X - sites', slug: '/initiativ/x-sites' },
+      { type: 'initiative', label: 'Plattform Syd', slug: '/initiativ/plattform-syd' }
     ]
   },
   {
@@ -58,13 +58,13 @@ const base: Menu = [
 
 export const buildMenu = async () => {
 
-  //const { allDesigners, allProductCategories, allProducts } = await apiQuery(MenuDocument, {});
+  const { news }: { news: NewsRecord[] } = await apiQuery(AllNewsDocument);
 
   const menu = base.map(item => {
     let sub: MenuItem[];
     switch (item.type) {
       case 'news':
-        sub = []
+        sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/mitt/${el.slug}` }))
         break;
       default:
         break;

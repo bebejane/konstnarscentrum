@@ -14,7 +14,7 @@ export default function Abouts({ abouts }: AboutsProps) {
 		<div className={styles.container}>
 			<h1>Abouts</h1>
 			{abouts.map(({ slug, title }, idx) =>
-				<Link key={idx} href={`/about/${slug}`}>
+				<Link key={idx} href={`/om/om-oss/${slug}`}>
 					{title}
 				</Link>
 			)}

@@ -40,21 +40,7 @@ export default function Grid() {
 	return (
 		<div className={s.grid}>
 			<div className={s.gridWrapper}>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
-				<div className={s.gridItem}></div>
+
 			</div>
 		</div>
 	)
