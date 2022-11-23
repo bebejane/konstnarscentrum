@@ -8,8 +8,11 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
-  letter-spacing: -0.03em;
+  font-size: 1.5rem;
+  @include mq($from: tablet) {
+    font-size: 2rem;
+  }
+  letter-spacing: -0.025em;
   font-weight: normal;
   padding-bottom: 0.8em;
   line-height: 1;
@@ -29,6 +32,7 @@ h2 {
 
 h2 {
   padding-bottom: 1em;
+  line-height: var(--line-height);
 }
 
 .small,
@@ -48,4 +52,14 @@ strong,
 b {
   font-family: "Jazz-Bold";
   font-weight: bold;
+}
+
+article {
+  ul {
+    padding-left: 1em;
+  }
+}
+
+button {
+  font-family: "Jazz";
 }

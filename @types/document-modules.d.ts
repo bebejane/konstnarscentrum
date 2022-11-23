@@ -10,6 +10,17 @@ export const AllAboutsMenu: DocumentNode;
 }
     
 
+declare module '*/consult.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Consult: DocumentNode;
+export const AllConsults: DocumentNode;
+export const AllConsultsMenu: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/footer.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -23,6 +34,15 @@ declare module '*/AboutFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AboutFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/ConsultFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ConsultFragment: DocumentNode;
 
   export default defaultDocument;
 }

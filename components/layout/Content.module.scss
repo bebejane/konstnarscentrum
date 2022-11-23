@@ -8,6 +8,7 @@
   article {
     margin-left: var(--outer-margin);
     margin-right: var(--outer-margin);
+    padding-bottom: var(--space);
 
     @include mq($from: tablet) {
       margin-left: calc(var(--total-outer-margin));
@@ -15,7 +16,6 @@
       padding-top: var(--navbar-height);
       padding-left: calc(2 * var(--grid-unit));
       padding-right: calc(2 * var(--grid-unit));
-      padding-bottom: var(--space);
     }
   }
 }

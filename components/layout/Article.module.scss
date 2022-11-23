@@ -1,14 +1,24 @@
 .article {
-  >header {
-    padding-bottom: var(--navbar-height);
+  > header {
+    padding-bottom: var(--small-space);
+    @include mq($from: tablet) {
+      padding-bottom: var(--navbar-height);
+    }
   }
 
   .image {
-    max-height: calc(100vh - (2 * var(--navbar-height)));
-    margin-left: var(--full-margin);
-    margin-right: var(--full-margin);
+    margin-left: calc(-1 * var(--outer-margin));
+    margin-right: calc(-1 * var(--outer-margin));
     width: auto !important;
-    min-width: calc(100% + (2 * var(--full-margin)));
+    min-width: calc(100% + (2 * var(--outer-margin)));
+
+    @include mq($from: tablet) {
+      max-height: calc(100vh - (2 * var(--navbar-height)));
+      margin-left: var(--full-margin);
+      margin-right: var(--full-margin);
+      width: auto !important;
+      min-width: calc(100% + (2 * var(--full-margin)));
+    }
 
     img {
       object-fit: cover;

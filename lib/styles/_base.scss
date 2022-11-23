@@ -1,6 +1,6 @@
 :root {
 	--black: #121212;
-	--white: #ffffff;
+	--white: #fcfcfc;
 	--dark-beige: #807a6e;
 	--light-beige: #e1dcd230;
 	--mid-beige: #e1dcd25f;
@@ -75,4 +75,16 @@ a {
 
 .intro {
 	margin-bottom: var(--small-space);
+}
+
+button {
+	border: 1px solid var(--black);
+	padding: 1em;
+	padding-left: 2em;
+	padding-right: 2em;
+	background-color: var(--white);
+	line-height: 1;
+	&:hover {
+		background-color: var(--light-beige);
+	}
 }

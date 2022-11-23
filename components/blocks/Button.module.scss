@@ -1,5 +1,7 @@
-.button{
-  button{   
+.button {
+  margin-top: var(--small-space);
+  display: block;
+  button {
     cursor: pointer;
   }
 }

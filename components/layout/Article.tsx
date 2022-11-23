@@ -23,7 +23,7 @@ export default function Article({ children, title, text, image, content, showIma
           <Image className={s.image} data={image.responsiveImage} />
         </header>
         :
-        <h1 className={s.title}> {title}</h1>
+        <h1> {title}</h1>
       }
       <Markdown className="intro">
         {text}
