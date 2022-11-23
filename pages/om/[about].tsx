@@ -21,7 +21,6 @@ export default function About({ about: { title, image, intro, content } }: About
 	);
 }
 
-
 export async function getStaticPaths() {
 	const { abouts } = await apiQuery(AllAboutsDocument)
 	const paths = abouts.map(({ slug }) => ({ params: { about: slug } }));
