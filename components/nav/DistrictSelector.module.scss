@@ -3,31 +3,41 @@
   min-width: 4em;
 
   ul {
-    list-style: none;
     display: none;
+    position: absolute;
     flex-direction: column !important;
-
+    list-style: none;
+    width: 400px;
     z-index: 10;
-    padding: 0;
+    padding: 1rem;
     top: 1rem;
-    left: 0;
+    left: -1rem;
     background-color: var(--white);
 
     &.show {
       display: flex;
     }
 
-    a {
-      li {
-        &[data-selected="true"] {
+    li {
+      &[data-selected="true"] {
+        a {
           color: rgb(245, 27, 223);
         }
+
       }
     }
   }
 
   .selected {
+    line-height: 0;
     position: relative;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    &.open>img {
+      transform: rotate(-180deg);
+    }
   }
 }

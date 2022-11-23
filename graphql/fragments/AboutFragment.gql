@@ -1,14 +1,16 @@
 #import "./ImageFragment.gql"
 #import "./VideoFragment.gql"
 
-
 fragment AboutFragment on AboutRecord {
 	id
 	title
 	intro
-  slug
+	slug
+	image {
+		...ImageFragment
+	}
 	content {
-    value
+		value
 		blocks {
 			__typename
 			... on ImageRecord {
@@ -24,7 +26,7 @@ fragment AboutFragment on AboutRecord {
 				text
 				url
 			}
-			... on VideoRecord{
+			... on VideoRecord {
 				__typename
 				id
 				video {
@@ -37,7 +39,7 @@ fragment AboutFragment on AboutRecord {
 					url
 				}
 			}
-			... on RecordInterface{
+			... on RecordInterface {
 				__typename
 				id
 			}

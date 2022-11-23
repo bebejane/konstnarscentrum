@@ -49,15 +49,17 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							data-menu-type={item.type}
 							onMouseEnter={() => setSelected(item)}
 						>
-							{item.label}
+							{item.index ?
+								<Link href={item.slug}>
+									{item.label}
+								</Link>
+								:
+								<>{item.label}</>
+							}
 						</li>
 					)}
-					<li
-						className={s.district}
-						data-menu-type="district"
-						onClick={() => setSelected(selected?.type === districtMenuItem.type ? undefined : districtMenuItem)}
-					>
-						{districts.find(el => el.slug === district)?.name || 'Region'} <img src="/images/caret.png" />
+					<li className={s.district}>
+						<DistrictSelector />
 					</li>
 				</ul>
 				<div>
@@ -68,7 +70,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 								key={i}
 								data-sub-type={item.type}
 								style={{ marginLeft }}
-								className={cn(s.sub, selected?.type === item.type && s.show)}
+								className={cn(s.sub, selected?.type === item.type && !selected.index && s.show)}
 								onMouseLeave={() => setSelected(undefined)}
 								onMouseMove={() => setSelected(item)}
 							>
@@ -82,21 +84,6 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							</ul>
 						)
 					})}
-					<ul
-						data-sub-type="district"
-						style={{ marginLeft }}
-						className={cn(s.sub, selected?.type === 'district' && s.show)}
-						onMouseLeave={() => setSelected(undefined)}
-						onMouseMove={() => setSelected(districtMenuItem)}
-					>
-						{[defaultDistict, ...districts].map((d, idx) =>
-							<li key={idx} data-slug={d.slug} data-sub-type="district">
-								<Link href={`/${d.slug}`}>
-									{d.name}
-								</Link>
-							</li>
-						)}
-					</ul>
 				</div>
 			</nav>
 		</>

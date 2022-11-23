@@ -40,7 +40,7 @@ export default function Footer({ menu, footer }: FooterProps) {
 
 				<section className={s.about}>
 					<Markdown>
-						{footer.aboutKc}
+						{footer?.aboutKc}
 					</Markdown>
 				</section>
 

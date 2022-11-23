@@ -19,19 +19,20 @@ export default function DistrictSelector({ }) {
   const [open, setOpen] = useState(false)
 
   const handleClick = (e) => setDistrict(e.target.dataset.slug)
-  const setDistrict = (slug) => {
-    setSelected(districts.find(d => d.slug === slug))
+  const setDistrict = (slug: string) => {
+    setSelected([...districts, defaultDistict].find(d => d.slug === slug))
     setOpen(false)
   }
 
   useEffect(() => {
     setDistrict(router?.asPath.split('/')[1])
   }, [router, setSelected])
+  console.log(selected);
 
   return (
     <div className={s.container}>
-      <div className={s.selected} onClick={() => setOpen(!open)}>
-        {selected?.name || 'Region'}
+      <div className={cn(s.selected, open && s.open)} onClick={() => setOpen(!open)}>
+        {selected?.name || 'Region'} <img src="/images/caret.png" />
       </div>
       <ul className={cn(open && s.show)}>
         {[defaultDistict, ...districts].map((d, idx) =>
