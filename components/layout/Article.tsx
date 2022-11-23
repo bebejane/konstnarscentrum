@@ -9,20 +9,21 @@ export type ArticleProps = {
   title: string,
   text: string,
   image?: FileField,
+  showImage?: boolean,
   content?: any
 }
 
-export default function Article({ children, title, text, image, content }: ArticleProps) {
+export default function Article({ children, title, text, image, content, showImage = true }: ArticleProps) {
 
   return (
     <div className={s.article}>
-      {image ?
+      {image && showImage ?
         <header>
-          <h1>{title}</h1>
+          <h1 className={s.title}>{title}</h1>
           <Image className={s.image} data={image.responsiveImage} />
         </header>
         :
-        <h1> {title}</h1>
+        <h1 className={s.title}> {title}</h1>
       }
       <Markdown className="intro">
         {text}
