@@ -10,9 +10,11 @@ export default function Content({ children }: ContentProps) {
 
 	return (
 		<main id="content" className={styles.content} data-type={layout}>
-			<article>
-				{children}
-			</article>
+			<div className={styles.wrapper}>
+				<article>
+					{children}
+				</article>
+			</div>
 		</main>
 	)
 }

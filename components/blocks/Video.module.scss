@@ -5,8 +5,8 @@
 
   @include mq($from: tablet) {
     height: auto;
-    width: calc(100% + (var(--grid-unit) * 2));
-    margin-left: calc(-1 * var(--grid-unit));
-    margin-left: calc(-1 * var(--grid-unit));
+    width: calc(100% + (var(--grid-unit) * 4));
+    margin-left: calc(-2 * var(--grid-unit));
+    margin-left: calc(-2 * var(--grid-unit));
   }
 }

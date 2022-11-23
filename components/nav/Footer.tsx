@@ -17,8 +17,8 @@ export default function Footer({ menu }: FooterProps) {
 	return (
 		<>
 			<footer className={cn(s.footer)} id="footer">
-				<section>
-					<nav className={s.menu}>
+				<section className={s.menu}>
+					<nav>
 						<ul>
 							{menu.map((item, idx) => {
 								return (
