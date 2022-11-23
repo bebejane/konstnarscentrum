@@ -11,3 +11,10 @@ query AllAbouts {
 		...AboutFragment
 	}
 }
+
+query AllAboutsMenu {
+	abouts: allAbouts {
+		title
+		slug
+	}
+}

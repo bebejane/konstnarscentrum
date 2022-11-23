@@ -1,5 +1,5 @@
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { AllNewsDocument } from "/graphql";
+import { AllNewsDocument, AllAboutsMenuDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -12,13 +12,7 @@ export type MenuItem = {
 
 const base: Menu = [
   {
-    type: 'about', label: 'Om', sub: [
-      { type: 'about', label: 'Om oss', slug: '/om/om-oss' },
-      { type: 'about', label: 'Lättläst', slug: '/om/lattlast' },
-      { type: 'about', label: 'Styrelse', slug: '/om/syrelse' },
-      { type: 'about', label: 'Stadgar', slug: '/om/stadgar' },
-      { type: 'about', label: 'Personuppgifter', slug: '/om/personuppgifter' },
-    ]
+    type: 'about', label: 'Om', sub: []
   },
   {
     type: 'consult', label: 'Anlita oss', sub: [
@@ -58,13 +52,16 @@ const base: Menu = [
 
 export const buildMenu = async () => {
 
-  const { news }: { news: NewsRecord[] } = await apiQuery(AllNewsDocument);
+  const { news, abouts }: { news: NewsRecord[], abouts: AboutRecord[] } = await apiQuery([AllNewsDocument, AllAboutsMenuDocument]);
 
   const menu = base.map(item => {
     let sub: MenuItem[];
     switch (item.type) {
       case 'news':
         sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/mitt/${el.slug}` }))
+        break;
+      case 'about':
+        sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}` }))
         break;
       default:
         break;
