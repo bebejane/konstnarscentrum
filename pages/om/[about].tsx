@@ -15,11 +15,14 @@ export default function About({ about }: AboutProps) {
 
 	return (
 		<div className={styles.container}>
-			<h1>{about.title}</h1>
+			<div className={styles.topImage}>
+				<h1>{about.title}</h1>
+				{about.image &&
+					<Image className={styles.image} data={about.image.responsiveImage} />
+				}
+			</div>
 			<Markdown className="intro">{about.intro}</Markdown>
-			{about.image &&
-				<Image data={about.image.responsiveImage} />
-			}
+
 			<StructuredContent content={about.content} />
 		</div>
 	);

@@ -16,13 +16,19 @@ export default function Article({ children, title, text, image, content }: Artic
 
   return (
     <article className={s.article}>
-      <h1>{title}</h1>
+      {image &&
+        <header>
+          <h1>{title}</h1>
+          <Image data={image.responsiveImage} />
+        </header>
+      }
+      {!image &&
+        < h1 > {title}</h1>
+      }
       <Markdown className="intro">
         {text}
       </Markdown>
-      {image &&
-        <Image data={image.responsiveImage} />
-      }
+
       {content &&
         <StructuredContent content={content} />
       }
