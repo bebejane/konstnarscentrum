@@ -1,0 +1,20 @@
+#import "./fragments/CommissionFragment.gql"
+
+query Commission($slug: String!) {
+	commission(filter: { slug: { eq: $slug } }) {
+		...CommissionFragment
+	}
+}
+
+query AllCommissions {
+	commissions: allCommissions {
+		...CommissionFragment
+	}
+}
+
+query AllCommissionsMenu {
+	commissions: allCommissions {
+		title
+		slug
+	}
+}

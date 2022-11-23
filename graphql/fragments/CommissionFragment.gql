@@ -1,0 +1,48 @@
+#import "./ImageFragment.gql"
+#import "./VideoFragment.gql"
+
+fragment CommissionFragment on CommissionRecord {
+	id
+	title
+	intro
+	slug
+	image {
+		...ImageFragment
+	}
+	content {
+		value
+		blocks {
+			__typename
+			... on ImageRecord {
+				__typename
+				id
+				image {
+					...ImageFragment
+				}
+			}
+			... on ButtonRecord {
+				__typename
+				id
+				text
+				url
+			}
+			... on VideoRecord {
+				__typename
+				id
+				video {
+					height
+					width
+					title
+					provider
+					providerUid
+					thumbnailUrl
+					url
+				}
+			}
+			... on RecordInterface {
+				__typename
+				id
+			}
+		}
+	}
+}
