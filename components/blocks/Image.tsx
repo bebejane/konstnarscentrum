@@ -14,20 +14,32 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 	return (
 		isSingle ?
 			<figure className={styles.single}>
-				<DatoImage data={images[0].responsiveImage} className={styles.image} fadeInDuration={1000} />
+				<DatoImage
+					data={images[0].responsiveImage}
+					className={styles.image}
+					fadeInDuration={0}
+				/>
+				<figcaption>{images[0].title}</figcaption>
 			</figure>
 			: isDouble ?
 				<div className={styles.double}>
 					<figure>
-						<DatoImage data={images[0].responsiveImage} className={styles.image} fadeInDuration={1000} />
+						<DatoImage
+							data={images[0].responsiveImage}
+							className={styles.image}
+							fadeInDuration={0}
+						/>
+						<figcaption>{images[0].title}</figcaption>
 					</figure>
 					<figure>
-						<DatoImage data={images[1].responsiveImage} className={styles.image} fadeInDuration={1300} />
+						<DatoImage
+							data={images[1].responsiveImage}
+							className={styles.image}
+							fadeInDuration={0}
+						/>
+						<figcaption>{images[1].title}</figcaption>
 					</figure>
 				</div>
-				: isGallery ?
-					<ImageGallery id={id} images={images} />
-					:
-					null
+				: isGallery ? <ImageGallery id={id} images={images} /> : null
 	)
 }

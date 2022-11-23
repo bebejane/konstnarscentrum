@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { CommissionDocument, AllCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
-import { Article } from "/components";
+import { Article, Block } from "/components";
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -16,8 +16,14 @@ export default function Commission({ commission: { title, image, intro, content 
 			title={title}
 			image={image}
 			text={intro}
-			content={content}
-		/>
+		>
+			<section className={s.documentation}>
+				<h2>Dokumentation</h2>
+				{content.map((block, idx) =>
+					<Block key={idx} data={block} />
+				)}
+			</section>
+		</Article>
 	);
 }
 

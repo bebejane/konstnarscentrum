@@ -9,8 +9,11 @@ import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import Link from "next/link";
 
 export default function DistrictHome({ district, start }) {
-	
-	return(
+
+	if (!district)
+		return <div>Not found</div>
+
+	return (
 		<div className={styles.container}>
 			<h1>{district.name}</h1>
 			<p>
@@ -26,15 +29,15 @@ export default function DistrictHome({ district, start }) {
 }
 
 export async function getStaticPaths(context) {
-	const paths = districts.map(({slug}) => ({ params: { district: slug } }))
+	const paths = districts.map(({ slug }) => ({ params: { district: slug } }))
 	return {
 		paths,
 		fallback: false,
 	};
 }
 
-export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, async ({props, revalidate, context } : any) => {
-	
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+
 	const slug = context.params.district;
 	const res = await apiQuery(StartDocument);
 	const start = propByDistrict(res, slug, 'start')
@@ -42,8 +45,8 @@ export const getStaticProps : GetStaticProps = withGlobalProps({queries:[]}, asy
 	return {
 		props: {
 			...props,
-			start, 
-			district: districts.find(d => d.slug === slug) 
+			start,
+			district: districts.find(d => d.slug === slug)
 		},
 		revalidate
 	};

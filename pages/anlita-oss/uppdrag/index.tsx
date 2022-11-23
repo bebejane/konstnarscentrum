@@ -14,7 +14,7 @@ export default function DistrictHome({ commissions }: Props) {
 	return (
 		<div className={styles.container}>
 			{commissions.map(({ title, slug }, idx) =>
-				<Link key={idx} href={`/uppdrag/${slug}`}>
+				<Link key={idx} href={`/anlita-oss/uppdrag/${slug}`}>
 					{title}
 				</Link>
 			)}

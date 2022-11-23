@@ -29,11 +29,14 @@ export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockP
 			>
 				{images.map((item, idx) =>
 					<SwiperSlide key={`${idx}`} className={cn(styles.slide)}>
-						<Image
-							data={item.responsiveImage}
-							className={styles.image}
-							fadeInDuration={(1000 + (idx * 300))}
-						/>
+						<figure>
+							<Image
+								data={item.responsiveImage}
+								className={styles.image}
+								fadeInDuration={0}
+							/>
+							<figcaption>{item.title}</figcaption>
+						</figure>
 					</SwiperSlide>
 				)}
 			</SwiperReact>

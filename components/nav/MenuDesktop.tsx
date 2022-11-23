@@ -37,6 +37,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	useEffect(() => {
 		const path = router?.asPath.split('/')[1];
 		setDistrict(districts.find(el => el.slug === path)?.slug)
+		setSelected(undefined)
 	}, [router, setDistrict])
 
 	return (

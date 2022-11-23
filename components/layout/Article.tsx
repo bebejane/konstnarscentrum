@@ -28,9 +28,7 @@ export default function Article({ children, title, text, image, content, showIma
           <Image
             className={s.image}
             data={image.responsiveImage}
-            fadeInDuration={!startScrollAnimation ? 1000 : 0}
-            placeholderStyle={startScrollAnimation ? { opacity: ratio } : {}}
-            pictureStyle={startScrollAnimation ? { opacity: (1 - ratio) } : {}}
+            fadeInDuration={0}
             objectFit="cover"
           />
           <div className={s.colorBg} style={{ backgroundColor: image.responsiveImage.bgColor }}></div>

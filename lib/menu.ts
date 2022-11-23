@@ -1,5 +1,5 @@
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { AllNewsDocument, AllAboutsMenuDocument } from "/graphql";
+import { AllNewsDocument, AllAboutsMenuDocument, AllConsultsDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -18,10 +18,7 @@ const base: Menu = [
   {
     type: 'consult', label: 'Anlita oss', sub: [
       { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar' },
-      { type: 'consult', label: 'Rådgivning', slug: '/anlita-oss/radgivning' },
-      { type: 'consult', label: 'Uppdragsarkiv', slug: '/uppdrag' },
-      { type: 'consult', label: 'Uppdragsgivare', slug: '/anlita-oss/uppdragsgivare' },
-      { type: 'consult', label: 'Offentlig konst', slug: '/anlita-oss/offentlig-konst' }
+      { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag' }
     ]
   },
   {
@@ -29,7 +26,7 @@ const base: Menu = [
       { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
       { type: 'artist', label: 'Logga in', slug: '/konstnar/logga-in' },
       { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt' },
-      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med--oss' }
+      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss' }
     ]
   },
   {
@@ -54,7 +51,11 @@ const base: Menu = [
 
 export const buildMenu = async () => {
 
-  const { news, abouts }: { news: NewsRecord[], abouts: AboutRecord[] } = await apiQuery([AllNewsDocument, AllAboutsMenuDocument]);
+  const { news, abouts, consults }: { news: NewsRecord[], abouts: AboutRecord[], consults: ConsultRecord[] } = await apiQuery([
+    AllNewsDocument,
+    AllAboutsMenuDocument,
+    AllConsultsDocument
+  ]);
 
   const menu = base.map(item => {
     let sub: MenuItem[];
@@ -64,6 +65,9 @@ export const buildMenu = async () => {
         break;
       case 'about':
         sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}` }))
+        break;
+      case 'consult':
+        sub = item.sub.concat(consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}` })))
         break;
       default:
         break;

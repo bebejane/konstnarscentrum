@@ -10,33 +10,29 @@ fragment CommissionFragment on CommissionRecord {
 		...ImageFragment
 	}
 	content {
-		value
-		blocks {
+		... on ImageRecord {
 			__typename
-			... on ImageRecord {
-				__typename
-				id
-				image {
-					...ImageFragment
-				}
+			id
+			image {
+				...ImageFragment
 			}
-			... on VideoRecord {
-				__typename
-				id
-				video {
-					height
-					width
-					title
-					provider
-					providerUid
-					thumbnailUrl
-					url
-				}
+		}
+		... on VideoRecord {
+			__typename
+			id
+			video {
+				height
+				width
+				title
+				provider
+				providerUid
+				thumbnailUrl
+				url
 			}
-			... on RecordInterface {
-				__typename
-				id
-			}
+		}
+		... on RecordInterface {
+			__typename
+			id
 		}
 	}
 }
