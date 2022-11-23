@@ -13,7 +13,7 @@
 	--line-height: 1.4em;
 	--line-height-nav: 1.6em;
 	--gutter: 1rem;
-	--navbar-height: calc(var(--logo-size) + calc(var(--outer-margin)));
+	--navbar-height: 4.5rem;
 
 	@include mq($from: tablet) {
 		--space: 4rem;

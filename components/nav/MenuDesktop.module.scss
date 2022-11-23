@@ -12,16 +12,20 @@
   padding-right: var(--outer-margin);
   background-color: var(--white);
 
-  >ul {
+  a {
+    color: var(--black);
+  }
+
+  > ul {
     position: relative;
     list-style: none;
     display: flex;
     flex-direction: row;
     width: 100%;
-    padding-top: var(--outer-margin);
+    padding-top: 1.7rem;
     cursor: pointer;
 
-    >li {
+    > li {
       flex: 0 0;
       margin-right: 1rem;
       white-space: pre;
@@ -54,18 +58,17 @@
     z-index: 101;
     margin-left: 0;
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.7rem;
     width: 100%;
     white-space: pre;
+    line-height: var(--line-height-nav);
 
     &.show {
       display: flex;
     }
 
-    >li {
+    > li {
       pointer-events: all;
     }
-
   }
-
 }
