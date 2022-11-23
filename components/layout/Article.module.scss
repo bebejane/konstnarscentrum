@@ -15,12 +15,10 @@
     }
   }
 
-  header>h1,
-  >h1 {
+  .title {
     position: absolute;
     z-index: 1;
     color: var(--white);
     padding-top: 1em;
   }
-
 }
