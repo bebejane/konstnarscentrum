@@ -1,10 +1,10 @@
 :root {
 	--black: #121212;
 	--white: #ffffff;
-	--dark-beige: #807a6e;
-	--light-beige: #e1dcd230;
-	--mid-beige: #e1dcd25f;
-	--outer-margin: 5vw;
+	--beige-dark: #807a6e;
+	--beige-light: #e1dcd230;
+	--beige-mid: #e1dcd25f;
+	--outer-margin: 6vw;
 	--logo-size: 2rem;
 	--total-outer-margin: calc((var(--outer-margin) * 2) + var(--logo-size));
 	--grid-unit: calc(((100vw - (2 * var(--total-outer-margin))) / 12));
@@ -19,6 +19,11 @@
 	@include mq($from: tablet) {
 		--space: 4rem;
 		--outer-margin: 3.333vw;
+	}
+
+	@include mq($until: tablet) {
+		--navbar-height: 3.5rem;
+		--logo-size: 1.3rem;
 	}
 }
 
@@ -63,6 +68,7 @@ html {
 
 a {
 	text-decoration: none;
+	color: var(--black);
 
 	&:hover {
 		color: var(--black);

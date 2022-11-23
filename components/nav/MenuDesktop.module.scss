@@ -12,11 +12,15 @@
   padding-right: var(--outer-margin);
   background-color: var(--white);
 
+  @include mq($until: tablet) {
+    display: none;
+  }
+
   a {
     color: var(--black);
   }
 
-  > ul {
+  >ul {
     position: relative;
     list-style: none;
     display: flex;
@@ -25,7 +29,7 @@
     padding-top: 1.7rem;
     cursor: pointer;
 
-    > li {
+    >li {
       flex: 0 0;
       margin-right: 1rem;
       white-space: pre;
@@ -67,7 +71,7 @@
       display: flex;
     }
 
-    > li {
+    >li {
       pointer-events: all;
     }
   }
