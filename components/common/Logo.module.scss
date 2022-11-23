@@ -4,17 +4,23 @@
   top: 0;
   left: 0;
   margin: var(--outer-margin);
-  min-width: var(--navbar-height);
-  font-size: var(--logo-size);
   color: var(--black);
   white-space: pre;
   font-family: "Logo", arial;
+  font-size: var(--logo-size);
 
   .vertical,
   .horizontal {
     position: absolute;
     top: 0;
     left: 0;
+
+    a {
+      padding: 0;
+      margin: 0;
+      line-height: 0;
+      max-height: var(--logo-size);
+    }
   }
 
   .vertical {

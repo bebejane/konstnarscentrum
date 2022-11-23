@@ -8,12 +8,11 @@ import { useState } from 'react'
 import { buildMenu } from '/lib/menu'
 import { useRouter } from 'next/router'
 
-export type LayoutProps = { children: React.ReactNode, menu: MenuItem[], title: string }
+export type LayoutProps = { children: React.ReactNode, menu: MenuItem[], title: string, footer: FooterRecord }
 
-export default function Layout({ children, menu: menuFromProps, title }: LayoutProps) {
+export default function Layout({ children, menu: menuFromProps, title, footer }: LayoutProps) {
 
 	const isHome = useRouter().asPath === '/'
-	const { color, layout, sidebar } = usePage()
 	const [menu, setMenu] = useState(menuFromProps)
 
 	useEffect(() => { // Refresh menu on load.
@@ -30,7 +29,7 @@ export default function Layout({ children, menu: menuFromProps, title }: LayoutP
 					{children}
 				</Content>
 			</div>
-			<Footer menu={menu} />
+			<Footer menu={menu} footer={footer} />
 			<Grid />
 		</>
 	)
