@@ -4,7 +4,10 @@
     ".vercel": true,
     ".vscode": true,
     "node_modules": true,
-    ".mailing": true
+    ".mailing": true,
+    "districts.json": true,
+    "mailing.config.json": true,
+    "middleware.js": true
   },
   "workspace.isHidden": true
 }

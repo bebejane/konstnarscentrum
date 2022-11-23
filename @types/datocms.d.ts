@@ -399,17 +399,17 @@ type CommisionCategoryRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type CommisionModelContentBlocksField = GalleryRecord | ImageRecord | VideoRecord;
+type CommissionModelContentBlocksField = GalleryRecord | ImageRecord | VideoRecord;
 
-type CommisionModelContentField = {
-  __typename?: 'CommisionModelContentField';
-  blocks: Array<CommisionModelContentBlocksField>;
+type CommissionModelContentField = {
+  __typename?: 'CommissionModelContentField';
+  blocks: Array<CommissionModelContentBlocksField>;
   links: Array<Scalars['String']>;
   value: Scalars['JsonField'];
 };
 
-type CommisionModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<CommisionModelFilter>>>;
+type CommissionModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<CommissionModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
   _isValid?: InputMaybe<BooleanFilter>;
@@ -426,12 +426,13 @@ type CommisionModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
   intro?: InputMaybe<TextFilter>;
+  slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
   year?: InputMaybe<StringFilter>;
 };
 
-enum CommisionModelOrderBy {
+enum CommissionModelOrderBy {
   _createdAt_ASC = '_createdAt_ASC',
   _createdAt_DESC = '_createdAt_DESC',
   _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
@@ -466,9 +467,9 @@ enum CommisionModelOrderBy {
   year_DESC = 'year_DESC'
 }
 
-/** Record of type Uppdrag (commision) */
-type CommisionRecord = RecordInterface & {
-  __typename?: 'CommisionRecord';
+/** Record of type Uppdrag (commission) */
+type CommissionRecord = RecordInterface & {
+  __typename?: 'CommissionRecord';
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -483,25 +484,26 @@ type CommisionRecord = RecordInterface & {
   artist?: Maybe<Scalars['String']>;
   city?: Maybe<Scalars['String']>;
   consultant?: Maybe<Scalars['String']>;
-  content?: Maybe<CommisionModelContentField>;
+  content?: Maybe<CommissionModelContentField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
   intro?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
   year?: Maybe<Scalars['String']>;
 };
 
 
-/** Record of type Uppdrag (commision) */
-type CommisionRecord_seoMetaTagsArgs = {
+/** Record of type Uppdrag (commission) */
+type CommissionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
 
-/** Record of type Uppdrag (commision) */
-type CommisionRecordintroArgs = {
+/** Record of type Uppdrag (commission) */
+type CommissionRecordintroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -3122,7 +3124,7 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allCommisionCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
-  _allCommisionsMeta: CollectionMetadata;
+  _allCommissionsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allConsultsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
@@ -3156,7 +3158,7 @@ type Query = {
   /** Returns a collection of records */
   allCommisionCategories: Array<CommisionCategoryRecord>;
   /** Returns a collection of records */
-  allCommisions: Array<CommisionRecord>;
+  allCommissions: Array<CommissionRecord>;
   /** Returns a collection of records */
   allConsults: Array<ConsultRecord>;
   /** Returns a collection of records */
@@ -3184,9 +3186,9 @@ type Query = {
   /** Returns the single instance record */
   apply?: Maybe<ApplyRecord>;
   /** Returns a specific record */
-  commision?: Maybe<CommisionRecord>;
-  /** Returns a specific record */
   commisionCategory?: Maybe<CommisionCategoryRecord>;
+  /** Returns a specific record */
+  commission?: Maybe<CommissionRecord>;
   /** Returns a specific record */
   consult?: Maybe<ConsultRecord>;
   /** Returns a specific record */
@@ -3251,9 +3253,9 @@ type Query_allCommisionCategoriesMetaArgs = {
 
 
 /** The query root for this schema */
-type Query_allCommisionsMetaArgs = {
+type Query_allCommissionsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<CommisionModelFilter>;
+  filter?: InputMaybe<CommissionModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3395,12 +3397,12 @@ type QueryallCommisionCategoriesArgs = {
 
 
 /** The query root for this schema */
-type QueryallCommisionsArgs = {
+type QueryallCommissionsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<CommisionModelFilter>;
+  filter?: InputMaybe<CommissionModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<CommisionModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<CommissionModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -3543,20 +3545,20 @@ type QueryapplyArgs = {
 
 
 /** The query root for this schema */
-type QuerycommisionArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<CommisionModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<CommisionModelOrderBy>>>;
-};
-
-
-/** The query root for this schema */
 type QuerycommisionCategoryArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CommisionCategoryModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<CommisionCategoryModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QuerycommissionArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<CommissionModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<CommissionModelOrderBy>>>;
 };
 
 
@@ -4469,6 +4471,23 @@ type AllAboutsMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 type AllAboutsMenuQuery = { __typename?: 'Query', abouts: Array<{ __typename?: 'AboutRecord', title: string, slug: string }> };
 
+type CommissionQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+type CommissionQuery = { __typename?: 'Query', commission?: { __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content?: { __typename?: 'CommissionModelContentField', value: any, blocks: Array<{ __typename: 'GalleryRecord', id: any } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null } | null };
+
+type AllCommissionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllCommissionsQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content?: { __typename?: 'CommissionModelContentField', value: any, blocks: Array<{ __typename: 'GalleryRecord', id: any } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null }> };
+
+type AllCommissionsMenuQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllCommissionsMenuQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', title?: string | null, slug?: string | null }> };
+
 type ConsultQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -4492,6 +4511,8 @@ type FooterQueryVariables = Exact<{ [key: string]: never; }>;
 type FooterQuery = { __typename?: 'Query', footer?: { __typename?: 'FooterRecord', aboutKc?: string | null } | null };
 
 type AboutFragment = { __typename?: 'AboutRecord', id: any, title: string, intro?: string | null, slug: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content?: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text?: string | null, url?: string | null } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null };
+
+type CommissionFragment = { __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content?: { __typename?: 'CommissionModelContentField', value: any, blocks: Array<{ __typename: 'GalleryRecord', id: any } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null };
 
 type ConsultFragment = { __typename?: 'ConsultRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content?: { __typename?: 'ConsultModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text?: string | null, url?: string | null } | { __typename: 'GalleryRecord', id: any } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null };
 

@@ -19,6 +19,7 @@ const base: Menu = [
     type: 'consult', label: 'Anlita oss', sub: [
       { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar' },
       { type: 'consult', label: 'Rådgivning', slug: '/anlita-oss/radgivning' },
+      { type: 'consult', label: 'Uppdragsarkiv', slug: '/uppdrag' },
       { type: 'consult', label: 'Uppdragsgivare', slug: '/anlita-oss/uppdragsgivare' },
       { type: 'consult', label: 'Offentlig konst', slug: '/anlita-oss/offentlig-konst' }
     ]

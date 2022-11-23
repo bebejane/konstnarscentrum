@@ -20,12 +20,6 @@ fragment CommissionFragment on CommissionRecord {
 					...ImageFragment
 				}
 			}
-			... on ButtonRecord {
-				__typename
-				id
-				text
-				url
-			}
 			... on VideoRecord {
 				__typename
 				id

@@ -10,6 +10,17 @@ export const AllAboutsMenu: DocumentNode;
 }
     
 
+declare module '*/commision.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Commission: DocumentNode;
+export const AllCommissions: DocumentNode;
+export const AllCommissionsMenu: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/consult.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -34,6 +45,15 @@ declare module '*/AboutFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AboutFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/CommissionFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CommissionFragment: DocumentNode;
 
   export default defaultDocument;
 }
