@@ -11,6 +11,12 @@
   padding-left: calc(2 * var(--grid-unit) + var(--total-outer-margin));
   padding-right: var(--outer-margin);
   background-color: var(--white);
+  opacity: 0;
+  transition: opacity .3s ease-out;
+
+  &.show {
+    opacity: 1;
+  }
 
   @include mq($until: tablet) {
     display: none;
