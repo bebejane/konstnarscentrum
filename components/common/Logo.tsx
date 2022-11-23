@@ -1,10 +1,15 @@
+import s from './Logo.module.scss'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import { isServer } from '/lib/utils'
-import styles from './Logo.module.scss'
+import Link from 'next/link'
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
 
-export default function Logo({ disabled }) {
+export type Props = {
+  disabled: boolean
+}
+
+export default function Logo({ disabled }: Props) {
 
   const { scrolledPosition, viewportHeight, isPageBottom, isPageTop, isScrolledUp } = useScrollInfo()
   const ratio = Math.min(scrolledPosition / viewportHeight, 1)
@@ -12,15 +17,17 @@ export default function Logo({ disabled }) {
   const horizontal = letters.filter((el, idx) => ((idx / letters.length) >= ratio || isServer) && !disabled)
 
   return (
-    <div className={styles.logo}>
-      <div className={styles.vertical}>
-        {vertical.map((l, i) => <>{l}</>)}
-        {horizontal.length > 0 &&
-          <span className={styles.space}>X</span>
-        }
+    <div className={s.logo}>
+      <div className={s.vertical}>
+        <Link href="/">
+          {vertical.map((l, i) => <>{l}</>)}
+        </Link>
+        {horizontal.length > 0 && <span className={s.space}>{letters[vertical.length]}</span>}
       </div>
-      <div className={styles.horizontal}>
-        {horizontal.map((l, i) => <>{l}</>)}
+      <div className={s.horizontal}>
+        <Link href="/">
+          {horizontal.map((l, i) => <>{l}</>)}
+        </Link>
       </div>
     </div>
   )
