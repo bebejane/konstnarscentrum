@@ -2,16 +2,12 @@ import s from './MenuDesktop.module.scss'
 import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState, useRef, useEffect, useCallback } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { districts } from "/lib/district";
 import { useStore, shallow } from '/lib/store'
-import { useWindowSize } from 'rooks'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
 import { DistrictSelector } from '/components'
-
-const districtMenuItem = { type: 'district', label: 'Region' }
-const defaultDistict = { id: 'riks', name: 'Riks', slug: '/' }
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -22,6 +18,13 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
 	const [district, setDistrict] = useState<string | undefined>()
+	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
+	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition } = useScrollInfo()
+
+	useEffect(() => { // Toggle menu bar on scroll
+		setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
+	}, [scrolledPosition, isPageBottom, isPageTop, isScrolledUp, setShowMenu]);
+
 
 	useEffect(() => {
 		if (typeof selected === 'undefined')
@@ -38,7 +41,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 	return (
 		<>
-			<nav id="menu" ref={ref} className={s.menu}>
+			<nav id="menu" ref={ref} className={cn(s.menu, showMenu && s.show)}>
 				<ul
 					className={s.nav}
 					onMouseLeave={() => setSelected(undefined)}
