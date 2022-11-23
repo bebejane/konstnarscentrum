@@ -1,11 +1,9 @@
-import styles from "./[about].module.scss";
+import s from "./[about].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { AboutDocument, AllAboutsDocument } from "/graphql";
-import { Image } from 'react-datocms'
 import type { GetStaticProps } from 'next'
-import { StructuredContent, Article } from "/components";
+import { Article } from "/components";
 
 type AboutProps = {
 	about: AboutRecord
