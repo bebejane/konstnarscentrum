@@ -1,1 +1,25 @@
-.article {}
+.article {
+  >header {
+    padding-bottom: var(--navbar-height);
+  }
+
+  .image {
+    max-height: calc(100vh - (2 * var(--navbar-height)));
+    margin-left: var(--full-margin);
+    margin-right: var(--full-margin);
+    width: auto !important;
+    min-width: calc(100% + (2 * var(--full-margin)));
+
+    img {
+      object-fit: cover;
+    }
+  }
+
+  h1 {
+    position: absolute;
+    z-index: 1;
+    color: var(--white);
+    padding-top: 1em;
+  }
+
+}
