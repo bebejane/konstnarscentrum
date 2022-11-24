@@ -82,3 +82,9 @@ a {
 .intro {
 	margin-bottom: var(--small-space);
 }
+
+button {
+	padding: 1em;
+	background: var(--white);
+	border: 1px solid var(--black);
+}

@@ -16,6 +16,9 @@ h1 {
   font-weight: normal;
   padding-bottom: 0.8em;
   line-height: 1;
+  &.noPadding {
+    padding: 0;
+  }
 }
 
 p {
@@ -57,6 +60,7 @@ b {
 article {
   ul {
     padding-left: 1em;
+    list-style-type: square;
   }
 }
 

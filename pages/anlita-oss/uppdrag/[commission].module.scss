@@ -1,0 +1,17 @@
+.meta {
+  border: 1px solid var(--beige-mid);
+  padding: 1em;
+  margin-bottom: var(--space);
+  ul {
+    columns: 2;
+    list-style: none;
+    li {
+      line-height: 2;
+      span {
+        color: var(--beige-dark);
+        width: 30%;
+        display: inline-block;
+      }
+    }
+  }
+}

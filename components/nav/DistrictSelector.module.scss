@@ -9,9 +9,11 @@
     list-style: none;
     width: 400px;
     z-index: 10;
-    padding: 1rem;
+    padding: 0.6rem;
+    padding-left: var(--outer-margin);
+    padding-bottom: 1.7em;
     top: 1rem;
-    left: -1rem;
+    left: calc(-1 * var(--outer-margin));
     background-color: var(--white);
 
     &.show {
@@ -19,11 +21,11 @@
     }
 
     li {
+      line-height: var(--line-height-nav);
       &[data-selected="true"] {
         a {
           color: rgb(245, 27, 223);
         }
-
       }
     }
   }
@@ -36,7 +38,7 @@
     flex-direction: row;
     align-items: center;
 
-    &.open>img {
+    &.open > img {
       transform: rotate(-180deg);
     }
   }

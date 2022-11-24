@@ -9,7 +9,7 @@ type CommissionProps = {
 	commission: CommissionRecord
 }
 
-export default function Commission({ commission: { title, image, intro, content } }: CommissionProps) {
+export default function Commission({ commission: { title, image, intro, city, year, artist, consultant, content } }: CommissionProps) {
 
 	return (
 		<Article
@@ -17,8 +17,16 @@ export default function Commission({ commission: { title, image, intro, content 
 			image={image}
 			text={intro}
 		>
+			<section className={s.meta}>
+				<ul className="small">
+					<li><span>Plats:</span>{city}</li>
+					<li><span>År:</span>{year}</li>
+					<li><span>Konstnär:</span>{artist}</li>
+					<li><span>Konsulent:</span>{consultant}</li>
+				</ul>
+			</section>
 			<section className={s.documentation}>
-				<h2>Dokumentation</h2>
+				<h1 className="noPadding">Dokumentation</h1>
 				{content.map((block, idx) =>
 					<Block key={idx} data={block} />
 				)}

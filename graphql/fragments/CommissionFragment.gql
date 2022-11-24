@@ -6,6 +6,10 @@ fragment CommissionFragment on CommissionRecord {
 	title
 	intro
 	slug
+	city
+	year
+	artist
+	consultant
 	image {
 		...ImageFragment
 	}
