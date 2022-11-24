@@ -19,6 +19,7 @@ export default function DistrictHome({ commissions }: Props) {
 				<h1>Uppdragsarkiv<sup className="amount">19</sup></h1>
 				<nav className={styles.filter}>
 					<ul>
+						<li>Visa:</li>
 						<li>Alla</li>
 						<li>Skola</li>
 						<li>Offentlig</li>

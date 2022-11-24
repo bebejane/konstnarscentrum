@@ -13,12 +13,13 @@
 	--space: 2.5rem;
 	--line-height: 1.4em;
 	--line-height-nav: 1.6em;
-	--gutter: 2.5vw;
+	--gutter: 4vw;
 	--navbar-height: 4.5rem;
 
 	@include mq($from: tablet) {
 		--space: 4rem;
 		--outer-margin: 3.333vw;
+		--gutter: 2.5vw;
 	}
 
 	@include mq($until: tablet) {

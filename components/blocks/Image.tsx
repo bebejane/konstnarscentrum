@@ -19,8 +19,9 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 					className={styles.image}
 					fadeInDuration={0}
 				/>
-				<figcaption>{images[0].title}</figcaption>
-			</figure>
+				{images[0].title &&
+					<figcaption>{images[0].title}</figcaption>
+				}			</figure>
 			: isDouble ?
 				<div className={styles.double}>
 					<figure>
@@ -29,7 +30,9 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 							className={styles.image}
 							fadeInDuration={0}
 						/>
-						<figcaption>{images[0].title}</figcaption>
+						{images[0].title &&
+							<figcaption>{images[0].title}</figcaption>
+						}
 					</figure>
 					<figure>
 						<DatoImage
@@ -37,8 +40,9 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 							className={styles.image}
 							fadeInDuration={0}
 						/>
-						<figcaption>{images[1].title}</figcaption>
-					</figure>
+						{images[1].title &&
+							<figcaption>{images[1].title}</figcaption>
+						}					</figure>
 				</div>
 				: isGallery ? <ImageGallery id={id} images={images} /> : null
 	)

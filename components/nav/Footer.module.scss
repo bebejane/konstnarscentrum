@@ -78,8 +78,11 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 0;
-    width: calc(100% + var(--outer-margin) + var(--logo-size));
-    margin-right: calc(-1 * var(--outer-margin) + var(--logo-size));
+
+    @include mq($from: tablet) {
+      width: calc(100% + var(--outer-margin) + var(--logo-size));
+      margin-right: calc(-1 * var(--outer-margin) + var(--logo-size));
+    }
 
     @include mq($until: tablet) {
       svg {
