@@ -34,13 +34,14 @@
     flex-direction: row;
     width: 100%;
     padding-top: 1.7rem;
-    cursor: pointer;
+
 
     >li {
       flex: 0 0;
       margin-right: 1rem;
       white-space: pre;
       z-index: 100;
+      cursor: default;
 
       &:nth-last-child(2) {
         flex: 1 1 100%;

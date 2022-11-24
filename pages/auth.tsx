@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
 }
 
 export const config = {
-	runtime: 'experimental-edge'
+	//runtime: 'experimental-edge'
 }
 
 export default Auth;

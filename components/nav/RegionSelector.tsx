@@ -26,6 +26,7 @@ export default function RegionSelector({ }) {
   }
 
   const createSlug = (regionSlug: string) => {
+    if (regionSlug === '/') return '/'
     const paths = router?.asPath.split('/').slice(1);
     const currentRegion = regions.find(el => el.slug === paths[0]);
     return !currentRegion ? `/${regionSlug}` : `/${regionSlug}/${paths.slice(1).join('/')}`
