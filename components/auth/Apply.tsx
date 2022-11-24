@@ -6,13 +6,13 @@ import { SubmitButton } from "./Auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
-export default function Apply({ districts = [] }) {
-	
+export default function Apply({ regions = [] }) {
+
 	const [application, setApplication] = useState();
 	return (
 		<div className={styles.container}>
 			{!application ? (
-				<ApplicationForm districts={districts} setApplication={setApplication} />
+				<ApplicationForm regions={regions} setApplication={setApplication} />
 			) : (
 				<div className={styles.success}>
 					<h1>{text.thanksForRegistering}</h1>
@@ -28,9 +28,9 @@ export default function Apply({ districts = [] }) {
 	);
 }
 
-const ApplicationForm = ({ districts, setApplication }) => {
+const ApplicationForm = ({ regions, setApplication }) => {
 	const [error, setError] = useState<undefined | Error>();
-	const { register, handleSubmit, formState: { errors, isSubmitting }} = useForm();
+	const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
 	useEffect(() => {
 		isSubmitting && setError(undefined)
@@ -61,33 +61,33 @@ const ApplicationForm = ({ districts, setApplication }) => {
 					{...register("firstName", { required: true })}
 					className={errors.firstName && styles.error}
 					placeholder={`${text.firstName}...`}
-					
+
 				/>
 				<input
 					{...register("lastName", { required: true })}
 					className={errors.lastName && styles.error}
 					placeholder={`${text.lastName}...`}
-					
+
 				/>
 				<textarea
 					{...register("message", { required: true })}
 					className={errors.message && styles.error}
 					placeholder={`${text.message}...`}
-					
+
 				/>
 				<select
 					{...register("roleId", { required: true })}
 					className={errors.roledId && styles.error}
-					placeholder={`${text.district}...`}
+					placeholder={`${text.region}...`}
 				>
-					{districts.map((r, i) => (
+					{regions.map((r, i) => (
 						<option key={i} value={r.id}>
 							{r.name}
 						</option>
 					))}
 				</select>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
-				{error && 
+				{error &&
 					<p className={styles.formError}>{`${error.error || error.message || error}`}</p>
 				}
 			</form>

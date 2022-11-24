@@ -1,30 +1,35 @@
 [
   {
-    "id": "133331",
+    "id": "143662355",
+    "roleId": "133331",
     "tokenId": "138887",
     "name": "Mitt",
     "slug": "mitt"
   },
   {
-    "id": "133332",
+    "id": "143662356",
+    "roleId": "133332",
     "tokenId": "138889",
     "name": "Nord",
     "slug": "nord"
   },
   {
-    "id": "133333",
+    "id": "143662358",
+    "roleId": "133333",
     "tokenId": "138888",
     "name": "Syd",
     "slug": "syd"
   },
   {
-    "id": "111106",
+    "id": "143685113",
+    "roleId": "111106",
     "tokenId": "115326",
     "name": "Väst",
     "slug": "vast"
   },
   {
-    "id": "111107",
+    "id": "143685114",
+    "roleId": "111107",
     "tokenId": "115327",
     "name": "Öst",
     "slug": "ost"

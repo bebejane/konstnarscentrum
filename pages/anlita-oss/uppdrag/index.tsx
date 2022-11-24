@@ -11,7 +11,7 @@ export type Props = {
 	commissions: CommissionRecord[]
 }
 
-export default function DistrictHome({ commissions }: Props) {
+export default function RegionHome({ commissions }: Props) {
 
 	return (
 		<>

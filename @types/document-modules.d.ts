@@ -146,6 +146,7 @@ declare module '*/news.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AllNews: DocumentNode;
+export const AllNewsByRegion: DocumentNode;
 export const News: DocumentNode;
 
   export default defaultDocument;

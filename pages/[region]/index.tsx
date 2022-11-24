@@ -1,23 +1,23 @@
 import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { districts } from "/lib/district";
+import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { StartDocument } from "/graphql";
-import { propByDistrict } from "/lib/district";
+import { propByRegion } from "/lib/region";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import Link from "next/link";
 
-export default function DistrictHome({ district, start }) {
+export default function RegionHome({ region, start }) {
 
-	if (!district)
+	if (!region)
 		return <div>Not found</div>
 
 	return (
 		<div className={styles.container}>
-			<h1>{district.name}</h1>
+			<h1>{region.name}</h1>
 			<p>
-				<Link href={`/${district.slug}/nyheter`}>
+				<Link href={`/${region.slug}/nyheter`}>
 					Go to Nyheter
 				</Link>
 			</p>
@@ -29,7 +29,7 @@ export default function DistrictHome({ district, start }) {
 }
 
 export async function getStaticPaths(context) {
-	const paths = districts.map(({ slug }) => ({ params: { district: slug } }))
+	const paths = regions.map(({ slug }) => ({ params: { region: slug } }))
 	return {
 		paths,
 		fallback: false,
@@ -38,15 +38,15 @@ export async function getStaticPaths(context) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const slug = context.params.district;
+	const slug = context.params.region;
 	const res = await apiQuery(StartDocument);
-	const start = propByDistrict(res, slug, 'start')
+	const start = propByRegion(res, slug, 'start')
 
 	return {
 		props: {
 			...props,
 			start,
-			district: districts.find(d => d.slug === slug)
+			region: regions.find(d => d.slug === slug)
 		},
 		revalidate
 	};

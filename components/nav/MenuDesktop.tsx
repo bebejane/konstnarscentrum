@@ -3,11 +3,11 @@ import cn from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useRef, useEffect } from 'react'
-import { districts } from "/lib/district";
+import { regions } from "/lib/region";
 import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
-import { DistrictSelector } from '/components'
+import { RegionSelector } from '/components'
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -17,7 +17,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const router = useRouter()
 	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
-	const [district, setDistrict] = useState<string | undefined>()
+	const [region, setRegion] = useState<string | undefined>()
 	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition } = useScrollInfo()
 
@@ -36,9 +36,9 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 	useEffect(() => {
 		const path = router?.asPath.split('/')[1];
-		setDistrict(districts.find(el => el.slug === path)?.slug)
+		setRegion(regions.find(el => el.slug === path)?.slug)
 		setSelected(undefined)
-	}, [router, setDistrict])
+	}, [router, setRegion])
 
 	return (
 		<>
@@ -62,8 +62,8 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							}
 						</li>
 					)}
-					<li className={s.district}>
-						<DistrictSelector />
+					<li className={s.region}>
+						<RegionSelector />
 					</li>
 				</ul>
 				<div>

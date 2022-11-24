@@ -10,8 +10,22 @@ query AllNews($first: IntType = 10, $skip: IntType = 0) {
 	}
 }
 
-query News($id: ItemId!) {
-	news(filter: { id: { eq: $id } }) {
+query AllNewsByRegion($first: IntType = 10, $skip: IntType = 0, $id: ItemId) {
+	news: allNews(
+		filter: { region: { eq: $id } }
+		orderBy: [createdAt_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...NewsFragment
+	}
+	pagination: _allNewsMeta {
+		count
+	}
+}
+
+query News($slug: String!) {
+	news(filter: { slug: { eq: $slug } }) {
 		...NewsFragment
 	}
 }
