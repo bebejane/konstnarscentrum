@@ -1,4 +1,5 @@
 import { datoError } from "dato-nextjs-utils/api";
+import React from "react";
 
 export const isServer = typeof window === 'undefined';
 
@@ -8,6 +9,13 @@ export const breakpoints = {
   desktop: 980,
   wide: 1441,
   navBreak: 1368
+}
+
+export const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) => {
+  const newArr = []
+  for (let i = 0; i < array.length; i += chunkSize)
+    newArr.push(array.slice(i, i + chunkSize));
+  return newArr
 }
 
 export const catchErrorsFrom = (handler) => {

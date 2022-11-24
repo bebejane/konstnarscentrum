@@ -13,6 +13,10 @@ fragment CommissionFragment on CommissionRecord {
 	image {
 		...ImageFragment
 	}
+	category {
+		id
+		title
+	}
 	content {
 		... on ImageRecord {
 			__typename
