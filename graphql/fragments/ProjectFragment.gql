@@ -1,0 +1,8 @@
+fragment ProjectFragment on ProjectRecord {
+	title
+	image {
+		...ImageFragment
+	}
+	url
+	text(markdown: false)
+}

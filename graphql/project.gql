@@ -1,0 +1,8 @@
+#import "./fragments/ImageFragment.gql"
+#import "./freagments/ProjectFragment.gql"
+
+query AllProjects {
+	projects: allProjects {
+		...ProjectFragment
+	}
+}

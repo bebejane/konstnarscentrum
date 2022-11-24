@@ -105,6 +105,15 @@ declare module '*/NewsFragment.gql' {
 }
     
 
+declare module '*/ProjectFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ProjectFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/SiteFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -149,6 +158,15 @@ declare module '*/news.gql' {
   export const AllNews: DocumentNode;
 export const AllNewsByRegion: DocumentNode;
 export const News: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/project.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AllProjects: DocumentNode;
 
   export default defaultDocument;
 }
