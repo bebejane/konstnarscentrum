@@ -89,6 +89,11 @@ button {
 	padding-top: 0.9em;
 	background: var(--white);
 	border: 1px solid var(--black);
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	&:hover {
+		border-width: 2px;
+	}
 }
 
 figcaption {
