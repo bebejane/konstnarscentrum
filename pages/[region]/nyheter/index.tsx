@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { regions, apiTokenByRegion } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { AllNewsDocument } from "/graphql";
+import { AllNewsDocument, AllNewsByRegionDocument } from "/graphql";
 
 import Link from "next/link";
 
@@ -19,7 +19,7 @@ export default function News({ news, region }: Props) {
 			<ul>
 				{news.length ? news.map(({ slug, title }, idx) =>
 					<li key={idx} >
-						<Link href={region ? `/nyheter/${slug}/${region.slug}` : `/mitt/nyheter/${slug}`}>
+						<Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
 							{title}
 						</Link>
 					</li>
@@ -43,7 +43,7 @@ export async function getStaticPaths(context) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const { news } = await apiQuery(AllNewsDocument, { apiToken: apiTokenByRegion(props.region?.slug) });
+	const { news } = await apiQuery(AllNewsByRegionDocument, { variables: { id: props.region?.id } });
 
 	return {
 		props: {

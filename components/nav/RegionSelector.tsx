@@ -25,6 +25,12 @@ export default function RegionSelector({ }) {
     setOpen(false)
   }
 
+  const createSlug = (regionSlug: string) => {
+    const paths = router?.asPath.split('/').slice(1);
+    const currentRegion = regions.find(el => el.slug === paths[0]);
+    return !currentRegion ? `/${regionSlug}` : `/${regionSlug}/${paths.slice(1).join('/')}`
+  }
+
   useEffect(() => {
     setRegion(router?.asPath.split('/')[1])
   }, [router, setSelected])
@@ -37,7 +43,7 @@ export default function RegionSelector({ }) {
       <ul className={cn(open && s.show)}>
         {[defaultDistict, ...regions].map((d, idx) =>
           <li key={idx} data-slug={d.slug} data-selected={selected?.id === d.id}>
-            <Link href={`/${d.slug}`} onClick={handleClick}>
+            <Link href={createSlug(d.slug)} onClick={handleClick}>
               {d.name}
             </Link>
           </li>

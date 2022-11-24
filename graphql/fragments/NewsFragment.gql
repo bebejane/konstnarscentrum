@@ -9,4 +9,9 @@ fragment NewsFragment on NewsRecord {
 	image {
 		...ImageFragment
 	}
+	region {
+		id
+		name
+		slug
+	}
 }
