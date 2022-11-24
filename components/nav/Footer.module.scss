@@ -44,6 +44,13 @@
 
         ul {
           list-style: none;
+
+          li {
+            max-width: 90%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
         }
       }
     }
@@ -60,12 +67,12 @@
 
     div,
     p {
+      span {
+        padding-right: 1em;
+      }
+
       @include mq($from: tablet) {
         width: 50%;
-
-        span {
-          padding-right: 1em;
-        }
 
         &:first-child {
           padding-right: 2em;

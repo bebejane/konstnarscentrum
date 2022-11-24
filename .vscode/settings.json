@@ -26,7 +26,8 @@
     "lib/controllers": true,
     "lib/emails": true,
     "lib/scripts": true,
-    "lib/services": true
+    "lib/services": true,
+    "regions.json": true
   },
   "workspace.isHidden": true
 }
