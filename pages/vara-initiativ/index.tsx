@@ -19,9 +19,11 @@ export default function Initiatives({ projects }: Props) {
 					<li key={idx}>
 						<Image data={image.responsiveImage} />
 						<h2>{title}</h2>
-						<Markdown>
-							{text}
-						</Markdown>
+						<div className="mid">
+							<Markdown>
+								{text}
+							</Markdown>
+						</div>
 						<a href={url}>
 							<button>Besök {title}</button>
 						</a>

@@ -2,6 +2,10 @@
   position: relative;
   min-width: 4em;
 
+  &:hover {
+    color: var(--beige-dark);
+  }
+
   ul {
     display: none;
     position: absolute;

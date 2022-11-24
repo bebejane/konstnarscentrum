@@ -1,13 +1,27 @@
 .container {
-  >ul {
+  > ul {
+    margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
+    margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    >li {
+    > li {
       flex: 0 0 50%;
+      padding-right: var(--gutter);
+      padding-left: var(--gutter);
+      border-right: 1px solid var(--beige-mid);
+
+      &:nth-child(even) {
+        border-right: none;
+      }
+
+      h2 {
+        padding-top: 0.7em;
+        padding-bottom: 0.5em;
+      }
     }
   }
 }

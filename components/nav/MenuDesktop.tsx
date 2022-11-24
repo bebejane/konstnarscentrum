@@ -66,7 +66,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 						<RegionSelector />
 					</li>
 				</ul>
-				<div>
+				<div className={s.background}>
 
 					{items.map((item, i) => {
 						return (
