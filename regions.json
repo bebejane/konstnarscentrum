@@ -1,0 +1,32 @@
+[
+  {
+    "id": "133331",
+    "tokenId": "138887",
+    "name": "Mitt",
+    "slug": "mitt"
+  },
+  {
+    "id": "133332",
+    "tokenId": "138889",
+    "name": "Nord",
+    "slug": "nord"
+  },
+  {
+    "id": "133333",
+    "tokenId": "138888",
+    "name": "Syd",
+    "slug": "syd"
+  },
+  {
+    "id": "111106",
+    "tokenId": "115326",
+    "name": "Väst",
+    "slug": "vast"
+  },
+  {
+    "id": "111107",
+    "tokenId": "115327",
+    "name": "Öst",
+    "slug": "ost"
+  }
+]

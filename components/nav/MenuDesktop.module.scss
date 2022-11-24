@@ -12,7 +12,7 @@
   padding-right: var(--outer-margin);
   background-color: var(--white);
   opacity: 1;
-  transition: transform .2s ease-out;
+  transition: transform .4s ease-out;
   transform: translateY(-100%);
 
   &.show {
@@ -50,7 +50,7 @@
         margin-right: 0;
       }
 
-      &.district {
+      &.region {
         display: flex;
         align-items: center;
 

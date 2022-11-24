@@ -8,7 +8,7 @@ export type Props = {
 
 }
 
-export default function DistrictHome({ }: Props) {
+export default function RegionHome({ }: Props) {
 
 	return (
 		<div className={styles.container}>

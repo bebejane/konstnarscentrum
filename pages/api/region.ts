@@ -1,14 +1,14 @@
 import Cookies from 'cookies'
-import { districts } from "/lib/district";
+import { regions } from "/lib/region";
 
 const handler = async (req, res) => {
-  const { district } = req.query
+  const { region } = req.query
   const cookies = new Cookies(req, res)
   // Get a cookie
-  console.log(cookies.get('district'))
+  console.log(cookies.get('region'))
   // Set a cookie
-  cookies.set('district', district, {httpOnly: true})
-  res.json({district})
+  cookies.set('region', region, { httpOnly: true })
+  res.json({ region })
 }
 
 export default handler;

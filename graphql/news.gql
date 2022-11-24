@@ -10,8 +10,8 @@ query AllNews($first: IntType = 10, $skip: IntType = 0) {
 	}
 }
 
-query News($id: ItemId!) {
-	news(filter: { id: { eq: $id } }) {
+query News($slug: String!) {
+	news(filter: { slug: { eq: $slug } }) {
 		...NewsFragment
 	}
 }
