@@ -17,7 +17,7 @@ export default function News({ news: { createdAt, title, content }, region }: Pr
 	return (
 		<div className={styles.container}>
 			<h1>{title}</h1>
-			{format(new Date(createdAt), "yyyy-MM-dd HH:mm")}
+			<h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
 			<Markdown>{content}</Markdown>
 		</div>
 	);

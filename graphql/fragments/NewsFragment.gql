@@ -5,6 +5,7 @@ fragment NewsFragment on NewsRecord {
 	title
 	content
 	slug
+	intro
 	createdAt
 	image {
 		...ImageFragment

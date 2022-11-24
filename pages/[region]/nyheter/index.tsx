@@ -4,6 +4,8 @@ import { GetStaticProps } from "next";
 import { regions, apiTokenByRegion } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument, AllNewsByRegionDocument } from "/graphql";
+import { format } from "date-fns";
+
 
 import Link from "next/link";
 
@@ -15,19 +17,24 @@ export type Props = {
 export default function News({ news, region }: Props) {
 
 	return (
-		<div className={styles.container}>
-			<ul>
-				{news.length ? news.map(({ slug, title }, idx) =>
-					<li key={idx} >
-						<Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
-							{title}
-						</Link>
-					</li>
-				) :
-					<>Inga nyheter...</>
-				}
-			</ul>
-		</div>
+		<>
+			<h1 class="noPadding">Nyheter</h1>
+			<div className={styles.container}>
+				<ul>
+					{news.length ? news.map(({ slug, title, intro, createdAt, region }, idx) =>
+						<li key={idx} >
+							<Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
+								<h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
+								<h2>{title}</h2>
+								<p>{intro}</p>
+							</Link>
+						</li>
+					) :
+						<>Inga nyheter...</>
+					}
+				</ul>
+			</div>
+		</>
 	);
 }
 

@@ -12,7 +12,7 @@ h1 {
   @include mq($from: tablet) {
     font-size: 2rem;
   }
-  letter-spacing: -0.025em;
+  letter-spacing: -0.02em;
   font-weight: normal;
   padding-bottom: 0.8em;
   line-height: 1;
@@ -21,21 +21,34 @@ h1 {
   }
 }
 
+h2 {
+  font-size: 1.3rem;
+  @include mq($from: tablet) {
+    font-size: 1.6rem;
+  }
+  font-weight: normal;
+  letter-spacing: -0.015em;
+  padding-bottom: 1em;
+  line-height: var(--line-height);
+}
+
+h5 {
+  font-family: "Logo";
+  font-weight: normal;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.55em;
+  padding-bottom: 1em;
+}
+
 p {
   line-height: var(--line-height);
 }
 
 p.intro,
-.intro p,
-h2 {
+.intro p {
   font-size: 1.15rem;
-  font-weight: normal;
   padding-bottom: 0;
-}
-
-h2 {
-  padding-bottom: 1em;
-  line-height: var(--line-height);
 }
 
 .small,
