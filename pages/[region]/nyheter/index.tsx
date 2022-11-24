@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { regions, apiTokenByRegion } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { AllNewsDocument, AllNewsByRegionDocument } from "/graphql";
+import { AllNewsByRegionDocument } from "/graphql";
 import { format } from "date-fns";
 
 
