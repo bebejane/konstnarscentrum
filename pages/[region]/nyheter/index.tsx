@@ -17,9 +17,8 @@ export type Props = {
 export default function News({ news, region }: Props) {
 
 	return (
-<<<<<<< HEAD
 		<>
-			<h1 class="noPadding">Nyheter</h1>
+			<h1 className="noPadding">Nyheter</h1>
 			<div className={styles.container}>
 				<ul>
 					{news.length ? news.map(({ slug, title, intro, createdAt, region }, idx) =>
@@ -36,21 +35,6 @@ export default function News({ news, region }: Props) {
 				</ul>
 			</div>
 		</>
-=======
-		<div className={styles.container}>
-			<ul>
-				{news.length ? news.map(({ slug, title, region }, idx) =>
-					<li key={idx} >
-						<Link href={`/${region.slug}/nyheter/${slug}`}>
-							{title}
-						</Link>
-					</li>
-				) :
-					<>Inga nyheter...</>
-				}
-			</ul>
-		</div>
->>>>>>> fbd35f1 (thumnails)
 	);
 }
 
