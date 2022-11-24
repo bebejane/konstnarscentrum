@@ -2,39 +2,21 @@ import create from "zustand";
 import shallow from "zustand/shallow"
 
 export interface StoreState {
+  region: Region | undefined,
   showMenu: boolean,
   showSubMenu: boolean,
   showMenuMobile: boolean,
-  currentSection: string,
-  invertSidebar: boolean,
-  invertMenu: boolean,
-  searchProducts: string,
-  transitioning: boolean,
-  showSiteSearch: boolean,
-  setCurrentSection: (currentSection: string) => void,
   setShowMenu: (showMenu: boolean) => void,
   setShowSubMenu: (showSubMenu: boolean) => void,
   setShowMenuMobile: (showMenuMobile: boolean) => void,
-  setInvertSidebar: (invertSidebar: boolean) => void,
-  setInvertMenu: (invertMenu: boolean) => void,
-  setSearchProducts: (searchProducts: string) => void,
-  setTransitioning: (transitioning: boolean) => void,
-  setShowSiteSearch: (showSiteSearch: boolean) => void,
+  setRegion: (region: Region | undefined) => void
 }
 
 const useStore = create<StoreState>((set) => ({
   showMenu: true,
   showSubMenu: false,
   showMenuMobile: false,
-  currentSection: undefined,
-  invertSidebar: false,
-  invertMenu: false,
-  sections: [],
-  searchProducts: undefined,
-  gallery: undefined,
-  product: undefined,
-  transitioning: false,
-  showSiteSearch: false,
+  region: undefined,
   setShowMenu: (showMenu: boolean) =>
     set((state) => ({
       showMenu
@@ -50,36 +32,12 @@ const useStore = create<StoreState>((set) => ({
       showMenuMobile
     })
     ),
-  setCurrentSection: (currentSection: string) =>
+  setRegion: (region: Region | undefined) =>
     set((state) => ({
-      currentSection
+      region
     })
     ),
-  setInvertSidebar: (invertSidebar: boolean) =>
-    set((state) => ({
-      invertSidebar
-    })
-    ),
-  setInvertMenu: (invertMenu: boolean) =>
-    set((state) => ({
-      invertMenu
-    })
-    ),
-  setSearchProducts: (searchProducts: string) =>
-    set((state) => ({
-      searchProducts
-    })
-    ),
-  setTransitioning: (transitioning) =>
-    set((state) => ({
-      transitioning
-    })
-    ),
-  setShowSiteSearch: (showSiteSearch) =>
-    set((state) => ({
-      showSiteSearch
-    })
-    ),
+
 }));
 
 export default useStore;
