@@ -49,7 +49,7 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 								</li>
 								{item.type === selected?.type && !item.index &&
 									item.sub?.map(({ slug, label }, idx) =>
-										<li className={s.sub} key={idx}>
+										<li className={s.sub} key={`sub-${idx}`}>
 											<Link href={slug}>
 												{label}
 											</Link>

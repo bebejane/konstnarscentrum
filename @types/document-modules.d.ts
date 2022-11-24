@@ -16,6 +16,7 @@ declare module '*/commision.gql' {
   export const Commission: DocumentNode;
 export const AllCommissions: DocumentNode;
 export const AllCommissionsMenu: DocumentNode;
+export const AllCommissionCategories: DocumentNode;
 
   export default defaultDocument;
 }

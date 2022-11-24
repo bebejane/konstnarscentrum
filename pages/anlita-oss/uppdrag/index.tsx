@@ -2,49 +2,46 @@ import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { AllCommissionsDocument, CommissionDocument } from "/graphql";
+import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphql";
 import Link from "next/link";
 import { Image as DatoImage } from 'react-datocms'
-
+import { FilterBar, Thumbnail, ThumbnailContainer } from '/components'
+import { useEffect, useState } from "react";
 
 export type Props = {
-	commissions: CommissionRecord[]
+	commissions: CommissionRecord[],
+	commissionCategories: CommissionCategoryRecord[]
 }
 
-export default function RegionHome({ commissions }: Props) {
+export default function RegionHome({ commissions, commissionCategories }: Props) {
+
+	const [catgegory, setCategory] = useState<CommissionCategoryRecord | undefined>()
 
 	return (
 		<>
 			<header>
 				<h1>Uppdragsarkiv<sup className="amount">19</sup></h1>
-				<nav className={styles.filter}>
-					<ul>
-						<li>Visa:</li>
-						<li>Alla</li>
-						<li>Skola</li>
-						<li>Offentlig</li>
-					</ul>
-					<div className={styles.background}></div>
-				</nav>
+				<FilterBar
+					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}
+					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}
+				/>
+
 			</header>
-			<div className={styles.container}>
-				{commissions.map(({ title, slug, image }, idx) =>
-					<Link className={styles.thumb} key={idx} href={`/anlita-oss/uppdrag/${slug}`}>
-						<DatoImage
-							data={image.responsiveImage}
-							className={styles.image}
-							fadeInDuration={0}
-						/>
-						<span class="mid">{title}</span>
-					</Link>
+			<ThumbnailContainer>
+				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, slug, image }, idx) =>
+					<Thumbnail
+						key={idx}
+						image={image}
+						title={title}
+						slug={`/anlita-oss/uppdrag/${slug}`}
+					/>
 				)}
-				<hr></hr>
-			</div>
+			</ThumbnailContainer>
 		</>
 	);
 }
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionsDocument] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionsDocument, AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 
 	return {
 		props,

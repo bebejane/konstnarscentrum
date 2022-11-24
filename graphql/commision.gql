@@ -18,3 +18,10 @@ query AllCommissionsMenu {
 		slug
 	}
 }
+
+query AllCommissionCategories {
+	commissionCategories: allCommissionCategories {
+		id
+		title
+	}
+}
