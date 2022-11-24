@@ -72,6 +72,7 @@ export default function Logo({ disabled }: Props) {
   useEffect(() => {
     setShowMenuMobile(false)
   }, [router, setShowMenuMobile])
+  //console.log(region);
 
   return (
     <div className={s.logo}>

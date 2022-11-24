@@ -1,4 +1,5 @@
 #import "./fragments/CommissionFragment.gql"
+#import "./fragments/CommissionFragmentLight.gql"
 
 query Commission($slug: String!) {
 	commission(filter: { slug: { eq: $slug } }) {
@@ -8,7 +9,7 @@ query Commission($slug: String!) {
 
 query AllCommissions {
 	commissions: allCommissions {
-		...CommissionFragment
+		...CommissionFragmentLight
 	}
 }
 

@@ -1,24 +1,35 @@
 .container {
-  > ul {
+  .intro {
+    margin-bottom: var(--small-space);
+  }
+
+  >ul {
     @include mq($from: tablet) {
       margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
       margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
     }
+
     padding: 0;
     list-style: none;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 
-    > li {
+    >li {
+      display: flex;
+      flex-direction: column;
+
       @include mq($from: tablet) {
         padding-right: var(--gutter);
         padding-left: var(--gutter);
       }
+
       border-right: 1px solid var(--beige-mid);
 
       @include mq($from: tablet) {
         flex: 0 0 50%;
+
+
         &:nth-child(even) {
           border-right: none;
         }
@@ -32,6 +43,33 @@
       button {
         margin-top: 1em;
         width: 100%;
+      }
+
+      .text {
+        flex: 1 1 auto;
+      }
+
+      >a>button {
+        width: 100%;
+      }
+
+    }
+
+    hr {
+      width: 100%;
+      flex: 1 1 100%;
+      background-color: var(--beige-mid);
+      margin-bottom: var(--small-space);
+      margin-top: var(--small-space);
+    }
+
+    @include mq($until: tablet) {
+      >li {
+        flex: 0 0 100%;
+      }
+
+      hr {
+        display: none;
       }
     }
   }

@@ -17,7 +17,6 @@
 
   &.show {
     transform: translateY(0%);
-    border-bottom: 1px solid red;
   }
 
   @include mq($until: tablet) {
@@ -26,12 +25,13 @@
 
   a {
     color: var(--black);
+
     &:hover {
       color: var(--beige-dark);
     }
   }
 
-  > ul {
+  >ul {
     position: relative;
     list-style: none;
     display: flex;
@@ -39,12 +39,13 @@
     width: 100%;
     padding-top: 1.7rem;
 
-    > li {
+    >li {
       flex: 0 0;
       margin-right: 1rem;
       white-space: pre;
       z-index: 100;
       cursor: pointer;
+
       &:hover {
         color: var(--beige-dark);
       }
@@ -85,7 +86,7 @@
       display: flex;
     }
 
-    > li {
+    >li {
       pointer-events: all;
     }
   }

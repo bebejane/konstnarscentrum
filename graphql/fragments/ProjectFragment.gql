@@ -1,7 +1,9 @@
+#import "./ImageMediumFragment.gql"
+
 fragment ProjectFragment on ProjectRecord {
 	title
 	image {
-		...ImageFragment
+		...ImageMediumFragment
 	}
 	url
 	text(markdown: false)

@@ -1,0 +1,14 @@
+#import "./ImageThumbnailFragment.gql"
+
+fragment CommissionFragmentLight on CommissionRecord {
+	id
+	title
+	slug
+	image {
+		...ImageThumbnailFragment
+	}
+	category {
+		id
+		title
+	}
+}

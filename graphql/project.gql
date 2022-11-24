@@ -6,3 +6,9 @@ query AllProjects {
 		...ProjectFragment
 	}
 }
+
+query ProjectsIntro {
+	introInitiative {
+		intro(markdown: false)
+	}
+}

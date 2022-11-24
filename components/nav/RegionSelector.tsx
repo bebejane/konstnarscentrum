@@ -4,21 +4,15 @@ import { regions } from "/lib/region";
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useStore from '/lib/store';
+import { useStore, shallow } from '/lib/store';
 
 const defaultRegion: Region = { id: 'riks', name: 'Riks', slug: '/', roleId: '', tokenId: '' }
 
 export default function RegionSelector({ }) {
 
   const router = useRouter()
-  const [selected, setSelected] = useState<Region>(defaultRegion)
-  const [region, setRegion] = useStore((state) => [state.region, state.setRegion])
+  const [region, setRegion] = useStore((state) => [state.region, state.setRegion], shallow)
   const [open, setOpen] = useState(false)
-
-  const handleClick = (e) => {
-    setRegion([...regions, defaultRegion].find(d => d.slug === e.target.dataset.slug))
-    setOpen(true)
-  }
 
   const createSlug = (regionSlug: string) => {
     if (regionSlug === '/') return '/'
@@ -30,7 +24,8 @@ export default function RegionSelector({ }) {
   useEffect(() => {
     const slug = router?.asPath.split('/')[1];
     setRegion(regions.find(d => d.slug === slug))
-  }, [router])
+    setOpen(false)
+  }, [router, setRegion])
 
   return (
     <div className={s.container}>
@@ -40,7 +35,7 @@ export default function RegionSelector({ }) {
       <ul className={cn(open && s.show)}>
         {[defaultRegion, ...regions].map((d, idx) =>
           <li key={idx} data-slug={d.slug} data-selected={region?.id === d.id}>
-            <Link href={createSlug(d.slug)} onClick={handleClick}>
+            <Link href={createSlug(d.slug)} onClick={() => setOpen(true)}>
               {d.name}
             </Link>
           </li>

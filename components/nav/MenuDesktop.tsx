@@ -17,7 +17,6 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const router = useRouter()
 	const [marginLeft, setMarginLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
-	const [region, setRegion] = useState<string | undefined>()
 	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition } = useScrollInfo()
 
