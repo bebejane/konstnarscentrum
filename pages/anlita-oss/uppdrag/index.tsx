@@ -4,6 +4,8 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllCommissionsDocument, CommissionDocument } from "/graphql";
 import Link from "next/link";
+import { Image as DatoImage } from 'react-datocms'
+
 
 export type Props = {
 	commissions: CommissionRecord[]
@@ -12,13 +14,32 @@ export type Props = {
 export default function DistrictHome({ commissions }: Props) {
 
 	return (
-		<div className={styles.container}>
-			{commissions.map(({ title, slug }, idx) =>
-				<Link key={idx} href={`/anlita-oss/uppdrag/${slug}`}>
-					{title}
-				</Link>
-			)}
-		</div>
+		<>
+			<header>
+				<h1>Uppdragsarkiv<sup className="amount">19</sup></h1>
+				<nav className={styles.filter}>
+					<ul>
+						<li>Alla</li>
+						<li>Skola</li>
+						<li>Offentlig</li>
+					</ul>
+					<div className={styles.background}></div>
+				</nav>
+			</header>
+			<div className={styles.container}>
+				{commissions.map(({ title, slug, image }, idx) =>
+					<Link className={styles.thumb} key={idx} href={`/anlita-oss/uppdrag/${slug}`}>
+						<DatoImage
+							data={image.responsiveImage}
+							className={styles.image}
+							fadeInDuration={0}
+						/>
+						<span class="mid">{title}</span>
+					</Link>
+				)}
+				<hr></hr>
+			</div>
+		</>
 	);
 }
 

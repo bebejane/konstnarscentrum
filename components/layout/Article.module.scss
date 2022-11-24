@@ -1,5 +1,5 @@
 .article {
-  >header {
+  > header {
     display: block;
     position: relative;
     padding-bottom: var(--small-space);
@@ -10,7 +10,6 @@
   }
 
   .image {
-
     margin-left: calc(-1 * var(--outer-margin));
     margin-right: calc(-1 * var(--outer-margin));
     width: auto !important;
@@ -22,6 +21,7 @@
       margin-right: var(--full-margin);
       width: auto !important;
       min-width: calc(100% + (2 * var(--full-margin)));
+      max-width: none !important;
     }
   }
 

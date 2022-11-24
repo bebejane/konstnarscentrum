@@ -1,4 +1,53 @@
-.container{
-  width: 100%;
-  padding:20px;
+.container {
+  width: calc(100% + (2 * var(--grid-unit)) + (2 * var(--gutter)));
+  margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
+  display: flex;
+  flex-wrap: wrap;
+
+  .thumb {
+    width: 33.33%;
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
+    border-right: 1px solid var(--beige-mid);
+
+    &:nth-child(3n) {
+      border-right: none;
+    }
+
+    .image {
+      margin-bottom: 0.5em;
+    }
+  }
+
+  hr {
+    margin-top: 2rem;
+    margin-left: var(--gutter);
+    margin-right: var(--gutter);
+  }
+}
+
+.filter {
+  position: relative;
+  padding-top: 1rem;
+  padding-bottom: 1.2rem;
+  margin-bottom: var(--small-space);
+  .background {
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    background-color: var(--beige-light);
+    margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    padding-left: 0 !important;
+
+    li {
+      padding-right: 1em;
+    }
+  }
 }

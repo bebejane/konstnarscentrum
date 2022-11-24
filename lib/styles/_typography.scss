@@ -41,11 +41,13 @@ h2 {
 .small,
 .small p,
 footer,
-footer nav {
+footer nav,
+figcaption {
   font-size: 0.75rem;
 }
 
-nav {
+nav,
+.mid {
   @include mq($from: tablet) {
     font-size: 0.9rem;
   }
@@ -66,4 +68,12 @@ article {
 
 button {
   font-family: "Jazz";
+}
+
+sup {
+  line-height: 0;
+  font-size: 0.4em;
+  vertical-align: super;
+  letter-spacing: 1px;
+  padding-left: 0.5em;
 }
