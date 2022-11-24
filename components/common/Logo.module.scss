@@ -37,4 +37,17 @@
   .space {
     visibility: hidden;
   }
+
+  .region {
+
+    margin-left: 2rem;
+    color: var(--white);
+    -webkit-text-stroke: 1px;
+    -webkit-text-stroke-color: var(--black);
+
+    @include mq($until: tablet) {
+      margin-left: 0.5em;
+    }
+  }
+
 }

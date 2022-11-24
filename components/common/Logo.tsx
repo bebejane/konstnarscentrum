@@ -15,9 +15,9 @@ export type Props = {
 
 export default function Logo({ disabled }: Props) {
 
-
   const router = useRouter()
-  const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
+
+  const [showMenuMobile, setShowMenuMobile, region] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.region])
   const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
@@ -79,12 +79,15 @@ export default function Logo({ disabled }: Props) {
         <Link href="/">
           {vertical.map((l, i) => <>{l}</>)}
         </Link>
-        {horizontal.length > 0 && <span className={s.space}>{letters[vertical.length]}</span>}
+        {horizontal.length > 0 &&
+          <span className={s.space}>{letters[vertical.length]}</span>
+        }
       </div>
       <div className={s.horizontal}>
         <Link href="/">
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
+        <span className={s.region}>{region?.name}</span>
       </div>
     </div>
   )

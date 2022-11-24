@@ -17,6 +17,7 @@
 
   &.show {
     transform: translateY(0%);
+    border-bottom: 1px solid red;
   }
 
   @include mq($until: tablet) {
