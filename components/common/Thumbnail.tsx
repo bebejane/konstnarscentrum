@@ -48,13 +48,15 @@ export default function Thumbnail({ image, slug, title }: Props) {
       onMouseOver={() => !isMobile && setHover(true)}
       onMouseLeave={() => !isMobile && setHover(false)}
     >
-      <Image
-        data={image.responsiveImage}
-        className={s.image}
-        pictureClassName={cn(s.picture, hover && s.hover)}
-        pictureStyle={{ left: hover ? '1.5rem' : 0 }}
-        fadeInDuration={0}
-      />
+      {image &&
+        <Image
+          data={image.responsiveImage}
+          className={s.image}
+          pictureClassName={cn(s.picture, hover && s.hover)}
+          pictureStyle={{ left: hover ? '1.5rem' : 0 }}
+          fadeInDuration={0}
+        />
+      }
       <span className={cn('mid', s.title, s.vertical)}>
         {vertical.map(c => c)}
       </span>

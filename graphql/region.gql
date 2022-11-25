@@ -1,5 +1,6 @@
 #import "./fragments/ImagaFragment.gql"
 #import "./fragments/CommissionsFragment.gql"
+#import "./fragments/MemberLightFragment.gql"
 
 query Region($regionId: ItemId!) {
 	region(filter: { id: { eq: $regionId } }) {
@@ -7,6 +8,8 @@ query Region($regionId: ItemId!) {
 		name
 		slug
 		gallery {
+			id
+			headline
 			image {
 				...ImageFragment
 			}
@@ -87,6 +90,11 @@ query Region($regionId: ItemId!) {
 			... on SelectedCommissionRecord {
 				commissions {
 					...CommissionFragment
+				}
+			}
+			... on SelectedMemberRecord {
+				selectedMembers {
+					...MemberLightFragment
 				}
 			}
 		}

@@ -1,15 +1,15 @@
 #import "./fragment/MemberFragment.gql"
-#import "./fragment/MemberFragmentLight.gql"
+#import "./fragment/MemberLightFragment.gql"
 #import "./fragment/MemberNewsLightFragment.gql"
 
 query AllMembers {
 	members: allMembers {
-		...MemberFragmentLight
+		...MemberLightFragment
 	}
 }
 query AllMembersWithPortfolio($regionId: ItemId) {
 	members: allMembers(filter: { image: { exists: true }, region: { eq: $regionId } }) {
-		...MemberFragmentLight
+		...MemberLightFragment
 	}
 }
 

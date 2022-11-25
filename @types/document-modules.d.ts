@@ -61,10 +61,10 @@ declare module '*/CommissionFragment.gql' {
 }
     
 
-declare module '*/CommissionFragmentLight.gql' {
+declare module '*/CommissionLightFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const CommissionFragmentLight: DocumentNode;
+  export const CommissionLightFragment: DocumentNode;
 
   export default defaultDocument;
 }
@@ -115,10 +115,10 @@ declare module '*/MemberFragment.gql' {
 }
     
 
-declare module '*/MemberFragmentLight.gql' {
+declare module '*/MemberLightFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const MemberFragmentLight: DocumentNode;
+  export const MemberLightFragment: DocumentNode;
 
   export default defaultDocument;
 }
