@@ -31,12 +31,10 @@
     overflow: hidden;
     max-width: 100% !important;
     transition: left .2s ease-in-out;
-    transition-delay: 0s;
 
     @include mq($from: tablet) {
       &:hover {
         left: 1.5rem;
-        transition-delay: 0.3s;
       }
     }
   }

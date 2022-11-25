@@ -4,10 +4,13 @@ import Link from 'next/link'
 import type { MenuItem } from '/lib/menu'
 import Logo from '/public/images/logo-round.svg'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
+import { useInView } from 'react-intersection-observer'
 
 export type FooterProps = { menu: MenuItem[], footer: FooterRecord }
 
 export default function Footer({ menu, footer }: FooterProps) {
+
+	const { inView, ref } = useInView()
 
 	return (
 		<>
@@ -24,7 +27,7 @@ export default function Footer({ menu, footer }: FooterProps) {
 												<li><strong>{item.label}</strong></li>
 												{item.sub?.map((subItem, subidx) =>
 													<li key={subidx}>
-														<Link scroll={false} href={subItem.slug}>
+														<Link scroll={true} href={subItem.slug}>
 															{subItem.label}
 														</Link>
 													</li>
@@ -58,7 +61,9 @@ export default function Footer({ menu, footer }: FooterProps) {
 				<section className={s.support}>
 					Med stöd av
 					<div></div>
-					<div><Logo /></div>
+					<div className={cn(s.logo, inView && s.inview)} ref={ref}>
+						<Logo />
+					</div>
 				</section>
 			</footer>
 		</>

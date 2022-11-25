@@ -1,4 +1,18 @@
-.container{
+.container {
   width: 100%;
-  padding:20px;
+
+  form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    //margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
+    //margin-right: calc(-1 * var(--outer-margin));
+    //width: 100vw;
+    background-color: var(--beige-light);
+
+    input,
+    select {
+      flex: 1 1 auto;
+    }
+  }
 }

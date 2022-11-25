@@ -105,6 +105,24 @@ declare module '*/ImageThumbnailFragment.gql' {
 }
     
 
+declare module '*/MemberFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const MemberFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/MemberFragmentLight.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const MemberFragmentLight: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/NewsFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -118,6 +136,15 @@ declare module '*/ProjectFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ProjectFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/RegionFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const RegionFragment: DocumentNode;
 
   export default defaultDocument;
 }
@@ -154,8 +181,11 @@ declare module '*/member.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AllMembers: DocumentNode;
+export const AllMembersWithPortfolio: DocumentNode;
 export const Member: DocumentNode;
+export const MemberBySlug: DocumentNode;
 export const MemberByPasswordToken: DocumentNode;
+export const AllMemberCategories: DocumentNode;
 
   export default defaultDocument;
 }

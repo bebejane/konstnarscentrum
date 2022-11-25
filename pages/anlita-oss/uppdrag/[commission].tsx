@@ -3,13 +3,22 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { CommissionDocument, AllCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
-import { Article, Block } from "/components";
+import { Article, Block, MetaSection } from "/components";
 
 type CommissionProps = {
 	commission: CommissionRecord
 }
 
-export default function Commission({ commission: { title, image, intro, city, year, artist, consultant, content } }: CommissionProps) {
+export default function Commission({ commission: {
+	title,
+	image,
+	intro,
+	city,
+	year,
+	artist,
+	consultant,
+	content
+} }: CommissionProps) {
 
 	return (
 		<>
@@ -18,14 +27,14 @@ export default function Commission({ commission: { title, image, intro, city, ye
 				image={image}
 				text={intro}
 			>
-				<section className={s.meta}>
-					<ul className="small">
-						<li><span>Plats:</span>{city}</li>
-						<li><span>År:</span>{year}</li>
-						<li><span>Konstnär:</span>{artist}</li>
-						<li><span>Konsulent:</span>{consultant}</li>
-					</ul>
-				</section>
+				<MetaSection
+					items={[
+						{ title: 'Plats', value: city },
+						{ title: 'År', value: year },
+						{ title: 'Konstnär', value: artist },
+						{ title: 'Konsulent', value: consultant }
+					]}
+				/>
 				<section className={s.documentation}>
 					<h1 className="noPadding">Dokumentation</h1>
 					{content.map((block, idx) =>

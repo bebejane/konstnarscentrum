@@ -1,4 +1,5 @@
 #import "./ImageFragment.gql"
+#import "./RegionFragment.gql"
 
 fragment NewsFragment on NewsRecord {
 	id
@@ -11,8 +12,6 @@ fragment NewsFragment on NewsRecord {
 		...ImageFragment
 	}
 	region {
-		id
-		name
-		slug
+		...RegionFragment
 	}
 }

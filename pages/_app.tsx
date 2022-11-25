@@ -1,8 +1,9 @@
 import '/lib/styles/index.scss'
 import { Layout } from '/components';
 import { SessionProvider } from "next-auth/react"
+import { Router } from 'next/router';
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps, router }) {
 
   const { menu, footer, session } = pageProps;
 

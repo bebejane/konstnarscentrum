@@ -1,26 +1,39 @@
+#import "./fragment/MemberFragment.gql"
+#import "./fragment/MemberFragmentLight.gql"
+
 query AllMembers {
-  members: allMembers {
-    id
-    firstName
-    lastName
-    email
-    _status
-    _firstPublishedAt
-  }
+	members: allMembers {
+		...MemberFragmentLight
+	}
 }
-query Member($email: String!){
-  member(filter: {email: {eq: $email}}){
-    id
-    email
-    firstName
-    lastName
-  }
+query AllMembersWithPortfolio {
+	members: allMembers(filter: { image: { exists: true } }) {
+		...MemberFragmentLight
+	}
 }
-query MemberByPasswordToken($token: String!){
-  member(filter: {resettoken: {eq: $token}}){
-    id
-    email
-    firstName
-    lastName
-  }
+query Member($email: String!) {
+	member(filter: { email: { eq: $email } }) {
+		...MemberFragment
+	}
+}
+query MemberBySlug($slug: String!) {
+	member(filter: { slug: { eq: $slug } }) {
+		...MemberFragment
+	}
+}
+
+query MemberByPasswordToken($token: String!) {
+	member(filter: { resettoken: { eq: $token } }) {
+		id
+		email
+		firstName
+		lastName
+	}
+}
+
+query AllMemberCategories {
+	memberCategories: allMemberCategories {
+		id
+		categoryType
+	}
 }

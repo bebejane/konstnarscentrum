@@ -1,0 +1,17 @@
+#import "./RegionFragment.gql"
+
+fragment MemberFragmentLight on MemberRecord {
+	id
+	firstName
+	lastName
+	email
+	region {
+		...RegionFragment
+	}
+	image {
+		...ImageThumbnailFragment
+	}
+	slug
+	_status
+	_firstPublishedAt
+}

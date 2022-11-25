@@ -1,27 +1,3 @@
-.meta {
-  border: 1px solid var(--beige-mid);
-  padding: 0.6em;
-  padding-left: 1em;
-  padding-right: 1em;
-  margin-bottom: var(--space);
-  ul {
-    columns: 2;
-    list-style: none;
-    padding-left: 0;
-    li {
-      line-height: 2;
-      span {
-        color: var(--beige-dark);
-        padding-right: 0.5em;
-        @include mq($from: tablet) {
-          width: 30%;
-        }
-        display: inline-block;
-      }
-    }
-  }
-}
-
 .related {
   padding-top: var(--space);
   padding-bottom: var(--space);
@@ -43,6 +19,7 @@
     @include mq($from: tablet) {
       margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
     }
+
     height: 100%;
     background: var(--beige-light);
 
