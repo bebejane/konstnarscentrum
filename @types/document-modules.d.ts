@@ -182,6 +182,7 @@ declare module '*/member.gql' {
   const defaultDocument: DocumentNode;
   export const AllMembers: DocumentNode;
 export const AllMembersWithPortfolio: DocumentNode;
+export const AllMembersCities: DocumentNode;
 export const Member: DocumentNode;
 export const MemberBySlug: DocumentNode;
 export const MemberByPasswordToken: DocumentNode;
@@ -212,10 +213,10 @@ export const ProjectsIntro: DocumentNode;
 }
     
 
-declare module '*/start.gql' {
+declare module '*/region.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const Start: DocumentNode;
+  export const Region: DocumentNode;
 
   export default defaultDocument;
 }

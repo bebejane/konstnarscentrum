@@ -2,4 +2,5 @@ fragment RegionFragment on RegionRecord {
 	id
 	name
 	slug
+	global
 }

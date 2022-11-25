@@ -1,6 +1,0 @@
-query Start {
-	start {
-		headline
-		intro
-	}
-}

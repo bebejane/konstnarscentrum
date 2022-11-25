@@ -1,0 +1,47 @@
+query Region($slug: String!) {
+	region(filter: { slug: { eq: $slug } }) {
+		id
+		name
+		slug
+		sections {
+			... on FindArtistRecord {
+				id
+			}
+			... on ImageShortcutRecord {
+				id
+				headline
+				link {
+					... on CommissionRecord {
+						id
+					}
+					... on ForArtistRecord {
+						id
+					}
+					... on MembersNewsRecord {
+						id
+					}
+					... on NewsRecord {
+						id
+					}
+				}
+				text
+			}
+			... on LatestNewsRecord {
+				id
+				description
+			}
+			... on LatestMemberNewsRecord {
+				id
+			}
+			... on TextRecord {
+				id
+				url
+				headline
+				text(markdown: false)
+			}
+			... on LatestCommissionRecord {
+				id
+			}
+		}
+	}
+}

@@ -6,11 +6,18 @@ query AllMembers {
 		...MemberFragmentLight
 	}
 }
-query AllMembersWithPortfolio {
-	members: allMembers(filter: { image: { exists: true } }) {
+query AllMembersWithPortfolio($regionId: ItemId) {
+	members: allMembers(filter: { image: { exists: true }, region: { eq: $regionId } }) {
 		...MemberFragmentLight
 	}
 }
+
+query AllMembersCities {
+	cities: allMembers(filter: { image: { exists: true } }) {
+		name: city
+	}
+}
+
 query Member($email: String!) {
 	member(filter: { email: { eq: $email } }) {
 		...MemberFragment
