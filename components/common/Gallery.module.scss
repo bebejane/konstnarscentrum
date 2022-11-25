@@ -1,0 +1,41 @@
+.gallery {
+  margin-right: var(--full-margin);
+  margin-left: var(--full-margin);
+  max-width: none;
+
+
+  >ul {
+
+    list-style: none;
+    position: relative;
+    display: flex;
+    min-height: calc(100vh - var(--navbar-height) - var(--space));
+    max-height: calc(100vh - var(--navbar-height) - var(--space));
+    background-color: pink;
+
+    li {
+
+
+      a {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        .image {
+          width: 100%;
+          height: 100%;
+        }
+
+        header {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          color: var(--white);
+        }
+      }
+    }
+  }
+}

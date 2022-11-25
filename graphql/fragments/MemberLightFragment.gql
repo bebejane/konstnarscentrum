@@ -1,6 +1,6 @@
 #import "./RegionFragment.gql"
 
-fragment MemberFragmentLight on MemberRecord {
+fragment MemberLightFragment on MemberRecord {
 	id
 	firstName
 	lastName

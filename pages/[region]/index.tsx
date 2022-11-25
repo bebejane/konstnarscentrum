@@ -4,20 +4,20 @@ import { GetStaticProps } from "next";
 import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
-import { Block } from "/components";
+import { Block, Gallery } from "/components";
 import { Image } from 'react-datocms'
+
 
 export type Props = {
 	regionStart: RegionRecord
 }
 
-export default function RegionHome({ regionStart }) {
+export default function RegionHome({ regionStart }: Props) {
 
 	return (
 		<div className={s.container}>
 			<div className={s.gallery}>
-
-
+				<Gallery slides={regionStart.gallery} />
 			</div>
 			{regionStart.sections.map((block, idx) =>
 				<Block key={idx} data={block} />
