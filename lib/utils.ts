@@ -31,7 +31,7 @@ export const recordToSlug = (record: any): string => {
   switch (record?.__typename) {
     case 'CommissionRecord':
       return '/'
-    case 'MembersNewsRecord':
+    case 'MemberNewsRecord':
       return '/'
     case 'NewsRecord':
       return '/'

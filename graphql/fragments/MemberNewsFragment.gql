@@ -1,0 +1,6 @@
+#import "./ImageFragment.gql"
+#import "./VideoFragment.gql"
+
+fragment MemberNewsFragment on MemberNewsRecord {
+	id
+}
