@@ -1,8 +1,8 @@
 import s from './Text.module.scss'
-import cn from 'classnames'
 import React from 'react'
 import Link from 'next/link';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
+
 export type TextBlockProps = {
   data: TextRecord
 }
