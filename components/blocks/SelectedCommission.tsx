@@ -3,6 +3,7 @@ import cn from 'classnames'
 import React from 'react'
 import ThumbnailContainer from '/components/common/ThumbnailContainer'
 import Thumbnail from '/components/common/Thumbnail'
+import SectionHeader from '../layout/SectionHeader'
 
 export type SelectedCommissionBlockProps = {
   data: SelectedCommissionRecord & {
@@ -14,10 +15,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
 
   return (
     <section className={s.container}>
-      <div className={s.header}>
-        <h2>Utvalda uppdrag</h2>
-        <div>Visa alla</div>
-      </div>
+      <SectionHeader title="Utvalda uppdrag" slug={"/anlita-oss/uppdrag"} />
       <ThumbnailContainer>
         {commissions.map(({ title, image, slug }, idx) =>
           <Thumbnail

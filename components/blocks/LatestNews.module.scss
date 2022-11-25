@@ -1,8 +1,8 @@
 .container {
   margin-top: var(--space);
   @include mq($from: tablet) {
-    margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
-    margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
+    margin-left: calc(-1 * var(--grid-unit));
+    margin-right: calc(-1 * var(--grid-unit));
   }
 
   ul {
@@ -13,11 +13,14 @@
 
     li {
       width: 50%;
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
 
       &:first-of-type {
+        padding-right: var(--gutter);
         border-right: 1px solid var(--beige-mid);
+      }
+
+      &:last-of-type {
+        padding-left: var(--gutter);
       }
     }
   }

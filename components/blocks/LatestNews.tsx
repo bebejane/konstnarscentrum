@@ -3,6 +3,7 @@ import cn from 'classnames'
 import React from 'react'
 import format from 'date-fns/format'
 import Link from 'next/link'
+import SectionHeader from '../layout/SectionHeader'
 
 export type LatestNewsBlockProps = {
   data: LatestNewsRecord & {
@@ -15,7 +16,7 @@ export default function LatestNews({ data: { news } }: LatestNewsBlockProps) {
 
   return (
     <section className={s.container}>
-      <h2>Nyheter</h2>
+      <SectionHeader title="Nyheter" slug={"/anlita-oss/uppdrag"} />
       <ul>
         {news.map(({ id, region, intro, slug, title, createdAt }, idx) =>
           <li key={idx}>
