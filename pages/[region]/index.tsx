@@ -5,19 +5,20 @@ import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
 import { Block } from "/components";
+import { Image } from 'react-datocms'
 
 export type Props = {
 	regionStart: RegionRecord
 }
 
-
 export default function RegionHome({ regionStart }) {
-
-	console.log(regionStart);
 
 	return (
 		<div className={s.container}>
-			<h1>{regionStart.name}</h1>
+			<div className={s.gallery}>
+
+
+			</div>
 			{regionStart.sections.map((block, idx) =>
 				<Block key={idx} data={block} />
 			)}

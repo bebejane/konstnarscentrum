@@ -6,10 +6,47 @@ query Region($regionId: ItemId!) {
 		id
 		name
 		slug
-		sections {
-			... on FindArtistRecord {
-				id
+		gallery {
+			image {
+				...ImageFragment
 			}
+			link {
+				__typename
+				... on CommissionRecord {
+					id
+					title
+					slug
+					image {
+						...ImageFragment
+					}
+				}
+				... on ForArtistRecord {
+					id
+					title
+					slug
+					image {
+						...ImageFragment
+					}
+				}
+				... on MemberNewsRecord {
+					id
+					title
+					slug
+					image {
+						...ImageFragment
+					}
+				}
+				... on NewsRecord {
+					id
+					title
+					slug
+					image {
+						...ImageFragment
+					}
+				}
+			}
+		}
+		sections {
 			... on ImageShortcutRecord {
 				id
 				headline
