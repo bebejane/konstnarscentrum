@@ -28,7 +28,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
           />
         )}
       </ThumbnailContainer>
-
+      <div className={s.background}></div>
     </section>
   )
 }

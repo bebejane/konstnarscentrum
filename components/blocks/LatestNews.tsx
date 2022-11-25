@@ -20,9 +20,9 @@ export default function LatestNews({ data: { news } }: LatestNewsBlockProps) {
         {news.map(({ id, region, intro, slug, title, createdAt }, idx) =>
           <li key={idx}>
             <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-            <h2>{title}</h2>
-            <p>{intro}</p>
-            <Link href={'/'}>Läs mer</Link>
+            <h4>{title}</h4>
+            <p className="mid">{intro}</p>
+            <Link className="small" href={'/'}>Läs mer</Link>
           </li>
         )}
 

@@ -46,9 +46,15 @@ p {
 }
 
 p.intro,
-.intro p {
+.intro p,
+h4 {
   font-size: 1.15rem;
   padding-bottom: 0;
+  font-weight: normal;
+}
+
+h4 {
+  padding-bottom: 1em;
 }
 
 .small,

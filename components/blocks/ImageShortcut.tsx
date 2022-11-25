@@ -23,7 +23,7 @@ export default function ImageShortcut({ data: { headline, image, link, text } }:
         }
         <figcaption>
           <h2>{headline}</h2>
-          {text}<br />
+          <p className="intro">{text}</p><br />
           <Link href={recordToSlug(link)}>Läs mer</Link>
         </figcaption>
       </figure>
