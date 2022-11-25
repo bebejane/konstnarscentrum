@@ -1,6 +1,6 @@
 #import "./fragment/MemberFragment.gql"
 #import "./fragment/MemberFragmentLight.gql"
-#import "./fragment/MemberNewsFragment.gql"
+#import "./fragment/MemberNewsLightFragment.gql"
 
 query AllMembers {
 	members: allMembers {
@@ -48,6 +48,17 @@ query AllMemberCategories {
 
 query AllMemberNews {
 	memberNews: allMemberNews {
-		...MemberNewsFragment
+		...MemberNewsLightFragment
+	}
+}
+
+query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId!) {
+	memberNews: allMemberNews(
+		filter: { region: { eq: $regionId } }
+		orderBy: [createdAt_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...MemberNewsLightFragment
 	}
 }

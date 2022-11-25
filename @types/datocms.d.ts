@@ -3084,6 +3084,7 @@ type MemberNewsModelFilter = {
   image?: InputMaybe<FileFilter>;
   intro?: InputMaybe<TextFilter>;
   location?: InputMaybe<StringFilter>;
+  region?: InputMaybe<LinkFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
@@ -3142,6 +3143,7 @@ type MemberNewsRecord = RecordInterface & {
   image?: Maybe<FileField>;
   intro?: Maybe<Scalars['String']>;
   location?: Maybe<Scalars['String']>;
+  region: RegionRecord;
   slug?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
@@ -4930,7 +4932,9 @@ type MemberFragment = { __typename?: 'MemberRecord', id: any, firstName: string,
 
 type MemberFragmentLightFragment = { __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null };
 
-type MemberNewsFragment = { __typename?: 'MemberNewsRecord', id: any };
+type MemberNewsFragment = { __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, content?: { __typename?: 'MemberNewsModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text?: string | null, url?: string | null } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } };
+
+type MemberNewsLightFragment = { __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } };
 
 type NewsFragment = { __typename?: 'NewsRecord', id: any, title?: string | null, content?: string | null, slug?: string | null, intro?: string | null, createdAt: any, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } };
 
@@ -4993,7 +4997,16 @@ type AllMemberCategoriesQuery = { __typename?: 'Query', memberCategories: Array<
 type AllMemberNewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any }> };
+type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+
+type LatestMemberNewsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  regionId: Scalars['ItemId'];
+}>;
+
+
+type LatestMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
 
 type AllNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;

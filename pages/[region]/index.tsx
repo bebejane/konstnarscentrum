@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { RegionDocument, LatestNewsDocument } from "/graphql";
+import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
 import { Block } from "/components";
 
 export type Props = {
@@ -36,8 +36,15 @@ export async function getStaticPaths(context) {
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 
-	const { region: regionStart }: { region: RegionRecord } = await apiQuery(RegionDocument, { variables: { regionId: props.region?.id } });
-	const { news } = await apiQuery(LatestNewsDocument, { variables: { regionId: props.region?.id } });
+	const { region: regionStart, news, memberNews }: {
+		region: RegionRecord, news: NewsRecord[], memberNews: MemberNewsRecord[]
+	} = await apiQuery([RegionDocument, LatestNewsDocument, LatestMemberNewsDocument], {
+		variables: [
+			{ regionId: props.region?.id },
+			{ regionId: props.region?.id },
+			{ regionId: props.region?.id }
+		]
+	});
 
 	return {
 		props: {
@@ -46,7 +53,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 				...regionStart,
 				sections: regionStart.sections.map((section) => ({
 					...section,
-					news: section.__typename === 'LatestNewsRecord' ? news : null
+					news: section.__typename === 'LatestNewsRecord' ? news : null,
+					memberNews: section.__typename === 'LatestMemberNewsRecord' ? memberNews : null
 				}))
 			}
 		},

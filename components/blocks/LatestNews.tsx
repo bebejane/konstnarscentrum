@@ -25,7 +25,6 @@ export default function LatestNews({ data: { news } }: LatestNewsBlockProps) {
             <Link className="small" href={'/'}>Läs mer</Link>
           </li>
         )}
-
       </ul>
     </section>
   )
