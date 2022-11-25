@@ -133,6 +133,15 @@ declare module '*/MemberNewsFragment.gql' {
 }
     
 
+declare module '*/MemberNewsLightFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const MemberNewsLightFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/NewsFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -198,6 +207,7 @@ export const MemberBySlug: DocumentNode;
 export const MemberByPasswordToken: DocumentNode;
 export const AllMemberCategories: DocumentNode;
 export const AllMemberNews: DocumentNode;
+export const LatestMemberNews: DocumentNode;
 
   export default defaultDocument;
 }

@@ -1,6 +1,58 @@
 #import "./ImageFragment.gql"
 #import "./VideoFragment.gql"
+#import "./RegionFragment.gql"
 
 fragment MemberNewsFragment on MemberNewsRecord {
 	id
+	title
+	image {
+		...ImageFragment
+	}
+	intro(markdown: false)
+	category {
+		id
+		category
+	}
+	date
+	location
+	slug
+	content {
+		value
+		blocks {
+			__typename
+			... on ImageRecord {
+				__typename
+				id
+				image {
+					...ImageFragment
+				}
+			}
+			... on ButtonRecord {
+				__typename
+				id
+				text
+				url
+			}
+			... on VideoRecord {
+				__typename
+				id
+				video {
+					height
+					width
+					title
+					provider
+					providerUid
+					thumbnailUrl
+					url
+				}
+			}
+			... on RecordInterface {
+				__typename
+				id
+			}
+		}
+	}
+	region {
+		...RegionFragment
+	}
 }

@@ -1,0 +1,22 @@
+#import "./ImageFragment.gql"
+#import "./VideoFragment.gql"
+#import "./RegionFragment.gql"
+
+fragment MemberNewsLightFragment on MemberNewsRecord {
+	id
+	title
+	image {
+		...ImageFragment
+	}
+	intro(markdown: false)
+	category {
+		id
+		category
+	}
+	date
+	location
+	slug
+	region {
+		...RegionFragment
+	}
+}
