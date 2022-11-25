@@ -4199,7 +4199,6 @@ type SelectedArtistRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
-  members: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
 

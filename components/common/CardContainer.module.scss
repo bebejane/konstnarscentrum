@@ -11,6 +11,25 @@
     margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
   }
 
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+
+  li {
+    width: 50%;
+
+    &:first-of-type {
+      padding-right: var(--gutter);
+      padding-left: var(--gutter);
+      border-right: 1px solid var(--beige-mid);
+    }
+
+    &:last-of-type {
+      padding-left: var(--gutter);
+    }
+  }
+
   hr {
     margin-top: 2rem;
     margin-bottom: 2rem;

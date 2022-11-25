@@ -1,6 +1,6 @@
 import s from './LatestMemberNews.module.scss'
 import React from 'react'
-import { CardContainer, NewsCard } from '/components'
+import { CardContainer, NewsCard, SectionHeader } from '/components'
 import format from 'date-fns/format'
 
 export type LatestMemberBlockProps = {
@@ -13,6 +13,7 @@ export default function LatestMemberNews({ data: { memberNews } }: LatestMemberB
 
   return (
     <section className={s.container}>
+      <SectionHeader title="Aktuellt för medlemmar" slug={"/anlita-oss/uppdrag"} />
       <CardContainer>
         {memberNews.map(({ date, title, intro, slug, region, image }, idx) =>
           <NewsCard

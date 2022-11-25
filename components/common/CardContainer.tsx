@@ -11,7 +11,7 @@ export default function CardContainer({ children }: Props) {
   const cards = chunkArray(Array.isArray(children) ? children : [children], isMobile ? 2 : 3) as [React.ReactNode[]]
 
   return (
-    <div className={s.container}>
+    <ul className={s.container}>
       {cards.map((row, idx) => {
         return (
           <>
@@ -20,6 +20,6 @@ export default function CardContainer({ children }: Props) {
           </>
         )
       })}
-    </div>
+    </ul>
   )
 }

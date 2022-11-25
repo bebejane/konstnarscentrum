@@ -17,14 +17,14 @@ export type NewsCardProps = {
 export default function NewsCard({ title, subtitle, text, slug, image, regionName }: NewsCardProps) {
 
   return (
-    <div className={s.card}>
+    <li className={s.card}>
       {image &&
         <Image className={s.image} data={image.responsiveImage} />
       }
       <h5>{subtitle}</h5>
-      <h2>{title}</h2>
+      <h4>{title}</h4>
       <p className="mid">{text}</p>
-      <Link href={slug}>Läs mer</Link>
-    </div>
+      <Link className="small" href={slug}>Läs mer</Link>
+    </li>
   )
 }

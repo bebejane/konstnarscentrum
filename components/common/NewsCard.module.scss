@@ -1,4 +1,7 @@
 .card {
   display: flex;
   flex-direction: column;
+  .image {
+    margin-bottom: 1rem;
+  }
 }
