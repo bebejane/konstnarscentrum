@@ -8,45 +8,29 @@ export type MenuItem = {
   index?: boolean
   label: string,
   slug?: string,
+  regional?: boolean,
   sub?: MenuItem[]
 }
 
 const base: Menu = [
-  {
-    type: 'about', label: 'Om', sub: []
-  },
+  { type: 'about', label: 'Om' },
   {
     type: 'consult', label: 'Anlita oss', sub: [
-      { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar' },
-      { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag' }
+      { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar', regional: true },
+      { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag', regional: true }
     ]
   },
   {
     type: 'artist', label: 'För konstnärer', sub: [
       { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
       { type: 'artist', label: 'Logga in', slug: '/konstnar/logga-in' },
-      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt' },
+      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true },
       { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss' }
     ]
   },
-  {
-    type: 'initiative', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [
-      { type: 'initiative', label: 'Konstdepartementet', slug: '/initiativ/konstdepartementet' },
-      { type: 'initiative', label: 'Galleri KC', slug: '/initiativ/galleri-kc' },
-      { type: 'initiative', label: 'BRAK', slug: '/initiativ/brak' },
-      { type: 'initiative', label: 'X - sites', slug: '/initiativ/x-sites' },
-      { type: 'initiative', label: 'Plattform Syd', slug: '/initiativ/plattform-syd' }
-    ]
-  },
-  {
-    type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, sub: []
-  },
-  {
-    type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, sub: [
-      { type: 'contact', label: 'Förbundet', slug: '/kontakt/forbundet' },
-      { type: 'contact', label: 'Våra regioner', slug: '/kontakt/regioner' }
-    ]
-  },
+  { type: 'initiative', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [] },
+  { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
+  { type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, regional: true, sub: [] },
 ]
 
 export const buildMenu = async () => {

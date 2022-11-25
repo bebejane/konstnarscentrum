@@ -3,14 +3,14 @@ import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
 
-export default function Video({ data: { video: { provider, providerUid, title, url, thumbnailUrl }}}) {
+export default function Video({ data: { video: { provider, providerUid, title, url, thumbnailUrl } } }) {
 
 	const ref = useRef()
 	const [height, setHeight] = useState(360);
 	const { innerWidth } = useWindowSize()
 
-	const vimeoId = provider === 'vimeo' && url.indexOf('/') > -1 ? url.substring(url.lastIndexOf('/')+1) : undefined
-	
+	const vimeoId = provider === 'vimeo' && url.indexOf('/') > -1 ? url.substring(url.lastIndexOf('/') + 1) : undefined
+
 	const video = provider === 'youtube' ?
 		<iframe
 			ref={ref}
@@ -43,7 +43,7 @@ export default function Video({ data: { video: { provider, providerUid, title, u
 			<section className={styles.video}>
 				{video}
 			</section>
-		:
+			:
 			<span>Video {provider} not supported!</span>
 	)
 }

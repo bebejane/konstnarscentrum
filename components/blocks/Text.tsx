@@ -1,36 +1,18 @@
-import styles from './Text.module.scss'
-import React from 'react'
+import s from './Text.module.scss'
 import cn from 'classnames'
+import React from 'react'
 import Link from 'next/link';
-import { StructuredText } from 'react-datocms';
-import type { StructuredText as StructuredTextType } from 'datocms-structured-text-utils';
 
+export type LatestMemberBlockProps = {
+  data: LatestMemberNewsRecord
+}
 
-export default function Text({ data: { text }}) {
-  
-	return (
-		<div className={cn(styles.text)}>
-			<StructuredText 
-        data={text}
-        renderInlineRecord={({ record }) => {
-          switch (record.__typename) {
-            default:
-              return null;
-          }
-        }}
-        renderLinkToRecord={({ record, children, transformedMeta }) => {
-          switch (record.__typename) {
-            default:
-              return null;
-          }
-        }}
-        renderText={(text)=>{
-          // Replace nbsp
-          return text?.replace(/\s/g, ' ');
-        }}
-			/>
-			
-		</div>
+export default function Text({ data: { text } }) {
 
-	)
+  return (
+    <div className={s.text}>
+
+    </div>
+
+  )
 }

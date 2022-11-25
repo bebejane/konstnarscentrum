@@ -22,7 +22,6 @@
     "tsconfig.json": true,
     "vercel.json": true,
     "lib/auth": true,
-    "lib/context": true,
     "lib/controllers": true,
     "lib/emails": true,
     "lib/scripts": true,

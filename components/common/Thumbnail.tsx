@@ -1,10 +1,9 @@
 import s from './Thumbnail.module.scss'
 import cn from 'classnames'
-import Link from 'next/link'
+import { RegionLink } from '/components'
 import { Image } from 'react-datocms'
 import { useEffect, useState, useRef } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
-import { breakpoints } from '/lib/utils'
+import useDevice from '/lib/hooks/useDevice'
 
 export type Props = {
   image: FileField,
@@ -19,7 +18,7 @@ export default function Thumbnail({ image, slug, title }: Props) {
 
   const [hover, setHover] = useState<undefined | boolean>();
   const [ratio, setRatio] = useState<number>(0)
-  const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
+  const { isMobile } = useDevice()
   const horizontal = title.split('').slice((title.length * ratio))
   const vertical = title.split('').slice(title.length - (title.length * ratio))
   const more = readMore.split('').slice(readMore.length - (readMore.length * ratio))
@@ -43,7 +42,7 @@ export default function Thumbnail({ image, slug, title }: Props) {
 
 
   return (
-    <Link
+    <RegionLink
       className={s.thumbnail}
       href={slug}
       onMouseOver={() => !isMobile && setHover(true)}
@@ -65,6 +64,6 @@ export default function Thumbnail({ image, slug, title }: Props) {
       <span className={cn('mid', s.more, hover && s.hover)}>
         {more.map(c => c)}
       </span>
-    </Link>
+    </RegionLink>
   )
 }

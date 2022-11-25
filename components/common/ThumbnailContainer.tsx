@@ -1,6 +1,6 @@
 import s from './ThumbnailContainer.module.scss'
-import { chunkArray, breakpoints } from '/lib/utils'
-import { useMediaQuery } from 'usehooks-ts'
+import { chunkArray } from '/lib/utils'
+import useDevice from '/lib/hooks/useDevice'
 
 
 export type Props = {
@@ -8,7 +8,7 @@ export type Props = {
 }
 
 export default function ThumbnailContainer({ children }: Props) {
-  const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
+  const { isMobile } = useDevice()
   const thumbs = chunkArray(Array.isArray(children) ? children : [children], isMobile ? 2 : 3) as [React.ReactNode[]]
 
   return (

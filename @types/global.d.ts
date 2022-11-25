@@ -3,5 +3,6 @@ type Region = {
   roleId: string,
   tokenId: string,
   name: string,
-  slug: string
+  slug: string,
+  global: boolean
 }

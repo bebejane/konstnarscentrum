@@ -1,11 +1,12 @@
 import s from './Logo.module.scss'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
-import { isServer, breakpoints } from '/lib/utils'
+import { isServer } from '/lib/utils'
 import Link from 'next/link'
-import { useMediaQuery } from 'usehooks-ts'
 import { useStore } from '/lib/store'
 import { useCallback, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
+import useDevice from '/lib/hooks/useDevice'
+import { useRegion } from '/lib/context/region'
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
 
@@ -16,9 +17,9 @@ export type Props = {
 export default function Logo({ disabled }: Props) {
 
   const router = useRouter()
-
-  const [showMenuMobile, setShowMenuMobile, region] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.region])
-  const isMobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
+  const region = useRegion()
+  const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
+  const { isMobile } = useDevice()
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [ratio, setRatio] = useState(0)
@@ -88,7 +89,9 @@ export default function Logo({ disabled }: Props) {
         <Link href="/">
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
-        <span className={s.region}>{region?.name}</span>
+        {!region?.global &&
+          <span className={s.region}>{region?.name}</span>
+        }
       </div>
     </div>
   )

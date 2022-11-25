@@ -4,28 +4,17 @@ import { regions } from "/lib/region";
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useStore, shallow } from '/lib/store';
-
-const defaultRegion: Region = { id: 'riks', name: 'Riks', slug: '/', roleId: '', tokenId: '' }
+import { useRegion } from '/lib/context/region';
 
 export default function RegionSelector({ }) {
 
+  const region = useRegion()
   const router = useRouter()
-  const [region, setRegion] = useStore((state) => [state.region, state.setRegion], shallow)
   const [open, setOpen] = useState(false)
 
-  const createSlug = (regionSlug: string) => {
-    if (regionSlug === '/') return '/'
-    const paths = router?.asPath.split('/').slice(1);
-    const currentRegion = regions.find(el => el.slug === paths[0]);
-    return !currentRegion ? `/${regionSlug}` : `/${regionSlug}/${paths.slice(1).join('/')}`
-  }
-
   useEffect(() => {
-    const slug = router?.asPath.split('/')[1];
-    setRegion(regions.find(d => d.slug === slug))
     setOpen(false)
-  }, [router, setRegion])
+  }, [router])
 
   return (
     <div className={s.container}>
@@ -33,9 +22,9 @@ export default function RegionSelector({ }) {
         {region?.name || 'Region'} <img src="/images/caret.png" />
       </div>
       <ul className={cn(open && s.show)}>
-        {[defaultRegion, ...regions].map((d, idx) =>
+        {regions.sort((a, b) => a.global ? -1 : 1).map((d, idx) =>
           <li key={idx} data-slug={d.slug} data-selected={region?.id === d.id}>
-            <Link href={createSlug(d.slug)} onClick={() => setOpen(true)}>
+            <Link href={`/${d.slug}`} onClick={() => setOpen(true)}>
               {d.name}
             </Link>
           </li>

@@ -7,7 +7,7 @@ import { regions } from "/lib/region";
 import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
-import { RegionSelector } from '/components'
+import { RegionSelector, RegionLink } from '/components'
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -51,9 +51,9 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							onMouseEnter={() => setSelected(item)}
 						>
 							{item.index ?
-								<Link href={item.slug}>
+								<RegionLink href={item.slug} regional={item.regional}>
 									{item.label}
-								</Link>
+								</RegionLink>
 								:
 								<>{item.label}</>
 							}
@@ -75,11 +75,11 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 								onMouseLeave={() => setSelected(undefined)}
 								onMouseMove={() => setSelected(item)}
 							>
-								{item.sub?.map(({ slug, label }, idx) =>
+								{item.sub?.map(({ slug, label, regional }, idx) =>
 									<li key={idx}>
-										<Link href={slug}>
+										<RegionLink href={slug} regional={regional}>
 											{label}
-										</Link>
+										</RegionLink>
 									</li>
 								)}
 							</ul>
