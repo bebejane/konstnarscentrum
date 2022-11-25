@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { RegionDocument } from "/graphql";
+import { RegionDocument, LatestNewsDocument } from "/graphql";
 import { Block } from "/components";
 
 export type Props = {
@@ -14,7 +14,6 @@ export type Props = {
 export default function RegionHome({ regionStart }) {
 
 	console.log(regionStart);
-
 
 	return (
 		<div className={s.container}>
@@ -37,13 +36,20 @@ export async function getStaticPaths(context) {
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 
-	const { region: regionStart } = await apiQuery(RegionDocument, { variables: { slug: props.region?.slug } });
+	const { region: regionStart }: { region: RegionRecord } = await apiQuery(RegionDocument, { variables: { regionId: props.region?.id } });
+	const { news } = await apiQuery(LatestNewsDocument, { variables: { regionId: props.region?.id } });
 
 	return {
 		props: {
 			...props,
-			regionStart
+			regionStart: {
+				...regionStart,
+				sections: regionStart.sections.map((section) => ({
+					...section,
+					news: section.__typename === 'LatestNewsRecord' ? news : null
+				}))
+			}
 		},
 		revalidate
-	};
-});
+	}
+})

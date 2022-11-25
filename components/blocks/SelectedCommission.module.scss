@@ -1,7 +1,8 @@
 .container {
-  ul {
-    padding: 0;
-    list-style: none;
+  display: flex;
+  flex-direction: column;
+
+  .header {
     display: flex;
     flex-direction: row;
   }

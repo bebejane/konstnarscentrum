@@ -1,0 +1,21 @@
+.container {
+  color: var(--white);
+
+  figure {
+    position: relative;
+
+    .image {}
+
+    figcaption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      a {
+        color: var(--white);
+      }
+    }
+  }
+}

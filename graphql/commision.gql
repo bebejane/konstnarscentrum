@@ -26,3 +26,14 @@ query AllCommissionCategories {
 		title
 	}
 }
+
+query LatestCommissions($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId!) {
+	commissions: allCommissions(
+		filter: { region: { eq: $regionId } }
+		orderBy: [createdAt_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...CommissionFragmentLight
+	}
+}

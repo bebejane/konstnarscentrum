@@ -26,3 +26,16 @@ export const catchErrorsFrom = (handler) => {
     });
   }
 }
+
+export const recordToSlug = (record: any): string => {
+  switch (record?.__typename) {
+    case 'CommissionRecord':
+      return '/'
+    case 'MembersNewsRecord':
+      return '/'
+    case 'NewsRecord':
+      return '/'
+    default:
+      return '/'
+  }
+}

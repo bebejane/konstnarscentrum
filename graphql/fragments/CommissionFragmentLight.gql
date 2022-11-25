@@ -1,4 +1,5 @@
 #import "./ImageThumbnailFragment.gql"
+#import "./RegionFragment.gql"
 
 fragment CommissionFragmentLight on CommissionRecord {
 	id
@@ -10,5 +11,8 @@ fragment CommissionFragmentLight on CommissionRecord {
 	category {
 		id
 		title
+	}
+	region {
+		...RegionFragment
 	}
 }

@@ -17,6 +17,7 @@ declare module '*/commision.gql' {
 export const AllCommissions: DocumentNode;
 export const AllCommissionsMenu: DocumentNode;
 export const AllCommissionCategories: DocumentNode;
+export const LatestCommissions: DocumentNode;
 
   export default defaultDocument;
 }
@@ -198,6 +199,7 @@ declare module '*/news.gql' {
   export const AllNews: DocumentNode;
 export const AllNewsByRegion: DocumentNode;
 export const News: DocumentNode;
+export const LatestNews: DocumentNode;
 
   export default defaultDocument;
 }

@@ -1,5 +1,8 @@
-query Region($slug: String!) {
-	region(filter: { slug: { eq: $slug } }) {
+#import "./fragments/ImagaFragment.gql"
+#import "./fragments/CommissionsFragment.gql"
+
+query Region($regionId: ItemId!) {
+	region(filter: { id: { eq: $regionId } }) {
 		id
 		name
 		slug
@@ -10,7 +13,12 @@ query Region($slug: String!) {
 			... on ImageShortcutRecord {
 				id
 				headline
+				image {
+					...ImageFragment
+				}
+				text
 				link {
+					__typename
 					... on CommissionRecord {
 						id
 					}
@@ -39,8 +47,10 @@ query Region($slug: String!) {
 				headline
 				text(markdown: false)
 			}
-			... on LatestCommissionRecord {
-				id
+			... on SelectedCommissionRecord {
+				commissions {
+					...CommissionFragment
+				}
 			}
 		}
 	}

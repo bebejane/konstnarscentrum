@@ -1,5 +1,6 @@
 #import "./ImageFragment.gql"
 #import "./VideoFragment.gql"
+#import "./RegionFragment.gql"
 
 fragment CommissionFragment on CommissionRecord {
 	id
@@ -42,5 +43,8 @@ fragment CommissionFragment on CommissionRecord {
 			__typename
 			id
 		}
+	}
+	region {
+		...RegionFragment
 	}
 }

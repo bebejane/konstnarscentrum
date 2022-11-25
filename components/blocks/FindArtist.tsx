@@ -9,6 +9,8 @@ export type FindArtistBlockProps = {
 export default function FindArtist({ data }: FindArtistBlockProps) {
 
   return (
-    <section>{data.__typename}</section>
+    <section className={s.container}>
+      Find artist
+    </section>
   )
 }
