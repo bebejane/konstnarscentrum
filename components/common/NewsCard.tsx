@@ -23,7 +23,7 @@ export default function NewsCard({ title, subtitle, text, slug, image, regionNam
       }
       <h5>{subtitle}</h5>
       <h2>{title}</h2>
-      <p>{text}</p>
+      <p className="mid">{text}</p>
       <Link href={slug}>Läs mer</Link>
     </div>
   )
