@@ -10,7 +10,6 @@ export type ImageShortcutBlockProps = {
 
 export default function ImageShortcut({ data: { headline, image, link, text } }: ImageShortcutBlockProps) {
 
-
   return (
     <section className={s.container}>
       <figure>
