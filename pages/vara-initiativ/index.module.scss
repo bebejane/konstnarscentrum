@@ -1,9 +1,9 @@
 .container {
   .intro {
-    margin-bottom: var(--small-space);
+    margin-bottom: var(--space);
   }
 
-  >ul {
+  > ul {
     @include mq($from: tablet) {
       margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
       margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
@@ -15,7 +15,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    >li {
+    > li {
       display: flex;
       flex-direction: column;
 
@@ -24,13 +24,11 @@
         padding-left: var(--gutter);
       }
 
-      border-right: 1px solid var(--beige-mid);
-
       @include mq($from: tablet) {
+        border-right: 1px solid var(--beige-mid);
         flex: 0 0 50%;
 
-
-        &:nth-child(even) {
+        &:nth-of-type(even) {
           border-right: none;
         }
       }
@@ -43,28 +41,36 @@
       button {
         margin-top: 1em;
         width: 100%;
+
+        @include mq($until: tablet) {
+          margin-bottom: var(--small-space);
+        }
       }
 
       .text {
         flex: 1 1 auto;
       }
 
-      >a>button {
+      > a > button {
         width: 100%;
       }
-
     }
 
     hr {
-      width: 100%;
-      flex: 1 1 100%;
+      //flex: 1 1 100%;
+      margin-left: var(--gutter);
+      margin-right: var(--gutter);
       background-color: var(--beige-mid);
       margin-bottom: var(--small-space);
       margin-top: var(--small-space);
+
+      &:last-child {
+        display: none;
+      }
     }
 
     @include mq($until: tablet) {
-      >li {
+      > li {
         flex: 0 0 100%;
       }
 
