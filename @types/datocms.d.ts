@@ -1276,7 +1276,7 @@ type ImageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type ImageShortcutModelLinkField = CommissionRecord | ForArtistRecord | MembersNewsRecord | NewsRecord;
+type ImageShortcutModelLinkField = CommissionRecord | ForArtistRecord | MemberNewsRecord | NewsRecord;
 
 /** Block of type Bildgenväg (image_shortcut) */
 type ImageShortcutRecord = RecordInterface & {
@@ -2984,6 +2984,181 @@ enum MemberModelOrderBy {
   yearOfBirth_DESC = 'yearOfBirth_DESC'
 }
 
+type MemberNewsCategoryModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  category?: InputMaybe<StringFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  position?: InputMaybe<PositionFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum MemberNewsCategoryModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  category_ASC = 'category_ASC',
+  category_DESC = 'category_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Medlemskategori (member_news_category) */
+type MemberNewsCategoryRecord = RecordInterface & {
+  __typename?: 'MemberNewsCategoryRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  category?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  position?: Maybe<Scalars['IntType']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Medlemskategori (member_news_category) */
+type MemberNewsCategoryRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+type MemberNewsModelContentBlocksField = ButtonRecord | ImageRecord | VideoRecord;
+
+type MemberNewsModelContentField = {
+  __typename?: 'MemberNewsModelContentField';
+  blocks: Array<MemberNewsModelContentBlocksField>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
+type MemberNewsModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<MemberNewsModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  category?: InputMaybe<LinkFilter>;
+  content?: InputMaybe<StructuredTextFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  date?: InputMaybe<DateFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  image?: InputMaybe<FileFilter>;
+  intro?: InputMaybe<TextFilter>;
+  location?: InputMaybe<StringFilter>;
+  slug?: InputMaybe<SlugFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum MemberNewsModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  date_ASC = 'date_ASC',
+  date_DESC = 'date_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  location_ASC = 'location_ASC',
+  location_DESC = 'location_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Aktuellt (member_news) */
+type MemberNewsRecord = RecordInterface & {
+  __typename?: 'MemberNewsRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  category: MemberNewsCategoryRecord;
+  content?: Maybe<MemberNewsModelContentField>;
+  createdAt: Scalars['DateTime'];
+  date?: Maybe<Scalars['Date']>;
+  id: Scalars['ItemId'];
+  image?: Maybe<FileField>;
+  intro?: Maybe<Scalars['String']>;
+  location?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Aktuellt (member_news) */
+type MemberNewsRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Aktuellt (member_news) */
+type MemberNewsRecordintroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Record of type Medlem (member) */
 type MemberRecord = RecordInterface & {
   __typename?: 'MemberRecord';
@@ -3029,181 +3204,6 @@ type MemberRecord_seoMetaTagsArgs = {
 
 /** Record of type Medlem (member) */
 type MemberRecordbioArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']>;
-};
-
-type MembersNewsCategoryModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<MembersNewsCategoryModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  category?: InputMaybe<StringFilter>;
-  createdAt?: InputMaybe<CreatedAtFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  position?: InputMaybe<PositionFilter>;
-  updatedAt?: InputMaybe<UpdatedAtFilter>;
-};
-
-enum MembersNewsCategoryModelOrderBy {
-  _createdAt_ASC = '_createdAt_ASC',
-  _createdAt_DESC = '_createdAt_DESC',
-  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
-  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
-  _isValid_ASC = '_isValid_ASC',
-  _isValid_DESC = '_isValid_DESC',
-  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
-  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
-  _publishedAt_ASC = '_publishedAt_ASC',
-  _publishedAt_DESC = '_publishedAt_DESC',
-  _status_ASC = '_status_ASC',
-  _status_DESC = '_status_DESC',
-  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
-  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
-  _updatedAt_ASC = '_updatedAt_ASC',
-  _updatedAt_DESC = '_updatedAt_DESC',
-  category_ASC = 'category_ASC',
-  category_DESC = 'category_DESC',
-  createdAt_ASC = 'createdAt_ASC',
-  createdAt_DESC = 'createdAt_DESC',
-  id_ASC = 'id_ASC',
-  id_DESC = 'id_DESC',
-  position_ASC = 'position_ASC',
-  position_DESC = 'position_DESC',
-  updatedAt_ASC = 'updatedAt_ASC',
-  updatedAt_DESC = 'updatedAt_DESC'
-}
-
-/** Record of type Medlemskategori (members_news_category) */
-type MembersNewsCategoryRecord = RecordInterface & {
-  __typename?: 'MembersNewsCategoryRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  category?: Maybe<Scalars['String']>;
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  position?: Maybe<Scalars['IntType']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Medlemskategori (members_news_category) */
-type MembersNewsCategoryRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
-type MembersNewsModelContentBlocksField = ButtonRecord | ImageRecord | VideoRecord;
-
-type MembersNewsModelContentField = {
-  __typename?: 'MembersNewsModelContentField';
-  blocks: Array<MembersNewsModelContentBlocksField>;
-  links: Array<Scalars['String']>;
-  value: Scalars['JsonField'];
-};
-
-type MembersNewsModelFilter = {
-  OR?: InputMaybe<Array<InputMaybe<MembersNewsModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  category?: InputMaybe<LinkFilter>;
-  content?: InputMaybe<StructuredTextFilter>;
-  createdAt?: InputMaybe<CreatedAtFilter>;
-  date?: InputMaybe<DateFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  image?: InputMaybe<FileFilter>;
-  intro?: InputMaybe<TextFilter>;
-  location?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
-  title?: InputMaybe<StringFilter>;
-  updatedAt?: InputMaybe<UpdatedAtFilter>;
-};
-
-enum MembersNewsModelOrderBy {
-  _createdAt_ASC = '_createdAt_ASC',
-  _createdAt_DESC = '_createdAt_DESC',
-  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
-  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
-  _isValid_ASC = '_isValid_ASC',
-  _isValid_DESC = '_isValid_DESC',
-  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
-  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
-  _publishedAt_ASC = '_publishedAt_ASC',
-  _publishedAt_DESC = '_publishedAt_DESC',
-  _status_ASC = '_status_ASC',
-  _status_DESC = '_status_DESC',
-  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
-  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
-  _updatedAt_ASC = '_updatedAt_ASC',
-  _updatedAt_DESC = '_updatedAt_DESC',
-  createdAt_ASC = 'createdAt_ASC',
-  createdAt_DESC = 'createdAt_DESC',
-  date_ASC = 'date_ASC',
-  date_DESC = 'date_DESC',
-  id_ASC = 'id_ASC',
-  id_DESC = 'id_DESC',
-  location_ASC = 'location_ASC',
-  location_DESC = 'location_DESC',
-  title_ASC = 'title_ASC',
-  title_DESC = 'title_DESC',
-  updatedAt_ASC = 'updatedAt_ASC',
-  updatedAt_DESC = 'updatedAt_DESC'
-}
-
-/** Record of type Aktuellt (members_news) */
-type MembersNewsRecord = RecordInterface & {
-  __typename?: 'MembersNewsRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  category: MembersNewsCategoryRecord;
-  content?: Maybe<MembersNewsModelContentField>;
-  createdAt: Scalars['DateTime'];
-  date?: Maybe<Scalars['Date']>;
-  id: Scalars['ItemId'];
-  image?: Maybe<FileField>;
-  intro?: Maybe<Scalars['String']>;
-  location?: Maybe<Scalars['String']>;
-  slug?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Aktuellt (members_news) */
-type MembersNewsRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type Aktuellt (members_news) */
-type MembersNewsRecordintroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -3453,11 +3453,11 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allMemberCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allMemberNewsCategoriesMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
+  _allMemberNewsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allMembersMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
-  _allMembersNewsCategoriesMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
-  _allMembersNewsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allNewsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
@@ -3493,11 +3493,11 @@ type Query = {
   /** Returns a collection of records */
   allMemberCategories: Array<MemberCategoryRecord>;
   /** Returns a collection of records */
+  allMemberNews: Array<MemberNewsRecord>;
+  /** Returns a collection of records */
+  allMemberNewsCategories: Array<MemberNewsCategoryRecord>;
+  /** Returns a collection of records */
   allMembers: Array<MemberRecord>;
-  /** Returns a collection of records */
-  allMembersNews: Array<MembersNewsRecord>;
-  /** Returns a collection of records */
-  allMembersNewsCategories: Array<MembersNewsCategoryRecord>;
   /** Returns a collection of records */
   allNews: Array<NewsRecord>;
   /** Returns a collection of records */
@@ -3533,9 +3533,9 @@ type Query = {
   /** Returns a specific record */
   memberCategory?: Maybe<MemberCategoryRecord>;
   /** Returns a specific record */
-  membersNews?: Maybe<MembersNewsRecord>;
+  memberNews?: Maybe<MemberNewsRecord>;
   /** Returns a specific record */
-  membersNewsCategory?: Maybe<MembersNewsCategoryRecord>;
+  memberNewsCategory?: Maybe<MemberNewsCategoryRecord>;
   /** Returns a specific record */
   news?: Maybe<NewsRecord>;
   /** Returns a specific record */
@@ -3630,25 +3630,25 @@ type Query_allMemberCategoriesMetaArgs = {
 
 
 /** The query root for this schema */
+type Query_allMemberNewsCategoriesMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MemberNewsCategoryModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allMemberNewsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MemberNewsModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type Query_allMembersMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MemberModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
-type Query_allMembersNewsCategoriesMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsCategoryModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
-type Query_allMembersNewsMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3820,34 +3820,34 @@ type QueryallMemberCategoriesArgs = {
 
 
 /** The query root for this schema */
+type QueryallMemberNewsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MemberNewsModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<MemberNewsModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+type QueryallMemberNewsCategoriesArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<MemberNewsCategoryModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 type QueryallMembersArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MemberModelFilter>;
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<MemberModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
-};
-
-
-/** The query root for this schema */
-type QueryallMembersNewsArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsModelFilter>;
-  first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<MembersNewsModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
-};
-
-
-/** The query root for this schema */
-type QueryallMembersNewsCategoriesArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsCategoryModelFilter>;
-  first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<MembersNewsCategoryModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -4006,20 +4006,20 @@ type QuerymemberCategoryArgs = {
 
 
 /** The query root for this schema */
-type QuerymembersNewsArgs = {
+type QuerymemberNewsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsModelFilter>;
+  filter?: InputMaybe<MemberNewsModelFilter>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<MembersNewsModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<MemberNewsModelOrderBy>>>;
 };
 
 
 /** The query root for this schema */
-type QuerymembersNewsCategoryArgs = {
+type QuerymemberNewsCategoryArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<MembersNewsCategoryModelFilter>;
+  filter?: InputMaybe<MemberNewsCategoryModelFilter>;
   locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<MembersNewsCategoryModelOrderBy>>>;
+  orderBy?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelOrderBy>>>;
 };
 
 
@@ -4255,7 +4255,7 @@ enum SiteLocale {
   en = 'en'
 }
 
-type SlideModelLinkField = CommissionRecord | ForArtistRecord | MembersNewsRecord | NewsRecord;
+type SlideModelLinkField = CommissionRecord | ForArtistRecord | MemberNewsRecord | NewsRecord;
 
 /** Block of type Slide (slide) */
 type SlideRecord = RecordInterface & {
@@ -4930,6 +4930,8 @@ type MemberFragment = { __typename?: 'MemberRecord', id: any, firstName: string,
 
 type MemberFragmentLightFragment = { __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null };
 
+type MemberNewsFragment = { __typename?: 'MemberNewsRecord', id: any };
+
 type NewsFragment = { __typename?: 'NewsRecord', id: any, title?: string | null, content?: string | null, slug?: string | null, intro?: string | null, createdAt: any, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } };
 
 type ProjectFragment = { __typename?: 'ProjectRecord', title?: string | null, url?: string | null, text?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, base64?: string | null, bgColor?: string | null, sizes: string } | null } | null };
@@ -4988,6 +4990,11 @@ type AllMemberCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 type AllMemberCategoriesQuery = { __typename?: 'Query', memberCategories: Array<{ __typename?: 'MemberCategoryRecord', id: any, categoryType?: string | null }> };
 
+type AllMemberNewsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any }> };
+
 type AllNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
@@ -5036,4 +5043,4 @@ type RegionQueryVariables = Exact<{
 }>;
 
 
-type RegionQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', id: any, name: string, slug: string, sections: Array<{ __typename?: 'FindArtistRecord', id: any } | { __typename?: 'ImageShortcutRecord', id: any, headline?: string | null, text?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, link?: { __typename: 'CommissionRecord', id: any } | { __typename: 'ForArtistRecord', id: any } | { __typename: 'MembersNewsRecord', id: any } | { __typename: 'NewsRecord', id: any } | null } | { __typename?: 'LatestMemberNewsRecord', id: any } | { __typename?: 'LatestNewsRecord', id: any, description?: string | null } | { __typename?: 'SelectedCommissionRecord', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, city?: string | null, year?: string | null, artist?: string | null, consultant?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> } | { __typename?: 'TextRecord', id: any, url?: string | null, headline?: string | null, text?: string | null }> } | null };
+type RegionQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', id: any, name: string, slug: string, sections: Array<{ __typename?: 'FindArtistRecord', id: any } | { __typename?: 'ImageShortcutRecord', id: any, headline?: string | null, text?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, link?: { __typename: 'CommissionRecord', id: any } | { __typename: 'ForArtistRecord', id: any } | { __typename: 'MemberNewsRecord', id: any } | { __typename: 'NewsRecord', id: any } | null } | { __typename?: 'LatestMemberNewsRecord', id: any } | { __typename?: 'LatestNewsRecord', id: any, description?: string | null } | { __typename?: 'SelectedCommissionRecord', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, city?: string | null, year?: string | null, artist?: string | null, consultant?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> } | { __typename?: 'TextRecord', id: any, url?: string | null, headline?: string | null, text?: string | null }> } | null };

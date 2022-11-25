@@ -1,5 +1,6 @@
 #import "./fragment/MemberFragment.gql"
 #import "./fragment/MemberFragmentLight.gql"
+#import "./fragment/MemberNewsFragment.gql"
 
 query AllMembers {
 	members: allMembers {
@@ -42,5 +43,11 @@ query AllMemberCategories {
 	memberCategories: allMemberCategories {
 		id
 		categoryType
+	}
+}
+
+query AllMemberNews {
+	memberNews: allMemberNews {
+		...MemberNewsFragment
 	}
 }
