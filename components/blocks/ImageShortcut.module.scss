@@ -4,7 +4,14 @@
   figure {
     position: relative;
 
-    .image {}
+    .image {
+      @include mq($from: tablet) {
+        min-width: calc(100% + (2 * var(--full-margin)));
+        margin-right: var(--full-margin);
+        margin-left: var(--full-margin);
+        max-width: none;
+      }
+    }
 
     figcaption {
       position: absolute;

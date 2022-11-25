@@ -1027,11 +1027,7 @@ type FileFilter = {
   notIn?: InputMaybe<Array<InputMaybe<Scalars['UploadId']>>>;
 };
 
-<<<<<<< HEAD
-/** Block of type Uppsäck konstnärer (find_artist) */
-=======
 /** Block of type Konstnärer (find_artist) */
->>>>>>> 32a47fb6b0d50fcd0deacb012eedc2ea29a0cdc5
 type FindArtistRecord = RecordInterface & {
   __typename?: 'FindArtistRecord';
   _createdAt: Scalars['DateTime'];
@@ -1051,11 +1047,7 @@ type FindArtistRecord = RecordInterface & {
 };
 
 
-<<<<<<< HEAD
-/** Block of type Uppsäck konstnärer (find_artist) */
-=======
 /** Block of type Konstnärer (find_artist) */
->>>>>>> 32a47fb6b0d50fcd0deacb012eedc2ea29a0cdc5
 type FindArtistRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
