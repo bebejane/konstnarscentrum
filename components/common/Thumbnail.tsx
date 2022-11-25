@@ -13,7 +13,7 @@ export type Props = {
 }
 
 const speed = 0.07
-const readMore = 'Läs mer'
+const readMore = 'Visa'
 
 export default function Thumbnail({ image, slug, title }: Props) {
 

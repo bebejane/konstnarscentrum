@@ -42,7 +42,7 @@ export default function Member({ member: {
 						{ title: 'Besök', value: '' }
 					]}
 				/>
-				<h2>Utvalda verk</h2>
+				<h1 className="noPadding">Utvalda verk</h1>
 				{content?.map((block, idx) =>
 					<Block key={idx} data={block} />
 				)}
