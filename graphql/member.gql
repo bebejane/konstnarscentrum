@@ -46,6 +46,12 @@ query AllMemberCategories {
 	}
 }
 
+query MemberNews($slug: String!) {
+	memberNews(filter: { slug: { eq: $slug } }) {
+		...MemberNewsFragment
+	}
+}
+
 query AllMemberNews {
 	memberNews: allMemberNews {
 		...MemberNewsLightFragment

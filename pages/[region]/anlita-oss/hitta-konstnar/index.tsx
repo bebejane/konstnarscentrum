@@ -64,8 +64,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({
 	]
 }, async ({ props, revalidate }: any) => {
 
-	const region = props.region;
-	const { members } = await apiQuery(AllMembersWithPortfolioDocument, { variables: { regionId: region?.id } })
+	const id = !props.region.global ? props.region.id : undefined
+	const { members } = await apiQuery(AllMembersWithPortfolioDocument, { variables: { id } })
 
 	return {
 		props: {

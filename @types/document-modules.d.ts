@@ -206,6 +206,7 @@ export const Member: DocumentNode;
 export const MemberBySlug: DocumentNode;
 export const MemberByPasswordToken: DocumentNode;
 export const AllMemberCategories: DocumentNode;
+export const MemberNews: DocumentNode;
 export const AllMemberNews: DocumentNode;
 export const LatestMemberNews: DocumentNode;
 

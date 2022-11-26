@@ -16,26 +16,25 @@ const components = {
   'reset': Reset
 }
 
-export default function Auth(data : any) {
-  
-  const {type, error} = data
+export default function Auth(data: any) {
+
+  const { type, error } = data
   const AuthComponent = components[type]
 
-  if(!AuthComponent) 
-    return AuthError({error: !error ? `Authentication type ${type} not found!` : error})
+  if (!AuthComponent)
+    return AuthError({ error: !error ? `Authentication type ${type} not found!` : error })
 
   return (
     <>
       <AuthComponent {...data} />
-      <AuthLinks {...data} />
     </>
   )
 }
 
 export function AuthError({ error }) {
   const message = typeof error === "string" ? error : error.message || error.toString()
-  
-	return (
+
+  return (
     <div className={styles.error}>
       <h1 className={styles.errorHeader}>
         Authentication Error
@@ -48,25 +47,25 @@ export function AuthError({ error }) {
   )
 }
 
-export function AuthLinks({type, domain}) {
+export function AuthLinks({ type, domain }) {
   const links = []
-  
-  if(['apply', 'reset', 'signup', 'signout'].includes(type))
-    links.push({title:text.signIn, href:'/auth?type=signin'})
-  else if(type === 'signin'){
-    links.push({title:text.apply, href:'/auth?type=apply'})
-    links.push({title:text.forgotPassword, href:'/auth?type=reset'})
+
+  if (['apply', 'reset', 'signup', 'signout'].includes(type))
+    links.push({ title: text.signIn, href: '/konstnar/auth?type=signin' })
+  else if (type === 'signin') {
+    links.push({ title: text.apply, href: '/konstnar/auth?type=apply' })
+    links.push({ title: text.forgotPassword, href: '/konstnar/auth?type=reset' })
   }
 
   return (
     <>
       <p className={styles.authLinks}>
-        {links.map(({title, href}, idx)=>
+        {links.map(({ title, href }, idx) =>
           <Link href={href} key={idx}>
             {title}
           </Link>
         )}
-        
+
       </p>
       <p className={styles.authDomain}>
         <Link href={'/'}>
@@ -76,8 +75,8 @@ export function AuthLinks({type, domain}) {
     </>
   )
 }
-export function SubmitButton({ loading, children, onClick } : {loading:boolean, children: React.ReactNode, onClick?: ()=> void}) {
-	return (
+export function SubmitButton({ loading, children, onClick }: { loading: boolean, children: React.ReactNode, onClick?: () => void }) {
+  return (
     <button className={styles.submitButton} type="submit" onClick={onClick}>
       {!loading ? children : <div className={styles.loader}></div>}
     </button>

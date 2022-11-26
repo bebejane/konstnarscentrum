@@ -46,7 +46,6 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	};
 	return (
 		<>
-			<h2>{text.apply}</h2>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitApplication)}>
 				<input
 					className={errors.email && styles.error}

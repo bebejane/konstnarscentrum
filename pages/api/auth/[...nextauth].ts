@@ -9,21 +9,21 @@ import { comparePassword, findUser } from '/lib/auth'
 
 const options = {
   site: process.env.NEXTAUTH_URL,
-  session: {  
+  session: {
     jwt: true,
     maxAge: 120 * (24 * 60 * 60), // 120 days
   },
-  pages: {    
-    signIn: '/auth?type=signin',    
-    signOut: '/auth?type=signout',    
-    error: '/auth?type=error', // Error code passed in query string as ?error=    
+  pages: {
+    signIn: '/konstnar/konto/logga-in',
+    signOut: '/konstnar/konto',
+    error: '/konstnar/konto/auth?type=error', // Error code passed in query string as ?error=    
     //verifyRequest: '/auth/verify-request', // (used for check email message)    
     //newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)  }
   },
-  callbacks:{
+  callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       // if(account.type !== 'credentials' && !(await findUser(user.email)))
-        // throw new Error('Access denied. Please registered for your account first.')
+      // throw new Error('Access denied. Please registered for your account first.')
       return true
     },
   },
@@ -43,21 +43,21 @@ const options = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: "Username", type: "text"},
-        password: {  label: "Password", type: "password" }
+        username: { label: "Username", type: "text" },
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        
-        try{
+
+        try {
 
           const { username: email, password } = credentials
           const user = await findUser(email)
-      
+
           if (!user) return null
-      
+
           const checkPassword = await comparePassword(password, user.password);
 
-          if(!checkPassword){
+          if (!checkPassword) {
             console.error('not a valid password!')
             return null
           }
@@ -65,12 +65,12 @@ const options = {
           // Login passed, return user. 
           // Any object returned will be saved in `user` property of the JWT
           return {
-            id:user.id,
-            email:user.email,
-            firstName:user.firstName,
-            lastName:user.lastName
+            id: user.id,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName
           }
-        }catch(err){
+        } catch (err) {
           console.error(err)
           return null
         }

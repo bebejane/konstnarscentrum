@@ -23,7 +23,7 @@ const base: Menu = [
   {
     type: 'artist', label: 'För konstnärer', sub: [
       { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
-      { type: 'artist', label: 'Logga in', slug: '/konstnar/logga-in' },
+      { type: 'artist', label: 'Logga in', slug: '/konstnar/konto/logga-in' },
       { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true },
       { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss' }
     ]

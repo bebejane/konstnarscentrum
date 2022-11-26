@@ -8,47 +8,47 @@ import { format } from "date-fns";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 
 export type Props = {
-	news: NewsRecord,
-	region: Region
+  news: NewsRecord,
+  region: Region
 }
 
 export default function News({ news: { createdAt, title, content }, region }: Props) {
 
-	return (
-		<div className={styles.container}>
-			<h1>{title}</h1>
-			<h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-			<Markdown>{content}</Markdown>
-		</div>
-	);
+  return (
+    <div className={styles.container}>
+      <h1>{title}</h1>
+      <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
+      <Markdown>{content}</Markdown>
+    </div>
+  );
 }
 
 export async function getStaticPaths(context) {
-	const { news } = await apiQuery(AllNewsDocument)
+  const { news } = await apiQuery(AllNewsDocument)
 
-	const paths = []
+  const paths = []
 
-	news.forEach(({ slug }) => regions.forEach(d => paths.push({ params: { news: slug, region: d.slug } })))
+  news.forEach(({ slug }) => regions.forEach(d => paths.push({ params: { news: slug, region: d.slug } })))
 
-	return {
-		paths,
-		fallback: false,
-	};
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const slug = context.params.news;
-	const { news } = await apiQuery(NewsDocument, { variables: { slug } })
+  const slug = context.params.news;
+  const { news } = await apiQuery(NewsDocument, { variables: { slug } })
 
-	return {
-		props: {
-			...props,
-			news
-		},
-	};
+  return {
+    props: {
+      ...props,
+      news
+    },
+  };
 });
 
 export const config = {
-	//runtime:'experimental-edge'
+  //runtime:'experimental-edge'
 }
