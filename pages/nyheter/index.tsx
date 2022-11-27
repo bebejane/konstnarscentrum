@@ -2,7 +2,7 @@ import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { AllNewsByRegionDocument } from "/graphql";
+import { AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
 
 
@@ -39,7 +39,7 @@ export default function News({ news, region }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-  const { news } = await apiQuery(AllNewsByRegionDocument, { variables: { id: props.region?.id } });
+  const { news } = await apiQuery(AllNewsDocument, { variables: { id: props.region?.id } });
 
   return {
     props: {

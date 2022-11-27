@@ -49,14 +49,6 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 	);
 }
 
-export async function getStaticPaths(context) {
-	const paths = regions.map(({ slug }) => ({ params: { region: slug } }))
-	return {
-		paths,
-		fallback: false,
-	};
-}
-
 export const getStaticProps: GetStaticProps = withGlobalProps({
 	queries: [
 		AllMemberCategoriesDocument,
