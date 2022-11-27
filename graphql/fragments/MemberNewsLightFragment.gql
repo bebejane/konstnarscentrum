@@ -1,4 +1,4 @@
-#import "./ImageFragment.gql"
+#import "./ImageThumbnailFragment.gql"
 #import "./VideoFragment.gql"
 #import "./RegionFragment.gql"
 
@@ -6,7 +6,7 @@ fragment MemberNewsLightFragment on MemberNewsRecord {
 	id
 	title
 	image {
-		...ImageFragment
+		...ImageThumbnailFragment
 	}
 	intro(markdown: false)
 	category {

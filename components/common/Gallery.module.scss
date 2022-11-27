@@ -4,15 +4,19 @@
   max-width: none;
 
   >ul {
-
+    --height: calc(100vh - calc(var(--navbar-height) *2));
     list-style: none;
     position: relative;
     display: flex;
-    min-height: calc(100vh - var(--navbar-height) - var(--space));
-    max-height: calc(100vh - var(--navbar-height) - var(--space));
-    background-color: pink;
+    min-height: var(--height);
+    max-height: var(--height);
 
     li {
+
+      &.hide {
+        opacity: 0;
+      }
+
 
       a {
         position: absolute;
@@ -20,6 +24,8 @@
         left: 0;
         width: 100%;
         height: 100%;
+        perspective: 1000px;
+        overflow: hidden;
 
         .image {
           width: 100%;
@@ -28,12 +34,46 @@
 
         header {
           position: absolute;
+          padding-left: var(--grid-unit);
+          padding-right: var(--grid-unit);
+          padding-top: 1rem;
           top: 0;
           left: 0;
           z-index: 1;
           color: var(--white);
         }
       }
+
     }
   }
+}
+
+
+.transition {
+  a {
+
+    z-index: 2;
+
+    img {
+      animation: trans 8s ease-in-out reverse forwards;
+      opacity: 1;
+
+      @keyframes trans {
+        0% {
+          opacity: 1;
+          transform: rotate3d(0, 1, 0, 0deg) scale(1);
+        }
+
+        80% {
+          opacity: 1;
+        }
+
+        100% {
+          opacity: 1;
+          transform: rotate3d(0, 1, 1, 2deg) scale(1.15);
+        }
+      }
+    }
+  }
+
 }
