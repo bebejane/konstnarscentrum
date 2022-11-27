@@ -26,6 +26,7 @@
 
     li {
       line-height: var(--line-height-nav);
+
       &[data-selected="true"] {
         a {
           color: var(--beige-dark);
@@ -41,8 +42,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: flex-end;
 
-    &.open > img {
+    &.open>img {
       transform: rotate(-180deg);
     }
   }

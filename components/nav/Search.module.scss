@@ -1,0 +1,30 @@
+.search {
+  position: sticky;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  bottom: 0;
+  right: 0;
+  z-index: 200;
+  pointer-events: none;
+
+  &.open {
+
+    background-color: pink;
+  }
+
+  .wrap {
+    display: flex;
+    align-items: center;
+    flex: 0 0;
+    margin: var(--outer-margin);
+    pointer-events: all;
+    cursor: pointer;
+
+    svg {
+      height: 1rem;
+
+    }
+  }
+
+}

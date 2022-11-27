@@ -19,7 +19,7 @@ export default function RegionSelector({ }) {
   return (
     <div className={s.container}>
       <div className={cn(s.selected, open && s.open)} onClick={() => setOpen(!open)}>
-        {region?.name || 'Region'} <img src="/images/caret.png" />
+        {!region || region.global ? 'Välj region' : region.name} <img src="/images/caret.png" />
       </div>
       <ul className={cn(open && s.show)}>
         {regions.sort((a, b) => a.global ? -1 : 1).map((d, idx) =>

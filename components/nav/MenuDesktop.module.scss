@@ -51,24 +51,6 @@
       &:hover {
         color: var(--beige-dark);
       }
-
-      &:nth-last-child(3) {
-        flex: 1 1 100%;
-      }
-
-      &:last-child {
-        margin-right: 0;
-      }
-
-      &.region {
-        display: flex;
-        align-items: center;
-
-        img {
-          width: 7px;
-          height: 4px;
-        }
-      }
     }
   }
 
@@ -101,5 +83,31 @@
       }
     }
   }
+}
 
+.toolsMenu {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  top: 0;
+  right: var(--outer-margin);
+  z-index: 101;
+  min-height: var(--navbar-height);
+
+  >ul {
+    list-style: none;
+
+    li {
+      &.region {
+        display: flex;
+        align-items: center;
+
+        img {
+          margin-left: 0.2rem;
+          width: 7px;
+          height: 4px;
+        }
+      }
+    }
+  }
 }

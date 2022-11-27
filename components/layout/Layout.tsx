@@ -1,6 +1,6 @@
 import styles from './Layout.module.scss'
 import React, { useEffect } from 'react'
-import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid } from '/components'
+import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search } from '/components'
 import { regions } from '/lib/region'
 import type { MenuItem } from '/lib/menu'
 import { useState } from 'react'
@@ -21,14 +21,20 @@ export default function Layout({ children, menu: menuFromProps, title, footer }:
 
 	return (
 		<>
-			{!isHome && <MenuDesktop items={menu} />}
+
+			{!isHome &&
+				<MenuDesktop items={menu} />
+			}
 			<MenuMobile items={menu} />
 			<div className={styles.layout}>
 				<Logo disabled={!isHome} />
+
 				<Content noMargins={isHome}>
 					{children}
 				</Content>
+				<Search />
 			</div>
+
 			<Footer menu={menu} footer={footer} />
 			<Grid />
 		</>

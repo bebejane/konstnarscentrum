@@ -1,9 +1,7 @@
 import s from './MenuDesktop.module.scss'
 import cn from 'classnames'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useRef, useEffect } from 'react'
-import { regions } from "/lib/region";
 import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
@@ -35,18 +33,15 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
 		const bounds = el.getBoundingClientRect()
 
-
 		setPaddingLeft(`${bounds.left}px`)
 
 		if (isAtBottom) {
-			const height = 140//subRef.current.getBoundingClientRect().height - 70
+			const height = 140 //subRef.current.getBoundingClientRect().height - 70
 			window.scrollTo({
 				top: height,
 				behavior: 'smooth'
 			})
 		}
-
-
 
 	}, [selected])
 
@@ -76,12 +71,6 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							}
 						</li>
 					)}
-					<li className={s.user}>
-						<User />
-					</li>
-					<li className={s.region}>
-						<RegionSelector />
-					</li>
 				</ul>
 				<div className={s.background} ref={subRef} style={{ paddingLeft }}>
 					{items.map((item, i) => {
@@ -104,6 +93,16 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 						)
 					})}
 				</div>
+			</nav>
+			<nav className={s.toolsMenu}>
+				<ul>
+					<li className={s.user}>
+						<User />
+					</li>
+					<li className={s.region}>
+						<RegionSelector />
+					</li>
+				</ul>
 			</nav>
 		</>
 	)
