@@ -53,9 +53,6 @@ export default function Logo({ disabled }: Props) {
       return letters.filter((el, idx) => ((idx / l) >= ratio || isServer))
   }
 
-  const vertical = letterReducer('vertical')
-  const horizontal = letterReducer('horizontal')
-
   useEffect(() => {
     if (manualMode) return
     setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, 1)))
@@ -73,7 +70,9 @@ export default function Logo({ disabled }: Props) {
   useEffect(() => {
     setShowMenuMobile(false)
   }, [router, setShowMenuMobile])
-  //console.log(region);
+
+  const vertical = letterReducer('vertical')
+  const horizontal = letterReducer('horizontal')
 
   return (
     <div className={s.logo}>

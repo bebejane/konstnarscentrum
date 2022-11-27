@@ -13,14 +13,27 @@
     @include mq($from: tablet) {
       margin-left: calc(var(--total-outer-margin));
       margin-right: calc(var(--total-outer-margin));
-      padding-top: var(--navbar-height);
       padding-left: calc(2 * var(--grid-unit));
       padding-right: calc(2 * var(--grid-unit));
     }
 
     @include mq($until: tablet) {
       padding-top: var(--navbar-height);
+    }
+  }
 
+  &.nomargins {
+    article {
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+
+      @include mq($from: tablet) {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
+      }
     }
   }
 }

@@ -25,7 +25,7 @@ export default function News({ news, region }: Props) {
 						<li key={idx} >
 							<Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
 								<h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-								<h3>{title}</h3>
+								<h2>{title}</h2>
 								<p>{intro}</p>
 							</Link>
 						</li>
@@ -47,16 +47,3 @@ export async function getStaticPaths(context) {
 		fallback: false,
 	};
 }
-
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
-
-	const { news } = await apiQuery(AllNewsByRegionDocument, { variables: { id: props.region?.id } });
-
-	return {
-		props: {
-			...props,
-			news
-		},
-		revalidate
-	};
-});

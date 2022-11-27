@@ -1,5 +1,5 @@
-import { regions } from "/lib/region";
-export { default, getStaticProps } from '/pages/anlita-oss/hitta-konstnar'
+import { regions } from '/lib/region';
+export { default, getStaticProps } from '/pages/konstnar/aktuellt'
 
 export async function getStaticPaths(context) {
 

@@ -6,8 +6,8 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 
-export default function SignIn({ csrfToken, providers}) {
-	
+export default function SignIn({ csrfToken, providers }) {
+
 	const router = useRouter();
 	const [error, setError] = useState<undefined | string | Error>();
 	const {
@@ -17,9 +17,9 @@ export default function SignIn({ csrfToken, providers}) {
 	} = useForm();
 
 	const onSubmitSignIn = async ({ username, password }) => {
-		
+
 		await signIn("credentials", {
-			callbackUrl: `${window.location.origin}/member`,
+			callbackUrl: `${window.location.origin}/konstnar/konto`,
 			username,
 			password,
 		});
@@ -32,7 +32,6 @@ export default function SignIn({ csrfToken, providers}) {
 
 	return (
 		<div className={styles.container}>
-			<h2>{text.signIn}</h2>
 			<form
 				className={styles.form}
 				method="post"
@@ -57,16 +56,18 @@ export default function SignIn({ csrfToken, providers}) {
 				<SubmitButton loading={isSubmitting}>
 					{text.send}
 				</SubmitButton>
+				{/*}
 				<ul className={styles.providers}>
-					{Object.keys(providers).filter(id => id !== 'credentials').map((id, idx) => 
-						<li key={idx} onClick={()=>signIn(id, {callbackUrl: `${window.location.origin}/member`})}>
+					{Object.keys(providers).filter(id => id !== 'credentials').map((id, idx) =>
+						<li key={idx} onClick={() => signIn(id, { callbackUrl: `${window.location.origin}/member` })}>
 							{providers[id].name}
 						</li>
 					)}
 				</ul>
-				{error && 
+				*/}
+				{error &&
 					<p className={styles.formError}>
-						{`${typeof error === 'string' ? error : error.message }`}
+						{`${typeof error === 'string' ? error : error.message}`}
 					</p>
 				}
 			</form>

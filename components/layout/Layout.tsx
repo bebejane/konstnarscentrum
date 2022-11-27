@@ -1,6 +1,7 @@
 import styles from './Layout.module.scss'
 import React, { useEffect } from 'react'
 import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid } from '/components'
+import { regions } from '/lib/region'
 import type { MenuItem } from '/lib/menu'
 import { useState } from 'react'
 import { buildMenu } from '/lib/menu'
@@ -10,7 +11,8 @@ export type LayoutProps = { children: React.ReactNode, menu: MenuItem[], title: 
 
 export default function Layout({ children, menu: menuFromProps, title, footer }: LayoutProps) {
 
-	const isHome = useRouter().asPath === '/'
+	const router = useRouter()
+	const isHome = router.asPath === '/' || regions.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const [menu, setMenu] = useState(menuFromProps)
 
 	useEffect(() => { // Refresh menu on load.
@@ -19,11 +21,11 @@ export default function Layout({ children, menu: menuFromProps, title, footer }:
 
 	return (
 		<>
-			<MenuDesktop items={menu} />
+			{!isHome && <MenuDesktop items={menu} />}
 			<MenuMobile items={menu} />
 			<div className={styles.layout}>
 				<Logo disabled={!isHome} />
-				<Content>
+				<Content noMargins={isHome}>
 					{children}
 				</Content>
 			</div>

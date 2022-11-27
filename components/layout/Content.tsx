@@ -1,13 +1,17 @@
+import s from './Content.module.scss'
+import cn from 'classnames'
 import React from 'react'
-import styles from './Content.module.scss'
 
-export type ContentProps = { children: React.ReactNode }
+export type ContentProps = {
+	children: React.ReactNode,
+	noMargins?: boolean
+}
 
-export default function Content({ children }: ContentProps) {
+export default function Content({ children, noMargins = false }: ContentProps) {
 
 	return (
-		<main id="content" className={styles.content}>
-			<div className={styles.wrapper}>
+		<main id="content" className={cn(s.content, noMargins && s.nomargins)}>
+			<div className={s.wrapper}>
 				<article>
 					{children}
 				</article>

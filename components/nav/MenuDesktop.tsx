@@ -7,7 +7,7 @@ import { regions } from "/lib/region";
 import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
-import { RegionSelector, RegionLink } from '/components'
+import { RegionSelector, RegionLink, User } from '/components'
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -15,13 +15,13 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 	const ref = useRef();
 	const router = useRouter()
-	const [marginLeft, setMarginLeft] = useState<string>('0px')
+	const [paddingLeft, setPaddingLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
 	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition } = useScrollInfo()
 
 	useEffect(() => { // Toggle menu bar on scroll
-		setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
+		//setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
 	}, [scrolledPosition, isPageBottom, isPageTop, isScrolledUp, setShowMenu]);
 
 
@@ -30,7 +30,8 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 			return
 
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
-		setMarginLeft(`${el.offsetLeft}px`)
+		const bounds = el.getBoundingClientRect()
+		setPaddingLeft(`${bounds.left}px`)
 	}, [selected])
 
 	useEffect(() => {
@@ -59,18 +60,19 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 							}
 						</li>
 					)}
+					<li className={s.user}>
+						<User />
+					</li>
 					<li className={s.region}>
 						<RegionSelector />
 					</li>
 				</ul>
-				<div className={s.background}>
-
+				<div className={s.background} style={{ paddingLeft }}>
 					{items.map((item, i) => {
 						return (
 							<ul
 								key={i}
 								data-sub-type={item.type}
-								style={{ marginLeft }}
 								className={cn(s.sub, selected?.type === item.type && !selected.index && s.show)}
 								onMouseLeave={() => setSelected(undefined)}
 								onMouseMove={() => setSelected(item)}
