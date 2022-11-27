@@ -3,17 +3,16 @@ import cn from 'classnames'
 import { useStore } from '/lib/store'
 import { regions } from '/lib/region'
 import { Twirl as Hamburger } from "hamburger-react";
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { Menu, MenuItem } from '/lib/menu';
 import Link from 'next/link';
 
 export type MenuMobileProps = { items: Menu }
 
-const englishMenuItem: MenuItem = { type: 'language', label: 'English', slug: '/english' }
+const englishMenuItem: MenuItem = { type: 'language', label: 'English', slug: '/english', index: true }
 
 export default function MenuMobile({ items }: MenuMobileProps) {
 
-	const [open, setOpen] = useState(false);
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
 	const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
@@ -30,7 +29,10 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 					size={24}
 				/>
 			</div>
-			<div className={cn(s.mobileMenu, showMenuMobile && s.show)}>
+			<div
+				className={cn(s.mobileMenu, showMenuMobile && s.show)}
+				onClick={({ target: { tagName } }) => tagName === 'A' && setShowMenuMobile(false)}
+			>
 				<nav>
 					<ul className={s.nav}>
 						{[...items, englishMenuItem].map((item, idx) =>
@@ -58,7 +60,6 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 										</li>
 									)
 								}
-
 							</>
 						)}
 					</ul>
@@ -71,7 +72,9 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 						</li>
 						{showRegions && regions.map(({ name, slug }, idx) =>
 							<li key={idx} className={s.sub}>
-								{name}
+								<Link href={`/${slug}`}>
+									{name}
+								</Link>
 							</li>
 						)}
 					</ul>

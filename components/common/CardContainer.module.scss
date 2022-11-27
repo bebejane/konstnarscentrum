@@ -37,7 +37,6 @@
         border-right: none;
       }
     }
-
   }
 
   &.three>li {
@@ -48,9 +47,9 @@
     }
 
     @include mq($until: tablet) {
-      width: 50%;
+      width: 100%;
 
-      &:nth-child(2n) {
+      &:nth-child(1n) {
         border-right: none;
       }
     }
