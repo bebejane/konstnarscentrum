@@ -1,7 +1,6 @@
 import s from './SelectedMember.module.scss'
 import React from 'react'
-import ThumbnailContainer from '/components/common/ThumbnailContainer'
-import Thumbnail from '/components/common/Thumbnail'
+import { CardContainer, Card, Thumbnail } from '/components'
 import SectionHeader from '../layout/SectionHeader'
 
 export type SelectedMemberBlockProps = {
@@ -13,16 +12,17 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
   return (
     <section className={s.container}>
       <SectionHeader title="Upptäck konstnärer" slug={"/anlita-oss/uppdrag"} margin={true} />
-      <ThumbnailContainer>
+      <CardContainer columns={3}>
         {selectedMembers?.map(({ firstName, lastName, image, slug }, idx) =>
-          <Thumbnail
-            key={idx}
-            title={`${firstName} ${lastName}`}
-            image={image}
-            slug={`/anlita-oss/hitta-konstnar/${slug}`}
-          />
+          <Card key={idx}>
+            <Thumbnail
+              title={`${firstName} ${lastName}`}
+              image={image}
+              slug={`/anlita-oss/hitta-konstnar/${slug}`}
+            />
+          </Card>
         )}
-      </ThumbnailContainer>
+      </CardContainer>
       <div className={s.background}></div>
     </section>
   )

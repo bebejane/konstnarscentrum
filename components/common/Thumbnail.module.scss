@@ -1,27 +1,6 @@
 .thumbnail {
-  width: 50%;
+
   position: relative;
-
-  @include mq($from: tablet) {
-    width: 33.33%;
-
-  }
-
-  padding-right: var(--gutter);
-  padding-left: var(--gutter);
-  border-right: 1px solid var(--beige-mid);
-
-  @include mq($until: tablet) {
-    &:nth-child(2n) {
-      border-right: none;
-    }
-  }
-
-  @include mq($from: tablet) {
-    &:nth-child(3n) {
-      border-right: none;
-    }
-  }
 
   .image {
     margin-bottom: 0.5em;
@@ -64,5 +43,4 @@
     overflow: hidden;
     min-height: 1rem;
   }
-
 }
