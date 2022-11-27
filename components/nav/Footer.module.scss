@@ -101,8 +101,7 @@
       svg {
         margin-left: 0px;
         transform: rotate(0deg);
-        transition: transform 2s ease-out, margin-left 2s ease-in-out;
-
+        transition: transform 0.7s ease-out, margin-left 2s ease-in-out;
       }
 
       &.inview {

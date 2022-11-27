@@ -15,14 +15,14 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
 
   return (
     <section className={s.container}>
-      <SectionHeader title="Utvalda uppdrag" slug={"/anlita-oss/uppdrag"} />
+      <SectionHeader title="Utvalda uppdrag" slug="/anlita-oss/uppdrag" />
       <ThumbnailContainer>
         {commissions.map(({ title, image, slug }, idx) =>
           <Thumbnail
             key={idx}
             title={title}
             image={image}
-            slug={`/anlita-oss/uppdrage/${slug}`}
+            slug={`/anlita-oss/uppdrag/${slug}`}
           />
         )}
       </ThumbnailContainer>
