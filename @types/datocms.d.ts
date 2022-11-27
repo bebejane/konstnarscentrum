@@ -796,6 +796,7 @@ type EmployeeModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
   name?: InputMaybe<StringFilter>;
+  region?: InputMaybe<LinkFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
 
@@ -847,6 +848,7 @@ type EmployeeRecord = RecordInterface & {
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
   name?: Maybe<Scalars['String']>;
+  region: RegionRecord;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -1259,8 +1261,6 @@ type ImageRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-type ImageShortcutModelLinkField = CommissionRecord | ForArtistRecord | MemberNewsRecord | NewsRecord;
-
 /** Block of type Bildgenväg (image_shortcut) */
 type ImageShortcutRecord = RecordInterface & {
   __typename?: 'ImageShortcutRecord';
@@ -1279,7 +1279,7 @@ type ImageShortcutRecord = RecordInterface & {
   headline?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
-  link?: Maybe<ImageShortcutModelLinkField>;
+  link?: Maybe<Scalars['String']>;
   text?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
@@ -3192,6 +3192,33 @@ type MemberRecordbioArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** Block of type Meta (meta_block) */
+type MetaBlockRecord = RecordInterface & {
+  __typename?: 'MetaBlockRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  text?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Block of type Meta (meta_block) */
+type MetaBlockRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 enum MuxThumbnailFormatType {
   gif = 'gif',
   jpg = 'jpg',
@@ -4080,10 +4107,12 @@ type RegionModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  contactIntro?: InputMaybe<TextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   global?: InputMaybe<BooleanFilter>;
   id?: InputMaybe<ItemIdFilter>;
   name?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
   slug?: InputMaybe<SlugFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -4113,6 +4142,8 @@ enum RegionModelOrderBy {
   id_DESC = 'id_DESC',
   name_ASC = 'name_ASC',
   name_DESC = 'name_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
   updatedAt_DESC = 'updatedAt_DESC'
 }
@@ -4133,13 +4164,17 @@ type RegionRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  contactIntro?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
   gallery: Array<SlideRecord>;
   global?: Maybe<Scalars['BooleanType']>;
   id: Scalars['ItemId'];
+  info: Array<MetaBlockRecord>;
   name: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
   sections: Array<RegionModelSectionsField>;
   slug: Scalars['String'];
+  sponsors: Array<SponsorRecord>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -4147,6 +4182,12 @@ type RegionRecord = RecordInterface & {
 /** Record of type Region (region) */
 type RegionRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Region (region) */
+type RegionRecordcontactIntroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Specifies how to filter by upload type */
@@ -4306,6 +4347,33 @@ type SlugFilter = {
   neq?: InputMaybe<Scalars['String']>;
   /** Filter records that do have one of the specified slugs */
   notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+/** Block of type Sponsor (sponsor) */
+type SponsorRecord = RecordInterface & {
+  __typename?: 'SponsorRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  image?: Maybe<FileField>;
+  updatedAt: Scalars['DateTime'];
+  url?: Maybe<Scalars['String']>;
+};
+
+
+/** Block of type Sponsor (sponsor) */
+type SponsorRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Record of type Start (start) */
@@ -5072,4 +5140,4 @@ type RegionQueryVariables = Exact<{
 }>;
 
 
-type RegionQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', id: any, name: string, slug: string, gallery: Array<{ __typename?: 'SlideRecord', id: any, headline?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, link?: { __typename: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'ForArtistRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'MemberNewsRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'NewsRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | null }>, sections: Array<{ __typename?: 'ImageShortcutRecord', id: any, headline?: string | null, text?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, link?: { __typename: 'CommissionRecord', id: any } | { __typename: 'ForArtistRecord', id: any } | { __typename: 'MemberNewsRecord', id: any } | { __typename: 'NewsRecord', id: any } | null } | { __typename?: 'LatestMemberNewsRecord', id: any } | { __typename?: 'LatestNewsRecord', id: any, description?: string | null } | { __typename?: 'SelectedCommissionRecord', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, city?: string | null, year?: string | null, artist?: string | null, consultant?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> } | { __typename?: 'SelectedMemberRecord', selectedMembers: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> } | { __typename?: 'TextRecord', id: any, url?: string | null, headline?: string | null, text?: string | null }> } | null };
+type RegionQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', id: any, name: string, slug: string, gallery: Array<{ __typename?: 'SlideRecord', id: any, headline?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, link?: { __typename: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'ForArtistRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'MemberNewsRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename: 'NewsRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | null }>, sections: Array<{ __typename?: 'ImageShortcutRecord', id: any, headline?: string | null, text?: string | null, link?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null } | { __typename?: 'LatestMemberNewsRecord', id: any } | { __typename?: 'LatestNewsRecord', id: any, description?: string | null } | { __typename?: 'SelectedCommissionRecord', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, city?: string | null, year?: string | null, artist?: string | null, consultant?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> } | { __typename?: 'SelectedMemberRecord', selectedMembers: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> } | { __typename?: 'TextRecord', id: any, url?: string | null, headline?: string | null, text?: string | null }> } | null };

@@ -57,21 +57,7 @@ query Region($regionId: ItemId!) {
 					...ImageFragment
 				}
 				text
-				link {
-					__typename
-					... on CommissionRecord {
-						id
-					}
-					... on ForArtistRecord {
-						id
-					}
-					... on MemberNewsRecord {
-						id
-					}
-					... on NewsRecord {
-						id
-					}
-				}
+				link 
 				text
 			}
 			... on LatestNewsRecord {

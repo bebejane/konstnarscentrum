@@ -11,6 +11,10 @@ export default function Text({ data: { text, headline, url } }: TextBlockProps) 
 
   return (
     <div className={s.container}>
+
+      {headline &&
+        <h2>{headline}</h2>
+      }
       <h3>
         <Markdown className={s.text}>
           {text}
