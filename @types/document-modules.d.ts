@@ -240,6 +240,7 @@ declare module '*/region.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const Region: DocumentNode;
+export const RegionMeta: DocumentNode;
 
   export default defaultDocument;
 }
