@@ -23,7 +23,9 @@
     "lib/emails": true,
     "lib/scripts": true,
     "lib/services": true,
-    "regions.json": true
+    "regions.json": true,
+    "@types": true,
+    "public": true
   },
   "workspace.isHidden": true
 }

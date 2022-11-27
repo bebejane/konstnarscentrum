@@ -1,4 +1,6 @@
 #import "./fragments/ImagaFragment.gql"
+#import "./fragments/ImagaThumbnailFragment.gql"
+#import "./fragments/RegionFragment.gql"
 #import "./fragments/CommissionsFragment.gql"
 #import "./fragments/MemberLightFragment.gql"
 
@@ -83,6 +85,26 @@ query Region($regionId: ItemId!) {
 					...MemberLightFragment
 				}
 			}
+		}
+	}
+}
+
+query RegionMeta($regionId: ItemId!) {
+	region(filter: { id: { eq: $regionId } }) {
+		contactIntro(markdown: false)
+		info {
+			title
+			text
+		}
+	}
+	employees: allEmployees(filter: { region: { eq: $regionId } }) {
+		name
+		email
+		image {
+			...ImageThumbnailFragment
+		}
+		region {
+			...RegionFragment
 		}
 	}
 }

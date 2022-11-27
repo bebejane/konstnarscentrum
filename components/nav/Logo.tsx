@@ -89,7 +89,7 @@ export default function Logo({ disabled }: Props) {
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
         {!region?.global &&
-          <span className={s.region}>{region?.name}</span>
+          <span className={s.region}>{horizontal.length === 0 && <>&nbsp;&nbsp;</>}{region?.name}</span>
         }
       </div>
     </div>

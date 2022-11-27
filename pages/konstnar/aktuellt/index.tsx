@@ -5,7 +5,6 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
 
-
 import Link from "next/link";
 
 export type Props = {
