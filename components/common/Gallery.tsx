@@ -30,7 +30,7 @@ const parseRecord = (record: any) => {
 export default function Gallery({ slides }: Props) {
 
   const [index, setIndex] = useState(0)
-  console.log(slides.map(el => ({ ...el, ...parseRecord(el.link) })));
+  //console.log(slides.map(el => ({ ...el, ...parseRecord(el.link) })));
 
   return (
     <section className={s.gallery}>

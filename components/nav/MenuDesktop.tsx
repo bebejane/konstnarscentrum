@@ -39,8 +39,6 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 		setPaddingLeft(`${bounds.left}px`)
 
 		if (isAtBottom) {
-			console.log(getComputedStyle(subRef.current).paddingTop);
-
 			const height = 140//subRef.current.getBoundingClientRect().height - 70
 			window.scrollTo({
 				top: height,
