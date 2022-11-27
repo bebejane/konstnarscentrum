@@ -9,6 +9,10 @@
   pointer-events: none;
   margin-top: calc(-1 * var(--navbar-height));
 
+  @include mq($until: tablet) {
+    display: none;
+  }
+
   &.open {}
 
   .wrap {

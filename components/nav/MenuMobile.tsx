@@ -1,6 +1,7 @@
 import s from './MenuMobile.module.scss'
 import cn from 'classnames'
-import { useStore, shallow } from '/lib/store'
+import { useStore } from '/lib/store'
+import { regions } from '/lib/region'
 import { Twirl as Hamburger } from "hamburger-react";
 import { useState } from 'react';
 import type { Menu, MenuItem } from '/lib/menu';
@@ -14,6 +15,7 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 
 	const [open, setOpen] = useState(false);
 	const [selected, setSelected] = useState<MenuItem | undefined>();
+	const [showRegions, setShowRegions] = useState<boolean>(false);
 	const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
 
 	return (
@@ -56,7 +58,21 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 										</li>
 									)
 								}
+
 							</>
+						)}
+					</ul>
+					<ul className={s.footer}>
+						<li>
+							Sök
+						</li>
+						<li onClick={() => setShowRegions(!showRegions)}>
+							Region <img className={cn(s.caret, showRegions && s.open)} src="/images/caret.png" />
+						</li>
+						{showRegions && regions.map(({ name, slug }, idx) =>
+							<li key={idx} className={s.sub}>
+								{name}
+							</li>
 						)}
 					</ul>
 				</nav>

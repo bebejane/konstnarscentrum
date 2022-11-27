@@ -6,6 +6,7 @@ import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
 import { RegionSelector, RegionLink, User } from '/components'
+import Link from 'next/link'
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -98,6 +99,9 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 				<ul>
 					<li className={s.user}>
 						<User />
+					</li>
+					<li className={s.english}>
+						<Link href={'/english'}>English</Link>
 					</li>
 					<li className={s.region}>
 						<RegionSelector />
