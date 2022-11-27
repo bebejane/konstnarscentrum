@@ -11,11 +11,9 @@ export default function Content({ children, noMargins = false }: ContentProps) {
 
 	return (
 		<main id="content" className={cn(s.content, noMargins && s.nomargins)}>
-			<div className={s.wrapper}>
-				<article>
-					{children}
-				</article>
-			</div>
+			<article>
+				{children}
+			</article>
 		</main>
 	)
 }
