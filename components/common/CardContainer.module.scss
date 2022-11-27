@@ -18,15 +18,11 @@
 
   li {
     width: 50%;
+    padding-right: var(--gutter);
+    padding-left: var(--gutter);
 
     &:first-of-type {
-      padding-right: var(--gutter);
-      padding-left: var(--gutter);
       border-right: 1px solid var(--beige-mid);
-    }
-
-    &:last-of-type {
-      padding-left: var(--gutter);
     }
   }
 

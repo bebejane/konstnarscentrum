@@ -11,11 +11,11 @@ export default function Text({ data: { text, headline, url } }: TextBlockProps) 
 
   return (
     <div className={s.container}>
-      <h2>
+      <h3>
         <Markdown className={s.text}>
           {text}
         </Markdown>
-      </h2>
+      </h3>
       <Link className="small" href={url}>Läs mer</Link>
     </div>
   )

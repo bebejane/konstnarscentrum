@@ -12,7 +12,7 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
 
   return (
     <section className={s.container}>
-      <SectionHeader title="Upptäck konstnärer" slug={"/anlita-oss/uppdrag"} />
+      <SectionHeader title="Upptäck konstnärer" slug={"/anlita-oss/uppdrag"} margin={true} />
       <ThumbnailContainer>
         {selectedMembers?.map(({ firstName, lastName, image, slug }, idx) =>
           <Thumbnail

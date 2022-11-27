@@ -28,7 +28,7 @@
       line-height: var(--line-height-nav);
       &[data-selected="true"] {
         a {
-          color: rgb(245, 27, 223);
+          color: var(--beige-dark);
         }
       }
     }

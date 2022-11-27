@@ -28,7 +28,7 @@ export default function Initiatives({ projects, introInitiative: { intro } }: Pr
 
 						<li key={idx}>
 							<Image className={s.image} data={image.responsiveImage} />
-							<h2>{title}</h2>
+							<h3>{title}</h3>
 							<Markdown className={cn('mid', s.text)}>
 								{text}
 							</Markdown>
