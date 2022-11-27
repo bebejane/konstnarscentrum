@@ -26,8 +26,8 @@
 
     width: 50%;
 
-    &:nth-child(3n) {
-      border-right: 1px solid var(--beige-mid);
+    &:nth-child(2n) {
+      border-right: none;
     }
 
     @include mq($until: tablet) {

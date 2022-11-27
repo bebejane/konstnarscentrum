@@ -4,6 +4,7 @@ import React from 'react'
 import ThumbnailContainer from '/components/common/ThumbnailContainer'
 import Thumbnail from '/components/common/Thumbnail'
 import SectionHeader from '../layout/SectionHeader'
+import { CardContainer, Card } from '/components'
 
 export type SelectedCommissionBlockProps = {
   data: SelectedCommissionRecord & {
@@ -16,16 +17,17 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
   return (
     <section className={s.container}>
       <SectionHeader title="Utvalda uppdrag" slug="/anlita-oss/uppdrag" margin={true} />
-      <ThumbnailContainer>
+      <CardContainer columns={3}>
         {commissions.map(({ title, image, slug }, idx) =>
-          <Thumbnail
-            key={idx}
-            title={title}
-            image={image}
-            slug={`/anlita-oss/uppdrag/${slug}`}
-          />
+          <Card key={idx}>
+            <Thumbnail
+              title={title}
+              image={image}
+              slug={`/anlita-oss/uppdrag/${slug}`}
+            />
+          </Card>
         )}
-      </ThumbnailContainer>
+      </CardContainer>
       <div className={s.background}></div>
     </section>
   )

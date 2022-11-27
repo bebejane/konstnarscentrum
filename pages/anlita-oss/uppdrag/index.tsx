@@ -5,7 +5,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphql";
 import Link from "next/link";
 import { Image as DatoImage } from 'react-datocms'
-import { FilterBar, Thumbnail, ThumbnailContainer } from '/components'
+import { FilterBar, Thumbnail, CardContainer, Card } from '/components'
 import { useEffect, useState } from "react";
 
 export type Props = {
@@ -27,16 +27,18 @@ export default function RegionHome({ commissions, commissionCategories }: Props)
 				/>
 
 			</header>
-			<ThumbnailContainer>
+			<CardContainer columns={3}>
 				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, slug, image }, idx) =>
-					<Thumbnail
-						key={idx}
-						image={image}
-						title={title}
-						slug={`/anlita-oss/uppdrag/${slug}`}
-					/>
+					<Card key={idx}>
+						<Thumbnail
+							key={idx}
+							image={image}
+							title={title}
+							slug={`/anlita-oss/uppdrag/${slug}`}
+						/>
+					</Card>
 				)}
-			</ThumbnailContainer>
+			</CardContainer>
 		</>
 	);
 }

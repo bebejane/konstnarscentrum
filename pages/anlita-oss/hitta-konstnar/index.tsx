@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { regions } from "/lib/region";
 import { GetStaticProps } from "next";
 import { AllMemberCategoriesDocument, AllMembersWithPortfolioDocument, AllMembersCitiesDocument } from "/graphql";
-import { FilterBar, ThumbnailContainer, Thumbnail } from "/components";
+import { FilterBar, CardContainer, Card, Thumbnail } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
 
 export type Props = {
@@ -35,16 +35,17 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 				onChange={() => { }}
 			/>
 			<h2>Upptäck konstnärer</h2>
-			<ThumbnailContainer>
+			<CardContainer columns={3}>
 				{members.map(({ id, firstName, lastName, image, region, slug }) =>
-					<Thumbnail
-						key={id}
-						image={image}
-						title={`${firstName} ${lastName}`}
-						slug={`/anlita-oss/hitta-konstnar/${slug}`}
-					/>
+					<Card key={id}>
+						<Thumbnail
+							image={image}
+							title={`${firstName} ${lastName}`}
+							slug={`/anlita-oss/hitta-konstnar/${slug}`}
+						/>
+					</Card>
 				)}
-			</ThumbnailContainer>
+			</CardContainer>
 		</div>
 	);
 }

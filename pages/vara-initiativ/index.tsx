@@ -6,6 +6,7 @@ import { AllProjectsDocument, ProjectsIntroDocument } from "/graphql";
 import { Image } from "react-datocms";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import useDevice from "/lib/hooks/useDevice";
+import { CardContainer, Card } from "/components";
 
 export type Props = {
 	projects: ProjectRecord[],
@@ -22,24 +23,20 @@ export default function Initiatives({ projects, introInitiative: { intro } }: Pr
 			<Markdown className={s.intro}>
 				{intro}
 			</Markdown>
-			<ul>
+			<CardContainer columns={2}>
 				{projects.map(({ title, text, url, image }, idx) =>
-					<>
-
-						<li key={idx}>
-							<Image className={s.image} data={image.responsiveImage} />
-							<h3>{title}</h3>
-							<Markdown className={cn('mid', s.text)}>
-								{text}
-							</Markdown>
-							<a href={url}>
-								<button>Besök {title}</button>
-							</a>
-						</li>
-						{(idx + 1) % 2 === 0 && <hr />}
-					</>
+					<Card key={idx}>
+						<Image className={s.image} data={image.responsiveImage} />
+						<h3>{title}</h3>
+						<Markdown className={cn('mid', s.text)}>
+							{text}
+						</Markdown>
+						<a href={url}>
+							<button>Besök {title}</button>
+						</a>
+					</Card>
 				)}
-			</ul>
+			</CardContainer>
 		</div>
 	);
 }
