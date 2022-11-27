@@ -17,9 +17,13 @@ export default function NewsCard({ title, subtitle, text, slug, image }: NewsCar
 
   return (
     <Card className={s.card}>
-      {image && <Image className={s.image} data={image.responsiveImage} />}
+      {image &&
+        <Link href={slug}>
+          <Image className={s.image} data={image.responsiveImage} />
+        </Link>
+      }
       <h5>{subtitle}</h5>
-      <h4>{title}</h4>
+      <Link href={slug}><h4>{title}</h4></Link>
       <p className="mid">{text}</p>
       <Link className="small" href={slug}>Läs mer</Link>
     </Card>

@@ -1,4 +1,4 @@
-import s from './NewsCard.module.scss'
+import s from './Card.module.scss'
 import cn from 'classnames'
 import React from 'react'
 

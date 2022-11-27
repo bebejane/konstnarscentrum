@@ -22,7 +22,7 @@ export default function LatestMemberNews({ data: { memberNews } }: LatestMemberB
             subtitle={`${format(new Date(date), "d MMMM y")} | ${region.name}`}
             text={intro}
             image={image}
-            slug={slug}
+            slug={`/konstnar/aktuellt/${slug}`}
             regionName={region.name}
           />
         )}
