@@ -113,3 +113,18 @@ hr {
 	border: 0px;
 	background: var(--beige-mid);
 }
+
+input,
+textarea,
+select {
+	background-color: var(--beige-light);
+	margin-bottom: 1em;
+	padding: 0.8em;
+	padding-left: 1em;
+	font-family: "Jazz";
+	border: none;
+
+	&:focus {
+		outline: 1px solid var(--beige-mid);
+	}
+}

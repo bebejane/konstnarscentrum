@@ -17,7 +17,9 @@ export default function Login({ csrfToken, providers }: Props) {
 	return (
 		<div className={styles.container}>
 			<h1>Logga in</h1>
+			<p className="intro">Här kan du som är medlem logga in och redigera din portfolio.</p>
 			<SignIn csrfToken={csrfToken} providers={providers} />
+			<span className="small">Har du glömt ditt lösenord? Återställ här.</span>
 		</div>
 	);
 }
