@@ -1,24 +1,29 @@
 import s from "./index.module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
-import { Block, Gallery } from "/components";
-
+import { Block, Gallery, MenuDesktop } from "/components";
+import type { Menu } from "/lib/menu";
 export type Props = {
 	regionStart: RegionRecord
+	menu: Menu
 }
 
-export default function RegionHome({ regionStart }: Props) {
+export default function RegionHome({ regionStart, menu }: Props) {
 
 	return (
 		<div className={s.container}>
-			<div className={s.gallery}>
+			<div className={cn(s.gallery, s.margins)}>
 				<Gallery slides={regionStart.gallery} />
 			</div>
-			{regionStart.sections.map((block, idx) =>
-				<Block key={idx} data={block} />
-			)}
+			<MenuDesktop items={menu} />
+			<div className={s.margins}>
+				{regionStart.sections.map((block, idx) =>
+					<Block key={idx} data={block} />
+				)}
+			</div>
 		</div>
 	);
 }

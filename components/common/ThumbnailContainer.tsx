@@ -1,7 +1,7 @@
 import s from './ThumbnailContainer.module.scss'
 import { chunkArray } from '/lib/utils'
 import useDevice from '/lib/hooks/useDevice'
-
+import React from 'react'
 
 export type Props = {
   children?: React.ReactNode | React.ReactNode[]
@@ -15,10 +15,10 @@ export default function ThumbnailContainer({ children }: Props) {
     <div className={s.container}>
       {thumbs.map((row, idx) => {
         return (
-          <>
-            {row.map(el => el)}
-            <hr key={idx} />
-          </>
+          <React.Fragment key={idx}>
+            {row.map((el) => el)}
+            <hr />
+          </React.Fragment>
         )
       })}
     </div>

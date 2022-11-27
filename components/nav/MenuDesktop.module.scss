@@ -1,5 +1,5 @@
 .menu {
-  position: fixed;
+  position: sticky;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -70,24 +70,33 @@
     }
   }
 
-  .sub {
-    list-style: none;
-    display: none;
-    flex-direction: column;
-    z-index: 101;
-    margin-left: 0;
-    padding-top: 1rem;
-    padding-bottom: 1.7rem;
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    white-space: pre;
-    line-height: var(--line-height-nav);
+    background-color: var(--white);
 
-    &.show {
-      display: flex;
-    }
+    .sub {
+      display: none;
+      flex-direction: column;
+      z-index: 101;
+      margin-left: 0;
+      padding-top: 4rem;
+      padding-bottom: 1.7rem;
+      width: 100%;
+      white-space: pre;
+      list-style: none;
+      line-height: var(--line-height-nav);
 
-    >li {
-      pointer-events: all;
+      &.show {
+        display: flex;
+      }
+
+      >li {
+        pointer-events: all;
+      }
     }
   }
+
 }
