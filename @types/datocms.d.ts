@@ -4963,11 +4963,21 @@ type AllCommissionCategoriesQuery = { __typename?: 'Query', commissionCategories
 type LatestCommissionsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  regionId: Scalars['ItemId'];
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 
 type LatestCommissionsQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+
+type RelatedCommissionsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
+  commissionId?: InputMaybe<Scalars['ItemId']>;
+}>;
+
+
+type RelatedCommissionsQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
 
 type ConsultQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -5091,6 +5101,16 @@ type LatestMemberNewsQueryVariables = Exact<{
 
 
 type LatestMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+
+type RelatedMembersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
+  memberId?: InputMaybe<Scalars['ItemId']>;
+}>;
+
+
+type RelatedMembersQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> };
 
 type AllNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;

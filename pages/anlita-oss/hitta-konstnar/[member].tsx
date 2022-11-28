@@ -2,12 +2,12 @@ import s from "./[member].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { MemberBySlugDocument, AllMembersWithPortfolioDocument } from "/graphql";
-import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { Article, Block, MetaSection } from "/components";
+import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
+import { Article, Block, MetaSection, RelatedSection } from "/components";
 
 export type Props = {
 	member: MemberRecord,
+	related: MemberRecord[],
 	region: Region
 }
 
@@ -24,7 +24,7 @@ export default function Member({ member: {
 	city,
 	content
 
-} }: Props) {
+}, related }: Props) {
 
 	return (
 		<div className={s.container}>
@@ -47,6 +47,15 @@ export default function Member({ member: {
 					<Block key={idx} data={block} />
 				)}
 			</Article>
+			<RelatedSection
+				title="Upptäck fler konstnärer"
+				slug={'/anlita-oss/hitta-konstnar'}
+				items={related.map(({ firstName, lastName, image, slug }) => ({
+					title: `${firstName} ${lastName}`,
+					image,
+					slug: `/anlita-oss/hitta-konstnar/${slug}`
+				}))}
+			/>
 		</div>
 	);
 }
@@ -64,13 +73,16 @@ export async function getStaticPaths(context) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
+	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
 	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug } })
+	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id } })
 
 	return {
 		props: {
 			...props,
-			member
+			member,
+			related
 		},
 	};
 });

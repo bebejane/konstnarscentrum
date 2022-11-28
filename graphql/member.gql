@@ -68,3 +68,18 @@ query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemI
 		...MemberNewsLightFragment
 	}
 }
+
+query RelatedMembers(
+	$first: IntType = 6
+	$skip: IntType = 0
+	$regionId: ItemId
+	$memberId: ItemId
+) {
+	members: allMembers(
+		filter: { image: { exists: true }, region: { eq: $regionId }, id: { neq: $memberId } }
+		first: $first
+		skip: $skip
+	) {
+		...MemberLightFragment
+	}
+}

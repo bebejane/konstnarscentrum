@@ -18,6 +18,7 @@ export const AllCommissions: DocumentNode;
 export const AllCommissionsMenu: DocumentNode;
 export const AllCommissionCategories: DocumentNode;
 export const LatestCommissions: DocumentNode;
+export const RelatedCommissions: DocumentNode;
 
   export default defaultDocument;
 }
@@ -209,6 +210,7 @@ export const AllMemberCategories: DocumentNode;
 export const MemberNews: DocumentNode;
 export const AllMemberNews: DocumentNode;
 export const LatestMemberNews: DocumentNode;
+export const RelatedMembers: DocumentNode;
 
   export default defaultDocument;
 }

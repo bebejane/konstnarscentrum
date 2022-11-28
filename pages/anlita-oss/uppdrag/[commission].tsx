@@ -1,12 +1,13 @@
 import s from "./[commission].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { CommissionDocument, AllCommissionsDocument } from "/graphql";
+import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
-import { Article, Block, MetaSection } from "/components";
+import { Article, Block, MetaSection, RelatedSection } from "/components";
 
 type CommissionProps = {
 	commission: CommissionRecord
+	commissions: CommissionRecord[]
 }
 
 export default function Commission({ commission: {
@@ -18,7 +19,7 @@ export default function Commission({ commission: {
 	artist,
 	consultant,
 	content
-} }: CommissionProps) {
+}, commissions }: CommissionProps) {
 
 	return (
 		<>
@@ -42,13 +43,11 @@ export default function Commission({ commission: {
 					)}
 				</section>
 			</Article>
-			<section className={s.related}>
-				<header>
-					<h1>Fler uppdrag</h1>
-					<nav>Visa alla</nav>
-				</header>
-				<div className={s.background}></div>
-			</section>
+			<RelatedSection
+				title="Fler uppdrag"
+				slug="/anlita-oss/uppdrag"
+				items={commissions.map(({ title, image, slug }) => ({ title, image, slug: `/anlita-oss/uppdrag/${slug}` }))}
+			/>
 		</>
 	);
 }
@@ -65,13 +64,16 @@ export async function getStaticPaths() {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
+	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.commission;
 	const { commission } = await apiQuery(CommissionDocument, { variables: { slug } });
+	const { commissions } = await apiQuery(RelatedCommissionsDocument, { variables: { regionId, commissionId: commission.id } });
 
 	return {
 		props: {
 			...props,
-			commission
+			commission,
+			commissions
 		},
 		revalidate
 	};
