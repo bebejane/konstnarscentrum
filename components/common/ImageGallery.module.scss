@@ -4,25 +4,27 @@
   min-width: 100%;
   margin-top: var(--space);
   margin-bottom: var(--space);
+
   @include mq($from: tablet) {
     margin-left: calc(-1 * var(--grid-unit));
     max-width: calc(100% + (var(--grid-unit) * 2));
     margin-right: calc(-1 * var(--grid-unit));
   }
+
   .swiper {
     position: relative;
     max-width: 100%;
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    > div {
+
+    >div {
       display: flex;
       flex-direction: row;
+
       .slide {
         position: relative;
-        .image,
-        picture {
-        }
+
       }
     }
   }

@@ -1,0 +1,20 @@
+.gallery {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0;
+  flex: 0 0 100%;
+
+  li {
+    flex: 0 0 calc(20% - .5rem);
+    margin-right: 1rem;
+    cursor: pointer;
+
+    .thumb {
+      aspect-ratio: 4/4;
+      background-color: rgba(255, 255, 255, 0.05);
+
+    }
+  }
+}

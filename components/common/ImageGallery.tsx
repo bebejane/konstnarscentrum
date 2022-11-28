@@ -35,7 +35,9 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								className={styles.image}
 								fadeInDuration={0}
 							/>
-							<figcaption>{item.title}</figcaption>
+							{item.title &&
+								<figcaption>{item.title}</figcaption>
+							}
 						</figure>
 					</SwiperSlide>
 				)}

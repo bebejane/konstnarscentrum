@@ -5,7 +5,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
 import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 export type Props = {
@@ -29,8 +29,12 @@ export default function Member({ member: {
 
 }, related }: Props) {
 
-	const [blocks, setBlocks] = useState(content)
+	const [blocks, setBlocks] = useState()
 	const { data, status } = useSession()
+
+	useEffect(() => {
+		setBlocks(content)
+	}, [content])
 
 	return (
 		<div className={s.container}>
@@ -50,7 +54,7 @@ export default function Member({ member: {
 					]}
 				/>
 				<h1 className="noPadding">Utvalda verk</h1>
-				{blocks?.map((block, idx) =>
+				{(blocks || content)?.map((block, idx) =>
 					<Block
 						key={idx}
 						data={block}

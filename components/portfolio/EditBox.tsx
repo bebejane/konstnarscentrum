@@ -2,7 +2,7 @@ import s from "./EditBox.module.scss";
 import cn from 'classnames'
 import { useEffect, useState } from "react";
 import { arrayMoveImmutable } from 'array-move';
-import PhotoEditor from "./PhotoEditor";
+import { PortfolioEditor } from "/components";
 import EditIcon from '/public/images/edit.svg'
 
 export default function EditBox({ onChange, blocks }) {
@@ -105,9 +105,8 @@ export default function EditBox({ onChange, blocks }) {
           }
         </div>
       </div>
-      {
-        images &&
-        <PhotoEditor images={images} onClose={() => setImages(undefined)} onSave={() => { }} />
+      {images &&
+        <PortfolioEditor images={images} onClose={() => setImages(undefined)} onSave={() => { }} />
       }
     </>
   )
