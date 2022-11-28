@@ -40,7 +40,6 @@ export default function Thumbnail({ image, slug, title }: Props) {
 
   }, [hover, setRatio])
 
-
   return (
     <RegionLink
       className={s.thumbnail}
@@ -57,15 +56,17 @@ export default function Thumbnail({ image, slug, title }: Props) {
           fadeInDuration={0}
         />
       }
+
       <span className={cn('mid', s.title, s.vertical)}>
         {vertical.map(c => c)}
       </span>
       <span className={cn('mid', s.title, s.horizontal)}>
-        {horizontal.map(c => c)}
+        <span>{horizontal.map(c => c)}</span>
+        <span className={cn('mid', s.more, hover && s.hover)}>
+          {more.map(c => c)}
+        </span>
       </span>
-      <span className={cn('mid', s.more, hover && s.hover)}>
-        {more.map(c => c)}
-      </span>
+
     </RegionLink>
   )
 }

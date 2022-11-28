@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
-import { Block, Gallery, MenuDesktop } from "/components";
+import { Block, Gallery, MenuDesktop, Thumbnail } from "/components";
 import type { Menu } from "/lib/menu";
 
 export type Props = {
@@ -15,6 +15,7 @@ export type Props = {
 export default function RegionHome({ regionStart, menu }: Props) {
 
 	return (
+
 		<div className={s.container}>
 			<div className={cn(s.gallery, s.margins)}>
 				<Gallery slides={regionStart.gallery} />
@@ -26,6 +27,7 @@ export default function RegionHome({ regionStart, menu }: Props) {
 				)}
 			</div>
 		</div>
+
 	);
 }
 
