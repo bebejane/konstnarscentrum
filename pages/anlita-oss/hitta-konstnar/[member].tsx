@@ -1,9 +1,12 @@
 import s from "./[member].module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection } from "/components";
+import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
+import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 export type Props = {
 	member: MemberRecord,
@@ -26,12 +29,16 @@ export default function Member({ member: {
 
 }, related }: Props) {
 
+	const [blocks, setBlocks] = useState(content)
+	const { data, status } = useSession()
+
 	return (
 		<div className={s.container}>
 			<Article
 				image={image}
 				title={`${firstName} ${lastName}`}
 				text={bio}
+				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
 			>
 				<MetaSection
 					items={[
@@ -43,8 +50,17 @@ export default function Member({ member: {
 					]}
 				/>
 				<h1 className="noPadding">Utvalda verk</h1>
-				{content?.map((block, idx) =>
-					<Block key={idx} data={block} />
+				{blocks?.map((block, idx) =>
+					<Block
+						key={idx}
+						data={block}
+						editable={{
+							...block,
+							id: block.id,
+							type: block.__typename,
+							index: idx
+						}}
+					/>
 				)}
 			</Article>
 			<RelatedSection
@@ -56,9 +72,11 @@ export default function Member({ member: {
 					slug: `/anlita-oss/hitta-konstnar/${slug}`
 				}))}
 			/>
+			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
 		</div>
 	);
 }
+
 
 export async function getStaticPaths(context) {
 	const { members }: { members: MemberRecord[] } = await apiQuery(AllMembersWithPortfolioDocument)

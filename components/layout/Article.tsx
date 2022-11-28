@@ -11,26 +11,28 @@ export type ArticleProps = {
   text: string,
   image?: FileField,
   showImage?: boolean,
-  content?: any
+  content?: any,
+  editable?: any
 }
 
-export default function Article({ children, title, text, image, content, showImage = true }: ArticleProps) {
+export default function Article({ children, title, text, image, content, showImage = true, editable }: ArticleProps) {
 
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
-  const startScrollAnimation = ratio > 0.1
 
   return (
-    <div className={s.article}>
+    <div className={s.article} >
       {image && showImage ?
-        <header>
+        <header >
           <h1 className={s.title}>{title}</h1>
-          <Image
-            className={s.image}
-            data={image.responsiveImage}
-            fadeInDuration={0}
-            objectFit="cover"
-          />
+          <figure data-editable={editable}>
+            <Image
+              className={s.image}
+              data={image.responsiveImage}
+              fadeInDuration={0}
+              objectFit="cover"
+            />
+          </figure>
           <div className={s.colorBg} style={{ backgroundColor: image.responsiveImage.bgColor }}></div>
         </header>
         :

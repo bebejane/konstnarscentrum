@@ -21,14 +21,13 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition, viewportHeight } = useScrollInfo()
 
 	useEffect(() => { // Toggle menu bar on scroll
-		//setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
+		setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
 	}, [scrolledPosition, isPageBottom, isPageTop, isScrolledUp, setShowMenu]);
 
 
 	useEffect(() => {
 		if (typeof selected === 'undefined')
 			return
-
 
 		const isAtBottom = menuRef.current.getBoundingClientRect().bottom >= viewportHeight //subRef.current.getBoundingClientRect().top
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
@@ -38,10 +37,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 		if (isAtBottom) {
 			const height = 140 //subRef.current.getBoundingClientRect().height - 70
-			window.scrollTo({
-				top: height,
-				behavior: 'smooth'
-			})
+			window.scrollTo({ top: height, behavior: 'smooth' })
 		}
 
 	}, [selected])

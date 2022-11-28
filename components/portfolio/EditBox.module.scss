@@ -1,0 +1,54 @@
+.editBox {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  padding: calc(var(--small-space) / 4);
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+
+
+  &.show {
+    display: flex;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-direction: row;
+
+    .edit {
+      display: flex;
+
+      flex-direction: row;
+      align-items: center;
+
+      color: var(--white);
+      flex: 1 1 100%;
+
+      div {
+        margin-right: 1rem;
+      }
+    }
+
+    .order {
+      color: var(--white);
+      font-size: 20px;
+
+      >div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-height: 30px;
+        min-width: 30px;
+        border: 1px solid var(--white);
+        margin-bottom: 5px;
+      }
+
+    }
+  }
+
+
+}
