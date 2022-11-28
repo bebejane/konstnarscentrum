@@ -75,6 +75,8 @@ export default function Logo({ disabled }: Props) {
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
 
+
+
   return (
     <div className={s.logo}>
       <div className={s.vertical}>
@@ -90,7 +92,7 @@ export default function Logo({ disabled }: Props) {
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
         {!region?.global &&
-          <Link href={`/${region.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
+          <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
             {region?.name}
           </Link>
         }
