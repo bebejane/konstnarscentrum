@@ -1,4 +1,5 @@
 import s from './Logo.module.scss'
+import cn from 'classnames'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import { isServer } from '/lib/utils'
 import Link from 'next/link'
@@ -40,7 +41,7 @@ export default function Logo({ disabled }: Props) {
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
 
-    if (disabled) {
+    if (disabled || (isMobile && !manualMode)) {
       if (isMobile && !manualMode)
         return direction === 'horizontal' ? letters : []
       if (!isMobile && !manualMode)
@@ -89,8 +90,8 @@ export default function Logo({ disabled }: Props) {
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
         {!region?.global &&
-          <Link href={`/${region.slug}`} className={s.region}>
-            {horizontal.length === 0 && <>&nbsp;&nbsp;</>}{region?.name}
+          <Link href={`/${region.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
+            {region?.name}
           </Link>
         }
       </div>
