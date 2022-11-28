@@ -23,7 +23,7 @@ export default function Article({ children, title, text, image, content, showIma
   return (
     <div className={s.article} >
       {image && showImage ?
-        <header >
+        <header>
           <h1 className={s.title}>{title}</h1>
           <figure data-editable={editable}>
             <Image
