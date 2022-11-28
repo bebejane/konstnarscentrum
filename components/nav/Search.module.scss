@@ -7,16 +7,19 @@
   right: 0;
   z-index: 200;
   pointer-events: none;
+  margin-top: calc(-1 * var(--navbar-height));
 
-  &.open {
-
-    background-color: pink;
+  @include mq($until: tablet) {
+    display: none;
   }
+
+  &.open {}
 
   .wrap {
     display: flex;
     align-items: center;
     flex: 0 0;
+
     margin: var(--outer-margin);
     pointer-events: all;
     cursor: pointer;

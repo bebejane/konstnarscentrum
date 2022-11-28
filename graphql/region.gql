@@ -4,7 +4,7 @@
 #import "./fragments/CommissionsFragment.gql"
 #import "./fragments/MemberLightFragment.gql"
 
-query Region($regionId: ItemId!) {
+query Region($regionId: ItemId) {
 	region(filter: { id: { eq: $regionId } }) {
 		id
 		name
@@ -59,7 +59,7 @@ query Region($regionId: ItemId!) {
 					...ImageFragment
 				}
 				text
-				link 
+				link
 				text
 			}
 			... on LatestNewsRecord {

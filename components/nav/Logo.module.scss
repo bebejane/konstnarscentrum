@@ -17,9 +17,7 @@
     top: 0;
     left: 0;
 
-    a {
-      padding: 0;
-      margin: 0;
+    >a {
       line-height: 0;
       max-height: var(--logo-size);
     }
@@ -29,6 +27,7 @@
     writing-mode: vertical-rl;
     transform: rotate(-180deg);
     text-align: right;
+    margin-top: -0.13em;
   }
 
   .horizontal {
@@ -41,14 +40,27 @@
 
   .region {
 
-    margin-left: 0.7rem;
     color: var(--white);
     -webkit-text-stroke: 1px;
     -webkit-text-stroke-color: var(--black);
 
-    @include mq($until: tablet) {
-      margin-left: 0.5em;
+    @include mq($from: tablet) {
+      margin-left: 0.5rem;
+
+      &.end {
+        margin-left: 1.5rem;
+      }
     }
+
+    @include mq($until: tablet) {
+      margin-left: 0.3rem;
+
+      &.end {
+        margin-left: 1.3rem;
+      }
+    }
+
+
   }
 
 }

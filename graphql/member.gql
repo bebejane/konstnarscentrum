@@ -58,7 +58,7 @@ query AllMemberNews {
 	}
 }
 
-query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId!) {
+query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId) {
 	memberNews: allMemberNews(
 		filter: { region: { eq: $regionId } }
 		orderBy: [createdAt_DESC]
@@ -66,5 +66,20 @@ query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemI
 		skip: $skip
 	) {
 		...MemberNewsLightFragment
+	}
+}
+
+query RelatedMembers(
+	$first: IntType = 6
+	$skip: IntType = 0
+	$regionId: ItemId
+	$memberId: ItemId
+) {
+	members: allMembers(
+		filter: { image: { exists: true }, region: { eq: $regionId }, id: { neq: $memberId } }
+		first: $first
+		skip: $skip
+	) {
+		...MemberLightFragment
 	}
 }

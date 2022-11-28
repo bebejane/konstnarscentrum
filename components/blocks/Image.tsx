@@ -4,9 +4,14 @@ import React from 'react'
 import { Image as DatoImage } from 'react-datocms'
 import { ImageGallery } from '/components'
 
-export type ImageBlockProps = { id: string, data: ImageRecord, onClick: Function }
+export type ImageBlockProps = {
+	id: string,
+	data: ImageRecord,
+	onClick: Function,
+	editable?: any
+}
 
-export default function Image({ id, data: { image: images }, onClick }: ImageBlockProps) {
+export default function Image({ id, data: { image: images }, onClick, editable }: ImageBlockProps) {
 
 	const isSingle = images.length === 1
 	const isDouble = images.length === 2
@@ -14,7 +19,7 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 
 	return (
 		isSingle ?
-			<figure className={s.single}>
+			<figure className={s.single} data-editable={editable}>
 				<DatoImage
 					data={images[0].responsiveImage}
 					className={s.image}
@@ -22,10 +27,11 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 				/>
 				{images[0].title &&
 					<figcaption>{images[0].title}</figcaption>
-				}			</figure>
+				}
+			</figure>
 			: isDouble ?
-				<div className={s.double}>
-					<figure>
+				<div className={s.double} data-editable={editable}>
+					<figure >
 						<DatoImage
 							data={images[0].responsiveImage}
 							className={s.image}
@@ -43,8 +49,11 @@ export default function Image({ id, data: { image: images }, onClick }: ImageBlo
 						/>
 						{images[1].title &&
 							<figcaption>{images[1].title}</figcaption>
-						}					</figure>
+						}
+					</figure>
 				</div>
-				: isGallery ? <ImageGallery id={id} images={images} /> : null
+				: isGallery ?
+					<ImageGallery id={id} images={images} editable={editable} />
+					: null
 	)
 }

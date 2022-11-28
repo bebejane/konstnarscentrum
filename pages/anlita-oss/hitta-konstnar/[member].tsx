@@ -1,13 +1,16 @@
 import s from "./[member].module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { MemberBySlugDocument, AllMembersWithPortfolioDocument } from "/graphql";
-import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { Article, Block, MetaSection } from "/components";
+import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
+import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
+import { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
 export type Props = {
 	member: MemberRecord,
+	related: MemberRecord[],
 	region: Region
 }
 
@@ -24,7 +27,14 @@ export default function Member({ member: {
 	city,
 	content
 
-} }: Props) {
+}, related }: Props) {
+
+	const [blocks, setBlocks] = useState()
+	const { data, status } = useSession()
+
+	useEffect(() => {
+		setBlocks(content)
+	}, [content])
 
 	return (
 		<div className={s.container}>
@@ -32,6 +42,7 @@ export default function Member({ member: {
 				image={image}
 				title={`${firstName} ${lastName}`}
 				text={bio}
+				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
 			>
 				<MetaSection
 					items={[
@@ -43,13 +54,33 @@ export default function Member({ member: {
 					]}
 				/>
 				<h1 className="noPadding">Utvalda verk</h1>
-				{content?.map((block, idx) =>
-					<Block key={idx} data={block} />
+				{(blocks || content)?.map((block, idx) =>
+					<Block
+						key={idx}
+						data={block}
+						editable={{
+							...block,
+							id: block.id,
+							type: block.__typename,
+							index: idx
+						}}
+					/>
 				)}
 			</Article>
+			<RelatedSection
+				title="Upptäck fler konstnärer"
+				slug={'/anlita-oss/hitta-konstnar'}
+				items={related.map(({ firstName, lastName, image, slug }) => ({
+					title: `${firstName} ${lastName}`,
+					image,
+					slug: `/anlita-oss/hitta-konstnar/${slug}`
+				}))}
+			/>
+			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
 		</div>
 	);
 }
+
 
 export async function getStaticPaths(context) {
 	const { members }: { members: MemberRecord[] } = await apiQuery(AllMembersWithPortfolioDocument)
@@ -64,13 +95,16 @@ export async function getStaticPaths(context) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
+	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
 	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug } })
+	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id } })
 
 	return {
 		props: {
 			...props,
-			member
+			member,
+			related
 		},
 	};
 });

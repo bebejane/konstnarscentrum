@@ -6,15 +6,15 @@ import type { Swiper } from 'swiper';
 import { Image } from 'react-datocms'
 import { useState, useRef, useEffect } from 'react';
 
-export type ImageGalleryBlockProps = { id: string, images: FileField[], onClick?: Function }
+export type ImageGalleryBlockProps = { id: string, images: FileField[], onClick?: Function, editable?: boolean }
 
-export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockProps) {
+export default function ImageGallery({ id, images, onClick, editable = false }: ImageGalleryBlockProps) {
 
 	const swiperRef = useRef<Swiper | null>(null)
 	const [index, setIndex] = useState(0)
 
 	return (
-		<div className={styles.gallery}>
+		<div className={styles.gallery} data-editable={editable}>
 			<SwiperReact
 				id={`${id}-swiper-wrap`}
 				className={cn(styles.swiper)}
@@ -35,7 +35,9 @@ export default function ImageGallery({ id, images, onClick }: ImageGalleryBlockP
 								className={styles.image}
 								fadeInDuration={0}
 							/>
-							<figcaption>{item.title}</figcaption>
+							{item.title &&
+								<figcaption>{item.title}</figcaption>
+							}
 						</figure>
 					</SwiperSlide>
 				)}

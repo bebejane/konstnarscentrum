@@ -6,6 +6,7 @@ import { useStore, shallow } from '/lib/store'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
 import { RegionSelector, RegionLink, User } from '/components'
+import Link from 'next/link'
 
 export type MenuDesktopProps = { items: Menu }
 
@@ -20,14 +21,13 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition, viewportHeight } = useScrollInfo()
 
 	useEffect(() => { // Toggle menu bar on scroll
-		//setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
+		setShowMenu((isScrolledUp && !isPageBottom) || isPageTop)
 	}, [scrolledPosition, isPageBottom, isPageTop, isScrolledUp, setShowMenu]);
 
 
 	useEffect(() => {
 		if (typeof selected === 'undefined')
 			return
-
 
 		const isAtBottom = menuRef.current.getBoundingClientRect().bottom >= viewportHeight //subRef.current.getBoundingClientRect().top
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
@@ -37,10 +37,7 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 
 		if (isAtBottom) {
 			const height = 140 //subRef.current.getBoundingClientRect().height - 70
-			window.scrollTo({
-				top: height,
-				behavior: 'smooth'
-			})
+			window.scrollTo({ top: height, behavior: 'smooth' })
 		}
 
 	}, [selected])
@@ -98,6 +95,9 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 				<ul>
 					<li className={s.user}>
 						<User />
+					</li>
+					<li className={s.english}>
+						<Link href={'/english'}>English</Link>
 					</li>
 					<li className={s.region}>
 						<RegionSelector />

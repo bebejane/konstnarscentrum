@@ -10,6 +10,7 @@ export type SectionHeaderProps = {
 }
 
 export default function SectionHeader({ title, slug, margin }: SectionHeaderProps) {
+
   return (
     <header className={cn(s.header, margin && s.minusMargin)}>
       <h2>{title}</h2>

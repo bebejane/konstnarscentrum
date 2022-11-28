@@ -11,7 +11,7 @@ export type Props = {
 export default function CardContainer({ children, columns = 3 }: Props) {
 
   const { isMobile } = useDevice()
-  const cards = chunkArray(Array.isArray(children) ? children : [children], isMobile ? 2 : 3) as [React.ReactNode[]]
+  const cards = chunkArray(Array.isArray(children) ? children : [children], isMobile ? 1 : columns) as [React.ReactNode[]]
 
   return (
     <ul className={cn(s.container, columns === 2 && s.two, columns === 3 && s.three)}>

@@ -1,8 +1,13 @@
 #import "./fragments/ImageFragment.gql"
 #import "./fragments/NewsFragment.gql"
 
-query AllNews($first: IntType = 10, $skip: IntType = 0) {
-	news: allNews(orderBy: [createdAt_DESC], first: $first, skip: $skip) {
+query AllNews($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId) {
+	news: allNews(
+		filter: { region: { eq: $regionId } }
+		orderBy: [createdAt_DESC]
+		first: $first
+		skip: $skip
+	) {
 		...NewsFragment
 	}
 	pagination: _allNewsMeta {
@@ -10,9 +15,9 @@ query AllNews($first: IntType = 10, $skip: IntType = 0) {
 	}
 }
 
-query AllNewsByRegion($first: IntType = 10, $skip: IntType = 0, $id: ItemId) {
+query AllNewsByRegion($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId) {
 	news: allNews(
-		filter: { region: { eq: $id } }
+		filter: { region: { eq: $regionId } }
 		orderBy: [createdAt_DESC]
 		first: $first
 		skip: $skip
@@ -30,7 +35,7 @@ query News($slug: String!) {
 	}
 }
 
-query LatestNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId!) {
+query LatestNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId) {
 	news: allNews(
 		filter: { region: { eq: $regionId } }
 		orderBy: [createdAt_DESC]

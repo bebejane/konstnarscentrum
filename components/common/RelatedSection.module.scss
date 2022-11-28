@@ -1,0 +1,23 @@
+.related {
+  padding-top: var(--space);
+  padding-bottom: var(--space);
+  position: relative;
+
+  .background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    margin-left: calc(-1 * var(--outer-margin));
+    width: calc(100% + var(--outer-margin));
+
+    @include mq($from: tablet) {
+      margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
+    }
+
+    height: 100%;
+    background: var(--beige-light);
+
+    width: 100vw;
+  }
+}

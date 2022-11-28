@@ -1,2 +1,9 @@
 .container {
+
+  figure[data-editable=true] {
+    &:hover {
+      filter: grayscale(1);
+      cursor: pointer;
+    }
+  }
 }

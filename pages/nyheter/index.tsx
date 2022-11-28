@@ -38,7 +38,8 @@ export default function News({ news, region }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-  const { news } = await apiQuery(AllNewsDocument, { variables: { id: props.region?.id } });
+  const regionId = props.region.global ? undefined : props.region.id;
+  const { news } = await apiQuery(AllNewsDocument, { variables: { regionId } });
 
   return {
     props: {

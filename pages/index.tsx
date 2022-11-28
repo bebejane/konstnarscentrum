@@ -6,6 +6,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
 import { Block, Gallery, MenuDesktop } from "/components";
 import type { Menu } from "/lib/menu";
+
 export type Props = {
 	regionStart: RegionRecord
 	menu: Menu
@@ -31,14 +32,12 @@ export default function RegionHome({ regionStart, menu }: Props) {
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 
+	const regionId = props.region.global ? undefined : props.region.id;
+
 	const { region: regionStart, news, memberNews }: {
 		region: RegionRecord, news: NewsRecord[], memberNews: MemberNewsRecord[]
 	} = await apiQuery([RegionDocument, LatestNewsDocument, LatestMemberNewsDocument], {
-		variables: [
-			{ regionId: props.region?.id },
-			{ regionId: props.region?.id },
-			{ regionId: props.region?.id }
-		]
+		variables: [{ regionId }, { regionId }, { regionId }]
 	});
 
 	return {
