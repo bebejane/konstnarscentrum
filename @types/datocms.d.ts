@@ -5086,7 +5086,7 @@ type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename
 type LatestMemberNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  regionId: Scalars['ItemId'];
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 
@@ -5095,6 +5095,7 @@ type LatestMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typen
 type AllNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 
@@ -5103,7 +5104,7 @@ type AllNewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsReco
 type AllNewsByRegionQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  id?: InputMaybe<Scalars['ItemId']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 
@@ -5119,7 +5120,7 @@ type NewsQuery = { __typename?: 'Query', news?: { __typename?: 'NewsRecord', id:
 type LatestNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  regionId: Scalars['ItemId'];
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 
@@ -5136,7 +5137,7 @@ type ProjectsIntroQueryVariables = Exact<{ [key: string]: never; }>;
 type ProjectsIntroQuery = { __typename?: 'Query', introInitiative?: { __typename?: 'IntroInitiativeRecord', intro: string } | null };
 
 type RegionQueryVariables = Exact<{
-  regionId: Scalars['ItemId'];
+  regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
 

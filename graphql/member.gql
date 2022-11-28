@@ -58,7 +58,7 @@ query AllMemberNews {
 	}
 }
 
-query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId!) {
+query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId) {
 	memberNews: allMemberNews(
 		filter: { region: { eq: $regionId } }
 		orderBy: [createdAt_DESC]
