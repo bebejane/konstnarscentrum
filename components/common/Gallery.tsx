@@ -1,60 +1,104 @@
-import s from './Gallery.module.scss'
+import "swiper/css";
+import styles from './Gallery.module.scss'
 import cn from 'classnames'
-import { Image } from 'react-datocms'
-import Link from 'next/link'
-import { useState } from 'react'
+import React from 'react'
+import { Image } from "react-datocms"
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState, useRef, useEffect } from 'react';
+import type { Swiper as SwiperType } from 'swiper'
+import { Modal } from "/components";
 
-export type Props = {
-  slides: SlideRecord[]
+import { Loader } from '/components'
+
+export type GalleryProps = {
+  images: FileField[],
+  onClose: (event?: React.MouseEvent) => void,
+  index: number,
+  show: boolean
 }
 
-const parseRecord = (record: any) => {
-  if (!record)
-    return { type: '', slug: '/' }
-  const { __typename, slug } = record
+export default function Gallery({ images, onClose, index = 0, show }: GalleryProps) {
 
-  switch (__typename) {
-    case 'CommissionRecord':
-      return { type: 'Uppdrag', slug: `/anlita-oss/uppdrag/${slug}` }
-    case 'MemberNewsRecord':
-      return { type: 'Aktuellt', slug: `/konstnar/aktuellt/${slug}` }
-    case 'NewsRecord':
-      return { type: 'Nyheter', slug: `/nyheter/${slug}` }
-    case 'ForArtistRecord':
-      return { type: 'För konstnärer', slug: `/` }
-    default:
-      return { type: '', slug: '/' }
-  }
-}
+  const swiperRef = useRef<SwiperType | undefined>()
+  const [realIndex, setRealIndex] = useState(0)
+  const [title, setTitle] = useState<string>()
+  const [loaded, setLoaded] = useState<any>({})
+  const [initLoaded, setInitLoaded] = useState(false)
+  const isSingleSlide = images?.length === 1
+  const isHidden = !images || !show;
 
-export default function Gallery({ slides }: Props) {
+  useEffect(() => {
+    if (images)
+      setTitle(images[realIndex]?.title)
+  }, [realIndex, images, setTitle])
 
-  const [index, setIndex] = useState(0)
-  //console.log(slides.map(el => ({ ...el, ...parseRecord(el.link) })));
+  useEffect(() => {
+    setRealIndex(index)
+  }, [index])
+
+  useEffect(() => { // handle  keys
+    const handleKeys = ({ key }) => {
+      if (isHidden) return
+      if (key === 'ArrowRight') swiperRef?.current?.slideNext()
+      if (key === 'ArrowLeft') swiperRef?.current?.slidePrev()
+      if (key === 'Escape') onClose()
+    }
+    document.addEventListener('keydown', handleKeys)
+    return () => document.removeEventListener('keydown', handleKeys)
+  }, [onClose, isHidden])
+
+  useEffect(() => {
+    setTimeout(() => setInitLoaded(true), 300)
+  }, [initLoaded]) // Delay loader
+
+  if (isHidden)
+    return null
 
   return (
-    <section className={s.gallery}>
-      <ul>
-        {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({ id, headline, image, link, slug, type }, idx) =>
-          <li
-            key={idx}
-            className={cn(idx === index ? s.transition : s.hide)}
-            onAnimationEnd={() => setIndex(index + 1 > slides.length - 1 ? 0 : index + 1)}
+    <Modal>
+      <div className={cn(styles.gallery, images.length <= 1 && styles.noArrows, isSingleSlide && styles.noArrows)}>
+        <div className={styles.back} onClick={() => swiperRef.current.slidePrev()}><img src="/images/arrow-light.svg" className={styles.arrow} /></div>
+        <div className={styles.images} onClick={() => !isSingleSlide && swiperRef?.current?.slideNext()}>
+          <Swiper
+            id={`main-gallery`}
+            loop={true}
+            spaceBetween={500}
+            simulateTouch={!isSingleSlide}
+            slidesPerView={1}
+            initialSlide={index}
+            onSlideChange={({ realIndex }) => setRealIndex(realIndex)}
+            onSwiper={(swiper) => swiperRef.current = swiper}
           >
-            <Link href={slug}>
-              <header>
-                <h5>{type}</h5>
-                <h2>{headline}</h2>
-              </header>
-              <Image
-                className={s.image}
-                data={image.responsiveImage}
-                objectFit="cover"
-              />
-            </Link>
-          </li>
-        )}
-      </ul>
-    </section>
+            {images.map((image, idx) =>
+              <SwiperSlide key={idx} className={cn(styles.slide)}>
+                {image.responsiveImage ?
+                  <Image
+                    pictureClassName={styles.image}
+                    data={image.responsiveImage}
+                    lazyLoad={false}
+                    usePlaceholder={false}
+                    onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
+                  />
+                  :
+                  <div className={styles.svg}>
+                    <img
+                      src={image.url}
+                      className={styles.image}
+                      onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
+                    />
+                  </div>
+                }
+                {/*!loaded[image.id] && initLoaded &&
+                  <div className={styles.loading}><Loader /></div>
+                */}
+              </SwiperSlide>
+            )}
+          </Swiper>
+        </div>
+        <div className={styles.forward} onClick={() => swiperRef.current.slideNext()}><img src="/images/arrow-light.svg" className={styles.arrow} /></div>
+        <div className={styles.caption}>{title && <p className="medium">{title}</p>}</div>
+        <div className={styles.close} onClick={onClose}>×</div>
+      </div>
+    </Modal>
   )
 }

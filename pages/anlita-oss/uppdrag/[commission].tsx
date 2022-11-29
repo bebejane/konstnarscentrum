@@ -3,7 +3,8 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
-import { Article, Block, MetaSection, RelatedSection } from "/components";
+import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
+import { useState } from "react";
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -21,12 +22,18 @@ export default function Commission({ commission: {
 	content
 }, commissions }: CommissionProps) {
 
+	const [imageId, setImageId] = useState<string | undefined>()
+	const images = [image]
+	content.forEach(({ image }) => image && images.push.apply(images, image))
+
+
 	return (
-		<>
+		<div className={s.container}>
 			<Article
 				title={title}
 				image={image}
 				text={intro}
+				onClick={(id) => setImageId(id)}
 			>
 				<MetaSection
 					items={[
@@ -39,7 +46,11 @@ export default function Commission({ commission: {
 				<section className={s.documentation}>
 					<h1 className="noPadding">Dokumentation</h1>
 					{content.map((block, idx) =>
-						<Block key={idx} data={block} />
+						<Block
+							key={idx}
+							data={block}
+							onClick={(id) => setImageId(id)}
+						/>
 					)}
 				</section>
 			</Article>
@@ -48,7 +59,13 @@ export default function Commission({ commission: {
 				slug="/anlita-oss/uppdrag"
 				items={commissions.map(({ title, image, slug }) => ({ title, image, slug: `/anlita-oss/uppdrag/${slug}` }))}
 			/>
-		</>
+			<Gallery
+				index={images.findIndex(({ id }) => id === imageId)}
+				images={images}
+				show={imageId !== undefined}
+				onClose={() => setImageId(undefined)}
+			/>
+		</div>
 	);
 }
 
