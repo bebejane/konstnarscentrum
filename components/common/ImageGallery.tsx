@@ -5,6 +5,7 @@ import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import type { Swiper } from 'swiper';
 import { Image } from 'react-datocms'
 import { useState, useRef, useEffect } from 'react';
+import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 
 export type ImageGalleryBlockProps = { id: string, images: FileField[], onClick?: Function, editable?: boolean }
 
@@ -36,7 +37,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								fadeInDuration={0}
 							/>
 							{item.title &&
-								<figcaption>{item.title}</figcaption>
+								<figcaption><Markdown allowedElements={['em', 'p']}>{item.title}</Markdown></figcaption>
 							}
 						</figure>
 					</SwiperSlide>

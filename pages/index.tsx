@@ -15,6 +15,7 @@ export type Props = {
 export default function RegionHome({ regionStart, menu }: Props) {
 
 	return (
+
 		<div className={s.container}>
 			<div className={cn(s.gallery, s.margins)}>
 				<Gallery slides={regionStart.gallery} />

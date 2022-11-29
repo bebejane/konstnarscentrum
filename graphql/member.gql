@@ -14,7 +14,7 @@ query AllMembersWithPortfolio($regionId: ItemId) {
 }
 
 query AllMembersCities {
-	cities: allMembers(filter: { image: { exists: true } }) {
+	cities: allMembers(filter: { image: { exists: true }, city: { neq: null } }) {
 		name: city
 	}
 }

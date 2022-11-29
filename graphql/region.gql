@@ -89,7 +89,7 @@ query Region($regionId: ItemId) {
 	}
 }
 
-query RegionMeta($regionId: ItemId!) {
+query RegionMeta($regionId: ItemId) {
 	region(filter: { id: { eq: $regionId } }) {
 		contactIntro(markdown: false)
 		info {

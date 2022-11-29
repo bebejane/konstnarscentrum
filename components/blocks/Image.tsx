@@ -3,6 +3,7 @@ import cn from 'classnames'
 import React from 'react'
 import { Image as DatoImage } from 'react-datocms'
 import { ImageGallery } from '/components'
+import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 
 export type ImageBlockProps = {
 	id: string,
@@ -26,7 +27,7 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 					fadeInDuration={0}
 				/>
 				{images[0].title &&
-					<figcaption>{images[0].title}</figcaption>
+					<figcaption><Markdown allowedElements={['em', 'p']}>{images[0].title}</Markdown></figcaption>
 				}
 			</figure>
 			: isDouble ?
@@ -38,7 +39,7 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 							fadeInDuration={0}
 						/>
 						{images[0].title &&
-							<figcaption>{images[0].title}</figcaption>
+							<figcaption><Markdown allowedElements={['em', 'p']}>{images[0].title}</Markdown></figcaption>
 						}
 					</figure>
 					<figure>
@@ -48,7 +49,7 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 							fadeInDuration={0}
 						/>
 						{images[1].title &&
-							<figcaption>{images[1].title}</figcaption>
+							<figcaption><Markdown allowedElements={['em', 'p']}>{images[1].title}</Markdown></figcaption>
 						}
 					</figure>
 				</div>

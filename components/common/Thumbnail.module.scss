@@ -1,6 +1,6 @@
 .thumbnail {
-
   position: relative;
+  width: 100%;
 
   .image {
     margin-bottom: 0.5em;
@@ -19,7 +19,8 @@
   }
 
   .title {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
     white-space: pre;
     min-height: 1rem;
 
@@ -29,17 +30,16 @@
       transform: rotate(360deg) translateY(calc(-100% - 0.5rem));
       text-align: right;
     }
+
+    .more {
+      display: inline;
+      overflow: hidden;
+      text-align: right;
+      flex: 1 1 100%;
+      min-height: 1rem;
+
+    }
   }
 
-  .more {
-    display: inline;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    overflow: hidden;
-    text-align: right;
-    width: 100%;
-    overflow: hidden;
-    min-height: 1rem;
-  }
+
 }

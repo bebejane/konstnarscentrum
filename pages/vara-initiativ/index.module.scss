@@ -3,7 +3,11 @@
     margin-bottom: var(--space);
   }
 
-  > ul {
+  .image {
+    min-width: 100%;
+  }
+
+  >ul {
     @include mq($from: tablet) {
       margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
       margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
@@ -15,7 +19,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    > li {
+    >li {
       display: flex;
       flex-direction: column;
 
@@ -51,7 +55,7 @@
         flex: 1 1 auto;
       }
 
-      > a > button {
+      >a>button {
         width: 100%;
       }
     }
@@ -70,7 +74,7 @@
     }
 
     @include mq($until: tablet) {
-      > li {
+      >li {
         flex: 0 0 100%;
       }
 
