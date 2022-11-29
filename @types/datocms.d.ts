@@ -5046,6 +5046,11 @@ type MemberNewsQueryVariables = Exact<{
 
 type MemberNewsQuery = { __typename?: 'Query', memberNews?: { __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, content?: { __typename?: 'MemberNewsModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text?: string | null, url?: string | null } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } } | null };
 
+type ApplyForMembershipQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title?: string | null, content?: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } | null } | null };
+
 type AllMemberNewsQueryVariables = Exact<{ [key: string]: never; }>;
 
 

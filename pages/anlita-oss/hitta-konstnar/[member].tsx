@@ -73,7 +73,14 @@ export default function Member({ member: {
 						}}
 					/>
 				)}
+
+
 			</Article>
+
+
+			<button className={s.addSection}>Lägg till sektion</button>
+			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
+
 			<RelatedSection
 				title="Upptäck fler konstnärer"
 				slug={'/anlita-oss/hitta-konstnar'}
@@ -89,7 +96,8 @@ export default function Member({ member: {
 				show={imageId !== undefined}
 				onClose={() => setImageId(undefined)}
 			/>
-			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
+
+
 		</div>
 	);
 }

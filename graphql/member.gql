@@ -52,6 +52,17 @@ query MemberNews($slug: String!) {
 	}
 }
 
+query ApplyForMembership {
+	apply {
+		id
+		title
+		content {
+			value
+			blocks
+		}
+	}
+}
+
 query AllMemberNews {
 	memberNews: allMemberNews {
 		...MemberNewsLightFragment
