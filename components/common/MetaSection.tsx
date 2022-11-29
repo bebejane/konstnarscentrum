@@ -1,6 +1,7 @@
 import s from './MetaSection.module.scss'
+import { isEmail } from '/lib/utils'
 
-type Props = {
+export type Props = {
   items: {
     title: string
     value: string
@@ -13,7 +14,8 @@ export default function MetaSection({ items = [] }: Props) {
       <ul className="small">
         {items.map(({ title, value }, idx) =>
           <li key={idx}>
-            <span>{title}:</span>{value}
+            <span>{title}:</span>
+            {isEmail(value) ? <a href={`mailto:${value}`}>Email</a> : <>{value}</>}
           </li>
         )}
       </ul>
