@@ -20,6 +20,10 @@
     &.delete {
       color: red;
       margin-left: 0;
+      &:hover {
+        background: red;
+        color: var(--white);
+      }
     }
   }
 
