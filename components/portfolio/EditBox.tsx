@@ -94,18 +94,19 @@ export default function EditBox({ onChange, blocks }) {
       >
         <div className={s.toolbar}>
           <div className={s.edit}>
-            <div><EditIcon /></div>
-            <div>Redigera</div>
+            <button>Redigera</button>
+            <button className={s.delete}>Ta bort</button>
           </div>
           {editable?.index !== undefined &&
             <div className={cn(s.order)}>
-              <div className={s.up} onClick={(e) => move(e, editable, true)}>▲</div>
-              <div className={s.down} onClick={(e) => move(e, editable, false)}>▼</div>
+              <button className={s.up} onClick={(e) => move(e, editable, true)}>Upp</button>
+              <button className={s.down} onClick={(e) => move(e, editable, false)}>Ner</button>
             </div>
           }
         </div>
       </div>
-      {images &&
+      {
+        images &&
         <PortfolioEditor images={images} onClose={() => setImages(undefined)} onSave={() => { }} />
       }
     </>

@@ -9,9 +9,18 @@
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
 
-
   &.show {
     display: flex;
+  }
+
+  button {
+    margin: 1rem;
+    border: 0;
+
+    &.delete {
+      color: red;
+      margin-left: 0;
+    }
   }
 
   .toolbar {
@@ -33,22 +42,16 @@
     }
 
     .order {
+      display: flex;
+      flex-direction: row;
       color: var(--white);
-      font-size: 20px;
+      button {
+        white-space: pre;
 
-      >div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        min-height: 30px;
-        min-width: 30px;
-        border: 1px solid var(--white);
-        margin-bottom: 5px;
+        &:last-child {
+          margin-left: 0;
+        }
       }
-
     }
   }
-
-
 }
