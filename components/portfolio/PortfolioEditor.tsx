@@ -29,7 +29,7 @@ export default function PortfolioEditor({ images, onClose, onSave }: Props) {
     <div id="edit-photo" className={cn(s.photoEditor)}>
       <form>
         <div className={cn(s.bar, s.top)}>
-          <header>Redigera</header>
+          <header><span>Redigera</span></header>
           <button type="button" onClick={onClose}>Stäng</button>
         </div>
         <div className={cn(s.content, image && s.showEditor)}>
@@ -42,11 +42,10 @@ export default function PortfolioEditor({ images, onClose, onSave }: Props) {
         <div className={cn(s.bar, s.bottom)}>
           <header>
             {image &&
-              <button type="button" onClick={() => setImage(undefined)}>Till galleri</button>
+              <button type="button" onClick={() => setImage(undefined)}>Tillbaka</button>
             }
           </header>
           <button type="button" onClick={onClose}>Spara</button>
-          <button type="button" onClick={onClose}>Släng</button>
         </div>
       </form>
     </div>

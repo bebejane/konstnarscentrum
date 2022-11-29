@@ -26,8 +26,8 @@ export default function PhotoEditor({ image }: Props) {
         </figure>
       </div>
       <div className={s.meta}>
-        <label htmlFor="description">Beskrivning</label>
-        <input name="description" type="text" />
+        <label className="small" htmlFor="description">Bildtext <span>Tips! Du kan kursivera titlar med *titel*.</span></label>
+        <input name="description" type="text" value="*Titel*, årtal, teknik, material" />
       </div>
     </div>
   )

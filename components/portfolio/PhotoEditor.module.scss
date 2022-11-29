@@ -6,12 +6,17 @@
 
   label {
     margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    span {
+      color: var(--beige-dark);
+    }
   }
 
   .photo {
     display: flex;
     flex-direction: column;
-
 
     figure {
       position: relative;
@@ -23,9 +28,8 @@
 
       .image {
         object-fit: contain;
-        max-height: 50vh;
+        max-height: calc(100vh - ((6 * var(--outer-margin) + 8rem)));
         width: 100%;
-
       }
 
       button {
@@ -33,6 +37,11 @@
         top: 50%;
         right: 50%;
         transform: translate(50%, -50%);
+        border: none;
+        &:hover {
+          background-color: var(--beige-light-solid);
+          color: var(--black);
+        }
       }
     }
 
@@ -40,6 +49,8 @@
   }
 
   .meta {
+    margin-top: var(--outer-margin);
+    margin-bottom: var(--outer-margin);
     display: flex;
     flex-direction: column;
     flex: 1 1;
@@ -47,9 +58,7 @@
 
     input {
       font-size: 1rem;
-      padding: 0.2rem;
       width: 100%;
-      background-color: var(--white);
     }
   }
 }
