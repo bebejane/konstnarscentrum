@@ -4,6 +4,10 @@
   align-items: baseline;
   margin-bottom: 1rem;
 
+  h2 {
+    line-height: 1;
+  }
+
   &.minusMargin {
     width: calc(100% + (2 * var(--grid-unit)));
     margin-left: calc((-1 * var(--grid-unit)));

@@ -1,5 +1,5 @@
 .article {
-  >header {
+  > header {
     display: block;
     position: relative;
     padding-bottom: var(--small-space);
@@ -13,7 +13,6 @@
       margin-right: calc(-1 * var(--outer-margin));
 
       @include mq($from: tablet) {
-
         margin-left: var(--full-margin);
         margin-right: var(--full-margin);
 
@@ -34,5 +33,8 @@
       color: var(--white);
       padding-top: 1em;
     }
+  }
+  &.noBottom {
+    padding-bottom: 0;
   }
 }

@@ -17,7 +17,7 @@ export default function RelatedSection({ title, slug, items }: RelatedSectionPro
 
   return (
     <section className={s.related}>
-      <SectionHeader title={title} slug={slug} />
+      <SectionHeader title={title} slug={slug} margin={true} />
       <div className={s.background}></div>
       <CardContainer columns={3}>
         {items.map(({ title, image, slug }, idx) =>

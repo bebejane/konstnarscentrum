@@ -42,6 +42,7 @@ export default function Member({ member: {
 				image={image}
 				title={`${firstName} ${lastName}`}
 				text={bio}
+				noBottom={true}
 				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
 			>
 				<MetaSection

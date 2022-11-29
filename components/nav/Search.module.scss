@@ -13,21 +13,20 @@
     display: none;
   }
 
-  &.open {}
+  &.open {
+  }
 
   .wrap {
     display: flex;
     align-items: center;
     flex: 0 0;
-
-    margin: var(--outer-margin);
+    height: var(--navbar-height);
+    margin-right: var(--outer-margin);
     pointer-events: all;
     cursor: pointer;
 
     svg {
       height: 1rem;
-
     }
   }
-
 }
