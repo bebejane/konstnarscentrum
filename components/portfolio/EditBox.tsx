@@ -99,8 +99,8 @@ export default function EditBox({ onChange, blocks }) {
           </div>
           {editable?.index !== undefined &&
             <div className={cn(s.order)}>
-              <button className={s.up} onClick={(e) => move(e, editable, true)}>Upp</button>
-              <button className={s.down} onClick={(e) => move(e, editable, false)}>Ner</button>
+              <button className={s.up} disabled={editable?.index === 0} onClick={(e) => move(e, editable, true)}>Upp</button>
+              <button className={s.down} disabled={editable?.index === blocks.length - 1} onClick={(e) => move(e, editable, false)}>Ner</button>
             </div>
           }
         </div>
