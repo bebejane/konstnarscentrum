@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
+import { Article, Block, MetaSection, RelatedSection, EditBox, Gallery } from "/components";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
@@ -32,6 +32,10 @@ export default function Member({ member: {
 	const [blocks, setBlocks] = useState()
 	const { data, status } = useSession()
 
+	const [imageId, setImageId] = useState<string | undefined>()
+	const images = [image]
+	content.forEach(({ image }) => image && images.push.apply(images, image))
+
 	useEffect(() => {
 		setBlocks(content)
 	}, [content])
@@ -44,6 +48,7 @@ export default function Member({ member: {
 				text={bio}
 				noBottom={true}
 				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
+				onClick={(id) => setImageId(id)}
 			>
 				<MetaSection
 					items={[
@@ -59,6 +64,7 @@ export default function Member({ member: {
 					<Block
 						key={idx}
 						data={block}
+						onClick={(id) => setImageId(id)}
 						editable={{
 							...block,
 							id: block.id,
@@ -76,6 +82,12 @@ export default function Member({ member: {
 					image,
 					slug: `/anlita-oss/hitta-konstnar/${slug}`
 				}))}
+			/>
+			<Gallery
+				index={images.findIndex(({ id }) => id === imageId)}
+				images={images}
+				show={imageId !== undefined}
+				onClose={() => setImageId(undefined)}
 			/>
 			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
 		</div>

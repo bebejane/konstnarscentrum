@@ -1,6 +1,6 @@
 import * as Components from '/components'
 
-export type BlockProps = { data: any, onClick?: Function, editable?: any }
+export type BlockProps = { data: any, onClick?: (id: string) => void, editable?: any }
 
 export default function Block({ data, onClick, editable }: BlockProps) {
   const type = data.__typename.replace('Record', '');

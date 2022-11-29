@@ -14,10 +14,13 @@ export type ArticleProps = {
   image?: FileField,
   showImage?: boolean,
   content?: any,
-  editable?: any
+  editable?: any,
+  noBottom?: boolean,
+  onClick?: (id: string) => void
+
 }
 
-export default function Article({ children, title, text, image, content, showImage = true, editable, noBottom }: ArticleProps) {
+export default function Article({ children, title, text, image, content, showImage = true, editable, noBottom, onClick }: ArticleProps) {
 
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
@@ -27,7 +30,7 @@ export default function Article({ children, title, text, image, content, showIma
       {image && showImage ?
         <header>
           <h1 className={s.title}>{title}</h1>
-          <figure data-editable={editable}>
+          <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
               data={image.responsiveImage}

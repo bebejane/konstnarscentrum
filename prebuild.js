@@ -4,7 +4,7 @@ const slugify = require("slugify");
 const { buildClient } = require("@datocms/cma-client-node");
 
 (async () => {
-	const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
+	const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL });
 
 	const roles = await client.roles.list();
 	const editor = roles.filter((r) => r.name.toLowerCase() === "riks")[0];

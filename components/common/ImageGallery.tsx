@@ -30,7 +30,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 			>
 				{images.map((item, idx) =>
 					<SwiperSlide key={`${idx}`} className={cn(styles.slide)}>
-						<figure>
+						<figure onClick={() => onClick?.(item.id)}>
 							<Image
 								data={item.responsiveImage}
 								className={styles.image}

@@ -69,7 +69,7 @@ export const buildMenu = async () => {
         sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
         break;
       case 'contact':
-        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `${el.slug}/kontakt` }))
+        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `/${el.slug}/kontakt` }))
         break;
       default:
         break;

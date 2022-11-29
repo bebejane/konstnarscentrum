@@ -36,7 +36,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 			variables: {
 				city,
 				memberCategoryId,
-				query: `${query.split(' ').filter(el => el).join('|')}`
+				query: `${query?.split(' ').filter(el => el).join('|')}`
 			}
 		}).then(res => setResults(res.members))
 
