@@ -211,6 +211,8 @@ export const MemberNews: DocumentNode;
 export const AllMemberNews: DocumentNode;
 export const LatestMemberNews: DocumentNode;
 export const RelatedMembers: DocumentNode;
+export const SearchMembers: DocumentNode;
+export const SearchMembersFree: DocumentNode;
 
   export default defaultDocument;
 }
