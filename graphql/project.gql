@@ -12,3 +12,9 @@ query ProjectsIntro {
 		intro(markdown: false)
 	}
 }
+
+query LatestProjects($first: IntType = 4, $skip: IntType = 0) {
+	projects: allProjects(orderBy: [createdAt_DESC], first: $first, skip: $skip) {
+		...ProjectFragment
+	}
+}

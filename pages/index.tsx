@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
-import { Block, Gallery, MenuDesktop, Thumbnail } from "/components";
+import { Block, Gallery, MenuDesktop } from "/components";
 import type { Menu } from "/lib/menu";
 
 export type Props = {
@@ -27,7 +27,6 @@ export default function RegionHome({ regionStart, menu }: Props) {
 				)}
 			</div>
 		</div>
-
 	);
 }
 

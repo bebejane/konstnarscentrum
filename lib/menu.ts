@@ -1,5 +1,6 @@
+import { regions } from '/lib/region';
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { AllNewsDocument, AllAboutsMenuDocument, AllConsultsDocument } from "/graphql";
+import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestProjectsDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -28,30 +29,47 @@ const base: Menu = [
       { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss' }
     ]
   },
-  { type: 'initiative', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [] },
+  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [] },
   { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
   { type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, regional: true, sub: [] },
 ]
 
 export const buildMenu = async () => {
 
-  const { news, abouts, consults }: { news: NewsRecord[], abouts: AboutRecord[], consults: ConsultRecord[] } = await apiQuery([
-    AllNewsDocument,
+  const {
+    news,
+    abouts,
+    consults,
+    projects
+  }: {
+    news: NewsRecord[],
+    abouts: AboutRecord[],
+    consults: ConsultRecord[],
+    projects: ProjectRecord[]
+  } = await apiQuery([
+    LatestNewsDocument,
     AllAboutsMenuDocument,
-    AllConsultsDocument
-  ]);
+    AllConsultsDocument,
+    LatestProjectsDocument,
+  ], { variables: [{ first: 4 }] });
 
   const menu = base.map(item => {
     let sub: MenuItem[];
     switch (item.type) {
       case 'news':
-        sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/mitt/${el.slug}` }))
+        sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/nyheter/${el.slug}` }))
         break;
       case 'about':
         sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}` }))
         break;
       case 'consult':
         sub = item.sub.concat(consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}` })))
+        break;
+      case 'projects':
+        sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
+        break;
+      case 'contact':
+        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `${el.slug}/kontakt` }))
         break;
       default:
         break;

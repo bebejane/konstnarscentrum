@@ -21,10 +21,21 @@ export default function Footer({ menu, footer }: FooterProps) {
 							{menu.map((item, idx) => {
 								return (
 									<li key={idx}>
-
 										<ul className={s.category}>
 											<>
-												<li><strong>{item.label}</strong></li>
+												{item.index ?
+													<li><strong>
+														<Link scroll={true} href={item.slug}>
+															{item.label}
+														</Link>
+													</strong></li>
+
+													:
+													<li>
+														<strong>{item.label}</strong>
+													</li>
+												}
+
 												{item.sub?.map((subItem, subidx) =>
 													<li key={subidx}>
 														<Link scroll={true} href={subItem.slug}>

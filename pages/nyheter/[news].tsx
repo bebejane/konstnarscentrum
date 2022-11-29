@@ -12,7 +12,7 @@ export type Props = {
   region: Region
 }
 
-export default function News({ news: { createdAt, title, content }, region }: Props) {
+export default function News({ news: { createdAt, title, content, region } }: Props) {
 
   return (
     <div className={styles.container}>
@@ -48,7 +48,3 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
     },
   };
 });
-
-export const config = {
-  //runtime:'experimental-edge'
-}

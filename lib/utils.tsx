@@ -1,4 +1,5 @@
 import { datoError } from "dato-nextjs-utils/api";
+import { lowerFirst } from "lodash-es";
 import React from "react";
 
 export const isServer = typeof window === 'undefined';
@@ -38,4 +39,10 @@ export const recordToSlug = (record: any): string => {
     default:
       return '/'
   }
+}
+
+export const isEmail = (string: string): boolean => {
+  const matcher = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  if (string.length > 320) return false;
+  return matcher.test(string);
 }

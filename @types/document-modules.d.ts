@@ -233,6 +233,7 @@ declare module '*/project.gql' {
   const defaultDocument: DocumentNode;
   export const AllProjects: DocumentNode;
 export const ProjectsIntro: DocumentNode;
+export const LatestProjects: DocumentNode;
 
   export default defaultDocument;
 }

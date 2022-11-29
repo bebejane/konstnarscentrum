@@ -10,10 +10,28 @@ import { Image } from "react-datocms";
 export type Props = {
 	contactIntro: RegionRecord['contactIntro'],
 	info: RegionRecord['info'],
-	employees: EmployeeRecord[]
+	employees: EmployeeRecord[],
+	region: Region
 }
 
-export default function Contact({ contactIntro, info, employees }: Props) {
+export type EmployeesByRegion = {
+	[key: Region['id']]: {
+		employees: EmployeeRecord[],
+		region: RegionRecord
+	}
+}
+
+export default function Contact({ contactIntro, info, employees, region }: Props) {
+
+	const employeesByRegion: EmployeesByRegion = {}
+
+	employees.forEach(e => {
+		if (!employeesByRegion[e.region.id])
+			employeesByRegion[e.region.id] = { employees: [], region: e.region }
+
+		employeesByRegion[e.region.id].employees.push(e);
+	})
+
 
 	return (
 		<div className={s.container}>
@@ -21,23 +39,33 @@ export default function Contact({ contactIntro, info, employees }: Props) {
 			<Markdown className={s.intro}>
 				{contactIntro}
 			</Markdown>
-			<h2>Personal</h2>
-			<CardContainer>
-				{employees.concat(employees).map(({ name, email, image }, idx) =>
-					<Card key={idx} className={s.employee}>
-						<Image data={image.responsiveImage} className={s.image} />
-						<div>{name}</div>
-						<div>{email}</div>
-					</Card>
-				)}
-			</CardContainer>
+			{Object.keys(employeesByRegion).map((regionId) => {
+				const { employees, region } = employeesByRegion[regionId]
+				return (
+					<>
+						<h2>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h2>
+						<CardContainer>
+							{employees.map(({ name, email, image }, idx) =>
+								<Card key={idx} className={s.employee}>
+									<Image data={image.responsiveImage} className={s.image} />
+									<div>{name}</div>
+									<div>{email}</div>
+								</Card>
+							)}
+						</CardContainer>
+					</>
+				)
+			}
+			)}
+
 		</div>
 	);
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const { region: { contactIntro, info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId: props.region?.id } });
+	const regionId = props.region.global ? undefined : props.region.id;
+	const { region: { contactIntro, info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId } });
 
 	return {
 		props: {

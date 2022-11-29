@@ -5,7 +5,7 @@ import useDevice from '/lib/hooks/useDevice'
 
 export type Props = {
   children?: React.ReactNode | React.ReactNode[],
-  columns: 2 | 3
+  columns?: 2 | 3
 }
 
 export default function CardContainer({ children, columns = 3 }: Props) {
