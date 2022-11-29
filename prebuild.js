@@ -1,4 +1,4 @@
-const env = require("dotenv").config({ path: "./.env" });
+require("dotenv").config({ path: "./.env" });
 const fs = require("fs");
 const slugify = require("slugify");
 const { buildClient } = require("@datocms/cma-client-node");
@@ -9,11 +9,7 @@ const { buildClient } = require("@datocms/cma-client-node");
 	const roles = await client.roles.list();
 	const editor = roles.filter((r) => r.name.toLowerCase() === "riks")[0];
 	const tokens = await client.accessTokens.list();
-	const districts = await client.items.list({
-		filter: {
-			type: "region",
-		},
-	});
+	const districts = await client.items.list({ filter: { type: "region" } });
 
 	const regions = roles
 		.filter(
@@ -23,8 +19,8 @@ const { buildClient } = require("@datocms/cma-client-node");
 		.map(({ id: roleId, name }) => ({
 			id: districts.find((el) => el.slug === slugify(name, { lower: true })).id,
 			roleId,
-			tokenId: tokens.find((t) => t.role?.id === roleId)?.id,
 			name,
+			tokenId: tokens.find((t) => t.role?.id === roleId)?.id,
 			slug: slugify(name, { lower: true }),
 			global: districts.find((el) => el.slug === slugify(name, { lower: true })).global || false,
 		}));

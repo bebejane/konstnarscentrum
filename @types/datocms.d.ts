@@ -3554,8 +3554,6 @@ type Query = {
   project?: Maybe<ProjectRecord>;
   /** Returns a specific record */
   region?: Maybe<RegionRecord>;
-  /** Returns the single instance record */
-  start?: Maybe<StartRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
 };
@@ -4063,13 +4061,6 @@ type QueryregionArgs = {
 
 
 /** The query root for this schema */
-type QuerystartArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
 type QueryuploadArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<UploadFilter>;
@@ -4374,39 +4365,6 @@ type SponsorRecord = RecordInterface & {
 /** Block of type Sponsor (sponsor) */
 type SponsorRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
-};
-
-/** Record of type Start (start) */
-type StartRecord = RecordInterface & {
-  __typename?: 'StartRecord';
-  _createdAt: Scalars['DateTime'];
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** SEO meta tags */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  createdAt: Scalars['DateTime'];
-  headline?: Maybe<Scalars['String']>;
-  id: Scalars['ItemId'];
-  intro?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type Start (start) */
-type StartRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type Start (start) */
-type StartRecordintroArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Specifies how to filter by status */
