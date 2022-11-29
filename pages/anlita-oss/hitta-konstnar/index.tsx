@@ -2,9 +2,16 @@ import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { regions } from "/lib/region";
 import { GetStaticProps } from "next";
-import { AllMemberCategoriesDocument, AllMembersWithPortfolioDocument, AllMembersCitiesDocument } from "/graphql";
+import {
+	AllMemberCategoriesDocument,
+	AllMembersWithPortfolioDocument,
+	AllMembersCitiesDocument,
+	SearchMembersDocument,
+	SearchMembersFreeDocument
+} from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
+import { useEffect, useState } from "react";
 
 export type Props = {
 	memberCategories: MemberCategoryRecord[]
@@ -17,14 +24,40 @@ export type Props = {
 
 export default function RegionHome({ members, memberCategories, cities, regions }: Props) {
 
+	const [results, setResults] = useState<MemberRecord[] | undefined>()
+	const [query, setQuery] = useState<string | undefined>()
+	const [city, setCity] = useState<string | undefined>()
+	const [memberCategoryId, setMemberCategoryId] = useState<string | undefined>()
+
+	useEffect(() => {
+
+		apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, {
+			apiToken: process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN,
+			variables: {
+				city,
+				memberCategoryId,
+				query: `${query.split(' ').filter(el => el).join('|')}`
+			}
+		}).then(res => setResults(res.members))
+
+	}, [query, city, setResults, memberCategoryId])
+
+	//console.log(results);
+
 	return (
 		<div className={styles.container}>
 			<h1>Hitta konstnärer</h1>
 			<form>
 				<span>Namn:</span>
-				<input type="text" />
+				<input
+					id="search"
+					name="search"
+					type="text"
+					value={query}
+					onChange={(e) => setQuery(e.target.value)}
+				/>
 				<span>Plats:</span>
-				<select>
+				<select value={city} onChange={(e) => setCity(e.target.value)}>
 					{cities.map(({ name }, idx) =>
 						<option key={idx} value={name}>{name}</option>
 					)}
@@ -32,8 +65,25 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 			</form>
 			<FilterBar
 				options={memberCategories.map(({ id, categoryType }) => ({ label: categoryType, id }))}
-				onChange={() => { }}
+				onChange={(id) => setMemberCategoryId(id)}
 			/>
+			{results &&
+				<>
+					<h2>Sök resultat</h2>
+					{results.length === 0 && <>Hittadet inget...</>}
+					<CardContainer columns={3}>
+						{results.map(({ id, firstName, lastName, image, region, slug }) =>
+							<Card key={id}>
+								<Thumbnail
+									image={image}
+									title={`${firstName} ${lastName}`}
+									slug={`/anlita-oss/hitta-konstnar/${slug}`}
+								/>
+							</Card>
+						)}
+					</CardContainer>
+				</>
+			}
 			<h2>Upptäck konstnärer</h2>
 			<CardContainer columns={3}>
 				{members.map(({ id, firstName, lastName, image, region, slug }) =>
