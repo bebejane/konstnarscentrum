@@ -25,6 +25,11 @@
       .slide {
         position: relative;
 
+        .image {
+          max-height: 200px;
+          min-height: 200px;
+        }
+
       }
     }
   }

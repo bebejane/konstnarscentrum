@@ -1,6 +1,5 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
-import { regions } from "/lib/region";
 import { GetStaticProps } from "next";
 import {
 	AllMemberCategoriesDocument,
@@ -25,29 +24,40 @@ export type Props = {
 export default function RegionHome({ members, memberCategories, cities, regions }: Props) {
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
+	const [error, setError] = useState<Error | undefined>()
 	const [query, setQuery] = useState<string | undefined>()
 	const [city, setCity] = useState<string | undefined>()
-	const [memberCategoryId, setMemberCategoryId] = useState<string | undefined>()
+	const [memberCategoryIds, setMemberCategoryIds] = useState<string[] | undefined>()
 
 	useEffect(() => {
 
-		const apiToken = process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN
 		const variables = {
 			city,
-			memberCategoryId,
+			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
 
+		if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
+			return setResults(undefined)
+
+		fetch('/api/search', {
+			body: JSON.stringify(variables),
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' }
+		})
+			.then(async (res) => setResults((await res.json()).members))
+			.catch((err) => console.error(err))
+		return
+
+		const apiToken = process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN
 		apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables, apiToken })
 			.then((res) => setResults(res.members))
 			.catch((err) => console.error(err))
 
-	}, [query, city, memberCategoryId, setResults])
-
-	console.log(results);
+	}, [query, city, memberCategoryIds, setResults])
 
 	return (
-		<div className={styles.container}>
+		<div className={s.container}>
 			<h1>Hitta konstnärer</h1>
 			<form>
 				<span>Namn:</span>
@@ -66,14 +76,15 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 				</select>
 			</form>
 			<FilterBar
+				multi={true}
 				options={memberCategories.map(({ id, categoryType }) => ({ label: categoryType, id }))}
-				onChange={(id) => setMemberCategoryId(id)}
+				onChange={(ids) => setMemberCategoryIds(ids)}
 			/>
 			{results &&
 				<>
 					<h2>Sök resultat</h2>
 					{results.length === 0 && <>Hittadet inget...</>}
-					<CardContainer columns={3}>
+					<CardContainer columns={3} className={s.results}>
 						{results.map(({ id, firstName, lastName, image, region, slug }) =>
 							<Card key={id}>
 								<Thumbnail

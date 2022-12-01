@@ -34,6 +34,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 							<Image
 								data={item.responsiveImage}
 								className={styles.image}
+								objectFit={'contain'}
 								fadeInDuration={0}
 							/>
 							{item.title &&

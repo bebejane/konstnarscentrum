@@ -9,17 +9,18 @@ type FilterOption = {
 }
 
 type Props = {
-  options: FilterOption[]
-  onChange: (value: string) => void
+  options: FilterOption[],
+  multi?: boolean,
+  onChange: (value: string[]) => void
 }
 
-export default function FilterBar({ options = [], onChange }: Props) {
+export default function FilterBar({ options = [], onChange, multi = false }: Props) {
 
-  const [selected, setSelected] = useState<FilterOption | undefined>()
+  const [selected, setSelected] = useState<FilterOption[]>([])
 
   useEffect(() => {
-    onChange(selected?.id)
-  }, [selected, onChange])
+    onChange(selected.map(({ id }) => id))
+  }, [selected])
 
   return (
     <nav className={s.filter}>
@@ -28,8 +29,8 @@ export default function FilterBar({ options = [], onChange }: Props) {
         {options.map((opt, idx) =>
           <li
             key={idx}
-            onClick={() => setSelected(selected?.id === opt.id ? undefined : opt)}
-            className={cn(selected?.id === opt.id && s.selected)}
+            onClick={() => setSelected(selected.find(({ id }) => id === opt.id) ? selected.filter(({ id }) => id !== opt.id) : multi ? [...selected, opt] : [opt])}
+            className={cn(selected?.find(({ id }) => id === opt.id) && s.selected)}
           >
             {opt.label}
           </li>

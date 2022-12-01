@@ -35,20 +35,24 @@ export default function Member({ member: {
 
 	const handleSave = useCallback(async () => {
 		console.log('save');
-		const res = await fetch('/api/account', {
-			method: 'POST',
-			body: JSON.stringify({
-				member: {
-					...member,
-					content: blocks
-				},
-			}),
-			headers: { 'Content-Type': 'application/json' },
-		})
-		const newMember = await res.json()
+		try {
 
-		console.log(newMember);
+			const res = await fetch('/api/account', {
+				method: 'POST',
+				body: JSON.stringify({
+					member: {
+						...member,
+						content: blocks
+					},
+				}),
+				headers: { 'Content-Type': 'application/json' },
+			})
+			const newMember = await res.json()
 
+			console.log(newMember);
+		} catch (err) {
+			console.log(err);
+		}
 
 	}, [blocks, member])
 

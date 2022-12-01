@@ -3478,6 +3478,8 @@ type Query = {
   _allRegionsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
+  /** Returns meta information regarding a record collection */
+  _allUsersMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a specific record */
@@ -3518,6 +3520,8 @@ type Query = {
   allRegions: Array<RegionRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a collection of records */
+  allUsers: Array<UserRecord>;
   /** Returns a specific record */
   application?: Maybe<ApplicationRecord>;
   /** Returns the single instance record */
@@ -3556,6 +3560,8 @@ type Query = {
   region?: Maybe<RegionRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+  /** Returns a specific record */
+  user?: Maybe<UserRecord>;
 };
 
 
@@ -3690,6 +3696,14 @@ type Query_allRegionsMetaArgs = {
 /** The query root for this schema */
 type Query_allUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allUsersMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3907,6 +3921,17 @@ type QueryallUploadsArgs = {
 
 
 /** The query root for this schema */
+type QueryallUsersArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 type QueryapplicationArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ApplicationModelFilter>;
@@ -4066,6 +4091,15 @@ type QueryuploadArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryuserArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
 };
 
 type RecordInterface = {
@@ -4829,6 +4863,81 @@ type UploadWidthFilter = {
   neq?: InputMaybe<Scalars['IntType']>;
 };
 
+type UserModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  member?: InputMaybe<LinkFilter>;
+  password?: InputMaybe<StringFilter>;
+  resetToken?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum UserModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  password_ASC = 'password_ASC',
+  password_DESC = 'password_DESC',
+  resetToken_ASC = 'resetToken_ASC',
+  resetToken_DESC = 'resetToken_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Användare (user) */
+type UserRecord = RecordInterface & {
+  __typename?: 'UserRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  member: MemberRecord;
+  password: Scalars['String'];
+  resetToken?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Användare (user) */
+type UserRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type VideoField = {
   __typename?: 'VideoField';
   height: Scalars['IntType'];
@@ -5078,7 +5187,7 @@ type RelatedMembersQuery = { __typename?: 'Query', members: Array<{ __typename?:
 type SearchMembersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  memberCategoryId?: InputMaybe<Scalars['ItemId']>;
+  memberCategoryIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
   regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 

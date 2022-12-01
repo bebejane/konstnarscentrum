@@ -55,8 +55,9 @@ export default function Logo({ disabled }: Props) {
   }
 
   useEffect(() => {
-    if (manualMode) return
-    setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, 1)))
+    if (manualMode)
+      return
+    setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, 2)))
   }, [scrolledPosition, viewportHeight, setRatio, manualMode])
 
   useEffect(() => {
@@ -74,8 +75,7 @@ export default function Logo({ disabled }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-
-
+  const regionRatio = Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length))))
 
   return (
     <div className={s.logo}>
@@ -91,9 +91,9 @@ export default function Logo({ disabled }: Props) {
         <Link href="/">
           {horizontal.map((l, i) => <>{l}</>)}
         </Link>
-        {!region?.global &&
+        {region && !region?.global &&
           <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
-            {region?.name}
+            {region.name.substring(0, (region.name.length) * regionRatio)}
           </Link>
         }
       </div>

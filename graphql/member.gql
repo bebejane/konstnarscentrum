@@ -98,14 +98,14 @@ query RelatedMembers(
 query SearchMembers(
 	$first: IntType = 10
 	$skip: IntType = 0
-	$memberCategoryId: ItemId
+	$memberCategoryIds: [ItemId]
 	$regionId: ItemId #$city: String
 ) {
 	members: allMembers(
 		filter: {
 			image: { exists: true }
 			region: { eq: $regionId }
-			memberCategory: { anyIn: [$memberCategoryId] }
+			memberCategory: { anyIn: $memberCategoryIds }
 			#city: { eq: $city }
 		}
 		first: $first
