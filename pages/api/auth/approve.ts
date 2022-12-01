@@ -1,8 +1,8 @@
-
+import { NextApiResponse, NextApiRequest } from 'next';
 import NextCors from 'nextjs-cors';
 import Email from '/lib/emails';
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	try {
 

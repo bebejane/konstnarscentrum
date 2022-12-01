@@ -1,6 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { buildClient } from '@datocms/cma-client';
+//import { buildClient } from '@datocms/cma-client';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 
 export const config = {
