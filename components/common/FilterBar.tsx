@@ -11,7 +11,7 @@ type FilterOption = {
 type Props = {
   options: FilterOption[],
   multi?: boolean,
-  onChange: (value: string[]) => void
+  onChange: (value: string[] | string) => void
 }
 
 export default function FilterBar({ options = [], onChange, multi = false }: Props) {
@@ -19,7 +19,7 @@ export default function FilterBar({ options = [], onChange, multi = false }: Pro
   const [selected, setSelected] = useState<FilterOption[]>([])
 
   useEffect(() => {
-    onChange(selected.map(({ id }) => id))
+    onChange(multi ? selected.map(({ id }) => id) : selected[0]?.id)
   }, [selected])
 
   return (

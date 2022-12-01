@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { regions } from "/lib/region";
@@ -13,10 +13,12 @@ export type Props = {
 export default function Member({ apply: { content, title } }: Props) {
 
 	return (
-		<div className={styles.container}>
+		<div className={s.container}>
 			<h1>{title}</h1>
 			<StructuredContent content={content} />
-			<Apply regions={regions.filter(({ global }) => !global)} />
+			<p className={s.form}>
+				<Apply regions={regions.filter(({ global }) => !global)} />
+			</p>
 		</div>
 	);
 }

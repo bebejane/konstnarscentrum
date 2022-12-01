@@ -81,7 +81,7 @@ export default function Logo({ disabled }: Props) {
     <div className={s.logo}>
       <div className={s.vertical}>
         <Link href="/">
-          {vertical.map((l, i) => <>{l}</>)}
+          {vertical.map((l, i) => l)}
         </Link>
         {horizontal.length > 0 &&
           <span className={s.space}>{letters[vertical.length]}</span>
@@ -89,7 +89,7 @@ export default function Logo({ disabled }: Props) {
       </div>
       <div className={s.horizontal}>
         <Link href="/">
-          {horizontal.map((l, i) => <>{l}</>)}
+          {horizontal.map((l, i) => l)}
         </Link>
         {region && !region?.global &&
           <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>

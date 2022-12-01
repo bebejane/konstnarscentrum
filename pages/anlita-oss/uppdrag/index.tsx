@@ -1,10 +1,7 @@
 import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { apiQuery } from "dato-nextjs-utils/api";
 import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphql";
-import Link from "next/link";
-import { Image as DatoImage } from 'react-datocms'
 import { FilterBar, Thumbnail, CardContainer, Card } from '/components'
 import { useEffect, useState } from "react";
 
@@ -25,7 +22,6 @@ export default function RegionHome({ commissions, commissionCategories }: Props)
 					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}
 					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}
 				/>
-
 			</header>
 			<CardContainer columns={3}>
 				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, slug, image }, idx) =>

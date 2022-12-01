@@ -36,9 +36,8 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 				<nav>
 					<ul className={s.nav}>
 						{[...items, englishMenuItem].map((item, idx) =>
-							<>
+							<React.Fragment key={idx}>
 								<li
-									key={idx}
 									data-slug={item.slug}
 									className={cn(selected?.type === item.type && s.selected)}
 									onClick={() => setSelected(selected?.type === item.type ? undefined : item)}
@@ -60,7 +59,7 @@ export default function MenuMobile({ items }: MenuMobileProps) {
 										</li>
 									)
 								}
-							</>
+							</React.Fragment>
 						)}
 					</ul>
 					<ul className={s.footer}>
