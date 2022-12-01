@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import client from '/lib/client'
+import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import GoogleProvider from "next-auth/providers/google";
@@ -7,11 +7,11 @@ import FacebookProvider from "next-auth/providers/facebook";
 import AppleProvider from "next-auth/providers/apple";
 import { comparePassword, findUser } from '/lib/auth'
 
-const options = {
-  site: process.env.NEXTAUTH_URL,
+export const authOptions: NextAuthOptions = {
+  //site: process.env.NEXTAUTH_URL,
   session: {
-    jwt: true,
-    maxAge: 120 * (24 * 60 * 60), // 120 days
+    strategy: 'jwt',
+    maxAge: 365 * (24 * 60 * 60), // 365 days
   },
   pages: {
     signIn: '/konstnar/konto/logga-in',
@@ -79,5 +79,5 @@ const options = {
   ]
 }
 
-const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, options);
+const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions);
 export default handler

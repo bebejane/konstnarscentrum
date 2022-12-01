@@ -7,7 +7,7 @@ import {
 	AllMembersWithPortfolioDocument,
 	AllMembersCitiesDocument,
 	SearchMembersDocument,
-	SearchMembersFreeDocument
+	SearchMembersFreeDocument,
 } from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
@@ -31,18 +31,20 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 
 	useEffect(() => {
 
-		apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, {
-			apiToken: process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN,
-			variables: {
-				city,
-				memberCategoryId,
-				query: `${query?.split(' ').filter(el => el).join('|')}`
-			}
-		}).then(res => setResults(res.members))
+		const apiToken = process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN
+		const variables = {
+			city,
+			memberCategoryId,
+			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
+		};
 
-	}, [query, city, setResults, memberCategoryId])
+		apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables, apiToken })
+			.then((res) => setResults(res.members))
+			.catch((err) => console.error(err))
 
-	//console.log(results);
+	}, [query, city, memberCategoryId, setResults])
+
+	console.log(results);
 
 	return (
 		<div className={styles.container}>

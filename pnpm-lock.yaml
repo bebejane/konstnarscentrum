@@ -4,7 +4,7 @@ specifiers:
   '@apollo/client': ^3.7.1
   '@datocms/cma-client': 1.1.10
   '@datocms/cma-client-browser': ^1.1.8
-  '@datocms/cma-client-node': ^1.1.8
+  '@datocms/cma-client-node': 1.1.10
   '@graphql-codegen/cli': ^2.13.11
   '@graphql-codegen/import-types-preset': ^2.2.6
   '@graphql-codegen/introspection': ^2.2.1
@@ -85,7 +85,7 @@ dependencies:
   '@apollo/client': 3.7.1_gdcq4dv6opitr3wbfwyjmanyra
   '@datocms/cma-client': 1.1.10_encoding@0.1.13
   '@datocms/cma-client-browser': 1.1.10_encoding@0.1.13
-  '@datocms/cma-client-node': 1.1.8_encoding@0.1.13
+  '@datocms/cma-client-node': 1.1.10_encoding@0.1.13
   '@next/bundle-analyzer': 12.3.2
   '@svgr/webpack': 6.5.1
   '@types/bcryptjs': 2.4.2
@@ -99,7 +99,7 @@ dependencies:
   cookie-cutter: 0.2.0
   cookies: 0.8.0
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/9ac968a00b5e7e4ac8b328cac7bddfb1e022d67b_nehq6dksbj5fbgp7pusvqblaqu
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/8c7515acb148a44f55072f0c191f64cf5975b09a_nehq6dksbj5fbgp7pusvqblaqu
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   framer-motion: 7.6.4_biqbaboplfbrettd7655fr4n2y
@@ -1583,11 +1583,11 @@ packages:
       - encoding
     dev: false
 
-  /@datocms/cma-client-node/1.1.8_encoding@0.1.13:
-    resolution: {integrity: sha512-Dud7MDEgUySWW6p3PAVqYMhumY3F0QDjmi08v5du0Go6eAD5a/9j98nRLFCTZbP4IzpctHxedXS4b94Dzmideg==}
+  /@datocms/cma-client-node/1.1.10_encoding@0.1.13:
+    resolution: {integrity: sha512-9cRGcaGlINJh9SfWEnr99eDxKt0vpz+SbmhNcHfQqJHQg3uhGr8ai+12q9oNg8Wi4/ekAFjbQZsz7T9Uk59cAw==}
     dependencies:
       '@datocms/cma-client': 1.1.10_encoding@0.1.13
-      '@datocms/rest-client-utils': 1.1.4_encoding@0.1.13
+      '@datocms/rest-client-utils': 1.1.9_encoding@0.1.13
       got: 11.8.5
       mime-types: 2.1.35
       tmp-promise: 3.0.3
@@ -1599,16 +1599,6 @@ packages:
     resolution: {integrity: sha512-iQr49XCgVTsD3esucwjk7UbZVvB691/qRV2ShxxpIOTjXPbp4f+0yMdmME6H3D0FTQSOvRA5rnCpVCiwn3KKvw==}
     dependencies:
       '@datocms/rest-client-utils': 1.1.9_encoding@0.1.13
-    transitivePeerDependencies:
-      - encoding
-    dev: false
-
-  /@datocms/rest-client-utils/1.1.4_encoding@0.1.13:
-    resolution: {integrity: sha512-Efiw/4oomKYmSwTDRNnSmNLx3lTeeqGSMcXHuXfBxFLfx4gqkmPPkykXrEOc9RnZvcGmjREyAyLOkbLg9g1gDw==}
-    dependencies:
-      async-scheduler: 1.4.4
-      cross-fetch: 3.1.5_encoding@0.1.13
-      qs: 6.11.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -12269,11 +12259,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/9ac968a00b5e7e4ac8b328cac7bddfb1e022d67b_nehq6dksbj5fbgp7pusvqblaqu:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/9ac968a00b5e7e4ac8b328cac7bddfb1e022d67b}
-    id: github.com/bebejane/dato-nextjs-utils/9ac968a00b5e7e4ac8b328cac7bddfb1e022d67b
+  github.com/bebejane/dato-nextjs-utils/8c7515acb148a44f55072f0c191f64cf5975b09a_nehq6dksbj5fbgp7pusvqblaqu:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/8c7515acb148a44f55072f0c191f64cf5975b09a}
+    id: github.com/bebejane/dato-nextjs-utils/8c7515acb148a44f55072f0c191f64cf5975b09a
     name: dato-nextjs-utils
-    version: 1.0.194
+    version: 1.0.202
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4

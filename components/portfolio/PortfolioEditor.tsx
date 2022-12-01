@@ -23,7 +23,6 @@ export default function PortfolioEditor({ images, onClose, onSave }: Props) {
       setImage(images[0])
   }, [])
 
-  console.log(image);
 
   return (
     <div id="edit-photo" className={cn(s.photoEditor)}>

@@ -99,7 +99,7 @@ query SearchMembers(
 	$first: IntType = 10
 	$skip: IntType = 0
 	$memberCategoryId: ItemId
-	$regionId: ItemId #$city: Strin
+	$regionId: ItemId #$city: String
 ) {
 	members: allMembers(
 		filter: {
