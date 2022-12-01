@@ -23,7 +23,7 @@ specifiers:
   '@types/jsonwebtoken': ^8.5.9
   '@types/lodash-es': ^4.17.6
   '@types/mjml': ^4.7.0
-  '@types/node': 18.11.9
+  '@types/node': ^18.11.9
   '@types/react': ^18.0.23
   apollo: ^2.34.0
   array-move: ^4.0.0
