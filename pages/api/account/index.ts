@@ -1,7 +1,7 @@
 
 import type { NextRequest, NextResponse } from 'next/server'
 import { buildClient, buildBlockRecord } from '@datocms/cma-client-node'
-import withAuthentication from '../../../lib/withAuthentication'
+import withAuthentication from '../../../lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberDocument } from '/graphql'
 
