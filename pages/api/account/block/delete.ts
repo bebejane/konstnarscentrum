@@ -2,7 +2,8 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { NextApiResponse, NextApiRequest } from 'next'
 import { Session } from 'next-auth'
-import { requireAuthentication, client } from '..'
+import { requireAuthentication } from '/lib/auth'
+import { client } from '../'
 
 export default requireAuthentication(async (req: NextApiRequest, res: NextApiResponse, session: Session) => {
 
