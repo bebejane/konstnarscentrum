@@ -228,7 +228,6 @@ type ApplicationModelFilter = {
   firstName?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   lastName?: InputMaybe<StringFilter>;
-  media?: InputMaybe<JsonFilter>;
   message?: InputMaybe<TextFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -289,7 +288,6 @@ type ApplicationRecord = RecordInterface & {
   firstName: Scalars['String'];
   id: Scalars['ItemId'];
   lastName: Scalars['String'];
-  media?: Maybe<Scalars['JsonField']>;
   message: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -2734,12 +2732,6 @@ enum ItemStatus {
   published = 'published',
   updated = 'updated'
 }
-
-/** Specifies how to filter JSON fields */
-type JsonFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-};
 
 /** Block of type Senaste nytt för medlemmar (latest_member_news) */
 type LatestMemberNewsRecord = RecordInterface & {

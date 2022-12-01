@@ -54,6 +54,7 @@
     "next-plugin-graphql": "^0.0.2",
     "next-seo": "^5.13.0",
     "next-sitemap": "^3.1.30",
+    "nextjs-cors": "^2.1.2",
     "nextjs-google-analytics": "^2.2.0",
     "nodemailer": "^6.8.0",
     "nodemailer-sendgrid-transport": "^0.2.0",

@@ -1,5 +1,6 @@
 import { datoError } from "dato-nextjs-utils/api";
 import { lowerFirst } from "lodash-es";
+import { NextApiRequest, NextApiResponse } from "next";
 import React from "react";
 
 export const isServer = typeof window === 'undefined';
@@ -20,9 +21,10 @@ export const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) 
 }
 
 export const catchErrorsFrom = (handler) => {
-  return async (req, res) => {
+  return async (req: NextApiRequest, res: NextApiResponse) => {
     return handler(req, res).catch((error) => {
       const err = datoError(error)
+      console.log(err)
       res.status(500).send(err);
     });
   }

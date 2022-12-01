@@ -1,14 +1,34 @@
-import { catchErrorsFrom } from '/lib/utils'
+
+import NextCors from 'nextjs-cors';
 import Email from '/lib/emails';
 
-export default catchErrorsFrom(async (req, res) => {
-	const { entity, previous_entity } = req.body;
-	const approved = entity && previous_entity && (entity.attributes.approved && !previous_entity.attributes.approved);
-	if (approved) {
-		const { email, approval_token: token, first_name: name } = entity.attributes
-		await Email.applicationApproved({email, token, name});
-	} else {
-		console.log('no approval')
+export default async function handler(req, res) {
+
+	try {
+
+		await NextCors(req, res, {
+			methods: ['POST'],
+			origin: '*',
+			optionsSuccessStatus: 200,
+		});
+
+		const { email, approval_token, first_name, last_name, approved } = req.body;
+
+		console.log('approve application', email);
+
+		if (!email || !approval_token || !first_name || !last_name)
+			throw 'Ogitltig data'
+
+		if (approved) {
+			await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
+		} else {
+			console.log('already approved')
+		}
+
+		res.status(200).json({ approved });
+
+	} catch (err) {
+		console.error(err);
+		res.status(501).json({ error: err?.message || err });
 	}
-	res.status(200).json({ approved });
-})
+}
