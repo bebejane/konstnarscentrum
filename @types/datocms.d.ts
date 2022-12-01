@@ -5268,3 +5268,11 @@ type RegionMetaQueryVariables = Exact<{
 
 
 type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title?: string | null, text?: string | null }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name?: string | null, email?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+
+type SiteSearchQueryVariables = Exact<{
+  memberIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
+  first?: InputMaybe<Scalars['IntType']>;
+}>;
+
+
+type SiteSearchQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> };

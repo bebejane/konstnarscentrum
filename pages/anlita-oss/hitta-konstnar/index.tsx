@@ -4,11 +4,9 @@ import { GetStaticProps } from "next";
 import {
 	AllMemberCategoriesDocument,
 	AllMembersWithPortfolioDocument,
-	AllMembersCitiesDocument,
-	SearchMembersDocument,
-	SearchMembersFreeDocument,
+	AllMembersCitiesDocument
 } from "/graphql";
-import { FilterBar, CardContainer, Card, Thumbnail } from "/components";
+import { FilterBar, CardContainer, Card, Thumbnail, Loader } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
 
@@ -25,6 +23,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
 	const [error, setError] = useState<Error | undefined>()
+	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
 	const [city, setCity] = useState<string | undefined>()
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string[] | undefined>()
@@ -32,6 +31,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 	useEffect(() => {
 
 		const variables = {
+			type: 'member',
 			city,
 			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
@@ -40,6 +40,8 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 		if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
 			return setResults(undefined)
 
+		setLoading(true)
+
 		fetch('/api/search', {
 			body: JSON.stringify(variables),
 			method: 'POST',
@@ -47,12 +49,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 		})
 			.then(async (res) => setResults((await res.json()).members))
 			.catch((err) => console.error(err))
-		return
-
-		const apiToken = process.env.NEXT_PUBLIC_SEARCH_GRAPHQL_TOKEN
-		apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables, apiToken })
-			.then((res) => setResults(res.members))
-			.catch((err) => console.error(err))
+			.finally(() => setLoading(false))
 
 	}, [query, city, memberCategoryIds, setResults])
 
@@ -97,6 +94,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 					</CardContainer>
 				</>
 			}
+			{loading && <Loader />}
 			<h2>Upptäck konstnärer</h2>
 			<CardContainer columns={3}>
 				{members.map(({ id, firstName, lastName, image, region, slug }) =>
