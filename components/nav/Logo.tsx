@@ -75,7 +75,7 @@ export default function Logo({ disabled }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionRatio = Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length))))
+  const regionRatio = Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length)))) || 1
 
   return (
     <div className={s.logo}>

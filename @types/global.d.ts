@@ -6,3 +6,9 @@ type Region = {
   slug: string,
   global: boolean
 }
+
+type Pagination = {
+  count: number
+  page: number
+  size: number
+}

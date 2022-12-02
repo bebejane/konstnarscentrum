@@ -1,11 +1,11 @@
 import styles from "./[news].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { regions } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { NewsDocument, AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
+import { pagination } from "/lib/utils";
 
 export type Props = {
   news: NewsRecord,
@@ -23,17 +23,8 @@ export default function News({ news: { createdAt, title, content, region } }: Pr
   );
 }
 
-export async function getStaticPaths(context) {
-  const { news } = await apiQuery(AllNewsDocument)
-
-  const paths = []
-
-  news.forEach(({ slug }) => regions.forEach(d => paths.push({ params: { news: slug, region: d.slug } })))
-
-  return {
-    paths,
-    fallback: false,
-  };
+export async function getStaticPaths() {
+  return pagination.getStaticPaths(AllNewsDocument, 'news');
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {

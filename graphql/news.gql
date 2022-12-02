@@ -10,21 +10,7 @@ query AllNews($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId) {
 	) {
 		...NewsFragment
 	}
-	pagination: _allNewsMeta {
-		count
-	}
-}
-
-query AllNewsByRegion($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId) {
-	news: allNews(
-		filter: { region: { eq: $regionId } }
-		orderBy: [createdAt_DESC]
-		first: $first
-		skip: $skip
-	) {
-		...NewsFragment
-	}
-	pagination: _allNewsMeta {
+	pagination: _allNewsMeta(filter: { region: { eq: $regionId } }) {
 		count
 	}
 }

@@ -1,9 +1,11 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphql";
 import { FilterBar, Thumbnail, CardContainer, Card } from '/components'
 import { useEffect, useState } from "react";
+import { pageSize } from "/lib/utils";
+import { apiQuery } from "dato-nextjs-utils/api";
 
 export type Props = {
 	commissions: CommissionRecord[],
@@ -39,10 +41,27 @@ export default function RegionHome({ commissions, commissionCategories }: Props)
 	);
 }
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionsDocument, AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
+
+	const page = parseInt(context.params?.page) || 1;
+	const regionId = props.region.global ? undefined : props.region.id;
+	const { commissions, pagination } = await apiQuery(AllCommissionsDocument, {
+		variables: {
+			regionId,
+			first: 100
+		}
+	});
 
 	return {
-		props,
+		props: {
+			...props,
+			commissions,
+			pagination: {
+				...pagination,
+				page,
+				size: pageSize
+			}
+		},
 		revalidate
 	};
 });
