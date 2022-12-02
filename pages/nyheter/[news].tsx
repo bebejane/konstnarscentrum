@@ -5,11 +5,10 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { NewsDocument, AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { pagination } from "/lib/utils";
+import { getStaticPagePaths, chunkArray } from "/lib/utils";
 
 export type Props = {
-  news: NewsRecord,
-  region: Region
+  news: NewsRecord
 }
 
 export default function News({ news: { createdAt, title, content, region } }: Props) {
@@ -24,7 +23,7 @@ export default function News({ news: { createdAt, title, content, region } }: Pr
 }
 
 export async function getStaticPaths() {
-  return pagination.getStaticPaths(AllNewsDocument, 'news');
+  return getStaticPagePaths(AllNewsDocument, 'news')
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
@@ -32,10 +31,14 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
   const slug = context.params.news;
   const { news } = await apiQuery(NewsDocument, { variables: { slug } })
 
+  if (!news)
+    return { notFound: true }
+
   return {
     props: {
       ...props,
       news
     },
+    revalidate
   };
 });

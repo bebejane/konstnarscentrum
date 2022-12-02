@@ -5,7 +5,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { StructuredContent } from "/components";
-import { pagination } from "/lib/utils";
+import { getStaticPagePaths } from "/lib/utils";
 
 export type Props = {
 	memberNews: MemberNewsRecord,
@@ -24,13 +24,16 @@ export default function News({ memberNews: { date, title, content }, region }: P
 }
 
 export async function getStaticPaths() {
-	return pagination.getStaticPaths(AllMemberNewsDocument, 'memberNews');
+	return getStaticPagePaths(AllMemberNewsDocument, 'memberNews')
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const slug = context.params.memberNews;
 	const { memberNews } = await apiQuery(MemberNewsDocument, { variables: { slug } })
+
+	if (!memberNews)
+		return { notFound: true }
 
 	return {
 		props: {

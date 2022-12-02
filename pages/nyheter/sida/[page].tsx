@@ -1,2 +1,7 @@
+import { getStaticPaginationPaths } from '/lib/utils'
+import { AllNewsDocument } from '/graphql'
 export { default, getStaticProps } from '../'
-export { getStaticPaths } from '/pages/nyheter/[news]'
+
+export const getStaticPaths = () => {
+  return getStaticPaginationPaths(AllNewsDocument, 'news')
+}

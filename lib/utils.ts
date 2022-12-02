@@ -53,39 +53,68 @@ export const isEmail = (string: string): boolean => {
   return matcher.test(string);
 }
 
-export const pagination = {
-  getStaticPaths: async (query: TypedDocumentNode, type: string) => {
+export const fetchAllRecords = async (query: TypedDocumentNode, type?: string) => {
+  const posts = []
 
-    const paths = []
-    const posts = []
+  for (let page = 0, count; posts.length < count || page === 0; page++) {
+    const res = await apiQuery(query, { variables: { first: 100, skip: (page * 100) } })
+    const key = type || Object.keys(res).find(k => k !== 'pagination')
+    posts.push.apply(posts, res[key]);
+    count = res.pagination.count;
+  }
 
-    for (let page = 0, count; posts.length < count || page === 0; page++) {
-      const res = await apiQuery(query, { variables: { first: 100, skip: (page * 100) } })
-      const key = Object.keys(res).find(k => k !== 'pagination')
-      posts.push.apply(posts, res[key]);
-      count = res.pagination.count;
-    }
+  return posts
+}
 
-    posts.forEach(({ slug, region }) => {
-      paths.push({ params: { region: '', [type]: slug, page: '' } })
-      paths.push({ params: { region: region.slug, [type]: slug, page: '' } })
-    })
+export const getStaticPaginationPaths = async (query: TypedDocumentNode, segment: string, regional: boolean = false) => {
 
-    chunkArray(posts, pageSize).forEach(({ news }, idx) => {
-      paths.push({ params: { region: '', [type]: '', page: `${idx + 1}` } })
-    })
+  const paths = []
+  const items = await fetchAllRecords(query)
 
+
+  if (regional) {
     regions.forEach((region) => {
-      const pages = chunkArray(posts.filter(p => p.region.id === region.id), pageSize)
-      const slugs = pages.map((p, idx) => ({ params: { [type]: '', region: region.slug, page: `${idx + 1}` } }))
-      paths.push.apply(paths, slugs)
+      const pages = chunkArray(items.filter(p => p.region.id === region.id), pageSize)
+      pages.forEach((posts, pageNo) => {
+        paths.push.apply(paths, posts.map(p => ({
+          params: {
+            region: region.slug,
+            [segment]: p.slug,
+            page: `${pageNo + 1}`,
+
+          }
+        })))
+      })
     })
-    //console.log(paths);
+  } else {
+    const pages = chunkArray(items, pageSize)
+    pages.forEach((posts, pageNo) => {
+      paths.push.apply(paths, posts.map(p => ({
+        params: {
+          [segment]: p.slug,
+          page: `${pageNo + 1}`
+        }
+      })))
+    })
+  }
 
-    return {
-      paths,
-      fallback: false,
-    };
-  },
+  return {
+    paths,
+    fallback: 'blocking'
+  };
+}
 
+export const getStaticPagePaths = async (query: TypedDocumentNode, segment: string, regional: boolean = false) => {
+  const items = await fetchAllRecords(query)
+  const paths = []
+
+  items.forEach(({ slug, region: { id, slug: regionSlug } }) => {
+    const params = { [segment]: slug }
+    paths.push(!regional ? { params } : { params: { ...params, region: regionSlug } })
+  })
+
+  return {
+    paths,
+    fallback: 'blocking'
+  }
 }

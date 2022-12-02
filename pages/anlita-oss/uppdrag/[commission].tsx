@@ -5,7 +5,7 @@ import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument 
 import type { GetStaticProps } from 'next'
 import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
 import { useState } from "react";
-import { pagination } from '/lib/utils'
+import { getStaticPagePaths } from '/lib/utils'
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -72,7 +72,10 @@ export default function Commission({ commission: {
 }
 
 export async function getStaticPaths() {
-	return pagination.getStaticPaths(AllCommissionsDocument, 'commission');
+	const p = await getStaticPagePaths(AllCommissionsDocument, 'commission')
+	console.log(p);
+	return p
+
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
@@ -80,6 +83,10 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.commission;
 	const { commission } = await apiQuery(CommissionDocument, { variables: { slug } });
+
+	if (!commission)
+		return { notFound: true }
+
 	const { commissions } = await apiQuery(RelatedCommissionsDocument, { variables: { regionId, commissionId: commission.id } });
 
 	return {
