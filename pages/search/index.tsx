@@ -1,6 +1,7 @@
 import s from "./index.module.scss";
 import { CardContainer, Card, Thumbnail, Loader } from "/components";
 import { useEffect, useState } from "react";
+import { recordToSlug } from "/lib/utils";
 
 export default function SiteSearch() {
 
@@ -11,6 +12,9 @@ export default function SiteSearch() {
 
   useEffect(() => {
 
+    setLoading(true)
+    setResults(undefined)
+
     const variables = {
       type: 'site',
       query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
@@ -19,15 +23,13 @@ export default function SiteSearch() {
     if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
       return setResults(undefined)
 
-    setLoading(true)
-
     fetch('/api/search', {
       body: JSON.stringify(variables),
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     })
       .then(async (res) => setResults((await res.json()).members))
-      .catch((err) => console.error(err))
+      .catch((err) => setError(err))
       .finally(() => setLoading(false))
 
   }, [query, setResults])
@@ -51,9 +53,13 @@ export default function SiteSearch() {
           <h2>Sök resultat</h2>
           {results.length === 0 && <>Hittadet inget...</>}
           <CardContainer columns={3} className={s.results}>
-            {results.map(({ __typename, id }) =>
-              <Card key={id}>
-                {__typename}: {id}
+            {results.map((record) =>
+              <Card key={record.id}>
+                <Thumbnail
+                  slug={recordToSlug(record)}
+                  image={record.image}
+                  title={record.firstName}
+                />
               </Card>
             )}
           </CardContainer>

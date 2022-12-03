@@ -34,16 +34,28 @@ export const catchErrorsFrom = (handler) => {
   }
 }
 
-export const recordToSlug = (record: any): string => {
-  switch (record?.__typename) {
+export const recordToSlug = (record: any, regional: boolean = true): string => {
+
+  if (!record) {
+    console.error('reecord is undefined')
+    return '/'
+  }
+
+  const { __typename, slug } = record
+
+  switch (__typename) {
     case 'CommissionRecord':
-      return '/'
-    case 'MemberNewsRecord':
-      return '/'
+      return `/anlita-oss/uppdrag/${slug}`
+    case 'MemberRecord':
+      return `/anlita-oss/hitta-konstnar/${slug}`
     case 'NewsRecord':
-      return '/'
+      return `/nyheter/${slug}`
+    case 'MemberNewsRecord':
+      return `/konstnar/aktuellt/${slug}`
+    case 'AboutRecord':
+      return `/om/${slug}`
     default:
-      return '/'
+      throw Error(`${__typename} is unknown record slug!`)
   }
 }
 

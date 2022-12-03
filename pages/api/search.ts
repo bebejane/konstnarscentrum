@@ -1,6 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-//import { buildClient } from '@datocms/cma-client';
+import { buildClient } from '@datocms/cma-client';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 
 export const config = {
@@ -78,7 +78,8 @@ export default async function handler(req: NextRequest, res: NextResponse) {
     })
   } else if (params.type === 'site') {
     const results = await siteSearch(params)
-    return new Response(JSON.stringify({ results }), {
+
+    return new Response(JSON.stringify(results), {
       status: 200,
       headers: { 'content-type': 'application/json' }
     })

@@ -1233,6 +1233,91 @@ type GlobalSeoField = {
   twitterAccount?: Maybe<Scalars['String']>;
 };
 
+type HelpModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<HelpModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  model?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
+  text?: InputMaybe<TextFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum HelpModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  model_ASC = 'model_ASC',
+  model_DESC = 'model_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Hjälp (help) */
+type HelpRecord = RecordInterface & {
+  __typename?: 'HelpRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  model: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
+  text: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Hjälp (help) */
+type HelpRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Hjälp (help) */
+type HelpRecordtextArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Block of type Bild(er) (image) */
 type ImageRecord = RecordInterface & {
   __typename?: 'ImageRecord';
@@ -3455,6 +3540,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allForMembersMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allHelpsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allMemberCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allMemberNewsCategoriesMeta: CollectionMetadata;
@@ -3497,6 +3584,8 @@ type Query = {
   /** Returns a collection of records */
   allForMembers: Array<ForMemberRecord>;
   /** Returns a collection of records */
+  allHelps: Array<HelpRecord>;
+  /** Returns a collection of records */
   allMemberCategories: Array<MemberCategoryRecord>;
   /** Returns a collection of records */
   allMemberNews: Array<MemberNewsRecord>;
@@ -3532,6 +3621,8 @@ type Query = {
   forArtist?: Maybe<ForArtistRecord>;
   /** Returns a specific record */
   forMember?: Maybe<ForMemberRecord>;
+  /** Returns a specific record */
+  help?: Maybe<HelpRecord>;
   /** Returns the single instance record */
   inEnglish?: Maybe<InEnglishRecord>;
   /** Returns the single instance record */
@@ -3625,6 +3716,14 @@ type Query_allForArtistsMetaArgs = {
 type Query_allForMembersMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ForMemberModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allHelpsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3825,6 +3924,17 @@ type QueryallForMembersArgs = {
 
 
 /** The query root for this schema */
+type QueryallHelpsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HelpModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 type QueryallMemberCategoriesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MemberCategoryModelFilter>;
@@ -3997,6 +4107,15 @@ type QueryforMemberArgs = {
   filter?: InputMaybe<ForMemberModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ForMemberModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryhelpArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HelpModelOrderBy>>>;
 };
 
 

@@ -7,8 +7,8 @@ import useDevice from '/lib/hooks/useDevice'
 
 export type Props = {
   image: FileField,
-  slug?: string,
-  title?: string
+  slug: string,
+  title: string
 }
 
 const speed = 0.07

@@ -2,6 +2,7 @@ import s from './ImageShortcut.module.scss'
 import React from 'react'
 import { Image } from 'react-datocms'
 import Link from 'next/link'
+import { getStaticPagePaths } from '/lib/utils'
 import { recordToSlug } from '/lib/utils'
 
 export type ImageShortcutBlockProps = {
