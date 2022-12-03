@@ -1,16 +1,37 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { buildClient } from '@datocms/cma-client-browser';
+//import { buildClient } from '@datocms/cma-client';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
+const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
 
 export const config = {
   runtime: 'experimental-edge',
-  unstable_allowDynamic: [
-    './node_modules/.pnpm/@datocms**', // use a glob to allow anything in the function-bind 3rd party module
-  ],
 }
 
-const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
+
+
+export default async function handler(req: NextRequest, res: NextResponse) {
+
+  const params = await req.json();
+
+  if (params.type === 'member') {
+
+    const members = await memberSearch(params)
+    return new Response(JSON.stringify({ members }), {
+      status: 200,
+      headers: { 'content-type': 'application/json' }
+    })
+
+  } else if (params.type === 'site') {
+
+    //const results = await siteSearch(params)
+    const results = {}
+    return new Response(JSON.stringify(results), {
+      status: 200,
+      headers: { 'content-type': 'application/json' }
+    })
+  }
+}
 
 const memberSearch = async (opt) => {
 
@@ -29,6 +50,7 @@ const memberSearch = async (opt) => {
   return members
 }
 
+/*
 export const siteSearch = async (opt: any) => {
 
   const { query, regionId } = opt;
@@ -69,24 +91,5 @@ export const siteSearch = async (opt: any) => {
   return data;
 }
 
-export default async function handler(req: NextRequest, res: NextResponse) {
+*/
 
-  const params = await req.json();
-
-  if (params.type === 'member') {
-
-    const members = await memberSearch(params)
-    return new Response(JSON.stringify({ members }), {
-      status: 200,
-      headers: { 'content-type': 'application/json' }
-    })
-
-  } else if (params.type === 'site') {
-
-    const results = await siteSearch(params)
-    return new Response(JSON.stringify(results), {
-      status: 200,
-      headers: { 'content-type': 'application/json' }
-    })
-  }
-}
