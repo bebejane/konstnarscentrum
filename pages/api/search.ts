@@ -1,10 +1,13 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-//import { buildClient } from '@datocms/cma-client-browser';
+import { buildClient } from '@datocms/cma-client-browser';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 
 export const config = {
   runtime: 'experimental-edge',
+  unstable_allowDynamic: [
+    './node_modules/.pnpm/@datocms**', // use a glob to allow anything in the function-bind 3rd party module
+  ],
 }
 
 const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
@@ -28,8 +31,6 @@ const memberSearch = async (opt) => {
 
 export const siteSearch = async (opt: any) => {
 
-  return {}
-
   const { query, regionId } = opt;
 
   const variables = {
@@ -40,7 +41,7 @@ export const siteSearch = async (opt: any) => {
   if (isEmpty(variables))
     return {}
 
-  //const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
+  const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
   const itemTypes = await client.itemTypes.list();
 
   const search = (await client.items.list({
