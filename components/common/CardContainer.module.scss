@@ -5,19 +5,21 @@
   margin-left: calc(-1 * var(--gutter));
   margin-right: calc(-1 * var(--gutter));
   width: calc(100% + (2 * var(--gutter)));
+  padding: 0;
+  list-style: none;
 
   @include mq($from: tablet) {
     width: calc(100% + (2 * var(--grid-unit)) + (2 * var(--gutter)));
     margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
   }
 
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
 
   >li {
     border-right: 1px solid var(--beige-mid);
+
+    @include mq($until: tablet) {
+      margin-bottom: var(--gutter)
+    }
   }
 
   &.two>li {

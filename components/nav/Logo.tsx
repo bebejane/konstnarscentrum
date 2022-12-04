@@ -75,27 +75,29 @@ export default function Logo({ disabled }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionRatio = Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length)))) || 1
+  const regionRatio = ratio > 1 ? Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length)))) : 1
 
   return (
-    <div className={s.logo}>
-      <div className={s.vertical}>
-        <Link href="/">
-          {vertical.map((l, i) => l)}
-        </Link>
-        {horizontal.length > 0 &&
-          <span className={s.space}>{letters[vertical.length]}</span>
-        }
-      </div>
-      <div className={s.horizontal}>
-        <Link href="/">
-          {horizontal.map((l, i) => l)}
-        </Link>
-        {region && !region?.global &&
-          <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
-            {region.name.substring(0, (region.name.length) * regionRatio)}
+    <div className={s.container}>
+      <div className={s.logo}>
+        <div className={s.vertical}>
+          <Link href="/">
+            {vertical.map((l, i) => l)}
           </Link>
-        }
+          {horizontal.length > 0 &&
+            <span className={s.space}>{letters[vertical.length]}</span>
+          }
+        </div>
+        <div className={s.horizontal}>
+          <Link href="/">
+            {horizontal.map((l, i) => l)}
+          </Link>
+          {region && !region?.global &&
+            <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
+              {region.name.substring(0, (region.name.length) * regionRatio)}
+            </Link>
+          }
+        </div>
       </div>
     </div>
   )
