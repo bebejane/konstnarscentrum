@@ -31,13 +31,13 @@ export default function RegionHome({ regionStart, menu }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-
 	const regionId = props.region.global ? undefined : props.region.id;
 
 	const { region: regionStart, news, memberNews }: {
 		region: RegionRecord, news: NewsRecord[], memberNews: MemberNewsRecord[]
 	} = await apiQuery([RegionDocument, LatestNewsDocument, LatestMemberNewsDocument], {
-		variables: [{ regionId }, { regionId }, { regionId }]
+		variables: [{ regionId }, { regionId }, { regionId }],
+		preview: context.preview
 	});
 
 	return {

@@ -148,8 +148,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
-	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug } })
-	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id } })
+	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug }, preview: context.preview })
+	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id }, preview: context.preview })
 
 	return {
 		props: {

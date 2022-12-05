@@ -82,7 +82,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.commission;
-	const { commission } = await apiQuery(CommissionDocument, { variables: { slug } });
+	const { commission } = await apiQuery(CommissionDocument, { variables: { slug }, preview: context.preview });
 
 	if (!commission)
 		return { notFound: true }
