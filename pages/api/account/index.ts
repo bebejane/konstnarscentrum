@@ -1,13 +1,12 @@
 
 import type { NextRequest, NextResponse } from 'next/server'
-import { buildClient, buildBlockRecord } from '@datocms/cma-client-node'
+import { buildClient, buildBlockRecord } from '@datocms/cma-client'
 import withAuthentication from '../../../lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberDocument } from '/graphql'
+export const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL, environment: 'dev' })
 
 const imageBlockId = '1349197'
-
-export const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL, environment: 'dev' })
 
 export default withAuthentication(async (req, res, session) => {
 
@@ -30,4 +29,6 @@ export default withAuthentication(async (req, res, session) => {
   return res.status(200).json(resp)
 })
 
-export const config = { /*runtime: 'experimental-edge'*/ }
+export const config = {
+  //runtime: 'experimental-edge'
+}

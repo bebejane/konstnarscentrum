@@ -8,9 +8,9 @@ import type { Menu, MenuItem } from '/lib/menu'
 import { RegionSelector, RegionLink, User } from '/components'
 import Link from 'next/link'
 
-export type MenuDesktopProps = { items: Menu }
+export type MenuDesktopProps = { items: Menu, home: boolean }
 
-export default function MenuDesktop({ items }: MenuDesktopProps) {
+export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 	const menuRef = useRef<HTMLDivElement | null>(null);
 	const subRef = useRef<HTMLDivElement | null>(null);
@@ -94,13 +94,13 @@ export default function MenuDesktop({ items }: MenuDesktopProps) {
 					})}
 				</div>
 			</nav>
-			<nav className={s.toolsMenu}>
+			<nav className={cn(s.toolsMenu, showMenu && s.show)}>
 				<ul>
 					<li className={s.user}>
 						<User />
 					</li>
 					<li className={s.english}>
-						<Link href={'/english'}>English</Link>
+						{home && <Link href={'/english'}>English</Link>}
 					</li>
 					<li className={s.region}>
 						<RegionSelector />

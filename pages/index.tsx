@@ -19,7 +19,7 @@ export default function RegionHome({ regionStart, menu }: Props) {
 			<div className={cn(s.gallery, s.margins)}>
 				<HomeGallery slides={regionStart.gallery} />
 			</div>
-			<MenuDesktop items={menu} />
+			<MenuDesktop items={menu} home={true} />
 			<div className={s.margins}>
 				{regionStart.sections.map((block, idx) =>
 					<Block key={idx} data={block} />

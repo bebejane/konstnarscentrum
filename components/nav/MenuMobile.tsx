@@ -7,11 +7,16 @@ import React, { useState } from 'react';
 import type { Menu, MenuItem } from '/lib/menu';
 import Link from 'next/link';
 
-export type MenuMobileProps = { items: Menu }
+export type MenuMobileProps = { items: Menu, home: boolean }
 
-const englishMenuItem: MenuItem = { type: 'language', label: 'English', slug: '/english', index: true }
+const englishMenuItem: MenuItem = {
+	type: 'language',
+	label: 'English',
+	slug: '/english',
+	index: true
+}
 
-export default function MenuMobile({ items }: MenuMobileProps) {
+export default function MenuMobile({ items, home }: MenuMobileProps) {
 
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
