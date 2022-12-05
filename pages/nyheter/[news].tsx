@@ -5,18 +5,25 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { NewsDocument, AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { getStaticPagePaths, chunkArray } from "/lib/utils";
+import { getStaticPagePaths } from "/lib/utils";
+import { Image } from "react-datocms";
 
 export type Props = {
   news: NewsRecord
 }
 
-export default function News({ news: { createdAt, title, content, region } }: Props) {
+export default function News({ news: { createdAt, title, image, content, region } }: Props) {
 
   return (
     <div className={styles.container}>
       <h1>{title}</h1>
       <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
+      {image &&
+        <Image
+          className={styles.image}
+          data={image.responsiveImage}
+        />
+      }
       <Markdown>{content}</Markdown>
     </div>
   );
