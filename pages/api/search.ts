@@ -1,6 +1,6 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { buildClient } from '@datocms/cma-client';
+import { buildClient } from '@datocms/cma-client-browser';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
 
