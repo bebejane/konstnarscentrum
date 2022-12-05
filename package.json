@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@apollo/client": "^3.7.1",
-    "@datocms/cma-client": "1.1.11",
-    "@datocms/cma-client-browser": "^1.1.11",
-    "@datocms/cma-client-node": "1.1.11",
+    "@datocms/cma-client": "1.1.12",
+    "@datocms/cma-client-browser": "^1.1.12",
+    "@datocms/cma-client-node": "1.1.12",
     "@next/bundle-analyzer": "^12.3.2",
     "@svgr/webpack": "^6.5.0",
     "@types/bcryptjs": "^2.4.2",

@@ -1,14 +1,12 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
-//import { buildClient } from '@datocms/cma-client';
+import { buildClient } from '@datocms/cma-client';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
 
 export const config = {
   runtime: 'experimental-edge',
 }
-
-
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
@@ -24,8 +22,7 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
   } else if (params.type === 'site') {
 
-    //const results = await siteSearch(params)
-    const results = {}
+    const results = await siteSearch(params)
     return new Response(JSON.stringify(results), {
       status: 200,
       headers: { 'content-type': 'application/json' }
@@ -50,7 +47,7 @@ const memberSearch = async (opt) => {
   return members
 }
 
-/*
+
 export const siteSearch = async (opt: any) => {
 
   const { query, regionId } = opt;
@@ -90,6 +87,4 @@ export const siteSearch = async (opt: any) => {
 
   return data;
 }
-
-*/
 
