@@ -15,11 +15,9 @@ export type Props = {
 
 export default function MemberNews({ memberNews, region, pagination }: Props) {
 
-
 	return (
 		<>
 			<h1 className="noPadding">Aktuellt</h1>
-
 			<CardContainer columns={2} className={s.memberNews}>
 				{memberNews.map(({ date, title, intro, slug, region, image }, idx) =>
 					<NewsCard
@@ -33,7 +31,6 @@ export default function MemberNews({ memberNews, region, pagination }: Props) {
 					/>
 				)}
 			</CardContainer>
-
 			<Pager pagination={pagination} slug={'/konstnar/aktuellt'} />
 		</>
 	);
@@ -43,16 +40,13 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const page = parseInt(context.params?.page) || 1;
 	const regionId = props.region.global ? undefined : props.region.id;
-	const options = {
+	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, {
 		variables: {
 			regionId,
 			first: pageSize,
 			skip: (pageSize * (page - 1))
 		}
-	}
-	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, options);
-
-	console.log(options);
+	});
 
 	return {
 		props: {

@@ -15,7 +15,7 @@ export const breakpoints = {
   navBreak: 1368
 }
 
-export const pageSize = 1;
+export const pageSize = 10;
 
 export const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) => {
   const newArr = []
