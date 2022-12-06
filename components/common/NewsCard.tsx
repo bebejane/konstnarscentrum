@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Image } from 'react-datocms'
 import { Card } from '/components'
+import ReadMore from '/components'
 
 export type NewsCardProps = {
   title: string,
@@ -25,7 +26,7 @@ export default function NewsCard({ title, subtitle, text, slug, image }: NewsCar
       <h5>{subtitle}</h5>
       <Link href={slug}><h4>{title}</h4></Link>
       <p className="mid">{text}</p>
-      <Link className="small" href={slug}>Läs mer</Link>
+      <ReadMore link={slug} message='Läs mer'></ReadMore>
     </Card>
   )
 }

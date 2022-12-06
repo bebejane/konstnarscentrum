@@ -1,0 +1,12 @@
+.square {
+  display: inline-block;
+  background: var(--black);
+  width: 0.5em;
+  height: 0.5em;
+  margin-right: 0.5em;
+
+  &.invert {
+    background: var(--white);
+    width: 0.45em;
+  }
+}

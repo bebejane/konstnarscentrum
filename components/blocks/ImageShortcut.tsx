@@ -1,7 +1,7 @@
 import s from './ImageShortcut.module.scss'
 import React from 'react'
 import { Image } from 'react-datocms'
-import Link from 'next/link'
+import ReadMore from '../common/ReadMore'
 import { recordToSlug } from '/lib/utils'
 
 export type ImageShortcutBlockProps = {
@@ -23,9 +23,9 @@ export default function ImageShortcut({ data: { headline, image, link, text } }:
         <figcaption>
           <h2>{headline}</h2>
           <p className="intro">{text}</p><br />
-          <Link href={recordToSlug(link)}>Läs mer</Link>
+          <ReadMore link={link} message='Läs mer' invert={true}></ReadMore>
         </figcaption>
       </figure>
-    </section>
+    </section >
   )
 }

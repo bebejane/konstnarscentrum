@@ -2,6 +2,7 @@ import s from './Text.module.scss'
 import React from 'react'
 import Link from 'next/link';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
+import ReadMore from '../common/ReadMore';
 
 export type TextBlockProps = {
   data: TextRecord
@@ -20,7 +21,7 @@ export default function Text({ data: { text, headline, url } }: TextBlockProps) 
           {text}
         </Markdown>
       </h3>
-      <Link className="small" href={url}>Läs mer</Link>
+      <ReadMore link={url} message='Läs mer'></ReadMore>
     </div>
   )
 }
