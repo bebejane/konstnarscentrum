@@ -5328,6 +5328,7 @@ type SearchMembersQueryVariables = Exact<{
   skip?: InputMaybe<Scalars['IntType']>;
   memberCategoryIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
   regionId?: InputMaybe<Scalars['ItemId']>;
+  city?: InputMaybe<Scalars['String']>;
 }>;
 
 

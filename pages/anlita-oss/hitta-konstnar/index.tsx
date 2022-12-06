@@ -9,7 +9,6 @@ import {
 import { FilterBar, CardContainer, Card, Thumbnail, Loader } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
-import { SsoGroup } from "@datocms/cma-client/dist/types/generated/resources";
 
 export type Props = {
 	memberCategories: MemberCategoryRecord[]
@@ -32,7 +31,6 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 	useEffect(() => {
 
 		const variables = {
-			type: 'member',
 			city,
 			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
@@ -44,7 +42,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 		setLoading(true)
 
 		fetch('/api/search', {
-			body: JSON.stringify(variables),
+			body: JSON.stringify({ ...variables, type: 'member' }),
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		})
@@ -81,36 +79,41 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 				options={memberCategories.map(({ id, categoryType }) => ({ label: categoryType, id }))}
 				onChange={(ids) => setMemberCategoryIds(ids)}
 			/>
-			{results &&
-				<>
-					<h2>Sök resultat</h2>
-					{results.length === 0 && <>Hittadet inget...</>}
-					<CardContainer columns={3} className={s.results}>
-						{results.map(({ id, firstName, lastName, image, region, slug }) =>
-							<Card key={id}>
-								<Thumbnail
-									image={image}
-									title={`${firstName} ${lastName}`}
-									slug={`/anlita-oss/hitta-konstnar/${slug}`}
-								/>
-							</Card>
-						)}
-					</CardContainer>
-				</>
+			{loading ?
+				<Loader />
+				: results ?
+					<>
+						<h2>Sök resultat</h2>
+						{results.length === 0 && <>Vi hittade ingenting...</>}
+						<CardContainer columns={3} className={s.results} key={Math.random()}>
+							{results.map(({ id, firstName, lastName, image, region, slug }) =>
+								<Card key={id}>
+									<Thumbnail
+										image={image}
+										title={`${firstName} ${lastName}`}
+										slug={`/anlita-oss/hitta-konstnar/${slug}`}
+									/>
+								</Card>
+							)}
+						</CardContainer>
+					</>
+					:
+					<>
+						<h2>Upptäck konstnärer</h2>
+						<CardContainer columns={3}>
+							{members.map(({ id, firstName, lastName, image, region, slug }) =>
+								<Card key={id}>
+									<Thumbnail
+										image={image}
+										title={`${firstName} ${lastName}`}
+										slug={`/anlita-oss/hitta-konstnar/${slug}`}
+									/>
+								</Card>
+							)}
+						</CardContainer>
+					</>
 			}
-			{loading && <Loader />}
-			<h2>Upptäck konstnärer</h2>
-			<CardContainer columns={3}>
-				{members.map(({ id, firstName, lastName, image, region, slug }) =>
-					<Card key={id}>
-						<Thumbnail
-							image={image}
-							title={`${firstName} ${lastName}`}
-							slug={`/anlita-oss/hitta-konstnar/${slug}`}
-						/>
-					</Card>
-				)}
-			</CardContainer>
+
 		</div>
 	);
 }

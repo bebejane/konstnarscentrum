@@ -8,6 +8,7 @@ import { Pager } from '/components'
 import { pageSize } from "/lib/utils";
 import Link from "next/link";
 
+//const pageSize = 2;
 
 export type Props = {
   news: NewsRecord[],
@@ -48,7 +49,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
     variables: {
       regionId,
       first: pageSize,
-      skip: (pageSize * page) - 1
+      skip: (pageSize * (page - 1))
     }
   });
 
