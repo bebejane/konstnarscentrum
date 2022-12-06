@@ -5,11 +5,13 @@ import { StructuredContent } from "/components";
 import { Image } from 'react-datocms';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 import cn from 'classnames'
+import { black } from '/lib/emails/components/theme';
 
 
 export type ArticleProps = {
   children?: React.ReactNode,
   title: string,
+  blackHeadline: boolean,
   text: string,
   image?: FileField,
   showImage?: boolean,
@@ -20,7 +22,7 @@ export type ArticleProps = {
 
 }
 
-export default function Article({ children, title, text, image, content, showImage = true, editable, noBottom, onClick }: ArticleProps) {
+export default function Article({ children, title, blackHeadline, text, image, content, showImage = true, editable, noBottom, onClick }: ArticleProps) {
 
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
@@ -29,7 +31,7 @@ export default function Article({ children, title, text, image, content, showIma
     <div className={cn(s.article, noBottom && s.noBottom)} >
       {image && showImage ?
         <header>
-          <h1 className={s.title}>{title}</h1>
+          <h1 className={cn(s.title, blackHeadline && s.black)} >{title}</h1>
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
