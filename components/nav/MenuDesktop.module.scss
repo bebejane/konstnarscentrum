@@ -1,3 +1,13 @@
+.menu,
+.toolsMenu {
+  transition: transform 0.4s ease-out;
+  transform: translateY(-100%);
+
+  &.show {
+    transform: translateY(0%);
+  }
+}
+
 .menu {
   position: sticky;
   display: flex;
@@ -11,13 +21,6 @@
   padding-left: calc(2 * var(--grid-unit) + var(--total-outer-margin));
   padding-right: var(--outer-margin);
   background-color: var(--white);
-  opacity: 1;
-  transition: transform 0.4s ease-out;
-  transform: translateY(-100%);
-
-  &.show {
-    transform: translateY(0%);
-  }
 
   @include mq($until: tablet) {
     display: none;

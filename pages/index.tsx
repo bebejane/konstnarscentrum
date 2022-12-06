@@ -19,7 +19,7 @@ export default function RegionHome({ regionStart, menu }: Props) {
 			<div className={cn(s.gallery, s.margins)}>
 				<HomeGallery slides={regionStart.gallery} />
 			</div>
-			<MenuDesktop items={menu} />
+			<MenuDesktop items={menu} home={true} />
 			<div className={s.margins}>
 				{regionStart.sections.map((block, idx) =>
 					<Block key={idx} data={block} />
@@ -31,13 +31,13 @@ export default function RegionHome({ regionStart, menu }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-
 	const regionId = props.region.global ? undefined : props.region.id;
 
 	const { region: regionStart, news, memberNews }: {
 		region: RegionRecord, news: NewsRecord[], memberNews: MemberNewsRecord[]
 	} = await apiQuery([RegionDocument, LatestNewsDocument, LatestMemberNewsDocument], {
-		variables: [{ regionId }, { regionId }, { regionId }]
+		variables: [{ regionId }, { regionId }, { regionId }],
+		preview: context.preview
 	});
 
 	return {

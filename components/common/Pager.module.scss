@@ -1,0 +1,11 @@
+.container {
+  >ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+
+    li {
+      margin-right: 1rem;
+    }
+  }
+}

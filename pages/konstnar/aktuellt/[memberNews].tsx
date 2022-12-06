@@ -1,12 +1,11 @@
 import styles from "./[memberNews].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { regions, apiTokenByRegion } from "/lib/region";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { StructuredContent } from "/components";
+import { getStaticPagePaths } from "/lib/utils";
 
 export type Props = {
 	memberNews: MemberNewsRecord,
@@ -24,23 +23,17 @@ export default function News({ memberNews: { date, title, content }, region }: P
 	);
 }
 
-export async function getStaticPaths(context) {
-	const { memberNews } = await apiQuery(AllMemberNewsDocument)
-
-	const paths = []
-
-	memberNews.forEach(({ slug }) => regions.forEach(d => paths.push({ params: { memberNews: slug, region: d.slug } })))
-
-	return {
-		paths,
-		fallback: false,
-	};
+export async function getStaticPaths() {
+	return getStaticPagePaths(AllMemberNewsDocument, 'memberNews')
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const slug = context.params.memberNews;
-	const { memberNews } = await apiQuery(MemberNewsDocument, { variables: { slug } })
+	const { memberNews } = await apiQuery(MemberNewsDocument, { variables: { slug }, preview: context.preview })
+
+	if (!memberNews)
+		return { notFound: true }
 
 	return {
 		props: {

@@ -4,19 +4,21 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-
 import Link from "next/link";
+import { pageSize } from "/lib/utils";
+import { Pager } from '/components'
 
 export type Props = {
 	memberNews: MemberNewsRecord[]
-	region?: Region
+	region?: Region,
+	pagination: Pagination
 }
 
-export default function MemberNews({ memberNews, region }: Props) {
+export default function MemberNews({ memberNews, region, pagination }: Props) {
 
 	return (
 		<>
-			<h1 className="noPadding">Nyheter</h1>
+			<h1 className="noPadding">Aktuellt</h1>
 			<div className={s.container}>
 				<ul>
 					{memberNews.length ? memberNews.map(({ slug, title, intro, date, region }, idx) =>
@@ -31,6 +33,7 @@ export default function MemberNews({ memberNews, region }: Props) {
 						<>Inga aktuellt...</>
 					}
 				</ul>
+				<Pager pagination={pagination} slug={'/konstnar/aktuellt'} />
 			</div>
 		</>
 	);
@@ -38,13 +41,21 @@ export default function MemberNews({ memberNews, region }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const id = !props.region.global ? props.region.id : undefined
-	const { memberNews } = await apiQuery(AllMemberNewsDocument, { variables: { id } });
+	const page = parseInt(context.params?.page) || 1;
+	const regionId = props.region.global ? undefined : props.region.id;
+	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, {
+		variables: {
+			regionId,
+			first: pageSize,
+			skip: (pageSize * page) - 1
+		}
+	});
 
 	return {
 		props: {
 			...props,
-			memberNews
+			memberNews,
+			pagination: { ...pagination, page, size: pageSize }
 		},
 		revalidate
 	};

@@ -6,6 +6,7 @@ import { RegionMetaDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { CardContainer, Card } from "/components";
 import { Image } from "react-datocms";
+import React from "react";
 
 export type Props = {
 	contactIntro: RegionRecord['contactIntro'],
@@ -32,17 +33,16 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 		employeesByRegion[e.region.id].employees.push(e);
 	})
 
-
 	return (
 		<div className={s.container}>
 			<h1>Kontakta oss</h1>
 			<Markdown className={s.intro}>
 				{contactIntro}
 			</Markdown>
-			{Object.keys(employeesByRegion).map((regionId) => {
+			{Object.keys(employeesByRegion).map((regionId, idx) => {
 				const { employees, region } = employeesByRegion[regionId]
 				return (
-					<>
+					<React.Fragment key={idx}>
 						<h2>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h2>
 						<CardContainer>
 							{employees.map(({ name, email, image }, idx) =>
@@ -53,7 +53,7 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 								</Card>
 							)}
 						</CardContainer>
-					</>
+					</React.Fragment>
 				)
 			}
 			)}

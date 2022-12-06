@@ -5,6 +5,7 @@ import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument 
 import type { GetStaticProps } from 'next'
 import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
 import { useState } from "react";
+import { getStaticPagePaths } from '/lib/utils'
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -24,6 +25,7 @@ export default function Commission({ commission: {
 
 	const [imageId, setImageId] = useState<string | undefined>()
 	const images = [image]
+	//@ts-ignore
 	content.forEach(({ image }) => image && images.push.apply(images, image))
 
 
@@ -70,20 +72,21 @@ export default function Commission({ commission: {
 }
 
 export async function getStaticPaths() {
-	const { commissions } = await apiQuery(AllCommissionsDocument)
-	const paths = commissions.map(({ slug }) => ({ params: { commission: slug } }));
+	const p = await getStaticPagePaths(AllCommissionsDocument, 'commission')
+	console.log(p);
+	return p
 
-	return {
-		paths,
-		fallback: false,
-	};
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.commission;
-	const { commission } = await apiQuery(CommissionDocument, { variables: { slug } });
+	const { commission } = await apiQuery(CommissionDocument, { variables: { slug }, preview: context.preview });
+
+	if (!commission)
+		return { notFound: true }
+
 	const { commissions } = await apiQuery(RelatedCommissionsDocument, { variables: { regionId, commissionId: commission.id } });
 
 	return {

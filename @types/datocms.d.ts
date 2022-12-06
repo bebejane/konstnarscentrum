@@ -228,7 +228,6 @@ type ApplicationModelFilter = {
   firstName?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   lastName?: InputMaybe<StringFilter>;
-  media?: InputMaybe<JsonFilter>;
   message?: InputMaybe<TextFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -289,7 +288,6 @@ type ApplicationRecord = RecordInterface & {
   firstName: Scalars['String'];
   id: Scalars['ItemId'];
   lastName: Scalars['String'];
-  media?: Maybe<Scalars['JsonField']>;
   message: Scalars['String'];
   updatedAt: Scalars['DateTime'];
 };
@@ -1233,6 +1231,91 @@ type GlobalSeoField = {
   siteName?: Maybe<Scalars['String']>;
   titleSuffix?: Maybe<Scalars['String']>;
   twitterAccount?: Maybe<Scalars['String']>;
+};
+
+type HelpModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<HelpModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  model?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
+  text?: InputMaybe<TextFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum HelpModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  model_ASC = 'model_ASC',
+  model_DESC = 'model_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Hjälp (help) */
+type HelpRecord = RecordInterface & {
+  __typename?: 'HelpRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  model: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
+  text: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Hjälp (help) */
+type HelpRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Hjälp (help) */
+type HelpRecordtextArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Block of type Bild(er) (image) */
@@ -2735,12 +2818,6 @@ enum ItemStatus {
   updated = 'updated'
 }
 
-/** Specifies how to filter JSON fields */
-type JsonFilter = {
-  /** Filter records with the specified field defined (i.e. with any value) or not */
-  exists?: InputMaybe<Scalars['BooleanType']>;
-};
-
 /** Block of type Senaste nytt för medlemmar (latest_member_news) */
 type LatestMemberNewsRecord = RecordInterface & {
   __typename?: 'LatestMemberNewsRecord';
@@ -3463,6 +3540,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allForMembersMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allHelpsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allMemberCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allMemberNewsCategoriesMeta: CollectionMetadata;
@@ -3478,6 +3557,8 @@ type Query = {
   _allRegionsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
   _allUploadsMeta?: Maybe<CollectionMetadata>;
+  /** Returns meta information regarding a record collection */
+  _allUsersMeta: CollectionMetadata;
   /** Returns the single instance record */
   _site: Site;
   /** Returns a specific record */
@@ -3503,6 +3584,8 @@ type Query = {
   /** Returns a collection of records */
   allForMembers: Array<ForMemberRecord>;
   /** Returns a collection of records */
+  allHelps: Array<HelpRecord>;
+  /** Returns a collection of records */
   allMemberCategories: Array<MemberCategoryRecord>;
   /** Returns a collection of records */
   allMemberNews: Array<MemberNewsRecord>;
@@ -3518,6 +3601,8 @@ type Query = {
   allRegions: Array<RegionRecord>;
   /** Returns a collection of assets */
   allUploads: Array<FileField>;
+  /** Returns a collection of records */
+  allUsers: Array<UserRecord>;
   /** Returns a specific record */
   application?: Maybe<ApplicationRecord>;
   /** Returns the single instance record */
@@ -3536,6 +3621,8 @@ type Query = {
   forArtist?: Maybe<ForArtistRecord>;
   /** Returns a specific record */
   forMember?: Maybe<ForMemberRecord>;
+  /** Returns a specific record */
+  help?: Maybe<HelpRecord>;
   /** Returns the single instance record */
   inEnglish?: Maybe<InEnglishRecord>;
   /** Returns the single instance record */
@@ -3556,6 +3643,8 @@ type Query = {
   region?: Maybe<RegionRecord>;
   /** Returns a specific asset */
   upload?: Maybe<FileField>;
+  /** Returns a specific record */
+  user?: Maybe<UserRecord>;
 };
 
 
@@ -3632,6 +3721,14 @@ type Query_allForMembersMetaArgs = {
 
 
 /** The query root for this schema */
+type Query_allHelpsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type Query_allMemberCategoriesMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MemberCategoryModelFilter>;
@@ -3690,6 +3787,14 @@ type Query_allRegionsMetaArgs = {
 /** The query root for this schema */
 type Query_allUploadsMetaArgs = {
   filter?: InputMaybe<UploadFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allUsersMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -3819,6 +3924,17 @@ type QueryallForMembersArgs = {
 
 
 /** The query root for this schema */
+type QueryallHelpsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HelpModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 type QueryallMemberCategoriesArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<MemberCategoryModelFilter>;
@@ -3907,6 +4023,17 @@ type QueryallUploadsArgs = {
 
 
 /** The query root for this schema */
+type QueryallUsersArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
 type QueryapplicationArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ApplicationModelFilter>;
@@ -3980,6 +4107,15 @@ type QueryforMemberArgs = {
   filter?: InputMaybe<ForMemberModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ForMemberModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryhelpArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<HelpModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<HelpModelOrderBy>>>;
 };
 
 
@@ -4066,6 +4202,15 @@ type QueryuploadArgs = {
   filter?: InputMaybe<UploadFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<UploadOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryuserArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<UserModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<UserModelOrderBy>>>;
 };
 
 type RecordInterface = {
@@ -4829,6 +4974,81 @@ type UploadWidthFilter = {
   neq?: InputMaybe<Scalars['IntType']>;
 };
 
+type UserModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  member?: InputMaybe<LinkFilter>;
+  password?: InputMaybe<StringFilter>;
+  resetToken?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum UserModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  password_ASC = 'password_ASC',
+  password_DESC = 'password_DESC',
+  resetToken_ASC = 'resetToken_ASC',
+  resetToken_DESC = 'resetToken_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Användare (user) */
+type UserRecord = RecordInterface & {
+  __typename?: 'UserRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  member: MemberRecord;
+  password: Scalars['String'];
+  resetToken?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Användare (user) */
+type UserRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 type VideoField = {
   __typename?: 'VideoField';
   height: Scalars['IntType'];
@@ -4903,10 +5123,14 @@ type CommissionQueryVariables = Exact<{
 
 type CommissionQuery = { __typename?: 'Query', commission?: { __typename?: 'CommissionRecord', id: any, title?: string | null, intro?: string | null, slug?: string | null, city?: string | null, year?: string | null, artist?: string | null, consultant?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } } | null };
 
-type AllCommissionsQueryVariables = Exact<{ [key: string]: never; }>;
+type AllCommissionsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
+}>;
 
 
-type AllCommissionsQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+type AllCommissionsQuery = { __typename?: 'Query', commissions: Array<{ __typename?: 'CommissionRecord', id: any, title?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'CommissionCategoryRecord', id: any, title?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type AllCommissionsMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5046,15 +5270,19 @@ type MemberNewsQueryVariables = Exact<{
 
 type MemberNewsQuery = { __typename?: 'Query', memberNews?: { __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, content?: { __typename?: 'MemberNewsModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text?: string | null, url?: string | null } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video?: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } | null }> } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } } | null };
 
+type AllMemberNewsQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
+}>;
+
+
+type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
+
 type ApplyForMembershipQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title?: string | null, content?: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } | null } | null };
-
-type AllMemberNewsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename?: 'MemberNewsRecord', id: any, title?: string | null, intro?: string | null, date?: any | null, location?: string | null, slug?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category?: string | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
 
 type LatestMemberNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
@@ -5078,7 +5306,7 @@ type RelatedMembersQuery = { __typename?: 'Query', members: Array<{ __typename?:
 type SearchMembersQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
-  memberCategoryId?: InputMaybe<Scalars['ItemId']>;
+  memberCategoryIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
   regionId?: InputMaybe<Scalars['ItemId']>;
 }>;
 
@@ -5102,15 +5330,6 @@ type AllNewsQueryVariables = Exact<{
 
 
 type AllNewsQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsRecord', id: any, title?: string | null, content?: string | null, slug?: string | null, intro?: string | null, createdAt: any, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
-
-type AllNewsByRegionQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['IntType']>;
-  skip?: InputMaybe<Scalars['IntType']>;
-  regionId?: InputMaybe<Scalars['ItemId']>;
-}>;
-
-
-type AllNewsByRegionQuery = { __typename?: 'Query', news: Array<{ __typename?: 'NewsRecord', id: any, title?: string | null, content?: string | null, slug?: string | null, intro?: string | null, createdAt: any, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type NewsQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -5159,3 +5378,11 @@ type RegionMetaQueryVariables = Exact<{
 
 
 type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title?: string | null, text?: string | null }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name?: string | null, email?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+
+type SiteSearchQueryVariables = Exact<{
+  memberIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
+  first?: InputMaybe<Scalars['IntType']>;
+}>;
+
+
+type SiteSearchQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug?: string | null, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> };

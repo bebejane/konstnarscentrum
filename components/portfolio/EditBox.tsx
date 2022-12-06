@@ -5,7 +5,7 @@ import { arrayMoveImmutable } from 'array-move';
 import { PortfolioEditor } from "/components";
 import EditIcon from '/public/images/edit.svg'
 
-export default function EditBox({ onChange, blocks }) {
+export default function EditBox({ onChange, onDelete, blocks }) {
 
   const [editBoxStyle, setEditBoxStyle] = useState<any | undefined>()
   const [editable, setEditable] = useState<any | undefined>()
@@ -63,7 +63,7 @@ export default function EditBox({ onChange, blocks }) {
     }
   }
 
-  const move = (e, editable: any, up: boolean) => {
+  const moveBlock = (e, editable: any, up: boolean) => {
 
     e.stopPropagation()
 
@@ -82,6 +82,11 @@ export default function EditBox({ onChange, blocks }) {
     }, 100)
   }
 
+  const deleteBlock = (e, editable: any) => {
+    e.stopPropagation()
+    onDelete(editable.id)
+  }
+
   useEffect(() => { init() }, [blocks])
 
   return (
@@ -95,12 +100,20 @@ export default function EditBox({ onChange, blocks }) {
         <div className={s.toolbar}>
           <div className={s.edit}>
             <button>Redigera</button>
-            <button className={s.delete}>Ta bort</button>
+            <button className={s.delete} onClick={(e) => deleteBlock(e, editable)}>Ta bort</button>
           </div>
           {editable?.index !== undefined &&
             <div className={cn(s.order)}>
-              <button className={s.up} disabled={editable?.index === 0} onClick={(e) => move(e, editable, true)}>Upp</button>
-              <button className={s.down} disabled={editable?.index === blocks.length - 1} onClick={(e) => move(e, editable, false)}>Ner</button>
+              <button
+                className={s.up}
+                disabled={editable?.index === 0}
+                onClick={(e) => moveBlock(e, editable, true)}
+              >Upp</button>
+              <button
+                className={s.down}
+                disabled={editable?.index === blocks.length - 1}
+                onClick={(e) => moveBlock(e, editable, false)}
+              >Ner</button>
             </div>
           }
         </div>

@@ -70,15 +70,19 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				/>
 				<textarea
 					{...register("message", { required: true })}
+					rows={10}
 					className={errors.message && styles.error}
 					placeholder={`${text.message}...`}
-
 				/>
 				<select
-					{...register("roleId", { required: true })}
+					{...register("roleId", {
+						required: true,
+						validate: (value: string) => regions.find(({ id }) => value === id) !== undefined
+					})}
 					className={errors.roledId && styles.error}
 					placeholder={`${text.region}...`}
 				>
+					<option value="false">Välj region</option>
 					{regions.map((r, i) => (
 						<option key={i} value={r.id}>
 							{r.name}

@@ -21,20 +21,15 @@ export default function Layout({ children, menu: menuFromProps, title, footer }:
 
 	return (
 		<>
-
-			{!isHome &&
-				<MenuDesktop items={menu} />
-			}
-			<MenuMobile items={menu} />
+			<Logo disabled={!isHome} />
+			<MenuMobile items={menu} home={isHome} />
+			{!isHome && <MenuDesktop items={menu} home={isHome} />}
 			<div className={styles.layout}>
-				<Logo disabled={!isHome} />
-
 				<Content noMargins={isHome}>
 					{children}
 				</Content>
 				<Search />
 			</div>
-
 			<Footer menu={menu} footer={footer} />
 			<Grid />
 		</>

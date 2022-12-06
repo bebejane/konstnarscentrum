@@ -7,14 +7,12 @@ const { buildClient } = require("@datocms/cma-client-node");
 	const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL });
 
 	const roles = await client.roles.list();
-	const editor = roles.filter((r) => r.name.toLowerCase() === "riks")[0];
+	const editor = roles.filter((r) => r.name.toLowerCase() === "editor")[0];
 	const tokens = await client.accessTokens.list();
 	const districts = await client.items.list({ filter: { type: "region" } });
 
 	const regions = roles
-		.filter(
-			(r) => r.id === editor.id || r.inherits_permissions_from?.find(({ id }) => id === editor.id)
-		)
+		.filter((r) => r.inherits_permissions_from?.find(({ id }) => id === editor.id))
 		.sort((a, b) => (a.name < b.name ? -1 : 1))
 		.map(({ id: roleId, name }) => ({
 			id: districts.find((el) => el.slug === slugify(name, { lower: true })).id,

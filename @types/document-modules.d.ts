@@ -208,8 +208,8 @@ export const MemberBySlug: DocumentNode;
 export const MemberByPasswordToken: DocumentNode;
 export const AllMemberCategories: DocumentNode;
 export const MemberNews: DocumentNode;
-export const ApplyForMembership: DocumentNode;
 export const AllMemberNews: DocumentNode;
+export const ApplyForMembership: DocumentNode;
 export const LatestMemberNews: DocumentNode;
 export const RelatedMembers: DocumentNode;
 export const SearchMembers: DocumentNode;
@@ -223,7 +223,6 @@ declare module '*/news.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AllNews: DocumentNode;
-export const AllNewsByRegion: DocumentNode;
 export const News: DocumentNode;
 export const LatestNews: DocumentNode;
 
@@ -247,6 +246,15 @@ declare module '*/region.gql' {
   const defaultDocument: DocumentNode;
   export const Region: DocumentNode;
 export const RegionMeta: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
+declare module '*/search.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const SiteSearch: DocumentNode;
 
   export default defaultDocument;
 }

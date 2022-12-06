@@ -5,7 +5,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
 import { Article, Block, MetaSection, RelatedSection, EditBox, Gallery } from "/components";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 
 export type Props = {
@@ -26,19 +26,44 @@ export default function Member({ member: {
 	email,
 	city,
 	content
-
-}, related }: Props) {
-
-	const [blocks, setBlocks] = useState()
-	const { data, status } = useSession()
+}, member, related }: Props) {
 
 	const [imageId, setImageId] = useState<string | undefined>()
-	const images = [image]
-	content.forEach(({ image }) => image && images.push.apply(images, image))
+	const images = [image, ...content.filter(({ image }) => image).map(({ image }) => image)]
+	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
+	const { data, status } = useSession()
+
+	const handleSave = useCallback(async () => {
+		console.log('save');
+		try {
+
+			const res = await fetch('/api/account', {
+				method: 'POST',
+				body: JSON.stringify({
+					member: {
+						...member,
+						content: blocks
+					},
+				}),
+				headers: { 'Content-Type': 'application/json' },
+			})
+			const newMember = await res.json()
+
+			console.log(newMember);
+		} catch (err) {
+			console.log(err);
+		}
+
+	}, [blocks, member])
 
 	useEffect(() => {
 		setBlocks(content)
 	}, [content])
+
+	useEffect(() => {
+		if (!blocks) return
+		handleSave()
+	}, [blocks, handleSave])
 
 	return (
 		<div className={s.container}>
@@ -59,7 +84,9 @@ export default function Member({ member: {
 						{ title: 'Besök', value: '' }
 					]}
 				/>
+
 				<h1 className="noPadding">Utvalda verk</h1>
+
 				{(blocks || content)?.map((block, idx) =>
 					<Block
 						key={idx}
@@ -73,13 +100,11 @@ export default function Member({ member: {
 						}}
 					/>
 				)}
-
-
 			</Article>
 
-
-			<button className={s.addSection}>Lägg till sektion</button>
-			<EditBox onChange={(blocks) => setBlocks(blocks)} blocks={blocks} />
+			<button className={s.addSection} onClick={() => setBlocks([...blocks, { __typename: 'ImageRecord', image: [] }])}>
+				Lägg till sektion
+			</button>
 
 			<RelatedSection
 				title="Upptäck fler konstnärer"
@@ -90,6 +115,7 @@ export default function Member({ member: {
 					slug: `/anlita-oss/hitta-konstnar/${slug}`
 				}))}
 			/>
+
 			<Gallery
 				index={images.findIndex(({ id }) => id === imageId)}
 				images={images}
@@ -97,6 +123,11 @@ export default function Member({ member: {
 				onClose={() => setImageId(undefined)}
 			/>
 
+			<EditBox
+				onChange={(blocks) => setBlocks(blocks)}
+				onDelete={(id) => setBlocks(blocks.filter((block) => block.id !== id))}
+				blocks={blocks}
+			/>
 
 		</div>
 	);
@@ -105,7 +136,6 @@ export default function Member({ member: {
 
 export async function getStaticPaths(context) {
 	const { members }: { members: MemberRecord[] } = await apiQuery(AllMembersWithPortfolioDocument)
-
 	const paths = members.map(({ slug, region }) => ({ params: { member: slug, region: region.slug } }))
 
 	return {
@@ -118,8 +148,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
-	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug } })
-	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id } })
+	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug }, preview: context.preview })
+	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id }, preview: context.preview })
 
 	return {
 		props: {

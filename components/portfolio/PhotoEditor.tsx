@@ -17,14 +17,16 @@ export default function PhotoEditor({ image }: Props) {
       <div className={s.photo}>
         <figure>
           {image &&
-            <Image
-              data={image.responsiveImage}
-              className={s.image}
-              objectFit="contain"
-              usePlaceholder={false}
-            />
+            <>
+              <Image
+                data={image.responsiveImage}
+                className={s.image}
+                objectFit="contain"
+                usePlaceholder={false}
+              />
+            </>
           }
-          <button type="button">Byt bild</button>
+          <button type="button">{image ? 'Byt bild' : 'Ladda upp'}</button>
         </figure>
       </div>
       <div className={s.meta}>

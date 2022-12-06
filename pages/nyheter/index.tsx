@@ -4,15 +4,18 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
-
+import { Pager } from '/components'
 import Link from "next/link";
+
+export const pageSize = 1;
 
 export type Props = {
   news: NewsRecord[],
-  region?: Region
+  region?: Region,
+  pagination: Pagination
 }
 
-export default function News({ news, region }: Props) {
+export default function News({ news, region, pagination }: Props) {
 
   return (
     <>
@@ -31,6 +34,7 @@ export default function News({ news, region }: Props) {
             <>Inga nyheter...</>
           }
         </ul>
+        <Pager pagination={pagination} slug={'/nyheter'} />
       </div>
     </>
   );
@@ -38,13 +42,25 @@ export default function News({ news, region }: Props) {
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
+  const page = parseInt(context.params?.page) || 1;
   const regionId = props.region.global ? undefined : props.region.id;
-  const { news } = await apiQuery(AllNewsDocument, { variables: { regionId } });
+  const { news, pagination } = await apiQuery(AllNewsDocument, {
+    variables: {
+      regionId,
+      first: pageSize,
+      skip: (pageSize * page) - 1
+    }
+  });
 
   return {
     props: {
       ...props,
-      news
+      news,
+      pagination: {
+        ...pagination,
+        page,
+        size: pageSize
+      }
     },
     revalidate
   };
