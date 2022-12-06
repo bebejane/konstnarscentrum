@@ -14,6 +14,7 @@ type CommissionProps = {
 
 export default function Commission({ commission: {
 	title,
+	blackHeadline,
 	image,
 	intro,
 	city,
@@ -35,6 +36,7 @@ export default function Commission({ commission: {
 				title={title}
 				image={image}
 				text={intro}
+				blackHeadline={blackHeadline}
 				onClick={(id) => setImageId(id)}
 			>
 				<MetaSection
