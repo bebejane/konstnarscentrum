@@ -1,6 +1,5 @@
 // FONT EMBEDDING & TYPO VARIABLES
-$body-font: "Jazz";
-$body-font-italic: "CooperItalic";
+$body-font: "Jazz", Arial, Helvetica, Sans-Serif;
 
 @font-face {
     font-family: "Jazz";
@@ -10,9 +9,9 @@ $body-font-italic: "CooperItalic";
 }
 
 @font-face {
-    font-family: "Jazz-Bold";
+    font-family: "Jazz";
     src: url("../../public/fonts/JazzTrialSN-Bold.otf") format("opentype");
-    font-weight: normal;
+    font-weight: bold;
     font-style: normal;
 }
 

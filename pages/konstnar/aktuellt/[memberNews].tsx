@@ -17,7 +17,7 @@ export default function News({ memberNews: { date, title, content }, region }: P
 	return (
 		<div className={styles.container}>
 			<h1>{title}</h1>
-			<h5>{format(new Date(date), "d MMMM y")} &#8226; {region.name}</h5>
+			<h5>{format(new Date(date), "d MMMM y")} • {region.name}</h5>
 			<StructuredContent content={content} />
 		</div>
 	);

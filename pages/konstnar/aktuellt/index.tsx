@@ -23,7 +23,7 @@ export default function MemberNews({ memberNews, region, pagination }: Props) {
 					<NewsCard
 						key={idx}
 						title={title}
-						subtitle={`${format(new Date(date), "d MMMM y")} | ${region.name}`}
+						subtitle={`${format(new Date(date), "d MMMM y")} • ${region.name}`}
 						text={intro}
 						image={image}
 						slug={`/konstnar/aktuellt/${slug}`}
