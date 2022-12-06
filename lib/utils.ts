@@ -41,6 +41,9 @@ export const recordToSlug = (record: any, regional: boolean = true): string => {
     return '/'
   }
 
+  if (typeof record === 'string')
+    return record
+
   const { __typename, slug } = record
 
   switch (__typename) {
