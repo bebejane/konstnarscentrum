@@ -5,9 +5,9 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { Pager } from '/components'
+import { pageSize } from "/lib/utils";
 import Link from "next/link";
 
-export const pageSize = 1;
 
 export type Props = {
   news: NewsRecord[],
