@@ -22,7 +22,7 @@ export default function LatestNews({ data: { news } }: LatestNewsBlockProps) {
           <NewsCard
             key={idx}
             title={title}
-            subtitle={`${format(new Date(createdAt), "d MMMM y")} | ${region.name}`}
+            subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
             text={intro}
             slug={`/nyheter/${slug}`}
             regionName={region.name}
