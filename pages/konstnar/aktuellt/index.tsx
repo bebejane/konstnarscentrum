@@ -4,9 +4,8 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import Link from "next/link";
 import { pageSize } from "/lib/utils";
-import { Pager } from '/components'
+import { Pager, CardContainer, NewsCard } from '/components'
 
 export type Props = {
 	memberNews: MemberNewsRecord[]
@@ -16,25 +15,26 @@ export type Props = {
 
 export default function MemberNews({ memberNews, region, pagination }: Props) {
 
+
 	return (
 		<>
 			<h1 className="noPadding">Aktuellt</h1>
-			<div className={s.container}>
-				<ul>
-					{memberNews.length ? memberNews.map(({ slug, title, intro, date, region }, idx) =>
-						<li key={idx} >
-							<Link href={region ? `/${region.slug}/konstnar/aktuellt/${slug}` : `/konstnar/aktuellt/${slug}`}>
-								<h5>{format(new Date(date), "d MMMM y")} &#8226; {region.name}</h5>
-								<h2>{title}</h2>
-								<p>{intro}</p>
-							</Link>
-						</li>
-					) :
-						<>Inga aktuellt...</>
-					}
-				</ul>
-				<Pager pagination={pagination} slug={'/konstnar/aktuellt'} />
-			</div>
+
+			<CardContainer columns={2} className={s.memberNews}>
+				{memberNews.map(({ date, title, intro, slug, region, image }, idx) =>
+					<NewsCard
+						key={idx}
+						title={title}
+						subtitle={`${format(new Date(date), "d MMMM y")} | ${region.name}`}
+						text={intro}
+						image={image}
+						slug={`/konstnar/aktuellt/${slug}`}
+						regionName={region.name}
+					/>
+				)}
+			</CardContainer>
+
+			<Pager pagination={pagination} slug={'/konstnar/aktuellt'} />
 		</>
 	);
 }
@@ -43,13 +43,16 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const page = parseInt(context.params?.page) || 1;
 	const regionId = props.region.global ? undefined : props.region.id;
-	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, {
+	const options = {
 		variables: {
 			regionId,
 			first: pageSize,
-			skip: (pageSize * page) - 1
+			skip: (pageSize * (page - 1))
 		}
-	});
+	}
+	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, options);
+
+	console.log(options);
 
 	return {
 		props: {

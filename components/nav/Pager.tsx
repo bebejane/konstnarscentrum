@@ -10,7 +10,7 @@ export type PagerProps = {
 
 export default function Pager({ pagination: { count, page, size }, slug }: PagerProps) {
 
-  const pages = new Array(count / size).fill(0).map((p, idx) => idx + 1);
+  const pages = new Array(Math.ceil(count / size)).fill(0).map((p, idx) => idx + 1);
 
   return (
     <nav className={s.container}>
