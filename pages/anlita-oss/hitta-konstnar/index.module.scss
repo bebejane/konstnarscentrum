@@ -1,19 +1,39 @@
 .container {
   width: 100%;
 
-  form {
+  .search {
     display: flex;
     flex-direction: row;
     align-items: center;
-    //margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
-    //margin-right: calc(-1 * var(--outer-margin));
-    //width: 100vw;
-    background-color: var(--beige-light);
+    padding-top: 1rem;
+    position: relative;
+    .background {
+      top: 0;
+      margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
+      margin-right: calc(-1 * var(--outer-margin));
+      width: 100vw;
+      background-color: var(--beige-light);
+      position: absolute;
+      height: 100%;
+      z-index: -1;
+    }
+  }
 
+  form {
     input,
     select {
-      flex: 1 1 auto;
+      background-color: var(--white);
+      margin-bottom: 0;
+      padding: 0.5em;
+      width: 20vw;
     }
+    span {
+      padding-right: 0.5em;
+    }
+  }
+
+  input {
+    margin-right: 1em;
   }
 
   .results {

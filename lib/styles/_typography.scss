@@ -73,7 +73,9 @@ figcaption {
 
 nav,
 .mid,
-button {
+button,
+.mid input,
+.mid select {
   @include mq($from: tablet) {
     font-size: 0.9rem;
   }
