@@ -5,6 +5,11 @@ fragment CommissionLightFragment on CommissionRecord {
 	id
 	title
 	slug
+	city
+	year
+	artist
+	consultant
+	blackHeadline
 	image {
 		...ImageThumbnailFragment
 	}

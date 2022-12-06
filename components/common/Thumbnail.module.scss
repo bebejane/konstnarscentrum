@@ -1,6 +1,8 @@
 .thumbnail {
   position: relative;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   .image {
     margin-bottom: 0.5em;
@@ -19,10 +21,13 @@
   }
 
   .title {
+    position: relative;
     display: flex;
     flex-direction: row;
     white-space: pre;
     min-height: 1rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     &.vertical {
       position: absolute;
@@ -37,9 +42,6 @@
       text-align: right;
       flex: 1 1 100%;
       min-height: 1rem;
-
     }
   }
-
-
 }

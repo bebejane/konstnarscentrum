@@ -65,7 +65,11 @@ export default function Commission({ commission: {
 			<RelatedSection
 				title="Fler uppdrag"
 				slug="/anlita-oss/uppdrag"
-				items={commissions.map(({ title, image, slug }) => ({ title, image, slug: `/anlita-oss/uppdrag/${slug}` }))}
+				items={commissions.map(({ title, city, year, image, slug }) => ({
+					title: `${city} ${year}`,
+					image,
+					slug: `/anlita-oss/uppdrag/${slug}`
+				}))}
 			/>
 			<Gallery
 				index={images.findIndex(({ id }) => id === imageId)}
