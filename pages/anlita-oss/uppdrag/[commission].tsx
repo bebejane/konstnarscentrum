@@ -21,6 +21,8 @@ export default function Commission({ commission: {
 	year,
 	artist,
 	consultant,
+	work,
+	commissioner,
 	content
 }, commissions }: CommissionProps) {
 
@@ -44,7 +46,9 @@ export default function Commission({ commission: {
 						{ title: 'Plats', value: city },
 						{ title: 'År', value: year },
 						{ title: 'Konstnär', value: artist },
-						{ title: 'Konsulent', value: consultant }
+						{ title: 'Konsulent', value: consultant },
+						{ title: 'Berställare', value: commissioner },
+						{ title: 'Titel', value: work }
 					]}
 				/>
 				<section className={s.documentation}>

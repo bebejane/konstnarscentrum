@@ -11,6 +11,8 @@ fragment CommissionFragment on CommissionRecord {
 	year
 	artist
 	consultant
+	work
+	commissioner
 	blackHeadline
 	image {
 		...ImageFragment
