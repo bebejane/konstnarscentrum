@@ -2,8 +2,7 @@ import s from './NewsCard.module.scss'
 import React from 'react'
 import Link from 'next/link'
 import { Image } from 'react-datocms'
-import { Card } from '/components'
-import ReadMore from '/components'
+import { Card, ReadMore } from '/components'
 
 export type NewsCardProps = {
   title: string,
