@@ -26,12 +26,12 @@ export default function RegionHome({ commissions, commissionCategories }: Props)
 				/>
 			</header>
 			<CardContainer columns={3}>
-				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, slug, image }, idx) =>
+				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, city, year, slug, image }, idx) =>
 					<Card key={idx}>
 						<Thumbnail
 							key={idx}
 							image={image}
-							title={title}
+							title={`${city} ${year}`}
 							slug={`/anlita-oss/uppdrag/${slug}`}
 						/>
 					</Card>

@@ -12,11 +12,12 @@ export type HeadlineProps = {
 }
 
 export default function Headline({ children, className, size = 1 }: HeadlineProps) {
-  children = 'hej hag ar en lang text'
-  const text = children;
+  //children = 'hej hag ar en lang text'
+
+  const text = (children as string);
   const ref = useRef<HTMLHeadingElement | null>(null)
   const { innerWidth, innerHeight } = useWindowSize()
-  const [rows, setRows] = useState<string[] | undefined>()
+  const [words, setWords] = useState<string[] | undefined>(text?.split(' '))
   //const Header = (size === 1 ? <h1 /> : <h2 />) as React.ElementType
   useEffect(() => {
     if (ref.current === null)
@@ -26,12 +27,13 @@ export default function Headline({ children, className, size = 1 }: HeadlineProp
     const height = parseInt(styles.height) - parseInt(styles.paddingTop) - parseInt(styles.paddingBottom)
     const lineHeight = parseInt(styles.lineHeight)
     const rows = Math.floor(height / lineHeight)
-    setRows([])
+    //setRows([])
+
   }, [ref, innerHeight, innerWidth])
 
   return (
     <h1 className={cn(s.hedline, className)} ref={ref}>
-      {children}
+      {words?.join(' ')}
     </h1>
   )
 }

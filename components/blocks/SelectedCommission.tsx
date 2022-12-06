@@ -18,10 +18,10 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
     <section className={s.container}>
       <SectionHeader title="Utvalda uppdrag" slug="/anlita-oss/uppdrag" margin={true} />
       <CardContainer columns={3}>
-        {commissions.map(({ title, image, slug }, idx) =>
+        {commissions.map(({ year, city, image, slug }, idx) =>
           <Card key={idx}>
             <Thumbnail
-              title={title}
+              title={`${city} ${year}`}
               image={image}
               slug={`/anlita-oss/uppdrag/${slug}`}
             />
