@@ -9,7 +9,7 @@ export default function withAuthentication(callback: authenticationHandler) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await unstable_getServerSession(req, res, authOptions)
 
-    if (!session?.user)
+    if (!session?.user || process.env.GRAPHQL_ENVIRONMENT !== 'dev')
       return res.status(401).send('Unauthorized')
 
     return callback(req, res, session);

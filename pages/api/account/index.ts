@@ -21,7 +21,6 @@ export default withAuthentication(async (req, res, session) => {
       })
       :
       id
-
     )
   })
   const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
