@@ -6,18 +6,25 @@ import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { StructuredContent } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
+import { Image } from "react-datocms";
 
 export type Props = {
 	memberNews: MemberNewsRecord,
 	region: Region
 }
 
-export default function News({ memberNews: { date, title, content }, region }: Props) {
+export default function News({ memberNews: { date, title, content, image }, region }: Props) {
 
 	return (
 		<div className={styles.container}>
 			<h1>{title}</h1>
 			<h5>{format(new Date(date), "d MMMM y")} • {region.name}</h5>
+			{image &&
+				<Image
+					className={styles.image}
+					data={image.responsiveImage}
+				/>
+			}
 			<StructuredContent content={content} />
 		</div>
 	);
