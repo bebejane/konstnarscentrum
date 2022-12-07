@@ -24,7 +24,7 @@ export default function News({ news: { createdAt, title, image, content, region 
           data={image.responsiveImage}
         />
       }
-      <Markdown>{content}</Markdown>
+      <Markdown scroll={true}>{content}</Markdown>
     </div>
   );
 }

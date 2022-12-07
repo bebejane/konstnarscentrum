@@ -27,8 +27,6 @@ export default function Headline({ children, className, headlineSize = 1, traili
     const height = parseInt(styles.height) - parseInt(styles.paddingTop) - parseInt(styles.paddingBottom)
     const lineHeight = parseInt(styles.lineHeight)
     const rows = Math.floor(height / lineHeight)
-    console.log(height, lineHeight, rows)
-
 
     setRows(rows)
   }
@@ -46,9 +44,9 @@ export default function Headline({ children, className, headlineSize = 1, traili
   const props = { className: cn(s.hedline, className), ref }
   const breakWord = rows === 2 ? words.length - (trailing + 1) : -1
   const content = words?.map((word, idx) =>
-    <>
+    <React.Fragment key={idx}>
       {word}{idx !== breakWord ? ' ' : <br />}
-    </>
+    </React.Fragment>
   )
 
   return (

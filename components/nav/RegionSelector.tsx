@@ -24,7 +24,7 @@ export default function RegionSelector({ }) {
       <ul className={cn(open && s.show)}>
         {regions.sort((a, b) => a.global ? -1 : 1).map((d, idx) =>
           <li key={idx} data-slug={d.slug} data-selected={region?.id === d.id}>
-            <Link href={`/${d.slug}`} onClick={() => setOpen(true)}>
+            <Link href={`/${!d.global ? d.slug : ''}`} onClick={() => setOpen(true)}>
               {d.name}
             </Link>
           </li>

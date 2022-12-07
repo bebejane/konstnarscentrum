@@ -43,6 +43,20 @@ const nextOptions = {
 		);
 		return config;
 	},
+	async redirects() {
+		return [
+			{
+				source: "/riks",
+				destination: "/",
+				permanent: true,
+			},
+			{
+				source: "/riks/:path*",
+				destination: "/:path*",
+				permanent: true,
+			},
+		];
+	},
 };
 
 const config = { sassOptions, ...nextOptions };

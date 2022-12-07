@@ -1,4 +1,4 @@
-import styles from './ImageGallery.module.scss'
+import s from './ImageGallery.module.scss'
 import cn from 'classnames'
 import React from 'react'
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
@@ -15,10 +15,10 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	const [index, setIndex] = useState(0)
 
 	return (
-		<div className={styles.gallery} data-editable={editable}>
+		<div className={s.gallery} data-editable={editable}>
 			<SwiperReact
 				id={`${id}-swiper-wrap`}
-				className={cn(styles.swiper)}
+				className={cn(s.swiper)}
 				loop={true}
 				noSwiping={false}
 				simulateTouch={true}
@@ -29,16 +29,19 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				onSwiper={(swiper) => swiperRef.current = swiper}
 			>
 				{images.map((item, idx) =>
-					<SwiperSlide key={`${idx}`} className={cn(styles.slide)}>
+					<SwiperSlide key={`${idx}`} className={cn(s.slide)}>
 						<figure onClick={() => onClick?.(item.id)}>
 							<Image
 								data={item.responsiveImage}
-								className={styles.image}
-								objectFit={'contain'}
+								className={s.image}
+								pictureClassName={s.picture}
+								objectFit={'cover'}
 								fadeInDuration={0}
 							/>
 							{item.title &&
-								<figcaption><Markdown allowedElements={['em', 'p']}>{item.title}</Markdown></figcaption>
+								<figcaption>
+									<Markdown allowedElements={['em', 'p']}>{item.title}</Markdown>
+								</figcaption>
 							}
 						</figure>
 					</SwiperSlide>

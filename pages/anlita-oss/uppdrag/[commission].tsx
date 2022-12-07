@@ -83,7 +83,6 @@ export default function Commission({ commission: {
 
 export async function getStaticPaths() {
 	const p = await getStaticPagePaths(AllCommissionsDocument, 'commission')
-	console.log(p);
 	return p
 
 }
