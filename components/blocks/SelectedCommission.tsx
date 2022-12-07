@@ -1,7 +1,5 @@
 import s from './SelectedCommission.module.scss'
-import cn from 'classnames'
 import React from 'react'
-import ThumbnailContainer from '/components/common/ThumbnailContainer'
 import Thumbnail from '/components/common/Thumbnail'
 import SectionHeader from '../layout/SectionHeader'
 import { CardContainer, Card } from '/components'

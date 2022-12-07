@@ -32,6 +32,7 @@ export default function Member({ member: {
 	const images = [image, ...content.filter(({ image }) => image).map(({ image }) => image)]
 	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
+	const isEditable = (status === 'authenticated' && data.user.email === email)
 
 	const handleSave = useCallback(async () => {
 		console.log('save');
@@ -102,10 +103,19 @@ export default function Member({ member: {
 				)}
 			</Article>
 
-			<button className={s.addSection} onClick={() => setBlocks([...blocks, { __typename: 'ImageRecord', image: [] }])}>
-				Lägg till sektion
-			</button>
+			{isEditable &&
+				<>
+					<EditBox
+						onChange={(blocks) => setBlocks(blocks)}
+						onDelete={(id) => setBlocks(blocks.filter((block) => block.id !== id))}
+						blocks={blocks}
+					/>
 
+					<button className={s.addSection} onClick={() => setBlocks([...blocks, { __typename: 'ImageRecord', image: [] }])}>
+						Lägg till sektion
+					</button>
+				</>
+			}
 			<RelatedSection
 				title="Upptäck fler konstnärer"
 				slug={'/anlita-oss/hitta-konstnar'}
@@ -123,11 +133,7 @@ export default function Member({ member: {
 				onClose={() => setImageId(undefined)}
 			/>
 
-			<EditBox
-				onChange={(blocks) => setBlocks(blocks)}
-				onDelete={(id) => setBlocks(blocks.filter((block) => block.id !== id))}
-				blocks={blocks}
-			/>
+
 
 		</div>
 	);
