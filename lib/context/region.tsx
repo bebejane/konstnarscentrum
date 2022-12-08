@@ -17,7 +17,7 @@ export const RegionProvider = ({ children, value }: RegionProviderProps) => {
   const regionFromCookie = regions.find(({ slug }) => slug === getCookie('region'))
 
   return (
-    <RegionContext.Provider value={value ? { ...value } : regionFromCookie ? { ...regionFromCookie } : undefined}>
+    <RegionContext.Provider value={regionFromCookie ? { ...regionFromCookie } : value ? { ...value } : undefined}>
       {children}
     </RegionContext.Provider>
   )
