@@ -3,6 +3,7 @@
 #import "./RegionFragment.gql"
 
 fragment MemberNewsLightFragment on MemberNewsRecord {
+	__typename
 	id
 	title
 	image {

@@ -1,6 +1,7 @@
 #import "./RegionFragment.gql"
 
 fragment MemberFragment on MemberRecord {
+	__typename
 	id
 	firstName
 	lastName

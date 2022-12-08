@@ -2,6 +2,7 @@
 #import "./VideoFragment.gql"
 
 fragment AboutFragment on AboutRecord {
+	__typename
 	id
 	title
 	intro

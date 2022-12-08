@@ -34,32 +34,42 @@ export const catchErrorsFrom = (handler) => {
   }
 }
 
-export const recordToSlug = (record: any, regional: boolean = true): string => {
+export const recordToSlug = (record: any, region?: Region): string => {
+
+  let url;
 
   if (!record) {
-    console.error('reecord is undefined')
+    console.error('recordToSlug: record is undefined')
     return '/'
   }
 
   if (typeof record === 'string')
-    return record
+    url = record
+  else {
+    const { __typename, slug } = record
 
-  const { __typename, slug } = record
-
-  switch (__typename) {
-    case 'CommissionRecord':
-      return `/anlita-oss/uppdrag/${slug}`
-    case 'MemberRecord':
-      return `/anlita-oss/hitta-konstnar/${slug}`
-    case 'NewsRecord':
-      return `/nyheter/${slug}`
-    case 'MemberNewsRecord':
-      return `/konstnar/aktuellt/${slug}`
-    case 'AboutRecord':
-      return `/om/${slug}`
-    default:
-      throw Error(`${__typename} is unknown record slug!`)
+    switch (__typename) {
+      case 'CommissionRecord':
+        url = `/anlita-oss/uppdrag/${slug}`
+        break;
+      case 'MemberRecord':
+        url = `/anlita-oss/hitta-konstnar/${slug}`
+        break;
+      case 'NewsRecord':
+        url = `/nyheter/${slug}`
+        break;
+      case 'MemberNewsRecord':
+        url = `/konstnar/aktuellt/${slug}`
+        break;
+      case 'AboutRecord':
+        url = `/om/${slug}`
+        break;
+      default:
+        throw Error(`${__typename} is unknown record slug!`)
+    }
   }
+
+  return !region?.global ? `/${region.slug}/${url}` : url
 }
 
 export const isEmail = (string: string): boolean => {

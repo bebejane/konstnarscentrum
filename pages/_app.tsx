@@ -5,9 +5,11 @@ import { RegionProvider } from '/lib/context/region';
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import { regions } from '/lib/region';
+import { useRouter } from 'next/router';
 
-function App({ Component, pageProps, router }) {
+function App({ Component, pageProps }) {
 
+  const router = useRouter()
   const { menu, footer, session } = pageProps;
   const [region, setRegion] = useState(pageProps.region)
 
@@ -15,7 +17,7 @@ function App({ Component, pageProps, router }) {
     const regionFromCookie = regions.find(({ slug }) => slug === getCookie('region'))
     if (regionFromCookie)
       setRegion(regionFromCookie)
-  }, [])
+  }, [router])
 
   return (
     <SessionProvider session={session}>

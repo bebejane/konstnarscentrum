@@ -2,6 +2,7 @@
 #import "./RegionFragment.gql"
 
 fragment CommissionLightFragment on CommissionRecord {
+	__typename
 	id
 	title
 	slug

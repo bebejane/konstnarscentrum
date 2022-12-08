@@ -2,6 +2,7 @@
 #import "./VideoFragment.gql"
 
 fragment ConsultFragment on ConsultRecord {
+	__typename
 	id
 	title
 	intro

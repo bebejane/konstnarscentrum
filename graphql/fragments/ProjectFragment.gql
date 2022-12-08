@@ -1,6 +1,7 @@
 #import "./ImageMediumFragment.gql"
 
 fragment ProjectFragment on ProjectRecord {
+	__typename
 	title
 	image {
 		...ImageMediumFragment

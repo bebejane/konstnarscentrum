@@ -3,6 +3,7 @@
 #import "./RegionFragment.gql"
 
 fragment CommissionFragment on CommissionRecord {
+	__typename
 	id
 	title
 	intro
