@@ -23,7 +23,9 @@ export default function Layout({ children, menu: menuFromProps, title, footer }:
 		<>
 			<Logo disabled={!isHome} />
 			<MenuMobile items={menu} home={isHome} />
-			{!isHome && <MenuDesktop items={menu} home={isHome} />}
+			{!isHome &&
+				<MenuDesktop items={menu} home={isHome} />
+			}
 			<div className={styles.layout}>
 				<Content noMargins={isHome}>
 					{children}

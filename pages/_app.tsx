@@ -3,10 +3,19 @@ import { Layout } from '/components';
 import { SessionProvider } from "next-auth/react"
 import { RegionProvider } from '/lib/context/region';
 import { getCookie } from 'cookies-next';
+import { useEffect, useState } from 'react';
+import { regions } from '/lib/region';
 
 function App({ Component, pageProps, router }) {
 
-  const { menu, footer, session, region } = pageProps;
+  const { menu, footer, session } = pageProps;
+  const [region, setRegion] = useState(pageProps.region)
+
+  useEffect(() => {
+    const regionFromCookie = regions.find(({ slug }) => slug === getCookie('region'))
+    if (regionFromCookie)
+      setRegion(regionFromCookie)
+  }, [])
 
   return (
     <SessionProvider session={session}>

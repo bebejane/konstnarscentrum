@@ -30,10 +30,11 @@ export default function StructuredContent({ content }) {
         return text?.replace(/\s/g, ' ');
       }}
       customNodeRules={[
-        // Wrap <a> with nextjs Link
+        /* Wrap <a> with nextjs Link
         renderNodeRule(isLink, ({ adapter: { renderNode }, node, children, key, ancestors }) => {
-          return <Link href={node.url}>{renderNode('a', { key }, children)}</Link>
+          return <Link href={node.url}>{children}</Link>
         }),
+        */
         // Clenup paragraphs
         renderNodeRule(isParagraph, ({ adapter: { renderNode }, node, children, key, ancestors }) => {
           //return renderNode('p', { key }, children)

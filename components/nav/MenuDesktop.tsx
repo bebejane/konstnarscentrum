@@ -99,9 +99,11 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 					<li className={s.user}>
 						<User />
 					</li>
-					<li className={s.english}>
-						{home && <Link href={'/english'}>English</Link>}
-					</li>
+					{home &&
+						<li className={s.english}>
+							<Link href={'/english'}>English</Link>
+						</li>
+					}
 					<li className={s.region}>
 						<RegionSelector />
 					</li>
