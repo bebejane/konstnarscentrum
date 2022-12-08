@@ -1,10 +1,10 @@
 import s from './Footer.module.scss'
 import cn from 'classnames'
-import Link from 'next/link'
 import type { MenuItem } from '/lib/menu'
 import Logo from '/public/images/logo-round.svg'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { useInView } from 'react-intersection-observer'
+import { RegionLink } from '/components'
 
 export type FooterProps = { menu: MenuItem[], footer: FooterRecord }
 
@@ -25,9 +25,9 @@ export default function Footer({ menu, footer }: FooterProps) {
 											<>
 												{item.index ?
 													<li><strong>
-														<Link scroll={true} href={item.slug}>
+														<RegionLink scroll={true} href={item.slug} regional={item.regional}>
 															{item.label}
-														</Link>
+														</RegionLink>
 													</strong></li>
 
 													:
@@ -38,9 +38,9 @@ export default function Footer({ menu, footer }: FooterProps) {
 
 												{item.sub?.map((subItem, subidx) =>
 													<li key={subidx}>
-														<Link scroll={true} href={subItem.slug}>
+														<RegionLink scroll={true} href={subItem.slug} regional={subItem.regional}>
 															{subItem.label}
-														</Link>
+														</RegionLink>
 													</li>
 												)}
 											</>

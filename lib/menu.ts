@@ -14,7 +14,7 @@ export type MenuItem = {
 }
 
 const base: Menu = [
-  { type: 'about', label: 'Om' },
+  { type: 'about', label: 'Om', regional: false },
   {
     type: 'consult', label: 'Anlita oss', sub: [
       { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar', regional: true },
@@ -23,13 +23,13 @@ const base: Menu = [
   },
   {
     type: 'artist', label: 'För konstnärer', sub: [
-      { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem' },
-      { type: 'artist', label: 'Logga in', slug: '/konstnar/konto/logga-in' },
+      { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem', regional: false },
+      { type: 'artist', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
       { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true },
-      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss' }
+      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss', regional: false }
     ]
   },
-  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', index: true, sub: [] },
+  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: false, index: true, sub: [] },
   { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
   { type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, regional: true, sub: [] },
 ]
@@ -57,19 +57,19 @@ export const buildMenu = async () => {
     let sub: MenuItem[];
     switch (item.type) {
       case 'news':
-        sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/nyheter/${el.slug}` }))
+        sub = news.slice(0, 5).map(el => ({ type: 'news', label: el.title, slug: `/nyheter/${el.slug}`, regional: false }))
         break;
       case 'about':
-        sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}` }))
+        sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}`, regional: false }))
         break;
       case 'consult':
-        sub = item.sub.concat(consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}` })))
+        sub = item.sub.concat(consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}`, regional: false })))
         break;
       case 'projects':
         sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
         break;
       case 'contact':
-        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `/${el.slug}/kontakt` }))
+        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `/${el.slug}/kontakt`, regional: false }))
         break;
       default:
         break;

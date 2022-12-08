@@ -1,17 +1,16 @@
 import styles from './ReadMore.module.scss'
 import { recordToSlug } from '/lib/utils'
-import Link from 'next/link'
 import cn from 'classnames'
 import { RegionLink } from '/components'
 import { useRegion } from '/lib/context/region'
 type Props = {
   message?: string
   link: string,
-  invert: boolean
+  invert?: boolean
 
 }
 
-export default function ReadMore({ message, link, invert }: Props) {
+export default function ReadMore({ message, link, invert = false }: Props) {
 
   const region = useRegion()
 

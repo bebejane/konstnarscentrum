@@ -2,7 +2,7 @@ import s from './NewsCard.module.scss'
 import React from 'react'
 import Link from 'next/link'
 import { Image } from 'react-datocms'
-import { Card, ReadMore } from '/components'
+import { Card, ReadMore, RegionLink } from '/components'
 
 export type NewsCardProps = {
   title: string,
@@ -18,9 +18,9 @@ export default function NewsCard({ title, subtitle, text, slug, image }: NewsCar
   return (
     <Card className={s.card}>
       {image &&
-        <Link href={slug}>
+        <RegionLink href={slug} regional={true}>
           <Image className={s.image} data={image.responsiveImage} />
-        </Link>
+        </RegionLink>
       }
       <h5>{subtitle}</h5>
       <Link href={slug}><h4>{title}</h4></Link>
