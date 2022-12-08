@@ -1,4 +1,6 @@
 import { useContext, createContext } from "react";
+import { regions } from '/lib/region'
+import { getCookie } from "cookies-next";
 
 export type RegionProps = Region
 
@@ -12,8 +14,10 @@ export type RegionProviderProps = {
 // Context provider
 export const RegionProvider = ({ children, value }: RegionProviderProps) => {
 
+  const regionFromCookie = regions.find(({ slug }) => slug === getCookie('region'))
+
   return (
-    <RegionContext.Provider value={value ? { ...value } : undefined}>
+    <RegionContext.Provider value={value ? { ...value } : regionFromCookie ? { ...regionFromCookie } : undefined}>
       {children}
     </RegionContext.Provider>
   )

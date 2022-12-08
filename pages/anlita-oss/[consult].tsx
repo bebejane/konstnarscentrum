@@ -9,10 +9,11 @@ type ConsultProps = {
 	consult: ConsultRecord
 }
 
-export default function Consult({ consult: { title, image, intro, content } }: ConsultProps) {
+export default function Consult({ consult: { id, title, image, intro, content } }: ConsultProps) {
 
 	return (
 		<Article
+			key={id}
 			title={title}
 			image={image}
 			text={intro}

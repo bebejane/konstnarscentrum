@@ -13,6 +13,7 @@ type CommissionProps = {
 }
 
 export default function Commission({ commission: {
+	id,
 	title,
 	blackHeadline,
 	image,
@@ -35,6 +36,7 @@ export default function Commission({ commission: {
 	return (
 		<div className={s.container}>
 			<Article
+				key={id}
 				title={title}
 				image={image}
 				text={intro}

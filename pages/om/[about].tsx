@@ -9,10 +9,11 @@ type AboutProps = {
 	about: AboutRecord
 }
 
-export default function About({ about: { title, image, intro, content } }: AboutProps) {
+export default function About({ about: { id, title, image, intro, content } }: AboutProps) {
 
 	return (
 		<Article
+			key={id}
 			title={title}
 			image={image}
 			text={intro}

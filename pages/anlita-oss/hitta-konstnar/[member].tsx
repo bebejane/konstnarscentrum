@@ -15,6 +15,7 @@ export type Props = {
 }
 
 export default function Member({ member: {
+	id,
 	firstName,
 	lastName,
 	image,
@@ -75,6 +76,7 @@ export default function Member({ member: {
 				noBottom={true}
 				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
 				onClick={(id) => setImageId(id)}
+				key={id}
 			>
 				<MetaSection
 					items={[
@@ -132,8 +134,6 @@ export default function Member({ member: {
 				show={imageId !== undefined}
 				onClose={() => setImageId(undefined)}
 			/>
-
-
 
 		</div>
 	);

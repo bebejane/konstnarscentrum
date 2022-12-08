@@ -5,12 +5,18 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useRegion } from '/lib/context/region';
+import { setCookie, getCookie } from 'cookies-next';
 
 export default function RegionSelector({ }) {
 
   const region = useRegion()
   const router = useRouter()
   const [open, setOpen] = useState(false)
+
+  const handleClick = (region: Region) => {
+    setCookie('region', region.slug)
+    setOpen(false)
+  }
 
   useEffect(() => {
     setOpen(false)
@@ -24,7 +30,7 @@ export default function RegionSelector({ }) {
       <ul className={cn(open && s.show)}>
         {regions.sort((a, b) => a.global ? -1 : 1).map((d, idx) =>
           <li key={idx} data-slug={d.slug} data-selected={region?.id === d.id}>
-            <Link href={`/${!d.global ? d.slug : ''}`} onClick={() => setOpen(true)}>
+            <Link href={`/${!d.global ? d.slug : ''}`} onClick={() => handleClick(d)}>
               {d.name}
             </Link>
           </li>
