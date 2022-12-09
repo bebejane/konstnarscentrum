@@ -53,6 +53,9 @@ export const authOptions: NextAuthOptions = {
           const { username: email, password } = credentials
           const user = await findUser(email)
 
+          console.log('login', email)
+          console.log(user, password)
+
           if (!user) return null
 
           const checkPassword = await comparePassword(password, user.password);
