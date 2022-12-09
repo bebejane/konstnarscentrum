@@ -65,7 +65,7 @@ export default function LogOut({ csrfToken, providers, member, memberCategories 
 	);
 }
 
-export const getServerSideProps: GetStaticProps = requireAuthentication(withGlobalProps({ queries: [AllMemberCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
+export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [AllMemberCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 	const res = await getCsrfToken(context)
 	const csrfToken = res
 	const session = await getSession(context);
@@ -81,4 +81,4 @@ export const getServerSideProps: GetStaticProps = requireAuthentication(withGlob
 			member
 		}
 	};
-}));
+});
