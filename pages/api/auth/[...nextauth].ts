@@ -8,7 +8,7 @@ import AppleProvider from "next-auth/providers/apple";
 import { comparePassword, findUser } from '/lib/auth'
 
 export const authOptions: NextAuthOptions = {
-  //site: process.env.NEXTAUTH_URL,
+  site: process.env.NEXTAUTH_URL,
   session: {
     strategy: 'jwt',
     maxAge: 365 * (24 * 60 * 60), // 365 days

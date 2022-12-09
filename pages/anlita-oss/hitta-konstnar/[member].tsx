@@ -34,7 +34,6 @@ export default function Member({ member: {
 	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
-	console.log(images);
 
 	const handleSave = useCallback(async () => {
 		console.log('save');
