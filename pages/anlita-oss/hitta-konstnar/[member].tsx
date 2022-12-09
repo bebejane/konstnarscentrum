@@ -30,10 +30,11 @@ export default function Member({ member: {
 }, member, related }: Props) {
 
 	const [imageId, setImageId] = useState<string | undefined>()
-	const images = [image, ...content.filter(({ image }) => image).map(({ image }) => image)]
+	const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
 	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
+	console.log(images);
 
 	const handleSave = useCallback(async () => {
 		console.log('save');

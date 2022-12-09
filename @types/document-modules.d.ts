@@ -35,6 +35,15 @@ export const AllConsultsMenu: DocumentNode;
 }
     
 
+declare module '*/english.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const InEnglish: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/footer.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

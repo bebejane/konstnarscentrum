@@ -6,7 +6,7 @@ import { useWindowSize } from 'rooks'
 
 export type HeadlineProps = {
   children: React.ReactNode,
-  trailing: number
+  trailing?: number
   className?: string
   headlineSize?: 1 | 2 | 3 | 4 | 5 | 6
 }

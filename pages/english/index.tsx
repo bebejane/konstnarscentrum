@@ -1,24 +1,24 @@
 import s from "./index.module.scss";
-import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-//import {  } from "/graphql";
-//import { } from "/components";
+import { InEnglishDocument } from "/graphql";
+import { StructuredContent } from "/components";
 
 export type Props = {
-
+	inEnglish: InEnglishRecord
 }
 
-export default function English({ }: Props) {
+export default function InEnglish({ inEnglish: { title, content } }: Props) {
 
 	return (
 		<div className={s.container}>
-			English...
+			<h1>{title}</h1>
+			<StructuredContent content={content} />
 		</div>
 	);
 }
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [InEnglishDocument] }, async ({ props, revalidate, context }: any) => {
 
 	return {
 		props,

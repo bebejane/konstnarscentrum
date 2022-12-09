@@ -19,7 +19,7 @@ query AllMembersCities {
 	}
 }
 
-query Member($email: String!) {
+query Member($email: String) {
 	member(filter: { email: { eq: $email } }) {
 		...MemberFragment
 	}

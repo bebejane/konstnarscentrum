@@ -1,0 +1,36 @@
+.container {
+
+  form {
+    margin-bottom: 1rem;
+
+    input[type="text"],
+    textarea,
+    select,
+    button {
+      width: 100%;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkboxGroup {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+
+      div {
+        flex: 0 0 33.333%;
+        white-space: pre;
+
+        input {
+          margin-right: 0.3rem;
+          margin-left: 0.3rem;
+        }
+      }
+
+    }
+  }
+}

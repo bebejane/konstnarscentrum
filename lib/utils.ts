@@ -69,7 +69,7 @@ export const recordToSlug = (record: any, region?: Region): string => {
     }
   }
 
-  return !region?.global ? `/${region.slug}/${url}` : url
+  return region && !region?.global ? `/${region.slug}/${url}` : url
 }
 
 export const isEmail = (string: string): boolean => {

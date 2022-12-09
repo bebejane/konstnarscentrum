@@ -1,0 +1,40 @@
+query InEnglish {
+	inEnglish {
+		__typename
+		id
+		title
+		slug
+		content {
+			value
+			blocks {
+				... on ImageRecord {
+					__typename
+					id
+
+					image {
+						...ImageFragment
+					}
+				}
+				... on TextRecord {
+					__typename
+					id
+					text(markdown: false)
+				}
+				... on VideoRecord {
+					__typename
+					id
+
+					video {
+						height
+						width
+						title
+						provider
+						providerUid
+						thumbnailUrl
+						url
+					}
+				}
+			}
+		}
+	}
+}

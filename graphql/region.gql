@@ -59,9 +59,7 @@ query Region($regionId: ItemId) {
 				image {
 					...ImageFragment
 				}
-				text
 				link
-				text
 			}
 			... on LatestNewsRecord {
 				id

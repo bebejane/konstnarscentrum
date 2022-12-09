@@ -81,3 +81,7 @@ export const authOptions: NextAuthOptions = {
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions);
 export default handler
+
+export const config = {
+  //runtime: 'experimental-edge'
+}
