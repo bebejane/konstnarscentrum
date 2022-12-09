@@ -14,12 +14,14 @@
   div {
     max-width: none !important;
   }
+
   figcaption {
     @include mq($until: tablet) {
       padding-left: var(--outer-margin);
     }
   }
 }
+
 .double {
   display: flex;
   flex-direction: row;
@@ -36,11 +38,21 @@
     margin: 0;
     flex: 0 0 calc(50% - (var(--gutter) / 2));
     margin-right: var(--gutter);
+
     &:last-child {
       margin-right: 0;
     }
+
     .image {
       max-width: none !important;
     }
   }
+}
+
+.single,
+.double {
+  img {
+    cursor: pointer;
+  }
+
 }
