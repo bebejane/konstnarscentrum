@@ -1,8 +1,9 @@
-import { getSession } from "next-auth/react"
+import { authOptions } from 'pages/api/auth/[...nextauth]'
+import { unstable_getServerSession } from "next-auth";
 
 export default function requireAuthentication(getServerSideProps) {
 	return async (context) => {
-		const session = await getSession(context);
+		const session = await unstable_getServerSession(context.req, context.res, authOptions);
 		if (!session) {
 			return {
 				props: {},

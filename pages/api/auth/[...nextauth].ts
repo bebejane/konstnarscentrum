@@ -8,7 +8,6 @@ import AppleProvider from "next-auth/providers/apple";
 import { comparePassword, findUser } from '/lib/auth'
 
 export const authOptions: NextAuthOptions = {
-  site: process.env.NEXTAUTH_URL,
   session: {
     strategy: 'jwt',
     maxAge: 365 * (24 * 60 * 60), // 365 days
@@ -52,9 +51,6 @@ export const authOptions: NextAuthOptions = {
 
           const { username: email, password } = credentials
           const user = await findUser(email)
-
-          console.log('login', email)
-          console.log(user, password)
 
           if (!user) return null
 
