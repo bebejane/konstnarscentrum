@@ -4,12 +4,21 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AboutDocument, AllAboutsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
 import { Article } from "/components";
+import { useEffect, useState } from "react";
+import useStore from "/lib/store";
 
 type AboutProps = {
 	about: AboutRecord
 }
 
 export default function About({ about: { id, title, image, intro, content } }: AboutProps) {
+
+	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
+
+	useEffect(() => {
+		const images = [image, ...content.blocks.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
+		setImages(images)
+	}, [image, content, setImages])
 
 	return (
 		<Article
@@ -18,6 +27,7 @@ export default function About({ about: { id, title, image, intro, content } }: A
 			image={image}
 			text={intro}
 			content={content}
+			onClick={(imageId) => setImageId(imageId)}
 		/>
 	);
 }

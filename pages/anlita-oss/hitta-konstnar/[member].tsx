@@ -7,6 +7,7 @@ import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDo
 import { Article, Block, MetaSection, RelatedSection, EditBox, Gallery } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import useStore from "/lib/store";
 
 export type Props = {
 	member: MemberRecord,
@@ -29,14 +30,14 @@ export default function Member({ member: {
 	content
 }, member, related }: Props) {
 
-	const [imageId, setImageId] = useState<string | undefined>()
-	const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
+	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
+
 	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
 	const handleSave = useCallback(async () => {
-		console.log('save');
+
 		try {
 
 			const res = await fetch('/api/account', {
@@ -59,6 +60,9 @@ export default function Member({ member: {
 	}, [blocks, member])
 
 	useEffect(() => {
+		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
+
+		setImages(images)
 		setBlocks(content)
 	}, [content])
 
@@ -66,6 +70,8 @@ export default function Member({ member: {
 		if (!blocks) return
 		handleSave()
 	}, [blocks, handleSave])
+
+
 
 	return (
 		<div className={s.container}>
@@ -127,14 +133,6 @@ export default function Member({ member: {
 					slug: `/anlita-oss/hitta-konstnar/${slug}`
 				}))}
 			/>
-
-			<Gallery
-				index={images.findIndex(({ id }) => id === imageId)}
-				images={images}
-				show={imageId !== undefined}
-				onClose={() => setImageId(undefined)}
-			/>
-
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { isParagraph, isLink, isThematicBreak, isRoot } from 'datocms-structured
 import Block from '/components/blocks';
 import Link from "next/link";
 
-export default function StructuredContent({ content }) {
+export default function StructuredContent({ content, onClick }) {
 
   if (!content) return null
 
@@ -11,7 +11,7 @@ export default function StructuredContent({ content }) {
     <StructuredText
       data={content}
       renderBlock={({ record }) => {
-        return <Block data={record} />
+        return <Block data={record} onClick={(id) => onClick?.(id)} />
       }}
       renderInlineRecord={({ record }) => {
         switch (record.__typename) {

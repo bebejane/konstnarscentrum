@@ -48,7 +48,7 @@ export default function Article({ children, title, blackHeadline = false, text, 
         {text}
       </Markdown>
       {content &&
-        <StructuredContent content={content} />
+        <StructuredContent content={content} onClick={(imageId) => onClick?.(imageId)} />
       }
       {children}
     </div>

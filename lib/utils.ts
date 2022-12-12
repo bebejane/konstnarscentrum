@@ -44,7 +44,7 @@ export const recordToSlug = (record: any, region?: Region): string => {
   }
 
   if (typeof record === 'string')
-    url = record
+    return record
   else {
     const { __typename, slug } = record
 
