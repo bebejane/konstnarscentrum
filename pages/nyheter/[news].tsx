@@ -7,7 +7,7 @@ import { format } from "date-fns";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { getStaticPagePaths } from "/lib/utils";
 import { Image } from "react-datocms";
-import { Headline } from "/components";
+import BalanceText from 'react-balance-text'
 
 export type Props = {
   news: NewsRecord
@@ -17,7 +17,7 @@ export default function News({ news: { createdAt, title, image, content, region 
 
   return (
     <div className={styles.container}>
-      <Headline headlineSize={1}>{title}</Headline>
+      <h1><BalanceText>{title}</BalanceText></h1>
       <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
       {image &&
         <Image

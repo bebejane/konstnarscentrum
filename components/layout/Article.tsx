@@ -5,7 +5,7 @@ import { StructuredContent, Headline } from "/components";
 import { Image } from 'react-datocms';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 import cn from 'classnames'
-
+import BalanceText from 'react-balance-text'
 
 export type ArticleProps = {
   children?: React.ReactNode,
@@ -30,7 +30,9 @@ export default function Article({ children, title, blackHeadline = false, text, 
     <div className={cn(s.article, noBottom && s.noBottom)} >
       {image && showImage ?
         <header>
-          <Headline className={cn(s.title, blackHeadline && s.black)}>{title}</Headline>
+          <h1 className={cn(s.title, blackHeadline && s.black)}>
+            <BalanceText>{title}</BalanceText>
+          </h1>
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}

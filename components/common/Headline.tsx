@@ -3,6 +3,7 @@ import cn from 'classnames'
 import React, { useRef } from 'react'
 import { useEffect, useState } from 'react'
 import { useWindowSize } from 'rooks'
+import BalanceText from 'react-balance-text'
 
 export type HeadlineProps = {
   children: React.ReactNode,
@@ -12,7 +13,7 @@ export type HeadlineProps = {
 }
 
 export default function Headline({ children, className, headlineSize = 1, trailing = 2 }: HeadlineProps) {
-  //children = 'hej hag ar en lang text ett tva tre fyra'
+  children = 'hej hag ar en lang text ett tva tre ads sda dsa'
 
   const text = (children as string);
   const ref = useRef<HTMLHeadingElement | null>(null)
@@ -48,6 +49,9 @@ export default function Headline({ children, className, headlineSize = 1, traili
       {word}{idx !== breakWord ? ' ' : <br />}
     </React.Fragment>
   )
+
+
+  return <h1><BalanceText>{text}</BalanceText></h1>
 
   return (
     <>

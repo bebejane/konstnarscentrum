@@ -3,6 +3,7 @@ import React from 'react'
 import Link from 'next/link'
 import { Image } from 'react-datocms'
 import { Card, ReadMore, RegionLink } from '/components'
+import BalanceText from 'react-balance-text'
 
 export type NewsCardProps = {
   title: string,
@@ -23,7 +24,9 @@ export default function NewsCard({ title, subtitle, text, slug, image }: NewsCar
         </RegionLink>
       }
       <h5>{subtitle}</h5>
-      <Link href={slug}><h4>{title}</h4></Link>
+      <Link href={slug}>
+        <h4><BalanceText>{title}</BalanceText></h4>
+      </Link>
       <p className="mid">{text}</p>
       <ReadMore link={slug} message='Läs mer'></ReadMore>
     </Card>

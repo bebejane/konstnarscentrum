@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { Pager } from '/components'
 import { pageSize } from "/lib/utils";
 import Link from "next/link";
+import BalanceText from 'react-balance-text'
 
 //const pageSize = 2;
 
@@ -27,12 +28,12 @@ export default function News({ news, region, pagination }: Props) {
             <li key={idx} >
               <Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-                <h2>{title}</h2>
+                <h2><BalanceText>{title}</BalanceText></h2>
                 <p>{intro}</p>
               </Link>
             </li>
           ) :
-            <>Inga nyheter...</>
+            <>Det finns inga nyheter...</>
           }
         </ul>
         <Pager pagination={pagination} slug={'/nyheter'} />

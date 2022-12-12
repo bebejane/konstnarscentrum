@@ -3,9 +3,15 @@ import { isParagraph, isLink, isThematicBreak, isRoot } from 'datocms-structured
 import Block from '/components/blocks';
 import Link from "next/link";
 
-export default function StructuredContent({ content, onClick }) {
+export type Props = {
+  content: any,
+  onClick?: (imageId: string) => void
+}
 
-  if (!content) return null
+export default function StructuredContent({ content, onClick }: Props) {
+
+  if (!content)
+    return null
 
   return (
     <StructuredText
