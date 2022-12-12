@@ -7,6 +7,7 @@ import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import type { Menu, MenuItem } from '/lib/menu'
 import { RegionSelector, RegionLink, User } from '/components'
 import Link from 'next/link'
+import { regions } from '/lib/region'
 
 export type MenuDesktopProps = { items: Menu, home: boolean }
 
@@ -19,6 +20,15 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 	const [selected, setSelected] = useState<MenuItem | undefined>()
 	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
 	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition, viewportHeight } = useScrollInfo()
+
+	const isActive = (item: MenuItem, parent: boolean = false): boolean => {
+		const slugs = [item.slug, ...regions.map(({ slug }) => `/${slug}${item.slug}`)]
+
+		if (parent) {
+			return slugs.find(s => router.asPath.startsWith(s)) !== undefined
+		}
+		return slugs.includes(router.asPath)
+	}
 
 	useEffect(() => { // Toggle menu bar on scroll
 		//console.log);
@@ -49,6 +59,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		setSelected(undefined)
 	}, [router])
 
+
 	return (
 		<>
 			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)}>
@@ -60,6 +71,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 						<li
 							key={idx}
 							data-menu-type={item.type}
+							className={cn(isActive(item, true) && s.active)}
 							onMouseEnter={() => setSelected(item)}
 						>
 							{item.index ?
@@ -82,10 +94,10 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 								onMouseLeave={() => setSelected(undefined)}
 								onMouseEnter={() => setSelected(item)}
 							>
-								{item.sub?.map(({ slug, label, regional }, idx) =>
-									<li key={idx}>
-										<RegionLink href={slug} regional={regional}>
-											{label}
+								{item.sub?.map((item, idx) =>
+									<li key={idx} className={cn(isActive(item) && s.active)}>
+										<RegionLink href={item.slug} regional={item.regional}>
+											{item.label}
 										</RegionLink>
 									</li>
 								)}

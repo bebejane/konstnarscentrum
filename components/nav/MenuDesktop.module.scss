@@ -48,11 +48,20 @@
       margin-right: 1rem;
       white-space: pre;
       z-index: 100;
-      cursor: pointer;
+      cursor: default;
 
       &:hover {
         color: var(--beige-dark);
       }
+    }
+  }
+
+  li.active {
+    color: var(--beige-dark);
+
+    a {
+      color: var(--beige-dark);
+      ;
     }
   }
 
@@ -85,7 +94,10 @@
       }
     }
   }
+
+
 }
+
 
 .toolsMenu {
   position: fixed;
