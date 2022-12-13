@@ -18,7 +18,7 @@ export default function RegionHome({ commissions, commissionCategories }: Props)
 
 	return (
 		<>
-			<header>
+			<header className={s.header}>
 				<h1>Uppdragsarkiv<sup className="amount">19</sup></h1>
 				<FilterBar
 					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}

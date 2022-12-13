@@ -84,7 +84,6 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 				<Loader />
 				: results ?
 					<>
-						<h2>Sök resultat</h2>
 						{results.length === 0 && <>Vi hittade ingenting...</>}
 						<CardContainer columns={3} className={s.results} key={Math.random()}>
 							{results.map(({ id, firstName, lastName, image, region, slug }) =>
@@ -100,7 +99,6 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 					</>
 					:
 					<>
-						<h2>Upptäck konstnärer</h2>
 						<CardContainer columns={3}>
 							{members.map(({ id, firstName, lastName, image, region, slug }) =>
 								<Card key={id}>

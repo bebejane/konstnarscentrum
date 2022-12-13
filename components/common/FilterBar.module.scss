@@ -2,7 +2,7 @@
   position: relative;
   padding-top: 1rem;
   padding-bottom: 1.2rem;
-  margin-bottom: var(--small-space);
+  margin-bottom: calc(var(--small-space) + 1rem);
 
   > ul {
     list-style: none;
