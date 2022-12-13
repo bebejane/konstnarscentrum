@@ -1,13 +1,17 @@
 .container {
 
   form {
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
 
     input[type="text"],
     textarea,
     select,
     button {
       width: 100%;
+    }
+
+    button {
+      margin-top: 2rem;
     }
 
     label {
@@ -20,14 +24,25 @@
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
+      background-color: var(--beige-light);
+      padding: 0.5rem;
+
 
       div {
         flex: 0 0 33.333%;
         white-space: pre;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 0.5rem;
 
         input {
-          margin-right: 0.3rem;
-          margin-left: 0.3rem;
+          margin: 0;
+          margin-right: 0.5rem;
+        }
+
+        label {
+          margin: 0;
         }
       }
 

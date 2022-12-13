@@ -3,10 +3,10 @@
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
-  bottom: 0;
+  top: 0;
   right: 0;
   z-index: 200;
-
+  max-height: 100vh;
   pointer-events: none;
   margin-top: calc(-1 * var(--navbar-height));
 
@@ -14,8 +14,7 @@
     display: none;
   }
 
-  &.open {
-  }
+  &.open {}
 
   .wrap {
     display: flex;
