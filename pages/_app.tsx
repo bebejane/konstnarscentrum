@@ -6,6 +6,10 @@ import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import { regions } from '/lib/region';
 import { useRouter } from 'next/router';
+import setDefaultOptions from 'date-fns/setDefaultOptions';
+import { sv } from 'date-fns/locale'
+
+setDefaultOptions({ locale: sv })
 
 function App({ Component, pageProps }) {
 
