@@ -21,7 +21,8 @@ export default function News({ memberNews: {
 	image,
 	location,
 	category,
-}, region }: Props) {
+	region
+} }: Props) {
 
 	return (
 		<Article
@@ -34,7 +35,8 @@ export default function News({ memberNews: {
 				items={[
 					{ title: 'Kategori', value: category.category },
 					{ title: 'Plats', value: location },
-					{ title: 'Datum', value: format(new Date(date), "d MMMM y") }
+					{ title: 'Datum', value: format(new Date(date), "d MMMM y") },
+					{ title: 'Region', value: region?.name }
 				]}
 			/>
 			<StructuredContent content={content} />
