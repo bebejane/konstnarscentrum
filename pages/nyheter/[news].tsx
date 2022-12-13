@@ -11,7 +11,6 @@ export type Props = {
 }
 
 export default function News({ news: { createdAt, title, image, intro, content, region } }: Props) {
-  console.log(content);
 
   return (
     <Article

@@ -61,7 +61,6 @@ export default function Article({
         <h1> {title}</h1>
       }
       {subtitle && <h5>{subtitle}</h5>}
-      {children}
       {text &&
         <Markdown className="intro">
           {text}
@@ -73,7 +72,7 @@ export default function Article({
           onClick={(imageId) => onClick?.(imageId)}
         />
       }
-
+      {children}
     </div>
   )
 }
