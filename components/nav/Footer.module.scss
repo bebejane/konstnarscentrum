@@ -33,12 +33,12 @@
   nav {
     width: 100%;
 
-    > ul {
+    >ul {
       display: flex;
       flex-direction: row;
       list-style: none;
 
-      > li {
+      >li {
         width: calc(100% / 6);
         line-height: var(--line-height-nav);
 
@@ -100,14 +100,12 @@
     .logo {
       svg {
         margin-left: 0px;
-        transform: rotate(0deg);
-        transition: transform 0.7s ease-out, margin-left 2s ease-in-out;
       }
 
       &.inview {
         svg {
-          transform: rotate(360deg) translateX(0%);
-          margin-left: 0px;
+          //transform: rotate(360deg) translateX(0%);
+          //margin-left: 0px;
         }
       }
     }
