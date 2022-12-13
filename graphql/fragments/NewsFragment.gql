@@ -4,7 +4,6 @@
 fragment NewsFragment on NewsRecord {
 	id
 	title
-	content
 	slug
 	intro
 	createdAt
@@ -13,5 +12,9 @@ fragment NewsFragment on NewsRecord {
 	}
 	region {
 		...RegionFragment
+	}
+	content {
+		value
+		blocks
 	}
 }

@@ -4,30 +4,39 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import { StructuredContent } from "/components";
+import { Article, MetaSection } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
-import { Image } from "react-datocms";
-import BalanceText from 'react-balance-text'
 
 export type Props = {
 	memberNews: MemberNewsRecord,
 	region: Region
 }
 
-export default function News({ memberNews: { date, title, content, image }, region }: Props) {
+export default function News({ memberNews: {
+	createdAt,
+	date,
+	title,
+	content,
+	image,
+	location,
+	category,
+}, region }: Props) {
 
 	return (
-		<div className={styles.container}>
-			<h1><BalanceText>{title}</BalanceText></h1>
-			<h5>{format(new Date(date), "d MMMM y")} • {region.name}</h5>
-			{image &&
-				<Image
-					className={styles.image}
-					data={image.responsiveImage}
-				/>
-			}
-			<StructuredContent content={content} />
-		</div>
+		<Article
+			image={image}
+			title={title}
+			subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
+			content={content}
+		>
+			<MetaSection
+				items={[
+					{ title: 'Kategori', value: category.category },
+					{ title: 'Plats', value: location },
+					{ title: 'Datum', value: format(new Date(date), "d MMMM y") }
+				]}
+			/>
+		</Article>
 	);
 }
 

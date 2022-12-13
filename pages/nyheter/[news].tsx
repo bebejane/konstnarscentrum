@@ -1,32 +1,26 @@
-import styles from "./[news].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { NewsDocument, AllNewsDocument } from "/graphql";
+import { Article } from "/components";
 import { format } from "date-fns";
-import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { getStaticPagePaths } from "/lib/utils";
-import { Image } from "react-datocms";
-import BalanceText from 'react-balance-text'
 
 export type Props = {
   news: NewsRecord
 }
 
-export default function News({ news: { createdAt, title, image, content, region } }: Props) {
+export default function News({ news: { createdAt, title, image, intro, content, region } }: Props) {
+  console.log(content);
 
   return (
-    <div className={styles.container}>
-      <h1><BalanceText>{title}</BalanceText></h1>
-      <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-      {image &&
-        <Image
-          className={styles.image}
-          data={image.responsiveImage}
-        />
-      }
-      <Markdown scroll={true}>{content}</Markdown>
-    </div>
+    <Article
+      image={image}
+      title={title}
+      subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
+      text={intro}
+      content={content}
+    />
   );
 }
 

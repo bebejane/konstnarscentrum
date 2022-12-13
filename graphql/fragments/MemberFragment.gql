@@ -10,6 +10,8 @@ fragment MemberFragment on MemberRecord {
 	yearOfBirth
 	birthPlace
 	city
+	webpage
+	instagram
 	memberCategory {
 		id
 		categoryType

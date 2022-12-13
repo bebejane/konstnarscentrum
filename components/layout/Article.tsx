@@ -10,8 +10,9 @@ import BalanceText from 'react-balance-text'
 export type ArticleProps = {
   children?: React.ReactNode,
   title: string,
+  subtitle?: string,
   blackHeadline?: boolean,
-  text: string,
+  text?: string,
   image?: FileField,
   showImage?: boolean,
   content?: any,
@@ -21,7 +22,19 @@ export type ArticleProps = {
 
 }
 
-export default function Article({ children, title, blackHeadline = false, text, image, content, showImage = true, editable, noBottom, onClick }: ArticleProps) {
+export default function Article({
+  children,
+  title,
+  subtitle,
+  blackHeadline = false,
+  text,
+  image,
+  content,
+  showImage = true,
+  editable,
+  noBottom,
+  onClick
+}: ArticleProps) {
 
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
@@ -33,6 +46,7 @@ export default function Article({ children, title, blackHeadline = false, text, 
           <h1 className={cn(s.title, blackHeadline && s.black)}>
             <BalanceText>{title}</BalanceText>
           </h1>
+
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
@@ -46,13 +60,20 @@ export default function Article({ children, title, blackHeadline = false, text, 
         :
         <h1> {title}</h1>
       }
-      <Markdown className="intro">
-        {text}
-      </Markdown>
-      {content &&
-        <StructuredContent content={content} onClick={(imageId) => onClick?.(imageId)} />
-      }
+      {subtitle && <h5>{subtitle}</h5>}
       {children}
+      {text &&
+        <Markdown className="intro">
+          {text}
+        </Markdown>
+      }
+      {content &&
+        <StructuredContent
+          content={content}
+          onClick={(imageId) => onClick?.(imageId)}
+        />
+      }
+
     </div>
   )
 }

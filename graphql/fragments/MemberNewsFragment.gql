@@ -5,6 +5,7 @@
 fragment MemberNewsFragment on MemberNewsRecord {
 	__typename
 	id
+	createdAt
 	title
 	image {
 		...ImageFragment

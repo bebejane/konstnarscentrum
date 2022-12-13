@@ -11,31 +11,35 @@ const imageBlockId = '1349197'
 export default withAuthentication(async (req, res, session) => {
 
   const {
-    member: {
-      id,
-      content,
-      firstName,
-      lastName,
-      bio,
-      birthPlace,
-      city,
-      yearOfBirth,
-      webpage,
-      instagram,
-      memberCategory
-    } } = req.body
-
-  const record = await client.items.find(id, { nested: 'true' });
-  await client.items.update(record.id, {
+    id,
+    content,
     firstName,
     lastName,
-    birthPlace,
     bio,
+    birthPlace,
     city,
     yearOfBirth,
     webpage,
     instagram,
-    memberCategory,
+    memberCategory
+  } = req.body
+  console.log(req.body);
+
+  const record = await client.items.find(id, { nested: 'true' });
+  if (!record)
+    return res.status(500).json({ error: `User with id "${id}" not found!` })
+
+  console.log(record);
+  const newRecord = {
+    first_name: firstName,
+    last_name: lastName,
+    birth_place: birthPlace,
+    bio,
+    city,
+    year_of_birth: yearOfBirth,
+    webpage,
+    instagram,
+    member_category: memberCategory,
     content: content ? content.map(({ id, image }) => !id ?
       buildBlockRecord({
         item_type: { type: 'item_type', id: imageBlockId },
@@ -45,7 +49,9 @@ export default withAuthentication(async (req, res, session) => {
       id
     )
       : undefined
-  })
+  }
+
+  await client.items.update(record.id, newRecord)
   const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
   const resp = { content, member }
   return res.status(200).json(resp)
