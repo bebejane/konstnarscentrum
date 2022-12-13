@@ -2864,6 +2864,7 @@ type LatestMemberNewsRecord = RecordInterface & {
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
   createdAt: Scalars['DateTime'];
+  description?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   updatedAt: Scalars['DateTime'];
 };

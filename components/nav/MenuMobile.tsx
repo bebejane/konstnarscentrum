@@ -36,7 +36,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 			</div>
 			<div
 				className={cn(s.mobileMenu, showMenuMobile && s.show)}
-				onClick={({ target: { tagName } }) => tagName === 'A' && setShowMenuMobile(false)}
+			//onClick={({ target: { tagName } }) => tagName === 'A' && setShowMenuMobile(false)}
 			>
 				<nav>
 					<ul className={s.nav}>

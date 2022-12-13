@@ -1,7 +1,6 @@
-import { StructuredText, renderNodeRule, renderMarkRule } from 'react-datocms';
-import { isParagraph, isLink, isThematicBreak, isRoot } from 'datocms-structured-text-utils';
+import { StructuredText, renderNodeRule } from 'react-datocms';
+import { isParagraph, isRoot } from 'datocms-structured-text-utils';
 import Block from '/components/blocks';
-import Link from "next/link";
 
 export type Props = {
   content: any,
