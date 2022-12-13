@@ -94,7 +94,7 @@ export default function Member({ member: {
 					]}
 				/>
 
-				<h1 className="noPadding">Utvalda verk</h1>
+				<h2 className="noPadding">Utvalda verk</h2>
 
 				{(blocks || content)?.map((block, idx) =>
 					<Block

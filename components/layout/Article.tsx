@@ -60,7 +60,6 @@ export default function Article({
         :
         <h1> {title}</h1>
       }
-      {subtitle && <h5>{subtitle}</h5>}
       {text &&
         <Markdown className="intro">
           {text}

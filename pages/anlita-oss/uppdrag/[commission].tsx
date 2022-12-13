@@ -54,7 +54,7 @@ export default function Commission({ commission: {
 					]}
 				/>
 				<section className={s.documentation}>
-					<h1 className="noPadding">Dokumentation</h1>
+					<h2 className="noPadding">Dokumentation</h2>
 					{content.map((block, idx) =>
 						<Block
 							key={idx}
