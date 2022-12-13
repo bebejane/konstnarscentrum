@@ -5,17 +5,17 @@
   text-overflow: ellipsis;
 
   .image {
-    margin-bottom: 0.5em;
+    margin-bottom: 0.8em;
   }
 
   .picture {
     overflow: hidden;
     max-width: 100% !important;
-    transition: left .2s ease-in-out;
+    transition: left 0.2s ease-in-out;
 
     @include mq($from: tablet) {
       &:hover {
-        left: 1.5rem;
+        left: 2.5rem;
       }
     }
   }
@@ -32,7 +32,7 @@
     &.vertical {
       position: absolute;
       writing-mode: vertical-rl;
-      transform: rotate(360deg) translateY(calc(-100% - 0.5rem));
+      transform: rotate(360deg) translateY(calc(-100% - 0.8rem));
       text-align: right;
     }
 

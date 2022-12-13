@@ -52,7 +52,7 @@ export default function Thumbnail({ image, slug, title }: Props) {
           data={image.responsiveImage}
           className={s.image}
           pictureClassName={cn(s.picture, hover && s.hover)}
-          pictureStyle={{ left: hover ? '1.5rem' : 0 }}
+          pictureStyle={{ left: hover ? '1.9rem' : 0 }}
           fadeInDuration={0}
         />
       }

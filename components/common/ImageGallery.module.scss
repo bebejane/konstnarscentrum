@@ -18,15 +18,17 @@
     flex-direction: row;
     overflow: hidden;
 
-    >div {
+    > div {
       display: flex;
       flex-direction: row;
 
       .slide {
         position: relative;
+        width: 30%;
+        margin-right: var(--gutter);
         //max-height: 20vw;
 
-        >figure {
+        > figure {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -42,7 +44,6 @@
             max-height: 20vw;
           }
         }
-
       }
     }
   }

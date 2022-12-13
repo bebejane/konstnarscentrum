@@ -22,8 +22,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				loop={true}
 				noSwiping={false}
 				simulateTouch={true}
-				slidesPerView={3}
-				spaceBetween={20}
+				slidesPerView='auto'
 				initialSlide={index}
 				onSlideChange={({ realIndex }) => setIndex(realIndex)}
 				onSwiper={(swiper) => swiperRef.current = swiper}
