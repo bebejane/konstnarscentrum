@@ -28,7 +28,7 @@ export default function News({ news, region, pagination }: Props) {
             <li key={idx} >
               <Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-                <h2><BalanceText>{title}</BalanceText></h2>
+                <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
               </Link>
             </li>

@@ -125,6 +125,8 @@
     font-weight: normal;
     font-size: 0.9rem;
     color: var(--white) !important;
+    margin-right: var(--outer-margin);
+    margin-left: var(--outer-margin);
 
     p {
       z-index: 100000;
