@@ -57,6 +57,18 @@ const nextOptions = {
 			},
 		];
 	},
+	async rewrites() {
+		return [
+			{
+				source: "/riks",
+				destination: "/",
+			},
+			{
+				source: "/riks/:path*",
+				destination: "/:path*",
+			},
+		];
+	},
 };
 
 const config = { sassOptions, ...nextOptions };

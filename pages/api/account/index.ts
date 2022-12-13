@@ -23,13 +23,11 @@ export default withAuthentication(async (req, res, session) => {
     instagram,
     memberCategory
   } = req.body
-  console.log(req.body);
 
   const record = await client.items.find(id, { nested: 'true' });
   if (!record)
     return res.status(500).json({ error: `User with id "${id}" not found!` })
 
-  console.log(record);
   const newRecord = {
     first_name: firstName,
     last_name: lastName,
