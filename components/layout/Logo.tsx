@@ -26,17 +26,20 @@ export default function Logo({ disabled }: Props) {
   const [ratio, setRatio] = useState(0)
 
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
-    let r = ratio;
 
     setManualMode(true)
+
+    let maxR = 1 + (region.name.length / letters.length)
+    let r = ratio;
+
     const interval = setInterval(() => {
-      if (r > 1 || r < 0) {
-        setRatio(r > 1 ? 1 : 0)
+      if (r > maxR || r < 0) {
+        setRatio(r > maxR ? maxR : 0)
         return clearInterval(interval)
       }
       setRatio(dir === 'horizontal' ? r += 0.1 : r -= 0.1)
     }, 30)
-  }, [setManualMode, ratio])
+  }, [setManualMode, ratio, region])
 
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
@@ -55,9 +58,9 @@ export default function Logo({ disabled }: Props) {
   }
 
   useEffect(() => {
-    if (manualMode)
-      return
-    setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, 2)))
+    if (manualMode) return
+    const maxR = 1 + (region.name.length / letters.length)
+    setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR)))
   }, [scrolledPosition, viewportHeight, setRatio, manualMode])
 
   useEffect(() => {
@@ -75,7 +78,7 @@ export default function Logo({ disabled }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionRatio = ratio > 1 ? Math.max(0, 1 - ((Math.max(scrolledPosition, viewportHeight) - viewportHeight) / (((viewportHeight / letters.length) * region?.name.length)))) : 1
+  const regionRatio = ratio > 1 ? 1 - ((ratio - 1) / (region.name.length / letters.length)) : 1
 
   return (
     <div className={s.container}>

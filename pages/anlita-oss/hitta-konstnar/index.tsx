@@ -31,7 +31,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 	useEffect(() => {
 
 		const variables = {
-			city,
+			city: city && city !== 'false' ? city : undefined,
 			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
@@ -67,6 +67,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 					/>
 					<span>Plats: </span>
 					<select value={city} onChange={(e) => setCity(e.target.value)}>
+						<option value={"false"}>Välj plats</option>
 						{cities.map(({ name }, idx) =>
 							<option key={idx} value={name}>{name}</option>
 						)}
@@ -131,7 +132,9 @@ export const getStaticProps: GetStaticProps = withGlobalProps({
 	return {
 		props: {
 			...props,
-			members
+			members,
+			cities: props.cities.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i) // Dedeupe cities
+
 		},
 		revalidate
 	};
