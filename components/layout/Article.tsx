@@ -27,7 +27,7 @@ export default function Article({ children, title, blackHeadline = false, text, 
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
 
   return (
-    <div className={cn(s.article, noBottom && s.noBottom)} >
+    <div className={cn(s.article, noBottom && s.noBottom, 'article')} >
       {image && showImage ?
         <header>
           <h1 className={cn(s.title, blackHeadline && s.black)}>

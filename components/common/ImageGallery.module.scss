@@ -24,8 +24,8 @@
 
       .slide {
         position: relative;
-        width: 33.33%;
-        margin-right: var(--gutter);
+        width: calc((100% - (var(--gutter) * 2)) / 3);
+        padding-right: var(--gutter);
         //max-height: 20vw;
 
         > figure {
@@ -40,8 +40,8 @@
           }
 
           .image {
-            min-height: 20vw;
-            max-height: 20vw;
+            //min-height: 20vw;
+            //max-height: 20vw;
           }
         }
       }

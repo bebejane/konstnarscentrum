@@ -65,6 +65,7 @@ export default function Gallery({ images, onClose, index = 0, show }: GalleryPro
             spaceBetween={500}
             simulateTouch={!isSingleSlide}
             slidesPerView={1}
+            effect={"fade"}
             initialSlide={index}
             onSlideChange={({ realIndex }) => setRealIndex(realIndex)}
             onSwiper={(swiper) => swiperRef.current = swiper}
