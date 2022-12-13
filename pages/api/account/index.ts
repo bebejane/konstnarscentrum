@@ -10,11 +10,33 @@ const imageBlockId = '1349197'
 
 export default withAuthentication(async (req, res, session) => {
 
-  const { member: { id, content } } = req.body
+  const {
+    member: {
+      id,
+      content,
+      firstName,
+      lastName,
+      bio,
+      birthPlace,
+      city,
+      yearOfBirth,
+      webpage,
+      instagram,
+      memberCategory
+    } } = req.body
 
   const record = await client.items.find(id, { nested: 'true' });
   await client.items.update(record.id, {
-    content: content.map(({ id, image }) => !id ?
+    firstName,
+    lastName,
+    birthPlace,
+    bio,
+    city,
+    yearOfBirth,
+    webpage,
+    instagram,
+    memberCategory,
+    content: content ? content.map(({ id, image }) => !id ?
       buildBlockRecord({
         item_type: { type: 'item_type', id: imageBlockId },
         image
@@ -22,6 +44,7 @@ export default withAuthentication(async (req, res, session) => {
       :
       id
     )
+      : undefined
   })
   const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
   const resp = { content, member }

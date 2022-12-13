@@ -17,22 +17,39 @@ export type Props = {
 	memberCategories: MemberCategoryRecord[]
 }
 
-export default function LogOut({ csrfToken, providers, member, memberCategories }: Props) {
+export default function Account({ csrfToken, providers, member: memberFromProps, memberCategories }: Props) {
 
 	const [error, setError] = useState<undefined | Error>();
-	const { register, handleSubmit, formState: { errors, isSubmitting }, formState } = useForm({
+	const [saving, setSaving] = useState(false);
+	const [member, setMember] = useState<MemberRecord>(memberFromProps)
+	const { firstName, lastName, bio, birthPlace, city, yearOfBirth, webpage, instagram, memberCategory } = member
+
+	const { register, handleSubmit, getValues, formState: { errors, isSubmitting }, formState } = useForm({
 		defaultValues: {
-			...member,
-			memberCategory: member.memberCategory.map(c => c.id)
+			firstName,
+			lastName,
+			bio,
+			birthPlace,
+			city,
+			yearOfBirth,
+			webpage,
+			instagram,
+			memberCategory: memberCategory.map(c => c.id)
 		}
 	})
 	const [formValues, setFormValues] = useState<any>({ ...member })
-	const handleFormField = ({ target: { id, value } }) => {
-		setFormValues({ ...formValues, [id]: value })
-	}
 
 	const onSubmit = async (form) => {
-		console.log(form);
+		setSaving(true)
+
+		fetch('/api/account', {
+			body: JSON.stringify({ ...form }),
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' }
+		})
+			.then(async (res) => setMember((await res.json()).member))
+			.catch((err) => setError(err))
+			.finally(() => setSaving(false))
 	}
 
 	return (
@@ -108,10 +125,12 @@ export default function LogOut({ csrfToken, providers, member, memberCategories 
 							<input
 								type="checkbox"
 								value={id}
-								checked={member.memberCategory.find(el => el.id === id) !== undefined}
+								name="memberCategory"
 								{...register("memberCategory", { required: false })}
 							/>
-							{categoryType}
+							<label>
+								{categoryType}
+							</label>
 						</div>
 					)}
 				</div>
