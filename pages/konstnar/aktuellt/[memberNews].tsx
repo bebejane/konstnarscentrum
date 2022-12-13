@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import { Article, MetaSection } from "/components";
+import { Article, MetaSection, StructuredContent } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
 
 export type Props = {
@@ -15,6 +15,7 @@ export type Props = {
 export default function News({ memberNews: {
 	createdAt,
 	date,
+	intro,
 	title,
 	content,
 	image,
@@ -26,8 +27,8 @@ export default function News({ memberNews: {
 		<Article
 			image={image}
 			title={title}
+			text={intro}
 			subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
-			content={content}
 		>
 			<MetaSection
 				items={[
@@ -36,6 +37,7 @@ export default function News({ memberNews: {
 					{ title: 'Datum', value: format(new Date(date), "d MMMM y") }
 				]}
 			/>
+			<StructuredContent content={content} />
 		</Article>
 	);
 }
