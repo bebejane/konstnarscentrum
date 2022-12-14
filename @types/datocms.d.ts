@@ -1076,6 +1076,15 @@ type FooterRecordaboutKcArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+type ForArtistModelContentBlocksField = ButtonRecord | ImageRecord | VideoRecord;
+
+type ForArtistModelContentField = {
+  __typename?: 'ForArtistModelContentField';
+  blocks: Array<ForArtistModelContentBlocksField>;
+  links: Array<Scalars['String']>;
+  value: Scalars['JsonField'];
+};
+
 type ForArtistModelFilter = {
   OR?: InputMaybe<Array<InputMaybe<ForArtistModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
@@ -1086,6 +1095,7 @@ type ForArtistModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  content?: InputMaybe<StructuredTextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
@@ -1135,6 +1145,7 @@ type ForArtistRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  content?: Maybe<ForArtistModelContentField>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
@@ -3358,6 +3369,7 @@ type NewsModelFilter = {
   image?: InputMaybe<FileFilter>;
   intro?: InputMaybe<TextFilter>;
   region?: InputMaybe<LinkFilter>;
+  showImage?: InputMaybe<BooleanFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
@@ -3384,6 +3396,8 @@ enum NewsModelOrderBy {
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
+  showImage_ASC = 'showImage_ASC',
+  showImage_DESC = 'showImage_DESC',
   title_ASC = 'title_ASC',
   title_DESC = 'title_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
@@ -3411,6 +3425,7 @@ type NewsRecord = RecordInterface & {
   image?: Maybe<FileField>;
   intro: Scalars['String'];
   region: RegionRecord;
+  showImage?: Maybe<Scalars['BooleanType']>;
   slug: Scalars['String'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
@@ -4504,6 +4519,7 @@ type SlideRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  blackText?: Maybe<Scalars['BooleanType']>;
   createdAt: Scalars['DateTime'];
   headline?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];

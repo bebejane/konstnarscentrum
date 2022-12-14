@@ -67,7 +67,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 					/>
 					<span>Plats: </span>
 					<select value={city} onChange={(e) => setCity(e.target.value)}>
-						<option value={"false"}>Välj plats</option>
+						<option value={"false"}>Inte vald</option>
 						{cities.map(({ name }, idx) =>
 							<option key={idx} value={name}>{name}</option>
 						)}

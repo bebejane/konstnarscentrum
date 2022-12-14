@@ -17,16 +17,16 @@ const base: Menu = [
   { type: 'about', label: 'Om', regional: false, slug: '/om' },
   {
     type: 'consult', label: 'Anlita oss', slug: '/anlita-oss', sub: [
-      { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar', regional: true },
-      { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag', regional: true }
+      { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag', regional: true },
+      { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar', regional: true }
+
     ]
   },
   {
     type: 'artist', label: 'För konstnärer', slug: '/konstnar', sub: [
       { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem', regional: false },
       { type: 'artist', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
-      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true },
-      { type: 'artist', label: 'Arbeta med oss', slug: '/konstnar/arbeta-med-oss', regional: false }
+      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true }
     ]
   },
   { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: false, index: true, sub: [] },
