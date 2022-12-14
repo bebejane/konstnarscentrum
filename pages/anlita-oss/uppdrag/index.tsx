@@ -9,17 +9,19 @@ import { apiQuery } from "dato-nextjs-utils/api";
 
 export type Props = {
 	commissions: CommissionRecord[],
-	commissionCategories: CommissionCategoryRecord[]
+	commissionCategories: CommissionCategoryRecord[],
+	pagination: Pagination
 }
 
-export default function RegionHome({ commissions, commissionCategories }: Props) {
+export default function RegionHome({ commissions, commissionCategories, pagination }: Props) {
 
 	const [catgegory, setCategory] = useState<CommissionCategoryRecord | undefined>()
+
 
 	return (
 		<>
 			<header className={s.header}>
-				<h1>Uppdragsarkiv<sup className="amount">19</sup></h1>
+				<h1>Uppdragsarkiv<sup className="amount">{pagination.count}</sup></h1>
 				<FilterBar
 					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}
 					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}

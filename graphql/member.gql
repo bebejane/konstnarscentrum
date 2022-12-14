@@ -11,6 +11,9 @@ query AllMembersWithPortfolio($regionId: ItemId) {
 	members: allMembers(filter: { image: { exists: true }, region: { eq: $regionId } }) {
 		...MemberLightFragment
 	}
+	pagination: _allMembersMeta(filter: { image: { exists: true }, region: { eq: $regionId } }) {
+		count
+	}
 }
 
 query AllMembersCities {

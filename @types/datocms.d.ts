@@ -5312,7 +5312,7 @@ type AllMembersWithPortfolioQueryVariables = Exact<{
 }>;
 
 
-type AllMembersWithPortfolioQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> };
+type AllMembersWithPortfolioQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', id: any, firstName: string, lastName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type AllMembersCitiesQueryVariables = Exact<{ [key: string]: never; }>;
 

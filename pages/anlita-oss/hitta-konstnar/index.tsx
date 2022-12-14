@@ -13,20 +13,19 @@ import { useEffect, useState } from "react";
 export type Props = {
 	memberCategories: MemberCategoryRecord[]
 	members: MemberRecord[],
+	pagination: Pagination,
 	regions: Region[],
-	cities: {
-		name: string
-	}[]
+	cities: { name: string }[]
 }
 
-export default function RegionHome({ members, memberCategories, cities, regions }: Props) {
+export default function Members({ members, memberCategories, cities, regions, pagination }: Props) {
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
 	const [error, setError] = useState<Error | undefined>()
 	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
 	const [city, setCity] = useState<string | undefined>()
-	const [memberCategoryIds, setMemberCategoryIds] = useState<string[] | undefined>()
+	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
 
 	useEffect(() => {
 
@@ -54,7 +53,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 
 	return (
 		<div className={s.container}>
-			<h1>Hitta konstnärer<sup className="amount">11</sup></h1>
+			<h1>Hitta konstnärer<sup className="amount">{pagination.count}</sup></h1>
 			<div className={s.search}>
 				<form className="mid">
 					<span>Namn: </span>
@@ -112,7 +111,6 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 						</CardContainer>
 					</>
 			}
-
 		</div>
 	);
 }
@@ -125,13 +123,14 @@ export const getStaticProps: GetStaticProps = withGlobalProps({
 }, async ({ props, revalidate }: any) => {
 
 	const regionId = !props.region.global ? props.region.id : undefined
-	const { members } = await apiQuery(AllMembersWithPortfolioDocument, { variables: { regionId } })
+	const { members, pagination } = await apiQuery(AllMembersWithPortfolioDocument, { variables: { regionId } })
 
 	return {
 		props: {
 			...props,
 			members,
-			cities: props.cities.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i) // Dedeupe cities
+			cities: props.cities.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i),
+			pagination
 
 		},
 		revalidate
