@@ -16,6 +16,7 @@ export default function Member({ apply: { content, title } }: Props) {
 		<div className={s.container}>
 			<h1>{title}</h1>
 			<StructuredContent content={content} />
+			<h3>Skicka in ansökan</h3>
 			<Apply regions={regions.filter(({ global }) => !global)} />
 		</div>
 	);

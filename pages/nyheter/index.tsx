@@ -8,6 +8,7 @@ import { Pager } from '/components'
 import { pageSize } from "/lib/utils";
 import Link from "next/link";
 import BalanceText from 'react-balance-text'
+import { ReadMore } from "/components";
 
 //const pageSize = 2;
 
@@ -30,6 +31,7 @@ export default function News({ news, region, pagination }: Props) {
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
                 <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
+                <ReadMore message='Läs mer'></ReadMore>
               </Link>
             </li>
           ) :

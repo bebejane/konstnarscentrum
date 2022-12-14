@@ -54,7 +54,7 @@ export default function RegionHome({ members, memberCategories, cities, regions 
 
 	return (
 		<div className={s.container}>
-			<h1>Hitta konstnärer</h1>
+			<h1>Hitta konstnärer<sup className="amount">11</sup></h1>
 			<div className={s.search}>
 				<form className="mid">
 					<span>Namn: </span>
