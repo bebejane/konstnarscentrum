@@ -1,7 +1,7 @@
 import s from './Article.module.scss'
 import React from 'react'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
-import { StructuredContent, Headline } from "/components";
+import { StructuredContent } from "/components";
 import { Image } from 'react-datocms';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 import cn from 'classnames'
