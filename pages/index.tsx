@@ -34,7 +34,9 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const regionId = props.region.global ? undefined : props.region.id;
 
 	const { region: regionStart, news, memberNews }: {
-		region: RegionRecord, news: NewsRecord[], memberNews: MemberNewsRecord[]
+		region: RegionRecord,
+		news: NewsRecord[],
+		memberNews: MemberNewsRecord[]
 	} = await apiQuery([RegionDocument, LatestNewsDocument, LatestMemberNewsDocument], {
 		variables: [{ regionId }, { regionId }, { regionId }],
 		preview: context.preview

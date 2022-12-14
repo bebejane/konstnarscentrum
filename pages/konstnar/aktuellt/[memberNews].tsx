@@ -12,7 +12,7 @@ export type Props = {
 	region: Region
 }
 
-export default function News({ memberNews: {
+export default function MemberNewsArticle({ memberNews: {
 	createdAt,
 	date,
 	intro,

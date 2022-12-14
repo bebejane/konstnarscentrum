@@ -2,28 +2,40 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { AllMemberNewsDocument } from "/graphql";
-import { format } from "date-fns";
+import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
+import { format, isAfter, isBefore } from "date-fns";
 import { pageSize } from "/lib/utils";
-import { Pager, CardContainer, NewsCard } from '/components'
+import { Pager, CardContainer, NewsCard, FilterBar } from '/components'
+import { useState } from "react";
 
+export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: string }
 export type Props = {
-	memberNews: MemberNewsRecord[]
+	memberNews: MemberNewsRecordWithStatus[],
+	memberNewsCategories: MemberNewsCategoryRecord[]
 	region?: Region,
 	pagination: Pagination
 }
 
-export default function MemberNews({ memberNews, region, pagination }: Props) {
+export default function MemberNews({ memberNews, memberNewsCategories, region, pagination }: Props) {
+
+	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
 
 	return (
 		<>
 			<h1 className="noPadding">Aktuellt</h1>
+			<FilterBar
+				multi={true}
+				options={memberNewsCategories.map(({ id, category }) => ({ label: category, id }))}
+				onChange={(ids) => setMemberNewsCategoryIds(ids)}
+			/>
+
 			<CardContainer columns={2} className={s.memberNews}>
-				{memberNews.map(({ date, title, intro, slug, region, image }, idx) =>
+				{memberNews.map(({ date, title, intro, slug, region, image, category, status }, idx) =>
 					<NewsCard
 						key={idx}
 						title={title}
-						subtitle={`${format(new Date(date), "d MMMM y")} • ${region.name}`}
+						subtitle={`${category.category} | ${format(new Date(date), "d MMM")} | ${region.name}`}
+						label={status}
 						text={intro}
 						image={image}
 						slug={`/konstnar/aktuellt/${slug}`}
@@ -36,7 +48,7 @@ export default function MemberNews({ memberNews, region, pagination }: Props) {
 	);
 }
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 
 	const page = parseInt(context.params?.page) || 1;
 	const regionId = props.region.global ? undefined : props.region.id;
@@ -51,7 +63,10 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	return {
 		props: {
 			...props,
-			memberNews,
+			memberNews: memberNews.map(el => ({
+				...el,
+				status: isAfter(new Date(), new Date(el.date)) ? 'Avslutat' : isBefore(new Date(), new Date(el.date)) ? 'Kommande' : 'Nu'
+			})),
 			pagination: { ...pagination, page, size: pageSize }
 		},
 		revalidate

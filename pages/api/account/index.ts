@@ -25,6 +25,7 @@ export default withAuthentication(async (req, res, session) => {
   } = req.body
 
   const record = await client.items.find(id, { nested: 'true' });
+
   if (!record)
     return res.status(500).json({ error: `User with id "${id}" not found!` })
 
@@ -49,10 +50,12 @@ export default withAuthentication(async (req, res, session) => {
       : undefined
   }
 
+  Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
+  console.log(newRecord);
+
   await client.items.update(record.id, newRecord)
   const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
-  const resp = { content, member }
-  return res.status(200).json(resp)
+  return res.status(200).json(member)
 })
 
 export const config = {

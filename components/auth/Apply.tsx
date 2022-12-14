@@ -36,9 +36,9 @@ const ApplicationForm = ({ regions, setApplication }) => {
 		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
 
-	const onSubmitApplication = async ({ email, firstName, lastName, message, roleId }) => {
+	const onSubmitApplication = async ({ email, firstName, lastName, education, webpage, message, roleId }) => {
 		try {
-			const app = await memberService.apply({ email, firstName, lastName, message, roleId });
+			const app = await memberService.apply({ email, firstName, lastName, education, webpage, message, roleId });
 			setApplication(app);
 		} catch (err) {
 			setError(err && err.response ? err.response.data : err.messsage || err);
@@ -67,6 +67,18 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					className={errors.lastName && styles.error}
 					placeholder={`${text.lastName}...`}
 
+				/>
+				<input
+					{...register("webpage", { required: false })}
+					className={errors.webpage && styles.error}
+					placeholder={`${text.webpage}...`}
+
+				/>
+				<textarea
+					{...register("education", { required: false })}
+					rows={5}
+					className={errors.education && styles.error}
+					placeholder={`${text.education}...`}
 				/>
 				<textarea
 					{...register("message", { required: true })}

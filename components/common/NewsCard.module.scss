@@ -1,7 +1,27 @@
 .card {
+
   display: flex;
   flex-direction: column;
+
   .image {
     margin-bottom: 1rem;
   }
+
+  a {
+    position: relative;
+
+    .label {
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 2;
+      color: var(--white);
+      writing-mode: vertical-lr;
+      margin: 0.3rem;
+      line-height: 1;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+    }
+  }
+
 }

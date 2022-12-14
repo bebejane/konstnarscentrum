@@ -14,7 +14,7 @@ setDefaultOptions({ locale: sv })
 function App({ Component, pageProps }) {
 
   const router = useRouter()
-  const { menu, footer, session } = pageProps;
+  const { menu, footer, regions, session } = pageProps;
   const [region, setRegion] = useState(pageProps.region)
 
   useEffect(() => {
@@ -26,7 +26,7 @@ function App({ Component, pageProps }) {
   return (
     <SessionProvider session={session}>
       <RegionProvider value={region}>
-        <Layout menu={menu || []} footer={footer} title="Page title">
+        <Layout menu={menu || []} footer={footer} regions={regions} title="Page title">
           <Component {...pageProps} />
         </Layout>
       </RegionProvider>

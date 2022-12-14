@@ -46,6 +46,17 @@ query AllMemberCategories {
 	}
 }
 
+query ApplyForMembership {
+	apply {
+		id
+		title
+		content {
+			value
+			blocks
+		}
+	}
+}
+
 query MemberNews($slug: String!) {
 	memberNews(filter: { slug: { eq: $slug } }) {
 		...MemberNewsFragment
@@ -66,17 +77,12 @@ query AllMemberNews($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId)
 	}
 }
 
-query ApplyForMembership {
-	apply {
+query AllMemberNewsCategories {
+	memberNewsCategories: allMemberNewsCategories {
 		id
-		title
-		content {
-			value
-			blocks
-		}
+		category
 	}
 }
-
 query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId) {
 	memberNews: allMemberNews(
 		filter: { region: { eq: $regionId } }

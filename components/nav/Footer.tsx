@@ -5,12 +5,19 @@ import Logo from '/public/images/logo-round.svg'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { useInView } from 'react-intersection-observer'
 import { RegionLink } from '/components'
+import { useRegion } from '/lib/context/region'
 
-export type FooterProps = { menu: MenuItem[], footer: FooterRecord }
+export type FooterProps = {
+	menu: MenuItem[],
+	footer: FooterRecord
+	regions: RegionRecord[]
+}
 
-export default function Footer({ menu, footer }: FooterProps) {
+export default function Footer({ menu, footer, regions }: FooterProps) {
 
 	const { inView, ref } = useInView()
+	const region = useRegion()
+	const sponsors = regions.find(el => el.id === region.id)?.sponsors
 
 	return (
 		<>
@@ -70,8 +77,18 @@ export default function Footer({ menu, footer }: FooterProps) {
 				</section>
 
 				<section className={s.support}>
-					Med stöd av
-					<div></div>
+					<div className={s.sponsors}>
+						{sponsors && sponsors.length > 0 &&
+							<ul>
+								<li>Med stöd av</li>
+								{sponsors.map(({ image, url }, idx) =>
+									<li key={idx}>
+										<img src={image.url} className={s.image} />
+									</li>
+								)}
+							</ul>
+						}
+					</div>
 					<div className={cn(s.logo, inView && s.inview)} ref={ref}>
 						<Logo />
 					</div>

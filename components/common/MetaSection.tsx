@@ -9,10 +9,11 @@ export type Props = {
 }
 
 export default function MetaSection({ items = [] }: Props) {
+
   return (
     <section className={s.meta}>
       <ul className="small">
-        {items.map(({ title, value }, idx) =>
+        {items.filter(({ value, title }) => value && title).map(({ title, value }, idx) =>
           <li key={idx}>
             <span>{title}:</span>
             {isEmail(value) ? <a href={`mailto:${value}`}>Email</a> : <>{value}</>}

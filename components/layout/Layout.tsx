@@ -8,15 +8,20 @@ import { buildMenu } from '/lib/menu'
 import { useRouter } from 'next/router'
 import { useStore, shallow } from '/lib/store'
 
-export type LayoutProps = { children: React.ReactNode, menu: MenuItem[], title: string, footer: FooterRecord }
+export type LayoutProps = {
+	children: React.ReactNode,
+	menu: MenuItem[],
+	title: string,
+	footer: FooterRecord,
+	regions: RegionRecord[]
+}
 
-export default function Layout({ children, menu: menuFromProps, title, footer }: LayoutProps) {
+export default function Layout({ children, menu: menuFromProps, title, footer, regions }: LayoutProps) {
 
 	const router = useRouter()
 	const [images, imageId, setImages, setImageId] = useStore((state) => [state.images, state.imageId, state.setImages, state.setImageId], shallow)
 	const isHome = router.asPath === '/' || regions.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const [menu, setMenu] = useState(menuFromProps)
-
 
 	useEffect(() => { // Refresh menu on load.
 		buildMenu().then(res => setMenu(res)).catch(err => console.error(err))
@@ -37,7 +42,7 @@ export default function Layout({ children, menu: menuFromProps, title, footer }:
 				</Content>
 				<Search />
 			</div>
-			<Footer menu={menu} footer={footer} />
+			<Footer menu={menu} footer={footer} regions={regions} />
 			<Gallery
 				index={images?.findIndex((image) => image?.id === imageId)}
 				images={images}

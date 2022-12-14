@@ -8,8 +8,6 @@ import { useState, useRef, useEffect } from 'react';
 import type { Swiper as SwiperType } from 'swiper'
 import { Modal } from "/components";
 
-import { Loader } from '/components'
-
 export type GalleryProps = {
   images: FileField[],
   onClose: (event?: React.MouseEvent) => void,

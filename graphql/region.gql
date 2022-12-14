@@ -13,6 +13,7 @@ query Region($regionId: ItemId) {
 		gallery {
 			id
 			headline
+			blackText
 			image {
 				...ImageFragment
 			}
@@ -56,6 +57,7 @@ query Region($regionId: ItemId) {
 			... on ImageShortcutRecord {
 				id
 				headline
+				text
 				image {
 					...ImageFragment
 				}

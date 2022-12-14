@@ -8,22 +8,25 @@ import BalanceText from 'react-balance-text'
 export type NewsCardProps = {
   title: string,
   subtitle: string,
+  label?: string,
   text: string,
   slug: string,
   regionName: string,
   image?: FileField
 }
 
-export default function NewsCard({ title, subtitle, text, slug, image }: NewsCardProps) {
+export default function NewsCard({ title, subtitle, text, slug, image, label }: NewsCardProps) {
 
   return (
     <Card className={s.card}>
       {image &&
         <RegionLink href={slug} regional={true}>
           <Image className={s.image} data={image.responsiveImage} />
+          {label && <div className={s.label}>{label}</div>}
         </RegionLink>
       }
       <h5>{subtitle}</h5>
+
       <Link href={slug}>
         <h4><BalanceText>{title}</BalanceText></h4>
       </Link>

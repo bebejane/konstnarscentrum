@@ -3,7 +3,7 @@
   margin-left: var(--full-margin);
   max-width: none;
 
-  > ul {
+  >ul {
     --height: calc(100vh - calc(var(--navbar-height) * 2));
     list-style: none;
     position: relative;
@@ -41,8 +41,13 @@
           z-index: 1;
           color: var(--white);
           width: 80%;
+
           h2 {
             //padding-right: 10%;
+          }
+
+          &.blackText {
+            color: var(--black);
           }
         }
       }

@@ -34,14 +34,14 @@ export default function HomeGallery({ slides }: Props) {
   return (
     <section className={s.gallery}>
       <ul>
-        {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({ id, headline, image, link, slug, type }, idx) =>
+        {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({ id, headline, image, link, slug, type, blackText }, idx) =>
           <li
             key={idx}
             className={cn(idx === index ? s.transition : s.hide)}
             onAnimationEnd={() => setIndex(index + 1 > slides.length - 1 ? 0 : index + 1)}
           >
             <Link href={slug}>
-              <header>
+              <header className={cn(blackText && s.blackText)}>
                 <h5>{type}</h5>
                 <h2>{headline}</h2>
               </header>

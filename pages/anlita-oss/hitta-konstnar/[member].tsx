@@ -38,15 +38,14 @@ export default function Member({ member: {
 
 	const handleSave = useCallback(async () => {
 
-		try {
+		if (JSON.stringify(member.content) === JSON.stringify(blocks)) return
 
+		try {
 			const res = await fetch('/api/account', {
 				method: 'POST',
 				body: JSON.stringify({
-					member: {
-						...member,
-						content: blocks
-					},
+					id: member.id,
+					content: blocks
 				}),
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -70,8 +69,6 @@ export default function Member({ member: {
 		if (!blocks) return
 		handleSave()
 	}, [blocks, handleSave])
-
-
 
 	return (
 		<div className={s.container}>
