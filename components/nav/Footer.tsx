@@ -17,7 +17,7 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 
 	const { inView, ref } = useInView()
 	const region = useRegion()
-	const sponsors = regions.find(el => el.id === region.id)?.sponsors
+	const sponsors = regions?.find(el => el.id === region.id)?.sponsors
 
 	return (
 		<>

@@ -26,7 +26,12 @@ function App({ Component, pageProps }) {
   return (
     <SessionProvider session={session}>
       <RegionProvider value={region}>
-        <Layout menu={menu || []} footer={footer} regions={regions} title="Page title">
+        <Layout
+          title="Page title"
+          menu={menu || []}
+          footer={footer}
+          regions={regions}
+        >
           <Component {...pageProps} />
         </Layout>
       </RegionProvider>

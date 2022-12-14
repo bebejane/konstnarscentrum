@@ -19,14 +19,14 @@ export type LayoutProps = {
 export default function Layout({ children, menu: menuFromProps, title, footer, regions }: LayoutProps) {
 
 	const router = useRouter()
-	const [images, imageId, setImages, setImageId] = useStore((state) => [state.images, state.imageId, state.setImages, state.setImageId], shallow)
-	const isHome = router.asPath === '/' || regions.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
+	const [images, imageId, setImageId] = useStore((state) => [state.images, state.imageId, state.setImageId], shallow)
+	const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const [menu, setMenu] = useState(menuFromProps)
 
 	useEffect(() => { // Refresh menu on load.
 		buildMenu().then(res => setMenu(res)).catch(err => console.error(err))
 	}, [])
-	console.log(images);
+
 
 	return (
 		<>
