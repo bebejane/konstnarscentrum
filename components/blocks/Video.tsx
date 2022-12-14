@@ -3,11 +3,15 @@ import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
 
-export default function Video({ data: { video: { provider, providerUid, title, url, thumbnailUrl } } }) {
+export default function Video({ data }) {
 
 	const ref = useRef()
 	const [height, setHeight] = useState(360);
 	const { innerWidth } = useWindowSize()
+
+	if (!data.video) return null
+
+	const { provider, providerUid, title, url, thumbnailUrl } = data.video
 
 	const vimeoId = provider === 'vimeo' && url.indexOf('/') > -1 ? url.substring(url.lastIndexOf('/') + 1) : undefined
 
