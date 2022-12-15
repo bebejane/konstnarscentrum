@@ -46,7 +46,13 @@ body {
 		background-color: var(--black);
 
 		a {
+			color: var(--white) !important;
+		}
+
+		button {
+			background-color: var(--black);
 			color: var(--white);
+			border-color: var(--white);
 		}
 	}
 }
@@ -54,6 +60,8 @@ body {
 html {
 	box-sizing: border-box;
 }
+
+
 
 ::-webkit-scrollbar {
 	-webkit-appearance: none;
@@ -106,6 +114,7 @@ button {
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	cursor: pointer;
+	transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 
 	&:hover {
 		//border-width: 2px;
