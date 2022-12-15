@@ -59,13 +59,13 @@ export default function Search({ }: Props) {
       <div className={cn(s.searchBar, open && s.show, query && s.full)}>
         {query &&
           <div className={s.results}>
-            <h4>Sök</h4>
+            <nav>Sök</nav>
             <h2>Sökresultat</h2>
             <ul>
               {results?.map(({ title, text }) =>
                 <li>
                   <h4>{title}</h4>
-                  {text}
+                  <p class="intro">{text}</p>
                 </li>
               )}
             </ul>

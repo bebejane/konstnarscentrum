@@ -52,7 +52,6 @@
 
   &.show {
     transform: translateX(0%);
-
   }
 
   &.full {
@@ -67,13 +66,20 @@
 
   .results {
     padding-top: var(--outer-margin);
+    padding-right: calc(var(--total-outer-margin) + calc(1 * var(--grid-unit)));
+
+    h2 {
+      padding-top: var(--small-space);
+    }
+
     flex: 1 1 auto;
 
     ul {
       list-style: none;
       overflow-y: auto;
 
-      li {}
+      li {
+      }
     }
   }
 
