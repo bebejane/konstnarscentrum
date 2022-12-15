@@ -19,7 +19,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 	const [paddingLeft, setPaddingLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
 	const [showMenu, setShowMenu] = useStore((state) => [state.showMenu, state.setShowMenu])
-	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition, viewportHeight } = useScrollInfo()
+	const { isPageBottom, isPageTop, isScrolledUp, scrolledPosition, viewportHeight, documentHeight } = useScrollInfo()
 
 	const isActive = (item: MenuItem, parent: boolean = false): boolean => {
 		const slugs = [item.slug, ...regions.map(({ slug }) => `/${slug}${item.slug}`)]
@@ -31,11 +31,12 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 	}
 
 	useEffect(() => { // Toggle menu bar on scroll
-		//console.log);
 		const menuTop = menuRef.current.getBoundingClientRect().top
-		if (menuTop > 0) return
+		const isNearBottom = scrolledPosition + viewportHeight > (documentHeight - (viewportHeight * 0.65))
+		if (menuTop > 0 || isNearBottom)
+			return
 		setShowMenu((isScrolledUp && !isPageBottom) || (isPageTop))
-	}, [scrolledPosition, isPageBottom, isPageTop, isScrolledUp, setShowMenu, menuRef]);
+	}, [scrolledPosition, documentHeight, viewportHeight, isPageBottom, isPageTop, isScrolledUp, setShowMenu, menuRef]);
 
 
 	useEffect(() => {
