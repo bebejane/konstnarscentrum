@@ -60,34 +60,36 @@ export default function Search({ }: Props) {
       <div className={cn(s.searchBar, open && s.show, query && s.full)}>
         {query &&
           <div className={s.results}>
-            <h4>Sök</h4>
-            <h2>Sökresultat: "{query}"</h2>
-            {results ?
-              Object.keys(results).map((type, idx) => {
-                const items = results[type]
-                return (
-                  <>
-                    <h4>{type}</h4>
-                    <ul>
-                      {items?.map(({ title, text, image }, i) =>
-                        <li key={i}>
-                          <h4>{title}</h4>
-                          {text}
-                          {image &&
-                            <Image className={s.iamge} data={image.responsiveImage} />
-                          }
-                        </li>
-                      )}
-                    </ul>
-                  </>
-                )
-              })
-              :
-              loading ?
-                <>Söker...</>
+            <nav>Sök</nav>
+            <h2>Sökresultat: &quot;{query}&quot;</h2>
+            <div className={s.matches}>
+              {results ?
+                Object.keys(results).map((type, idx) => {
+                  const items = results[type]
+                  return (
+                    <>
+                      <h4>{type}</h4>
+                      <ul>
+                        {items?.map(({ title, text, image }, i) =>
+                          <li key={i}>
+                            <h4>{title}</h4>
+                            {text}
+                            {image &&
+                              <Image className={s.iamge} data={image.responsiveImage} />
+                            }
+                          </li>
+                        )}
+                      </ul>
+                    </>
+                  )
+                })
                 :
-                <>Inget hittades...</>
-            }
+                loading ?
+                  <>Söker...</>
+                  :
+                  <>Inget hittades...</>
+              }
+            </div>
           </div>
         }
         <div className={s.bar}>
