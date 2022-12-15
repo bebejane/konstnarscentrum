@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
-  background-color: var(--black);
-  color: var(--white);
+  //background-color: var(--black);
+  //color: var(--white);
   padding: var(--outer-margin);
 
   @include mq($from: desktop) {
