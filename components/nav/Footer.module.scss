@@ -10,15 +10,8 @@
   padding-top: var(--space);
   padding-bottom: var(--small-space);
 
-  <<<<<<< HEAD a {
 
-    //color: var(--white);
-    &:hover {
-      color: var(--beige);
-    }
-  }
-
-  =======>>>>>>>79587e7 (pushshsh) section {
+  section {
     display: flex;
     flex-direction: row;
     margin-bottom: var(--small-space);
@@ -34,6 +27,8 @@
 
   nav {
     width: 100%;
+
+
 
     >ul {
       display: flex;
@@ -52,7 +47,6 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
-
 
             &:first-child {
               font-weight: bold !important;
