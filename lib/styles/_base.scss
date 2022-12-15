@@ -44,6 +44,10 @@ body {
 	&.invert {
 		color: var(--white);
 		background-color: var(--black);
+
+		a {
+			color: var(--white);
+		}
 	}
 }
 
