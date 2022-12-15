@@ -19,7 +19,7 @@ export default function LatestMemberNews({ data: { memberNews } }: LatestMemberB
           <NewsCard
             key={idx}
             title={title}
-            subtitle={`${format(new Date(date), "d MMMM y")} | ${region.name}`}
+            subtitle={`${format(new Date(date), "d MMMM y")} • ${region.name}`}
             text={intro}
             image={image}
             slug={`/konstnar/aktuellt/${slug}`}

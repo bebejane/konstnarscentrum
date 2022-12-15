@@ -1,5 +1,4 @@
 .card {
-
   display: flex;
   flex-direction: column;
 
@@ -14,14 +13,18 @@
       position: absolute;
       top: 0;
       right: 0;
+      display: flex;
+      align-items: flex-end;
       z-index: 2;
       color: var(--white);
       writing-mode: vertical-lr;
-      margin: 0.3rem;
+      padding: 0.8rem;
+      padding-top: 1rem;
+      height: calc(100% - 1em);
+      width: 50%;
       line-height: 1;
-      font-size: 0.7rem;
       text-transform: uppercase;
+      background: linear-gradient(90deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.283));
     }
   }
-
 }

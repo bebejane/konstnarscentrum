@@ -22,7 +22,7 @@ export default function NewsCard({ title, subtitle, text, slug, image, label }: 
       {image &&
         <RegionLink href={slug} regional={true}>
           <Image className={s.image} data={image.responsiveImage} />
-          {label && <div className={s.label}>{label}</div>}
+          {label && <div className={s.label}><h5>{label}</h5></div>}
         </RegionLink>
       }
       <h5>{subtitle}</h5>

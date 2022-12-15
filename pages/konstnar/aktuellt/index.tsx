@@ -34,7 +34,7 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 					<NewsCard
 						key={idx}
 						title={title}
-						subtitle={`${category.category} | ${format(new Date(date), "d MMM")} | ${region.name}`}
+						subtitle={`${category.category} • ${format(new Date(date), "d MMM")} • ${region.name}`}
 						label={status}
 						text={intro}
 						image={image}
