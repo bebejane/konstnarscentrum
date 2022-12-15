@@ -2,6 +2,7 @@ import s from './SectionHeader.module.scss'
 import React from 'react'
 import Link from 'next/link'
 import cn from 'classnames'
+import { ReadMore } from 'components'
 
 export type SectionHeaderProps = {
   title: string,
@@ -15,7 +16,7 @@ export default function SectionHeader({ title, slug, margin }: SectionHeaderProp
     <header className={cn(s.header, margin && s.minusMargin)}>
       <h2>{title}</h2>
       {slug &&
-        <Link className="mid" href={slug}>Visa alla</Link>
+        <ReadMore link={slug} message='Visa alla'></ReadMore>
       }
     </header>
   )

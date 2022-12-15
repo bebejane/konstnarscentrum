@@ -1,9 +1,10 @@
 .square {
   display: inline-block;
   background: var(--black);
-  width: 0.5em;
-  height: 0.5em;
-  margin-right: 0.5em;
+  width: 0.45em;
+  height: 0.45em;
+  margin-right: 0.4em;
+  margin-bottom: 0.05em;
 
   &.invert {
     background: var(--white);
