@@ -22,7 +22,7 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 
 	return (
 		<>
-			<h1 className="noPadding">Aktuellt</h1>
+			<h1>Aktuellt</h1>
 			<FilterBar
 				multi={true}
 				options={memberNewsCategories.map(({ id, category }) => ({ label: category, id }))}
