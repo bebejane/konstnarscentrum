@@ -37,6 +37,15 @@ export default function RegionSelector({ }) {
           </li>
         )}
       </ul>
+      <div className={s.compass}>
+        <span>Nord</span>
+        <div><span>Väst</span><span>Mitt</span><span>Öst</span></div>
+        <span>Syd</span>
+        <span className={s.all}>Alla</span>
+
+
+      </div>
+
     </div>
   )
 }
