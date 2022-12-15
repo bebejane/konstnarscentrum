@@ -74,17 +74,22 @@ export const siteSearch = async (opt: any) => {
     _api_key: itemTypes.find((t) => t.id === el.item_type.id).api_key,
   }))
 
+
   const data = await apiQuery(SiteSearchDocument, {
     variables: {
-      memberIds: search.filter(el => el._api_key === 'member').map(el => el.id)
+      memberIds: search.filter(el => el._api_key === 'member').map(el => el.id),
+      newsIds: search.filter(el => el._api_key === 'news').map(el => el.id),
+      memberNewsIds: search.filter(el => el._api_key === 'member_news').map(el => el.id)
     }
   })
 
   Object.keys(data).forEach(type => {
     if (!data[type].length)
       delete data[type]
-    else
+    else {
       data[type] = data[type].map(normalizeSiteResult)
+    }
+
   })
 
   return data;
@@ -92,10 +97,16 @@ export const siteSearch = async (opt: any) => {
 
 const normalizeSiteResult = (item: any): any => {
   const { __typename } = item;
+
   switch (__typename) {
     case 'MemberRecord':
-      return { title: `${item.fullName}`, text: item.bio }
+      return { title: `${item.fullName}`, text: item.bio, image: item.image, __typename }
+    case 'MemberNewsRecord':
+      return { title: item.title, text: item.intro, image: item.image, __typename }
+    case 'NewsRecord':
+      return { title: item.title, text: item.intro, image: item.image, __typename }
     default:
+      console.log('type name not found', __typename)
       return {}
   }
 }

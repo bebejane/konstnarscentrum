@@ -65,8 +65,17 @@
   }
 
   .results {
+    width: 100%;
     padding-top: var(--outer-margin);
     padding-right: calc(var(--total-outer-margin) + calc(1 * var(--grid-unit)));
+
+    .matches {
+      overflow-y: auto;
+      flex: 0 0;
+      width: 100%;
+      max-height: calc(100vh - var(--navbar-height) - var(--outer-margin))
+    }
+
 
     h2 {
       padding-top: var(--small-space);
@@ -76,9 +85,9 @@
 
     ul {
       list-style: none;
-      overflow-y: auto;
 
       li {
+        .image {}
       }
     }
   }

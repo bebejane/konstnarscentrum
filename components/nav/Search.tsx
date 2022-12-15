@@ -3,6 +3,7 @@ import cn from 'classnames'
 import s from './Search.module.scss'
 import SearchIcon from '/public/images/search.svg'
 import CloseIcon from '/public/images/close.svg'
+import { Image } from 'react-datocms'
 
 export type Props = {
 
@@ -11,7 +12,7 @@ export type Props = {
 export default function Search({ }: Props) {
 
   const [open, setOpen] = useState(false)
-  const [results, setResults] = useState<any[] | undefined>()
+  const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
   const [query, setQuery] = useState<string | undefined>()
@@ -34,7 +35,7 @@ export default function Search({ }: Props) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     })
-      .then(async (res) => setResults((await res.json()).members))
+      .then(async (res) => setResults(await res.json()))
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
 
@@ -60,15 +61,35 @@ export default function Search({ }: Props) {
         {query &&
           <div className={s.results}>
             <nav>Sök</nav>
-            <h2>Sökresultat</h2>
-            <ul>
-              {results?.map(({ title, text }) =>
-                <li>
-                  <h4>{title}</h4>
-                  <p class="intro">{text}</p>
-                </li>
-              )}
-            </ul>
+            <h2>Sökresultat: &quot;{query}&quot;</h2>
+            <div className={s.matches}>
+              {results ?
+                Object.keys(results).map((type, idx) => {
+                  const items = results[type]
+                  return (
+                    <>
+                      <h4>{type}</h4>
+                      <ul>
+                        {items?.map(({ title, text, image }, i) =>
+                          <li key={i}>
+                            <h4>{title}</h4>
+                            {text}
+                            {image &&
+                              <Image className={s.iamge} data={image.responsiveImage} />
+                            }
+                          </li>
+                        )}
+                      </ul>
+                    </>
+                  )
+                })
+                :
+                loading ?
+                  <>Söker...</>
+                  :
+                  <>Inget hittades...</>
+              }
+            </div>
           </div>
         }
         <div className={s.bar}>

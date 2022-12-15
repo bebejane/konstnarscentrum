@@ -2,6 +2,7 @@
 #import "./RegionFragment.gql"
 
 fragment NewsFragment on NewsRecord {
+	__typename
 	id
 	title
 	slug
