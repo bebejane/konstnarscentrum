@@ -67,10 +67,11 @@ export default function Logo({ fixed }: Props) {
     const footer = document.getElementById('footer') as HTMLDivElement
     const footerThreshhold = documentHeight - footer.clientHeight
     const maxR = 1 + (region.name.length / letters.length)
+
     let r;
 
     if ((scrolledPosition + viewportHeight) > footerThreshhold)
-      r = (documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight;
+      r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
       r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))
 
@@ -94,7 +95,6 @@ export default function Logo({ fixed }: Props) {
   useEffect(() => {
     setHeight(ref.current.clientHeight)
   }, [ref])
-
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
