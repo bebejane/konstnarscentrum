@@ -18,11 +18,12 @@ export type Props = {
 export default function Logo({ fixed }: Props) {
 
   const ref = useRef<HTMLDivElement | null>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
   const { isMobile } = useDevice()
-  const { scrolledPosition, viewportHeight } = useScrollInfo()
+  const { scrolledPosition, viewportHeight, documentHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [ratio, setRatio] = useState(0)
   const [height, setHeight] = useState(0)
@@ -60,10 +61,22 @@ export default function Logo({ fixed }: Props) {
   }
 
   useEffect(() => {
-    if (manualMode) return
+    if (manualMode)
+      return
+
+    const footer = document.getElementById('footer') as HTMLDivElement
+    const footerThreshhold = documentHeight - footer.clientHeight
     const maxR = 1 + (region.name.length / letters.length)
-    setRatio(Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR)))
-  }, [scrolledPosition, viewportHeight, setRatio, manualMode])
+    let r;
+
+    if ((scrolledPosition + viewportHeight) > footerThreshhold)
+      r = (documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight;
+    else
+      r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))
+
+    setRatio(r)
+
+  }, [scrolledPosition, viewportHeight, documentHeight, setRatio, manualMode, height])
 
   useEffect(() => {
     animateManual(!showMenuMobile ? 'vertical' : 'horizontal')
@@ -90,7 +103,7 @@ export default function Logo({ fixed }: Props) {
 
   return (
     <div className={s.container}>
-      <div className={s.logo} style={{ minHeight: `${height}px` }}>
+      <div className={s.logo} >
         <div className={s.vertical} ref={ref}>
           <Link href="/">
             {vertical.map((l, i) => l)}
