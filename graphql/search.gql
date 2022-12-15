@@ -1,7 +1,20 @@
 #import "./fragments/MemberLightFragment"
+#import "./fragments/NewsFragment"
+#import "./fragments/MemberNewsFragment"
 
-query SiteSearch($memberIds: [ItemId], $first: IntType = 100) {
+query SiteSearch(
+	$memberIds: [ItemId]
+	$newsIds: [ItemId]
+	$memberNewsIds: [ItemId]
+	$first: IntType = 100
+) {
 	members: allMembers(first: $first, filter: { id: { in: $memberIds } }) {
 		...MemberFragment
+	}
+	news: allNews(first: $first, filter: { id: { in: $newsIds } }) {
+		...NewsFragment
+	}
+	memberNews: allMemberNews(first: $first, filter: { id: { in: $memberNewsIds } }) {
+		...MemberNewsFragment
 	}
 }
