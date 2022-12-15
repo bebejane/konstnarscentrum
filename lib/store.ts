@@ -8,6 +8,7 @@ export interface StoreState {
   showMenuMobile: boolean,
   images: FileField[],
   imageId: string,
+  darkMode: boolean,
   setShowMenu: (showMenu: boolean) => void,
   setShowSubMenu: (showSubMenu: boolean) => void,
   setShowMenuMobile: (showMenuMobile: boolean) => void,
@@ -23,6 +24,7 @@ const useStore = create<StoreState>((set) => ({
   region: undefined,
   images: [],
   imageId: undefined,
+  darkMode: false,
   setShowMenu: (showMenu: boolean) =>
     set((state) => ({
       showMenu
@@ -52,8 +54,12 @@ const useStore = create<StoreState>((set) => ({
     set((state) => ({
       images
     })
+    ),
+  setDarkMode: (darkMode: boolean) =>
+    set((state) => ({
+      darkMode
+    })
     )
-
 }));
 
 export default useStore;

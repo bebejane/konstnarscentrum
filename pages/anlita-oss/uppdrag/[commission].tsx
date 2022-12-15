@@ -38,7 +38,7 @@ export default function Commission({ commission: {
 		<div className={s.container}>
 			<Article
 				key={id}
-				title={title}
+				title={`${title} i ${city}, ${year}`}
 				image={image}
 				text={intro}
 				blackHeadline={blackHeadline}
@@ -50,7 +50,7 @@ export default function Commission({ commission: {
 						{ title: 'År', value: year },
 						{ title: 'Konstnär', value: artist },
 						{ title: 'Konsulent', value: consultant },
-						{ title: 'Berställare', value: commissioner },
+						{ title: 'Beställare', value: commissioner },
 						{ title: 'Titel', value: work }
 					]}
 				/>
@@ -69,7 +69,8 @@ export default function Commission({ commission: {
 				title="Fler uppdrag"
 				slug="/anlita-oss/uppdrag"
 				items={commissions.map(({ title, city, year, image, slug }) => ({
-					title: `${city} ${year}`,
+					title,
+					subtitle: `${city} ${year}`,
 					image,
 					slug: `/anlita-oss/uppdrag/${slug}`
 				}))}

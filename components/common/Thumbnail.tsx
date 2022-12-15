@@ -8,19 +8,21 @@ import useDevice from '/lib/hooks/useDevice'
 export type Props = {
   image: FileField,
   slug: string,
-  title: string
+  title: string,
+  subtitle?: string
 }
 
 const speed = 0.07
-const readMore = 'Visa'
 
-export default function Thumbnail({ image, slug, title }: Props) {
+
+export default function Thumbnail({ image, slug, title, subtitle }: Props) {
 
   const [hover, setHover] = useState<undefined | boolean>();
   const [ratio, setRatio] = useState<number>(0)
   const { isMobile } = useDevice()
   const horizontal = title.split('').slice((title.length * ratio))
   const vertical = title.split('').slice(title.length - (title.length * ratio))
+  const readMore = subtitle || 'Visa'
   const more = readMore.split('').slice(readMore.length - (readMore.length * ratio))
   const interval = useRef<NodeJS.Timer | null>(null)
 
@@ -57,9 +59,9 @@ export default function Thumbnail({ image, slug, title }: Props) {
         />
       }
 
-      <span className={cn('mid', s.title, s.vertical)}>
+      <div className={cn('mid', s.title, s.vertical)}>
         {vertical.map(c => c)}
-      </span>
+      </div>
       <span className={cn('mid', s.title, s.horizontal)}>
         <span>{horizontal.map(c => c)}</span>
         <span className={cn('mid', s.more, hover && s.hover)}>

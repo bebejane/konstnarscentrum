@@ -8,6 +8,7 @@ export type RelatedSectionProps = {
   slug: string
   items: {
     title: string,
+    subtitle?: string,
     image: FileField,
     slug: string
   }[]
@@ -20,11 +21,12 @@ export default function RelatedSection({ title, slug, items }: RelatedSectionPro
       <SectionHeader title={title} slug={slug} margin={true} />
       <div className={s.background}></div>
       <CardContainer columns={3}>
-        {items.map(({ title, image, slug }, idx) =>
+        {items.map(({ title, subtitle, image, slug }, idx) =>
           <Card key={idx}>
             <Thumbnail
               image={image}
               title={title}
+              subtitle={subtitle}
               slug={slug}
             />
           </Card>

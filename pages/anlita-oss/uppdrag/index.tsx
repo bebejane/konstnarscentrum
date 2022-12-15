@@ -32,8 +32,8 @@ export default function RegionHome({ commissions, commissionCategories, paginati
 						<Thumbnail
 							key={idx}
 							image={image}
-							title={title
-							}
+							title={title}
+							subtitle={`${city} ${year}`}
 							slug={`/anlita-oss/uppdrag/${slug}`}
 						/>
 					</Card>
