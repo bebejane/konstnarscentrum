@@ -6,6 +6,7 @@ import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { useInView } from 'react-intersection-observer'
 import { RegionLink } from '/components'
 import { useRegion } from '/lib/context/region'
+import { useEffect } from 'react'
 
 export type FooterProps = {
 	menu: MenuItem[],
@@ -19,9 +20,13 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 	const region = useRegion()
 	const sponsors = regions?.find(el => el.id === region.id)?.sponsors
 
+	useEffect(() => {
+		document.body.classList.toggle('invert', inView)
+	}, [inView])
+
 	return (
 		<>
-			<footer className={cn(s.footer)} id="footer">
+			<footer className={cn(s.footer)} id="footer" ref={ref}>
 				<section className={s.menu}>
 					<nav>
 						<ul>
@@ -89,7 +94,7 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 							</ul>
 						}
 					</div>
-					<div className={cn(s.logo, inView && s.inview)} ref={ref}>
+					<div className={cn(s.logo, inView && s.inview)}>
 						<Logo />
 					</div>
 				</section>

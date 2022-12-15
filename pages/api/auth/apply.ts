@@ -6,7 +6,7 @@ import { memberController, applicationController } from '/lib/controllers';
 
 export default catchErrorsFrom(async (req, res) => {
 
-  const { email, firstName, lastName, message, roleId, education, webpage, roleSlug } = req.body
+  const { email, firstName, lastName, message, roleId, education, webpage } = req.body
   const memberExist = await memberController.exists(email)
 
   if (memberExist)
@@ -28,10 +28,11 @@ export default catchErrorsFrom(async (req, res) => {
       id: process.env.DATOCMS_APPLICATION_MODEL_ID
     },
     email,
-    education,
-    webpage,
     first_name: firstName,
     last_name: lastName,
+    full_name: `${firstName} ${lastName}`,
+    education,
+    webpage,
     message,
     approval_token: approvalToken,
     approved: false

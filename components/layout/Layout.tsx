@@ -1,4 +1,5 @@
-import styles from './Layout.module.scss'
+import s from './Layout.module.scss'
+import cn from 'classnames'
 import React, { useEffect } from 'react'
 import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, Gallery } from '/components'
 import type { MenuItem } from '/lib/menu'
@@ -28,12 +29,11 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 
 	return (
 		<>
-
 			<MenuMobile items={menu} home={isHome} />
 			{!isHome &&
 				<MenuDesktop items={menu} home={isHome} />
 			}
-			<div className={styles.layout}>
+			<div className={s.layout}>
 				<Logo fixed={!isHome} />
 				<Content noMargins={isHome}>
 					{children}

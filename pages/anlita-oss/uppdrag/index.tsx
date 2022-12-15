@@ -15,8 +15,7 @@ export type Props = {
 
 export default function RegionHome({ commissions, commissionCategories, pagination }: Props) {
 
-	const [catgegory, setCategory] = useState<CommissionCategoryRecord | undefined>()
-
+	const [category, setCategory] = useState<CommissionCategoryRecord | undefined>()
 
 	return (
 		<>
@@ -27,8 +26,8 @@ export default function RegionHome({ commissions, commissionCategories, paginati
 					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}
 				/>
 			</header>
-			<CardContainer columns={3}>
-				{commissions.filter(({ category: { id } }) => !catgegory || catgegory.id === id).map(({ title, city, year, slug, image }, idx) =>
+			<CardContainer columns={3} key={category?.id}>
+				{commissions.filter(({ category: { id } }) => !category || category.id === id).map(({ title, city, year, slug, image }, idx) =>
 					<Card key={idx}>
 						<Thumbnail
 							key={idx}
