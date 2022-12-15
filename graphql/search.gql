@@ -2,6 +2,6 @@
 
 query SiteSearch($memberIds: [ItemId], $first: IntType = 100) {
 	members: allMembers(first: $first, filter: { id: { in: $memberIds } }) {
-		...MemberLightFragment
+		...MemberFragment
 	}
 }

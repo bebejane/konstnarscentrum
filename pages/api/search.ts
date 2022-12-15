@@ -83,8 +83,19 @@ export const siteSearch = async (opt: any) => {
   Object.keys(data).forEach(type => {
     if (!data[type].length)
       delete data[type]
+    else
+      data[type] = data[type].map(normalizeSiteResult)
   })
 
   return data;
 }
 
+const normalizeSiteResult = (item: any): any => {
+  const { __typename } = item;
+  switch (__typename) {
+    case 'MemberRecord':
+      return { title: `${item.fullName}`, text: item.bio }
+    default:
+      return {}
+  }
+}
