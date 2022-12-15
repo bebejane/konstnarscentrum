@@ -19,7 +19,6 @@ const base: Menu = [
     type: 'consult', label: 'Anlita oss', slug: '/anlita-oss', sub: [
       { type: 'consult', label: 'Uppdragsarkiv', slug: '/anlita-oss/uppdrag', regional: true },
       { type: 'consult', label: 'Hitta konstnär', slug: '/anlita-oss/hitta-konstnar', regional: true }
-
     ]
   },
   {
