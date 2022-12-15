@@ -5,6 +5,7 @@ fragment MemberFragment on MemberRecord {
 	id
 	firstName
 	lastName
+	fullName
 	email
 	bio(markdown: false)
 	yearOfBirth

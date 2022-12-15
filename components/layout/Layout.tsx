@@ -34,7 +34,7 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 				<MenuDesktop items={menu} home={isHome} />
 			}
 			<div className={styles.layout}>
-				<Logo disabled={!isHome} />
+				<Logo fixed={!isHome} />
 				<Content noMargins={isHome}>
 					{children}
 				</Content>

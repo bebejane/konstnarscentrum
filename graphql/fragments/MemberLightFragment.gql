@@ -5,6 +5,7 @@ fragment MemberLightFragment on MemberRecord {
 	id
 	firstName
 	lastName
+	fullName
 	email
 	region {
 		...RegionFragment

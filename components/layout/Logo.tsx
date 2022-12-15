@@ -12,12 +12,12 @@ import { useRegion } from '/lib/context/region'
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
 
 export type Props = {
-  disabled: boolean
+  fixed: boolean
 }
 
-export default function Logo({ disabled }: Props) {
+export default function Logo({ fixed }: Props) {
 
-  const ref = useRef()
+  const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
@@ -25,6 +25,7 @@ export default function Logo({ disabled }: Props) {
   const { scrolledPosition, viewportHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [ratio, setRatio] = useState(0)
+  const [height, setHeight] = useState(0)
 
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
 
@@ -45,7 +46,7 @@ export default function Logo({ disabled }: Props) {
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
 
-    if (disabled || (isMobile && !manualMode)) {
+    if (fixed || (isMobile && !manualMode)) {
       if (isMobile && !manualMode)
         return direction === 'horizontal' ? letters : []
       if (!isMobile && !manualMode)
@@ -77,15 +78,20 @@ export default function Logo({ disabled }: Props) {
     setShowMenuMobile(false)
   }, [router, setShowMenuMobile])
 
+  useEffect(() => {
+    setHeight(ref.current.clientHeight)
+  }, [ref])
+
+
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionRatio = ratio > 1 ? 1 - ((ratio - 1) / (region.name.length / letters.length)) : 1
-  //console.log(ref?.current?.clientHei);
+  const regionPerc = (region.name.length / letters.length)
+  const regionRatio = ratio > 1 && !fixed ? 1 - ((ratio - 1) / regionPerc) : fixed ? 1 - ((1 + regionPerc) * ratio) : 1
 
   return (
-    <div className={s.container} ref={ref}>
-      <div className={s.logo}>
-        <div className={s.vertical}>
+    <div className={s.container}>
+      <div className={s.logo} style={{ minHeight: `${height}px` }}>
+        <div className={s.vertical} ref={ref}>
           <Link href="/">
             {vertical.map((l, i) => l)}
           </Link>

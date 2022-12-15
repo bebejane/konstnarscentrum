@@ -32,10 +32,10 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
 const memberSearch = async (opt) => {
 
-  const { query, city, memberCategoryIds } = opt;
+  const { query, regionId, memberCategoryIds } = opt;
 
   const variables = {
-    city,
+    regionId,
     memberCategoryIds,
     query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
   };

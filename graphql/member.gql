@@ -117,14 +117,12 @@ query SearchMembers(
 	$skip: IntType = 0
 	$memberCategoryIds: [ItemId]
 	$regionId: ItemId
-	$city: String
 ) {
 	members: allMembers(
 		filter: {
 			image: { exists: true }
 			region: { eq: $regionId }
 			memberCategory: { anyIn: $memberCategoryIds }
-			city: { eq: $city }
 		}
 		first: $first
 		skip: $skip

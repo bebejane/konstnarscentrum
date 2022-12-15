@@ -15,22 +15,23 @@ export type Props = {
 	members: MemberRecord[],
 	pagination: Pagination,
 	regions: Region[],
+	region: Region,
 	cities: { name: string }[]
 }
 
-export default function Members({ members, memberCategories, cities, regions, pagination }: Props) {
+export default function Members({ members, memberCategories, cities, regions, region: regionFromProps, pagination }: Props) {
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
 	const [error, setError] = useState<Error | undefined>()
 	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
-	const [city, setCity] = useState<string | undefined>()
+	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id)
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
 
 	useEffect(() => {
-
+		const region = regions.find(({ id }) => id === regionId)
 		const variables = {
-			city: city && city !== 'false' ? city : undefined,
+			regionId: region && !region.global ? region.id : undefined,
 			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
@@ -49,7 +50,7 @@ export default function Members({ members, memberCategories, cities, regions, pa
 			.catch((err) => console.error(err))
 			.finally(() => setLoading(false))
 
-	}, [query, city, memberCategoryIds, setResults])
+	}, [query, regionId, memberCategoryIds, setResults])
 
 	return (
 		<div className={s.container}>
@@ -65,10 +66,10 @@ export default function Members({ members, memberCategories, cities, regions, pa
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 					<span>Plats: </span>
-					<select value={city} onChange={(e) => setCity(e.target.value)}>
+					<select value={regionId} onChange={(e) => setRegionId(e.target.value)}>
 						<option value={"false"}>Inte vald</option>
-						{cities.map(({ name }, idx) =>
-							<option key={idx} value={name}>{name}</option>
+						{regions.map(({ id, name, global }, idx) =>
+							<option key={idx} value={id}>{name}</option>
 						)}
 					</select>
 				</form>
