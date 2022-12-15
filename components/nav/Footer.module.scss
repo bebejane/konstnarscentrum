@@ -14,6 +14,9 @@
 
   a {
     //color: var(--white);
+    &:hover {
+      color: var(--beige);
+    }
   }
 
   section {
@@ -33,12 +36,12 @@
   nav {
     width: 100%;
 
-    >ul {
+    > ul {
       display: flex;
       flex-direction: row;
       list-style: none;
 
-      >li {
+      > li {
         width: calc(100% / 6);
         line-height: var(--line-height-nav);
 
