@@ -21,10 +21,12 @@
     position: absolute;
     top: 0;
     left: 0;
+    color: var(--black);
 
     >a {
       line-height: 0;
       max-height: var(--logo-size);
+
     }
   }
 
@@ -33,6 +35,11 @@
     transform: rotate(-180deg);
     text-align: right;
     margin-top: -0.13em;
+
+    a {
+      color: var(--black) !important;
+    }
+
   }
 
   .horizontal {
