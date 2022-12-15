@@ -1,4 +1,6 @@
 import Link from 'next/link'
+import withGlobalProps from '/lib/withGlobalProps'
+import { GetStaticProps } from 'next'
 
 export default function FourOhFour() {
   return (
@@ -10,3 +12,11 @@ export default function FourOhFour() {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+
+  return {
+    props,
+    revalidate
+  }
+})
