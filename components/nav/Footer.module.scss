@@ -1,7 +1,5 @@
 .footer {
   width: 100%;
-  //background-color: var(--black);
-  //color: var(--white);
   padding: var(--outer-margin);
 
   @include mq($from: desktop) {
@@ -12,14 +10,15 @@
   padding-top: var(--space);
   padding-bottom: var(--small-space);
 
-  a {
+  <<<<<<< HEAD a {
+
     //color: var(--white);
     &:hover {
       color: var(--beige);
     }
   }
 
-  section {
+  =======>>>>>>>79587e7 (pushshsh) section {
     display: flex;
     flex-direction: row;
     margin-bottom: var(--small-space);
@@ -36,12 +35,12 @@
   nav {
     width: 100%;
 
-    > ul {
+    >ul {
       display: flex;
       flex-direction: row;
       list-style: none;
 
-      > li {
+      >li {
         width: calc(100% / 6);
         line-height: var(--line-height-nav);
 
@@ -53,6 +52,11 @@
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
+
+            &:first-child {
+              font-weight: bold !important;
+            }
+
           }
         }
       }
@@ -124,13 +128,6 @@
     .logo {
       svg {
         margin-left: 0px;
-      }
-
-      &.inview {
-        svg {
-          //transform: rotate(360deg) translateX(0%);
-          //margin-left: 0px;
-        }
       }
     }
   }

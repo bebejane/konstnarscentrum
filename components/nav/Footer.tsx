@@ -16,7 +16,7 @@ export type FooterProps = {
 
 export default function Footer({ menu, footer, regions }: FooterProps) {
 
-	const { inView, ref } = useInView({ threshold: 0.35 })
+	const { inView, ref } = useInView({ threshold: 0.50 })
 	const region = useRegion()
 	const sponsors = regions?.find(el => el.id === region.id)?.sponsors
 
@@ -36,15 +36,14 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 										<ul className={s.category}>
 											<>
 												{item.index ?
-													<li><strong>
+													<li>
 														<RegionLink scroll={true} href={item.slug} regional={item.regional}>
 															{item.label}
 														</RegionLink>
-													</strong></li>
-
+													</li>
 													:
 													<li>
-														<strong>{item.label}</strong>
+														{item.label}
 													</li>
 												}
 
