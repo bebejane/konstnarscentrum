@@ -62,7 +62,7 @@ export const buildMenu = async () => {
         sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}`, regional: false }))
         break;
       case 'consult':
-        sub = item.sub.concat(consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}`, regional: false })))
+        sub = consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}`, regional: false })).concat(item.sub)
         break;
       case 'projects':
         sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
