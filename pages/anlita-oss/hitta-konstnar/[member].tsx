@@ -1,5 +1,4 @@
 import s from "./[member].module.scss";
-import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
@@ -8,6 +7,7 @@ import { Article, Block, MetaSection, RelatedSection, EditBox, Gallery } from "/
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import useStore from "/lib/store";
+import { PageProps } from "/lib/context/page";
 
 export type Props = {
 	member: MemberRecord,
@@ -134,6 +134,7 @@ export default function Member({ member: {
 	);
 }
 
+Member.page = { noBottom: true } as PageProps
 
 export async function getStaticPaths(context) {
 	const { members }: { members: MemberRecord[] } = await apiQuery(AllMembersWithPortfolioDocument)

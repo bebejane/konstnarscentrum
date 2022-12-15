@@ -3044,6 +3044,7 @@ type MemberModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   email?: InputMaybe<StringFilter>;
   firstName?: InputMaybe<StringFilter>;
+  fullName?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
   instagram?: InputMaybe<StringFilter>;
@@ -3085,6 +3086,8 @@ enum MemberModelOrderBy {
   email_DESC = 'email_DESC',
   firstName_ASC = 'firstName_ASC',
   firstName_DESC = 'firstName_DESC',
+  fullName_ASC = 'fullName_ASC',
+  fullName_DESC = 'fullName_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
   instagram_ASC = 'instagram_ASC',
@@ -3302,6 +3305,7 @@ type MemberRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   firstName: Scalars['String'];
+  fullName: Scalars['String'];
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
   instagram?: Maybe<Scalars['String']>;

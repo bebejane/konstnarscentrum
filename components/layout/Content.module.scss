@@ -24,7 +24,7 @@
     }
   }
 
-  &.nomargins {
+  &.noMargins {
     article {
       margin: 0;
       padding-left: 0;
@@ -36,6 +36,12 @@
         padding-left: 0;
         padding-right: 0;
       }
+    }
+  }
+
+  &.noBottom {
+    article {
+      padding-bottom: 0;
     }
   }
 }

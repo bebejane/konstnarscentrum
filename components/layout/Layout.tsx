@@ -1,7 +1,6 @@
 import styles from './Layout.module.scss'
 import React, { useEffect } from 'react'
 import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, Gallery } from '/components'
-import { regions } from '/lib/region'
 import type { MenuItem } from '/lib/menu'
 import { useState } from 'react'
 import { buildMenu } from '/lib/menu'
@@ -26,7 +25,6 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 	useEffect(() => { // Refresh menu on load.
 		buildMenu().then(res => setMenu(res)).catch(err => console.error(err))
 	}, [])
-
 
 	return (
 		<>

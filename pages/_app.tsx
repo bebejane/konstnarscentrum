@@ -7,12 +7,15 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 import { sv } from 'date-fns/locale'
+import { PageProvider, type PageProps } from '/lib/context/page';
 
 setDefaultOptions({ locale: sv })
 
 function App({ Component, pageProps }) {
 
   const router = useRouter()
+  const page = (Component.page || {}) as PageProps
+
   const { menu, footer, regions, session } = pageProps;
   const [region, setRegion] = useState(pageProps.region)
 
@@ -24,16 +27,13 @@ function App({ Component, pageProps }) {
 
   return (
     <SessionProvider session={session}>
-      <RegionProvider value={region}>
-        <Layout
-          title="Page title"
-          menu={menu || []}
-          footer={footer}
-          regions={regions}
-        >
-          <Component {...pageProps} />
-        </Layout>
-      </RegionProvider>
+      <PageProvider value={page}>
+        <RegionProvider value={region}>
+          <Layout title="Page title" menu={menu || []} footer={footer} regions={regions}>
+            <Component {...pageProps} />
+          </Layout>
+        </RegionProvider>
+      </PageProvider>
     </SessionProvider>
   );
 }

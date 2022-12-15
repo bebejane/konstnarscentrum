@@ -4,7 +4,7 @@ import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import { isServer } from '/lib/utils'
 import Link from 'next/link'
 import { useStore } from '/lib/store'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
@@ -17,6 +17,7 @@ export type Props = {
 
 export default function Logo({ disabled }: Props) {
 
+  const ref = useRef()
   const router = useRouter()
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
@@ -79,9 +80,10 @@ export default function Logo({ disabled }: Props) {
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
   const regionRatio = ratio > 1 ? 1 - ((ratio - 1) / (region.name.length / letters.length)) : 1
+  //console.log(ref?.current?.clientHei);
 
   return (
-    <div className={s.container}>
+    <div className={s.container} ref={ref}>
       <div className={s.logo}>
         <div className={s.vertical}>
           <Link href="/">

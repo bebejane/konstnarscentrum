@@ -32,6 +32,7 @@ export default withAuthentication(async (req, res, session) => {
   const newRecord = {
     first_name: firstName,
     last_name: lastName,
+    full_name: `${firstName} ${lastName}`,
     birth_place: birthPlace,
     bio,
     city,

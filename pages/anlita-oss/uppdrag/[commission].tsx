@@ -6,6 +6,7 @@ import type { GetStaticProps } from 'next'
 import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
 import { useState } from "react";
 import { getStaticPagePaths } from '/lib/utils'
+import { PageProps } from "/lib/context/page";
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -82,6 +83,8 @@ export default function Commission({ commission: {
 		</div>
 	);
 }
+
+Commission.page = { noBottom: true } as PageProps
 
 export async function getStaticPaths() {
 	const p = await getStaticPagePaths(AllCommissionsDocument, 'commission')

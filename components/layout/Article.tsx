@@ -32,7 +32,6 @@ export default function Article({
   content,
   showImage = true,
   editable,
-  noBottom,
   onClick
 }: ArticleProps) {
 
@@ -40,7 +39,7 @@ export default function Article({
   const ratio = Math.max(0, Math.min((scrolledPosition) / viewportHeight, 1))
 
   return (
-    <div className={cn(s.article, noBottom && s.noBottom, 'article')} >
+    <div className={cn(s.article, 'article')} >
       {image && showImage ?
         <header>
           <h1 className={cn(s.title, blackHeadline && s.black)}>
