@@ -3198,6 +3198,7 @@ type MemberNewsModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  blackHeadline?: InputMaybe<BooleanFilter>;
   category?: InputMaybe<LinkFilter>;
   content?: InputMaybe<StructuredTextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
@@ -3229,6 +3230,8 @@ enum MemberNewsModelOrderBy {
   _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
   _updatedAt_ASC = '_updatedAt_ASC',
   _updatedAt_DESC = '_updatedAt_DESC',
+  blackHeadline_ASC = 'blackHeadline_ASC',
+  blackHeadline_DESC = 'blackHeadline_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   date_ASC = 'date_ASC',
@@ -3257,6 +3260,7 @@ type MemberNewsRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  blackHeadline?: Maybe<Scalars['BooleanType']>;
   category: MemberNewsCategoryRecord;
   content: MemberNewsModelContentField;
   createdAt: Scalars['DateTime'];
@@ -3382,6 +3386,7 @@ type NewsModelFilter = {
   _status?: InputMaybe<StatusFilter>;
   _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  blackHeadline?: InputMaybe<BooleanFilter>;
   content?: InputMaybe<StructuredTextFilter>;
   contentOld?: InputMaybe<TextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
@@ -3412,6 +3417,8 @@ enum NewsModelOrderBy {
   _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
   _updatedAt_ASC = '_updatedAt_ASC',
   _updatedAt_DESC = '_updatedAt_DESC',
+  blackHeadline_ASC = 'blackHeadline_ASC',
+  blackHeadline_DESC = 'blackHeadline_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   id_ASC = 'id_ASC',
@@ -3438,6 +3445,7 @@ type NewsRecord = RecordInterface & {
   _status: ItemStatus;
   _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
   _updatedAt: Scalars['DateTime'];
+  blackHeadline?: Maybe<Scalars['BooleanType']>;
   content?: Maybe<NewsModelContentField>;
   contentOld: Scalars['String'];
   createdAt: Scalars['DateTime'];
@@ -5476,4 +5484,4 @@ type SiteSearchQueryVariables = Exact<{
 }>;
 
 
-type SiteSearchQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null }> };
+type SiteSearchQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', id: any, firstName: string, lastName: string, fullName: string, email: string, bio: string, yearOfBirth: string, birthPlace: string, city: string, webpage?: string | null, instagram?: string | null, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, memberCategory: Array<{ __typename?: 'MemberCategoryRecord', id: any, categoryType: string }>, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, content: Array<{ __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> }> };
