@@ -18,7 +18,8 @@ export default function RegionSelector({ }) {
   const [ref] = useOutsideClickRef(() => setOpen(false))
 
   const handleClick = (e) => {
-    const region = regions.find(el => e.target.href.includes(el.slug))
+    const url = new URL(e.target.href)
+    const region = regions.find(el => url.pathname === `/${el.slug}` || (url.pathname === `/` && el.global))
     setCookie('region', region.slug)
     setOpen(false)
   }
@@ -30,8 +31,8 @@ export default function RegionSelector({ }) {
   useEffect(() => {
     if (open && !showMenu)
       setOpen(false)
-  }, [showMenu, open]
-  )
+  }, [showMenu, open])
+
   return (
     <div className={s.container} ref={ref}>
       <div className={cn(s.selected, open && s.open)} onClick={() => setOpen(!open)}>
