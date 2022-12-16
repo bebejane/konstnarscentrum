@@ -9,13 +9,14 @@ export type Props = {
   image: FileField,
   slug: string,
   title: string,
-  subtitle?: string
+  subtitle?: string,
+  regional?: boolean
 }
 
 const speed = 0.07
 
 
-export default function Thumbnail({ image, slug, title, subtitle }: Props) {
+export default function Thumbnail({ image, slug, title, subtitle, regional = true }: Props) {
 
   const [hover, setHover] = useState<undefined | boolean>();
   const [ratio, setRatio] = useState<number>(0)
@@ -46,6 +47,7 @@ export default function Thumbnail({ image, slug, title, subtitle }: Props) {
     <RegionLink
       className={s.thumbnail}
       href={slug}
+      regional={regional}
       onMouseOver={() => !isMobile && setHover(true)}
       onMouseLeave={() => !isMobile && setHover(false)}
     >
