@@ -2,8 +2,8 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphql";
-import { FilterBar, Thumbnail, CardContainer, Card } from '/components'
-import { useEffect, useState } from "react";
+import { FilterBar, Thumbnail, CardContainer, Card, RevealText } from '/components'
+import { useState } from "react";
 import { pageSize } from "/lib/utils";
 import { apiQuery } from "dato-nextjs-utils/api";
 
@@ -20,7 +20,7 @@ export default function RegionHome({ commissions, commissionCategories, paginati
 	return (
 		<>
 			<header className={s.header}>
-				<h1>Uppdragsarkiv<sup className="amount">{pagination.count}</sup></h1>
+				<h1><RevealText>Uppdragsarkiv</RevealText><sup className="amount">{pagination.count}</sup></h1>
 				<FilterBar
 					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}
 					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}

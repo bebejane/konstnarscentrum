@@ -6,7 +6,7 @@ import {
 	AllMembersWithPortfolioDocument,
 	AllMembersCitiesDocument
 } from "/graphql";
-import { FilterBar, CardContainer, Card, Thumbnail, Loader } from "/components";
+import { FilterBar, CardContainer, Card, Thumbnail, Loader, RevealText } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
 
@@ -54,7 +54,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 
 	return (
 		<div className={s.container}>
-			<h1>Hitta konstnärer<sup className="amount">{pagination.count}</sup></h1>
+			<h1><RevealText>Hitta konstnärer</RevealText><sup className="amount">{pagination.count}</sup></h1>
 			<div className={s.search}>
 				<form className="mid">
 					<span>Namn: </span>

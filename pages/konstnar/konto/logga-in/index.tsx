@@ -2,8 +2,8 @@ import styles from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignIn from "/components/auth/SignIn";
-import SignOut from "/components/auth/SignOut";
 import { ClientSafeProvider, getCsrfToken, getProviders, useSession } from "next-auth/react";
+import { RevealText } from "/components";
 
 export type Props = {
 	csrfToken: string,
@@ -16,7 +16,7 @@ export default function Login({ csrfToken, providers }: Props) {
 
 	return (
 		<div className={styles.container}>
-			<h1>Logga in</h1>
+			<h1><RevealText>Logga in</RevealText></h1>
 			<p className="intro">Här kan du som är medlem logga in och redigera din portfolio.</p>
 			<SignIn csrfToken={csrfToken} providers={providers} />
 			<span className="small">Har du glömt ditt lösenord? Återställ här.</span>

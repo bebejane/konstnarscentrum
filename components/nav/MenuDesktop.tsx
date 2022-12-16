@@ -61,7 +61,6 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		setSelected(undefined)
 	}, [router])
 
-
 	return (
 		<>
 			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)}>

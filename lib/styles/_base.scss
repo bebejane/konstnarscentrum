@@ -160,3 +160,14 @@ select {
 	background-position-x: calc(100% - 1em);
 	background-position-y: center;
 }
+
+.amount {
+	opacity: 0;
+	animation: show 0.1s 1s ease-in forwards;
+
+	@keyframes show {
+		to {
+			opacity: 1;
+		}
+	}
+}
