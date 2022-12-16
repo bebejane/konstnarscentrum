@@ -1,13 +1,24 @@
-.square {
-  display: inline-block;
-  background: var(--black);
-  width: 0.4em;
-  height: 0.4em;
-  margin-right: 0.4em;
-  margin-bottom: 0.1em;
+.more {
+  overflow: hidden;
+  &:hover {
+    .square {
+      transform: translateX(-0.14em) rotate(45deg);
+    }
+  }
 
-  &.invert {
-    background: var(--white);
-    width: 0.45em;
+  .square {
+    overflow: hidden;
+    display: inline-block;
+    background: var(--black);
+    width: 0.4em;
+    height: 0.4em;
+    margin-right: 0.4em;
+    margin-bottom: 0.1em;
+    transition: all 0.1s;
+
+    &.invert {
+      background: var(--white);
+      width: 0.45em;
+    }
   }
 }
