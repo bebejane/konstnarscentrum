@@ -122,8 +122,10 @@ export default function Member({ member: {
 				</>
 			}
 			<RelatedSection
+				key={id}
 				title="Upptäck fler konstnärer"
 				slug={'/anlita-oss/hitta-konstnar'}
+				regional={false}
 				items={related.map(({ firstName, lastName, image, slug }) => ({
 					title: `${firstName} ${lastName}`,
 					image,
@@ -151,13 +153,20 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
 	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug }, preview: context.preview })
-	const { members: related } = await apiQuery(RelatedMembersDocument, { variables: { regionId, memberId: member.id }, preview: context.preview })
+	const { members: related } = await apiQuery(RelatedMembersDocument, {
+		variables: {
+			first: 100,
+			regionId,
+			memberId: member.id
+		},
+		preview: context.preview
+	})
 
 	return {
 		props: {
 			...props,
 			member,
-			related
+			related: related.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 6)
 		},
 	};
 });

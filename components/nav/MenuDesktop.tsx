@@ -34,11 +34,12 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 		const menuTop = menuRef.current.getBoundingClientRect().top
 		const isNearBottom = scrolledPosition + viewportHeight > (documentHeight - (viewportHeight * 0.50))
-		if (menuTop > 0 || isNearBottom || scrolledPosition < 150)
+
+		if (menuTop > 0 || isNearBottom || (scrolledPosition < 150 && showMenu))
 			return
+
 		setShowMenu((isScrolledUp && !isPageBottom) || (isPageTop))
 	}, [scrolledPosition, documentHeight, viewportHeight, isPageBottom, isPageTop, isScrolledUp, setShowMenu, menuRef]);
-
 
 	useEffect(() => {
 		if (typeof selected === 'undefined')

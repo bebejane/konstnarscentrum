@@ -39,6 +39,9 @@ export default function Members({ members, memberCategories, cities, regions, re
 		if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
 			return setResults(undefined)
 
+		//Object.keys(variables).forEach(k => variables[k] === undefined && delete variables[k])
+		console.log(variables);
+
 		setLoading(true)
 
 		fetch('/api/search', {
@@ -52,9 +55,12 @@ export default function Members({ members, memberCategories, cities, regions, re
 
 	}, [query, regionId, memberCategoryIds, setResults])
 
+
 	return (
 		<div className={s.container}>
-			<h1><RevealText>Hitta konstnärer</RevealText><sup className="amount">{pagination.count}</sup></h1>
+			<h1>
+				<RevealText>Hitta konstnärer</RevealText><sup className="amount">{pagination.count}</sup>
+			</h1>
 			<div className={s.search}>
 				<form className="mid">
 					<span>Namn: </span>
@@ -99,20 +105,18 @@ export default function Members({ members, memberCategories, cities, regions, re
 						</CardContainer>
 					</>
 					:
-					<>
-						<CardContainer columns={3}>
-							{members.map(({ id, firstName, lastName, image, region, slug }) =>
-								<Card key={id}>
-									<Thumbnail
-										image={image}
-										title={`${firstName} ${lastName}`}
-										slug={`/anlita-oss/hitta-konstnar/${slug}`}
-										regional={false}
-									/>
-								</Card>
-							)}
-						</CardContainer>
-					</>
+					<CardContainer columns={3}>
+						{members.map(({ id, firstName, lastName, image, region, slug }) =>
+							<Card key={id}>
+								<Thumbnail
+									image={image}
+									title={`${firstName} ${lastName}`}
+									slug={`/anlita-oss/hitta-konstnar/${slug}`}
+									regional={false}
+								/>
+							</Card>
+						)}
+					</CardContainer>
 			}
 		</div>
 	);
@@ -134,7 +138,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({
 			members,
 			cities: props.cities.filter((v, i, a) => a.findIndex(v2 => (v2.name === v.name)) === i),
 			pagination
-
 		},
 		revalidate
 	};

@@ -36,10 +36,6 @@ export default function Commission({ commission: {
 		setImages(images)
 	}, [content])
 
-	//@ts-ignore
-	//content.forEach(({ image }) => image && images.push.apply(images, image))
-
-
 	return (
 		<div className={s.container}>
 			<Article
@@ -72,6 +68,7 @@ export default function Commission({ commission: {
 				</section>
 			</Article>
 			<RelatedSection
+				key={id}
 				title="Fler uppdrag"
 				slug="/anlita-oss/uppdrag"
 				items={commissions.map(({ title, city, year, image, slug }) => ({
@@ -102,13 +99,19 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	if (!commission)
 		return { notFound: true }
 
-	const { commissions } = await apiQuery(RelatedCommissionsDocument, { variables: { regionId, commissionId: commission.id } });
+	const { commissions } = await apiQuery(RelatedCommissionsDocument, {
+		variables: {
+			first: 100,
+			regionId,
+			commissionId: commission.id
+		}
+	});
 
 	return {
 		props: {
 			...props,
 			commission,
-			commissions
+			commissions: commissions.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 5)
 		},
 		revalidate
 	};

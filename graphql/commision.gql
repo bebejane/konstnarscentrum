@@ -54,7 +54,6 @@ query RelatedCommissions(
 ) {
 	commissions: allCommissions(
 		filter: { region: { eq: $regionId }, id: { neq: $commissionId } }
-		orderBy: [createdAt_DESC]
 		first: $first
 		skip: $skip
 	) {
