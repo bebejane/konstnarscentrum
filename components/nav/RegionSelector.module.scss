@@ -6,35 +6,6 @@
     color: var(--beige-dark);
   }
 
-  ul {
-    display: none;
-    position: absolute;
-    flex-direction: column !important;
-    list-style: none;
-    width: 400px;
-    z-index: 10;
-    padding: 0.6rem;
-    padding-left: var(--outer-margin);
-    padding-bottom: 1.7em;
-    top: 1rem;
-    left: calc(-1 * var(--outer-margin));
-    background-color: var(--white);
-
-    &.show {
-      display: flex;
-    }
-
-    li {
-      line-height: var(--line-height-nav);
-
-      &[data-selected="true"] {
-        a {
-          color: var(--beige-dark);
-        }
-      }
-    }
-  }
-
   .selected {
     line-height: 0;
     position: relative;
@@ -49,56 +20,55 @@
     }
   }
 
-
-}
-
-.compass {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  top: 1.5rem;
-  right: 0;
-  background: var(--black);
-  color: var(--white);
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
-  width: 300px;
-
-  &.show {
-    display: flex;
-  }
-
-  a {
-    color: var(--white);
-  }
-
-  div {
-    display: flex;
-    flex-direction: row;
+  .compass {
+    display: none;
+    flex-direction: column;
     align-items: center;
-    width: 100%;
-    text-align: center;
+    position: absolute;
+    top: 1.5rem;
+    right: 0;
+    background: var(--black);
+    color: var(--white);
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    width: 300px;
 
-    &.all {
-      border-top: 1px solid var(--beige-light);
-      display: inline-block;
-      margin-top: 0.8em;
-      padding-top: 1.2em;
-      padding-bottom: 0.5em;
+    &.show {
+      display: flex;
+    }
+
+    a {
+      color: var(--white);
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       width: 100%;
-
-    }
-
-    span {
-      padding: 0.8em;
-      line-height: 1;
-      flex: 0 0 33.3333%;
       text-align: center;
-      width: 33.3333%;
+
+      &.all {
+        border-top: 1px solid var(--beige-light);
+        display: inline-block;
+        margin-top: 0.8em;
+        padding-top: 1.2em;
+        padding-bottom: 0.5em;
+        width: 100%;
+
+      }
+
+      span {
+        padding: 0.8em;
+        line-height: 1;
+        flex: 0 0 33.3333%;
+        text-align: center;
+        width: 33.3333%;
+
+      }
+
 
     }
-
 
   }
 

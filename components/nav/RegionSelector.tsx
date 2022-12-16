@@ -7,6 +7,7 @@ import { useRegion } from '/lib/context/region';
 import { setCookie, getCookie } from 'cookies-next';
 import { useStore } from '/lib/store';
 import { useOutsideClickRef } from 'rooks';
+import { regions } from '/lib/region'
 
 export default function RegionSelector({ }) {
 
@@ -16,7 +17,8 @@ export default function RegionSelector({ }) {
   const [showMenu] = useStore((state) => [state.showMenu])
   const [ref] = useOutsideClickRef(() => setOpen(false))
 
-  const handleClick = (region: Region) => {
+  const handleClick = (e) => {
+    const region = regions.find(el => e.target.href.includes(el.slug))
     setCookie('region', region.slug)
     setOpen(false)
   }
@@ -31,36 +33,27 @@ export default function RegionSelector({ }) {
   }, [showMenu, open]
   )
   return (
-    <div className={s.container}>
+    <div className={s.container} ref={ref}>
       <div className={cn(s.selected, open && s.open)} onClick={() => setOpen(!open)}>
         {!region || region.global ? 'Välj region' : region.name} <img src="/images/caret.png" />
       </div>
-      {/*<ul className={cn(open && s.show)}>
-        {regions.sort((a, b) => a.global ? -1 : 1).map((d, idx) =>
-          <li key={idx} data-slug={d.slug} data-selected={region?.id === d.id}>
-            <Link href={`/${!d.global ? d.slug : ''}`} onClick={() => handleClick(d)}>
-              {d.name}
-            </Link>
-          </li>
-        )}
-        </ul>*/}
-      <div className={cn(s.compass, open && s.show)} ref={ref}>
+      <div className={cn(s.compass, open && s.show)} >
         <div>
           <span></span>
-          <span><Link href="/nord">Nord</Link></span>
+          <span><Link href="/nord" onClick={handleClick}>Nord</Link></span>
           <span></span>
         </div>
         <div>
-          <span><Link href="/vast">Väst</Link></span>
-          <span><Link href="/mitt">Mitt</Link></span>
-          <span><Link href="/ost">Öst</Link></span>
+          <span><Link href="/vast" onClick={handleClick}>Väst</Link></span>
+          <span><Link href="/mitt" onClick={handleClick}>Mitt</Link></span>
+          <span><Link href="/ost" onClick={handleClick}>Öst</Link></span>
         </div>
         <div>
           <span></span>
-          <span><Link href="/syd">Syd</Link></span>
+          <span><Link href="/syd" onClick={handleClick}>Syd</Link></span>
           <span></span>
         </div>
-        <div className={s.all}><Link href="/">Alla</Link></div>
+        <div className={s.all}><Link href="/" onClick={handleClick}>Alla</Link></div>
       </div>
     </div>
   )
