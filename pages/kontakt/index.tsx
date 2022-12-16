@@ -36,23 +36,22 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 	return (
 		<div className={s.container}>
 			<h1>Kontakta oss</h1>
-			<Markdown className={s.intro}>
+			<Markdown className="intro">
 				{contactIntro}
 			</Markdown>
 			{Object.keys(employeesByRegion).map((regionId, idx) => {
 				const { employees, region } = employeesByRegion[regionId]
 				return (
 					<React.Fragment key={idx}>
-						<h2>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h2>
-						<CardContainer>
+						<h3>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h3>
+						<ul className={s.region}>
 							{employees.map(({ name, email, image }, idx) =>
 								<Card key={idx} className={s.employee}>
-									<Image data={image.responsiveImage} className={s.image} />
-									<div>{name}</div>
-									<div>{email}</div>
+									<h4>{name}</h4>
+									<p>{email}</p>
 								</Card>
 							)}
-						</CardContainer>
+						</ul>
 					</React.Fragment>
 				)
 			}
