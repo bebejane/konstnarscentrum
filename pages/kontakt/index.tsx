@@ -36,7 +36,8 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 	return (
 		<div className={s.container}>
 			<h1>Kontakta oss</h1>
-			<Markdown className="intro">
+			<Markdown className="
+			">
 				{contactIntro}
 			</Markdown>
 			{Object.keys(employeesByRegion).map((regionId, idx) => {
