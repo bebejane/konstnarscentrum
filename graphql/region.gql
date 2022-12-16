@@ -106,6 +106,7 @@ query RegionMeta($regionId: ItemId) {
 		}
 		region {
 			...RegionFragment
+			position
 		}
 	}
 }
