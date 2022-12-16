@@ -21,6 +21,7 @@ export default function MemberNewsArticle({ memberNews: {
 	image,
 	location,
 	category,
+	blackHeadline,
 	region
 } }: Props) {
 
@@ -29,6 +30,7 @@ export default function MemberNewsArticle({ memberNews: {
 			image={image}
 			title={title}
 			text={intro}
+			blackHeadline={blackHeadline}
 			subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
 		>
 			<MetaSection

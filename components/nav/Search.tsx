@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import cn from 'classnames'
 import s from './Search.module.scss'
 import SearchIcon from '/public/images/search.svg'
@@ -16,6 +16,7 @@ export default function Search({ }: Props) {
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
   const [query, setQuery] = useState<string | undefined>()
+  const ref = useRef<HTMLInputElement | undefined>()
 
   useEffect(() => {
 
@@ -43,11 +44,13 @@ export default function Search({ }: Props) {
 
   useEffect(() => {
     if (open) {
-      setQuery(undefined)
+      setQuery('')
       setResults(undefined)
+      ref.current?.focus()
+
     }
   }, [open])
-  console.log(results);
+
 
   return (
     <>
@@ -99,6 +102,7 @@ export default function Search({ }: Props) {
             <SearchIcon />
           </div>
           <input
+            ref={ref}
             type="text"
             placeholder="Sök..."
             value={query}

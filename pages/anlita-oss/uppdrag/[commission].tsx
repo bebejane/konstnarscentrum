@@ -4,9 +4,10 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
 import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getStaticPagePaths } from '/lib/utils'
 import { PageProps } from "/lib/context/page";
+import { useStore } from "/lib/store";
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -28,10 +29,15 @@ export default function Commission({ commission: {
 	content
 }, commissions }: CommissionProps) {
 
-	const [imageId, setImageId] = useState<string | undefined>()
-	const images = [image]
+	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
+
+	useEffect(() => {
+		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
+		setImages(images)
+	}, [content])
+
 	//@ts-ignore
-	content.forEach(({ image }) => image && images.push.apply(images, image))
+	//content.forEach(({ image }) => image && images.push.apply(images, image))
 
 
 	return (
@@ -74,12 +80,6 @@ export default function Commission({ commission: {
 					image,
 					slug: `/anlita-oss/uppdrag/${slug}`
 				}))}
-			/>
-			<Gallery
-				index={images.findIndex(({ id }) => id === imageId)}
-				images={images}
-				show={imageId !== undefined}
-				onClose={() => setImageId(undefined)}
 			/>
 		</div>
 	);

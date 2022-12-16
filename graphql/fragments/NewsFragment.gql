@@ -8,6 +8,7 @@ fragment NewsFragment on NewsRecord {
 	slug
 	intro
 	createdAt
+	blackHeadline
 	image {
 		...ImageFragment
 	}
