@@ -67,13 +67,25 @@
   .results {
     width: 100%;
     padding-top: var(--outer-margin);
-    padding-right: calc(var(--total-outer-margin) + calc(1 * var(--grid-unit)));
+    padding-right: var(--outer-margin);
 
     .matches {
       overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        background: var(--beige-light);
+      }
+
+      &::-webkit-scrollbar:vertical {
+        width: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: var(--beige-dark);
+      }
       flex: 0 0;
       width: 100%;
       max-height: calc(100vh - var(--navbar-height) - var(--outer-margin));
+      padding-right: var(--total-outer-margin);
     }
 
     h2 {
