@@ -4424,6 +4424,32 @@ type RegionRecordcontactIntroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** Block of type Relaterat på aktuellt (related_members_news) */
+type RelatedMembersNewsRecord = RecordInterface & {
+  __typename?: 'RelatedMembersNewsRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  membersNews?: Maybe<MemberNewsRecord>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Block of type Relaterat på aktuellt (related_members_news) */
+type RelatedMembersNewsRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter by upload type */
 type ResolutionFilter = {
   /** Search uploads with the specified resolution */

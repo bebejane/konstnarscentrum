@@ -155,3 +155,7 @@ export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: bo
 }
 
 export const isEmptyObject = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
+
+export const capitalize = (str: string, lower: boolean = false) => {
+  return (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
+}

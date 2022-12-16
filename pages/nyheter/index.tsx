@@ -26,9 +26,9 @@ export default function News({ news, region, pagination }: Props) {
             <li key={idx} >
               <Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-                <h3><BalanceText><RevealText>{title}</RevealText></BalanceText></h3>
+                <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
-                <ReadMore message='Läs mer'></ReadMore>
+                <ReadMore link={`/nyheter/${slug}`} message='Läs mer' />
               </Link>
             </li>
           ) :
