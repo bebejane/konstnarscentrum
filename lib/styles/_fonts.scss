@@ -10,13 +10,13 @@ $body-font: "Jazz", Arial, Helvetica, Sans-Serif;
 
 @font-face {
     font-family: "Jazz";
-    src: url("../../public/fonts/JazzSN-Book.woff2") format("woff2");
-    font-weight: normal;
+    src: url("../../public/fonts/JazzTrialSN-Bold.otf") format("opentype");
+    font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Jazz";
+    font-family: "Jazz-Italic";
     src: url("../../public/fonts/JazzTrialSN-BookItalic.otf") format("opentype");
     font-weight: normal;
     font-style: italic;

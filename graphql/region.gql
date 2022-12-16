@@ -101,6 +101,7 @@ query RegionMeta($regionId: ItemId) {
 	employees: allEmployees(filter: { region: { eq: $regionId } }) {
 		name
 		email
+		title
 		image {
 			...ImageThumbnailFragment
 		}

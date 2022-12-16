@@ -1,4 +1,15 @@
 .employee {
+  p {
+    margin-bottom: 0;
+  }
+  p a {
+    display: inline-block;
+    padding-bottom: 1em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .region {
@@ -14,7 +25,11 @@
 }
 
 .container {
-  h3 {
+  h3:first-of-type {
+    padding-top: 1rem;
+  }
+
+  h3:not(:first-of-type) {
     padding-top: var(--small-space);
   }
 }
