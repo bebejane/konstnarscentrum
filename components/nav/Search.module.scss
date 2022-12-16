@@ -73,9 +73,8 @@
       overflow-y: auto;
       flex: 0 0;
       width: 100%;
-      max-height: calc(100vh - var(--navbar-height) - var(--outer-margin))
+      max-height: calc(100vh - var(--navbar-height) - var(--outer-margin));
     }
-
 
     h2 {
       padding-top: var(--small-space);
@@ -87,7 +86,23 @@
       list-style: none;
 
       li {
-        .image {}
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: var(--small-space);
+        margin-right: var(--gutter);
+        .image {
+          width: 25% !important;
+          margin-left: var(--gutter);
+          display: flex;
+          align-items: flex-start;
+          img {
+            object-fit: contain;
+            object-position: top left;
+          }
+        }
+        div {
+          width: calc(75% - var(--gutter));
+        }
       }
     }
   }

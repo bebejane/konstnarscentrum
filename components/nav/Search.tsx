@@ -68,14 +68,16 @@ export default function Search({ }: Props) {
                   const items = results[type]
                   return (
                     <>
-                      <h4>{type}</h4>
+                      <h5>{type}</h5>
                       <ul>
                         {items?.map(({ title, text, image }, i) =>
                           <li key={i}>
-                            <h4>{title}</h4>
-                            {text}
+                            <div>
+                              <h4>{title}</h4>
+                              <p class="intro">{text}</p>
+                            </div>
                             {image &&
-                              <Image className={s.iamge} data={image.responsiveImage} />
+                              <Image className={s.image} data={image.responsiveImage} />
                             }
                           </li>
                         )}
