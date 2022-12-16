@@ -39,8 +39,7 @@ export const recordToSlug = (record: any, region?: Region): string => {
   let url;
 
   if (!record) {
-    console.error('recordToSlug: record is undefined')
-    return '/'
+    throw new Error('recordToSlug: Record  is empty')
   }
 
   if (typeof record === 'string')
@@ -143,3 +142,16 @@ export const getStaticPagePaths = async (query: TypedDocumentNode, segment: stri
     fallback: 'blocking'
   }
 }
+
+
+export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: boolean = true, minLength = 50) => {
+  if (!s || s.indexOf('.') === -1)
+    return s;
+  if (s.length < minLength)
+    return s;
+
+  let str = `${s.substring(0, minLength - 1)} ${s.substring(minLength).split('.').slice(0, sentances).join('. ')}`
+  return ellipsis ? (str + '...') : str + '.';
+}
+
+export const isEmptyObject = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0

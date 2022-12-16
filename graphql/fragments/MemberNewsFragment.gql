@@ -4,9 +4,11 @@
 
 fragment MemberNewsFragment on MemberNewsRecord {
 	__typename
+	_modelApiKey
 	id
 	createdAt
 	title
+	blackHeadline
 	image {
 		...ImageFragment
 	}

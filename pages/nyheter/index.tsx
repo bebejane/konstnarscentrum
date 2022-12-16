@@ -4,13 +4,10 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import { Pager } from '/components'
+import { Pager, ReadMore, RevealText } from '/components'
 import { pageSize } from "/lib/utils";
 import Link from "next/link";
 import BalanceText from 'react-balance-text'
-import { ReadMore } from "/components";
-
-//const pageSize = 2;
 
 export type Props = {
   news: NewsRecord[],
@@ -29,7 +26,7 @@ export default function News({ news, region, pagination }: Props) {
             <li key={idx} >
               <Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
-                <h3><BalanceText>{title}</BalanceText></h3>
+                <h3><BalanceText><RevealText>{title}</RevealText></BalanceText></h3>
                 <p>{intro}</p>
                 <ReadMore message='Läs mer'></ReadMore>
               </Link>

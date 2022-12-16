@@ -1,6 +1,4 @@
-#import "./fragments/MemberLightFragment"
-#import "./fragments/NewsFragment"
-#import "./fragments/MemberNewsFragment"
+#import "./fragments/ImageThumbnailFragment"
 
 query SiteSearch(
 	$memberIds: [ItemId]
@@ -9,12 +7,33 @@ query SiteSearch(
 	$first: IntType = 100
 ) {
 	members: allMembers(first: $first, filter: { id: { in: $memberIds } }) {
-		...MemberFragment
+		__typename
+		_modelApiKey
+		fullName
+		bio(markdown: false)
+		slug
+		image {
+			...ImageThumbnailFragment
+		}
 	}
 	news: allNews(first: $first, filter: { id: { in: $newsIds } }) {
-		...NewsFragment
+		__typename
+		_modelApiKey
+		title
+		intro(markdown: false)
+		slug
+		image {
+			...ImageThumbnailFragment
+		}
 	}
 	memberNews: allMemberNews(first: $first, filter: { id: { in: $memberNewsIds } }) {
-		...MemberNewsFragment
+		__typename
+		_modelApiKey
+		title
+		intro(markdown: false)
+		slug
+		image {
+			...ImageThumbnailFragment
+		}
 	}
 }

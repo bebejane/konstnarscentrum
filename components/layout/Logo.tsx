@@ -70,7 +70,7 @@ export default function Logo({ fixed }: Props) {
 
     let r;
 
-    if ((scrolledPosition + viewportHeight) > footerThreshhold)
+    if ((scrolledPosition + viewportHeight) > footerThreshhold) // At bottom
       r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
       r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))

@@ -2,6 +2,7 @@
 
 fragment MemberLightFragment on MemberRecord {
 	__typename
+	_modelApiKey
 	id
 	firstName
 	lastName

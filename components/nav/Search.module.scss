@@ -50,6 +50,10 @@
   transform: translateX(100%);
   transition: transform 0.2s ease-out;
 
+  a {
+    color: var(--white)
+  }
+
   &.show {
     transform: translateX(0%);
   }
@@ -65,12 +69,19 @@
   }
 
   .results {
+    --header-height: 7rem;
     width: 100%;
     padding-top: var(--outer-margin);
     padding-right: var(--outer-margin);
 
+    header {
+      min-height: var(--header-height);
+      max-height: var(--header-height);
+    }
+
     .matches {
       overflow-y: auto;
+      max-height: calc(100vh - var(--header-height) - var(--navbar-height) - var(--outer-margin)) !important;
 
       &::-webkit-scrollbar {
         background: var(--beige-light);
@@ -79,9 +90,11 @@
       &::-webkit-scrollbar:vertical {
         width: 1px;
       }
+
       &::-webkit-scrollbar-thumb {
         background: var(--beige-dark);
       }
+
       flex: 0 0;
       width: 100%;
       max-height: calc(100vh - var(--navbar-height) - var(--outer-margin));
@@ -102,16 +115,12 @@
         flex-wrap: wrap;
         margin-bottom: var(--small-space);
         margin-right: var(--gutter);
-        .image {
+
+        figure {
           width: 25% !important;
           margin-left: var(--gutter);
-          display: flex;
-          align-items: flex-start;
-          img {
-            object-fit: contain;
-            object-position: top left;
-          }
         }
+
         div {
           width: calc(75% - var(--gutter));
         }

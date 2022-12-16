@@ -2,6 +2,7 @@
 
 fragment MemberFragment on MemberRecord {
 	__typename
+	_modelApiKey
 	id
 	firstName
 	lastName

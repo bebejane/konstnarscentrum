@@ -1,7 +1,7 @@
 import s from './Layout.module.scss'
 import cn from 'classnames'
 import React, { useEffect } from 'react'
-import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, Gallery } from '/components'
+import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, FullscreenGallery } from '/components'
 import type { MenuItem } from '/lib/menu'
 import { useState } from 'react'
 import { buildMenu } from '/lib/menu'
@@ -41,7 +41,7 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 				<Search />
 			</div>
 			<Footer menu={menu} footer={footer} regions={regions} />
-			<Gallery
+			<FullscreenGallery
 				index={images?.findIndex((image) => image?.id === imageId)}
 				images={images}
 				show={imageId !== undefined}

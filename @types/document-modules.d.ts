@@ -89,6 +89,15 @@ declare module '*/ConsultFragment.gql' {
 }
     
 
+declare module '*/ConsultLightFragment.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ConsultLightFragment: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/ImageFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
