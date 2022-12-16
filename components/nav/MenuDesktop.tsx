@@ -34,7 +34,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 		const menuTop = menuRef.current.getBoundingClientRect().top
 		const isNearBottom = scrolledPosition + viewportHeight > (documentHeight - (viewportHeight * 0.50))
-		if (menuTop > 0 || isNearBottom)
+		if (menuTop > 0 || isNearBottom || scrolledPosition < 150)
 			return
 		setShowMenu((isScrolledUp && !isPageBottom) || (isPageTop))
 	}, [scrolledPosition, documentHeight, viewportHeight, isPageBottom, isPageTop, isScrolledUp, setShowMenu, menuRef]);
@@ -51,11 +51,11 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		setPaddingLeft(`${bounds.left}px`)
 
 		if (isAtBottom) {
-			const height = 140 //subRef.current.getBoundingClientRect().height - 70
+			const height = subRef.current.getBoundingClientRect().height / 2
 			window.scrollTo({ top: height, behavior: 'smooth' })
 		}
 
-	}, [selected])
+	}, [selected, viewportHeight])
 
 	useEffect(() => {
 		setSelected(undefined)
