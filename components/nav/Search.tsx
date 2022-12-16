@@ -4,6 +4,9 @@ import s from './Search.module.scss'
 import SearchIcon from '/public/images/search.svg'
 import CloseIcon from '/public/images/close.svg'
 import { Image } from 'react-datocms'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import Loader from '/components/common/Loader'
 
 export type Props = {
 
@@ -11,6 +14,7 @@ export type Props = {
 
 export default function Search({ }: Props) {
 
+  const router = useRouter()
   const [open, setOpen] = useState(false)
   const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
@@ -47,10 +51,12 @@ export default function Search({ }: Props) {
       setQuery('')
       setResults(undefined)
       ref.current?.focus()
-
     }
   }, [open])
 
+  useEffect(() => {
+    setOpen(false)
+  }, [router])
 
   return (
     <>
@@ -63,36 +69,41 @@ export default function Search({ }: Props) {
       <div className={cn(s.searchBar, open && s.show, query && s.full)}>
         {query &&
           <div className={s.results}>
-            <nav>Sök</nav>
-            <h2>Sökresultat: &quot;{query}&quot;</h2>
+            <header>
+              <nav>Sök</nav>
+              <h2>Sökresultat: &quot;{query}&quot;</h2>
+            </header>
             <div className={s.matches}>
               {results ?
-                Object.keys(results).map((type, idx) => {
-                  const items = results[type]
-                  return (
-                    <>
-                      <h5>{type}</h5>
-                      <ul>
-                        {items?.map(({ title, text, image }, i) =>
-                          <li key={i}>
-                            <div>
-                              <h4>{title}</h4>
-                              <p class="intro">{text}</p>
-                            </div>
-                            {image &&
-                              <Image className={s.image} data={image.responsiveImage} />
-                            }
-                          </li>
-                        )}
-                      </ul>
-                    </>
-                  )
-                })
+                Object.keys(results).map((type, idx) =>
+                  <ul key={idx}>
+                    {results[type]?.map(({ category, title, text, image, slug }, i) =>
+                      <li key={i}>
+                        <div>
+                          <h5>{category}</h5>
+                          <h4>
+                            <Link href={slug}>{title}</Link>
+                          </h4>
+                          <p className="intro">{text}</p>
+                        </div>
+                        {image &&
+                          <figure>
+                            <Link href={slug}>
+                              <Image
+                                className={s.image}
+                                data={image.responsiveImage}
+                                objectFit="contain"
+                              />
+                            </Link>
+                          </figure>
+                        }
+                      </li>
+                    )}
+                  </ul>
+
+                )
                 :
-                loading ?
-                  <>Söker...</>
-                  :
-                  <>Inget hittades...</>
+                loading ? <Loader /> : <>Inga resultat för &quot;{query}&quot;</>
               }
             </div>
           </div>
