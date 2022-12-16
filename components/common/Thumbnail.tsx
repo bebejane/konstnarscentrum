@@ -60,7 +60,6 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
           fadeInDuration={0}
         />
       }
-
       <div className={cn('mid', s.title, s.vertical)}>
         {vertical.map(c => c)}
       </div>
@@ -70,7 +69,6 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
           {more.map(c => c)}
         </span>
       </span>
-
     </RegionLink>
   )
 }

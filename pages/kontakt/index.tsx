@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionMetaDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { CardContainer, Card } from "/components";
+import { Card } from "/components";
 import { Image } from "react-datocms";
 import React from "react";
 
@@ -16,21 +16,20 @@ export type Props = {
 }
 
 export type EmployeesByRegion = {
-	[key: Region['id']]: {
-		employees: EmployeeRecord[],
-		region: RegionRecord
-	}
-}
+	employees: EmployeeRecord[]
+	region: RegionRecord
+}[]
 
 export default function Contact({ contactIntro, info, employees, region }: Props) {
 
-	const employeesByRegion: EmployeesByRegion = {}
+	const employeesByRegion: EmployeesByRegion = []
 
 	employees.forEach(e => {
-		if (!employeesByRegion[e.region.id])
-			employeesByRegion[e.region.id] = { employees: [], region: e.region }
-
-		employeesByRegion[e.region.id].employees.push(e);
+		const idx = employeesByRegion.findIndex(el => el.region.id === e.region.id)
+		if (idx === -1)
+			employeesByRegion.push({ employees: [e], region: e.region })
+		else
+			employeesByRegion[idx].employees.push(e)
 	})
 
 	return (
@@ -39,8 +38,7 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 			<Markdown className="intro">
 				{contactIntro}
 			</Markdown>
-			{Object.keys(employeesByRegion).map((regionId, idx) => {
-				const { employees, region } = employeesByRegion[regionId]
+			{employeesByRegion.sort((a, b) => a.region.position > b.region.position ? 1 : -1).map(({ region, employees }, idx) => {
 				return (
 					<React.Fragment key={idx}>
 						<h3>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h3>
