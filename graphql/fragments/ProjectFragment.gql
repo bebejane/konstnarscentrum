@@ -2,6 +2,7 @@
 
 fragment ProjectFragment on ProjectRecord {
 	__typename
+	_modelApiKey
 	title
 	image {
 		...ImageMediumFragment

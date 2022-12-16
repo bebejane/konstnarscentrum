@@ -2,7 +2,7 @@ import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
-const isEmpty = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
+import { truncateParagraph, isEmptyObject, recordToSlug } from '/lib/utils';
 
 export const config = {
   runtime: 'experimental-edge',
@@ -40,7 +40,7 @@ const memberSearch = async (opt) => {
     query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
   };
 
-  if (isEmpty(variables))
+  if (isEmptyObject(variables))
     return []
 
   const { members } = await apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables })
@@ -57,23 +57,19 @@ export const siteSearch = async (opt: any) => {
     query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
   };
 
-  if (isEmpty(variables))
+  if (isEmptyObject(variables))
     return {}
 
   const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
   const itemTypes = await client.itemTypes.list();
 
   const search = (await client.items.list({
-    filter: {
-      type: itemTypes.map(m => m.api_key).join(','),
-      query,
-    },
+    filter: { type: itemTypes.map(m => m.api_key).join(','), query },
     order_by: '_rank_DESC'
   })).map(el => ({
     ...el,
-    _api_key: itemTypes.find((t) => t.id === el.item_type.id).api_key,
+    _api_key: itemTypes.find((t) => t.id === el.item_type.id).api_key
   }))
-
 
   const data = await apiQuery(SiteSearchDocument, {
     variables: {
@@ -86,27 +82,39 @@ export const siteSearch = async (opt: any) => {
   Object.keys(data).forEach(type => {
     if (!data[type].length)
       delete data[type]
-    else {
-      data[type] = data[type].map(normalizeSiteResult)
-    }
-
+    else
+      data[type] = data[type].map(el => normalizeSiteResult(el, itemTypes))
   })
 
   return data;
 }
 
-const normalizeSiteResult = (item: any): any => {
-  const { __typename } = item;
+const normalizeSiteResult = (record: any, itemTypes: any[]): any => {
+
+  let res: any;
+  const { __typename, _modelApiKey } = record;
 
   switch (__typename) {
     case 'MemberRecord':
-      return { title: `${item.fullName}`, text: item.bio, image: item.image, __typename }
+      res = { title: `${record.fullName}`, text: record.bio, image: record.image }
+      break;
     case 'MemberNewsRecord':
-      return { title: item.title, text: item.intro, image: item.image, __typename }
+      res = { title: record.title, text: record.intro, image: record.image }
+      break;
     case 'NewsRecord':
-      return { title: item.title, text: item.intro, image: item.image, __typename }
-    default:
-      console.log('type name not found', __typename)
-      return {}
+      res = { title: record.title, text: record.intro, image: record.image }
+      break;
   }
+
+  if (!res)
+    throw Error(`Can't parse search result for "${__typename}"`)
+
+  return {
+    ...res,
+    category: itemTypes.find(({ api_key }) => api_key === _modelApiKey).name,
+    text: truncateParagraph(res.text, 1, false),
+    slug: recordToSlug(record),
+    _modelApiKey,
+    __typename
+  };
 }

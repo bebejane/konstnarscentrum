@@ -13,7 +13,7 @@ type Props = {
 export default function ReadMore({ message, link, invert = false }: Props) {
 
   const region = useRegion()
-
+  if (!link) return null
   return (
     <RegionLink href={recordToSlug(link, region)} className={cn(styles.more, 'small')} regional={(typeof link !== 'string')}>
       <div className={cn(styles.square, invert && styles.invert)}></div>{message}

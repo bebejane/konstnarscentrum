@@ -4,6 +4,7 @@
 
 fragment CommissionFragment on CommissionRecord {
 	__typename
+	_modelApiKey
 	id
 	title
 	intro

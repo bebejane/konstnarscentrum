@@ -3,6 +3,7 @@
 
 fragment ConsultFragment on ConsultRecord {
 	__typename
+	_modelApiKey
 	id
 	title
 	intro

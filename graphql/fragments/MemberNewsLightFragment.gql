@@ -4,6 +4,7 @@
 
 fragment MemberNewsLightFragment on MemberNewsRecord {
 	__typename
+	_modelApiKey
 	id
 	createdAt
 	title

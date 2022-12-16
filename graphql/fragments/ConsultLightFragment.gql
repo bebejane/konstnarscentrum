@@ -1,7 +1,7 @@
 #import "./ImageFragment.gql"
 #import "./VideoFragment.gql"
 
-fragment ConsultFragment on ConsultRecord {
+fragment ConsultLightFragment on ConsultRecord {
 	__typename
 	id
 	title
