@@ -823,7 +823,9 @@ type EmployeeModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
   name?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
   region?: InputMaybe<LinkFilter>;
+  title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
 
@@ -852,6 +854,10 @@ enum EmployeeModelOrderBy {
   id_DESC = 'id_DESC',
   name_ASC = 'name_ASC',
   name_DESC = 'name_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
   updatedAt_DESC = 'updatedAt_DESC'
 }
@@ -873,9 +879,11 @@ type EmployeeRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['ItemId'];
-  image: FileField;
+  image?: Maybe<FileField>;
   name: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
   region: RegionRecord;
+  title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -5478,7 +5486,7 @@ type RegionMetaQueryVariables = Exact<{
 }>;
 
 
-type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, image: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
+type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null } }> };
 
 type SiteSearchQueryVariables = Exact<{
   memberIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;

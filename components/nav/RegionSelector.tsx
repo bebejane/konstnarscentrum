@@ -44,7 +44,7 @@ export default function RegionSelector({ }) {
           <span><Link href="/nord" onClick={handleClick}>Nord</Link></span>
           <span></span>
         </div>
-        <div>
+        <div className={s.mid}>
           <span><Link href="/vast" onClick={handleClick}>Väst</Link></span>
           <span><Link href="/mitt" onClick={handleClick}>Mitt</Link></span>
           <span><Link href="/ost" onClick={handleClick}>Öst</Link></span>
