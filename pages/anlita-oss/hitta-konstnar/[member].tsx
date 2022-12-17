@@ -30,15 +30,17 @@ export default function Member({ member: {
 	content: contentFromProps
 }, member, related }: Props) {
 
-	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
+	console.log(member);
 
-	const [content, setContent] = useState<MemberModelContentField[] | undefined>(contentFromProps)
+	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
+	const [content, setContent] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
 	const handleSave = useCallback(async () => {
 
-		if (JSON.stringify(member.content) === JSON.stringify(content))
+
+		if (JSON.stringify(member.content) === JSON.stringify(content) || status !== 'authenticated')
 			return
 
 		try {
@@ -57,12 +59,20 @@ export default function Member({ member: {
 			console.log(err);
 		}
 
-	}, [content, member])
+	}, [status, content, member,])
+
 
 	useEffect(() => {
+		console.log('update');
+
+		setContent(contentFromProps)
+	}, [contentFromProps])
+
+
+	useEffect(() => {
+		if (!content) return
 		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
 		setImages(images)
-		setContent(content)
 	}, [content, image, setImages])
 
 	useEffect(() => {
@@ -74,15 +84,16 @@ export default function Member({ member: {
 	return (
 		<div className={s.container}>
 			<Article
+				key={id}
 				image={image}
 				title={`${firstName} ${lastName}`}
 				text={bio}
 				noBottom={true}
 				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
 				onClick={(id) => setImageId(id)}
-				key={id}
 			>
 				<MetaSection
+					key={`${id}-meta`}
 					items={[
 						{ title: 'Född', value: birthPlace },
 						{ title: 'Verksam', value: city },
@@ -93,10 +104,9 @@ export default function Member({ member: {
 				/>
 
 				<h2 className="noPadding">Utvalda verk</h2>
-
-				{(content || content)?.map((block, idx) =>
+				{content?.map((block, idx) =>
 					<Block
-						key={idx}
+						key={`${id}-${idx}`}
 						data={block}
 						onClick={(id) => setImageId(id)}
 						editable={{
@@ -114,7 +124,7 @@ export default function Member({ member: {
 					<EditBox
 						onChange={(content) => setContent(content)}
 						onDelete={(id) => setContent(content.filter((block) => block.id !== id))}
-						content={content}
+						blocks={content}
 					/>
 
 					<button className={s.addSection} onClick={() => setContent([...content, { __typename: 'ImageRecord', image: [] }])}>
@@ -169,5 +179,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 			member,
 			related: related.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 6)
 		},
+		revalidate
 	};
 });
