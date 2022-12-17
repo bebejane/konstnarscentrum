@@ -8,7 +8,7 @@ type Props = {
   className?: string
 }
 
-export default function RevealText({ children: text, className, start = false }: Props) {
+export default function RevealText({ children: text, className, start }: Props) {
 
   const [delays, setDelays] = useState([])
   const { inView, ref } = useInView({ triggerOnce: true })
