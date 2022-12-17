@@ -35,7 +35,7 @@ export default function Article({
 }: ArticleProps) {
 
   return (
-    <div className={cn(s.article, 'article')} >
+    <div className={cn(s.article, 'article')}>
       {image && showImage ?
         <header>
           <h1 className={cn(s.title, blackHeadline && s.black)}>
