@@ -34,7 +34,7 @@ export default function Commission({ commission: {
 	useEffect(() => {
 		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
 		setImages(images)
-	}, [content])
+	}, [content, image, setImages])
 
 	return (
 		<div className={s.container}>
@@ -60,7 +60,7 @@ export default function Commission({ commission: {
 					<h2 className="noPadding">Dokumentation</h2>
 					{content.map((block, idx) =>
 						<Block
-							key={idx}
+							key={`${id}-${idx}`}
 							data={block}
 							onClick={(id) => setImageId(id)}
 						/>
@@ -68,7 +68,7 @@ export default function Commission({ commission: {
 				</section>
 			</Article>
 			<RelatedSection
-				key={id}
+				key={`${id}-related`}
 				title="Fler uppdrag"
 				slug="/anlita-oss/uppdrag"
 				items={commissions.map(({ title, city, year, image, slug }) => ({
