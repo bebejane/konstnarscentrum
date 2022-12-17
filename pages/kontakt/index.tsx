@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionMetaDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { Card } from "/components";
+import { Card, RevealText } from "/components";
 import { Image } from "react-datocms";
 import React from "react";
 
@@ -34,7 +34,7 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 
 	return (
 		<div className={s.container}>
-			<h1>Kontakta oss</h1>
+			<h1><RevealText>Kontakta oss</RevealText></h1>
 			<Markdown className="intro">
 				{contactIntro}
 			</Markdown>
