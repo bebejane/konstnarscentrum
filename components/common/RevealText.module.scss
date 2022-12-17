@@ -1,6 +1,9 @@
 .char {
+  display: inline;
+  position: relative;
   opacity: 0;
-  animation: show 0s linear forwards;
+  animation-duration: 0s;
+  animation-fill-mode: forwards;
 
   @keyframes show {
     to {

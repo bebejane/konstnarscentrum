@@ -1,4 +1,5 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignIn from "/components/auth/SignIn";
@@ -22,7 +23,7 @@ export default function Login({ providers }: Props) {
 	})
 
 	return (
-		<div className={styles.container}>
+		<div className={s.container}>
 			{status === 'loading' ?
 				<Loader />
 				:
@@ -30,7 +31,7 @@ export default function Login({ providers }: Props) {
 					<h1><RevealText>Logga in</RevealText></h1>
 					<p className="intro">Här kan du som är medlem logga in och redigera din portfolio.</p>
 					<SignIn csrfToken={csrfToken} providers={providers} />
-					<span className="small">Har du glömt ditt lösenord? Återställ här.</span>
+					<span className={cn('small', s.forgot)}>Har du glömt ditt lösenord? Återställ här.</span>
 				</>
 			}
 		</div>
