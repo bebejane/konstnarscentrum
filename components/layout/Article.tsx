@@ -40,10 +40,9 @@ export default function Article({
         <header>
           <h1 className={cn(s.title, blackHeadline && s.black)}>
             <BalanceText>
-              <RevealText>{title}</RevealText>
+              {title}
             </BalanceText>
           </h1>
-
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
