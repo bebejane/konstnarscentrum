@@ -22,6 +22,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
               title={`${city} ${year}`}
               image={image}
               slug={`/anlita-oss/uppdrag/${slug}`}
+              regional={false}
             />
           </Card>
         )}

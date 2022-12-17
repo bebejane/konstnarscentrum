@@ -1,5 +1,5 @@
 import regions from '/regions.json'
-import { capitalize } from "lodash-es";
+import { capitalize } from "/lib/utils";
 
 export const apiTokenByRegion = (slug: string) => !slug ? undefined : process.env[`GRAPHQL_API_TOKEN_${slug.toUpperCase()}`]
 

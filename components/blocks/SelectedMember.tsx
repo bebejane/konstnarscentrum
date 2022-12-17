@@ -19,6 +19,7 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
               title={`${firstName} ${lastName}`}
               image={image}
               slug={`/anlita-oss/hitta-konstnar/${slug}`}
+              regional={false}
             />
           </Card>
         )}

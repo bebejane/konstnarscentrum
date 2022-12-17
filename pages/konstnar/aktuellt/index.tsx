@@ -5,7 +5,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format, isAfter, isBefore } from "date-fns";
 import { pageSize } from "/lib/utils";
-import { Pager, CardContainer, NewsCard, FilterBar } from '/components'
+import { Pager, CardContainer, NewsCard, FilterBar, RevealText } from '/components'
 import { useState } from "react";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: string }
@@ -22,7 +22,8 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 
 	return (
 		<>
-			<h1>Aktuellt</h1>
+			<h1><RevealText>Aktuellt</RevealText></h1>
+
 			<FilterBar
 				multi={true}
 				options={memberNewsCategories.map(({ id, category }) => ({ label: category, id }))}

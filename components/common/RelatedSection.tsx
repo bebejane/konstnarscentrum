@@ -1,11 +1,11 @@
 import s from './RelatedSection.module.scss'
 import React from 'react'
-import Link from 'next/link'
 import { CardContainer, Card, Thumbnail, SectionHeader } from '/components'
 
 export type RelatedSectionProps = {
   title: string,
-  slug: string
+  slug: string,
+  regional?: boolean
   items: {
     title: string,
     subtitle?: string,
@@ -14,7 +14,7 @@ export type RelatedSectionProps = {
   }[]
 }
 
-export default function RelatedSection({ title, slug, items }: RelatedSectionProps) {
+export default function RelatedSection({ title, slug, items, regional = true }: RelatedSectionProps) {
 
   return (
     <section className={s.related}>
@@ -28,11 +28,11 @@ export default function RelatedSection({ title, slug, items }: RelatedSectionPro
               title={title}
               subtitle={subtitle}
               slug={slug}
+              regional={regional}
             />
           </Card>
         )}
       </CardContainer>
     </section>
-
   )
 }

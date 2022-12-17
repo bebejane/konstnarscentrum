@@ -1,4 +1,5 @@
 #import "./ImageMediumFragment.gql"
+#import "./RegionFragment.gql"
 
 fragment ProjectFragment on ProjectRecord {
 	__typename
@@ -9,4 +10,7 @@ fragment ProjectFragment on ProjectRecord {
 	}
 	url
 	text(markdown: false)
+	region {
+		...RegionFragment
+	}
 }

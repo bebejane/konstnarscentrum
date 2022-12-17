@@ -2,10 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import type { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import GoogleProvider from "next-auth/providers/google";
-import FacebookProvider from "next-auth/providers/facebook";
-import AppleProvider from "next-auth/providers/apple";
 import { comparePassword, findUser } from '/lib/auth'
+
+//export const config = { runtime: 'experimental-edge' }
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -27,18 +26,6 @@ export const authOptions: NextAuthOptions = {
     },
   },
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET
-    }),
-    FacebookProvider({
-      clientId: process.env.FACEBOOK_CLIENT_ID,
-      clientSecret: process.env.FACEBOOK_CLIENT_SECRET
-    }),
-    AppleProvider({
-      clientId: process.env.APPLE_ID,
-      clientSecret: process.env.APPLE_SECRET
-    }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
@@ -80,7 +67,3 @@ export const authOptions: NextAuthOptions = {
 
 const handler = (req: NextApiRequest, res: NextApiResponse) => NextAuth(req, res, authOptions);
 export default handler
-
-export const config = {
-  //runtime: 'experimental-edge'
-}

@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { RevealText } from "/components";
 
 export type Props = {
 	csrfToken: string,
@@ -63,7 +64,7 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 
 	return (
 		<div className={s.container}>
-			<h1>Konto</h1>
+			<h1><RevealText>Konto</RevealText></h1>
 			<p>
 				<Link href={recordToSlug(member)}>
 					Gå till din portfolio

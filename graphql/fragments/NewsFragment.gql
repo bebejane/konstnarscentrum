@@ -1,5 +1,6 @@
 #import "./ImageFragment.gql"
 #import "./RegionFragment.gql"
+#import "./MemberNewsFragment.gql"
 
 fragment NewsFragment on NewsRecord {
 	__typename
@@ -18,6 +19,14 @@ fragment NewsFragment on NewsRecord {
 	}
 	content {
 		value
-		blocks
+		blocks {
+			... on RelatedMembersNewsRecord {
+				__typename
+				id
+				membersNews {
+					...MemberNewsFragment
+				}
+			}
+		}
 	}
 }

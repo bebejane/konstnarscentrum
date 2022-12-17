@@ -5,21 +5,19 @@ import { GetStaticProps } from "next";
 import { AllProjectsDocument, ProjectsIntroDocument } from "/graphql";
 import { Image } from "react-datocms";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import useDevice from "/lib/hooks/useDevice";
-import { CardContainer, Card } from "/components";
+import { CardContainer, Card, RevealText } from "/components";
 
 export type Props = {
 	projects: ProjectRecord[],
-	introInitiative: IntroInitiativeRecord
+	introInitiative: IntroInitiativeRecord,
+	region: Region
 }
 
-export default function Initiatives({ projects, introInitiative: { intro } }: Props) {
-
-	const { isMobile } = useDevice()
+export default function Initiatives({ projects, introInitiative: { intro }, region }: Props) {
 
 	return (
 		<div className={s.container}>
-			<h1>Våra initiativ</h1>
+			<h1><RevealText>Våra initiativ</RevealText></h1>
 			<Markdown className={s.intro}>
 				{intro}
 			</Markdown>
@@ -43,8 +41,14 @@ export default function Initiatives({ projects, introInitiative: { intro } }: Pr
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllProjectsDocument, ProjectsIntroDocument] }, async ({ props, revalidate, context }: any) => {
 
+	const regionId = props.region.global ? undefined : props.region.id;
+	const projects = props.projects.sort((a, b) => a.region.id === regionId ? -1 : 1)
+
 	return {
-		props,
+		props: {
+			...props,
+			projects
+		},
 		revalidate
 	};
 });
