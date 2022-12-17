@@ -7,9 +7,10 @@ type Props = {
 
 export default function RevealText({ children, className }: Props) {
 
-  const [text, setText] = useState<string | undefined>()
+  const [text, setText] = useState<string | undefined>(children)
 
   useEffect(() => {
+    return
     let count = children.length;
     const interval = setInterval(() => {
       if (count < 0) return clearInterval(interval)
@@ -21,7 +22,13 @@ export default function RevealText({ children, className }: Props) {
 
   return (
     <>
-      {text}
+      {text.split('').map((c, idx) =>
+        <span
+          key={idx}
+          className={s.char}
+          style={{ animationDelay: `${Math.min(0.2 + Math.random(), 0.5)}s` }}
+        >{c}</span>
+      )}
     </>
   )
 }
