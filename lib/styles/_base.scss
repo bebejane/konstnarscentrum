@@ -3,12 +3,13 @@
 	--white: #fcfcfc;
 	--beige-dark: #807a6e;
 	--beige-light: #e1dcd230;
-	--beige-mid: #e1dcd2af;
+	--beige-mid: #ddd6c891;
 	--beige-light-solid: #eceae5;
 	--red: #bf0000;
 	--outer-margin: 6vw;
 	--logo-size: 2rem;
-	--total-outer-margin: calc((var(--outer-margin) * 2) + var(--logo-size));
+	--logo-size-optical: 1.7rem;
+	--total-outer-margin: calc((var(--outer-margin) * 2) + var(--logo-size-optical));
 	--grid-unit: calc(((100vw - (2 * var(--total-outer-margin))) / 12));
 	--full-margin: calc(-1 * (2 * var(--grid-unit)));
 	--small-space: 2rem;
@@ -65,7 +66,7 @@ html {
 
 ::-webkit-scrollbar {
 	-webkit-appearance: none;
-	background: var(--white);
+	background: var(--beige-light);
 }
 
 ::-webkit-scrollbar:vertical {

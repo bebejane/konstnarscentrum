@@ -23,10 +23,9 @@
     left: 0;
     color: var(--black);
 
-    >a {
+    > a {
       line-height: 0;
       max-height: var(--logo-size);
-
     }
   }
 
@@ -35,11 +34,11 @@
     transform: rotate(-180deg);
     text-align: right;
     margin-top: -0.13em;
+    margin-left: 0.2em;
 
     a {
       //color: var(--black) !important;
     }
-
   }
 
   .horizontal {
@@ -54,6 +53,7 @@
     color: transparent !important;
     -webkit-text-stroke: 1px;
     -webkit-text-stroke-color: var(--black);
+    font-size: calc(var(--logo-size) * 0.97);
 
     @include mq($from: tablet) {
       margin-left: 0.5rem;
