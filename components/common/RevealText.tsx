@@ -19,8 +19,8 @@ export default function RevealText({ children, className }: Props) {
 
     return () => clearInterval(interval);
   }, [children])
-
-  const delays = new Array(text.length).fill(0).map((el, idx) => idx * (text.length / 200)).sort(() => Math.random() > 0.5 ? 1 : -1)
+  const total = 1.2
+  const delays = new Array(text.length).fill(0).map((el, idx) => idx * (total / text.length)).sort(() => Math.random() > 0.5 ? 1 : -1)
 
   return (
     <>
