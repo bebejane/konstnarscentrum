@@ -20,13 +20,15 @@ export default function RevealText({ children, className }: Props) {
     return () => clearInterval(interval);
   }, [children])
 
+  const delays = new Array(text.length).fill(0).map((el, idx) => idx * (text.length / 200)).sort(() => Math.random() > 0.5 ? 1 : -1)
+
   return (
     <>
       {text.split('').map((c, idx) =>
         <span
           key={idx}
           className={s.char}
-          style={{ animationDelay: `${Math.min(0.2 + Math.random(), 0.5)}s` }}
+          style={{ animationDelay: `${delays[idx]}s` }}
         >{c}</span>
       )}
     </>
