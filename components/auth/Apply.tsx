@@ -17,11 +17,6 @@ export default function Apply({ regions = [] }) {
 				<div className={styles.success}>
 					<h1>{text.thanksForRegistering}</h1>
 					<p>{text.reviewYourRegistration}</p>
-					<p>
-						<Link href={"/"}>
-							{text.goHome}
-						</Link>
-					</p>
 				</div>
 			)}
 		</div>
@@ -36,9 +31,9 @@ const ApplicationForm = ({ regions, setApplication }) => {
 		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
 
-	const onSubmitApplication = async ({ email, firstName, lastName, education, webpage, message, roleId }) => {
+	const onSubmitApplication = async ({ email, firstName, lastName, education, webpage, message, regionId }) => {
 		try {
-			const app = await memberService.apply({ email, firstName, lastName, education, webpage, message, roleId });
+			const app = await memberService.apply({ email, firstName, lastName, education, webpage, message, regionId });
 			setApplication(app);
 		} catch (err) {
 			setError(err && err.response ? err.response.data : err.messsage || err);
@@ -87,7 +82,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					placeholder={`${text.message}...`}
 				/>
 				<select
-					{...register("roleId", {
+					{...register("regionId", {
 						required: true,
 						validate: (value: string) => regions.find(({ id }) => value === id) !== undefined
 					})}

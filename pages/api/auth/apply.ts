@@ -1,24 +1,28 @@
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
-import Email from "../../../lib/emails";
+import { regions } from '/lib/region'
+
+import Email from "/lib/emails";
 import { generateToken } from '/lib/auth'
 import { memberController, applicationController } from '/lib/controllers';
 
 export default catchErrorsFrom(async (req, res) => {
 
-  const { email, firstName, lastName, message, roleId, education, webpage } = req.body
+  const { email, firstName, lastName, message, regionId, education, webpage } = req.body
   const memberExist = await memberController.exists(email)
 
   if (memberExist)
-    throw 'User already exists!'
+    throw 'Denna medlem finns redan!'
 
   const applicationExist = await applicationController.exists(email)
 
   if (applicationExist)
-    throw 'You have already applied for membership!'
+    throw 'Du har redan ansökt om medlemskap!'
+
 
   const tokens = await client.accessTokens.list();
-  const roleApiToken = tokens.find((t) => t.role && t.role.id === roleId).token
+  const region = regions.find(r => r.id === regionId)
+  const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken });
 
@@ -30,7 +34,6 @@ export default catchErrorsFrom(async (req, res) => {
     email,
     first_name: firstName,
     last_name: lastName,
-    full_name: `${firstName} ${lastName}`,
     education,
     webpage,
     message,

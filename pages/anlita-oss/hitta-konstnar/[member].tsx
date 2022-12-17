@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection, EditBox, Gallery } from "/components";
+import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import useStore from "/lib/store";
@@ -27,25 +27,26 @@ export default function Member({ member: {
 	region,
 	email,
 	city,
-	content
+	content: contentFromProps
 }, member, related }: Props) {
 
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 
-	const [blocks, setBlocks] = useState<MemberModelContentField[] | undefined>()
+	const [content, setContent] = useState<MemberModelContentField[] | undefined>(contentFromProps)
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
 	const handleSave = useCallback(async () => {
 
-		if (JSON.stringify(member.content) === JSON.stringify(blocks)) return
+		if (JSON.stringify(member.content) === JSON.stringify(content))
+			return
 
 		try {
 			const res = await fetch('/api/account', {
 				method: 'POST',
 				body: JSON.stringify({
 					id: member.id,
-					content: blocks
+					content
 				}),
 				headers: { 'Content-Type': 'application/json' },
 			})
@@ -56,19 +57,19 @@ export default function Member({ member: {
 			console.log(err);
 		}
 
-	}, [blocks, member])
+	}, [content, member])
 
 	useEffect(() => {
 		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
-
 		setImages(images)
-		setBlocks(content)
-	}, [content])
+		setContent(content)
+	}, [content, image, setImages])
 
 	useEffect(() => {
-		if (!blocks) return
+		if (!content) return
 		handleSave()
-	}, [blocks, handleSave])
+	}, [content, handleSave])
+
 
 	return (
 		<div className={s.container}>
@@ -93,7 +94,7 @@ export default function Member({ member: {
 
 				<h2 className="noPadding">Utvalda verk</h2>
 
-				{(blocks || content)?.map((block, idx) =>
+				{(content || content)?.map((block, idx) =>
 					<Block
 						key={idx}
 						data={block}
@@ -111,18 +112,18 @@ export default function Member({ member: {
 			{isEditable &&
 				<>
 					<EditBox
-						onChange={(blocks) => setBlocks(blocks)}
-						onDelete={(id) => setBlocks(blocks.filter((block) => block.id !== id))}
-						blocks={blocks}
+						onChange={(content) => setContent(content)}
+						onDelete={(id) => setContent(content.filter((block) => block.id !== id))}
+						content={content}
 					/>
 
-					<button className={s.addSection} onClick={() => setBlocks([...blocks, { __typename: 'ImageRecord', image: [] }])}>
+					<button className={s.addSection} onClick={() => setContent([...content, { __typename: 'ImageRecord', image: [] }])}>
 						Lägg till sektion
 					</button>
 				</>
 			}
 			<RelatedSection
-				key={id}
+				key={`${id}-related`}
 				title="Upptäck fler konstnärer"
 				slug={'/anlita-oss/hitta-konstnar'}
 				regional={false}
@@ -170,7 +171,3 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 		},
 	};
 });
-
-export const config = {
-	//runtime:'experimental-edge'
-}

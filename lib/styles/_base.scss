@@ -5,6 +5,7 @@
 	--beige-light: #e1dcd230;
 	--beige-mid: #e1dcd2af;
 	--beige-light-solid: #eceae5;
+	--red: #bf0000;
 	--outer-margin: 6vw;
 	--logo-size: 2rem;
 	--total-outer-margin: calc((var(--outer-margin) * 2) + var(--logo-size));
@@ -61,8 +62,6 @@ body {
 html {
 	box-sizing: border-box;
 }
-
-
 
 ::-webkit-scrollbar {
 	-webkit-appearance: none;

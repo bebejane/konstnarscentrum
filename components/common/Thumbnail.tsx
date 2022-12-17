@@ -43,6 +43,7 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
 
   }, [hover, setRatio])
 
+
   return (
     <RegionLink
       className={s.thumbnail}
