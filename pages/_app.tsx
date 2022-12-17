@@ -25,6 +25,7 @@ function App({ Component, pageProps }) {
       setRegion(regionFromCookie)
   }, [router])
 
+
   return (
     <SessionProvider session={session}>
       <PageProvider value={page}>

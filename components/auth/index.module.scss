@@ -26,9 +26,11 @@
 	}
 
 	.formError {
-		text-align: center;
-		max-width: 300px;
-		color: var(--black);
+
+		margin-top: 0.5rem;
+		width: 100%;
+		font-size: 0.75rem;
+		color: var(--red);
 		word-break: break-all;
 		margin-bottom: 0px;
 	}
