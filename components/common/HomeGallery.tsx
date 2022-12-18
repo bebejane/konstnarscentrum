@@ -51,7 +51,7 @@ export default function HomeGallery({ slides }: Props) {
     return () => clearInterval(interval)
   }, [index, slides])
 
-  const currentImage = slides[index].image
+  //const currentImage = slides[index].image
 
   return (
     <section className={s.gallery}>
