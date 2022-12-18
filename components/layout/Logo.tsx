@@ -9,16 +9,14 @@ import { useRouter } from 'next/router'
 import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
 
-const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
-
 export type Props = {
   fixed: boolean
 }
 
 export default function Logo({ fixed }: Props) {
 
+  const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
   const ref = useRef<HTMLDivElement | null>(null)
-  const containerRef = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
@@ -27,27 +25,28 @@ export default function Logo({ fixed }: Props) {
   const [manualMode, setManualMode] = useState(false)
   const [ratio, setRatio] = useState(0)
   const [height, setHeight] = useState(0)
+  const [atBottom, setAtBottom] = useState(false)
+  const maxR = 1 + (region.name.length / letters.length)
+  const isFixed = !fixed ? false : fixed && !atBottom
 
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
 
     setManualMode(true)
-
-    let maxR = 1 + (region.name.length / letters.length)
     let r = ratio;
-
+    const step = maxR / (letters.length + region.name.length)
     const interval = setInterval(() => {
       if (r > maxR || r < 0) {
         setRatio(r > maxR ? maxR : 0)
         return clearInterval(interval)
       }
-      setRatio(dir === 'horizontal' ? r += 0.1 : r -= 0.1)
-    }, 30)
-  }, [setManualMode, ratio, region])
+      setRatio(dir === 'horizontal' ? r += step : r -= step)
+    }, 10)
+  }, [setManualMode, ratio, region, letters, maxR])
 
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
 
-    if (fixed || (isMobile && !manualMode)) {
+    if (isFixed || (isMobile && !manualMode)) {
       if (isMobile && !manualMode)
         return direction === 'horizontal' ? letters : []
       if (!isMobile && !manualMode)
@@ -64,20 +63,16 @@ export default function Logo({ fixed }: Props) {
     if (manualMode)
       return
 
-    const footer = document.getElementById('footer') as HTMLDivElement
-    const footerThreshhold = documentHeight - footer.clientHeight
-    const maxR = 1 + (region.name.length / letters.length)
-
     let r;
 
-    if ((scrolledPosition + viewportHeight) > footerThreshhold) // At bottom
+    if (atBottom) // At bottom
       r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
       r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))
 
     setRatio(r)
 
-  }, [scrolledPosition, viewportHeight, documentHeight, setRatio, manualMode, height])
+  }, [scrolledPosition, viewportHeight, documentHeight, atBottom, setRatio, manualMode, height, region, maxR])
 
   useEffect(() => {
     animateManual(!showMenuMobile ? 'vertical' : 'horizontal')
@@ -96,22 +91,20 @@ export default function Logo({ fixed }: Props) {
     setHeight(ref.current.clientHeight)
   }, [ref])
 
+  useEffect(() => {
+    const footer = document.getElementById('footer') as HTMLDivElement
+    const footerThreshhold = documentHeight - footer.clientHeight
+    setAtBottom((scrolledPosition + viewportHeight) > footerThreshhold)
+  }, [scrolledPosition, documentHeight, viewportHeight])
+
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
   const regionPerc = (region.name.length / letters.length)
-  const regionRatio = ratio > 1 && !fixed ? 1 - ((ratio - 1) / regionPerc) : fixed ? 1 - ((1 + regionPerc) * ratio) : 1
+  const regionRatio = ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed ? 1 - ((1 + regionPerc) * ratio) : 1
 
   return (
     <div className={s.container}>
-      <div className={s.logo} >
-        <div className={s.vertical} ref={ref}>
-          <Link href="/">
-            {vertical.map((l, i) => l)}
-          </Link>
-          {horizontal.length > 0 &&
-            <span className={s.space}>{letters[vertical.length]}</span>
-          }
-        </div>
+      <div className={s.logo}>
         <div className={s.horizontal}>
           <Link href="/">
             {horizontal.map((l, i) => l)}
@@ -120,6 +113,14 @@ export default function Logo({ fixed }: Props) {
             <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
               {region.name.substring(0, (region.name.length) * regionRatio)}
             </Link>
+          }
+        </div>
+        <div className={s.vertical} ref={ref}>
+          <Link href="/">
+            {vertical.map((l, i) => l)}
+          </Link>
+          {horizontal.length > 0 &&
+            <div className={s.space}></div>
           }
         </div>
       </div>

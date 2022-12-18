@@ -4,6 +4,9 @@ import { Image } from 'react-datocms'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { RevealText } from '/components'
+import { SvgBlob } from 'react-svg-blob';
+import blobshape from "blobshape";
+
 
 export type Props = {
   slides: SlideRecord[]
@@ -28,9 +31,16 @@ const parseRecord = (record: any) => {
   }
 }
 
+function randomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 export default function HomeGallery({ slides }: Props) {
 
   const [index, setIndex] = useState(0)
+  const [loaded, setLoaded] = useState({})
 
   useEffect(() => {
 
@@ -40,6 +50,8 @@ export default function HomeGallery({ slides }: Props) {
 
     return () => clearInterval(interval)
   }, [index, slides])
+
+  const currentImage = slides[index].image
 
   return (
     <section className={s.gallery}>
@@ -57,11 +69,16 @@ export default function HomeGallery({ slides }: Props) {
               <Image
                 className={s.image}
                 data={image.responsiveImage}
+                onLoad={() => setLoaded({ ...loaded, [id]: true })}
                 objectFit="cover"
               />
             </Link>
           </li>
         )}
+        <div
+          className={s.color}
+        //style={{ backgroundColor: currentImage.responsiveImage.bgColor }}
+        ></div>
       </ul>
     </section>
   )

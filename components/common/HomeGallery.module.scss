@@ -31,6 +31,8 @@
           height: 100%;
         }
 
+
+
         header {
           position: absolute;
           padding-left: var(--grid-unit);
@@ -38,7 +40,7 @@
           padding-top: 2rem;
           top: 0;
           left: 0;
-          z-index: 1;
+          z-index: 3;
           color: var(--white);
           width: 80%;
 
@@ -79,5 +81,47 @@
         }
       }
     }
+  }
+}
+
+.color {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: height 1s ease-in-out;
+  overflow: hidden;
+
+  .blob {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation-duration: 0s;
+    animation-fill-mode: forwards;
+
+    @keyframes show {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes hide {
+      to {
+        opacity: 0;
+      }
+    }
+
+    //background-color: transparent;
+
+    path {
+      //fill: transparent;
+    }
+  }
+
+  &.hide {
+    height: 0%;
   }
 }
