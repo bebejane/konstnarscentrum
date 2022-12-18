@@ -2,19 +2,20 @@ import s from './RevealText.module.scss'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-type Props = {
-  children: string
-  start?: boolean
+export type Props = {
+  children: React.ReactNode | string,
+  start?: boolean,
   className?: string
 }
 
 const animationTime = 0.65
 
-export default function RevealText({ children: text, className, start }: Props) {
+export default function RevealText({ children, className, start }: Props) {
 
+  const text = typeof children === 'string' ? children : children.props.children
   const [delays, setDelays] = useState([])
   const [startAnimation, setStartAnimation] = useState(false)
-  const { inView, ref } = useInView({ threshold: 0, triggerOnce: true })
+  const { inView, ref } = useInView({ triggerOnce: true })
 
   useEffect(() => {
     const delays = new Array(text.length).fill(0).map((el, idx) => idx * (animationTime / text.length)).sort(() => Math.random() > 0.5 ? 1 : -1)
