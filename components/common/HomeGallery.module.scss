@@ -67,6 +67,10 @@
 
           &.blackText {
             color: var(--black);
+
+            & .fade {
+              display: none;
+            }
           }
 
           &.hide {
