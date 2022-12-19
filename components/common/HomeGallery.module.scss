@@ -3,7 +3,7 @@
   margin-left: var(--full-margin);
   max-width: none;
 
-  > ul {
+  >ul {
     --height: calc(100vh - calc(var(--navbar-height) * 2));
     list-style: none;
     position: relative;
@@ -28,7 +28,7 @@
           transform: translateX(0%) scale(1.1);
 
           &.pan {
-            animation: pan 10s linear forwards;
+            animation: pan 6s linear forwards;
 
             @keyframes pan {
               from {
@@ -36,7 +36,7 @@
               }
 
               to {
-                transform: translateX(-2%) scale(1.1);
+                transform: translateX(-4%) scale(1.1);
               }
             }
           }
@@ -45,8 +45,7 @@
         &.current {
           z-index: 1;
 
-          .image {
-          }
+          .image {}
         }
 
         &.next {
