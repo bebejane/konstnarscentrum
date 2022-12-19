@@ -44,6 +44,7 @@ export default function Article({
                 {title}
               </BalanceText>
             </RevealText>
+            <div className={s.fade}></div>
           </h1>
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image

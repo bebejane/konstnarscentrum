@@ -29,12 +29,25 @@
 
     .title {
       position: absolute;
-      z-index: 1;
+      z-index: 2;
       color: var(--white);
       padding-top: 1em;
+      width: 100%;
 
       &.black {
         color: var(--black);
+      }
+
+      .fade {
+        background: linear-gradient(180deg, rgba(0, 0, 0, 0.332) 0%, rgba(0, 0, 0, 0) 100%);
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        width: calc(100% - (2 * var(--full-margin)));
+        height: 150%;
+        margin-left: var(--full-margin);
+        margin-right: var(--full-margin);
       }
     }
   }
