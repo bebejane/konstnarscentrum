@@ -23,17 +23,35 @@
         overflow: hidden;
         z-index: 0;
 
+        .image {
+          min-width: 100%;
+          height: 100%;
+          transform: translateX(0%) scale(1.1);
+
+          &.pan {
+            animation: pan 10s linear forwards;
+
+            @keyframes pan {
+              from {
+                transform: translateX(0%) scale(1.1);
+              }
+
+              to {
+                transform: translateX(5%) scale(1.1);
+              }
+            }
+          }
+
+        }
+
         &.current {
           z-index: 1;
+
+          .image {}
         }
 
         &.next {
           z-index: 3;
-        }
-
-        .image {
-          min-width: 100%;
-          height: 100%;
         }
 
         header {

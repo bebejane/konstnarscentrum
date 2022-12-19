@@ -92,7 +92,7 @@ export default function HomeGallery({ slides }: Props) {
                   <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
                 </header>
                 <Image
-                  className={s.image}
+                  className={cn(s.image, isCurrent && s.pan)}
                   data={image.responsiveImage}
                   onLoad={() => setLoaded({ ...loaded, [id]: true })}
                   pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
