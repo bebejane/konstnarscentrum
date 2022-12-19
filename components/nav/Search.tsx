@@ -71,8 +71,7 @@ export default function Search({ }: Props) {
         {query &&
           <div className={s.results}>
             <header>
-              <nav>Sök</nav>
-              <h2>Sökresultat: &quot;{query}&quot;</h2>
+              <nav>Sökresultat: &quot;{query}&quot;</nav>
             </header>
             <div className={s.matches}>
               {results ?
@@ -80,7 +79,7 @@ export default function Search({ }: Props) {
                   <ul key={idx}>
                     {results[type]?.map(({ category, title, text, image, slug }, i) =>
                       <li key={i}>
-                        <div>
+                        <div className={s.text}>
                           <h5>{category}</h5>
                           <h4>
                             <Link href={slug}>{title}</Link>

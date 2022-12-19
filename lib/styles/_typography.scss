@@ -116,6 +116,10 @@ article {
   ul {
     padding-left: 1em;
     list-style-type: square;
+
+    p:last-of-type {
+      margin-bottom: 0.5em;
+    }
   }
 }
 
