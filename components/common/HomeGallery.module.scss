@@ -3,7 +3,7 @@
   margin-left: var(--full-margin);
   max-width: none;
 
-  >ul {
+  > ul {
     --height: calc(100vh - calc(var(--navbar-height) * 2));
     list-style: none;
     position: relative;
@@ -45,7 +45,8 @@
         &.current {
           z-index: 1;
 
-          .image {}
+          .image {
+          }
         }
 
         &.next {
@@ -77,12 +78,12 @@
           }
 
           .fade {
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.179) 0%, rgba(0, 0, 0, 0) 100%);
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.348) 0%, rgba(0, 0, 0, 0) 100%);
             position: absolute;
             z-index: -1;
             top: 0;
             left: 0;
-            width: calc(100% - (2 * var(--full-margin)));
+            width: calc(120% - (2 * var(--full-margin)));
             height: 150%;
             margin-left: var(--full-margin);
             margin-right: var(--full-margin);

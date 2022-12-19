@@ -1,4 +1,8 @@
 .employee {
+  &:last-of-type p {
+    margin-bottom: 0 !important;
+  }
+
   p {
     margin-bottom: 0;
   }

@@ -84,7 +84,7 @@ export default function Search({ }: Props) {
                           <h4>
                             <Link href={slug}>{title}</Link>
                           </h4>
-                          <Markdown className="intro">{text}</Markdown>
+                          <Markdown>{text}</Markdown>
                         </div>
                         {image &&
                           <figure>

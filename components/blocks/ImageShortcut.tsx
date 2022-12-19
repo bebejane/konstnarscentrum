@@ -21,6 +21,7 @@ export default function ImageShortcut({ data: { headline, image, link, text } }:
           />
         }
         <figcaption>
+          <div className={s.fade}></div>
           <h2>{headline}</h2>
           <p className="intro">{text}</p><br />
           <ReadMore link={link} message='Läs mer' invert={true} />
