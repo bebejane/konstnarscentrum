@@ -9,8 +9,8 @@ query SiteSearch(
 	members: allMembers(first: $first, filter: { id: { in: $memberIds } }) {
 		__typename
 		_modelApiKey
-		fullName
-		bio(markdown: false)
+		title: fullName
+		text: bio(markdown: false)
 		slug
 		image {
 			...ImageThumbnailFragment
@@ -20,7 +20,7 @@ query SiteSearch(
 		__typename
 		_modelApiKey
 		title
-		intro(markdown: false)
+		text: intro(markdown: false)
 		slug
 		image {
 			...ImageThumbnailFragment
@@ -30,7 +30,7 @@ query SiteSearch(
 		__typename
 		_modelApiKey
 		title
-		intro(markdown: false)
+		text: intro(markdown: false)
 		slug
 		image {
 			...ImageThumbnailFragment

@@ -7,6 +7,7 @@ import { Image } from 'react-datocms'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Loader from '/components/common/Loader'
+import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 
 export type Props = {
 
@@ -84,7 +85,7 @@ export default function Search({ }: Props) {
                           <h4>
                             <Link href={slug}>{title}</Link>
                           </h4>
-                          <p className="intro">{text}</p>
+                          <Markdown className="intro">{text}</Markdown>
                         </div>
                         {image &&
                           <figure>
@@ -119,7 +120,7 @@ export default function Search({ }: Props) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <div className={s.icon} onClick={() => setOpen(!open)}>
+          <div className={cn(s.close, s.icon)} onClick={() => setOpen(!open)}>
             <CloseIcon />
           </div>
         </div>

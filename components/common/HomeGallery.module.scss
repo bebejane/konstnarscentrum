@@ -13,19 +13,23 @@
     background-color: lightgray;
 
     li {
-      &.hide {
-        opacity: 0;
-      }
 
       a {
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 10;
         width: 100%;
         height: 100%;
-        perspective: 1000px;
         overflow: hidden;
+        z-index: 0;
+
+        &.current {
+          z-index: 1;
+        }
+
+        &.next {
+          z-index: 3;
+        }
 
         .image {
           min-width: 100%;
@@ -39,44 +43,17 @@
           padding-top: 2rem;
           top: 0;
           left: 0;
-          z-index: 4;
+          z-index: 2;
           color: var(--white);
           width: 80%;
-
-          h2 {
-            //padding-right: 10%;
-          }
 
           &.blackText {
             color: var(--black);
           }
-        }
-      }
-    }
-  }
-}
 
-.transition {
-  a {
-    z-index: 2;
-
-    img {
-      //animation: trans 6s ease-in reverse forwards;
-      opacity: 1;
-
-      @keyframes trans {
-        0% {
-          opacity: 1;
-          transform: rotate3d(0, 1, 0, 0deg) scale(1);
-        }
-
-        80% {
-          opacity: 1;
-        }
-
-        100% {
-          opacity: 1;
-          transform: rotate3d(0, 1, 1, 2deg) scale(1.15);
+          &.hide {
+            display: none;
+          }
         }
       }
     }
@@ -92,15 +69,6 @@
   height: 100%;
   transition: height 1s ease-in-out;
   overflow: hidden;
-
-  .maskImage {
-    position: absolute !important;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
 
   .blob {
     position: absolute;
@@ -121,15 +89,5 @@
         opacity: 0;
       }
     }
-
-    //background-color: transparent;
-
-    path {
-      //fill: transparent;
-    }
-  }
-
-  &.hide {
-    height: 0%;
   }
 }
