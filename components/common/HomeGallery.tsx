@@ -108,13 +108,10 @@ export default function HomeGallery({ slides }: Props) {
   )
 }
 
-
 const Mask = ({ id, size, start }) => {
-
 
   const numBlobs = 200
   const animationTime = 400
-  const [count, setCount] = useState(0)
   const [paths, setPaths] = useState([])
 
   useEffect(() => {
@@ -148,7 +145,7 @@ const Mask = ({ id, size, start }) => {
     const timeout = setTimeout(() => blobIt(), slideTime - animationTime)
     return () => clearTimeout(timeout)
 
-  }, [start, paths, size])
+  }, [start, id, paths, size])
 
 
   return (
