@@ -21,6 +21,7 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 10;
         width: 100%;
         height: 100%;
         perspective: 1000px;
@@ -38,7 +39,7 @@
           padding-top: 2rem;
           top: 0;
           left: 0;
-          z-index: 1;
+          z-index: 4;
           color: var(--white);
           width: 80%;
 
@@ -60,7 +61,7 @@
     z-index: 2;
 
     img {
-      animation: trans 6s ease-in reverse forwards;
+      //animation: trans 6s ease-in reverse forwards;
       opacity: 1;
 
       @keyframes trans {
@@ -79,5 +80,56 @@
         }
       }
     }
+  }
+}
+
+.color {
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: height 1s ease-in-out;
+  overflow: hidden;
+
+  .maskImage {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blob {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    animation-duration: 0s;
+    animation-fill-mode: forwards;
+
+    @keyframes show {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes hide {
+      to {
+        opacity: 0;
+      }
+    }
+
+    //background-color: transparent;
+
+    path {
+      //fill: transparent;
+    }
+  }
+
+  &.hide {
+    height: 0%;
   }
 }

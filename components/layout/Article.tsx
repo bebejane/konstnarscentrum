@@ -39,11 +39,12 @@ export default function Article({
       {image && showImage ?
         <header>
           <h1 className={cn(s.title, blackHeadline && s.black)}>
-            <BalanceText>
-              <RevealText>{title}</RevealText>
-            </BalanceText>
+            <RevealText>
+              <BalanceText>
+                {title}
+              </BalanceText>
+            </RevealText>
           </h1>
-
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
