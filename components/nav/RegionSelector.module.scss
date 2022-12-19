@@ -32,9 +32,9 @@
     border: 1px solid var(--beige-mid);
     padding-top: 1.2em;
     padding-bottom: 1em;
-    padding-left: 0.8em;
-    padding-right: 0.8em;
-    width: 220px;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    width: 11.4em;
 
     &.show {
       display: flex;
@@ -58,6 +58,12 @@
       &.mid {
         padding-top: 1.5em;
         padding-bottom: 1.5em;
+        span:first-of-type {
+          text-align: left;
+        }
+        span:last-of-type {
+          text-align: right;
+        }
       }
 
       &.all {
