@@ -85,7 +85,7 @@ export default function HomeGallery({ slides }: Props) {
               <Link href={slug} className={cn(isCurrent ? s.current : isNext ? s.next : undefined)}>
                 <header className={cn(blackText && s.blackText, !isCurrent && s.hide)}>
                   <h5>{type}</h5>
-                  <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
+                  <h2>{headline}</h2>
                 </header>
                 <Image
                   className={cn(s.image, isCurrent && s.pan)}
