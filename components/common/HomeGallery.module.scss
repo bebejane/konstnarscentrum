@@ -57,7 +57,7 @@
 
         header {
           position: absolute;
-          padding-left: var(--grid-unit);
+          padding-left: calc(2 * var(--grid-unit));
           padding-right: var(--grid-unit);
           padding-top: 2rem;
           top: 0;
