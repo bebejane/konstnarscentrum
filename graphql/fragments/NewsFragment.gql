@@ -27,6 +27,15 @@ fragment NewsFragment on NewsRecord {
 					...MemberNewsFragment
 				}
 			}
+			... on ImageRecord {
+				id
+				image {
+					...ImageFragment
+				}
+			}
+			... on RecordInterface {
+				id
+			}
 		}
 	}
 }
