@@ -69,19 +69,20 @@
   }
 
   .results {
-    --header-height: 7rem;
+    --header-height: var(--navbar-height);
     width: 100%;
-    padding-top: var(--outer-margin);
     padding-right: var(--outer-margin);
 
     header {
+      display: flex;
+      align-items: center;
       min-height: var(--header-height);
       max-height: var(--header-height);
     }
 
     .matches {
       overflow-y: auto;
-      max-height: calc(100vh - var(--header-height) - var(--navbar-height) - var(--outer-margin)) !important;
+      max-height: calc(100vh - var(--header-height) - var(--navbar-height)) !important;
 
       &::-webkit-scrollbar {
         background: var(--beige-light);
