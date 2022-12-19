@@ -24,7 +24,7 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
           </Card>
         )}
       </CardContainer>
-      <BackgroundImage></BackgroundImage>
+      <BackgroundImage image={selectedMembers?.[0].image}></BackgroundImage>
     </section>
   )
 }

@@ -27,7 +27,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
           </Card>
         )}
       </CardContainer>
-      <BackgroundImage></BackgroundImage>
+      <BackgroundImage image={commissions?.[0].image}></BackgroundImage>
     </section>
   )
 }
