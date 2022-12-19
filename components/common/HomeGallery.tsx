@@ -112,24 +112,20 @@ export default function HomeGallery({ slides }: Props) {
 const Mask = ({ id, size, start }) => {
 
   const numBlobs = 200
-  const animationTime = 400
-  const [paths, setPaths] = useState([])
+  const animationTime = 650
 
   useEffect(() => {
+    if (!start) return
+
     const paths = new Array(numBlobs).fill(0).map((e, idx) => {
       const { path } = blobshape({
-        size: randomInt(size.width * (idx / 200), size.width * (idx / 200)),
-        growth: randomInt(2, 10),
+        size: randomInt(size.width * (idx / numBlobs), size.width * (idx / numBlobs)),
+        growth: randomInt(2, 6),
         edges: randomInt(2, 10),
         seed: null
       })
       return path
     })
-    setPaths(paths)
-  }, [setPaths, size])
-
-  useEffect(() => {
-    if (!start) return
 
     const clipPath = document.getElementById(id)
     clipPath.innerHTML = ''
@@ -146,7 +142,7 @@ const Mask = ({ id, size, start }) => {
     const timeout = setTimeout(() => blobIt(), slideTime - animationTime)
     return () => clearTimeout(timeout)
 
-  }, [start, id, paths, size])
+  }, [start, id, size])
 
 
   return (

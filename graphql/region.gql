@@ -86,7 +86,7 @@ query Region($regionId: ItemId) {
 			}
 			... on SelectedCommissionRecord {
 				commissions {
-					...CommissionFragment
+					...CommissionLightFragment
 				}
 			}
 			... on SelectedMemberRecord {
