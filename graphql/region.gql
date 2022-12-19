@@ -51,6 +51,14 @@ query Region($regionId: ItemId) {
 						...ImageFragment
 					}
 				}
+				... on AboutRecord {
+					id
+					title
+					slug
+					image {
+						...ImageFragment
+					}
+				}
 			}
 		}
 		sections {

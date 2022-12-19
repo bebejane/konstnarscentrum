@@ -52,6 +52,7 @@
 
         &.next {
           z-index: 3;
+          pointer-events: none;
         }
 
         header {
