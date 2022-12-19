@@ -13,14 +13,17 @@ export type Props = {
 export default function News({ news: { createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
 
   return (
-    <Article
-      image={image}
-      title={title}
-      subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
-      blackHeadline={blackHeadline}
-      text={intro}
-      content={content}
-    />
+    <>
+      <Article
+        image={image}
+        title={title}
+        subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
+        blackHeadline={blackHeadline}
+        text={intro}
+        content={content}
+      />
+      <button className="wide">Visa alla nyheter</button>
+    </>
   );
 }
 
