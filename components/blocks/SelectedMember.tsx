@@ -1,6 +1,6 @@
 import s from './SelectedMember.module.scss'
 import React from 'react'
-import { CardContainer, Card, Thumbnail } from '/components'
+import { CardContainer, Card, Thumbnail, BackgroundImage } from '/components'
 import SectionHeader from '../layout/SectionHeader'
 
 export type SelectedMemberBlockProps = {
@@ -24,7 +24,7 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
           </Card>
         )}
       </CardContainer>
-      <div className={s.background}></div>
+      <BackgroundImage></BackgroundImage>
     </section>
   )
 }

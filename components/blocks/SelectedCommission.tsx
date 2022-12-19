@@ -2,7 +2,7 @@ import s from './SelectedCommission.module.scss'
 import React from 'react'
 import Thumbnail from '/components/common/Thumbnail'
 import SectionHeader from '../layout/SectionHeader'
-import { CardContainer, Card } from '/components'
+import { CardContainer, Card, BackgroundImage } from '/components'
 
 export type SelectedCommissionBlockProps = {
   data: SelectedCommissionRecord & {
@@ -27,7 +27,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
           </Card>
         )}
       </CardContainer>
-      <div className={s.background}></div>
+      <BackgroundImage></BackgroundImage>
     </section>
   )
 }
