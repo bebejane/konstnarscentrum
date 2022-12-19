@@ -159,3 +159,5 @@ export const isEmptyObject = (obj: any) => Object.keys(obj).filter(k => obj[k] !
 export const capitalize = (str: string, lower: boolean = false) => {
   return (lower ? str.toLowerCase() : str).replace(/(?:^|\s|["'([{])+\S/g, match => match.toUpperCase());
 }
+
+export const sleep = (ms: number) => new Promise((resolve, refject) => setTimeout(resolve, ms))

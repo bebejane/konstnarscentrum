@@ -3,10 +3,9 @@ import cn from 'classnames'
 import { Image } from 'react-datocms'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
-import { RevealText } from '/components'
-import { SvgBlob } from 'react-svg-blob';
+import { RevealText } from '/components';
+import { sleep } from '/lib/utils'
 import blobshape from "blobshape";
-
 
 export type Props = {
   slides: SlideRecord[]
@@ -24,6 +23,8 @@ const parseRecord = (record: any) => {
       return { type: 'Aktuellt', slug: `/konstnar/aktuellt/${slug}` }
     case 'NewsRecord':
       return { type: 'Nyheter', slug: `/nyheter/${slug}` }
+    case 'AboutRecord':
+      return { type: 'Om', slug: `/om/${slug}` }
     case 'ForArtistRecord':
       return { type: 'För konstnärer', slug: `/` }
     default:
@@ -42,7 +43,6 @@ const slideTime = 6000
 export default function HomeGallery({ slides }: Props) {
 
   const [index, setIndex] = useState(0)
-  const [tIndex, setTIndex] = useState()
   const [loaded, setLoaded] = useState({})
   const [size, setSize] = useState({ width: 0, height: 0 })
   const ref = useRef<HTMLUListElement | null>(null)
@@ -64,17 +64,13 @@ export default function HomeGallery({ slides }: Props) {
     })
   }, [ref])
 
-
-
   return (
     <section className={s.gallery}>
       <ul ref={ref}>
-
         {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({
           id,
           headline,
           image,
-          link,
           slug,
           type,
           blackText
@@ -115,50 +111,44 @@ export default function HomeGallery({ slides }: Props) {
 
 const Mask = ({ id, size, start }) => {
 
+
   const numBlobs = 200
+  const animationTime = 600
   const [count, setCount] = useState(0)
   const [paths, setPaths] = useState([])
 
   useEffect(() => {
     const paths = new Array(numBlobs).fill(0).map((e, idx) => {
       const { path } = blobshape({
-        size: randomInt(400 * (idx / 200), 1000 * (idx / 200)),
+        size: randomInt(size.width * (idx / 200), size.width * (idx / 200)),
         growth: randomInt(2, 10),
         edges: randomInt(2, 10),
         seed: null
       })
-      return (
-        <path
-          d={path}
-          key={idx}
-          transform={`translate(${randomInt(-200, size.width)},${randomInt(-200, size.height)})`}
-        />
-      )
+      return path
     })
     setPaths(paths)
   }, [setPaths, size])
 
   useEffect(() => {
-    if (!start)
-      return setCount(0)
+    if (!start) return
 
     const clipPath = document.getElementById(id)
+    clipPath.innerHTML = ''
 
-    let interval;
+    const blobIt = async () => {
 
-    const timeout = setTimeout(() => {
-      let c = 0;
-      interval = setInterval(() => {
-        if (c > numBlobs)
-          return clearInterval(interval)
-        setCount(++c)
-      }, 0)
-    }, slideTime - 1000)
-    return () => {
-      clearInterval(interval)
-      clearTimeout(timeout)
+      for (let i = 0; i < paths.length; i++) {
+        const path = paths[i];
+        clipPath.innerHTML += `<path d="${path}" transform="translate(${randomInt(-200, size.width)},${randomInt(-200, size.height)})"/>`
+        await sleep(animationTime / numBlobs)
+      }
     }
-  }, [start])
+
+    const timeout = setTimeout(() => blobIt(), slideTime - animationTime)
+    return () => clearTimeout(timeout)
+
+  }, [start, paths, size])
 
 
   return (
@@ -166,7 +156,7 @@ const Mask = ({ id, size, start }) => {
       <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${size.width} ${size.height}`}>
         <defs>
           <clipPath id={id}>
-            {paths.slice(0, count)}
+
           </clipPath>
         </defs>
       </svg>
