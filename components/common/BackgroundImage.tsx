@@ -11,7 +11,7 @@ export default function BackgroundImage({ image }: BackgroundImageProps) {
     <div
       className={s.background}
       // @ts-ignore
-      style={{ '--background': `url(${image.url}?w=1000)` }}
+      style={{ '--background': `url(${image?.url}?w=1000)` }}
     ></div>
   )
 }
