@@ -120,7 +120,12 @@ button {
 	&:hover {
 		//border-width: 2px;
 		//margin: -1px;
-		color: var(--beige-dark);
+		color: var(--beige-dark) !important;
+	}
+
+	&.wide {
+		margin-top: 1rem;
+		width: 100%;
 	}
 }
 

@@ -49,6 +49,10 @@
         margin-left: var(--full-margin);
         margin-right: var(--full-margin);
       }
+
+      &.black .fade {
+        display: none;
+      }
     }
   }
 

@@ -118,7 +118,11 @@ article {
     list-style-type: square;
 
     p:last-of-type {
-      margin-bottom: 0.5em;
+      margin-bottom: 0.7em;
+    }
+
+    li:last-of-type p {
+      margin-bottom: 1em;
     }
   }
 }
