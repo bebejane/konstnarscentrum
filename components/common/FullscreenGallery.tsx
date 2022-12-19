@@ -11,7 +11,7 @@ import { useState, useRef, useEffect } from 'react';
 import type { Swiper as SwiperType } from 'swiper'
 import { Modal } from "/components";
 
-SwiperCore.use([EffectFade, EffectCube]);
+SwiperCore.use([EffectFade]);
 
 
 export type FullscreenGalleryProps = {
@@ -65,10 +65,10 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
           <Swiper
             id={`main-gallery`}
             loop={true}
-            spaceBetween={500}
+            spaceBetween={0}
+            centeredSlides={true}
             simulateTouch={!isSingleSlide}
             slidesPerView={1}
-            //effect={'fade'}
             initialSlide={index}
             onSlideChange={({ realIndex }) => setRealIndex(realIndex)}
             onSwiper={(swiper) => swiperRef.current = swiper}
