@@ -14,11 +14,6 @@
   .images {
     --height: calc(100vh - calc(2 * var(--outer-margin)) - var(--space));
     --width: calc(100vw - calc(2 * var(--outer-margin)) - calc(2 * var(--gutter)));
-    display: flex;
-    position: relative;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
     max-height: var(--height);
     min-height: var(--height);
     margin-bottom: var(--space);
@@ -38,9 +33,7 @@
       .image {
         position: relative;
         margin: 0;
-        object-fit: CONTAIN;
-        height: 100%;
-        width: 100%;
+        object-fit: contain;
         max-height: var(--height);
 
         &.portrait {

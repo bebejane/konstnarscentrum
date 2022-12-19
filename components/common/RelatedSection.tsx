@@ -19,7 +19,7 @@ export default function RelatedSection({ title, slug, items, regional = true }: 
   return (
     <section className={s.related}>
       <SectionHeader title={title} slug={slug} margin={true} />
-      <BackgroundImage></BackgroundImage>
+      <BackgroundImage image={items?.[0].image}></BackgroundImage>
       <CardContainer columns={3}>
         {items.map(({ title, subtitle, image, slug }, idx) =>
           <Card key={idx}>

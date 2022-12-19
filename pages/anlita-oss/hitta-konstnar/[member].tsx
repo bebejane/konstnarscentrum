@@ -30,15 +30,12 @@ export default function Member({ member: {
 	content: contentFromProps
 }, member, related }: Props) {
 
-	console.log(member);
-
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 	const [content, setContent] = useState<MemberModelContentField[] | undefined>()
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
 	const handleSave = useCallback(async () => {
-
 
 		if (JSON.stringify(member.content) === JSON.stringify(content) || status !== 'authenticated')
 			return
@@ -53,7 +50,6 @@ export default function Member({ member: {
 				headers: { 'Content-Type': 'application/json' },
 			})
 			const newMember = await res.json()
-
 			console.log(newMember);
 		} catch (err) {
 			console.log(err);
@@ -63,8 +59,6 @@ export default function Member({ member: {
 
 
 	useEffect(() => {
-		console.log('update');
-
 		setContent(contentFromProps)
 	}, [contentFromProps])
 
