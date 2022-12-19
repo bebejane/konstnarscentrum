@@ -65,60 +65,66 @@ export default function HomeGallery({ slides }: Props) {
   }, [ref])
 
 
-  const currentImage = slides[index]?.image
-  const nextImage = slides[index + 1 > slides.length - 1 ? 0 : index + 1]?.image
-
 
   return (
     <section className={s.gallery}>
       <ul ref={ref}>
 
-        {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({ id, headline, image, link, slug, type, blackText }, idx) =>
-          <li
-            key={idx}
-            className={cn(idx === index ? s.transition : s.hide)}
-          >
-            <Link href={slug}>
-              <header className={cn(blackText && s.blackText)}>
-                <h5>{type}</h5>
-                <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
-              </header>
-              <Image
-                className={s.image}
-                data={image.responsiveImage}
-                onLoad={() => setLoaded({ ...loaded, [id]: true })}
-                objectFit="cover"
-              />
-              {index === idx &&
-                <Transition
-                  image={slides[idx + 1 > slides.length - 1 ? 0 : idx + 1]?.image}
-                  size={size}
-                  start={true}
+        {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({
+          id,
+          headline,
+          image,
+          link,
+          slug,
+          type,
+          blackText
+        }, idx) => {
+
+          const isCurrent = index === idx;
+          const isNext = (index + 1 > slides.length - 1 ? 0 : index + 1) === idx
+          const maskId = `mask${idx}`
+
+          return (
+            <li key={idx}>
+              <Link href={slug} className={cn(isCurrent ? s.current : isNext ? s.next : undefined)}>
+                <header className={cn(blackText && s.blackText, !isCurrent && s.hide)}>
+                  <h5>{type}</h5>
+                  <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
+                </header>
+                <Image
+                  className={cn(s.image, isCurrent && s.pan)}
+                  data={image.responsiveImage}
+                  onLoad={() => setLoaded({ ...loaded, [id]: true })}
+                  pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
+                  objectFit="cover"
                 />
-              }
-            </Link>
-          </li>
-        )}
-
+                <Mask
+                  id={maskId}
+                  size={size}
+                  start={isNext}
+                />
+              </Link>
+            </li>
+          )
+        })}
       </ul>
-
-    </section >
+    </section>
   )
 }
 
 
-const Transition = ({ image, size, start }) => {
+const Mask = ({ id, size, start }) => {
 
-  const totalBlob = 300
+  const numBlobs = 200
   const [count, setCount] = useState(0)
   const [paths, setPaths] = useState([])
 
   useEffect(() => {
-    const paths = new Array(totalBlob).fill(0).map((e, idx) => {
+    const paths = new Array(numBlobs).fill(0).map((e, idx) => {
       const { path } = blobshape({
-        size: randomInt(100, 400),
-        growth: randomInt(2, 20),
-        edges: randomInt(2, 20),
+        size: randomInt(400 * (idx / 200), 1000 * (idx / 200)),
+        growth: randomInt(2, 10),
+        edges: randomInt(2, 10),
         seed: null
       })
       return (
@@ -136,40 +142,34 @@ const Transition = ({ image, size, start }) => {
     if (!start)
       return setCount(0)
 
+    const clipPath = document.getElementById(id)
+
     let interval;
 
     const timeout = setTimeout(() => {
       let c = 0;
       interval = setInterval(() => {
-        if (c > totalBlob)
+        if (c > numBlobs)
           return clearInterval(interval)
         setCount(++c)
-      }, 10)
-    }, slideTime - 2000)
+      }, 0)
+    }, slideTime - 1000)
     return () => {
       clearInterval(interval)
       clearTimeout(timeout)
     }
-  }, [start, image])
+  }, [start])
 
 
   return (
     <div className={s.color}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${size.width} ${size.height}`}>
         <defs>
-          <clipPath id="mask">
+          <clipPath id={id}>
             {paths.slice(0, count)}
           </clipPath>
         </defs>
       </svg>
-      <Image
-        className={s.maskImage}
-        data={image.responsiveImage}
-        lazyLoad={false}
-        usePlaceholder={false}
-        objectFit="cover"
-        pictureStyle={{ clipPath: `url(#mask)` }}
-      />
     </div>
   )
 }

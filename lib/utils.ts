@@ -150,7 +150,7 @@ export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: bo
   if (s.length < minLength)
     return s;
 
-  let str = `${s.substring(0, minLength - 1)} ${s.substring(minLength).split('.').slice(0, sentances).join('. ')}`
+  let str = `${s.substring(0, minLength - 1)}${s.substring(minLength - 1).split('.').slice(0, sentances).join('. ')}`
   return ellipsis ? (str + '...') : str + '.';
 }
 

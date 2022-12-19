@@ -5,9 +5,14 @@ import React from 'react'
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { Image } from "react-datocms"
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectFade, EffectCube } from 'swiper'
+import SwiperCore from 'swiper'
 import { useState, useRef, useEffect } from 'react';
 import type { Swiper as SwiperType } from 'swiper'
 import { Modal } from "/components";
+
+SwiperCore.use([EffectFade, EffectCube]);
+
 
 export type FullscreenGalleryProps = {
   images: FileField[],
@@ -56,7 +61,6 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
   return (
     <Modal>
       <div className={cn(s.gallery, images.length <= 1 && s.noArrows, isSingleSlide && s.noArrows)}>
-        <div className={s.back} onClick={() => swiperRef.current.slidePrev()}><img src="/images/arrow-light.svg" className={s.arrow} /></div>
         <div className={s.images} onClick={() => !isSingleSlide && swiperRef?.current?.slideNext()}>
           <Swiper
             id={`main-gallery`}
@@ -64,30 +68,20 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
             spaceBetween={500}
             simulateTouch={!isSingleSlide}
             slidesPerView={1}
-            effect={"fade"}
+            //effect={'fade'}
             initialSlide={index}
             onSlideChange={({ realIndex }) => setRealIndex(realIndex)}
             onSwiper={(swiper) => swiperRef.current = swiper}
           >
             {images.map((image, idx) =>
               <SwiperSlide key={idx} className={cn(s.slide)}>
-                {image.responsiveImage ?
-                  <Image
-                    pictureClassName={s.image}
-                    data={image.responsiveImage}
-                    lazyLoad={false}
-                    usePlaceholder={false}
-                    onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
-                  />
-                  :
-                  <div className={s.svg}>
-                    <img
-                      src={image.url}
-                      className={s.image}
-                      onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
-                    />
-                  </div>
-                }
+                <Image
+                  pictureClassName={cn(s.image,)}
+                  data={image.responsiveImage}
+                  lazyLoad={false}
+                  usePlaceholder={false}
+                  onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
+                />
                 {/*!loaded[image.id] && initLoaded &&
                   <div className={s.loading}><Loader /></div>
                 */}
@@ -95,7 +89,6 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
             )}
           </Swiper>
         </div>
-        <div className={s.forward} onClick={() => swiperRef.current.slideNext()}><img src="/images/arrow-light.svg" className={s.arrow} /></div>
         <div className={s.caption}>
           {title &&
             <Markdown className={cn(s.text, "medium")} allowedElements={['em', 'p']}>
@@ -103,7 +96,7 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
             </Markdown>
           }
         </div>
-        <div className={s.close} onClick={onClose}>×</div>
+        <div className={s.close} onClick={onClose}>STÄNG</div>
       </div>
     </Modal>
   )

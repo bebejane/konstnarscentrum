@@ -2,6 +2,7 @@
   position: relative;
   min-width: 4em;
 
+
   &:hover {
     color: var(--beige-dark);
   }
@@ -15,7 +16,7 @@
     align-items: center;
     justify-content: flex-end;
 
-    &.open > img {
+    &.open>img {
       transform: rotate(-180deg);
     }
   }
@@ -41,7 +42,7 @@
     }
 
     a {
-      color: var(--black);
+      color: var(--black) !important;
 
       &:hover {
         color: var(--beige-dark);
@@ -54,6 +55,7 @@
       align-items: center;
       width: 100%;
       text-align: center;
+
 
       &.mid {
         padding-top: 1.5em;
@@ -79,6 +81,7 @@
         flex: 0 0 33.3333%;
         text-align: center;
         width: 33.3333%;
+
       }
     }
   }

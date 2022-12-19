@@ -83,38 +83,13 @@ export const siteSearch = async (opt: any) => {
     if (!data[type].length)
       delete data[type]
     else
-      data[type] = data[type].map(el => normalizeSiteResult(el, itemTypes))
+      data[type] = data[type].map(el => ({
+        ...el,
+        category: itemTypes.find(({ api_key }) => api_key === el._modelApiKey).name,
+        text: truncateParagraph(el.text, 1, false),
+        slug: recordToSlug(el)
+      }))
   })
 
   return data;
-}
-
-const normalizeSiteResult = (record: any, itemTypes: any[]): any => {
-
-  let res: any;
-  const { __typename, _modelApiKey } = record;
-
-  switch (__typename) {
-    case 'MemberRecord':
-      res = { title: `${record.fullName}`, text: record.bio, image: record.image }
-      break;
-    case 'MemberNewsRecord':
-      res = { title: record.title, text: record.intro, image: record.image }
-      break;
-    case 'NewsRecord':
-      res = { title: record.title, text: record.intro, image: record.image }
-      break;
-  }
-
-  if (!res)
-    throw Error(`Can't parse search result for "${__typename}"`)
-
-  return {
-    ...res,
-    category: itemTypes.find(({ api_key }) => api_key === _modelApiKey).name,
-    text: truncateParagraph(res.text, 1, false),
-    slug: recordToSlug(record),
-    _modelApiKey,
-    __typename
-  };
 }

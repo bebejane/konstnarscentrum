@@ -141,6 +141,10 @@
       &:first-child {
         margin-right: 1rem;
       }
+
+      &.close {
+        cursor: pointer;
+      }
     }
 
     svg {
