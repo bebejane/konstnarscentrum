@@ -2,6 +2,7 @@
   position: fixed;
   flex: 0 0;
   margin: var(--outer-margin);
+  margin-top: 1.6rem;
   top: 0;
   right: 0;
   z-index: 100000;
@@ -12,10 +13,7 @@
   &.show {
     opacity: 1;
   }
-
-  a {
-    font-weight: bold;
+  span:last-child {
+    color: var(--beige-dark);
   }
-
-
 }

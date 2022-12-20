@@ -17,11 +17,11 @@ export default function Breadcrumbs({ show }: Props) {
   const crumbs = [{ slug: '', title: 'Hem', regional: true }, ...page.crumbs]
 
   return (
-    <div className={cn(s.container, show && s.show)}>
+    <div className={cn(s.container, 'mid', show && s.show)}>
       {crumbs.map(({ slug, title, regional }, idx) =>
         <>
           {slug === undefined ?
-            <>{title}</>
+            <><span>{title}</span></>
             :
             <RegionLink key={idx} href={`/${slug}`} regional={regional}>
               {title}

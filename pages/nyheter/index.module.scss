@@ -9,8 +9,11 @@
     li {
       margin-bottom: 2em;
       padding-bottom: 2em;
-
       border-bottom: 1px solid var(--beige-mid);
+      h3:hover {
+        text-underline-offset: 0.1em;
+        text-decoration: underline;
+      }
     }
   }
 
