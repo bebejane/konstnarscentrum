@@ -41,7 +41,7 @@ export default function News({ news, region, pagination }: Props) {
   );
 }
 
-News.page = { crumbs: [{ slug: 'nyheter', title: 'Nyheter' }] } as PageProps
+News.page = { crumbs: [{ title: 'Nyheter', regional: true }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 

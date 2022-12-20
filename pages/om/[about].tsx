@@ -32,7 +32,7 @@ export default function About({ about: { id, title, image, intro, content } }: A
 	);
 }
 
-About.page = { crumbs: [{ slug: 'om', title: 'Om' }] } as PageProps
+About.page = { crumbs: [{ title: 'Om', regional: false }] } as PageProps
 
 export async function getStaticPaths() {
 	const { abouts } = await apiQuery(AllAboutsDocument)

@@ -60,6 +60,8 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 	);
 }
 
+Contact.page = { crumbs: [{ title: 'Kontakt', regional: false }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;

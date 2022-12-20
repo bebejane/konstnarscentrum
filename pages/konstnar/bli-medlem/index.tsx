@@ -22,6 +22,8 @@ export default function Member({ apply: { content, title } }: Props) {
 	);
 }
 
+Member.page = { crumbs: [{ title: 'Bli medlem', regional: false }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [ApplyForMembershipDocument] }, async ({ props, revalidate, context }: any) => {
 
 	return {

@@ -122,6 +122,9 @@ export default function Members({ members, memberCategories, cities, regions, re
 	);
 }
 
+
+Members.page = { crumbs: [{ title: 'Hitta konstnär', regional: true }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({
 	queries: [
 		AllMemberCategoriesDocument,

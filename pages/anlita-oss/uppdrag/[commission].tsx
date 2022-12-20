@@ -81,7 +81,10 @@ export default function Commission({ commission: {
 	);
 }
 
-Commission.page = { noBottom: true } as PageProps
+Commission.page = {
+	noBottom: true,
+	crumbs: [{ slug: 'anlita-oss/uppdrag', title: 'Uppdragsarkiv', regional: true }]
+} as PageProps
 
 export async function getStaticPaths() {
 	const p = await getStaticPagePaths(AllCommissionsDocument, 'commission')

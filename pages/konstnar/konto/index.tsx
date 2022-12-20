@@ -60,8 +60,6 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 
 	}, [formState, errors])
 
-	console.log(errors);
-
 	return (
 		<div className={s.container}>
 			<h1><RevealText>Konto</RevealText></h1>
@@ -182,6 +180,8 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 	);
 }
 
+Account.page = { crumbs: [{ title: 'Konto', regional: false }] } as PageProps
+
 const ErrorMessage = ({ errors, id }) => {
 	if (!errors[id])
 		return null
@@ -190,6 +190,7 @@ const ErrorMessage = ({ errors, id }) => {
 		<div className={s.error}>{errors[id].message}</div>
 	)
 }
+
 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [AllMemberCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 	const res = await getCsrfToken(context)

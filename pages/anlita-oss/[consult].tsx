@@ -22,6 +22,8 @@ export default function Consult({ consult: { id, title, image, intro, content } 
 	);
 }
 
+Consult.page = { crumbs: [{ title: 'Anlita oss', regional: false }] } as PageProps
+
 export async function getStaticPaths() {
 	const { consults } = await apiQuery(AllConsultsDocument)
 	const paths = consults.map(({ slug }) => ({ params: { consult: slug } }));

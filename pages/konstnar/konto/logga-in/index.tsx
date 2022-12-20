@@ -38,6 +38,8 @@ export default function Login({ providers }: Props) {
 	);
 }
 
+Login.page = { crumbs: [{ slug: 'konstnar/konto', title: 'Konto', regional: false }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 	return {
 		props,
