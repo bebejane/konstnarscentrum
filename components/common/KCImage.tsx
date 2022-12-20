@@ -193,7 +193,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
   (
     {
       className,
-      fadeInDuration = 750,
+      fadeInDuration = 1000,
       intersectionTreshold,
       intersectionThreshold,
       intersectionMargin,
@@ -296,7 +296,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
     );
 
     const transition = fadeInDuration > 0 ? `border-width ${fadeInDuration}ms` : undefined;
-    const border = loaded ? `0px solid ${data.bgColor}` : `30px solid ${data.bgColor}`
+    const border = loaded ? `0px solid ${data.bgColor}` : `15px solid ${data.bgColor}`
 
     const placeholder =
       usePlaceholder && (data.bgColor || data.base64) ? (
