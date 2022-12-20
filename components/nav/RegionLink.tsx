@@ -3,6 +3,7 @@ import { useRegion } from '/lib/context/region';
 
 export type Props = {
   [key: string]: any
+  href: string
   regional?: boolean
 }
 

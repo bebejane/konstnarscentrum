@@ -1,11 +1,9 @@
-import styles from "./[memberNews].module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import Link from "next/link";
-import { Article, MetaSection, StructuredContent } from "/components";
+import { Article, MetaSection, StructuredContent, RegionLink } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
 
 export type Props = {
@@ -45,7 +43,9 @@ export default function MemberNewsArticle({ memberNews: {
 				/>
 				<StructuredContent content={content} />
 			</Article>
-			<button className="wide"><Link href='../'>Tillbaka till översikt</Link></button>
+			<RegionLink href={'/konstnar/aktuellt'}>
+				<button className="wide">Tillbaka till översik</button>
+			</RegionLink>
 		</>
 	);
 }
@@ -69,7 +69,3 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 		},
 	};
 });
-
-export const config = {
-	//runtime:'experimental-edge'
-}

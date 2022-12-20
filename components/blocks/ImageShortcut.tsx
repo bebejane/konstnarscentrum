@@ -1,14 +1,14 @@
 import s from './ImageShortcut.module.scss'
+import cn from 'classnames'
 import React from 'react'
 import { Image } from 'react-datocms'
 import ReadMore from '../common/ReadMore'
-import { recordToSlug } from '/lib/utils'
 
 export type ImageShortcutBlockProps = {
   data: ImageShortcutRecord
 }
 
-export default function ImageShortcut({ data: { headline, image, link, text } }: ImageShortcutBlockProps) {
+export default function ImageShortcut({ data: { headline, image, link, text, blackHeadline } }: ImageShortcutBlockProps) {
 
   return (
     <section className={s.container}>
@@ -22,7 +22,9 @@ export default function ImageShortcut({ data: { headline, image, link, text } }:
         }
         <figcaption>
           <div className={s.fade}></div>
-          <h2>{headline}</h2>
+          <h2 className={cn(blackHeadline && s.black)}>
+            {headline}
+          </h2>
           <p className="intro">{text}</p><br />
           <ReadMore link={link} message='Läs mer' invert={true} />
         </figcaption>
