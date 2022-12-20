@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   padding: var(--outer-margin);
-  margin-top: var(--small-space);
+  margin-top: var(--small- space);
 
   @include mq($from: desktop) {
     padding-left: calc((var(--outer-margin) * 2) + var(--logo-size));
