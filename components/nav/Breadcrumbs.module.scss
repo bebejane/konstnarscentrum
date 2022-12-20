@@ -1,4 +1,7 @@
 .container {
+  @include mq($until: tablet) {
+    display: none;
+  }
   position: fixed;
   flex: 0 0;
   margin: var(--outer-margin);
@@ -14,6 +17,6 @@
     opacity: 1;
   }
   span:last-child {
-    color: var(--beige-dark);
+    color: v ar(--beige-dark);
   }
 }

@@ -15,6 +15,7 @@
   font-family: "Logo", arial;
   font-size: var(--logo-size);
   text-transform: uppercase;
+  letter-spacing: -0.03em;
 
   .vertical,
   .horizontal {
@@ -63,6 +64,7 @@
     @include mq($from: tablet) {
       margin-left: 0.5rem;
       -webkit-text-stroke: 1px;
+      -webkit-text-stroke-color: var(--black);
 
       &.end {
         margin-left: 2rem;
