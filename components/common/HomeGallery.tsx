@@ -94,6 +94,7 @@ export default function HomeGallery({ slides }: Props) {
                   onLoad={() => setLoaded({ ...loaded, [id]: true })}
                   pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
                   objectFit="cover"
+                  fadeInDuration={0}
                 />
                 <Mask
                   id={maskId}

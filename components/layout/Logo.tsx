@@ -13,9 +13,11 @@ export type Props = {
   fixed: boolean
 }
 
+const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
+
 export default function Logo({ fixed }: Props) {
 
-  const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
+
   const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
@@ -32,6 +34,7 @@ export default function Logo({ fixed }: Props) {
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
 
     setManualMode(true)
+
     let r = ratio;
     const step = maxR / (letters.length + region.name.length)
     const interval = setInterval(() => {
@@ -41,6 +44,8 @@ export default function Logo({ fixed }: Props) {
       }
       setRatio(dir === 'horizontal' ? r += step : r -= step)
     }, 10)
+
+    return () => clearInterval(interval)
   }, [setManualMode, ratio, region, letters, maxR])
 
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
@@ -59,6 +64,8 @@ export default function Logo({ fixed }: Props) {
       return letters.filter((el, idx) => ((idx / l) >= ratio || isServer))
   }
 
+  //useEffect(() => { return animateManual('horizontal') }, [router.asPath])
+
   useEffect(() => {
     if (manualMode)
       return
@@ -75,7 +82,7 @@ export default function Logo({ fixed }: Props) {
   }, [scrolledPosition, viewportHeight, documentHeight, atBottom, setRatio, manualMode, height, region, maxR])
 
   useEffect(() => {
-    animateManual(!showMenuMobile ? 'vertical' : 'horizontal')
+    return animateManual(!showMenuMobile ? 'vertical' : 'horizontal')
   }, [showMenuMobile])
 
   useEffect(() => {
@@ -91,11 +98,14 @@ export default function Logo({ fixed }: Props) {
     setHeight(ref.current.clientHeight)
   }, [ref])
 
+
   useEffect(() => {
     const footer = document.getElementById('footer') as HTMLDivElement
     const footerThreshhold = documentHeight - footer.clientHeight
     setAtBottom((scrolledPosition + viewportHeight) > footerThreshhold)
   }, [scrolledPosition, documentHeight, viewportHeight])
+
+
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')

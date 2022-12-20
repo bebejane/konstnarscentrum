@@ -21,7 +21,7 @@ export default function Home({ regionStart, menu }: Props) {
 			</div>
 			<MenuDesktop items={menu} home={true} />
 			<div className={s.margins}>
-				{regionStart.sections.map((block, idx) =>
+				{regionStart.sections?.map((block, idx) =>
 					<Block key={idx} data={block} />
 				)}
 			</div>
@@ -47,11 +47,11 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 			...props,
 			regionStart: {
 				...regionStart,
-				sections: regionStart.sections.map((section) => ({
+				sections: regionStart?.sections.map((section) => ({
 					...section,
 					news: section.__typename === 'LatestNewsRecord' ? news : null,
 					memberNews: section.__typename === 'LatestMemberNewsRecord' ? memberNews : null
-				}))
+				})) || null
 			}
 		},
 		revalidate

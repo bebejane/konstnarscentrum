@@ -81,6 +81,7 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
                   lazyLoad={false}
                   usePlaceholder={false}
                   onLoad={() => setLoaded({ ...loaded, [image.id]: true })}
+                  fadeInDuration={0}
                 />
                 {/*!loaded[image.id] && initLoaded &&
                   <div className={s.loading}><Loader /></div>

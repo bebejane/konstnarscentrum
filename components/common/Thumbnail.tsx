@@ -58,7 +58,6 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
           className={s.image}
           pictureClassName={cn(s.picture, hover && s.hover)}
           pictureStyle={{ left: hover ? '1.9rem' : 0 }}
-          fadeInDuration={0}
         />
       }
       <div className={cn('mid', s.title, s.vertical)}>

@@ -20,7 +20,7 @@ export default function NewsCard({ title, subtitle, text, slug, image, label }: 
   return (
     <Card className={s.card}>
       {image &&
-        <RegionLink href={slug} regional={true}>
+        <RegionLink href={slug} regional={false}>
           <Image className={s.image} data={image.responsiveImage} />
           {label && <div className={s.label}><h5>{label}</h5></div>}
         </RegionLink>

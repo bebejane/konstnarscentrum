@@ -35,7 +35,6 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								className={s.image}
 								pictureClassName={s.picture}
 								objectFit={'cover'}
-								fadeInDuration={0}
 							/>
 							{item.title &&
 								<figcaption>

@@ -1,7 +1,6 @@
 import s from './Pager.module.scss'
 import React from 'react'
 import Link from 'next/link'
-import { RegionLink } from '/components'
 
 export type PagerProps = {
   pagination: Pagination,
@@ -9,7 +8,6 @@ export type PagerProps = {
 }
 
 export default function Pager({ pagination: { count, page, size }, slug }: PagerProps) {
-
 
   const pages = new Array(Math.ceil(count / size)).fill(0).map((p, idx) => idx + 1);
 
@@ -21,7 +19,7 @@ export default function Pager({ pagination: { count, page, size }, slug }: Pager
       <ul>
         {pages.map((p, idx) =>
           <li key={idx}>
-            {page === p ? <>{p}</> : <RegionLink regional={true} href={`${slug}/sida/${p}`}>{p}</RegionLink>}
+            {page === p ? <>{p}</> : <Link href={`${slug}/sida/${p}`}>{p}</Link>}
           </li>
         )}
       </ul>

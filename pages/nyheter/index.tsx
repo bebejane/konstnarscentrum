@@ -24,18 +24,18 @@ export default function News({ news, region, pagination }: Props) {
         <ul>
           {news.length > 0 ? news.map(({ slug, title, intro, createdAt, region }, idx) =>
             <li key={idx} >
-              <Link href={region ? `/${region.slug}/nyheter/${slug}` : `/nyheter/${slug}`}>
+              <Link href={`/${region.slug}/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
                 <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
               </Link>
-              <ReadMore link={`/nyheter/${slug}`} message='Läs mer' />
+              <ReadMore link={`/${region.slug}/nyheter/${slug}`} message='Läs mer' />
             </li>
           ) :
             <>Det finns inga nyheter...</>
           }
         </ul>
-        <Pager pagination={pagination} slug={'/nyheter'} />
+        <Pager pagination={pagination} slug={`/${region.slug}/nyheter`} />
       </div>
     </>
   );

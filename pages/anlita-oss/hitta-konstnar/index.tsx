@@ -97,7 +97,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 									<Thumbnail
 										image={image}
 										title={`${firstName} ${lastName}`}
-										slug={`/anlita-oss/hitta-konstnar/${slug}`}
+										slug={`/${region.slug}/anlita-oss/hitta-konstnar/${slug}`}
 										regional={false}
 									/>
 								</Card>
@@ -111,7 +111,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 								<Thumbnail
 									image={image}
 									title={`${firstName} ${lastName}`}
-									slug={`/anlita-oss/hitta-konstnar/${slug}`}
+									slug={`/${region.slug}/anlita-oss/hitta-konstnar/${slug}`}
 									regional={false}
 								/>
 							</Card>
