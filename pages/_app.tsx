@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { DefaultDatoSEO } from 'dato-nextjs-utils/components';
 import { sv } from 'date-fns/locale'
-import { PageProvider, type PageProps } from '/lib/context/page';
+import { PageProvider } from '/lib/context/page';
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 
 setDefaultOptions({ locale: sv })
@@ -17,7 +17,7 @@ function App({ Component, pageProps }) {
   const router = useRouter()
   const page = (Component.page || {}) as PageProps
 
-  const { menu, footer, regions, session, site } = pageProps;
+  const { menu, footer, regions, session, site, pageTitle } = pageProps;
   const [region, setRegion] = useState(pageProps.region)
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function App({ Component, pageProps }) {
       <SessionProvider session={session}>
         <PageProvider value={page}>
           <RegionProvider value={region}>
-            <Layout title="Page title" menu={menu || []} footer={footer} regions={regions}>
+            <Layout title={pageTitle} menu={menu || []} footer={footer} regions={regions}>
               <Component {...pageProps} />
             </Layout>
           </RegionProvider>

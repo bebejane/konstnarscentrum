@@ -1,11 +1,8 @@
 import { useContext, createContext } from "react";
 
-export type PageProps = {
-  noBottom?: boolean
-}
-
 const initialState: PageProps = {
-  noBottom: false
+  noBottom: false,
+  crumbs: []
 }
 
 export const PageContext = createContext(initialState);

@@ -10,7 +10,7 @@ export type Props = {
   news: NewsRecord
 }
 
-export default function News({ news: { createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
+export default function NewsItem({ news: { createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
 
   return (
     <>
@@ -29,6 +29,8 @@ export default function News({ news: { createdAt, title, image, intro, content, 
   );
 }
 
+NewsItem.page = { crumbs: [{ slug: 'nyheter', title: 'Nyheter' }] } as PageProps
+
 export async function getStaticPaths() {
   return getStaticPagePaths(AllNewsDocument, 'news')
 }
@@ -44,7 +46,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
   return {
     props: {
       ...props,
-      news
+      news,
+      pageTitle: news.title
     },
     revalidate
   };

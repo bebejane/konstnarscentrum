@@ -1,0 +1,21 @@
+.container {
+  position: fixed;
+  flex: 0 0;
+  margin: var(--outer-margin);
+  top: 0;
+  right: 0;
+  z-index: 100000;
+  writing-mode: vertical-lr;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+
+  &.show {
+    opacity: 1;
+  }
+
+  a {
+    font-weight: bold;
+  }
+
+
+}

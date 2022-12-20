@@ -12,7 +12,7 @@ export type Props = {
 	menu: Menu
 }
 
-export default function RegionHome({ regionStart, menu }: Props) {
+export default function Home({ regionStart, menu }: Props) {
 
 	return (
 		<div className={s.container}>
@@ -28,6 +28,8 @@ export default function RegionHome({ regionStart, menu }: Props) {
 		</div>
 	);
 }
+
+Home.page = { crumbs: [{ slug: '', title: 'Hem' }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
