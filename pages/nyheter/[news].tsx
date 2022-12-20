@@ -2,7 +2,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { NewsDocument, AllNewsDocument } from "/graphql";
-import { Article } from "/components";
+import { Article, RegionLink } from "/components";
 import { format } from "date-fns";
 import { getStaticPagePaths } from "/lib/utils";
 
@@ -22,7 +22,9 @@ export default function News({ news: { createdAt, title, image, intro, content, 
         text={intro}
         content={content}
       />
-      <button className="wide">Visa alla nyheter</button>
+      <RegionLink href={'/nyheter'}>
+        <button className="wide">Visa alla nyheter</button>
+      </RegionLink>
     </>
   );
 }

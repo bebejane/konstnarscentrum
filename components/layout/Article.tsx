@@ -1,10 +1,11 @@
 import s from './Article.module.scss'
-import React from 'react'
+import React, { useState } from 'react'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { StructuredContent, RevealText } from "/components";
 import { Image } from 'react-datocms';
 import cn from 'classnames'
 import BalanceText from 'react-balance-text'
+import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 
 export type ArticleProps = {
   children?: React.ReactNode,
@@ -18,7 +19,6 @@ export type ArticleProps = {
   editable?: any,
   noBottom?: boolean,
   onClick?: (id: string) => void
-
 }
 
 export default function Article({
@@ -33,6 +33,9 @@ export default function Article({
   editable,
   onClick
 }: ArticleProps) {
+
+  const { scrolledPosition } = useScrollInfo()
+  const hideCaption = scrolledPosition > 100;
 
   return (
     <div className={cn(s.article, 'article')}>
@@ -53,6 +56,9 @@ export default function Article({
               fadeInDuration={0}
               objectFit="cover"
             />
+            <figcaption className={cn(hideCaption && s.hide)}>
+              <Markdown>{image.title}</Markdown>
+            </figcaption>
           </figure>
           <div className={s.colorBg} style={{ backgroundColor: image.responsiveImage.bgColor }}></div>
         </header>

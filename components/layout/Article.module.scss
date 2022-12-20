@@ -1,5 +1,5 @@
 .article {
-  > header {
+  >header {
     display: block;
     position: relative;
     padding-bottom: var(--small-space);
@@ -23,6 +23,15 @@
           width: auto !important;
           min-width: calc(100% + (2 * var(--full-margin)));
           max-width: none !important;
+        }
+      }
+
+      figcaption {
+        opacity: 1;
+        transition: opacity 0.4s ease-in-out;
+
+        &.hide {
+          opacity: 0;
         }
       }
     }
