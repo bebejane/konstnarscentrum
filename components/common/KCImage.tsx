@@ -295,7 +295,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
       />
     );
 
-    const transition = fadeInDuration > 0 ? `border-width ${fadeInDuration}ms` : undefined;
+    const transition = fadeInDuration > 0 ? `border-width ${fadeInDuration}ms ease-out` : undefined;
     const border = loaded ? `0px solid ${data.bgColor}` : `15px solid ${data.bgColor}`
 
     const placeholder =
