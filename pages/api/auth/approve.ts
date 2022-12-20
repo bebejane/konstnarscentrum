@@ -1,11 +1,10 @@
 import { NextApiResponse, NextApiRequest } from 'next';
+import { withBasicAuth } from 'dato-nextjs-utils/hoc'
 import NextCors from 'nextjs-cors';
 import Email from '/lib/emails';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
+export default withBasicAuth(async (req: NextApiRequest, res: NextApiResponse) => {
 	try {
-
 		await NextCors(req, res, {
 			methods: ['POST'],
 			origin: '*',
@@ -31,4 +30,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		console.error(err);
 		res.status(501).json({ error: err?.message || err });
 	}
-}
+})

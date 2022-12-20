@@ -39,7 +39,7 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 						label={status}
 						text={intro}
 						image={image}
-						slug={`/konstnar/aktuellt/${slug}`}
+						slug={`/${region.slug}/konstnar/aktuellt/${slug}`}
 						regionName={region.name}
 					/>
 				)}

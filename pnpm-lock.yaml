@@ -106,7 +106,7 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/23fcfed23c1e44cacd50df6de6fe651cee53080a_57a6fwf2kfo256p6xcvnywlb6i
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f_57a6fwf2kfo256p6xcvnywlb6i
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   graphql: 16.6.0
@@ -12338,11 +12338,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/23fcfed23c1e44cacd50df6de6fe651cee53080a_57a6fwf2kfo256p6xcvnywlb6i:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/23fcfed23c1e44cacd50df6de6fe651cee53080a}
-    id: github.com/bebejane/dato-nextjs-utils/23fcfed23c1e44cacd50df6de6fe651cee53080a
+  github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f_57a6fwf2kfo256p6xcvnywlb6i:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/974a3631d5b2ce1e0e9e10985de563731dcfee9f}
+    id: github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f
     name: dato-nextjs-utils
-    version: 1.0.209
+    version: 1.0.212
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4
