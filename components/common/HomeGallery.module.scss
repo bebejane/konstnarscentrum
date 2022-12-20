@@ -10,7 +10,10 @@
   }
 
   > ul {
-    --height: calc(100vh - calc(var(--navbar-height) * 2));
+    height: 60vh;
+    @include mq($from: tablet) {
+      --height: calc(100vh - calc(var(--navbar-height) * 2));
+    }
     list-style: none;
     position: relative;
     display: flex;

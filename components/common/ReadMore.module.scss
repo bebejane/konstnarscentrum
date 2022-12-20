@@ -1,6 +1,8 @@
 .more {
   overflow: hidden;
   display: inline-block;
+  white-space: nowrap;
+
   &:hover {
     .square {
       transform: translateX(-0.14em) rotate(45deg);
