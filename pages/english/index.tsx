@@ -18,6 +18,8 @@ export default function InEnglish({ inEnglish: { title, content } }: Props) {
 	);
 }
 
+InEnglish.page = { crumbs: [{ title: 'English', regional: false }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [InEnglishDocument] }, async ({ props, revalidate, context }: any) => {
 
 	return {

@@ -2,7 +2,7 @@ import { useContext, createContext } from "react";
 
 const initialState: PageProps = {
   noBottom: false,
-  crumbs: []
+  crumbs: undefined
 }
 
 export const PageContext = createContext(initialState);

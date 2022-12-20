@@ -1,8 +1,6 @@
 import s from './Breadcrumbs.module.scss'
 import cn from 'classnames'
-import { useRegion } from '/lib/context/region';
 import { usePage } from '/lib/context/page';
-import { useRouter } from 'next/router';
 import { RegionLink } from '/components'
 
 export type Props = {
@@ -10,22 +8,29 @@ export type Props = {
   show: boolean
 }
 
-export default function Breadcrumbs({ title, show }: Props) {
+export default function Breadcrumbs({ show }: Props) {
 
-  const router = useRouter()
-  const region = useRegion()
-  const { crumbs } = usePage()
+  const page = usePage()
+  if (!page.crumbs)
+    return null
+
+  const crumbs = [{ slug: '', title: 'Hem', regional: true }, ...page.crumbs]
 
   return (
     <div className={cn(s.container, show && s.show)}>
-      {[{ slug: '', title: 'Hem', }, ...crumbs].map(({ slug, title }, idx) =>
+      {crumbs.map(({ slug, title, regional }, idx) =>
         <>
-          <RegionLink
-            key={idx}
-            href={`/${slug}`}
-          >{title}</RegionLink>&nbsp;›&nbsp;
+          {slug === undefined ?
+            <>{title}</>
+            :
+            <RegionLink key={idx} href={`/${slug}`} regional={regional}>
+              {title}
+            </RegionLink>
+          }
+          {idx + 1 < crumbs.length && <>&nbsp;›&nbsp;</>}
         </>
-      )}{title && `${title}`}
-    </div>
+      )
+      }
+    </div >
   )
 }

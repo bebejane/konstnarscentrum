@@ -39,6 +39,8 @@ export default function Initiatives({ projects, introInitiative: { intro }, regi
 	);
 }
 
+Initiatives.page = { crumbs: [{ title: 'Våra initiativ', regional: true }] } as PageProps
+
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllProjectsDocument, ProjectsIntroDocument] }, async ({ props, revalidate, context }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;

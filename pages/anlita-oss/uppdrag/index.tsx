@@ -13,7 +13,7 @@ export type Props = {
 	pagination: Pagination
 }
 
-export default function RegionHome({ commissions, commissionCategories, pagination }: Props) {
+export default function CommissionArchive({ commissions, commissionCategories, pagination }: Props) {
 
 	const [category, setCategory] = useState<CommissionCategoryRecord | undefined>()
 
@@ -42,6 +42,8 @@ export default function RegionHome({ commissions, commissionCategories, paginati
 		</>
 	);
 }
+
+CommissionArchive.page = { crumbs: [{ title: 'Uppdragsarkiv', regional: true }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 

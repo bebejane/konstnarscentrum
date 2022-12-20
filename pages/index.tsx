@@ -29,8 +29,6 @@ export default function Home({ regionStart, menu }: Props) {
 	);
 }
 
-Home.page = { crumbs: [{ slug: '', title: 'Hem' }] } as PageProps
-
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;
