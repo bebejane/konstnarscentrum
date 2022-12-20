@@ -1,7 +1,7 @@
 import s from './Thumbnail.module.scss'
 import cn from 'classnames'
 import { RegionLink } from '/components'
-import { Image } from 'react-datocms'
+import { KCImage as Image } from '/components'
 import { useEffect, useState, useRef } from 'react'
 import useDevice from '/lib/hooks/useDevice'
 

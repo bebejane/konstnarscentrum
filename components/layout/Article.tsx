@@ -2,7 +2,7 @@ import s from './Article.module.scss'
 import React, { useState } from 'react'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { StructuredContent, RevealText } from "/components";
-import { Image } from 'react-datocms';
+import { KCImage as Image } from '/components'
 import cn from 'classnames'
 import BalanceText from 'react-balance-text'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';

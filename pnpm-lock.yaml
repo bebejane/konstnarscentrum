@@ -66,7 +66,7 @@ specifiers:
   nprogress: ^0.2.0
   react: ^18.2.0
   react-balance-text: ^2.0.1
-  react-datocms: github:bebejane/react-datocms
+  react-datocms: ^4.0.7
   react-dom: ^18.2.0
   react-hook-form: ^7.15.4
   react-intersection-observer: ^9.4.0
@@ -79,8 +79,9 @@ specifiers:
   slugify: ^1.6.5
   swiper: ^8.4.4
   swr: ^1.3.0
-  typescript: ^4.9.3
+  typescript: ^4.9.4
   uglify-js: ^3.17.4
+  universal-base64: ^2.1.0
   usehooks-ts: ^2.9.1
   uuid: ^8.3.2
   watch: ^1.0.2
@@ -133,7 +134,7 @@ dependencies:
   nprogress: 0.2.0
   react: 18.2.0
   react-balance-text: 2.0.1_react@18.2.0
-  react-datocms: github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89_react@18.2.0
+  react-datocms: 4.0.7_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.38.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
@@ -146,12 +147,13 @@ dependencies:
   slugify: 1.6.5
   swiper: 8.4.4
   swr: 1.3.0_react@18.2.0
+  universal-base64: 2.1.0
   usehooks-ts: 2.9.1_biqbaboplfbrettd7655fr4n2y
   uuid: 8.3.2
   zustand: 4.1.4_react@18.2.0
 
 devDependencies:
-  '@graphql-codegen/cli': 2.15.0_rqjlw7vynvrdxkczmtjek63zxa
+  '@graphql-codegen/cli': 2.15.0_msbrvoiwtpyou6e6dymueqt4he
   '@graphql-codegen/import-types-preset': 2.2.6_rjjjs2nwgns3bcvnnqb5eu5nry
   '@graphql-codegen/introspection': 2.2.1_rjjjs2nwgns3bcvnnqb5eu5nry
   '@graphql-codegen/typed-document-node': 2.3.6_rjjjs2nwgns3bcvnnqb5eu5nry
@@ -165,12 +167,12 @@ devDependencies:
   '@types/graphql': 14.5.0
   '@types/lodash-es': 4.17.6
   '@types/react': 18.0.24
-  apollo: 2.34.0_h4etdup2fzeludhsifzedqfzpq
+  apollo: 2.34.0_y2u24o4hbt7776lsltw37vsuta
   encoding: 0.1.13
   eslint: 8.26.0
-  eslint-config-next: 12.3.2_s6zjlrzpskv7oc5fqmwkfkbdxm
+  eslint-config-next: 12.3.2_v5bglvupnukcksncywgdzapdrq
   glob: 8.0.3
-  typescript: 4.9.3
+  typescript: 4.9.4
   uglify-js: 3.17.4
   watch: 1.0.2
 
@@ -1632,7 +1634,7 @@ packages:
       - encoding
     dev: false
 
-  /@endemolshinegroup/cosmiconfig-typescript-loader/3.0.2_qkc3vo3nzqm3fls2mklcv7vbki:
+  /@endemolshinegroup/cosmiconfig-typescript-loader/3.0.2_unuh27verjvjz3ile7u7xyrj3u:
     resolution: {integrity: sha512-QRVtqJuS1mcT56oHpVegkKBlgtWjXw/gHNWO3eL9oyB5Sc7HBoc2OLG/nYpVfT/Jejvo3NUrD0Udk7XgoyDKkA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -1641,7 +1643,7 @@ packages:
       cosmiconfig: 7.0.1
       lodash.get: 4.4.2
       make-error: 1.3.6
-      ts-node: 9.1.1_typescript@4.9.3
+      ts-node: 9.1.1_typescript@4.9.4
       tslib: 2.4.1
     transitivePeerDependencies:
       - typescript
@@ -1692,7 +1694,7 @@ packages:
       tslib: 2.4.0
     dev: true
 
-  /@graphql-codegen/cli/2.15.0_rqjlw7vynvrdxkczmtjek63zxa:
+  /@graphql-codegen/cli/2.15.0_msbrvoiwtpyou6e6dymueqt4he:
     resolution: {integrity: sha512-o4Wh99VJDX/z0fG3pkdOf0t0fu7SlYn6qlLnqzNhVpZByGPe548gu11GKiOPKVaQ76kkB3dzqzfINRl+v7EA4A==}
     hasBin: true
     peerDependencies:
@@ -1718,11 +1720,11 @@ packages:
       chalk: 4.1.2
       chokidar: 3.5.3
       cosmiconfig: 7.0.1
-      cosmiconfig-typescript-loader: 4.1.1_c3wx773ada3g3glsmhqelvkz6u
+      cosmiconfig-typescript-loader: 4.1.1_gfndqdm6cmx5xv44al2kd2hwqa
       debounce: 1.2.1
       detect-indent: 6.1.0
       graphql: 16.6.0
-      graphql-config: 4.3.6_rqjlw7vynvrdxkczmtjek63zxa
+      graphql-config: 4.3.6_msbrvoiwtpyou6e6dymueqt4he
       inquirer: 8.2.5
       is-glob: 4.0.3
       json-to-pretty-yaml: 1.2.2
@@ -3346,7 +3348,7 @@ packages:
       '@types/yargs-parser': 21.0.0
     dev: false
 
-  /@typescript-eslint/parser/5.42.0_s6zjlrzpskv7oc5fqmwkfkbdxm:
+  /@typescript-eslint/parser/5.42.0_v5bglvupnukcksncywgdzapdrq:
     resolution: {integrity: sha512-Ixh9qrOTDRctFg3yIwrLkgf33AHyEIn6lhyf5cCfwwiGtkWhNpVKlEZApi3inGQR/barWnY7qY8FbGKBO7p3JA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3358,10 +3360,10 @@ packages:
     dependencies:
       '@typescript-eslint/scope-manager': 5.42.0
       '@typescript-eslint/types': 5.42.0
-      '@typescript-eslint/typescript-estree': 5.42.0_typescript@4.9.3
+      '@typescript-eslint/typescript-estree': 5.42.0_typescript@4.9.4
       debug: 4.3.4
       eslint: 8.26.0
-      typescript: 4.9.3
+      typescript: 4.9.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3379,7 +3381,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree/5.42.0_typescript@4.9.3:
+  /@typescript-eslint/typescript-estree/5.42.0_typescript@4.9.4:
     resolution: {integrity: sha512-2O3vSq794x3kZGtV7i4SCWZWCwjEtkWfVqX4m5fbUBomOsEOyd6OAD1qU2lbvV5S8tgy/luJnOYluNyYVeOTTg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3394,8 +3396,8 @@ packages:
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.3.8
-      tsutils: 3.21.0_typescript@4.9.3
-      typescript: 4.9.3
+      tsutils: 3.21.0_typescript@4.9.4
+      typescript: 4.9.4
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -3666,7 +3668,7 @@ packages:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  /apollo-codegen-core/0.40.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-codegen-core/0.40.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-AiynL9PWGZ9zXq9gbJENGixrbmJTORjg8T15gXlPbFcXJzVlQ8+gGuBcHMjBBFBtqb1ZhXN2IZ6udzrRHCB+ag==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
@@ -3674,7 +3676,7 @@ packages:
       '@babel/parser': 7.20.1
       '@babel/types': 7.17.10
       apollo-env: 0.10.2_encoding@0.1.13
-      apollo-language-server: 1.26.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-language-server: 1.26.9_y2u24o4hbt7776lsltw37vsuta
       ast-types: 0.14.2
       common-tags: 1.8.2
       recast: 0.21.5
@@ -3683,13 +3685,13 @@ packages:
       - typescript
     dev: true
 
-  /apollo-codegen-flow/0.38.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-codegen-flow/0.38.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-w02FRiDCfFH7FxRqKZlnmH6q4URT3hlrGvizaRKirEyFQWH7OSEE4osYhSCU+dcRru+NuWtPVrMh3LTB7NinSQ==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
       '@babel/generator': 7.17.10
       '@babel/types': 7.17.10
-      apollo-codegen-core: 0.40.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-codegen-core: 0.40.9_y2u24o4hbt7776lsltw37vsuta
       change-case: 4.1.2
       common-tags: 1.8.2
       inflected: 2.1.0
@@ -3698,11 +3700,11 @@ packages:
       - typescript
     dev: true
 
-  /apollo-codegen-scala/0.39.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-codegen-scala/0.39.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-Dtpg8m3MgJ5RIlkPfGDOclsZro1scR32AQY517uA3QdUHa/R+XxU9CQ2bnPnI7BtzuUsrTiJnBXQSulfxrdDOQ==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
-      apollo-codegen-core: 0.40.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-codegen-core: 0.40.9_y2u24o4hbt7776lsltw37vsuta
       change-case: 4.1.2
       common-tags: 1.8.2
       inflected: 2.1.0
@@ -3711,11 +3713,11 @@ packages:
       - typescript
     dev: true
 
-  /apollo-codegen-swift/0.40.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-codegen-swift/0.40.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-Ghk0ef4//QOUdJ80kheD7Q20o9UDrXQVWXz8lWUM88w1cba5LBLXz+CeeQ+VyUHrnFO9XqkimqyPZSDpDmHUSA==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
-      apollo-codegen-core: 0.40.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-codegen-core: 0.40.9_y2u24o4hbt7776lsltw37vsuta
       change-case: 4.1.2
       common-tags: 1.8.2
       inflected: 2.1.0
@@ -3724,13 +3726,13 @@ packages:
       - typescript
     dev: true
 
-  /apollo-codegen-typescript/0.40.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-codegen-typescript/0.40.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-koOS3ZbU8UNoZwl87WBxpo+3t0e/iIIkbgYg9zOVKnHCYHi2/CbSE7rq3uAM99QmvcE62wrIoFjpBQADJq78Dw==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
       '@babel/generator': 7.17.10
       '@babel/types': 7.17.10
-      apollo-codegen-core: 0.40.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-codegen-core: 0.40.9_y2u24o4hbt7776lsltw37vsuta
       change-case: 4.1.2
       common-tags: 1.8.2
       inflected: 2.1.0
@@ -3773,14 +3775,14 @@ packages:
       sha.js: 2.4.11
     dev: true
 
-  /apollo-language-server/1.26.9_h4etdup2fzeludhsifzedqfzpq:
+  /apollo-language-server/1.26.9_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-+moe6KfDPPHUaC5Te4x9O5OqBPTZmkNRfjM4kb3XRb3ve8tUeKdye5lIANU+XCv7aZ6G68PHozrO5/Tj1X8Qcw==}
     engines: {node: '>=8', npm: '>=6'}
     dependencies:
       '@apollo/federation': 0.27.0_graphql@15.8.0
       '@apollographql/apollo-tools': 0.5.4_graphql@15.8.0
       '@apollographql/graphql-language-service-interface': 2.0.2_graphql@15.8.0
-      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2_qkc3vo3nzqm3fls2mklcv7vbki
+      '@endemolshinegroup/cosmiconfig-typescript-loader': 3.0.2_unuh27verjvjz3ile7u7xyrj3u
       apollo-datasource: 3.3.2_encoding@0.1.13
       apollo-env: 0.10.2_encoding@0.1.13
       apollo-graphql: 0.9.7_graphql@15.8.0
@@ -3890,7 +3892,7 @@ packages:
       tslib: 1.14.1
     dev: true
 
-  /apollo/2.34.0_h4etdup2fzeludhsifzedqfzpq:
+  /apollo/2.34.0_y2u24o4hbt7776lsltw37vsuta:
     resolution: {integrity: sha512-gDH+WBN+b6TA/tIrIuAyO6Df4tsHwAA/t3NZqUitOM0gKo/nXNOUZzskAFTjErL6fgp5+kYIP3rZ+bIleqXAKg==}
     engines: {node: '>=8', npm: '>=6'}
     hasBin: true
@@ -3904,14 +3906,14 @@ packages:
       '@oclif/plugin-not-found': 2.3.1
       '@oclif/plugin-plugins': 2.1.0
       '@oclif/plugin-warn-if-update-available': 2.0.4
-      apollo-codegen-core: 0.40.9_h4etdup2fzeludhsifzedqfzpq
-      apollo-codegen-flow: 0.38.9_h4etdup2fzeludhsifzedqfzpq
-      apollo-codegen-scala: 0.39.9_h4etdup2fzeludhsifzedqfzpq
-      apollo-codegen-swift: 0.40.9_h4etdup2fzeludhsifzedqfzpq
-      apollo-codegen-typescript: 0.40.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-codegen-core: 0.40.9_y2u24o4hbt7776lsltw37vsuta
+      apollo-codegen-flow: 0.38.9_y2u24o4hbt7776lsltw37vsuta
+      apollo-codegen-scala: 0.39.9_y2u24o4hbt7776lsltw37vsuta
+      apollo-codegen-swift: 0.40.9_y2u24o4hbt7776lsltw37vsuta
+      apollo-codegen-typescript: 0.40.9_y2u24o4hbt7776lsltw37vsuta
       apollo-env: 0.10.2_encoding@0.1.13
       apollo-graphql: 0.9.7_graphql@15.8.0
-      apollo-language-server: 1.26.9_h4etdup2fzeludhsifzedqfzpq
+      apollo-language-server: 1.26.9_y2u24o4hbt7776lsltw37vsuta
       chalk: 4.1.2
       cli-ux: 6.0.9
       env-ci: 7.1.0
@@ -5045,7 +5047,7 @@ packages:
       '@iarna/toml': 2.2.5
     dev: true
 
-  /cosmiconfig-typescript-loader/4.1.1_c3wx773ada3g3glsmhqelvkz6u:
+  /cosmiconfig-typescript-loader/4.1.1_7scwza6kuemvklxjzdf5e3dzz4:
     resolution: {integrity: sha512-9DHpa379Gp0o0Zefii35fcmuuin6q92FnLDffzdZ0l9tVd3nEobG3O+MZ06+kuBvFTSVScvNb/oHA13Nd4iipg==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -5056,10 +5058,11 @@ packages:
     dependencies:
       '@types/node': 18.11.9
       cosmiconfig: 7.0.1
-      typescript: 4.9.3
+      ts-node: 10.9.1_3v2cms72gsblw7jmali7btb3pu
+      typescript: 4.9.4
     dev: true
 
-  /cosmiconfig-typescript-loader/4.1.1_hbqppro5hiqtzhrtkhdp7dbdei:
+  /cosmiconfig-typescript-loader/4.1.1_gfndqdm6cmx5xv44al2kd2hwqa:
     resolution: {integrity: sha512-9DHpa379Gp0o0Zefii35fcmuuin6q92FnLDffzdZ0l9tVd3nEobG3O+MZ06+kuBvFTSVScvNb/oHA13Nd4iipg==}
     engines: {node: '>=12', npm: '>=6'}
     peerDependencies:
@@ -5070,8 +5073,7 @@ packages:
     dependencies:
       '@types/node': 18.11.9
       cosmiconfig: 7.0.1
-      ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
-      typescript: 4.9.3
+      typescript: 4.9.4
     dev: true
 
   /cosmiconfig/7.0.1:
@@ -6048,7 +6050,7 @@ packages:
       - supports-color
     dev: false
 
-  /eslint-config-next/12.3.2_s6zjlrzpskv7oc5fqmwkfkbdxm:
+  /eslint-config-next/12.3.2_v5bglvupnukcksncywgdzapdrq:
     resolution: {integrity: sha512-ir8t3wRNexUMSKsMNh7J1EWwiBAr2dd015UAiCFvQ/01MRBPmFof1C6PFh/RqlupwamSZlv6j8gfaV1RxHuRoQ==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0
@@ -6059,7 +6061,7 @@ packages:
     dependencies:
       '@next/eslint-plugin-next': 12.3.2
       '@rushstack/eslint-patch': 1.2.0
-      '@typescript-eslint/parser': 5.42.0_s6zjlrzpskv7oc5fqmwkfkbdxm
+      '@typescript-eslint/parser': 5.42.0_v5bglvupnukcksncywgdzapdrq
       eslint: 8.26.0
       eslint-import-resolver-node: 0.3.6
       eslint-import-resolver-typescript: 2.7.1_mynvxvmq5qtyojffiqgev4x7mm
@@ -6067,7 +6069,7 @@ packages:
       eslint-plugin-jsx-a11y: 6.6.1_eslint@8.26.0
       eslint-plugin-react: 7.31.10_eslint@8.26.0
       eslint-plugin-react-hooks: 4.6.0_eslint@8.26.0
-      typescript: 4.9.3
+      typescript: 4.9.4
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
@@ -6121,7 +6123,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.42.0_s6zjlrzpskv7oc5fqmwkfkbdxm
+      '@typescript-eslint/parser': 5.42.0_v5bglvupnukcksncywgdzapdrq
       debug: 3.2.7
       eslint: 8.26.0
       eslint-import-resolver-node: 0.3.6
@@ -6140,7 +6142,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.42.0_s6zjlrzpskv7oc5fqmwkfkbdxm
+      '@typescript-eslint/parser': 5.42.0_v5bglvupnukcksncywgdzapdrq
       array-includes: 3.1.5
       array.prototype.flat: 1.3.0
       debug: 2.6.9
@@ -6933,7 +6935,7 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /graphql-config/4.3.6_rqjlw7vynvrdxkczmtjek63zxa:
+  /graphql-config/4.3.6_msbrvoiwtpyou6e6dymueqt4he:
     resolution: {integrity: sha512-i7mAPwc0LAZPnYu2bI8B6yXU5820Wy/ArvmOseDLZIu0OU1UTULEuexHo6ZcHXeT9NvGGaUPQZm8NV3z79YydA==}
     engines: {node: '>= 10.0.0'}
     peerDependencies:
@@ -6947,11 +6949,11 @@ packages:
       '@graphql-tools/utils': 8.13.1_graphql@16.6.0
       cosmiconfig: 7.0.1
       cosmiconfig-toml-loader: 1.0.0
-      cosmiconfig-typescript-loader: 4.1.1_hbqppro5hiqtzhrtkhdp7dbdei
+      cosmiconfig-typescript-loader: 4.1.1_7scwza6kuemvklxjzdf5e3dzz4
       graphql: 16.6.0
       minimatch: 4.2.1
       string-env-interpolation: 1.0.1
-      ts-node: 10.9.1_wup25etrarvlqkprac7h35hj7u
+      ts-node: 10.9.1_3v2cms72gsblw7jmali7btb3pu
       tslib: 2.4.1
     transitivePeerDependencies:
       - '@swc/core'
@@ -10237,6 +10239,21 @@ packages:
       react: 18.2.0
     dev: false
 
+  /react-datocms/4.0.7_react@18.2.0:
+    resolution: {integrity: sha512-Wie8JpLAtCZBJmzN51efKZEGl2no599Zwoy2ua1TOdLAZ1T+dr5by4yEqI7OYZEuPCr/SgLyf16irzN8iUOOIw==}
+    peerDependencies:
+      react: '>= 16.12.0'
+    dependencies:
+      datocms-listen: 0.1.14
+      datocms-structured-text-generic-html-renderer: 2.0.4
+      datocms-structured-text-utils: 2.0.4
+      react: 18.2.0
+      react-intersection-observer: 8.34.0_react@18.2.0
+      react-string-replace: 1.1.0
+      universal-base64: 2.1.0
+      use-deep-compare-effect: 1.8.1_react@18.2.0
+    dev: false
+
   /react-dom/15.7.0_react@15.7.0:
     resolution: {integrity: sha512-mpjXqC2t1FuYsILOLCj0kg6pbg460byZkVA/80VtDmKU/pYmoTdHOtaMcTRIDiyXLz4sIur0cQ04nOC6iGndJg==}
     peerDependencies:
@@ -11518,7 +11535,7 @@ packages:
     resolution: {integrity: sha512-PGcnJoTBnVGy6yYNFxWVNkdcAuAMstvutN9MgDJIV6L0oG8fB+ZNNy1T+wJzah8RPGor1mZuPQkVfXNDpy9eHA==}
     dev: true
 
-  /ts-node/10.9.1_wup25etrarvlqkprac7h35hj7u:
+  /ts-node/10.9.1_3v2cms72gsblw7jmali7btb3pu:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -11544,12 +11561,12 @@ packages:
       create-require: 1.1.1
       diff: 4.0.2
       make-error: 1.3.6
-      typescript: 4.9.3
+      typescript: 4.9.4
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
 
-  /ts-node/9.1.1_typescript@4.9.3:
+  /ts-node/9.1.1_typescript@4.9.4:
     resolution: {integrity: sha512-hPlt7ZACERQGf03M253ytLY3dHbGNGrAq9qIHWUY9XHYl1z7wYngSr3OQ5xmui8o2AaxsONxIzjafLUiWBo1Fg==}
     engines: {node: '>=10.0.0'}
     hasBin: true
@@ -11561,7 +11578,7 @@ packages:
       diff: 4.0.2
       make-error: 1.3.6
       source-map-support: 0.5.21
-      typescript: 4.9.3
+      typescript: 4.9.4
       yn: 3.1.1
     dev: true
 
@@ -11589,14 +11606,14 @@ packages:
     engines: {node: '>=0.6.x'}
     dev: false
 
-  /tsutils/3.21.0_typescript@4.9.3:
+  /tsutils/3.21.0_typescript@4.9.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==}
     engines: {node: '>= 6'}
     peerDependencies:
       typescript: '>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.9.3
+      typescript: 4.9.4
     dev: true
 
   /tty/1.0.1:
@@ -11657,8 +11674,8 @@ packages:
     hasBin: true
     dev: false
 
-  /typescript/4.9.3:
-    resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
+  /typescript/4.9.4:
+    resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 
@@ -12352,27 +12369,7 @@ packages:
       react-markdown: 8.0.3_bbvjflvjoibwhtpmedigb26h6y
       remark-breaks: 3.0.2
       remark-gfm: 3.0.1
-      typescript: 4.9.3
+      typescript: 4.9.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89_react@18.2.0:
-    resolution: {tarball: https://codeload.github.com/bebejane/react-datocms/tar.gz/7fd6053fea1aec20537bc34620f0f0b3294d8b89}
-    id: github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89
-    name: react-datocms
-    version: 4.0.6
-    prepare: true
-    requiresBuild: true
-    peerDependencies:
-      react: '>= 16.12.0'
-    dependencies:
-      datocms-listen: 0.1.14
-      datocms-structured-text-generic-html-renderer: 2.0.4
-      datocms-structured-text-utils: 2.0.4
-      react: 18.2.0
-      react-intersection-observer: 8.34.0_react@18.2.0
-      react-string-replace: 1.1.0
-      universal-base64: 2.1.0
-      use-deep-compare-effect: 1.8.1_react@18.2.0
     dev: false

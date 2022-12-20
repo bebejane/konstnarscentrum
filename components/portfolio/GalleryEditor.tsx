@@ -1,7 +1,7 @@
 import s from "./GalleryEditor.module.scss";
 import cn from 'classnames'
 import { useEffect, useState } from "react";
-import { Image } from "react-datocms";
+import { KCImage as Image } from '/components'
 
 export type Props = {
   images?: FileField[],

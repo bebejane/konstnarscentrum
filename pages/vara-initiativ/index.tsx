@@ -3,7 +3,7 @@ import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { AllProjectsDocument, ProjectsIntroDocument } from "/graphql";
-import { Image } from "react-datocms";
+import { KCImage as Image } from '/components'
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { CardContainer, Card, RevealText } from "/components";
 

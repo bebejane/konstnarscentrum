@@ -5,7 +5,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionMetaDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { Card, RevealText } from "/components";
-import { Image } from "react-datocms";
+import { KCImage as Image } from '/components'
 import React from "react";
 
 export type Props = {

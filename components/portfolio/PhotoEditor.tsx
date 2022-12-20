@@ -1,7 +1,7 @@
 import s from "./PhotoEditor.module.scss";
 import cn from 'classnames'
 import { useEffect, useState } from "react";
-import { Image } from "react-datocms";
+import { KCImage as Image } from '/components'
 import { GalleryEditor } from "/components";
 
 export type Props = {
