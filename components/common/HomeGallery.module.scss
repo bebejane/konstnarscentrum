@@ -3,6 +3,10 @@
   margin-left: var(--full-margin);
   max-width: none;
 
+  @include mq($until: tablet) {
+    margin-top: calc(-1 * var(--navbar-height));
+  }
+
   > ul {
     --height: calc(100vh - calc(var(--navbar-height) * 2));
     list-style: none;
@@ -64,6 +68,10 @@
           z-index: 2;
           color: var(--white);
           width: 80%;
+
+          @include mq($until: tablet) {
+            margin-top: var(--small-space);
+          }
 
           &.blackText {
             color: var(--black);

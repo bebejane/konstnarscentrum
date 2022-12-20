@@ -1,12 +1,16 @@
 .background {
-  width: 100vw;
+  width: calc(100vw + var(--outer-margin));
   height: 100%;
   top: 0;
   left: 0;
   position: absolute;
-  margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
   z-index: -1;
   background-color: var(--beige-very-light);
+  margin-left: calc(-1 * var(--outer-margin));
+  @include mq($from: tablet) {
+    width: 100vw;
+    margin-left: calc((var(--full-margin) - var(--total-outer-margin)));
+  }
 
   &:before {
     content: " ";

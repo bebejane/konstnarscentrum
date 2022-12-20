@@ -28,11 +28,22 @@
 
       figcaption {
         display: none;
-        height: var(--navbar-height);
+        @include mq($from: tablet) {
+          height: var(--navbar-height);
+        }
         display: flex;
         align-items: center;
+
         opacity: 1;
         transition: opacity 0.4s ease-in-out;
+        @include mq($until: tablet) {
+          margin-left: var(--outer-margin);
+          margin-right: var(--outer-margin);
+          padding-top: 1em;
+          p {
+            margin-bottom: 0;
+          }
+        }
 
         &.hide {
           opacity: 0;
@@ -56,12 +67,13 @@
         position: absolute;
         z-index: -1;
         top: 0;
-
         left: 0;
-        width: calc(100% - (2 * var(--full-margin)));
         height: 150%;
         margin-left: var(--full-margin);
         margin-right: var(--full-margin);
+        @include mq($from: tablet) {
+          width: calc(100% - (2 * var(--full-margin)));
+        }
       }
 
       &.black .fade {

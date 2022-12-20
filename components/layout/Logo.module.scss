@@ -28,7 +28,7 @@
     }
 
     @include mq($until: tablet) {
-      margin-top: 0.2em;
+      margin-top: 0.1em;
     }
   }
 
@@ -56,12 +56,13 @@
 
   .region {
     color: transparent !important;
-    -webkit-text-stroke: 1px;
+    -webkit-text-stroke: 0.03em;
     -webkit-text-stroke-color: var(--black);
     font-size: calc(var(--logo-size) * 0.97);
 
     @include mq($from: tablet) {
       margin-left: 0.5rem;
+      -webkit-text-stroke: 1px;
 
       &.end {
         margin-left: 2rem;

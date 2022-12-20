@@ -9,8 +9,10 @@
   }
 
   &.minusMargin {
-    width: calc(100% + (2 * var(--grid-unit)));
-    margin-left: calc((-1 * var(--grid-unit)));
-    margin-right: calc((-1 * var(--grid-unit)));
+    @include mq($from: tablet) {
+      width: calc(100% + (2 * var(--grid-unit)));
+      margin-left: calc((-1 * var(--grid-unit)));
+      margin-right: calc((-1 * var(--grid-unit)));
+    }
   }
 }

@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-left: calc(-1 * var(--gutter));
-  margin-right: calc(-1 * var(--gutter));
-  width: calc(100% + (2 * var(--gutter)));
+  margin-left: calc(-1 * var(--outer-margin));
+  margin-right: calc(-1 * var(--outer-margin));
+  width: calc(100% + (2 * var(--outer-margin)));
+  @include mq($from: tablet) {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+    width: calc(100% + (2 * var(--gutter)));
+  }
   padding: 0;
   list-style: none;
 
@@ -49,7 +54,7 @@
     }
 
     @include mq($until: tablet) {
-      width: 100%;
+      width: 50%;
 
       &:nth-child(1n) {
         border-right: none;
