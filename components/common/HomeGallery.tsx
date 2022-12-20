@@ -113,16 +113,17 @@ export default function HomeGallery({ slides }: Props) {
 const Mask = ({ id, size, start }) => {
 
   const numBlobs = 200
-  const animationTime = 650
+  const animationTime = 850
 
   useEffect(() => {
     if (!start) return
 
     const paths = new Array(numBlobs).fill(0).map((e, idx) => {
+
       const { path } = blobshape({
         size: randomInt(size.width * (idx / numBlobs), size.width * (idx / numBlobs)),
-        growth: randomInt(2, 6),
-        edges: randomInt(2, 10),
+        growth: randomInt(2, 8),
+        edges: randomInt(2, 20),
         seed: null
       })
       return path

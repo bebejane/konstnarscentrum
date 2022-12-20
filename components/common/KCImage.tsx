@@ -295,8 +295,8 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
       />
     );
 
-    const transition = fadeInDuration > 0 ? `border-width ${fadeInDuration}ms ease-out` : undefined;
-    const border = loaded ? `0px solid ${data.bgColor}` : `15px solid ${data.bgColor}`
+    const transition = fadeInDuration > 0 ? `border-left-width ${fadeInDuration}ms ease-out` : undefined;
+    const borderLeft = loaded ? `0px solid ${data.bgColor}` : `25px solid ${data.bgColor}`
 
     const placeholder =
       usePlaceholder && (data.bgColor || data.base64) ? (
@@ -381,7 +381,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
                 className={pictureClassName}
                 style={{
                   opacity: showImage ? 1 : 0,
-                  border,
+                  borderLeft,
                   transition,
                   ...absolutePositioning,
                   objectFit,
