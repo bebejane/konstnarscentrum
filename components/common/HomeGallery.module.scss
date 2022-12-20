@@ -5,6 +5,8 @@
 
   @include mq($until: tablet) {
     margin-top: calc(-1 * var(--navbar-height));
+    margin-left: calc(-1 * var(--outer-margin));
+    margin-right: calc(-1 * var(--outer-margin));
   }
 
   > ul {
@@ -60,14 +62,18 @@
 
         header {
           position: absolute;
-          padding-left: calc(2 * var(--grid-unit));
-          padding-right: var(--grid-unit);
           padding-top: 2rem;
           top: 0;
           left: 0;
           z-index: 2;
           color: var(--white);
-          width: 80%;
+          padding-left: var(--outer-margin);
+          padding-right: var(--outer-margin);
+          @include mq($from: tablet) {
+            width: 80%;
+            padding-left: calc(2 * var(--grid-unit));
+            padding-right: var(--grid-unit);
+          }
 
           @include mq($until: tablet) {
             margin-top: var(--small-space);
@@ -95,6 +101,9 @@
             height: 150%;
             margin-left: var(--full-margin);
             margin-right: var(--full-margin);
+            @include mq($until: tablet) {
+              margin-top: calc(-1 * var(--navbar-height));
+            }
           }
         }
       }

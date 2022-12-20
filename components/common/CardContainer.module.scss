@@ -22,7 +22,9 @@
     border-right: 1px solid var(--beige-mid);
 
     @include mq($until: tablet) {
-      margin-bottom: var(--gutter);
+      &:not(last-of-type) {
+        margin-bottom: 2rem;
+      }
     }
   }
 
@@ -57,7 +59,7 @@
       width: 50%;
 
       &:nth-child(1n) {
-        border-right: none;
+        border-right: 1px solid var(--beige-mid);
       }
     }
   }
@@ -67,6 +69,10 @@
     margin-bottom: 2rem;
     margin-left: var(--gutter);
     margin-right: var(--gutter);
+
+    @include mq($until: tablet) {
+      display: none;
+    }
 
     &:last-child {
       display: none;
