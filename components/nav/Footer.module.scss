@@ -1,7 +1,7 @@
 .footer {
   width: 100%;
   padding: var(--outer-margin);
-
+  margin-top: var(--small-space);
 
   @include mq($from: desktop) {
     padding-left: calc((var(--outer-margin) * 2) + var(--logo-size));
@@ -33,12 +33,12 @@
       color: var(--white);
     }
 
-    >ul {
+    > ul {
       display: flex;
       flex-direction: row;
       list-style: none;
 
-      >li {
+      > li {
         width: calc(100% / 6);
         line-height: var(--line-height-nav);
 
@@ -54,7 +54,6 @@
             &:first-child {
               font-weight: bold !important;
             }
-
           }
         }
       }
