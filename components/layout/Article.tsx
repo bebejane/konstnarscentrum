@@ -53,7 +53,7 @@ export default function Article({
             <Image
               className={s.image}
               data={image.responsiveImage}
-              fadeInDuration={0}
+              fadeInDuration={750}
               objectFit="cover"
             />
             <figcaption className={cn(hideCaption && s.hide)}>

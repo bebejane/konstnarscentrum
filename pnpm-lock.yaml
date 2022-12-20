@@ -66,7 +66,7 @@ specifiers:
   nprogress: ^0.2.0
   react: ^18.2.0
   react-balance-text: ^2.0.1
-  react-datocms: ^4.0.7
+  react-datocms: github:bebejane/react-datocms
   react-dom: ^18.2.0
   react-hook-form: ^7.15.4
   react-intersection-observer: ^9.4.0
@@ -133,7 +133,7 @@ dependencies:
   nprogress: 0.2.0
   react: 18.2.0
   react-balance-text: 2.0.1_react@18.2.0
-  react-datocms: 4.0.7_react@18.2.0
+  react-datocms: github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-hook-form: 7.38.0_react@18.2.0
   react-intersection-observer: 9.4.0_react@18.2.0
@@ -5220,8 +5220,8 @@ packages:
     engines: {node: '>=0.11'}
     dev: false
 
-  /datocms-listen/0.1.10:
-    resolution: {integrity: sha512-gaQ69vMC+shRsj6fFo3xEMcUpxtLElJIT0HBTaQHzy0nk1bCeWbwgzYzI8r1FLukD6KV4oFm/YGrGBNbnwOovg==}
+  /datocms-listen/0.1.14:
+    resolution: {integrity: sha512-Ijd5fzQ1Y1EUiSwduvaPRN7a6Edh//c500/2MjDhgaKd+N+zGEy7rpJ/SVXX0TdYDhX0ssoC4FDms6sbR7k+eA==}
     dev: false
 
   /datocms-structured-text-generic-html-renderer/2.0.4:
@@ -10237,21 +10237,6 @@ packages:
       react: 18.2.0
     dev: false
 
-  /react-datocms/4.0.7_react@18.2.0:
-    resolution: {integrity: sha512-Wie8JpLAtCZBJmzN51efKZEGl2no599Zwoy2ua1TOdLAZ1T+dr5by4yEqI7OYZEuPCr/SgLyf16irzN8iUOOIw==}
-    peerDependencies:
-      react: '>= 16.12.0'
-    dependencies:
-      datocms-listen: 0.1.10
-      datocms-structured-text-generic-html-renderer: 2.0.4
-      datocms-structured-text-utils: 2.0.4
-      react: 18.2.0
-      react-intersection-observer: 8.34.0_react@18.2.0
-      react-string-replace: 1.1.0
-      universal-base64: 2.1.0
-      use-deep-compare-effect: 1.8.1_react@18.2.0
-    dev: false
-
   /react-dom/15.7.0_react@15.7.0:
     resolution: {integrity: sha512-mpjXqC2t1FuYsILOLCj0kg6pbg460byZkVA/80VtDmKU/pYmoTdHOtaMcTRIDiyXLz4sIur0cQ04nOC6iGndJg==}
     peerDependencies:
@@ -12370,4 +12355,24 @@ packages:
       typescript: 4.9.3
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89_react@18.2.0:
+    resolution: {tarball: https://codeload.github.com/bebejane/react-datocms/tar.gz/7fd6053fea1aec20537bc34620f0f0b3294d8b89}
+    id: github.com/bebejane/react-datocms/7fd6053fea1aec20537bc34620f0f0b3294d8b89
+    name: react-datocms
+    version: 4.0.6
+    prepare: true
+    requiresBuild: true
+    peerDependencies:
+      react: '>= 16.12.0'
+    dependencies:
+      datocms-listen: 0.1.14
+      datocms-structured-text-generic-html-renderer: 2.0.4
+      datocms-structured-text-utils: 2.0.4
+      react: 18.2.0
+      react-intersection-observer: 8.34.0_react@18.2.0
+      react-string-replace: 1.1.0
+      universal-base64: 2.1.0
+      use-deep-compare-effect: 1.8.1_react@18.2.0
     dev: false
