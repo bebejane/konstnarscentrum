@@ -23,7 +23,6 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 				<DatoImage
 					data={images[0].responsiveImage}
 					className={s.image}
-					fadeInDuration={0}
 				/>
 				{images[0].title &&
 					<figcaption>
@@ -37,8 +36,6 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 						<DatoImage
 							data={images[0].responsiveImage}
 							className={s.image}
-							fadeInDuration={0}
-
 						/>
 						{images[0].title &&
 							<figcaption>
@@ -50,7 +47,6 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 						<DatoImage
 							data={images[1].responsiveImage}
 							className={s.image}
-							fadeInDuration={0}
 						/>
 						{images[1].title &&
 							<figcaption>
