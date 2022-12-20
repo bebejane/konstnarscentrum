@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
+import Link from "next/link";
 import { Article, MetaSection, StructuredContent } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
 
@@ -26,23 +27,26 @@ export default function MemberNewsArticle({ memberNews: {
 } }: Props) {
 
 	return (
-		<Article
-			image={image}
-			title={title}
-			text={intro}
-			blackHeadline={blackHeadline}
-			subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
-		>
-			<MetaSection
-				items={[
-					{ title: 'Kategori', value: category.category },
-					{ title: 'Plats', value: location },
-					{ title: 'Datum', value: format(new Date(date), "d MMMM y") },
-					{ title: 'Region', value: region?.name }
-				]}
-			/>
-			<StructuredContent content={content} />
-		</Article>
+		<>
+			<Article
+				image={image}
+				title={title}
+				text={intro}
+				blackHeadline={blackHeadline}
+				subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
+			>
+				<MetaSection
+					items={[
+						{ title: 'Kategori', value: category.category },
+						{ title: 'Plats', value: location },
+						{ title: 'Datum', value: format(new Date(date), "d MMMM y") },
+						{ title: 'Region', value: region?.name }
+					]}
+				/>
+				<StructuredContent content={content} />
+			</Article>
+			<button className="wide"><Link href='../'>Tillbaka till översikt</Link></button>
+		</>
 	);
 }
 
