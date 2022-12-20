@@ -5,39 +5,28 @@ import Email from '/lib/emails';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-	await NextCors(req, res, { methods: ['POST'], origin: '*', optionsSuccessStatus: 200 });
-	console.log('pass cors')
-	//ithBasicAuth(async (req, res) => {
-	console.log('basic auth passed')
-	try {
-		const basicAuth = req.headers.authorization
-		if (!basicAuth)
-			return res.status(401).send('Access denied')
+	await NextCors(req, res, { methods: ['POST', 'OPTIONS'], origin: '*', optionsSuccessStatus: 200 });
 
-		const auth = basicAuth.split(' ')[1]
-		const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':')
-		const isAuthorized = user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD
+	withBasicAuth(async (req, res) => {
 
-		if (!isAuthorized)
-			return res.status(401).send('Access denied')
+		try {
+			const { email, approval_token, first_name, last_name, approved } = req.body;
 
-		const { email, approval_token, first_name, last_name, approved } = req.body;
+			console.log('approve application', email);
 
-		console.log('approve application', email);
+			if (!email || !approval_token || !first_name || !last_name)
+				throw 'Ogitltig data'
 
-		if (!email || !approval_token || !first_name || !last_name)
-			throw 'Ogitltig data'
+			if (approved)
+				await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
+			else
+				console.log('already approved')
 
-		if (approved)
-			await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
-		else
-			console.log('already approved')
+			res.status(200).json({ approved });
 
-		res.status(200).json({ approved });
-
-	} catch (err) {
-		console.error(err);
-		res.status(501).json({ error: err?.message || err });
-	}
-	//})
+		} catch (err) {
+			console.error(err);
+			res.status(501).json({ error: err?.message || err });
+		}
+	})
 }
