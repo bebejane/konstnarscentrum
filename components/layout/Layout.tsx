@@ -1,7 +1,7 @@
 import s from './Layout.module.scss'
 import cn from 'classnames'
 import React, { useEffect } from 'react'
-import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, FullscreenGallery } from '/components'
+import { Content, Footer, MenuDesktop, MenuMobile, Logo, Grid, Search, FullscreenGallery, Breadcrumbs } from '/components'
 import type { MenuItem } from '/lib/menu'
 import { useState } from 'react'
 import { buildMenu } from '/lib/menu'
@@ -19,7 +19,7 @@ export type LayoutProps = {
 export default function Layout({ children, menu: menuFromProps, title, footer, regions }: LayoutProps) {
 
 	const router = useRouter()
-	const [images, imageId, setImageId] = useStore((state) => [state.images, state.imageId, state.setImageId], shallow)
+	const [images, imageId, setImageId, showMenu] = useStore((state) => [state.images, state.imageId, state.setImageId, state.showMenu], shallow)
 	const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const [menu, setMenu] = useState(menuFromProps)
 
@@ -38,8 +38,10 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 				<Content noMargins={isHome}>
 					{children}
 				</Content>
+				<Breadcrumbs title={title} show={!showMenu} />
 				<Search />
 			</div>
+
 			<Footer menu={menu} footer={footer} regions={regions} />
 			<FullscreenGallery
 				index={images?.findIndex((image) => image?.id === imageId)}

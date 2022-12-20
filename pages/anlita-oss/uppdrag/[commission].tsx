@@ -3,10 +3,9 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { CommissionDocument, AllCommissionsDocument, RelatedCommissionsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
-import { Article, Block, MetaSection, RelatedSection, Gallery } from "/components";
+import { Article, Block, MetaSection, RelatedSection } from "/components";
 import { useEffect, useState } from "react";
 import { getStaticPagePaths } from '/lib/utils'
-import { PageProps } from "/lib/context/page";
 import { useStore } from "/lib/store";
 
 type CommissionProps = {

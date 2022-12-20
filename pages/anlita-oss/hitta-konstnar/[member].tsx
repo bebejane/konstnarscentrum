@@ -7,7 +7,6 @@ import { Article, Block, MetaSection, RelatedSection, EditBox } from "/component
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import useStore from "/lib/store";
-import { PageProps } from "/lib/context/page";
 
 export type Props = {
 	member: MemberRecord,

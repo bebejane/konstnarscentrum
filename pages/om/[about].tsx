@@ -32,6 +32,8 @@ export default function About({ about: { id, title, image, intro, content } }: A
 	);
 }
 
+About.page = { crumbs: [{ slug: 'om', title: 'Om' }] } as PageProps
+
 export async function getStaticPaths() {
 	const { abouts } = await apiQuery(AllAboutsDocument)
 	const paths = abouts.map(({ slug }) => ({ params: { about: slug } }));
@@ -50,7 +52,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	return {
 		props: {
 			...props,
-			about
+			about,
+			pageTitle: about.title
 		},
 		revalidate
 	};

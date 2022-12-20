@@ -12,3 +12,11 @@ type Pagination = {
   page: number
   size: number
 }
+
+type PageProps = {
+  noBottom?: boolean
+  crumbs: {
+    slug: string,
+    title: string
+  }[]
+}
