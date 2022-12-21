@@ -69,8 +69,7 @@
         top: 0;
         left: 0;
         height: 150%;
-        width: calc(100%);
-
+        width: calc(100% + (2 * var(--outer-margin)));
         margin-left: calc(-1 * var(--outer-margin));
         margin-right: calc(-1 * var(--outer-margin));
         @include mq($from: tablet) {

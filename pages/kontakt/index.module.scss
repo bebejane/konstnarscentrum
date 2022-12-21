@@ -19,12 +19,18 @@
 .region {
   display: flex;
   flex-wrap: wrap;
-  margin-left: calc(-1 * var(--gutter));
-  margin-right: calc(-1 * var(--gutter));
   padding: 0;
+  margin-left: calc(-1 * var(--outer-margin));
+  margin-right: calc(-1 * var(--outer-margin));
+  @include mq($from: tablet) {
+    margin-left: calc(-1 * var(--gutter));
+    margin-right: calc(-1 * var(--gutter));
+  }
 
   li {
-    width: 50%;
+    @include mq($from: tablet) {
+      width: 50%;
+    }
   }
 }
 

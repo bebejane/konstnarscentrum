@@ -24,8 +24,10 @@ export default function FilterBar({ options = [], onChange, multi = false }: Pro
 
   return (
     <nav className={s.filter}>
+
       <ul>
         <li>Visa:</li>
+
         {options.map((opt, idx) =>
           <li
             key={idx}

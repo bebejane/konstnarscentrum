@@ -7,7 +7,11 @@
   > ul {
     list-style: none;
     display: flex;
+    overflow: hidden;
     padding-left: 0 !important;
+    @include mq($until: tablet) {
+      margin-right: calc(-1 * var(--outer-margin));
+    }
 
     li {
       padding-right: 1em;
@@ -15,11 +19,18 @@
 
       &:first-child {
         cursor: default;
+        min-width: 3.8em;
       }
 
       &.selected {
         color: var(--beige-dark);
       }
+    }
+  }
+
+  &.multi-row {
+    li {
+      padding-bottom: 1em;
     }
   }
 

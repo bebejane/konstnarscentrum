@@ -12,14 +12,14 @@ export default function MetaSection({ items = [] }: Props) {
 
   return (
     <section className={s.meta}>
-      <ul className="small">
+      <table className="small">
         {items.filter(({ value, title }) => value && title).map(({ title, value }, idx) =>
-          <li key={idx}>
-            <span>{title}:</span>
-            {isEmail(value) ? <a href={`mailto:${value}`}>Email</a> : <>{value}</>}
-          </li>
+          <tr key={idx}>
+            <td><span>{title}:</span></td>
+            <td>{isEmail(value) ? <a href={`mailto:${value}`}>Email</a> : <>{value}</>}</td>
+          </tr>
         )}
-      </ul>
+      </table>
     </section>
   )
 }

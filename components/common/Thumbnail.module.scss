@@ -26,8 +26,17 @@
     flex-direction: row;
     white-space: pre;
     min-height: 1.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
+
+    & span {
+      overflow: hidden;
+      min-width: 100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    @include mq($until: tablet) {
+      font-size: 0.75em;
+    }
 
     &.vertical {
       position: absolute;

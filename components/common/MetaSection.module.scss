@@ -5,13 +5,14 @@
   padding-right: 1em;
   margin-bottom: var(--space);
 
-  ul {
+  table {
     columns: 2;
+    display: block;
     list-style: none;
     padding-left: 0;
 
-    li {
-      line-height: 2;
+    td {
+      padding-bottom: 0.5em;
 
       span {
         color: var(--beige-dark);

@@ -47,12 +47,12 @@ export default function Commission({ commission: {
 			>
 				<MetaSection
 					items={[
-						{ title: 'Plats', value: city },
-						{ title: 'År', value: year },
 						{ title: 'Konstnär', value: artist },
-						{ title: 'Konsulent', value: consultant },
+						{ title: 'År', value: year },
+						{ title: 'Titel', value: work },
+						{ title: 'Plats', value: city },
 						{ title: 'Beställare', value: commissioner },
-						{ title: 'Titel', value: work }
+						{ title: 'Konsulent', value: consultant }
 					]}
 				/>
 				<section className={s.documentation}>
