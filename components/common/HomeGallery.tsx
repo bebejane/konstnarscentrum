@@ -65,7 +65,7 @@ export default function HomeGallery({ slides }: Props) {
   }, [ref])
 
   return (
-    <section className={s.gallery}>
+    <section className={s.gallery} id="home-gallery">
       <ul ref={ref}>
         {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({
           id,

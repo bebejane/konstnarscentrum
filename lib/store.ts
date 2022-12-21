@@ -9,9 +9,11 @@ export interface StoreState {
   images: FileField[],
   imageId: string,
   darkMode: boolean,
+  invertedMenu: boolean,
   setShowMenu: (showMenu: boolean) => void,
   setShowSubMenu: (showSubMenu: boolean) => void,
   setShowMenuMobile: (showMenuMobile: boolean) => void,
+  setInvertedMenu: (invetedMenu: boolean) => void,
   setRegion: (region: Region | undefined) => void,
   setImages: (images: FileField[] | undefined) => void
   setImageId: (imageId: string | undefined) => void
@@ -25,6 +27,7 @@ const useStore = create<StoreState>((set) => ({
   images: [],
   imageId: undefined,
   darkMode: false,
+  invertedMenu: false,
   setShowMenu: (showMenu: boolean) =>
     set((state) => ({
       showMenu
@@ -58,6 +61,11 @@ const useStore = create<StoreState>((set) => ({
   setDarkMode: (darkMode: boolean) =>
     set((state) => ({
       darkMode
+    })
+    ),
+  setInvertedMenu: (invertedMenu: boolean) =>
+    set((state) => ({
+      invertedMenu
     })
     )
 }));

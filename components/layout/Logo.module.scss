@@ -1,6 +1,12 @@
 .container {
   position: relative;
   max-width: 0;
+
+  &.inverted {
+    * {
+      color: var(--white) !important;
+    }
+  }
 }
 
 .logo {
@@ -24,7 +30,7 @@
     left: 0;
     color: var(--black);
 
-    > a {
+    >a {
       max-height: var(--logo-size);
     }
 
