@@ -8,6 +8,7 @@ import type { Menu, MenuItem } from '/lib/menu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
+import useDevice from '/lib/hooks/useDevice';
 
 export type MenuMobileProps = { items: Menu, home: boolean }
 
@@ -25,15 +26,16 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const { scrolledPosition } = useScrollInfo()
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
+	const { isMobile } = useDevice()
 	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
 
 	useEffect(() => {
-		if (!isHome) return
+		if (!isHome || !isMobile) return setInvertedMenu(false)
 
 		const homeGallery = document.getElementById('home-gallery')
 		setInvertedMenu(!showMenuMobile && scrolledPosition < homeGallery.getBoundingClientRect().height)
 
-	}, [isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
+	}, [isMobile, isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
 
 	return (
 		<>
