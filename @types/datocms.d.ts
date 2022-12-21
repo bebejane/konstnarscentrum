@@ -1332,7 +1332,7 @@ type FormTextRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-/** Block of type Textfältsformulär (form_textfield) */
+/** Block of type Textfälts-formulär (form_textfield) */
 type FormTextfieldRecord = RecordInterface & {
   __typename?: 'FormTextfieldRecord';
   _createdAt: Scalars['DateTime'];
@@ -1353,7 +1353,7 @@ type FormTextfieldRecord = RecordInterface & {
 };
 
 
-/** Block of type Textfältsformulär (form_textfield) */
+/** Block of type Textfälts-formulär (form_textfield) */
 type FormTextfieldRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
