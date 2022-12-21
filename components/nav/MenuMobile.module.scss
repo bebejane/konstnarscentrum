@@ -21,7 +21,7 @@
   width: 100%;
   max-width: 100%;
   min-height: 100%;
-  max-height: calc(100vh - calc(100vh - 100%));
+  //max-height: calc(100vh - calc(100vh - 100%));
   margin: 0;
   padding: 0;
   top: 0;
@@ -31,7 +31,7 @@
   padding-left: var(--total-outer-margin);
   padding-right: var(--outer-margin);
   padding-top: var(--navbar-height);
-  transition: transform .3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
   transform: translateX(100%);
 
   &.show {
@@ -39,7 +39,7 @@
   }
 
   nav {
-    --height: calc(100vh - var(--navbar-height) - var(--small-space));
+    --height: calc(100% - var(--navbar-height) - var(--small-space));
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,6 @@
     overflow-x: hidden;
 
     ul {
-
       width: 100%;
       list-style: none;
 
@@ -86,7 +85,7 @@
 
         img.caret {
           margin-left: 0.3rem;
-          transition: transform .4s ease-in-out;
+          transition: transform 0.4s ease-in-out;
 
           &.open {
             transform: rotate(-180deg);
@@ -99,14 +98,11 @@
       }
     }
   }
-
 }
 
 @include mq($from: tablet) {
-
   .mobileMenu,
   .hamburger {
     display: none;
   }
-
 }
