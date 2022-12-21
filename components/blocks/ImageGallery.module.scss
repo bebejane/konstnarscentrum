@@ -15,6 +15,9 @@
   }
 
   .next {
+    @include mq($until: tablet) {
+      display: none;
+    }
     width: 3em;
     height: 3em;
     display: flex;

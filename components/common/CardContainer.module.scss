@@ -29,14 +29,6 @@
     }
   }
 
-  &.whiteBorder {
-    & > li {
-      border-color: var(--white);
-    }
-    hr {
-      background: var(--white);
-    }
-  }
   &.two > li {
     width: 50%;
 
@@ -67,8 +59,11 @@
     @include mq($until: tablet) {
       width: 50%;
 
-      &:nth-child(1n) {
+      &:nth-of-type(odd) {
         border-right: 1px solid var(--beige-mid);
+      }
+      &:nth-of-type(even) {
+        border-right: none;
       }
     }
   }
@@ -85,6 +80,15 @@
 
     &:last-child {
       display: none;
+    }
+  }
+
+  &.whiteBorder {
+    & > li {
+      border-color: var(--white) !important;
+    }
+    hr {
+      background: var(--white) !important;
     }
   }
 }
