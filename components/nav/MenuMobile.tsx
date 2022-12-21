@@ -3,9 +3,11 @@ import cn from 'classnames'
 import { useStore } from '/lib/store'
 import { regions } from '/lib/region'
 import { Twirl as Hamburger } from "hamburger-react";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Menu, MenuItem } from '/lib/menu';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 
 export type MenuMobileProps = { items: Menu, home: boolean }
 
@@ -18,9 +20,20 @@ const englishMenuItem: MenuItem = {
 
 export default function MenuMobile({ items, home }: MenuMobileProps) {
 
+	const router = useRouter()
+	const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
+	const { scrolledPosition } = useScrollInfo()
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
-	const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
+	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
+
+	useEffect(() => {
+		if (!isHome) return
+
+		const homeGallery = document.getElementById('home-gallery')
+		setInvertedMenu(!showMenuMobile && scrolledPosition < homeGallery.getBoundingClientRect().height)
+
+	}, [isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
 
 	return (
 		<>
@@ -28,19 +41,16 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 				<Hamburger
 					toggled={showMenuMobile}
 					onToggle={setShowMenuMobile}
-					color={'#121212'}
+					color={!invertedMenu ? '#121212' : '#ffffff'}
 					duration={0.5}
 					label={"Menu"}
 					size={24}
 				/>
 			</div>
-			<div
-				className={cn(s.mobileMenu, showMenuMobile && s.show)}
-			//onClick={({ target: { tagName } }) => tagName === 'A' && setShowMenuMobile(false)}
-			>
+			<div className={cn(s.mobileMenu, showMenuMobile && s.show)}>
 				<nav>
 					<ul className={s.nav}>
-						{[...items, englishMenuItem].map((item, idx) =>
+						{!showRegions && [...items, englishMenuItem].map((item, idx) =>
 							<React.Fragment key={idx}>
 								<li
 									data-slug={item.slug}

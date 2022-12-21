@@ -21,7 +21,7 @@ export default function Logo({ fixed }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
-  const [showMenuMobile, setShowMenuMobile] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile])
+  const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
   const { isMobile } = useDevice()
   const { scrolledPosition, viewportHeight, documentHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
@@ -113,7 +113,7 @@ export default function Logo({ fixed }: Props) {
   const regionRatio = ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed ? 1 - ((1 + regionPerc) * ratio) : 1
 
   return (
-    <div className={s.container}>
+    <div className={cn(s.container, invertedMenu && s.inverted)}>
       <div className={s.logo}>
         <div className={s.horizontal}>
           <Link href="/">
