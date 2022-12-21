@@ -59,13 +59,13 @@ fragment MemberNewsFragment on MemberNewsRecord {
 				id
 				subject
 				reciever
-				field {
+				formFields {
 					__typename
-					... on FormTextfieldRecord {
+					... on FormTextRecord {
 						id
 						title
 					}
-					... on FormTextRecord {
+					... on FormTextblockRecord {
 						id
 						title
 					}
