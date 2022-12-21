@@ -1,1 +1,16 @@
-.form {}
+.form {
+
+  form {
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input,
+    textarea,
+    button {
+      width: 100%;
+    }
+  }
+
+}

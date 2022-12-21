@@ -23,37 +23,47 @@ const sendMail = buildSendMail({
 });
 
 const Email = {
-  resetPassword: ({ email, token }: { email: string, token: string}) => 
+  resetPassword: ({ email, token }: { email: string, token: string }) =>
     sendMail({
       to: email,
       subject: 'Reset your password',
-      component: 
-        <ResetPassword 
+      component:
+        <ResetPassword
           link={`${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`}
           ctaText={'Reset password'}
           body={
             <>
-              We&apos;ve received your request to change your password. 
-              Use the link below to set up a new password for your account. 
+              We&apos;ve received your request to change your password.
+              Use the link below to set up a new password for your account.
             </>
           }
         />
     })
   ,
-  applicationSubmitted: ({ email, name }: { email: string, name:string }) => 
+  applicationSubmitted: ({ email, name }: { email: string, name: string }) =>
     sendMail({
       to: email,
       subject: 'Thanks for your application',
-      component: <ApplicationSubmitted name={name}/>
+      component: <ApplicationSubmitted name={name} />
     })
   ,
-  applicationApproved: ({ email, name, token } : { email: string, name:string, token:string }) => 
+  applicationApproved: ({ email, name, token }: { email: string, name: string, token: string }) =>
     sendMail({
-      to:email,
+      to: email,
       subject: 'Your application have been approved!',
-      component: 
-        <ApplicationApproved 
-          name={name} 
+      component:
+        <ApplicationApproved
+          name={name}
+          link={`${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`}
+        />
+    }),
+  contactForm: ({ formFields }: { formFields: { title: string, value: string } }) =>
+    sendMail({
+      to: email,
+      subject: 'Your application have been approved!',
+      component:
+        <ApplicationApproved
+          name={name}
           link={`${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`}
         />
     })
