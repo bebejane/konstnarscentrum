@@ -1,7 +1,7 @@
 import { NextApiResponse, NextApiRequest } from 'next';
 import { withBasicAuth } from 'dato-nextjs-utils/hoc'
 import NextCors from 'nextjs-cors';
-import Email from '/lib/emails';
+import { Email } from "/lib/emails";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 

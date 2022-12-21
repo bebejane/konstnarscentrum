@@ -7,7 +7,6 @@ export type ButtonBlockProps = { data: FormRecord, onClick: Function }
 
 const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
 
-
 export default function Form({ data: { id, formFields, reciever, subject }, onClick }: ButtonBlockProps) {
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
@@ -21,14 +20,19 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 	}
 
 	const createUpload = (file: File) => {
+		//return null
 		return client.uploads.createFromFileOrBlob({
-			// File object to upload
 			fileOrBlob: file,
-			// if you want, you can specify a different base name for the uploaded file
-			filename: 'different-image-name.png',
-			// skip the upload and return an existing resource if it's already present in the Media Area:
-			skipCreationIfAlreadyExists: true,
-			// be notified about the progress of the operation.
+			filename: file.name,
+			default_field_metadata: {
+				en: {
+					alt: `Form upload: ${id}`,
+					title: `Form upload: ${id}`,
+					custom_data: {
+						formId: id
+					}
+				}
+			},
 			onProgress: (info) => {
 				// info.type can be one of the following:
 				//
@@ -40,15 +44,6 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 				// Payload information depends on the type of notification
 				console.log('Details:', info.payload);
 			},
-			// specify some additional metadata to the upload resource
-			author: 'New author!',
-			copyright: 'New copyright',
-			default_field_metadata: {
-				en: {
-					alt: 'Pdf upload',
-					title: 'Pdf upload',
-				},
-			},
 		});
 	}
 
@@ -56,10 +51,8 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 		if (fileInput.current === null) return
 
 		fileInput.current.addEventListener('change', async (event) => {
-			const files = event.target.files;
-			for (let file of files) {
-				createUpload(file).then((upload) => console.log(upload));
-			}
+			const file = event.target.files[0];
+			createUpload(file).then((upload) => console.log(upload));
 		});
 	}, [fileInput])
 
@@ -103,10 +96,10 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 				<label htmlFor={'from-email'}>Email</label>
 				<input id={'fromEmail'} type="email" value={formValues.fromEmail} onChange={handleInputChange} />
 
-				{formFields.map(({ id, __typename, title }) => {
+				{formFields.map(({ id, __typename, title }, idx) => {
 					const props = { 'data-typename': __typename, value: formValues[id], onChange: handleInputChange }
 					return (
-						<>
+						<React.Fragment key={idx}>
 							<label htmlFor={id}>{title}</label>
 							{(() => {
 								switch (__typename) {
@@ -117,10 +110,10 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 									case 'PdfFormRecord':
 										return <input id={id} type="file" ref={fileInput} {...props} />
 									default:
-										return <div>Unsupported: {__typename}</div>
+										return <div key={idx}>Unsupported: {__typename}</div>
 								}
 							})()}
-						</>
+						</React.Fragment>
 					)
 				})}
 				<button type="submit">Skicka</button>
