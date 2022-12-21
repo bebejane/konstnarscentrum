@@ -3,7 +3,7 @@ import { buildSendMail } from "mailing-core";
 import ResetPassword from './ResetPassword'
 import ApplicationSubmitted from './ApplicationSubmitted'
 import ApplicationApproved from './ApplicationApproved'
-
+import ContactForm from "./ContactForm";
 
 const transport = nodemailer.createTransport({
   pool: true,
@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const sendMail = buildSendMail({
+export const sendMail = buildSendMail({
   transport,
   defaultFrom: "dev@konst-teknik.se",
   configPath: "./mailing.config.json",
@@ -57,14 +57,22 @@ const Email = {
           link={`${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`}
         />
     }),
-  contactForm: ({ formFields }: { formFields: { title: string, value: string } }) =>
+  contactForm: ({ fromName, fromEmail, to, subject, fields }: {
+    fromName: string,
+    fromEmail: string,
+    to: string,
+    subject: string,
+    fields: { title: string, value: string }[],
+  }) =>
     sendMail({
-      to: email,
-      subject: 'Your application have been approved!',
+      to,
+      subject,
       component:
-        <ApplicationApproved
-          name={name}
-          link={`${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`}
+        <ContactForm
+          fromName={fromName}
+          fromEmail={fromEmail}
+          subject={subject}
+          fields={fields}
         />
     })
 }
