@@ -54,6 +54,27 @@ fragment MemberNewsFragment on MemberNewsRecord {
 				__typename
 				id
 			}
+			... on FormRecord {
+				__typename
+				id
+				subject
+				reciever
+				field {
+					__typename
+					... on FormTextfieldRecord {
+						id
+						title
+					}
+					... on FormTextRecord {
+						id
+						title
+					}
+					... on PdfFormRecord {
+						id
+						title
+					}
+				}
+			}
 		}
 	}
 	region {
