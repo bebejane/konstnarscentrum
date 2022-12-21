@@ -67,7 +67,7 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
         </div>
       </div>
       <span className={cn('mid', s.title, s.horizontal)}>
-        <span>{horizontal.map(c => c)}</span>
+        <span className={s.first}>{horizontal.map(c => c)}</span>
         <span className={cn('mid', s.more, hover && s.hover)}>
           {more.map(c => c)}
         </span>

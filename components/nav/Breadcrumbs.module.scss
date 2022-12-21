@@ -16,7 +16,8 @@
   &.show {
     opacity: 1;
   }
-  span:last-child {
-    color: v ar(--beige-dark);
+  a:last-child,
+  span {
+    color: var(--beige-dark);
   }
 }

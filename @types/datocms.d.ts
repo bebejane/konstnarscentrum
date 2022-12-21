@@ -1332,15 +1332,9 @@ type FormTextRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
-<<<<<<< HEAD
-/** Block of type Textfälts-formulär (form_textfield) */
-type FormTextfieldRecord = RecordInterface & {
-  __typename?: 'FormTextfieldRecord';
-=======
 /** Block of type Textblock (form_textblock) */
 type FormTextblockRecord = RecordInterface & {
   __typename?: 'FormTextblockRecord';
->>>>>>> 17a1d10 (form start)
   _createdAt: Scalars['DateTime'];
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
@@ -1359,13 +1353,8 @@ type FormTextblockRecord = RecordInterface & {
 };
 
 
-<<<<<<< HEAD
-/** Block of type Textfälts-formulär (form_textfield) */
-type FormTextfieldRecord_seoMetaTagsArgs = {
-=======
 /** Block of type Textblock (form_textblock) */
 type FormTextblockRecord_seoMetaTagsArgs = {
->>>>>>> 17a1d10 (form start)
   locale?: InputMaybe<SiteLocale>;
 };
 

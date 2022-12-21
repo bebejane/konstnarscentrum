@@ -27,7 +27,7 @@
     white-space: pre;
     min-height: 1.5rem;
 
-    & span {
+    span.first {
       overflow: hidden;
       min-width: 100%;
       white-space: nowrap;
@@ -51,6 +51,7 @@
       text-align: right;
       flex: 1 1 100%;
       min-height: 1rem;
+      min-width: auto;
     }
   }
 }
