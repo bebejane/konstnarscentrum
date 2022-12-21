@@ -77,6 +77,7 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 				})}
 				<button type="submit">Skicka</button>
 				<Loader loading={loading} />
+				{error && <>Error: {error.message}</>}
 			</form>
 		</section>
 	)
