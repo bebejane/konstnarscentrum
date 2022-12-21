@@ -5,28 +5,46 @@ export type ButtonBlockProps = { data: FormRecord, onClick: Function }
 
 export default function Form({ data: { id, formFields, reciever, subject }, onClick }: ButtonBlockProps) {
 
-	const [formValues, setFormValues] = useState({})
+	const [formValues, setFormValues] = useState({ formName: '', formEmail: '' })
 	const handleInputChange = ({ target: { id, value } }) => {
 		setFormValues({ ...formValues, [id]: value })
 	}
-	return (
-		<section>
-			<form>
-				{formFields.map(({ id, __typename, title }) =>
-					(() => {
-						switch (__typename) {
-							case 'FormTextRecord':
-								return <input id={id} type="text" data-typename={__typename} value={formValues[id]} onChange={handleInputChange} />
-							case 'FormTextblockRecord':
-								return <textarea id={id} data-typename={__typename} rows={6} value={formValues[id]} onChange={handleInputChange} />
-							case 'FormEmailRecord':
-								return <input id={id} type="email" data-typename={__typename} value={formValues[id]} onChange={handleInputChange} />
-							default:
-								return <div>Unsupported: {__typename}</div>
 
-						}
-					})()
-				)}
+	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+		e.preventDefault()
+	}
+
+	return (
+		<section className={s.form}>
+			<form onSubmit={handleSubmit}>
+
+				<label htmlFor={'form-name'}>Namn</label>
+				<input id={'form-name'} type="text" value={formValues.formName} onChange={handleInputChange} />
+
+				<label htmlFor={'form-email'}>Email</label>
+				<input id={'form-email'} type="email" value={formValues.formEmail} onChange={handleInputChange} />
+
+				{formFields.map(({ id, __typename, title }) => {
+					const props = { 'data-typename': __typename, value: formValues[id], onChange: handleInputChange }
+					return (
+						<>
+							<label htmlFor={id}>{title}</label>
+							{(() => {
+								switch (__typename) {
+									case 'FormTextRecord':
+										return <input id={id} type="text"  {...props} />
+									case 'FormTextblockRecord':
+										return <textarea id={id} rows={6}  {...props} />
+									case 'PdfFormRecord':
+										return <input id={id} type="file"  {...props} />
+									default:
+										return <div>Unsupported: {__typename}</div>
+								}
+							})()}
+						</>
+					)
+				})}
+				<button type="submit">Skicka</button>
 			</form>
 		</section>
 	)
