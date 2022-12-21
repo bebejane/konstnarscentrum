@@ -92,12 +92,12 @@ export default function FullscreenGallery({ images, onClose, index = 0, show }: 
         </div>
         <div className={s.caption}>
           {title &&
-            <Markdown className={cn(s.text, "medium")} allowedElements={['em', 'p']}>
+            <Markdown className={cn(s.text, "small")} allowedElements={['em', 'p']}>
               {title}
             </Markdown>
           }
         </div>
-        <div className={s.close} onClick={onClose}>STÄNG</div>
+        <div className={cn(s.close, "mid")} onClick={onClose}>STÄNG</div>
       </div>
     </Modal>
   )

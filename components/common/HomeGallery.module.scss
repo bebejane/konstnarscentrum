@@ -9,7 +9,7 @@
     margin-right: calc(-1 * var(--outer-margin));
   }
 
-  >ul {
+  > ul {
     height: 60vh;
 
     @include mq($from: tablet) {
@@ -56,7 +56,8 @@
         &.current {
           z-index: 1;
 
-          .image {}
+          .image {
+          }
         }
 
         &.next {

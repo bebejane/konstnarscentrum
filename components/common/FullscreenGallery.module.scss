@@ -12,11 +12,11 @@
   z-index: 4000;
 
   .images {
-    --height: calc(100vh - calc(2 * var(--outer-margin)) - var(--space));
+    --height: calc(100vh - calc(2 * var(--outer-margin)) - 1em);
     --width: calc(100vw - calc(2 * var(--outer-margin)) - calc(2 * var(--gutter)));
     max-height: var(--height);
     min-height: var(--height);
-    margin-bottom: var(--space);
+    margin-bottom: 2rem;
     max-width: var(--width);
     min-width: var(--width);
 
@@ -29,6 +29,9 @@
       position: relative;
       max-height: var(--height);
       min-height: var(--height);
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       .image {
         position: relative;
@@ -64,7 +67,6 @@
     justify-content: center;
     bottom: 0;
     font-weight: normal;
-    font-size: 0.9rem;
     color: var(--white) !important;
     margin-right: var(--outer-margin);
     margin-left: var(--outer-margin);
@@ -94,12 +96,10 @@
     color: var(--white);
     z-index: 500;
     cursor: pointer;
-    font-size: 1rem;
     margin: 1rem;
     writing-mode: vertical-lr;
   }
 
-
-
-  @include mq($until: tablet) {}
+  @include mq($until: tablet) {
+  }
 }
