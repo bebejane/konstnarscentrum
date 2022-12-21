@@ -61,7 +61,8 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
         />
       }
       <div className={cn('mid', s.title, s.vertical)}>
-        {vertical.map(c => c)}
+        <span>
+          {vertical.map(c => c)}</span>
         <div className={s.fade}>
 
         </div>
