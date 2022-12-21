@@ -295,9 +295,12 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
       />
     );
 
-    const transition = fadeInDuration > 0 ? `border-left-width ${fadeInDuration}ms, border-right-width ${fadeInDuration}ms` : undefined;
-    const border = loaded ? `0px solid ${data.bgColor}` : `15px solid ${data.bgColor}`
-    const borderRight = loaded ? `0px solid ${data.bgColor}` : `15px solid ${data.bgColor}`
+    const outlineWidth = 20
+    const transitionStyles = {
+      transition: fadeInDuration > 0 ? `outline ${fadeInDuration}ms, outline-offset ${fadeInDuration}ms` : undefined,
+      outline: loaded ? `0px solid ${data.bgColor}` : `${outlineWidth}px solid ${data.bgColor}`,
+      outlineOffset: loaded ? `0px` : `-${outlineWidth}px`,
+    }
 
     const placeholder =
       usePlaceholder && (data.bgColor || data.base64) ? (
@@ -311,7 +314,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
             backgroundColor: data.bgColor ?? undefined,
             objectFit,
             objectPosition,
-            transition,
+            //transition,
             opacity: showImage ? 0 : 1,
             // During the opacity transition of the placeholder to the definitive version,
             // hardware acceleration is triggered. This results in the browser trying to render the
@@ -382,9 +385,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
                 className={pictureClassName}
                 style={{
                   opacity: showImage ? 1 : 0,
-                  border,
-                  borderRight,
-                  transition,
+                  ...transitionStyles,
                   ...absolutePositioning,
                   objectFit,
                   objectPosition,
