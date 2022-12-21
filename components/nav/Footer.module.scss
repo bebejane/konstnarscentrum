@@ -87,6 +87,14 @@
     }
   }
 
+  .social {
+    @include mq($until: tablet) {
+      span {
+        padding-bottom: 1em;
+      }
+    }
+  }
+
   .support {
     display: flex;
     justify-content: space-between;

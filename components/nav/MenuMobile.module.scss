@@ -47,6 +47,7 @@
     min-height: var(--height);
     overflow-y: scroll;
     overflow-x: hidden;
+    flex: 1;
 
     ul {
       width: 100%;
@@ -82,6 +83,7 @@
         flex-direction: column;
         justify-content: flex-end;
         flex: 1 1 100%;
+        margin-bottom: 2rem;
 
         img.caret {
           margin-left: 0.3rem;
