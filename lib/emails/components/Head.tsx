@@ -33,6 +33,11 @@ const Head: React.FC<HeadProps> = ({ children }) => {
         .paragraph a {
           color: ${black} !important;
         }
+
+        .paragraph span {
+          color: ${grayDark} !important;
+        }
+
         .li {
           text-indent: -18px;
           margin-left: 24px;

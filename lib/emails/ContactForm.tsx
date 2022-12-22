@@ -44,7 +44,7 @@ const ContactForm: React.FC<{
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Från: {fromName} {fromEmail}
+            <span>Från: </span>{fromName} {fromEmail}
           </MjmlText>
           <MjmlText
             padding="24px 0 0"
@@ -54,7 +54,7 @@ const ContactForm: React.FC<{
           >
             {fields.map(({ title, value }, idx) =>
               <p key={idx}>
-                {title}<br />
+                <span>{title}</span><br />
                 {value}
               </p>
             )}

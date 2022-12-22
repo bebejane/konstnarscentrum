@@ -9,7 +9,7 @@ const Header: React.FC<HeaderProps> = ({ loose }) => {
     <MjmlSection padding={loose ? "48px 0 40px" : "48px 0 24px"}>
       <MjmlColumn>
         <MjmlImage
-          padding="0 20px 0"
+          padding="0 120px 0"
           //width="500px"
           //height="54px"
           align="center"

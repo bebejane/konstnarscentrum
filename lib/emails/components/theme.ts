@@ -1,7 +1,7 @@
 // Colors
-export const black = "#000";
+export const black = "#121212";
 export const gold = "#fadf98";
-export const grayDark = "#888";
+export const grayDark = "#807a6e";
 export const grayLight = "#f5f5f5";
 
 // Typography
