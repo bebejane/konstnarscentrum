@@ -10,7 +10,7 @@ export type Props = {
   news: NewsRecord
 }
 
-export default function NewsItem({ news: { createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
+export default function NewsItem({ news: { id, createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
 
   return (
     <>
