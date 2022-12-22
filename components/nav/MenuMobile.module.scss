@@ -100,9 +100,26 @@
       }
     }
   }
+
+  ::-webkit-scrollbar {
+    -webkit-appearance: none;
+    background: var(--white);
+  }
+
+  ::-webkit-scrollbar:vertical {
+    width: 0px;
+  }
+
+  ::-webkit-scrollbar:horizontal {
+    height: 0px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--white);
+  }
 }
 
-@include mq($from: tablet) {
+@include mq($from: nav-break) {
   .mobileMenu,
   .hamburger {
     display: none;

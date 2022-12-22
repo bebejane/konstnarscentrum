@@ -39,6 +39,7 @@ body {
 	color: var(--black);
 	background-color: var(--white);
 	font-family: $body-font;
+	letter-spacing: -0.01em;
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
 	overflow-x: hidden;
