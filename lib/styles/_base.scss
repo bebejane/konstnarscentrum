@@ -117,12 +117,13 @@ button {
 	-webkit-box-sizing: border-box;
 	cursor: pointer;
 	color: var(--black);
-	transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+	transition: color 0.3s ease-in-out, background-color 0.5s ease-in-out;
 
 	&:hover {
 		//border-width: 2px;
 		//margin: -1px;
-		color: var(--beige-dark) !important;
+		background-color: var(--black);
+		color: var(--beige-light-solid) !important;
 	}
 
 	&.wide {
