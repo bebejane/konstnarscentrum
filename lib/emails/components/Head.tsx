@@ -38,10 +38,6 @@ const Head: React.FC<HeadProps> = ({ children }) => {
           color: ${grayDark} !important;
         }
 
-        .content {
-          border-top: 1px solid ${grayLight};
-        }
-
         .li {
           text-indent: -18px;
           margin-left: 24px;

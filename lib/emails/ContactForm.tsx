@@ -8,7 +8,8 @@ import {
   MjmlColumn,
   MjmlText,
   MjmlImage,
-  MjmlSpacer
+  MjmlSpacer,
+  MjmlDivider
 } from "mjml-react";
 
 import {
@@ -32,11 +33,16 @@ const ContactForm: React.FC<{
       <Header loose />
       <MjmlSection padding="0 24px">
         <MjmlColumn>
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="8px 0 32px 0"
+          ></MjmlDivider>
           <MjmlText
-            padding="50px 0 0 0"
+            padding="18px 0 0 0"
             fontSize={textXl}
             lineHeight={leadingTight}
-            cssClass="content paragraph"
+            cssClass="paragraph"
           >
             {subject}
           </MjmlText>
@@ -65,6 +71,11 @@ const ContactForm: React.FC<{
               </p>
             )}
           </MjmlText>
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="40px 0 0 0"
+          ></MjmlDivider>
         </MjmlColumn>
       </MjmlSection>
       <Footer />

@@ -29,15 +29,14 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
   return (
     <Mjml>
       <Head />
-      <MjmlBody width={400}>
-        <Header />
+      <MjmlBody width={600}>
+        <Header loose />
         <MjmlSection padding="0 24px" cssClass="smooth">
           <MjmlColumn>
             <MjmlDivider
               borderColor="#666"
-              borderStyle="dotted"
               borderWidth="1px"
-              padding="8px 0 16px 0"
+              padding="8px 0 32px 0"
             ></MjmlDivider>
             <MjmlText
               cssClass="paragraph"
@@ -56,13 +55,10 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               lineHeight={leadingRelaxed}
               cssClass="paragraph"
             >
-              ♥
-              <br />
               Konstnärscentrum
             </MjmlText>
             <MjmlDivider
               borderColor="#666"
-              borderStyle="dotted"
               borderWidth="1px"
               padding="16px 0 0"
             ></MjmlDivider>

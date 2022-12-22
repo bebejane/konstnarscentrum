@@ -9,6 +9,7 @@ import {
   MjmlText,
   MjmlImage,
   MjmlSpacer,
+  MjmlDivider,
 } from "mjml-react";
 
 import {
@@ -63,6 +64,11 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             <br />
             Konstnärscentrum
           </MjmlText>
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="40px 0 0 0"
+          ></MjmlDivider>
         </MjmlColumn>
       </MjmlSection>
       <Footer />
