@@ -55,8 +55,8 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 	}
 
 	useEffect(() => {
-		if (success)
-			confirmationRef.current?.scrollIntoView({ behavior: 'smooth' })
+		if (!success)
+			confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 	}, [success])
 
 	return (
