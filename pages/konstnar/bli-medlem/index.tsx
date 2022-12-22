@@ -10,12 +10,12 @@ export type Props = {
 	apply: ApplyRecord
 }
 
-export default function Member({ apply: { content, title } }: Props) {
+export default function Member({ apply: { id, content, title } }: Props) {
 
 	return (
 		<div className={s.container}>
 			<h1><RevealText>{title}</RevealText></h1>
-			<StructuredContent content={content} />
+			<StructuredContent id={id} content={content} />
 			<h3>Skicka in ansökan</h3>
 			<Apply regions={regions.filter(({ global }) => !global)} />
 		</div>

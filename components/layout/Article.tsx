@@ -8,6 +8,7 @@ import BalanceText from 'react-balance-text'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 
 export type ArticleProps = {
+  id: string,
   children?: React.ReactNode,
   title: string,
   subtitle?: string,
@@ -22,6 +23,7 @@ export type ArticleProps = {
 }
 
 export default function Article({
+  id,
   children,
   title,
   subtitle,
@@ -73,6 +75,7 @@ export default function Article({
       }
       {content &&
         <StructuredContent
+          id={id}
           content={content}
           onClick={(imageId) => onClick?.(imageId)}
         />

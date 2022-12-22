@@ -15,6 +15,7 @@ export default function NewsItem({ news: { createdAt, title, image, intro, conte
   return (
     <>
       <Article
+        id={id}
         image={image}
         title={title}
         subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}

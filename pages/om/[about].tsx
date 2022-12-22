@@ -22,6 +22,7 @@ export default function About({ about: { id, title, image, intro, content } }: A
 
 	return (
 		<Article
+			id={id}
 			key={id}
 			title={title}
 			image={image}

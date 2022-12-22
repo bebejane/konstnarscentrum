@@ -77,6 +77,7 @@ export default function Member({ member: {
 	return (
 		<div className={s.container}>
 			<Article
+				id={id}
 				key={id}
 				image={image}
 				title={`${firstName} ${lastName}`}
@@ -101,6 +102,7 @@ export default function Member({ member: {
 					<Block
 						key={`${id}-${idx}`}
 						data={block}
+						recordId={id}
 						onClick={(id) => setImageId(id)}
 						editable={{
 							...block,

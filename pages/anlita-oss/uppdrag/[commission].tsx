@@ -38,6 +38,7 @@ export default function Commission({ commission: {
 	return (
 		<div className={s.container}>
 			<Article
+				id={id}
 				key={id}
 				title={`${title} i ${city}, ${year}`}
 				image={image}
@@ -61,6 +62,7 @@ export default function Commission({ commission: {
 						<Block
 							key={`${id}-${idx}`}
 							data={block}
+							recordId={id}
 							onClick={(id) => setImageId(id)}
 						/>
 					)}

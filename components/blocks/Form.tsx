@@ -1,15 +1,19 @@
 import s from './Form.module.scss'
 import cn from 'classnames'
 import { buildClient } from '@datocms/cma-client-browser';
-import React, { ForwardedRef, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { Upload } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
 
-export type ButtonBlockProps = { data: FormRecord, onClick: Function }
+export type ButtonBlockProps = {
+	recordId: string,
+	data: FormRecord,
+	onClick: Function
+}
 
 const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
 
-export default function Form({ data: { id, formFields, reciever, subject }, onClick }: ButtonBlockProps) {
+export default function Form({ recordId, data: { id, formFields, subject, confirmation }, onClick }: ButtonBlockProps) {
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
 	const [error, setError] = useState<Error | undefined>()
@@ -30,18 +34,10 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 
 		const fromName = formValues.fromName;
 		const fromEmail = formValues.fromEmail;
-		const to = reciever;
 		const fields = formFields.map(({ title, id }) => ({ title, value: formValues[id] }))
-		const form = { subject, fromEmail, fromName, to, fields }
+		const form = { recordId, fromEmail, fromName, fields }
 
 		setLoading(true)
-
-		setTimeout(() => {
-			setLoading(false)
-			setSuccess(true)
-		}, 2000)
-
-
 		fetch('/api/contact-form', {
 			body: JSON.stringify(form),
 			method: 'POST',
@@ -57,45 +53,60 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 		}).catch((err) => setError(err)).finally(() => setLoading(false))
 	}
 
+	console.log(formValues);
+
 	return (
 		<section className={s.form}>
-			<form onSubmit={handleSubmit} className={cn(loading && s.loading)}>
-				<label htmlFor={'fromName'}>Namn</label>
-				<input id={'fromName'} type="text" value={formValues.fromName} onChange={handleInputChange} />
+			{success ?
+				<p className={s.confirmation}>{confirmation}</p>
+				:
+				<form onSubmit={handleSubmit} className={cn(loading && s.loading)}>
+					<label htmlFor={'fromName'}>Namn</label>
+					<input id={'fromName'} type="text" value={formValues.fromName} onChange={handleInputChange} />
 
-				<label htmlFor={'from-email'}>Email</label>
-				<input id={'fromEmail'} type="email" value={formValues.fromEmail} onChange={handleInputChange} />
+					<label htmlFor={'from-email'}>Email</label>
+					<input id={'fromEmail'} type="email" value={formValues.fromEmail} onChange={handleInputChange} />
 
-				{formFields.map(({ id: fieldId, __typename, title }, idx) => {
-					const props = { id: fieldId, formId: id, 'data-typename': __typename, value: formValues[id], onChange: handleInputChange }
-					return (
-						<React.Fragment key={idx}>
-							<label htmlFor={id}>{title}</label>
-							{(() => {
-								switch (__typename) {
-									case 'FormTextRecord':
-										return <input type="text"  {...props} />
-									case 'FormTextblockRecord':
-										return <textarea rows={6}  {...props} />
-									case 'PdfFormRecord':
-										return <FileInput label="Välj fil..." {...props} onError={(err) => setError(err)} onChange={(u: Upload) => setFormValues({ ...formValues, [id]: upload?.url })} />
-									default:
-										return <div key={idx}>Unsupported: {__typename}</div>
-								}
-							})()}
-						</React.Fragment>
-					)
-				})}
+					{formFields.map(({ id: fieldId, __typename, title }, idx) => {
+						const props = { id: fieldId, formId: id, 'data-typename': __typename, value: formValues[id], onChange: handleInputChange }
+						return (
+							<React.Fragment key={idx}>
+								<label htmlFor={id}>{title}</label>
+								{(() => {
+									switch (__typename) {
+										case 'FormTextRecord':
+											return <input type="text"  {...props} />
+										case 'FormTextblockRecord':
+											return <textarea rows={6}  {...props} />
+										case 'PdfFormRecord':
+											return (
+												<FileInput
+													label="Välj fil..."
+													{...props}
+													onError={(err) => setError(err)}
+													onChange={(upload) => setFormValues({ ...formValues, [fieldId]: upload?.url })}
+												/>
+											)
+										default:
+											return <div key={idx}>Unsupported: {__typename}</div>
+									}
+								})()}
+							</React.Fragment>
+						)
+					})}
 
-				{error &&
-					<p className={s.error}>Error: {error.message}</p>
-				}
+					{error &&
+						<p className={s.error}>
+							{error.message}
+						</p>
+					}
 
-				<button type="submit" disabled={loading}>
-					{loading ? 'Skickar...' : 'Skicka'}
-				</button>
+					<button type="submit" disabled={loading}>
+						{loading ? 'Skickar...' : 'Skicka'}
+					</button>
 
-			</form>
+				</form>
+			}
 		</section>
 	)
 }
@@ -109,21 +120,20 @@ const FileInput = ({ label, formId, onChange, onError }) => {
 	const [progress, setProgress] = useState<number | undefined>()
 	const ref = useRef<HTMLInputElement | null>(null)
 
-	const onClick = (e) => {
-		ref.current?.click();
-	}
-
 	const resetInput = () => {
 		setUpload(undefined)
 		setUploading(false)
 		setProgress(undefined)
 		setError(undefined)
+		ref.current.value = ''
 	}
 
-	const createUpload = (file: File) => {
+	const createUpload = useCallback((file: File) => {
+		if (!file) return
 
 		resetInput()
 		setUploading(true)
+		console.log('create upload');
 
 		return client.uploads.createFromFileOrBlob({
 			fileOrBlob: file,
@@ -138,8 +148,6 @@ const FileInput = ({ label, formId, onChange, onError }) => {
 				}
 			},
 			onProgress: (info: OnProgressInfo) => {
-				console.log('Phase:', info.type);
-				console.log('Details:', info.payload);
 				if (info.payload && 'progress' in info.payload) {
 					setProgress(info.payload.progress)
 					if (info.payload.progress >= 100) {
@@ -148,33 +156,33 @@ const FileInput = ({ label, formId, onChange, onError }) => {
 				}
 			},
 		})
-	}
+	}, [formId])
+
+	const handleChange = useCallback((event) => {
+		const file = event.target.files[0];
+		createUpload(file).then((upload) => setUpload(upload)).catch(setError)
+	}, [createUpload])
 
 	useEffect(() => {
 		if (ref.current === null) return
 
-		const handleChange = (event) => {
-			const file = event.target.files[0];
-			createUpload(file).then((upload) => setUpload(upload)).catch(setError)
-		}
-
+		ref.current?.removeEventListener('change', handleChange);
 		ref.current.addEventListener('change', handleChange);
 
-		return () => ref.current.removeEventListener('change', handleChange);
-	}, [ref])
+	}, [ref, createUpload, handleChange])
 
 	useEffect(() => {
 		onChange(upload)
-	}, [upload, onChange])
+	}, [upload])
 
 	useEffect(() => {
 		onError(error)
-	}, [error, onError])
+	}, [error])
 
 	return (
 		<p>
 			{!upload ?
-				<button type="button" onClick={onClick} disabled={progress !== undefined}>
+				<button type="button" onClick={() => ref.current?.click()} disabled={progress !== undefined || uploading}>
 					{progress !== undefined ? `${progress}%` : label}
 				</button>
 				:
@@ -183,7 +191,7 @@ const FileInput = ({ label, formId, onChange, onError }) => {
 					<span onClick={resetInput}>Ta bort</span>
 				</div>
 			}
-			<input type="file" ref={ref} />
+			<input type="file" ref={ref} accept={'.pdf'} />
 		</p>
 	)
 }

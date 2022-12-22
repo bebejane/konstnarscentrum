@@ -227,6 +227,7 @@ export const MemberByPasswordToken: DocumentNode;
 export const AllMemberCategories: DocumentNode;
 export const ApplyForMembership: DocumentNode;
 export const MemberNews: DocumentNode;
+export const MemberNewsById: DocumentNode;
 export const AllMemberNews: DocumentNode;
 export const AllMemberNewsCategories: DocumentNode;
 export const LatestMemberNews: DocumentNode;

@@ -59,6 +59,7 @@ fragment MemberNewsFragment on MemberNewsRecord {
 				id
 				subject
 				reciever
+				confirmation
 				formFields {
 					__typename
 					... on FormTextRecord {

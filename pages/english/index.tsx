@@ -8,12 +8,12 @@ export type Props = {
 	inEnglish: InEnglishRecord
 }
 
-export default function InEnglish({ inEnglish: { title, content } }: Props) {
+export default function InEnglish({ inEnglish: { id, title, content } }: Props) {
 
 	return (
 		<div className={s.container}>
 			<h1>{title}</h1>
-			<StructuredContent content={content} />
+			<StructuredContent id={id} content={content} />
 		</div>
 	);
 }

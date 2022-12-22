@@ -12,6 +12,7 @@ export type Props = {
 }
 
 export default function MemberNewsArticle({ memberNews: {
+	id,
 	createdAt,
 	date,
 	intro,
@@ -24,9 +25,12 @@ export default function MemberNewsArticle({ memberNews: {
 	region
 } }: Props) {
 
+	console.log(id);
+
 	return (
 		<>
 			<Article
+				id={id}
 				image={image}
 				title={title}
 				text={intro}
@@ -41,7 +45,7 @@ export default function MemberNewsArticle({ memberNews: {
 						{ title: 'Region', value: region?.name }
 					]}
 				/>
-				<StructuredContent content={content} />
+				<StructuredContent id={id} content={content} />
 			</Article>
 			<RegionLink href={'/konstnar/aktuellt'}>
 				<button className="wide">Tillbaka till översikt</button>

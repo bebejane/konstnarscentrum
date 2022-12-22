@@ -8,10 +8,10 @@ export type Props = {
   children?: React.ReactNode | React.ReactNode[],
   columns?: 2 | 3,
   className?: string
-  whiteBorder: boolean
+  whiteBorder?: boolean
 }
 
-export default function CardContainer({ children, columns = 3, className, whiteBorder }: Props) {
+export default function CardContainer({ children, columns = 3, className, whiteBorder = false }: Props) {
 
   const buildCards = () => {
     return chunkArray(Array.isArray(children) ? children : [children], columns) as [React.ReactNode[]]

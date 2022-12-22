@@ -13,6 +13,7 @@ export default function Consult({ consult: { id, title, image, intro, content } 
 
 	return (
 		<Article
+			id={id}
 			key={id}
 			title={title}
 			image={image}
