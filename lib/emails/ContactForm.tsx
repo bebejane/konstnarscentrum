@@ -44,10 +44,10 @@ const ContactForm: React.FC<{
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            <span>Från: </span>{fromName} {fromEmail}
+            <span>Från: </span>{fromName} <span>({fromEmail})</span>
           </MjmlText>
           <MjmlText
-            padding="24px 0 0"
+            padding="0 0 0"
             fontSize={textBase}
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
