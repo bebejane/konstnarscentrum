@@ -71,7 +71,8 @@ const Head: React.FC<HeadProps> = ({ children }) => {
       `}</MjmlStyle>
         <MjmlAttributes>
           <MjmlAll
-            font-family='"Jazz", Univers, "Univers", Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif'
+            font-family='"Jazz", Univers, "Univers", Helvetica, Arial, -apple-system, BlinkMacSystemFont, 
+            sans-serif'
             font-weight="400"
           />
         </MjmlAttributes>
