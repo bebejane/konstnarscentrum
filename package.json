@@ -26,6 +26,7 @@
 		"@types/bcryptjs": "^2.4.2",
 		"@types/jsonwebtoken": "^8.5.9",
 		"@types/mjml": "^4.7.0",
+		"@types/mjml-react": "^2.0.6",
 		"@types/node": "^18.11.9",
 		"array-move": "^4.0.0",
 		"axios": "^0.21.4",

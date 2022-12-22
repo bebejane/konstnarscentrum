@@ -8,7 +8,7 @@ import {
   MjmlColumn,
   MjmlText,
   MjmlImage,
-  MjmlSpacer,
+  MjmlSpacer
 } from "mjml-react";
 
 import {
@@ -17,6 +17,8 @@ import {
   textBase,
   textXl,
 } from "./components/theme";
+
+import { isValidUrl } from "./";
 
 const ContactForm: React.FC<{
   subject: string,
@@ -55,7 +57,11 @@ const ContactForm: React.FC<{
             {fields.map(({ title, value }, idx) =>
               <p key={idx}>
                 <span>{title}</span><br />
-                {value}
+                {isValidUrl(value) ?
+                  <a href={value}>{value}</a>
+                  :
+                  <>{value}</>
+                }
               </p>
             )}
           </MjmlText>

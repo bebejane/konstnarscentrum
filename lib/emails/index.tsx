@@ -22,6 +22,20 @@ const sendMail = buildSendMail({
   configPath: "./mailing.config.json",
 });
 
+export const isValidUrl = (str: string): boolean => {
+  if (!str) return false
+  const pattern = new RegExp(
+    '^([a-zA-Z]+:\\/\\/)?' + // protocol
+    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
+    '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+    '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+    '(\\#[-a-z\\d_]*)?$', // fragment locator
+    'i'
+  );
+  return pattern.test(str);
+}
+
 export const Email = {
   resetPassword: ({ email, token }: { email: string, token: string }) =>
     sendMail({
