@@ -11,6 +11,40 @@
     button {
       width: 100%;
     }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    &.loading {
+      opacity: 0.5;
+      pointer-events: none;
+    }
   }
 
+  .error {
+    color: var(--red);
+  }
+
+  .filename {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+
+    span {
+      &:nth-child(1) {
+        flex: 1 1 auto;
+      }
+
+      &:nth-child(2) {
+        cursor: pointer;
+        color: var(--beige-dark);
+
+        &:hover {
+          color: var(--black);
+        }
+      }
+    }
+  }
 }

@@ -12,6 +12,9 @@ export function newContactform() {
       }, {
         title: 'Field two',
         value: 'Lorem Ipsum is simply dummy text of the printing'
+      }, {
+        title: 'Ladda upp din presentation som PDF',
+        value: 'https://www.datocms-assets.com/55629/1671709126-1671111169-oxid-vagglampa-sv.pdf'
       }
       ]}
     />
