@@ -24,8 +24,11 @@ export default function Initiatives({ projects, introInitiative: { intro }, regi
 			<CardContainer columns={2}>
 				{projects.map(({ title, text, url, image }, idx) =>
 					<Card key={idx}>
-						<Image className={s.image} data={image.responsiveImage} />
-						<h3>{title}</h3>
+						<a href={url}>
+							<Image className={s.image} data={image.responsiveImage} />
+
+							<h3>{title}</h3>
+						</a>
 						<Markdown className={cn('mid', s.text)}>
 							{text}
 						</Markdown>

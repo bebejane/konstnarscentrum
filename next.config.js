@@ -69,6 +69,18 @@ const nextOptions = {
 			},
 		];
 	},
+	async headers() {
+		return [
+			{
+				source: "/fonts/:path*",
+				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+			},
+			{
+				source: "/images/:path*",
+				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+			},
+		];
+	},
 };
 
 const config = { sassOptions, ...nextOptions };

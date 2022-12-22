@@ -2,6 +2,7 @@ import s from './Form.module.scss'
 import { buildClient } from '@datocms/cma-client-browser';
 import React, { useEffect, useRef, useState } from 'react'
 import Loader from '/components/common/Loader'
+import { OnProgressInfo } from '@datocms/cma-client-browser';
 
 export type ButtonBlockProps = { data: FormRecord, onClick: Function }
 
@@ -13,6 +14,7 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 	const [error, setError] = useState<Error | undefined>()
 	const [loading, setLoading] = useState(false)
 	const [success, setSuccess] = useState<boolean | undefined>()
+	const [progress, setProgress] = useState<number | undefined>()
 	const fileInput = useRef<HTMLInputElement | null>(null)
 
 	const handleInputChange = ({ target: { id, value } }) => {
@@ -21,6 +23,7 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 
 	const createUpload = (file: File) => {
 		//return null
+		setLoading(true)
 		return client.uploads.createFromFileOrBlob({
 			fileOrBlob: file,
 			filename: file.name,
@@ -33,16 +36,11 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 					}
 				}
 			},
-			onProgress: (info) => {
-				// info.type can be one of the following:
-				//
-				// * DOWNLOADING_FILE: client is downloading the asset from the specified URL
-				// * REQUESTING_UPLOAD_URL: client is requesting permission to upload the asset to the DatoCMS CDN
-				// * UPLOADING_FILE: client is uploading the asset
-				// * CREATING_UPLOAD_OBJECT: client is finalizing the creation of the upload resource
+			onProgress: (info: OnProgressInfo) => {
 				console.log('Phase:', info.type);
-				// Payload information depends on the type of notification
 				console.log('Details:', info.payload);
+				if ('progress' in info.payload)
+					setProgress(info.payload.progress)
 			},
 		});
 	}
