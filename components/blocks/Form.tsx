@@ -20,6 +20,7 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 	const [loading, setLoading] = useState(false)
 	const [upload, setUpload] = useState<Upload | undefined>()
 	const [success, setSuccess] = useState<boolean | undefined>()
+	const confirmationRef = useRef<HTMLParagraphElement | undefined>()
 
 	const handleInputChange = ({ target: { id, value } }) => {
 		setFormValues({ ...formValues, [id]: value })
@@ -53,10 +54,15 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 		}).catch((err) => setError(err)).finally(() => setLoading(false))
 	}
 
+	useEffect(() => {
+		if (success)
+			confirmationRef.current?.scrollIntoView({ behavior: 'smooth' })
+	}, [success])
+
 	return (
 		<section className={s.form}>
 			{success ?
-				<p className={s.confirmation}>{confirmation}</p>
+				<p ref={confirmationRef} className={s.confirmation}>{confirmation}</p>
 				:
 				<form onSubmit={handleSubmit} className={cn(loading && s.loading)}>
 					<label htmlFor={'fromName'}>Namn</label>
