@@ -72,11 +72,7 @@ const nextOptions = {
 	async headers() {
 		return [
 			{
-				source: "/fonts/:path*",
-				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
-			},
-			{
-				source: "/images/:path*",
+				source: "/:path*",
 				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
 			},
 		];
