@@ -78,7 +78,7 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 									case 'FormTextblockRecord':
 										return <textarea rows={6}  {...props} />
 									case 'PdfFormRecord':
-										return <FileInput label="Välj fil..." {...props} onChange={(u: Upload) => setFormValues({ ...formValues, [id]: upload?.url })} />
+										return <FileInput label="Välj fil..." {...props} onError={(err) => setError(err)} onChange={(u: Upload) => setFormValues({ ...formValues, [id]: upload?.url })} />
 									default:
 										return <div key={idx}>Unsupported: {__typename}</div>
 								}
@@ -101,9 +101,10 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 }
 
 
-const FileInput = ({ label, formId, onChange }) => {
+const FileInput = ({ label, formId, onChange, onError }) => {
 
 	const [uploading, setUploading] = useState(false)
+	const [error, setError] = useState<Error | undefined>()
 	const [upload, setUpload] = useState<Upload | undefined>()
 	const [progress, setProgress] = useState<number | undefined>()
 	const ref = useRef<HTMLInputElement | null>(null)
@@ -111,14 +112,17 @@ const FileInput = ({ label, formId, onChange }) => {
 	const onClick = (e) => {
 		ref.current?.click();
 	}
+
 	const resetInput = () => {
 		setUpload(undefined)
 		setUploading(false)
 		setProgress(undefined)
+		setError(undefined)
 	}
 
 	const createUpload = (file: File) => {
 
+		resetInput()
 		setUploading(true)
 
 		return client.uploads.createFromFileOrBlob({
@@ -143,7 +147,7 @@ const FileInput = ({ label, formId, onChange }) => {
 					}
 				}
 			},
-		});
+		})
 	}
 
 	useEffect(() => {
@@ -151,7 +155,7 @@ const FileInput = ({ label, formId, onChange }) => {
 
 		const handleChange = (event) => {
 			const file = event.target.files[0];
-			createUpload(file).then((upload) => setUpload(upload));
+			createUpload(file).then((upload) => setUpload(upload)).catch(setError)
 		}
 
 		ref.current.addEventListener('change', handleChange);
@@ -163,19 +167,23 @@ const FileInput = ({ label, formId, onChange }) => {
 		onChange(upload)
 	}, [upload, onChange])
 
+	useEffect(() => {
+		onError(error)
+	}, [error, onError])
+
 	return (
 		<p>
-			<input type="file" ref={ref} />
 			{!upload ?
 				<button type="button" onClick={onClick} disabled={progress !== undefined}>
 					{progress !== undefined ? `${progress}%` : label}
 				</button>
 				:
-				<p className={s.filename}>
+				<div className={s.filename}>
 					<span>{upload.filename}</span>
 					<span onClick={resetInput}>Ta bort</span>
-				</p>
+				</div>
 			}
+			<input type="file" ref={ref} />
 		</p>
 	)
 }

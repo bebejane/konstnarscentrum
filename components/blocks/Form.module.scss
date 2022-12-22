@@ -29,6 +29,8 @@
   .filename {
     display: flex;
     flex-direction: row;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 
     span {
       &:nth-child(1) {
