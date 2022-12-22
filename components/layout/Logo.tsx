@@ -17,7 +17,6 @@ const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T
 
 export default function Logo({ fixed }: Props) {
 
-
   const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
   const region = useRegion()
@@ -43,7 +42,7 @@ export default function Logo({ fixed }: Props) {
         return clearInterval(interval)
       }
       setRatio(dir === 'horizontal' ? r += step : r -= step)
-    }, 10)
+    }, 20)
 
     return () => clearInterval(interval)
   }, [setManualMode, ratio, region, letters, maxR])
@@ -64,7 +63,15 @@ export default function Logo({ fixed }: Props) {
       return letters.filter((el, idx) => ((idx / l) >= ratio || isServer))
   }
 
-  //useEffect(() => { return animateManual('horizontal') }, [router.asPath])
+  useEffect(() => {
+    const handleRouteChange = () => {
+      if (!isFixed)
+        animateManual('vertical')
+    }
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => router.events.off('routeChangeComplete', handleRouteChange)
+
+  }, [router.asPath])
 
   useEffect(() => {
     if (manualMode)
@@ -72,7 +79,7 @@ export default function Logo({ fixed }: Props) {
 
     let r;
 
-    if (atBottom) // At bottom
+    if (atBottom)
       r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
       r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))
