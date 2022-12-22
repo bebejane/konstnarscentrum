@@ -1,8 +1,11 @@
 import s from './Form.module.scss'
-import React, { useState } from 'react'
+import { buildClient } from '@datocms/cma-client-browser';
+import React, { useEffect, useRef, useState } from 'react'
 import Loader from '/components/common/Loader'
 
 export type ButtonBlockProps = { data: FormRecord, onClick: Function }
+
+const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
 
 export default function Form({ data: { id, formFields, reciever, subject }, onClick }: ButtonBlockProps) {
 
@@ -10,10 +13,48 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 	const [error, setError] = useState<Error | undefined>()
 	const [loading, setLoading] = useState(false)
 	const [success, setSuccess] = useState<boolean | undefined>()
+	const fileInput = useRef<HTMLInputElement | null>(null)
 
 	const handleInputChange = ({ target: { id, value } }) => {
 		setFormValues({ ...formValues, [id]: value })
 	}
+
+	const createUpload = (file: File) => {
+		//return null
+		return client.uploads.createFromFileOrBlob({
+			fileOrBlob: file,
+			filename: file.name,
+			default_field_metadata: {
+				en: {
+					alt: `Form upload: ${id}`,
+					title: `Form upload: ${id}`,
+					custom_data: {
+						formId: id
+					}
+				}
+			},
+			onProgress: (info) => {
+				// info.type can be one of the following:
+				//
+				// * DOWNLOADING_FILE: client is downloading the asset from the specified URL
+				// * REQUESTING_UPLOAD_URL: client is requesting permission to upload the asset to the DatoCMS CDN
+				// * UPLOADING_FILE: client is uploading the asset
+				// * CREATING_UPLOAD_OBJECT: client is finalizing the creation of the upload resource
+				console.log('Phase:', info.type);
+				// Payload information depends on the type of notification
+				console.log('Details:', info.payload);
+			},
+		});
+	}
+
+	useEffect(() => {
+		if (fileInput.current === null) return
+
+		fileInput.current.addEventListener('change', async (event) => {
+			const file = event.target.files[0];
+			createUpload(file).then((upload) => console.log(upload));
+		});
+	}, [fileInput])
 
 	const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault()
@@ -55,10 +96,10 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 				<label htmlFor={'from-email'}>Email</label>
 				<input id={'fromEmail'} type="email" value={formValues.fromEmail} onChange={handleInputChange} />
 
-				{formFields.map(({ id, __typename, title }) => {
+				{formFields.map(({ id, __typename, title }, idx) => {
 					const props = { 'data-typename': __typename, value: formValues[id], onChange: handleInputChange }
 					return (
-						<>
+						<React.Fragment key={idx}>
 							<label htmlFor={id}>{title}</label>
 							{(() => {
 								switch (__typename) {
@@ -67,17 +108,18 @@ export default function Form({ data: { id, formFields, reciever, subject }, onCl
 									case 'FormTextblockRecord':
 										return <textarea id={id} rows={6}  {...props} />
 									case 'PdfFormRecord':
-										return <input id={id} type="file"  {...props} />
+										return <input id={id} type="file" ref={fileInput} {...props} />
 									default:
-										return <div>Unsupported: {__typename}</div>
+										return <div key={idx}>Unsupported: {__typename}</div>
 								}
 							})()}
-						</>
+						</React.Fragment>
 					)
 				})}
 				<button type="submit">Skicka</button>
 				<Loader loading={loading} />
 				{error && <>Error: {error.message}</>}
+				{success && 'Mailet skickades!'}
 			</form>
 		</section>
 	)

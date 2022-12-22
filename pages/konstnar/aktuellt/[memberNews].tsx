@@ -44,7 +44,7 @@ export default function MemberNewsArticle({ memberNews: {
 				<StructuredContent content={content} />
 			</Article>
 			<RegionLink href={'/konstnar/aktuellt'}>
-				<button className="wide">Tillbaka till översik</button>
+				<button className="wide">Tillbaka till översikt</button>
 			</RegionLink>
 		</>
 	);

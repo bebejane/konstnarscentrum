@@ -16,13 +16,13 @@ const transport = nodemailer.createTransport({
   },
 });
 
-export const sendMail = buildSendMail({
+const sendMail = buildSendMail({
   transport,
   defaultFrom: "dev@konst-teknik.se",
   configPath: "./mailing.config.json",
 });
 
-const Email = {
+export const Email = {
   resetPassword: ({ email, token }: { email: string, token: string }) =>
     sendMail({
       to: email,
@@ -78,4 +78,4 @@ const Email = {
 }
 
 
-export default Email;
+export default sendMail;

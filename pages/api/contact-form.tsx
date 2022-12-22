@@ -1,4 +1,4 @@
-import Email from "/lib/emails";
+import { Email } from "/lib/emails";
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
