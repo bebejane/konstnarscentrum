@@ -11,7 +11,7 @@ export default function Footer() {
           fontSize={textSm}
           color={grayDark}
         >
-          © {new Date().getFullYear()} Konstnäscentrum&nbsp;&nbsp;·&nbsp;&nbsp;
+          © {new Date().getFullYear()} Konstnärscentrum&nbsp;&nbsp;·&nbsp;&nbsp;
         </MjmlText>
       </MjmlColumn>
     </MjmlSection>

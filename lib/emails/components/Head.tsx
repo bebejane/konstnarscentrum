@@ -20,8 +20,8 @@ const Head: React.FC<HeadProps> = ({ children }) => {
           <meta name="supported-color-schemes" content="light dark" />
         </MjmlRaw>
         <MjmlFont
-          name="Inter"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700"
+          name="Jazz"
+          href={`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/email.css`}
         />
         <MjmlStyle>{`
         strong {
@@ -71,7 +71,7 @@ const Head: React.FC<HeadProps> = ({ children }) => {
       `}</MjmlStyle>
         <MjmlAttributes>
           <MjmlAll
-            font-family='Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+            font-family='"Jazz", Univers, "Univers", Helvetica, Arial, -apple-system, BlinkMacSystemFont, sans-serif'
             font-weight="400"
           />
         </MjmlAttributes>
