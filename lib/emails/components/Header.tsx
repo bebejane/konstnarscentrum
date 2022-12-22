@@ -6,10 +6,10 @@ type HeaderProps = {
 
 const Header: React.FC<HeaderProps> = ({ loose }) => {
   return (
-    <MjmlSection padding={loose ? "48px 0 40px" : "48px 0 24px"}>
+    <MjmlSection padding={loose ? "40px 0 40px" : "20px 0 24px"}>
       <MjmlColumn>
         <MjmlImage
-          padding="0 120px 0"
+          padding="0 20% 0"
           //width="500px"
           //height="54px"
           align="center"

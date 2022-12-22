@@ -7,7 +7,7 @@ import {
   MjmlStyle,
   MjmlRaw,
 } from "mjml-react";
-import { black, grayDark } from "./theme";
+import { black, grayDark, grayLight } from "./theme";
 
 type HeadProps = { children?: ReactElement };
 
@@ -36,6 +36,10 @@ const Head: React.FC<HeadProps> = ({ children }) => {
 
         .paragraph span {
           color: ${grayDark} !important;
+        }
+
+        .content {
+          border-top: 1px solid ${grayLight};
         }
 
         .li {

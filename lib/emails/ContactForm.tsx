@@ -28,13 +28,13 @@ const ContactForm: React.FC<{
     <Head />
     <MjmlBody width={600}>
       <Header loose />
-      <MjmlSection padding="0 24px" cssClass="smooth">
+      <MjmlSection padding="0 24px">
         <MjmlColumn>
           <MjmlText
-            cssClass="paragraph"
-            padding="0"
+            padding="50px 0 0 0"
             fontSize={textXl}
             lineHeight={leadingTight}
+            cssClass="content paragraph"
           >
             {subject}
           </MjmlText>
