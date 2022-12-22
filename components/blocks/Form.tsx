@@ -5,13 +5,13 @@ import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { Upload } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
 
+const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
+
 export type ButtonBlockProps = {
 	recordId: string,
 	data: FormRecord,
 	onClick: Function
 }
-
-const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
 
 export default function Form({ recordId, data: { id, formFields, subject, confirmation }, onClick }: ButtonBlockProps) {
 
@@ -53,8 +53,6 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 		}).catch((err) => setError(err)).finally(() => setLoading(false))
 	}
 
-	console.log(formValues);
-
 	return (
 		<section className={s.form}>
 			{success ?
@@ -81,8 +79,8 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 										case 'PdfFormRecord':
 											return (
 												<FileInput
-													label="Välj fil..."
 													{...props}
+													label="Välj fil..."
 													onError={(err) => setError(err)}
 													onChange={(upload) => setFormValues({ ...formValues, [fieldId]: upload?.url })}
 												/>
@@ -133,18 +131,16 @@ const FileInput = ({ label, formId, onChange, onError }) => {
 
 		resetInput()
 		setUploading(true)
-		console.log('create upload');
 
 		return client.uploads.createFromFileOrBlob({
 			fileOrBlob: file,
 			filename: file.name,
+			tags: ['form-upload', `${formId}`],
 			default_field_metadata: {
 				en: {
 					alt: `Form upload: ${formId}`,
 					title: `Form upload: ${formId}`,
-					custom_data: {
-						formId
-					}
+					custom_data: { formId }
 				}
 			},
 			onProgress: (info: OnProgressInfo) => {
