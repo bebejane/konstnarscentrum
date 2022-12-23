@@ -31,7 +31,7 @@ export default function Logo({ }: Props) {
   const isFixed = isHome ? false : atBottom ? false : true
   const maxR = 1 + (region.name.length / letters.length)
   const [height, setHeight] = useState(0)
-  const [ratio, setRatio] = useState(isFixed ? maxR : 0)
+  const [ratio, setRatio] = useState(0)
 
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
 
@@ -44,7 +44,7 @@ export default function Logo({ }: Props) {
         setRatio(r > maxR ? maxR : 0)
         return clearInterval(interval)
       }
-      setRatio(dir === 'horizontal' ? r += step : r -= step)
+      setRatio(dir === 'horizontal' ? r -= step : r += step)
     }, 20)
 
     return () => clearInterval(interval)
@@ -70,7 +70,7 @@ export default function Logo({ }: Props) {
 
     const handleRouteChange = () => {
       if (!isFixed)
-        animateManual('vertical')
+        animateManual('horizontal')
     }
     router.events.on('routeChangeComplete', handleRouteChange)
     return () => router.events.off('routeChangeComplete', handleRouteChange)
@@ -86,14 +86,14 @@ export default function Logo({ }: Props) {
     if (atBottom)
       r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
-      r = Math.max(0, Math.min(scrolledPosition / viewportHeight, maxR))
+      r = Math.max(isFixed ? maxR : 0, Math.min(scrolledPosition / viewportHeight, maxR))
 
     setRatio(r)
 
-  }, [scrolledPosition, viewportHeight, documentHeight, atBottom, setRatio, manualMode, height, region, maxR])
+  }, [scrolledPosition, viewportHeight, documentHeight, isFixed, atBottom, setRatio, manualMode, height, region, maxR])
 
   useEffect(() => {
-    return animateManual(!showMenuMobile ? 'vertical' : 'horizontal')
+    return animateManual(showMenuMobile ? 'vertical' : 'horizontal')
   }, [showMenuMobile])
 
   useEffect(() => {
