@@ -3,6 +3,7 @@ import { recordToSlug } from '/lib/utils'
 import cn from 'classnames'
 import { RegionLink } from '/components'
 import { useRegion } from '/lib/context/region'
+import { useTheme } from 'next-themes'
 
 type Props = {
   message?: string
@@ -13,6 +14,7 @@ type Props = {
 export default function ReadMore({ message, link, invert = false }: Props) {
 
   const region = useRegion()
+  const { theme } = useTheme()
 
   if (!link) return null
 
@@ -22,7 +24,7 @@ export default function ReadMore({ message, link, invert = false }: Props) {
       className={cn(styles.more, 'small')}
       regional={(typeof link !== 'string')}
     >
-      <div className={cn(styles.square, invert && styles.invert)}></div>{message}
+      <div className={cn(styles.square, invert && styles.invert)} data-theme={theme}></div>{message}
     </RegionLink>
   )
 }

@@ -12,7 +12,7 @@
   .square {
     overflow: hidden;
     display: inline-block;
-    background: var(--black);
+    background: var(--foreground);
     width: 0.4em;
     height: 0.4em;
     margin-right: 0.4em;
@@ -20,7 +20,7 @@
     transition: all 0.1s;
 
     &.invert {
-      background: var(--white);
+      background: var(--background);
       width: 0.45em;
     }
   }

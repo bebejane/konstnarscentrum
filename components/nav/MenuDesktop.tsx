@@ -8,6 +8,7 @@ import type { Menu, MenuItem } from '/lib/menu'
 import { RegionSelector, RegionLink, User } from '/components'
 import Link from 'next/link'
 import { regions } from '/lib/region'
+import { useTheme } from 'next-themes'
 
 export type MenuDesktopProps = { items: Menu, home: boolean }
 
@@ -15,6 +16,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 	const menuRef = useRef<HTMLDivElement | null>(null);
 	const subRef = useRef<HTMLDivElement | null>(null);
+	const { theme } = useTheme()
 	const router = useRouter()
 	const [paddingLeft, setPaddingLeft] = useState<string>('0px')
 	const [selected, setSelected] = useState<MenuItem | undefined>()
@@ -60,11 +62,12 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 	useEffect(() => {
 		setSelected(undefined)
+		setShowMenu(true)
 	}, [router])
 
 	return (
 		<>
-			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)}>
+			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)} data-theme={theme}>
 				<ul
 					className={s.nav}
 					onMouseLeave={() => setSelected(undefined)}
@@ -108,7 +111,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 					})}
 				</div>
 			</nav>
-			<nav className={cn(s.toolsMenu, showMenu && s.show)}>
+			<nav className={cn(s.toolsMenu, showMenu && s.show)} data-theme={theme}>
 				<ul>
 					<li className={s.user}>
 						<User />

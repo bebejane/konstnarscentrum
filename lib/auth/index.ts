@@ -6,25 +6,25 @@ export { default as requireAuthentication } from './requireAuthentication'
 
 export { validateEmail, validatePassword, validateSignUp } from './validate';
 
-export const generateToken = async (email: string) : Promise<any> => {
+export const generateToken = async (email: string): Promise<any> => {
   return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
 }
-export const hashPassword = async (password: string) : Promise<string>  => {
+export const hashPassword = async (password: string): Promise<string> => {
   return hash(password, 12)
 }
-export const comparePassword = async (password: string, password2: string) : Promise<boolean> => {
+export const comparePassword = async (password: string, password2: string): Promise<boolean> => {
   return compare(password, password2);
 }
-export const findUser = async (email: string) : Promise<any | null> => {
+export const findUser = async (email: string): Promise<any | null> => {
 
-  if(!email) 
-    throw new Error('E-mail is not defined!')
+  if (!email)
+    throw new Error('E-post adress är tom')
 
   const users = await client.items.list({
     filter: {
-      type: "member", 
-      fields: { 
-        email: { 
+      type: "member",
+      fields: {
+        email: {
           eq: email
         }
       }

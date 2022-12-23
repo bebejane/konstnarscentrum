@@ -7,6 +7,8 @@ import { useInView } from 'react-intersection-observer'
 import { RegionLink } from '/components'
 import { useRegion } from '/lib/context/region'
 import { useEffect } from 'react'
+import { useTheme } from 'next-themes'
+import { useStore } from '/lib/store'
 
 export type FooterProps = {
 	menu: MenuItem[],
@@ -16,13 +18,15 @@ export type FooterProps = {
 
 export default function Footer({ menu, footer, regions }: FooterProps) {
 
+	const { setTheme } = useTheme()
 	const { inView, ref } = useInView({ threshold: 0.20 })
+	const [showMobileMenu] = useStore(({ showMenuMobile }) => [showMenuMobile])
 	const region = useRegion()
 	const sponsors = regions?.find(el => el.id === region.id)?.sponsors
 
 	useEffect(() => {
-		document.body.classList.toggle('invert', inView)
-	}, [inView])
+		setTheme(inView && !showMobileMenu ? 'dark' : 'light')
+	}, [inView, setTheme, showMobileMenu])
 
 	return (
 		<>

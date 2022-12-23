@@ -5,7 +5,7 @@
   top: 4px;
   right: 0;
   margin-right: calc(var(--outer-margin) - 12px);
-  color: #000;
+  color: var(--black);
   z-index: 300;
 
   @include mq($from: tablet, $until: nav-break) {
@@ -33,6 +33,11 @@
   padding-top: var(--navbar-height);
   transition: transform 0.3s ease-in-out;
   transform: translateX(100%);
+  color: var(--black) !important;
+
+  a {
+    color: var(--black) !important;
+  }
 
   &.show {
     transform: translateX(0%);
@@ -72,7 +77,6 @@
 
         &.sub {
           background-color: var(--beige-light);
-          //margin-left: -1rem;
           padding-left: 1rem;
           width: calc(100% + 1rem);
         }
@@ -120,6 +124,7 @@
 }
 
 @include mq($from: nav-break) {
+
   .mobileMenu,
   .hamburger {
     display: none;

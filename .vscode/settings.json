@@ -16,10 +16,7 @@
     "README.md": true,
     "tsconfig.json": true,
     "vercel.json": true,
-    "lib/auth": true,
-    "lib/controllers": true,
     "lib/scripts": true,
-    "lib/services": true,
     "@types": true,
     "public": true
   },

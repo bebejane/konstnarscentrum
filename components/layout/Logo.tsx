@@ -8,27 +8,30 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
+import { regions } from '/lib/region'
 
 export type Props = {
-  fixed: boolean
+  //fixed: boolean
 }
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
 
-export default function Logo({ fixed }: Props) {
+export default function Logo({ }: Props) {
 
-  const ref = useRef<HTMLDivElement | null>(null)
   const router = useRouter()
+  const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
+  const ref = useRef<HTMLDivElement | null>(null)
+
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
   const { isMobile } = useDevice()
   const { scrolledPosition, viewportHeight, documentHeight } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
-  const [ratio, setRatio] = useState(0)
-  const [height, setHeight] = useState(0)
   const [atBottom, setAtBottom] = useState(false)
+  const isFixed = isHome ? false : atBottom ? false : true
   const maxR = 1 + (region.name.length / letters.length)
-  const isFixed = !fixed ? false : fixed && !atBottom
+  const [height, setHeight] = useState(0)
+  const [ratio, setRatio] = useState(isFixed ? maxR : 0)
 
   const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
 
@@ -64,6 +67,7 @@ export default function Logo({ fixed }: Props) {
   }
 
   useEffect(() => {
+
     const handleRouteChange = () => {
       if (!isFixed)
         animateManual('vertical')
@@ -71,7 +75,7 @@ export default function Logo({ fixed }: Props) {
     router.events.on('routeChangeComplete', handleRouteChange)
     return () => router.events.off('routeChangeComplete', handleRouteChange)
 
-  }, [router.asPath])
+  }, [router.asPath, ratio])
 
   useEffect(() => {
     if (manualMode)
@@ -105,14 +109,11 @@ export default function Logo({ fixed }: Props) {
     setHeight(ref.current.clientHeight)
   }, [ref])
 
-
   useEffect(() => {
     const footer = document.getElementById('footer') as HTMLDivElement
     const footerThreshhold = documentHeight - footer.clientHeight
     setAtBottom((scrolledPosition + viewportHeight) > footerThreshhold)
   }, [scrolledPosition, documentHeight, viewportHeight])
-
-
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')

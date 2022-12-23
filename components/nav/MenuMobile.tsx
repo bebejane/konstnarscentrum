@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 import useDevice from '/lib/hooks/useDevice';
+import { useTheme } from 'next-themes';
 
 export type MenuMobileProps = { items: Menu, home: boolean }
 
@@ -22,6 +23,7 @@ const englishMenuItem: MenuItem = {
 export default function MenuMobile({ items, home }: MenuMobileProps) {
 
 	const router = useRouter()
+	const { theme, setTheme } = useTheme()
 	const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const { scrolledPosition } = useScrollInfo()
 	const [selected, setSelected] = useState<MenuItem | undefined>();
@@ -30,12 +32,17 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
 
 	useEffect(() => {
-		if (!isHome || !isMobile) return setInvertedMenu(false)
+		if (!isHome || !isMobile)
+			return setInvertedMenu(false)
 
 		const homeGallery = document.getElementById('home-gallery')
 		setInvertedMenu(!showMenuMobile && scrolledPosition < homeGallery.getBoundingClientRect().height)
 
 	}, [isMobile, isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
+
+	useEffect(() => {
+		if (showMenuMobile) setTheme('light')
+	}, [showMenuMobile, setTheme])
 
 	return (
 		<>
@@ -43,7 +50,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 				<Hamburger
 					toggled={showMenuMobile}
 					onToggle={setShowMenuMobile}
-					color={!invertedMenu ? '#121212' : '#ffffff'}
+					color={invertedMenu || (theme === 'dark' && !showMenuMobile) ? '#ffffff' : '#121212'}
 					duration={0.5}
 					label={"Menu"}
 					size={24}
@@ -52,7 +59,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 			<div className={cn(s.mobileMenu, showMenuMobile && s.show)}>
 				<nav>
 					<ul className={s.nav}>
-						{!showRegions && [...items, englishMenuItem].map((item, idx) =>
+						{[...items, englishMenuItem].map((item, idx) =>
 							<React.Fragment key={idx}>
 								<li
 									data-slug={item.slug}
@@ -88,7 +95,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 						</li>
 						{showRegions && regions.map(({ name, slug }, idx) =>
 							<li key={idx} className={s.sub}>
-								<Link href={`/${slug}`}>
+								<Link href={`/${slug}`} onClick={() => setShowRegions(false)}>
 									{name}
 								</Link>
 							</li>

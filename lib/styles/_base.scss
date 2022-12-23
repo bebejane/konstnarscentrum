@@ -20,6 +20,9 @@
 	--gutter: 4vw;
 	--navbar-height: 4.5rem;
 
+	--background: var(--white);
+	--foreground: var(--black);
+
 	@include mq($from: tablet) {
 		--space: 4rem;
 		--outer-margin: 3.333vw;
@@ -36,34 +39,23 @@ body {
 	width: 100%;
 	font-size: 100%;
 	line-height: 1em;
-	color: var(--black);
-	background-color: var(--white);
+	color: var(--foreground);
+	background-color: var(--background);
 	font-family: $body-font;
 	letter-spacing: -0.01em;
 	-webkit-font-smoothing: antialiased;
 	font-feature-settings: "liga", "kern";
 	overflow-x: hidden;
 	transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
-
-	&.invert {
-		color: var(--white);
-		background-color: var(--black);
-
-		a {
-			color: var(--white) !important;
-			-webkit-text-stroke-color: var(--white) !important;
-		}
-
-		button {
-			background-color: var(--black);
-			color: var(--white);
-			border-color: var(--white);
-		}
-	}
 }
 
 html {
 	box-sizing: border-box;
+
+	&[data-theme='dark'] {
+		--background: var(--black);
+		--foreground: var(--white);
+	}
 }
 
 ::-webkit-scrollbar {
@@ -91,14 +83,14 @@ html {
 
 a {
 	text-decoration: none;
-	color: var(--black);
+	color: var(--foreground);
 
 	&:hover {
-		color: var(--black);
+		color: var(--foreground);
 	}
 
 	&:visited {
-		color: var(--black);
+		color: var(--foreground);
 	}
 }
 
@@ -112,19 +104,18 @@ button {
 	padding-right: 1.5em;
 	padding-bottom: 1em;
 	padding-top: 0.9em;
-	background: var(--white);
-	border: 1px solid var(--black);
+	background-color: var(--background);
+	color: var(--foreground);
+	border: 1px solid var(--foreground);
 	box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	cursor: pointer;
-	color: var(--black);
-	transition: color 0.3s ease-in-out, background-color 0.5s ease-in-out;
+
+	transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
 
 	&:hover {
-		//border-width: 2px;
-		//margin: -1px;
-		background-color: var(--black);
-		color: var(--beige-light-solid) !important;
+		background-color: var(--foreground);
+		color: var(--beige-dark) !important;
 	}
 
 	&.wide {

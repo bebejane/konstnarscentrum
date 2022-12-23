@@ -8,6 +8,7 @@
     margin-top: 1rem;
     padding-top: 1.1rem;
     position: relative;
+
     .background {
       top: 0;
       width: 100vw;
@@ -26,14 +27,15 @@
 
   form {
     width: 100%;
+
     input,
     select {
-      background-color: var(--white);
       margin-bottom: 0;
       padding: 0.5em;
       padding-left: 0.8em;
       width: calc((100% / 2) - 4.5em);
     }
+
     span {
       padding-right: 0.5em;
     }

@@ -2,6 +2,7 @@ import '/lib/styles/index.scss'
 import { Layout } from '/components';
 import { SessionProvider } from "next-auth/react"
 import { RegionProvider } from '/lib/context/region';
+import { ThemeProvider } from 'next-themes'
 import { getCookie } from 'cookies-next';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
@@ -26,16 +27,17 @@ function App({ Component, pageProps }) {
       setRegion(regionFromCookie)
   }, [router])
 
-
   return (
     <>
       <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" />
       <SessionProvider session={session}>
         <PageProvider value={page}>
           <RegionProvider value={region}>
-            <Layout title={pageTitle} menu={menu || []} footer={footer} regions={regions}>
-              <Component {...pageProps} />
-            </Layout>
+            <ThemeProvider defaultTheme="light" themes={['light', 'dark']} enableSystem={false}>
+              <Layout title={pageTitle} menu={menu || []} footer={footer} regions={regions}>
+                <Component {...pageProps} />
+              </Layout>
+            </ThemeProvider>
           </RegionProvider>
         </PageProvider>
       </SessionProvider>

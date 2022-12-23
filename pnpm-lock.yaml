@@ -61,6 +61,7 @@ specifiers:
   next-plugin-graphql: ^0.0.2
   next-seo: ^5.13.0
   next-sitemap: ^3.1.30
+  next-themes: ^0.2.1
   nextjs-cors: ^2.1.2
   nextjs-google-analytics: ^2.2.0
   nodemailer: ^6.8.0
@@ -131,6 +132,7 @@ dependencies:
   next-plugin-graphql: 0.0.2_graphql@16.6.0
   next-seo: 5.13.0_s75y6mxmikaw2mhqmuko6w7njm
   next-sitemap: 3.1.30_evgnzc4izodeqk4zxijcwr4uja
+  next-themes: 0.2.1_s75y6mxmikaw2mhqmuko6w7njm
   nextjs-cors: 2.1.2_next@13.1.0
   nextjs-google-analytics: 2.2.0_next@13.1.0+react@18.2.0
   nodemailer: 6.8.0
@@ -9283,6 +9285,18 @@ packages:
       '@next/env': 13.0.5
       minimist: 1.2.7
       next: 13.1.0_orpxj3vgaelozwpc7iiuainqz4
+    dev: false
+
+  /next-themes/0.2.1_s75y6mxmikaw2mhqmuko6w7njm:
+    resolution: {integrity: sha512-B+AKNfYNIzh0vqQQKqQItTS8evEouKD7H5Hj3kmuPERwddR2TxvDSFZuTj6T7Jfn1oyeUyJMydPl1Bkxkh0W7A==}
+    peerDependencies:
+      next: '*'
+      react: '*'
+      react-dom: '*'
+    dependencies:
+      next: 13.1.0_orpxj3vgaelozwpc7iiuainqz4
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
     dev: false
 
   /next/13.1.0_orpxj3vgaelozwpc7iiuainqz4:
