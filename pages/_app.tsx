@@ -22,10 +22,16 @@ function App({ Component, pageProps }) {
   const [region, setRegion] = useState(pageProps.region)
 
   useEffect(() => {
-    const regionFromCookie = regions.find(({ slug }) => slug === getCookie('region'))
+    const regionFromCookie = regions?.find(({ slug }) => slug === getCookie('region'))
     if (regionFromCookie)
       setRegion(regionFromCookie)
   }, [router])
+
+  const errorCode = parseInt(router.pathname.replace('/', ''))
+  const isError = !isNaN(errorCode) && (errorCode > 400 && errorCode < 600)
+
+  if (isError)
+    return <Component {...pageProps} />
 
   return (
     <>

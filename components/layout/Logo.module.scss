@@ -4,8 +4,13 @@
 
   &.inverted {
     * {
-      color: var(--white) !important;
+      color: var(--background);
     }
+
+    .region {
+      -webkit-text-stroke-color: var(--background);
+    }
+
   }
 }
 
@@ -64,13 +69,13 @@
   .region {
     color: transparent !important;
     -webkit-text-stroke: 0.03em;
-    -webkit-text-stroke-color: var(--black);
+    -webkit-text-stroke-color: var(--foreground);
     font-size: calc(var(--logo-size) * 0.97);
 
     @include mq($from: tablet) {
       margin-left: 0.5rem;
       -webkit-text-stroke: 1px;
-      -webkit-text-stroke-color: var(--black);
+      -webkit-text-stroke-color: var(--foreground);
 
       &.end {
         margin-left: 2rem;

@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { useStore } from '/lib/store'
 import { regions } from '/lib/region'
 import { Twirl as Hamburger } from "hamburger-react";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import type { Menu, MenuItem } from '/lib/menu';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -30,6 +30,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const [showRegions, setShowRegions] = useState<boolean>(false);
 	const { isMobile } = useDevice()
 	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
+	const regionsRef = useRef<HTMLLIElement | null>(null)
 
 	useEffect(() => {
 		if (!isHome || !isMobile)
@@ -41,8 +42,14 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	}, [isMobile, isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
 
 	useEffect(() => {
-		if (showMenuMobile) setTheme('light')
+		if (showMenuMobile)
+			setTheme('light')
 	}, [showMenuMobile, setTheme])
+
+	useEffect(() => {
+		if (showRegions && regionsRef.current !== null)
+			regionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+	}, [showRegions, regionsRef])
 
 	return (
 		<>
@@ -90,7 +97,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 						<li>
 							Sök
 						</li>
-						<li onClick={() => setShowRegions(!showRegions)}>
+						<li ref={regionsRef} onClick={() => setShowRegions(!showRegions)}>
 							Region <img className={cn(s.caret, showRegions && s.open)} src="/images/caret.png" />
 						</li>
 						{showRegions && regions.map(({ name, slug }, idx) =>

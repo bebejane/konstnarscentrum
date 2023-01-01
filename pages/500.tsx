@@ -1,22 +1,12 @@
-import Link from 'next/link'
-import withGlobalProps from '/lib/withGlobalProps'
-import { GetStaticProps } from 'next'
+import s from './404.module.scss'
 
-export default function Custom500() {
+export default function FiveZeroZero() {
   return (
-    <div className={'errorPageContainer'}>
+    <div className={s.container}>
       <h1>500 - Server-side error occurred</h1>
-      <Link href="/">
+      <a href="/">
         Go back home
-      </Link>
+      </a>
     </div>
   )
 }
-
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
-
-  return {
-    props,
-    revalidate
-  }
-})

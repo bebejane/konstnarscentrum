@@ -25,11 +25,11 @@ export default function Logo({ }: Props) {
   const region = useRegion()
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
   const { isMobile } = useDevice()
-  const { scrolledPosition, viewportHeight, documentHeight } = useScrollInfo()
+  const { scrolledPosition, viewportHeight, documentHeight, isScrolling } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
   const isFixed = isHome ? false : atBottom ? false : true
-  const maxR = 1 + (region.name.length / letters.length)
+  const maxR = 1 + (region?.name.length / letters.length)
   const [height, setHeight] = useState(0)
   const [ratio, setRatio] = useState(0)
 
@@ -38,7 +38,7 @@ export default function Logo({ }: Props) {
     setManualMode(true)
 
     let r = ratio;
-    const step = maxR / (letters.length + region.name.length)
+    const step = maxR / (letters.length + region?.name.length)
     const interval = setInterval(() => {
       if (r > maxR || r < 0) {
         setRatio(r > maxR ? maxR : 0)
@@ -117,7 +117,7 @@ export default function Logo({ }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionPerc = (region.name.length / letters.length)
+  const regionPerc = (region?.name.length / letters.length)
   const regionRatio = ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed ? 1 - ((1 + regionPerc) * ratio) : 1
 
   return (

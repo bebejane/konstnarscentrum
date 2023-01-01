@@ -122,8 +122,8 @@ const Mask = ({ id, size, start }) => {
 
       const { path } = blobshape({
         size: randomInt(size.width * (idx / numBlobs), size.width * (idx / numBlobs)),
-        growth: randomInt(2, 8),
-        edges: randomInt(2, 20),
+        growth: randomInt(2, 9),
+        edges: randomInt(2, 40),
         seed: null
       })
       return path
@@ -139,21 +139,22 @@ const Mask = ({ id, size, start }) => {
         clipPath.innerHTML += `<path d="${path}" transform="translate(${randomInt(-200, size.width)},${randomInt(-200, size.height)})"/>`
         await sleep(animationTime / numBlobs)
       }
+      await sleep(100)
+      clipPath.innerHTML = ''
+
     }
 
-    const timeout = setTimeout(() => blobIt(), slideTime - animationTime)
+    const timeout = setTimeout(blobIt, slideTime - animationTime)
     return () => clearTimeout(timeout)
 
   }, [start, id, size])
 
 
   return (
-    <div className={s.color}>
+    <div className={s.mask}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox={`0 0 ${size.width} ${size.height}`}>
         <defs>
-          <clipPath id={id}>
-
-          </clipPath>
+          <clipPath id={id}></clipPath>
         </defs>
       </svg>
     </div>

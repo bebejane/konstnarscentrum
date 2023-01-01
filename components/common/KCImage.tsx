@@ -193,7 +193,7 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
   (
     {
       className,
-      fadeInDuration = 1000,
+      fadeInDuration = 700,
       intersectionTreshold,
       intersectionThreshold,
       intersectionMargin,
@@ -297,9 +297,11 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
 
     const outlineWidth = 20
     const transitionStyles = !fadeInDuration ? {} : {
-      transition: fadeInDuration > 0 ? `outline ${fadeInDuration}ms, outline-offset ${fadeInDuration}ms` : undefined,
+      transition: fadeInDuration > 0 ? `outline, outline-offset` : undefined,
       outline: loaded ? `0px solid ${data.bgColor}` : `${outlineWidth}px solid ${data.bgColor}`,
       outlineOffset: loaded ? `0px` : `-${outlineWidth}px`,
+      transitionTimingFunction: `steps(4)`,
+      transitionDuration: `${fadeInDuration}ms`
     }
 
     const placeholder =

@@ -9,8 +9,8 @@
     margin-right: calc(-1 * var(--outer-margin));
   }
 
-  > ul {
-    height: 60vh;
+  >ul {
+    height: 80vh;
 
     @include mq($from: tablet) {
       --height: calc(100vh - calc(var(--navbar-height) * 2));
@@ -56,8 +56,7 @@
         &.current {
           z-index: 1;
 
-          .image {
-          }
+          .image {}
         }
 
         &.next {
@@ -118,7 +117,7 @@
   }
 }
 
-.color {
+.mask {
   position: absolute;
   z-index: 3;
   top: 0;

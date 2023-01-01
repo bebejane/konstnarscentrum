@@ -150,7 +150,7 @@ export async function getStaticPaths(context) {
 
 	return {
 		paths,
-		fallback: false,
+		fallback: true,
 	};
 }
 
@@ -159,6 +159,10 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.member;
 	const { member } = await apiQuery(MemberBySlugDocument, { variables: { slug }, preview: context.preview })
+
+	if (!member)
+		return { notFound: true }
+
 	const { members: related } = await apiQuery(RelatedMembersDocument, {
 		variables: {
 			first: 100,

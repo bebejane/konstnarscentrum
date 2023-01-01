@@ -44,12 +44,13 @@
   }
 
   nav {
-    --height: calc(100% - var(--navbar-height) - var(--small-space));
+    --height: calc(100vh - var(--navbar-height) - var(--small-space));
     width: 100%;
     display: flex;
     flex-direction: column;
     min-height: var(--height);
     min-height: var(--height);
+    max-height: var(--height);
     overflow-y: scroll;
     overflow-x: hidden;
     flex: 1;
