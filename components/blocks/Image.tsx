@@ -32,29 +32,34 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 			</figure>
 			: isDouble ?
 				<div className={s.double} data-editable={editable}>
-					<figure onClick={() => onClick?.(images[0].id)}>
-						<DatoImage
-							data={images[0].responsiveImage}
-							className={s.image}
-						/>
+					<div className={s.imgWrap}>
+						<figure onClick={() => onClick?.(images[0].id)}>
+							<DatoImage
+								data={images[0].responsiveImage}
+								className={s.image}
+							/>
+						</figure>
+						<figure onClick={() => onClick?.(images[1].id)}>
+							<DatoImage
+								data={images[1].responsiveImage}
+								className={s.image}
+							/>
+						</figure>
+					</div>
+
+					<div className={s.captionWrap}>
 						{images[0].title &&
 							<figcaption>
 								<Markdown allowedElements={['em', 'p']}>{images[0].title}</Markdown>
 							</figcaption>
 						}
-					</figure>
-					<figure onClick={() => onClick?.(images[1].id)}>
-						<DatoImage
-							data={images[1].responsiveImage}
-							className={s.image}
-						/>
 						{images[1].title &&
 							<figcaption>
 								<Markdown allowedElements={['em', 'p']}>{images[1].title}</Markdown>
 							</figcaption>
 						}
-					</figure>
-				</div>
+					</div>
+				</div >
 				: isGallery ?
 					<ImageGallery id={id} images={images} editable={editable} onClick={(id) => onClick?.(id)} />
 					: null
