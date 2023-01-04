@@ -2,6 +2,8 @@ import { ReactElement } from "react";
 import Head from "./components/Head";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import Line from "./components/Line";
+
 import ButtonPrimary from "./components/ButtonPrimary";
 import { leadingRelaxed, textBase } from "./components/theme";
 
@@ -33,11 +35,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
         <Header loose />
         <MjmlSection padding="0 24px" cssClass="smooth">
           <MjmlColumn>
-            <MjmlDivider
-              borderColor="#666"
-              borderWidth="1px"
-              padding="8px 0 32px 0"
-            ></MjmlDivider>
+            <Line
+              padding="0 0 32px 0"
+            ></Line>
             <MjmlText
               cssClass="paragraph"
               padding="0"
@@ -57,11 +57,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
             >
               Konstnärscentrum
             </MjmlText>
-            <MjmlDivider
-              borderColor="#666"
-              borderWidth="1px"
+            <Line
               padding="16px 0 0"
-            ></MjmlDivider>
+            ></Line>
           </MjmlColumn>
         </MjmlSection>
         <Footer />
