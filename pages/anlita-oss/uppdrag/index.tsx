@@ -20,7 +20,7 @@ export default function CommissionArchive({ commissions, commissionCategories, p
 	return (
 		<>
 			<header className={s.header}>
-				<h1><RevealText>Uppdragsarkiv</RevealText><sup className="amount">{pagination.count}</sup></h1>
+				<h1><RevealText>Utvalda uppdrag</RevealText><sup className="amount">{pagination.count}</sup></h1>
 				<FilterBar
 					options={commissionCategories.map(({ id, title: label }) => ({ id, label }))}
 					onChange={(id) => setCategory(commissionCategories.find(el => el.id === id))}
@@ -43,7 +43,7 @@ export default function CommissionArchive({ commissions, commissionCategories, p
 	);
 }
 
-CommissionArchive.page = { crumbs: [{ title: 'Uppdragsarkiv', regional: true }] } as PageProps
+CommissionArchive.page = { crumbs: [{ title: 'Utvalda uppdrag', regional: true }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 

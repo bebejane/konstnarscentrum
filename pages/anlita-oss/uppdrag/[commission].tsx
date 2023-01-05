@@ -85,7 +85,7 @@ export default function Commission({ commission: {
 
 Commission.page = {
 	noBottom: true,
-	crumbs: [{ slug: 'anlita-oss/uppdrag', title: 'Uppdragsarkiv', regional: true }]
+	crumbs: [{ slug: 'anlita-oss/uppdrag', title: 'Utvalda uppdrag', regional: true }]
 } as PageProps
 
 export async function getStaticPaths() {
