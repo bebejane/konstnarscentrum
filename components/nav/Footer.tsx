@@ -53,9 +53,14 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 
 												{item.sub?.map((subItem, subidx) =>
 													<li key={subidx}>
-														<RegionLink scroll={true} href={subItem.slug} regional={subItem.regional}>
-															{subItem.label}
-														</RegionLink>
+														{item.external ?
+															<a href={subItem.slug} target="_new">{subItem.label}</a>
+															:
+															<RegionLink scroll={true} href={subItem.slug} regional={subItem.regional}>
+																{subItem.label}
+															</RegionLink>
+														}
+
 													</li>
 												)}
 											</>

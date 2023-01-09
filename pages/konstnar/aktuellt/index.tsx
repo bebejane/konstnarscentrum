@@ -16,6 +16,10 @@ export type Props = {
 	pagination: Pagination
 }
 
+const memberNewsStatus = (date) => {
+	return isAfter(new Date(), new Date(date)) ? { value: 'past', label: 'Avslutat' } : isBefore(new Date(), new Date(date)) ? { value: 'upcoming', label: 'Kommander' } : { value: 'present', label: 'Nu' }
+}
+
 export default function MemberNews({ memberNews, memberNewsCategories, region, pagination }: Props) {
 
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
@@ -66,7 +70,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	return {
 		props: {
 			...props,
-			memberNews: memberNews.map(el => ({
+			memberNews: memberNews.sort(()).map(el => ({
 				...el,
 				status: isAfter(new Date(), new Date(el.date)) ? 'Avslutat' : isBefore(new Date(), new Date(el.date)) ? 'Kommande' : 'Nu'
 			})),

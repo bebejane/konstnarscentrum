@@ -5,11 +5,12 @@ import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestP
 export type Menu = MenuItem[]
 
 export type MenuItem = {
-  type: string,
+  type: string
   index?: boolean
-  label: string,
-  slug?: string,
-  regional?: boolean,
+  label: string
+  slug?: string
+  regional?: boolean
+  external?: boolean
   sub?: MenuItem[]
 }
 
@@ -28,7 +29,7 @@ const base: Menu = [
       { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true }
     ]
   },
-  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, sub: [] },
+  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, external: true, sub: [] },
   { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
   { type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, regional: true, sub: [] },
 ]

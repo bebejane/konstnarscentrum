@@ -23,13 +23,15 @@ export default function Logo({ }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
 
   const region = useRegion()
+  const pageRegion = regions.find(r => router.asPath.startsWith(`/${r.slug}`))
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
   const { isMobile } = useDevice()
   const { scrolledPosition, viewportHeight, documentHeight, isScrolling } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
   const isFixed = isHome ? false : atBottom ? false : true
-  const maxR = 1 + (region?.name.length / letters.length)
+  const maxRegionR = (pageRegion?.name.length / letters.length)
+  const maxR = 1 + maxRegionR
   const [height, setHeight] = useState(0)
   const [ratio, setRatio] = useState(0)
 
@@ -86,7 +88,7 @@ export default function Logo({ }: Props) {
     if (atBottom)
       r = ((documentHeight - ((scrolledPosition + viewportHeight))) / viewportHeight) * maxR;
     else
-      r = Math.max(isFixed ? maxR : 0, Math.min(scrolledPosition / viewportHeight, maxR))
+      r = Math.max(isFixed ? 1 - (maxR - maxRegionR) + Math.min(scrolledPosition / viewportHeight, maxRegionR) : 0, Math.min(scrolledPosition / viewportHeight, maxR))
 
     setRatio(r)
 
@@ -117,8 +119,10 @@ export default function Logo({ }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionPerc = (region?.name.length / letters.length)
-  const regionRatio = ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed ? 1 - ((1 + regionPerc) * ratio) : 1
+  const regionPerc = (pageRegion?.name.length / letters.length)
+  const regionRatio = (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
+
+  console.log(ratio);
 
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
@@ -127,9 +131,9 @@ export default function Logo({ }: Props) {
           <Link href="/">
             {horizontal.map((l, i) => l)}
           </Link>
-          {region && !region?.global &&
-            <Link href={`/${region?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
-              {region.name.substring(0, (region.name.length) * regionRatio)}
+          {pageRegion && !pageRegion?.global &&
+            <Link href={`/${pageRegion?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
+              {pageRegion.name.substring(0, (pageRegion.name.length) * regionRatio)}
             </Link>
           }
         </div>

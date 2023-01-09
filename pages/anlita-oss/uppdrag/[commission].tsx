@@ -115,7 +115,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 		props: {
 			...props,
 			commission,
-			commissions: commissions.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 5)
+			commissions: commissions.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 6)
 		},
 		revalidate
 	};

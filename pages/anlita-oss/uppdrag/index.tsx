@@ -14,6 +14,7 @@ export type Props = {
 }
 
 export default function CommissionArchive({ commissions, commissionCategories, pagination }: Props) {
+	console.log(commissions);
 
 	const [category, setCategory] = useState<CommissionCategoryRecord | undefined>()
 

@@ -10,7 +10,7 @@ query Commission($slug: String!) {
 query AllCommissions($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId) {
 	commissions: allCommissions(
 		filter: { region: { eq: $regionId } }
-		orderBy: [createdAt_DESC]
+		orderBy: [year_DESC]
 		first: $first
 		skip: $skip
 	) {
