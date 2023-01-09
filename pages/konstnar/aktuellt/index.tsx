@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format, isAfter, isBefore } from "date-fns";
-import { pageSize } from "/lib/utils";
+import { pageSize, apiQueryAll } from "/lib/utils";
 import { Pager, CardContainer, NewsCard, FilterBar, RevealText } from '/components'
 import { useState } from "react";
 
@@ -59,13 +59,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 
 	const page = parseInt(context.params?.page) || 1;
 	const regionId = props.region.global ? undefined : props.region.id;
-	const { memberNews, pagination } = await apiQuery(AllMemberNewsDocument, {
-		variables: {
-			regionId,
-			first: pageSize,
-			skip: (pageSize * (page - 1))
-		}
-	});
+	const { memberNews, pagination } = await apiQueryAll(AllMemberNewsDocument, { variables: { regionId } });
 
 	return {
 		props: {
