@@ -2,7 +2,9 @@ import { TypedDocumentNode } from "@apollo/client/core";
 import { datoError } from "dato-nextjs-utils/api";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { regions } from "/lib/region";
+import { format, isAfter, isBefore } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
+import type { ApiQueryOptions } from "dato-nextjs-utils/api";
 import React from "react";
 
 export const isServer = typeof window === 'undefined';
@@ -95,7 +97,6 @@ export const getStaticPaginationPaths = async (query: TypedDocumentNode, segment
   const paths = []
   const items = await fetchAllRecords(query)
 
-
   if (regional) {
     regions.forEach((region) => {
       const pages = chunkArray(items.filter(p => p.region.id === region.id), pageSize)
@@ -105,7 +106,6 @@ export const getStaticPaginationPaths = async (query: TypedDocumentNode, segment
             region: region.slug,
             [segment]: p.slug,
             page: `${pageNo + 1}`,
-
           }
         })))
       })
@@ -161,3 +161,42 @@ export const capitalize = (str: string, lower: boolean = false) => {
 }
 
 export const sleep = (ms: number) => new Promise((resolve, refject) => setTimeout(resolve, ms))
+
+export const apiQueryAll = async (doc: TypedDocumentNode, variables: ApiQueryOptions = {}): Promise<any> => {
+
+  const results = {}
+  let pagesLeft = true;
+  let size = 100;
+  let skip = 0;
+
+  while (pagesLeft) {
+
+    const res = await apiQuery(doc, { variables: { ...variables, first: size, skip } });
+    console.log(res.memberNews.length)
+    const { count } = res.pagination
+    const props = Object.keys(res)
+    for (let i = 0; i < props.length; i++) {
+      const k = props[i]
+      const el = res[props[i]];
+      if (Array.isArray(el)) {
+        if (!results[k])
+          results[k] = [...el]
+        else
+          results[k] = results[k].concat([...el])
+        console.log('x', results[k].length);
+
+      } else
+        results[k] = el;
+    }
+
+    pagesLeft = skip + size < count;
+    skip += (size)
+  }
+  return results
+}
+
+export const memberNewsStatus = (date, dateEnd): { value: string, label: string, order: number } => {
+  const start = new Date(date);
+  const end = new Date(dateEnd);
+  return isAfter(new Date(), end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
+}

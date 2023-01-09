@@ -17,6 +17,7 @@ fragment MemberNewsLightFragment on MemberNewsRecord {
 		category
 	}
 	date
+	dateEnd
 	location
 	slug
 	region {

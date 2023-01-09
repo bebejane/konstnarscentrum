@@ -18,6 +18,7 @@ fragment MemberNewsFragment on MemberNewsRecord {
 		category
 	}
 	date
+	dateEnd
 	location
 	slug
 	content {

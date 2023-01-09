@@ -30,7 +30,7 @@ export default function Logo({ }: Props) {
   const [manualMode, setManualMode] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
   const isFixed = isHome ? false : atBottom ? false : true
-  const maxRegionR = (pageRegion?.name.length / letters.length)
+  const maxRegionR = pageRegion ? (pageRegion?.name.length / letters.length) : 0;
   const maxR = 1 + maxRegionR
   const [height, setHeight] = useState(0)
   const [ratio, setRatio] = useState(0)
@@ -121,8 +121,6 @@ export default function Logo({ }: Props) {
   const horizontal = letterReducer('horizontal')
   const regionPerc = (pageRegion?.name.length / letters.length)
   const regionRatio = (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
-
-  console.log(ratio);
 
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
