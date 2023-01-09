@@ -76,8 +76,8 @@ export default function Footer({ menu, footer, regions }: FooterProps) {
 				<section className={s.social}>
 					<div>
 						<span>Följ oss</span>
-						<span>Instagram</span>
-						<span>Facebook</span>
+						<span><a href="https://www.instagram.com/konstnarscentrum/">Instagram</a></span>
+						<span><a href="https://www.facebook.com/profile.php?id=100079288527813">Facebook</a></span>
 					</div>
 					<div className={s.copyright}>
 						<span>Copyright Konstnärscentrum 2022</span><span>GDPR & Cookies</span>
