@@ -11,7 +11,7 @@ import { useRegion } from '/lib/context/region'
 import { regions } from '/lib/region'
 
 export type Props = {
-  //fixed: boolean
+
 }
 
 const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T', 'R', 'U', 'M']
@@ -21,7 +21,6 @@ export default function Logo({ }: Props) {
   const router = useRouter()
   const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
   const ref = useRef<HTMLDivElement | null>(null)
-
   const region = useRegion()
   const pageRegion = regions.find(r => router.asPath.startsWith(`/${r.slug}`))
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
@@ -33,16 +32,15 @@ export default function Logo({ }: Props) {
   const maxRegionR = pageRegion ? (pageRegion?.name.length / letters.length) : 0;
   const maxR = 1 + maxRegionR
   const [height, setHeight] = useState(0)
-  const [ratio, setRatio] = useState(0)
+  const [ratio, setRatio] = useState<number | undefined>(0)
+  const [menuMobileSwitch, setMenuMobileSwitch] = useState<boolean | undefined>()
 
-  const animateManual = useCallback((dir: 'horizontal' | 'vertical') => {
+  const animateManual = useCallback((dir: 'horizontal' | 'vertical', start?: number) => {
 
-    setManualMode(true)
-
-    let r = ratio;
+    let r = start !== undefined ? start : ratio
     const step = maxR / (letters.length + region?.name.length)
     const interval = setInterval(() => {
-      if (r > maxR || r < 0) {
+      if (r > maxR || r < 0 || isNaN(r)) {
         setRatio(r > maxR ? maxR : 0)
         return clearInterval(interval)
       }
@@ -50,15 +48,15 @@ export default function Logo({ }: Props) {
     }, 20)
 
     return () => clearInterval(interval)
-  }, [setManualMode, ratio, region, letters, maxR])
+  }, [setManualMode, ratio, region, maxR])
 
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
 
     if (isFixed || (isMobile && !manualMode)) {
       if (isMobile && !manualMode)
-        return direction === 'horizontal' ? letters : []
-      if (!isMobile && !manualMode)
+        return direction === 'horizontal' ? letters : showMenuMobile ? letters : []
+      if (!isMobile && !manualMode && !showMenuMobile)
         return direction === 'vertical' ? letters : []
     }
 
@@ -67,17 +65,6 @@ export default function Logo({ }: Props) {
     else
       return letters.filter((el, idx) => ((idx / l) >= ratio || isServer))
   }
-
-  useEffect(() => {
-
-    const handleRouteChange = () => {
-      if (!isFixed)
-        animateManual('horizontal')
-    }
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => router.events.off('routeChangeComplete', handleRouteChange)
-
-  }, [router.asPath, ratio])
 
   useEffect(() => {
     if (manualMode)
@@ -92,20 +79,27 @@ export default function Logo({ }: Props) {
 
     setRatio(r)
 
-  }, [scrolledPosition, viewportHeight, documentHeight, isFixed, atBottom, setRatio, manualMode, height, region, maxR])
+  }, [scrolledPosition, viewportHeight, maxRegionR, documentHeight, isFixed, atBottom, setRatio, manualMode, height, region, maxR])
 
   useEffect(() => {
-    return animateManual(showMenuMobile ? 'vertical' : 'horizontal')
-  }, [showMenuMobile])
+    setMenuMobileSwitch(showMenuMobile ? true : menuMobileSwitch === undefined ? undefined : false)
+  }, [setMenuMobileSwitch, showMenuMobile, menuMobileSwitch])
 
   useEffect(() => {
-    if (isMobile) return
+    if (menuMobileSwitch !== undefined) {
+      setManualMode(true)
+      return animateManual(menuMobileSwitch ? 'vertical' : 'horizontal')
+    }
+  }, [menuMobileSwitch])
+
+  useEffect(() => {
+    if (isMobile || scrolledPosition === 0) return
     setManualMode(false)
   }, [scrolledPosition, isMobile])
 
   useEffect(() => {
     setShowMenuMobile(false)
-  }, [router, setShowMenuMobile])
+  }, [router])
 
   useEffect(() => {
     setHeight(ref.current.clientHeight)
@@ -117,10 +111,18 @@ export default function Logo({ }: Props) {
     setAtBottom((scrolledPosition + viewportHeight) > footerThreshhold)
   }, [scrolledPosition, documentHeight, viewportHeight])
 
+  useEffect(() => {
+
+    const handleRouteChange = () => animateManual('horizontal', 1)
+    router.events.on('routeChangeComplete', handleRouteChange)
+    return () => router.events.off('routeChangeComplete', handleRouteChange)
+
+  }, [router.asPath, isFixed, ratio, router.events, animateManual])
+
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
   const regionPerc = (pageRegion?.name.length / letters.length)
-  const regionRatio = (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
+  const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
 
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>

@@ -34,7 +34,7 @@ export default function Layout({ children, menu: menuFromProps, title, footer, r
 				<MenuDesktop items={menu} home={isHome} />
 			}
 			<div className={s.layout}>
-				<Logo key={'logo'} />
+				<Logo />
 				<Content noMargins={isHome}>
 					{children}
 				</Content>
