@@ -6,11 +6,13 @@
 
   margin-right: calc(-1 * var(--outer-margin));
   width: calc(100% + (2 * var(--outer-margin)));
+
   @include mq($from: tablet) {
     margin-left: calc(-1 * var(--gutter));
     margin-right: calc(-1 * var(--gutter));
     width: calc(100% + (2 * var(--gutter)));
   }
+
   padding: 0;
   list-style: none;
 
@@ -19,17 +21,11 @@
     margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
   }
 
-  > li {
+  >li {
     border-right: 1px solid var(--beige-mid);
-
-    @include mq($until: tablet) {
-      &:not(last-of-type) {
-        margin-bottom: 2rem;
-      }
-    }
   }
 
-  &.two > li {
+  &.two>li {
     width: 50%;
 
     @include mq($from: tablet) {
@@ -47,7 +43,7 @@
     }
   }
 
-  &.three > li {
+  &.three>li {
     width: 33.333%;
 
     @include mq($from: tablet) {
@@ -62,6 +58,7 @@
       &:nth-of-type(odd) {
         border-right: 1px solid var(--beige-mid);
       }
+
       &:nth-of-type(even) {
         border-right: none;
       }
@@ -75,7 +72,7 @@
     margin-right: var(--gutter);
 
     @include mq($until: tablet) {
-      display: none;
+      //display: none;
     }
 
     &:last-child {
@@ -84,9 +81,10 @@
   }
 
   &.whiteBorder {
-    & > li {
+    &>li {
       border-color: var(--white) !important;
     }
+
     hr {
       background: var(--white) !important;
     }

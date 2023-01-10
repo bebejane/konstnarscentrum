@@ -1,5 +1,5 @@
 import s from './Article.module.scss'
-import React, { useState } from 'react'
+import React from 'react'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { StructuredContent, RevealText } from "/components";
 import { KCImage as Image } from '/components'
@@ -10,7 +10,7 @@ import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 export type ArticleProps = {
   id: string,
   children?: React.ReactNode,
-  title: string,
+  title?: string,
   subtitle?: string,
   blackHeadline?: boolean,
   text?: string,
@@ -43,14 +43,16 @@ export default function Article({
     <div className={cn(s.article, 'article')}>
       {image && showImage ?
         <header>
-          <h1 className={cn(s.title, blackHeadline && s.black)}>
-            <RevealText>
-              <BalanceText>
-                {title}
-              </BalanceText>
-            </RevealText>
-            <div className={s.fade}></div>
-          </h1>
+          {text &&
+            <h1 className={cn(s.title, blackHeadline && s.black)}>
+              <RevealText>
+                <BalanceText>
+                  {title}
+                </BalanceText>
+              </RevealText>
+              <div className={s.fade}></div>
+            </h1>
+          }
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
             <Image
               className={s.image}
@@ -63,7 +65,7 @@ export default function Article({
           </figure>
           <div className={s.colorBg} style={{ backgroundColor: image.responsiveImage.bgColor }}></div>
         </header>
-        :
+        : title &&
         <h1>
           <RevealText>{title}</RevealText>
         </h1>

@@ -20,10 +20,10 @@ fragment NewsFragment on NewsRecord {
 	content {
 		value
 		blocks {
-			... on RelatedMembersNewsRecord {
-				__typename
+			__typename
+			... on RelatedMemberNewsRecord {
 				id
-				membersNews {
+				memberNews {
 					...MemberNewsFragment
 				}
 			}
@@ -35,11 +35,6 @@ fragment NewsFragment on NewsRecord {
 			}
 			... on RecordInterface {
 				id
-			}
-			... on RelatedMembersNewsRecord {
-				membersNews {
-					...MemberNewsFragment
-				}
 			}
 		}
 	}

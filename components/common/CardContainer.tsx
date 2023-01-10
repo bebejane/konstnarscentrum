@@ -14,10 +14,15 @@ export type Props = {
 export default function CardContainer({ children, columns = 3, className, whiteBorder = false }: Props) {
 
   const buildCards = () => {
-    return chunkArray(Array.isArray(children) ? children : [children], columns) as [React.ReactNode[]]
+    return chunkArray(Array.isArray(children) ? children : [children], isMobile ? 2 : columns) as [React.ReactNode[]]
   }
 
+  const { isMobile } = useDevice()
   const [cards, setCards] = useState(buildCards())
+
+  useEffect(() => {
+    setCards(buildCards())
+  }, [isMobile])
 
   return (
     <ul className={cn(s.container, columns === 2 && s.two, columns === 3 && s.three, className, whiteBorder && s.whiteBorder)}>
