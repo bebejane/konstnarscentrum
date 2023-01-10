@@ -1,12 +1,12 @@
 import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { apiQuery } from "dato-nextjs-utils/api";
+import { useApiQuery } from 'dato-nextjs-utils/hooks'
 import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format } from "date-fns";
 import { pageSize, apiQueryAll, memberNewsStatus } from "/lib/utils";
 import { Pager, CardContainer, NewsCard, FilterBar, RevealText } from '/components'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
@@ -19,6 +19,20 @@ export type Props = {
 export default function MemberNews({ memberNews, memberNewsCategories, region, pagination }: Props) {
 
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
+	const { data, loading, error, nextPage, page, loadMore } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllMemberNewsDocument, {
+		initialData: { memberNews, pagination },
+		variables: { first: 1 },
+		pageSize
+	});
+
+	//useEffect(() => console.log(data[0].title), [data])
+	function handleInView(inView) {
+		console.log('inview', inView);
+		console.log(page);
+
+		//if (inView)nextPage()
+	}
+
 
 	return (
 		<>
@@ -44,7 +58,7 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 					/>
 				)}
 			</CardContainer>
-			{<Pager pagination={pagination} slug={'/konstnar/aktuellt'} />}
+			{<Pager pagination={pagination} onInView={handleInView} slug={'/konstnar/aktuellt'} />}
 		</>
 	);
 }
@@ -65,6 +79,9 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
 		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
 		.slice(start, end)
+
+	if (!memberNews.length)
+		return { notFound: true }
 
 	return {
 		props: {

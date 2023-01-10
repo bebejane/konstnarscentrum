@@ -36,6 +36,11 @@ fragment NewsFragment on NewsRecord {
 			... on RecordInterface {
 				id
 			}
+			... on RelatedMembersNewsRecord {
+				membersNews {
+					...MemberNewsFragment
+				}
+			}
 		}
 	}
 }
