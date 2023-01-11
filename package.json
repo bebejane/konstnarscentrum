@@ -5,7 +5,7 @@
 	"scripts": {
 		"dev": "npm run dev:watch",
 		"dev:watch": "LOG_GRAPHQL=false next dev & npm run barrel:watch & graphql-codegen --watch",
-		"dev:email": "npx mailing",
+		"dev:emails": "npx mailing",
 		"prebuild": "node ./prebuild",
 		"build": "npm run prebuild && next build",
 		"codegen": "graphql-codegen",
