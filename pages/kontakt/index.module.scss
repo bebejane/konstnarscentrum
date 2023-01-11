@@ -6,6 +6,7 @@
   p {
     margin-bottom: 0;
   }
+
   p a {
     display: inline-block;
     padding-bottom: 1em;
@@ -23,6 +24,7 @@
   padding: 0;
   margin-left: calc(-1 * var(--outer-margin));
   margin-right: calc(-1 * var(--outer-margin));
+
   @include mq($from: tablet) {
     margin-left: calc(-1 * var(--gutter));
     margin-right: calc(-1 * var(--gutter));
@@ -33,6 +35,12 @@
       width: 50%;
     }
   }
+}
+
+.info {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
 }
 
 .container {

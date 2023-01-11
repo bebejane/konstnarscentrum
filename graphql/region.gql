@@ -10,6 +10,11 @@ query Region($regionId: ItemId) {
 		id
 		name
 		slug
+		contactIntro(markdown: false)
+		info {
+			text
+			title
+		}
 		gallery {
 			id
 			headline
@@ -116,6 +121,11 @@ query RegionMeta($regionId: ItemId) {
 		region {
 			...RegionFragment
 			position
+			contactIntro(markdown: false)
+			info {
+				title
+				text
+			}
 		}
 	}
 }

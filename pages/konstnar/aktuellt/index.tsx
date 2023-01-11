@@ -6,7 +6,7 @@ import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql
 import { format } from "date-fns";
 import { pageSize, apiQueryAll, memberNewsStatus } from "/lib/utils";
 import { Pager, CardContainer, NewsCard, FilterBar, RevealText } from '/components'
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
@@ -21,22 +21,17 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
 	const { data, loading, error, nextPage, page, loadMore } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllMemberNewsDocument, {
 		initialData: { memberNews, pagination },
-		variables: { first: 1 },
+		variables: { first: 10 },
 		pageSize
 	});
 
-	//useEffect(() => console.log(data[0].title), [data])
 	function handleInView(inView) {
-		console.log('inview', inView);
-		console.log(page);
-
-		//if (inView)nextPage()
+		//if (inView) loadMore({})
 	}
-
 
 	return (
 		<>
-			<h1><RevealText>Aktuellt</RevealText></h1>
+			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
 
 			<FilterBar
 				multi={true}
@@ -76,7 +71,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	let end = isFirstPage ? pageSize : ((pageSize * (page)))
 
 	memberNews = memberNews
-		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
+		.map(el => ({ ...el, status: memberNewsStatus(el) }))
 		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
 		.slice(start, end)
 

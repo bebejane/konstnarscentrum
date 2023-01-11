@@ -1,3 +1,4 @@
+import React from "react";
 import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
@@ -5,8 +6,6 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionMetaDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { Card, RevealText } from "/components";
-import { KCImage as Image } from '/components'
-import React from "react";
 
 export type Props = {
 	contactIntro: RegionRecord['contactIntro'],
@@ -20,7 +19,7 @@ export type EmployeesByRegion = {
 	region: RegionRecord
 }[]
 
-export default function Contact({ contactIntro, info, employees, region }: Props) {
+export default function Contact({ contactIntro, employees }: Props) {
 
 	const employeesByRegion: EmployeesByRegion = []
 
@@ -42,6 +41,12 @@ export default function Contact({ contactIntro, info, employees, region }: Props
 				return (
 					<React.Fragment key={idx}>
 						<h3>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h3>
+						<Markdown className={s.intro}>{region.contactIntro}</Markdown>
+						<ul className={s.info}>
+							{region.info.map(({ text, title }, idx) =>
+								<li key={idx}>{title} - {text}</li>
+							)}
+						</ul>
 						<ul className={s.region}>
 							{employees.map(({ name, email, image, title }, idx) =>
 								<Card key={idx} className={s.employee}>

@@ -132,9 +132,9 @@ export const getStaticPagePaths = async (query: TypedDocumentNode, segment: stri
   const items = await fetchAllRecords(query)
   const paths = []
 
-  items.forEach(({ slug, region: { id, slug: regionSlug } }) => {
+  items.forEach(({ slug, region }) => {
     const params = { [segment]: slug }
-    paths.push(!regional ? { params } : { params: { ...params, region: regionSlug } })
+    paths.push(!regional ? { params } : { params: { ...params, region: region?.slug } })
   })
 
   return {
@@ -172,9 +172,9 @@ export const apiQueryAll = async (doc: TypedDocumentNode, variables: ApiQueryOpt
   while (pagesLeft) {
 
     const res = await apiQuery(doc, { variables: { ...variables, first: size, skip } });
-    console.log(res.memberNews.length)
     const { count } = res.pagination
     const props = Object.keys(res)
+
     for (let i = 0; i < props.length; i++) {
       const k = props[i]
       const el = res[props[i]];
@@ -195,7 +195,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, variables: ApiQueryOpt
   return results
 }
 
-export const memberNewsStatus = (date, dateEnd): { value: string, label: string, order: number } => {
+export const memberNewsStatus = ({ date, dateEnd }): { value: string, label: string, order: number } => {
   const start = new Date(date);
   const end = new Date(dateEnd);
   return isAfter(new Date(), end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }

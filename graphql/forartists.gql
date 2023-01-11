@@ -1,0 +1,61 @@
+#import "./fragment/ImageFragment.gql"
+#import "./fragment/ImageThumbnailFragment.gql"
+
+fragment ForArtistFragment on ForArtistRecord {
+	id
+	createdAt
+	content {
+		value
+		blocks {
+			... on ImageRecord {
+				__typename
+				id
+				image {
+					...ImageFragment
+				}
+			}
+			... on VideoRecord {
+				__typename
+				id
+				video {
+					height
+					width
+					title
+					provider
+					providerUid
+					thumbnailUrl
+					url
+				}
+			}
+			... on ButtonRecord {
+				__typename
+				id
+				text
+				url
+			}
+		}
+	}
+	image {
+		...ImageThumbnailFragment
+	}
+	slug
+	title
+}
+
+query AllForArtist {
+	forArtists: allForArtists(orderBy: [createdAt_DESC]) {
+		id
+		createdAt
+		slug
+		title
+	}
+	pagination: _allForArtistsMeta {
+		count
+	}
+}
+
+query ForArtist($slug: String!) {
+	forArtist(filter: { slug: { eq: $slug } }) {
+		...ForArtistFragment
+	}
+}

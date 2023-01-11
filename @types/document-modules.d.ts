@@ -53,6 +53,17 @@ declare module '*/footer.gql' {
 }
     
 
+declare module '*/forartists.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const ForArtistFragment: DocumentNode;
+export const AllForArtist: DocumentNode;
+export const ForArtist: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/AboutFragment.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

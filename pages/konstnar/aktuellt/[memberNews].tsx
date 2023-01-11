@@ -15,6 +15,7 @@ export default function MemberNewsArticle({ memberNews: {
 	id,
 	createdAt,
 	date,
+	dateEnd,
 	intro,
 	title,
 	content,
@@ -41,8 +42,9 @@ export default function MemberNewsArticle({ memberNews: {
 					items={[
 						{ title: 'Kategori', value: category.category },
 						{ title: 'Plats', value: location },
+						{ title: 'Region', value: region?.name },
 						{ title: 'Datum', value: format(new Date(date), "d MMMM y") },
-						{ title: 'Region', value: region?.name }
+						{ title: 'Slutdatum', value: format(new Date(dateEnd), "d MMMM y") },
 					]}
 				/>
 				<StructuredContent id={id} content={content} />

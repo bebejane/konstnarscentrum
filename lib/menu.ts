@@ -1,6 +1,6 @@
 import { regions } from '/lib/region';
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestProjectsDocument } from "/graphql";
+import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestProjectsDocument, AllForArtistDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -23,10 +23,10 @@ const base: Menu = [
     ]
   },
   {
-    type: 'artist', label: 'För konstnärer', slug: '/konstnar', sub: [
-      { type: 'artist', label: 'Bli medlem', slug: '/konstnar/bli-medlem', regional: false },
-      { type: 'artist', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
-      { type: 'artist', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true }
+    type: 'for-artists', label: 'För konstnärer', slug: '/konstnar', sub: [
+      { type: 'for-artists', label: 'Bli medlem', slug: '/konstnar/bli-medlem', regional: false },
+      { type: 'for-artists', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
+      { type: 'for-artists', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true }
     ]
   },
   { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, external: true, sub: [] },
@@ -40,17 +40,20 @@ export const buildMenu = async () => {
     news,
     abouts,
     consults,
-    projects
+    projects,
+    forArtists
   }: {
     news: NewsRecord[],
     abouts: AboutRecord[],
     consults: ConsultRecord[],
-    projects: ProjectRecord[]
+    projects: ProjectRecord[],
+    forArtists: ForArtistRecord[]
   } = await apiQuery([
     LatestNewsDocument,
     AllAboutsMenuDocument,
     AllConsultsDocument,
     LatestProjectsDocument,
+    AllForArtistDocument
   ], { variables: [{ first: 4 }] });
 
   const menu = base.map(item => {
@@ -70,6 +73,9 @@ export const buildMenu = async () => {
         break;
       case 'contact':
         sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `/${el.slug}/kontakt`, regional: false }))
+        break;
+      case 'for-artists':
+        sub = item.sub.concat(forArtists.map(el => ({ type: 'for-artists', label: el.title, slug: `/for-konstnarer/${el.slug}`, regional: false })))
         break;
       default:
         break;
