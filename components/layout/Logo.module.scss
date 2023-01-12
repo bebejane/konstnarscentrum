@@ -20,7 +20,6 @@
   top: 0.9em;
   left: 0;
   margin-left: var(--outer-margin);
-  //margin-top: calc(-1 * var(--navbar-height));
   color: var(--black);
   white-space: pre;
   font-family: "Logo", arial;
@@ -37,6 +36,11 @@
 
     >a {
       max-height: var(--logo-size);
+    }
+
+    >a span {
+      display: inline-block;
+      transition: transform 0.3s ease-out;
     }
 
     @include mq($until: tablet) {

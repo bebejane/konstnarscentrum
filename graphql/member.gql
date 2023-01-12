@@ -85,6 +85,39 @@ query AllMemberNews($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId)
 	}
 }
 
+query AllPastMemberNews($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId, $date: Date) {
+	pastMemberNews: allMemberNews(
+		filter: { region: { eq: $regionId }, dateEnd: { lt: $date } }
+		orderBy: [date_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...MemberNewsLightFragment
+	}
+	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId } }) {
+		count
+	}
+}
+
+query AllPresentMemberNews(
+	$first: IntType = 100
+	$skip: IntType = 0
+	$regionId: ItemId
+	$date: Date
+) {
+	presentMemberNews: allMemberNews(
+		filter: { region: { eq: $regionId }, dateEnd: { gt: $date } }
+		orderBy: [date_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...MemberNewsLightFragment
+	}
+	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId } }) {
+		count
+	}
+}
+
 query AllMemberNewsCategories {
 	memberNewsCategories: allMemberNewsCategories {
 		id

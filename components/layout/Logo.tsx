@@ -1,7 +1,7 @@
 import s from './Logo.module.scss'
 import cn from 'classnames'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks'
-import { isServer } from '/lib/utils'
+import { isServer, randomInt } from '/lib/utils'
 import Link from 'next/link'
 import { useStore } from '/lib/store'
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -124,12 +124,23 @@ export default function Logo({ }: Props) {
   const regionPerc = (pageRegion?.name.length / letters.length)
   const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
 
+  function handleMouseOver(e) {
+    const { type, target } = e;
+    const nodes = target.parentNode.childNodes
+    const id = target.parentNode.id
+
+    Array.from(nodes).forEach(node => {
+      const translateType = `translate${id === 'vertical' ? 'X' : 'Y'}`
+      node.style.transform = type === 'mouseenter' ? `${translateType}(${randomInt(-15, 15)}%)` : `${translateType}(0%)`
+    })
+  }
+
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
       <div className={s.logo}>
         <div className={s.horizontal}>
-          <Link href="/">
-            {horizontal.map((l, i) => l)}
+          <Link id="horizontal" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
+            {horizontal.map((l, idx) => <span key={idx}>{l}</span>)}
           </Link>
           {pageRegion && !pageRegion?.global &&
             <Link href={`/${pageRegion?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
@@ -138,8 +149,8 @@ export default function Logo({ }: Props) {
           }
         </div>
         <div className={s.vertical} ref={ref}>
-          <Link href="/">
-            {vertical.map((l, i) => l)}
+          <Link id="vertical" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
+            {vertical.map((l, idx) => <span key={idx}>{l}</span>)}
           </Link>
           {horizontal.length > 0 &&
             <div className={s.space}></div>

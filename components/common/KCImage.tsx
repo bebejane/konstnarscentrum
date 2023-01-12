@@ -296,10 +296,10 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
     );
 
     const outlineWidth = 20
-    const transitionStyles = !fadeInDuration ? {} : {
-      transition: loaded ? undefined : fadeInDuration > 0 ? `outline, outline-offset` : undefined,
-      outline: loaded ? `0px solid ${data.bgColor}` : `${outlineWidth}px solid ${data.bgColor}`,
-      outlineOffset: loaded ? `0px` : `-${outlineWidth}px`,
+    const transitionStyles = (!fadeInDuration || loaded) ? {} : {
+      transition: fadeInDuration > 0 ? `outline, outline-offset` : undefined,
+      outline: `${outlineWidth}px solid ${data.bgColor}`,
+      outlineOffset: `-${outlineWidth}px`,
       transitionTimingFunction: `steps(4)`,
       transitionDuration: `${fadeInDuration}ms`
     }

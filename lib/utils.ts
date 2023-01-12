@@ -162,7 +162,7 @@ export const capitalize = (str: string, lower: boolean = false) => {
 
 export const sleep = (ms: number) => new Promise((resolve, refject) => setTimeout(resolve, ms))
 
-export const apiQueryAll = async (doc: TypedDocumentNode, variables: ApiQueryOptions = {}): Promise<any> => {
+export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions = {}): Promise<any> => {
 
   const results = {}
   let pagesLeft = true;
@@ -171,7 +171,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, variables: ApiQueryOpt
 
   while (pagesLeft) {
 
-    const res = await apiQuery(doc, { variables: { ...variables, first: size, skip } });
+    const res = await apiQuery(doc, { variables: { ...opt.variables, first: size, skip } });
     const { count } = res.pagination
     const props = Object.keys(res)
 
@@ -199,4 +199,10 @@ export const memberNewsStatus = ({ date, dateEnd }): { value: string, label: str
   const start = new Date(date);
   const end = new Date(dateEnd);
   return isAfter(new Date(), end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
+}
+
+export const randomInt = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }

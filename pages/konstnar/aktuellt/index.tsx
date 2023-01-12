@@ -1,33 +1,39 @@
 import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
+import { apiQuery } from "dato-nextjs-utils/api";
 import { useApiQuery } from 'dato-nextjs-utils/hooks'
-import { AllMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
+import { AllPresentMemberNewsDocument, AllPastMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format } from "date-fns";
-import { pageSize, apiQueryAll, memberNewsStatus } from "/lib/utils";
-import { Pager, CardContainer, NewsCard, FilterBar, RevealText } from '/components'
-import { useState } from "react";
+import { pageSize, apiQueryAll, memberNewsStatus, isServer } from "/lib/utils";
+import { CardContainer, NewsCard, FilterBar, RevealText, Loader } from '/components'
+import { useEffect, useState } from "react";
+import { useInView } from "react-intersection-observer";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
-	memberNews: MemberNewsRecordWithStatus[],
+	presentMemberNews: MemberNewsRecordWithStatus[],
+	pastMemberNews: MemberNewsRecord[],
 	memberNewsCategories: MemberNewsCategoryRecord[]
+	date: string
 	region?: Region,
 	pagination: Pagination
 }
 
-export default function MemberNews({ memberNews, memberNewsCategories, region, pagination }: Props) {
+export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
 
+	const { inView, ref } = useInView({ triggerOnce: false })
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
-	const { data, loading, error, nextPage, page, loadMore } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllMemberNewsDocument, {
-		initialData: { memberNews, pagination },
-		variables: { first: 10 },
+	const { data: { pastMemberNews }, loading, error, nextPage, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
+		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
+		variables: { first: pageSize, date },
 		pageSize
 	});
 
-	function handleInView(inView) {
-		//if (inView) loadMore({})
-	}
+	useEffect(() => {
+		if (inView && !page.end)
+			nextPage()
+	}, [inView, page.end])
 
 	return (
 		<>
@@ -39,21 +45,24 @@ export default function MemberNews({ memberNews, memberNewsCategories, region, p
 				onChange={(ids) => setMemberNewsCategoryIds(ids)}
 			/>
 
-			<CardContainer columns={2} className={s.memberNews} key={pagination.page}>
-				{memberNews.map(({ date, title, intro, slug, region, image, category, status }, idx) =>
-					<NewsCard
-						key={idx}
-						title={title}
-						subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
-						label={status.label}
-						text={intro}
-						image={image}
-						slug={`/${region.slug}/konstnar/aktuellt/${slug}`}
-						regionName={region.name}
-					/>
-				)}
+			<CardContainer columns={2} className={s.memberNews} key={page.no}>
+				{presentMemberNews.concat(pastMemberNews).map((el, idx) => {
+					const { date, title, intro, slug, region, image, category, status } = el
+					return (
+						<NewsCard
+							key={idx}
+							title={title}
+							subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
+							label={memberNewsStatus(el).label}
+							text={intro}
+							image={image}
+							slug={`/${region.slug}/konstnar/aktuellt/${slug}`}
+							regionName={region.name}
+						/>
+					)
+				})}
 			</CardContainer>
-			{<Pager pagination={pagination} onInView={handleInView} slug={'/konstnar/aktuellt'} />}
+			<div ref={ref}>{loading && <Loader />}</div>
 		</>
 	);
 }
@@ -65,23 +74,31 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	const page = parseInt(context.params?.page) || 1;
 	const isFirstPage = page === 1
 	const regionId = props.region.global ? undefined : props.region.id;
+	const date = format(new Date(), 'yyyy-MM-dd')
 
-	let { memberNews, pagination } = await apiQueryAll(AllMemberNewsDocument, { variables: { regionId } });
+	let { presentMemberNews } = await apiQuery(AllPresentMemberNewsDocument, { variables: { regionId, date } });
+	let { pastMemberNews, pagination } = await apiQueryAll(AllPastMemberNewsDocument, { variables: { regionId, date } });
+
 	let start = (isFirstPage ? 0 : (page - 1) * pageSize)
 	let end = isFirstPage ? pageSize : ((pageSize * (page)))
 
-	memberNews = memberNews
+	pastMemberNews = pastMemberNews
 		.map(el => ({ ...el, status: memberNewsStatus(el) }))
-		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
 		.slice(start, end)
 
-	if (!memberNews.length)
+	presentMemberNews = presentMemberNews
+		.map(el => ({ ...el, status: memberNewsStatus(el) }))
+		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
+
+	if (!pastMemberNews.length && !presentMemberNews.length)
 		return { notFound: true }
 
 	return {
 		props: {
 			...props,
-			memberNews,
+			presentMemberNews,
+			pastMemberNews,
+			date,
 			pagination: { ...pagination, page, size: pageSize }
 		},
 		revalidate

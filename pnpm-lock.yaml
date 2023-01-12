@@ -80,6 +80,7 @@ specifiers:
   rooks: ^7.4.1
   sass: ^1.56.0
   slugify: ^1.6.5
+  src: link:/user/bebejane/projects/dato-nextjs-utils/src
   swiper: ^8.4.4
   swr: ^1.3.0
   typescript: ^4.9.4
@@ -113,7 +114,7 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f_jlbfog4cyzccfgy6cl64ttd4mu
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79_jlbfog4cyzccfgy6cl64ttd4mu
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   graphql: 16.6.0
@@ -151,6 +152,7 @@ dependencies:
   rooks: 7.4.1_biqbaboplfbrettd7655fr4n2y
   sass: 1.56.0
   slugify: 1.6.5
+  src: link:../../../../../../user/bebejane/projects/dato-nextjs-utils/src
   swiper: 8.4.4
   swr: 1.3.0_react@18.2.0
   universal-base64: 2.1.0
@@ -2407,6 +2409,10 @@ packages:
 
   /@next/env/13.1.0:
     resolution: {integrity: sha512-6iNixFzCndH+Bl4FetQzOMjxCJqg8fs0LAlZviig1K6mIjOWH2m2oPcHcOg1Ta5VCe7Bx5KG1Hs+NrWDUkBt9A==}
+    dev: false
+
+  /@next/env/13.1.1:
+    resolution: {integrity: sha512-vFMyXtPjSAiOXOywMojxfKIqE3VWN5RCAx+tT3AS3pcKjMLFTCJFUWsKv8hC+87Z1F4W3r68qTwDFZIFmd5Xkw==}
     dev: false
 
   /@next/eslint-plugin-next/12.3.2:
@@ -4908,8 +4914,8 @@ packages:
     dependencies:
       delayed-stream: 1.0.0
 
-  /comma-separated-tokens/2.0.2:
-    resolution: {integrity: sha512-G5yTt3KQN4Yn7Yk4ed73hlZ1evrFKXeUW3086p3PRFNp7m2vIjI6Pg+Kgb+oyzhd9F2qdcoj67+y3SdxL5XWsg==}
+  /comma-separated-tokens/2.0.3:
+    resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
     dev: false
 
   /commander/2.20.3:
@@ -7083,8 +7089,8 @@ packages:
     dependencies:
       function-bind: 1.1.1
 
-  /hast-util-whitespace/2.0.0:
-    resolution: {integrity: sha512-Pkw+xBHuV6xFeJprJe2BBEoDV+AvQySaz3pPDRUs5PNZEMQjpXJJueqrpcHIXxnWTcAGi/UOCgVShlkY6kLoqg==}
+  /hast-util-whitespace/2.0.1:
+    resolution: {integrity: sha512-nAxA0v8+vXSBDt3AnRUNjyRIQ0rD+ntpbAp4LnPkumc5M9yUbSMa4XDU9Q6etY4f1Wp4bNgvc1yjiZtsTTrSng==}
     dev: false
 
   /he/1.2.0:
@@ -8414,8 +8420,8 @@ packages:
       - supports-color
     dev: false
 
-  /mdast-util-to-hast/12.2.4:
-    resolution: {integrity: sha512-a21xoxSef1l8VhHxS1Dnyioz6grrJkoaCUgGzMD/7dWHvboYX3VW53esRUfB5tgTyz4Yos1n25SPcj35dJqmAg==}
+  /mdast-util-to-hast/12.2.5:
+    resolution: {integrity: sha512-EFNhT35ZR/VZ85/EedDdCNTq0oFM+NM/+qBomVGQ0+Lcg0nhI8xIwmdCzNMlVlCJNXRprpobtKP/IUh8cfz6zQ==}
     dependencies:
       '@types/hast': 2.3.4
       '@types/mdast': 3.0.10
@@ -10098,8 +10104,8 @@ packages:
       object-assign: 4.1.1
       react-is: 16.13.1
 
-  /property-information/6.1.1:
-    resolution: {integrity: sha512-hrzC564QIl0r0vy4l6MvRLhafmUowhO/O3KgVSoXIbbA2Sz4j8HGpJc6T2cubRVwMwpdiG/vKGfhT4IixmKN9w==}
+  /property-information/6.2.0:
+    resolution: {integrity: sha512-kma4U7AFCTwpqq5twzC1YVIDXSqg6qQK6JN0smOw8fgRy1OkMi0CYSzFmsy6dnqSenamAtj0CyXMUJ1Mf6oROg==}
     dev: false
 
   /proto-list/1.2.4:
@@ -10254,8 +10260,8 @@ packages:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
     dev: false
 
-  /react-markdown/8.0.3_bbvjflvjoibwhtpmedigb26h6y:
-    resolution: {integrity: sha512-We36SfqaKoVNpN1QqsZwWSv/OZt5J15LNgTLWynwAN5b265hrQrsjMtlRNwUvS+YyR3yDM8HpTNc4pK9H/Gc0A==}
+  /react-markdown/8.0.4_bbvjflvjoibwhtpmedigb26h6y:
+    resolution: {integrity: sha512-2oxHa6oDxc1apg/Gnc1Goh06t3B617xeywqI/92wmDV9FELI6ayRkwge7w7DoEqM0gRpZGTNU6xQG+YpJISnVg==}
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
@@ -10264,15 +10270,15 @@ packages:
       '@types/prop-types': 15.7.5
       '@types/react': 18.0.24
       '@types/unist': 2.0.6
-      comma-separated-tokens: 2.0.2
-      hast-util-whitespace: 2.0.0
+      comma-separated-tokens: 2.0.3
+      hast-util-whitespace: 2.0.1
       prop-types: 15.8.1
-      property-information: 6.1.1
+      property-information: 6.2.0
       react: 18.2.0
       react-is: 18.2.0
       remark-parse: 10.0.1
       remark-rehype: 10.1.0
-      space-separated-tokens: 2.0.1
+      space-separated-tokens: 2.0.2
       style-to-object: 0.3.0
       unified: 10.1.2
       unist-util-visit: 4.1.1
@@ -10518,7 +10524,7 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       '@types/mdast': 3.0.10
-      mdast-util-to-hast: 12.2.4
+      mdast-util-to-hast: 12.2.5
       unified: 10.1.2
     dev: false
 
@@ -11016,8 +11022,8 @@ packages:
     engines: {node: '>=0.10.0'}
     requiresBuild: true
 
-  /space-separated-tokens/2.0.1:
-    resolution: {integrity: sha512-ekwEbFp5aqSPKaqeY1PGrlGQxPNaq+Cnx4+bE2D8sciBQrHpbwoBbawqTN2+6jPs9IdWxxiUcN0K2pkczD3zmw==}
+  /space-separated-tokens/2.0.2:
+    resolution: {integrity: sha512-PEGlAwrG8yXGXRjW32fGbg66JAlOAwbObuqVoJpv/mRgoWDQfgH1wDPvtzWyUSNAXBGSk8h755YDbbcEy3SH2Q==}
     dev: false
 
   /split-on-first/1.1.0:
@@ -11615,6 +11621,7 @@ packages:
     resolution: {integrity: sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    dev: true
 
   /ua-parser-js/0.7.32:
     resolution: {integrity: sha512-f9BESNVhzlhEFf2CHMSj40NWOjYPl1YKYbrvIr/hFTDEmLq7SRbWvm7FcdcpCYT95zrOhC7gZSxjdnnTpBcwVw==}
@@ -12287,11 +12294,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f_jlbfog4cyzccfgy6cl64ttd4mu:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/974a3631d5b2ce1e0e9e10985de563731dcfee9f}
-    id: github.com/bebejane/dato-nextjs-utils/974a3631d5b2ce1e0e9e10985de563731dcfee9f
+  github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79_jlbfog4cyzccfgy6cl64ttd4mu:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/713466ea0791d4ff919fa9a9a4eefc4610f62c79}
+    id: github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79
     name: dato-nextjs-utils
-    version: 1.0.212
+    version: 1.0.243
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4
@@ -12306,6 +12313,7 @@ packages:
     dependencies:
       '@apollo/client': 3.7.1_gdcq4dv6opitr3wbfwyjmanyra
       '@datocms/cma-client': 1.1.12_encoding@0.1.13
+      '@next/env': 13.1.1
       '@types/node': 18.11.9
       '@types/react': 18.0.24
       markdown-truncate: 1.0.4
@@ -12313,10 +12321,9 @@ packages:
       next-seo: 5.13.0_s75y6mxmikaw2mhqmuko6w7njm
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-      react-markdown: 8.0.3_bbvjflvjoibwhtpmedigb26h6y
+      react-markdown: 8.0.4_bbvjflvjoibwhtpmedigb26h6y
       remark-breaks: 3.0.2
       remark-gfm: 3.0.1
-      typescript: 4.9.4
     transitivePeerDependencies:
       - supports-color
     dev: false

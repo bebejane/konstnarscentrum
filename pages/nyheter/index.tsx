@@ -4,10 +4,13 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllNewsDocument } from "/graphql";
 import { format } from "date-fns";
-import { Pager, ReadMore, RevealText } from '/components'
+import { ReadMore, RevealText, Loader } from '/components'
 import { pageSize } from "/lib/utils";
 import Link from "next/link";
 import BalanceText from 'react-balance-text'
+import { useInView } from "react-intersection-observer";
+import { useApiQuery } from "dato-nextjs-utils/hooks";
+import { useEffect } from "react";
 
 export type Props = {
   news: NewsRecord[],
@@ -15,7 +18,19 @@ export type Props = {
   pagination: Pagination
 }
 
-export default function News({ news, region, pagination }: Props) {
+export default function News({ news: newsFromProps, region, pagination }: Props) {
+
+  const { inView, ref } = useInView({ triggerOnce: false })
+  const { data: { news }, loading, error, nextPage, page } = useApiQuery<{ news: NewsRecord[] }>(AllNewsDocument, {
+    initialData: { news: newsFromProps, pagination },
+    variables: { first: pageSize, regionId: region.id },
+    pageSize
+  });
+
+  useEffect(() => {
+    if (inView && !page.end)
+      nextPage()
+  }, [inView, page.end, nextPage])
 
   return (
     <>
@@ -35,7 +50,7 @@ export default function News({ news, region, pagination }: Props) {
             <>Det finns inga nyheter...</>
           }
         </ul>
-        <Pager pagination={pagination} slug={`/${region.slug}/nyheter`} />
+        <div ref={ref}>{loading && <Loader />}</div>
       </div>
     </>
   );
