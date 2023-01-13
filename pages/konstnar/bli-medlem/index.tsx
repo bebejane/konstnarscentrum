@@ -5,16 +5,20 @@ import { regions } from "/lib/region";
 import { Apply } from "/components";
 import { ApplyForMembershipDocument } from "/graphql";
 import { StructuredContent, RevealText } from "/components";
+import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 
 export type Props = {
 	apply: ApplyRecord
 }
 
-export default function Member({ apply: { id, content, title } }: Props) {
+export default function Member({ apply: { id, content, title, intro } }: Props) {
 
 	return (
 		<div className={s.container}>
 			<h1><RevealText>{title}</RevealText></h1>
+			<Markdown className="intro">
+				{intro}
+			</Markdown>
 			<StructuredContent id={id} content={content} />
 			<h3>Skicka in ansökan</h3>
 			<Apply regions={regions.filter(({ global }) => !global)} />

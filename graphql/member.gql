@@ -53,6 +53,7 @@ query ApplyForMembership {
 	apply {
 		id
 		title
+		intro
 		content {
 			value
 			blocks

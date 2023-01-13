@@ -88,4 +88,8 @@
   &.noBottom {
     padding-bottom: 0;
   }
+
+  a:hover {
+    color: var(--beige-dark) !important;
+  }
 }

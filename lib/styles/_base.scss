@@ -86,11 +86,16 @@ a {
 	color: var(--foreground);
 
 	&:hover {
-		color: var(--beige-dark);
-	}
-
-	&:visited {
 		color: var(--foreground);
+	}
+}
+
+article p a {
+	text-decoration: underline !important;
+	text-underline-offset: 0.1em;
+
+	&:hover {
+		color: var(--beige-dark);
 	}
 }
 

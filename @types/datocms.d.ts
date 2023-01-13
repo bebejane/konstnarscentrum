@@ -340,6 +340,7 @@ type ApplyRecord = RecordInterface & {
   content: ApplyModelContentField;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  intro?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
   title: Scalars['String'];
   updatedAt: Scalars['DateTime'];
@@ -349,6 +350,12 @@ type ApplyRecord = RecordInterface & {
 /** Record of type Bli medlem (apply) */
 type ApplyRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Bli medlem (apply) */
+type ApplyRecordintroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** Specifies how to filter Boolean fields */
@@ -5536,7 +5543,7 @@ type AllMemberCategoriesQuery = { __typename?: 'Query', memberCategories: Array<
 type ApplyForMembershipQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } } | null };
+type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, intro?: string | null, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } } | null };
 
 type MemberNewsQueryVariables = Exact<{
   slug: Scalars['String'];

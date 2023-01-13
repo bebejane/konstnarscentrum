@@ -19,7 +19,7 @@ export type FooterProps = {
 export default function Footer({ menu, footer, regions }: FooterProps) {
 
 	const { setTheme } = useTheme()
-	const { inView, ref } = useInView({ threshold: 0.20 })
+	const { inView, ref } = useInView({ threshold: 0.50 })
 	const [showMobileMenu] = useStore(({ showMenuMobile }) => [showMenuMobile])
 	const region = useRegion()
 	const sponsors = regions?.find(el => el.id === region.id)?.sponsors

@@ -27,8 +27,8 @@
     display: none;
   }
 
-  &:hover {
-    color: var(--beige-dark !important);
+  a:hover {
+    color: var(--beige-dark) !important;
   }
 
   > ul {
@@ -48,7 +48,7 @@
       cursor: default;
 
       &:hover {
-        color: var(--beige-dark !important);
+        color: var(--beige-dark) !important;
       }
     }
   }

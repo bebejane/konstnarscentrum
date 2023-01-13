@@ -10,7 +10,17 @@
     .region {
       -webkit-text-stroke-color: var(--background);
     }
+  }
 
+  .back {
+    display: none; //Här ska du fadea upp samtidigt som allt annat blir svart i footern
+    width: 100vw;
+    height: var(--navbar-height);
+    background-color: var(--black);
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
   }
 }
 
@@ -34,11 +44,11 @@
     left: 0;
     color: var(--black);
 
-    >a {
+    > a {
       max-height: var(--logo-size);
     }
 
-    >a span {
+    > a span {
       display: inline-block;
       transition: transform 0.3s ease-out;
     }

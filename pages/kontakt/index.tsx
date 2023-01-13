@@ -41,12 +41,13 @@ export default function Contact({ contactIntro, employees }: Props) {
 				return (
 					<React.Fragment key={idx}>
 						<h3>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h3>
-						<Markdown className={s.intro}>{region.contactIntro}</Markdown>
-						<ul className={s.info}>
-							{region.info.map(({ text, title }, idx) =>
-								<li key={idx}>{title} - {text}</li>
-							)}
-						</ul>
+						{region.info.length < 0 &&
+							< ul className={s.info}>
+								{region.info.map(({ text, title }, idx) =>
+									<li key={idx}>{title}: {text}</li>
+								)}
+							</ul>
+						}
 						<ul className={s.region}>
 							{employees.map(({ name, email, image, title }, idx) =>
 								<Card key={idx} className={s.employee}>

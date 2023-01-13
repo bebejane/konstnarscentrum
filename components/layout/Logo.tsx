@@ -137,6 +137,7 @@ export default function Logo({ }: Props) {
 
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
+      <div className={s.back}></div>
       <div className={s.logo}>
         <div className={s.horizontal}>
           <Link id="horizontal" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
