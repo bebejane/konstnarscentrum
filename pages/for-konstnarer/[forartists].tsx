@@ -11,13 +11,14 @@ export type Props = {
   region: Region
 }
 
-export default function ForArtists({ forArtist: { id, image, title, createdAt, content }, region }: Props) {
+export default function ForArtists({ forArtist: { id, image, title, createdAt, content, intro }, region }: Props) {
 
   return (
     <>
       <Article
         id={id}
         image={image}
+        text={intro}
         title={title}
         subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
         content={content}

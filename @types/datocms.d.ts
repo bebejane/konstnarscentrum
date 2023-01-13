@@ -1119,6 +1119,7 @@ type ForArtistModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
   image?: InputMaybe<FileFilter>;
+  intro?: InputMaybe<TextFilter>;
   position?: InputMaybe<PositionFilter>;
   slug?: InputMaybe<SlugFilter>;
   title?: InputMaybe<StringFilter>;
@@ -1172,6 +1173,7 @@ type ForArtistRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
   image?: Maybe<FileField>;
+  intro?: Maybe<Scalars['String']>;
   position?: Maybe<Scalars['IntType']>;
   slug: Scalars['String'];
   title: Scalars['String'];
@@ -1182,6 +1184,12 @@ type ForArtistRecord = RecordInterface & {
 /** Record of type För konstnärer (for_artist) */
 type ForArtistRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type För konstnärer (for_artist) */
+type ForArtistRecordintroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 type ForMemberModelFilter = {
@@ -1196,6 +1204,7 @@ type ForMemberModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   id?: InputMaybe<ItemIdFilter>;
+  intro?: InputMaybe<TextFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
 
@@ -1241,6 +1250,7 @@ type ForMemberRecord = RecordInterface & {
   content: Array<ContentRecord>;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  intro?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
 
@@ -1248,6 +1258,12 @@ type ForMemberRecord = RecordInterface & {
 /** Record of type For member (for_member) */
 type ForMemberRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type For member (for_member) */
+type ForMemberRecordintroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
 type FormModelFormFieldsField = FormTextRecord | FormTextblockRecord | PdfFormRecord;
@@ -5421,7 +5437,7 @@ type FooterQueryVariables = Exact<{ [key: string]: never; }>;
 
 type FooterQuery = { __typename?: 'Query', footer?: { __typename?: 'FooterRecord', aboutKc: string } | null, regions: Array<{ __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, sponsors: Array<{ __typename?: 'SponsorRecord', id: any, url: string, image: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } }> }> };
 
-type ForArtistFragment = { __typename?: 'ForArtistRecord', id: any, createdAt: any, slug: string, title: string, content?: { __typename?: 'ForArtistModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> } | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null };
+type ForArtistFragment = { __typename?: 'ForArtistRecord', id: any, createdAt: any, slug: string, title: string, intro?: string | null, content?: { __typename?: 'ForArtistModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> } | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null };
 
 type AllForArtistQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -5433,7 +5449,7 @@ type ForArtistQueryVariables = Exact<{
 }>;
 
 
-type ForArtistQuery = { __typename?: 'Query', forArtist?: { __typename?: 'ForArtistRecord', id: any, createdAt: any, slug: string, title: string, content?: { __typename?: 'ForArtistModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> } | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null } | null };
+type ForArtistQuery = { __typename?: 'Query', forArtist?: { __typename?: 'ForArtistRecord', id: any, createdAt: any, slug: string, title: string, intro?: string | null, content?: { __typename?: 'ForArtistModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> } | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null } | null } | null } | null };
 
 type AboutFragment = { __typename: 'AboutRecord', _modelApiKey: string, id: any, title: string, intro: string, slug: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content: { __typename?: 'AboutModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string } | { __typename: 'ImageRecord', id: any, image: Array<{ __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null }> } | { __typename: 'VideoRecord', id: any, video: { __typename?: 'VideoField', height: any, width: any, title: string, provider: string, providerUid: string, thumbnailUrl: string, url: string } }> } };
 

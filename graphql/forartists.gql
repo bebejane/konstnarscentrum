@@ -40,6 +40,7 @@ fragment ForArtistFragment on ForArtistRecord {
 	}
 	slug
 	title
+	intro
 }
 
 query AllForArtist {
