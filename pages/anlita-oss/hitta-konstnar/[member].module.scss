@@ -12,11 +12,9 @@
 
   .addSection {
     width: 100%;
-    margin-bottom: var(--space);
+    margin-bottom: 1rem;
     margin-top: 1rem;
   }
-
-
 
   .newBlock {
     display: flex;
@@ -32,8 +30,9 @@
 
     img {
       opacity: 0.05;
-      max-width: 50%;
-      min-height: 30%;
+      max-width: 30%;
+      min-width: 30%;
+      margin: 4rem;
     }
   }
 }
@@ -58,10 +57,12 @@
   .error {
     display: flex;
     min-width: 50%;
+    max-width: 50%;
     min-height: 50%;
     flex-direction: column;
     background-color: var(--white);
     padding: 2rem;
+    border: 1px solid var(--beige-dark);
 
     .message {
       color: var(--red);

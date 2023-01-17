@@ -47,6 +47,7 @@ export default function Member({ member: {
 		console.log('save content');
 		const rollbackContent = [...content]
 		!silent && setSaving(true)
+		console.log(data);
 
 		try {
 
@@ -60,6 +61,10 @@ export default function Member({ member: {
 				headers: { 'Content-Type': 'application/json' },
 			})
 
+			if (res.status !== 200) {
+				const { error } = await res.json()
+				throw new Error(error)
+			}
 			const updatedMember = await res.json()
 			console.log(updatedMember);
 
@@ -76,20 +81,20 @@ export default function Member({ member: {
 
 	const handleBlockChange = (block) => {
 		console.log('block change', block);
-
 		handleSave(content.map((b) => b.id === block.id ? block : b))
 	}
 	const handleContentChange = (content) => {
 		handleSave(content, true)
 	}
 	const handleRemove = (id) => {
+		console.log('remove', id);
+		console.log(content);
+
 		handleSave(content.filter((block) => block.id !== id), true)
 	}
 
 	useEffect(() => setContent(contentFromProps), [contentFromProps])
 	useEffect(() => error && console.error(error), [error])
-
-	//console.log(content);
 
 	return (
 		<div className={s.container}>
@@ -144,23 +149,28 @@ export default function Member({ member: {
 						/>
 
 						{content?.filter((b) => (b.__typename === 'ImageRecord' && b.image.length === 0) || (b.__typename === 'VideoRecord' && !b.video)).map((block, idx) =>
-							block.__typename === 'ImageRecord' ?
-								<div className={s.newBlock} data-editable={JSON.stringify(block)}>
+							<div key={idx} className={s.newBlock} data-editable={JSON.stringify(block)}>
+								{block.__typename === 'ImageRecord' ?
 									<img src={'/images/noimage.svg'} />
-								</div>
-								:
-								block.__typename === 'VideoRecord' ?
-									<div className={s.newBlock} data-editable={JSON.stringify(block)}>
-										Redigera video
-									</div>
-									: null
+									:
+									block.__typename === 'VideoRecord' ?
+										<img src={'/images/novideo.svg'} />
+										: null
+								}
+							</div>
 						)}
 
 						<button
 							className={s.addSection}
 							onClick={() => handleSave([...content, { __typename: 'ImageRecord', image: [] }])}
 						>
-							Lägg till sektion
+							Lägg till bild
+						</button>
+						<button
+							className={s.addSection}
+							onClick={() => handleSave([...content, { __typename: 'VideoRecord', video: undefined }])}
+						>
+							Lägg till video
 						</button>
 					</>
 				}
@@ -170,7 +180,7 @@ export default function Member({ member: {
 				<div className={s.overlay}>
 					<div className={s.error}>
 						<h3>Det uppstod ett fel</h3>
-						<div className={s.message}>{error.message}</div>
+						<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
 						<button onClick={() => setError(undefined)}>Close</button>
 					</div>
 

@@ -17,6 +17,7 @@ fragment ForArtistFragment on ForArtistRecord {
 			... on VideoRecord {
 				__typename
 				id
+				title
 				video {
 					height
 					width

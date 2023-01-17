@@ -30,6 +30,7 @@ fragment ConsultLightFragment on ConsultRecord {
 			... on VideoRecord {
 				__typename
 				id
+				title
 				video {
 					height
 					width

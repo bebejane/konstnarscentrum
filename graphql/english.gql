@@ -24,7 +24,7 @@ query InEnglish {
 				... on VideoRecord {
 					__typename
 					id
-
+					title
 					video {
 						height
 						width

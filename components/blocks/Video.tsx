@@ -1,4 +1,4 @@
-import styles from "./Video.module.scss"
+import s from "./Video.module.scss"
 import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
@@ -9,10 +9,11 @@ export default function Video({ data, editable }) {
 	const [height, setHeight] = useState(360);
 	const { innerWidth } = useWindowSize()
 
+	useEffect(() => setHeight((ref.current?.clientWidth / 16) * 9), [innerWidth]) // Set to 16:9
+
 	if (!data.video) return null
 
 	const { provider, providerUid, title, url, thumbnailUrl } = data.video
-
 	const vimeoId = provider === 'vimeo' && url.indexOf('/') > -1 ? url.substring(url.lastIndexOf('/') + 1) : undefined
 
 	const video = provider === 'youtube' ?
@@ -26,7 +27,7 @@ export default function Video({ data, editable }) {
 			allow="autoplay; fullscreen; picture-in-picture"
 			src={`https://www.youtube.com/embed/${providerUid}?autoplay=0&origin=http://example.com`}
 			frameBorder={0}
-			data-editable={editable}
+
 		/>
 		: provider === 'vimeo' ?
 			<iframe
@@ -38,18 +39,14 @@ export default function Video({ data, editable }) {
 				frameBorder="0"
 				allow="autoplay; fullscreen; picture-in-picture"
 				allowFullScreen
-				data-editable={editable}
 			/>
 			: null;
 
-	useEffect(() => setHeight((ref.current?.clientWidth / 16) * 9), [innerWidth]) // Set to 16:9
-
+	if (!video) return null
 	return (
-		video ?
-			<section className={styles.video}>
-				{video}
-			</section>
-			:
-			<span>Video {provider} not supported!</span>
+		<section className={s.video} data-editable={editable}>
+			{video}
+			{title && <div className={s.caption}>{title}</div>}
+		</section>
 	)
 }

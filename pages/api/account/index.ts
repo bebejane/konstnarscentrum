@@ -1,13 +1,28 @@
 
 import type { NextRequest, NextResponse } from 'next/server'
-import { buildClient, buildBlockRecord } from '@datocms/cma-client'
+import { buildClient, buildBlockRecord } from '@datocms/cma-client-node'
 import withAuthentication from '/lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberDocument } from '/graphql'
-export const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL, environment: 'dev' })
+import camelToKebabCase from "camel-to-kebab";
+
+
+export const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL, environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main' })
 
 const imageBlockId = '1349197'
 const videoBlockId = '2021689'
+
+const removeUndefined = (obj: any) => {
+  if (!obj) return {}
+  Object.keys(obj).forEach(k => obj[k] === undefined && delete obj[k])
+  return obj
+}
+
+const convertCase = (obj) => {
+  const newObj = {}
+  Object.keys(obj).forEach(k => newObj[camelToKebabCase(k)] = obj[k])
+  return newObj;
+}
 
 export default withAuthentication(async (req, res, session) => {
 
@@ -30,7 +45,6 @@ export default withAuthentication(async (req, res, session) => {
   if (!record)
     return res.status(500).json({ error: `User with id "${id}" not found!` })
 
-  //console.log(JSON.stringify(req.body, null, 2));
   const images = []
   const newRecord = {
     first_name: firstName,
@@ -48,7 +62,10 @@ export default withAuthentication(async (req, res, session) => {
         item_type: { type: 'item_type', id: block.__typename === 'ImageRecord' ? imageBlockId : videoBlockId },
         ...{
           ...block,
-          image: block.image?.map((i) => {
+          __typename: undefined,
+          type: undefined,
+          index: undefined,
+          image: block.__typename === 'ImageRecord' ? block.image?.map((i) => {
             images.push(i)
             return {
               title: i.title,
@@ -62,15 +79,25 @@ export default withAuthentication(async (req, res, session) => {
                 },
               },
             }
-          }),
-          type: undefined,
-          index: undefined,
-          __typename: undefined,
+          }) : undefined,
+          video: block.video ? {
+            ...block.video,
+            __typename: undefined,
+            provider: 'youtube',
+            provider_uid: 'youtube',
+            providerUid: undefined,
+            thumbnailUrl: undefined,
+            width: 0,
+            height: 0,
+            thumbnail_url: 'https://localhost:3000',
+          } : undefined
         },
       })
     )
       : undefined
   }
+
+  //  console.log(JSON.stringify(newRecord, null, 2))
 
   try {
     Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
@@ -85,9 +112,8 @@ export default withAuthentication(async (req, res, session) => {
 
   } catch (err) {
     const apiError = err.response.body.data;
-    const error = apiError//apiError.map(({ attributes: { details: { field, code, messages } } }) => messages.join('. ')).join(', ')
-    console.log('ERROR');
-    console.error(JSON.stringify(error, null, 2));
+    const error = apiError.map(({ attributes: { details: { field, code, messages, message, errors } } }) => `${messages?.join('. ') || message}: ${Array.isArray(errors) ? errors?.join('. ') : errors} (${code})`)
+    //console.error(JSON.stringify(apiError, null, 2));
     return res.status(500).json({ error })
   }
 

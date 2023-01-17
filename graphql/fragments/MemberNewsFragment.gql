@@ -41,6 +41,7 @@ fragment MemberNewsFragment on MemberNewsRecord {
 			... on VideoRecord {
 				__typename
 				id
+				title
 				video {
 					height
 					width

@@ -37,11 +37,14 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
       const height = target.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom))
       const width = target.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight))
       const bounds = target.getBoundingClientRect();
+      const offsetLeft = parseInt(getComputedStyle(target).paddingLeft)
+      const offsetTop = parseInt(getComputedStyle(target).paddingTop)
+
       const padding = 20;
 
       setEditBoxStyle({
-        top: (bounds.top - padding) + window.scrollY - (isTablet || isMobile ? 0 : 99),
-        left: bounds.left - padding,
+        top: (bounds.top - padding) + offsetTop + window.scrollY - (isTablet || isMobile ? 0 : 99),
+        left: bounds.left - padding + offsetLeft,
         width: width + (padding * 2),
         height: height + (padding * 2)
       })
@@ -91,6 +94,8 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
 
   const deleteBlock = (e, editable: any) => {
     e.stopPropagation()
+    console.log(editable);
+
     onRemove(editable.id)
   }
 

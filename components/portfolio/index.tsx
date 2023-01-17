@@ -40,7 +40,11 @@ export default function Portfolio({ onSave, onClose, onRemove, content, block, s
         />
         :
         block?.__typename === 'VideoRecord' ?
-          <VideoBlockEditor block={block} onClose={handleClose} onChange={handleChange} />
+          <VideoBlockEditor
+            block={block}
+            onClose={handleClose}
+            onChange={handleChange}
+          />
           : null
       }
     </>

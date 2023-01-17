@@ -6,7 +6,7 @@ import { PortfolioLoader } from '/components'
 export type Props = {
   onClose: () => void
   onSave: (image?: FileField) => void
-  onBack: () => void
+  onBack?: () => void
   header: string
   save: string
   saveDisabled: boolean
@@ -28,7 +28,7 @@ export default function PortfolioContent({ header, save, saveDisabled, children,
         </div>
         <div className={cn(s.bar, s.bottom)}>
           <header>
-            {onBack && <button type="button" onClick={() => onBack()}>Tillbaka</button>}
+            {onBack && <button type="button" onClick={() => onBack?.()}>Tillbaka</button>}
           </header>
           <button type="button" disabled={saveDisabled} onClick={() => onSave()}>{save}</button>
         </div>
