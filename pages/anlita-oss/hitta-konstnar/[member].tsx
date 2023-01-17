@@ -39,15 +39,18 @@ export default function Member({ member: {
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
-	const handleSave = useCallback(async (data, silent = false) => {
-		silent = false
+	const handleSave = useCallback(async (data) => {
+
 		if (status !== 'authenticated')
 			return
 
 		console.log('save content');
-		const rollbackContent = [...content]
-		!silent && setSaving(true)
 		console.log(data);
+
+		setSaving(true)
+		setBlock(undefined)
+
+		const rollbackContent = [...content]
 
 		try {
 
@@ -73,9 +76,10 @@ export default function Member({ member: {
 			console.error(err)
 			setContent(rollbackContent)
 			setError(err)
+
 		}
 
-		!silent && setSaving(false)
+		setSaving(false)
 
 	}, [status, content, member])
 
@@ -84,13 +88,10 @@ export default function Member({ member: {
 		handleSave(content.map((b) => b.id === block.id ? block : b))
 	}
 	const handleContentChange = (content) => {
-		handleSave(content, true)
+		handleSave(content)
 	}
 	const handleRemove = (id) => {
-		console.log('remove', id);
-		console.log(content);
-
-		handleSave(content.filter((block) => block.id !== id), true)
+		handleSave(content.filter((block) => block.id !== id))
 	}
 
 	useEffect(() => setContent(contentFromProps), [contentFromProps])
@@ -133,62 +134,33 @@ export default function Member({ member: {
 							index: idx
 						}} />
 				)}
-				{isEditable && !saving &&
-					<>
-
-						<Portfolio
-							show={block !== undefined}
-							block={block}
-							setBlock={setBlock}
-							content={content || contentFromProps}
-							onContentChange={handleContentChange}
-							onChange={handleBlockChange}
-							onRemove={handleRemove}
-							onClose={() => setBlock(undefined)}
-							onSave={() => { }}
-						/>
-
-						{content?.filter((b) => (b.__typename === 'ImageRecord' && b.image.length === 0) || (b.__typename === 'VideoRecord' && !b.video)).map((block, idx) =>
-							<div key={idx} className={s.newBlock} data-editable={JSON.stringify(block)}>
-								{block.__typename === 'ImageRecord' ?
-									<img src={'/images/noimage.svg'} />
-									:
-									block.__typename === 'VideoRecord' ?
-										<img src={'/images/novideo.svg'} />
-										: null
-								}
-							</div>
-						)}
-
-						<button
-							className={s.addSection}
-							onClick={() => handleSave([...content, { __typename: 'ImageRecord', image: [] }])}
-						>
-							Lägg till bild
-						</button>
-						<button
-							className={s.addSection}
-							onClick={() => handleSave([...content, { __typename: 'VideoRecord', video: undefined }])}
-						>
-							Lägg till video
-						</button>
-					</>
+				{isEditable &&
+					<Portfolio
+						show={block !== undefined}
+						block={block}
+						setBlock={setBlock}
+						content={content || contentFromProps}
+						onContentChange={handleContentChange}
+						onChange={handleBlockChange}
+						onRemove={handleRemove}
+						onClose={() => setBlock(undefined)}
+						saving={saving}
+					/>
 				}
 			</Article>
 
 			{error &&
-				<div className={s.overlay}>
+				<div className={cn(s.overlay, s.transparent)}>
 					<div className={s.error}>
 						<h3>Det uppstod ett fel</h3>
 						<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
 						<button onClick={() => setError(undefined)}>Close</button>
 					</div>
-
 				</div>
 			}
 
 			{saving &&
-				<div className={cn(s.overlay, s.transparent)}>
+				<div className={cn(s.overlay)}>
 					<div className={s.loader}>
 						<Loader />
 					</div>

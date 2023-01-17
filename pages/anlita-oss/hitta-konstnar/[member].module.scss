@@ -9,32 +9,6 @@
   h2 {
     padding-top: 0.8em;
   }
-
-  .addSection {
-    width: 100%;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-
-  .newBlock {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 100%;
-    padding: 0rem;
-    margin-bottom: 2rem;
-    min-height: 10rem;
-    margin-right: calc(var(--full-margin));
-    margin-left: calc(var(--full-margin));
-    background-color: var(--beige-light);
-
-    img {
-      opacity: 0.05;
-      max-width: 30%;
-      min-width: 30%;
-      margin: 4rem;
-    }
-  }
 }
 
 .overlay {
@@ -49,6 +23,7 @@
   color: var(--black);
   align-items: center;
   justify-content: center;
+  background-color: rgba(255, 255, 255, 0.6);
 
   .transparent {
     background-color: transparent !important;
@@ -71,15 +46,4 @@
     }
   }
 
-  .loader {
-    position: absolute;
-    top: var(--navbar-height);
-    right: 0;
-    margin: calc(var(--outer-margin) *2);
-    margin-top: 0.2rem;
-  }
-
-  button {}
 }
-
-#saving-portfolio {}

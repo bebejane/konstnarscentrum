@@ -37,8 +37,8 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
       const height = target.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom))
       const width = target.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight))
       const bounds = target.getBoundingClientRect();
-      const offsetLeft = parseInt(getComputedStyle(target).paddingLeft)
-      const offsetTop = parseInt(getComputedStyle(target).paddingTop)
+      const offsetLeft = parseInt(computedStyle.paddingLeft)
+      const offsetTop = parseInt(computedStyle.paddingTop)
 
       const padding = 20;
 
@@ -62,12 +62,14 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
 
     editables.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter)
+      //el.addEventListener('mousemove', handleMouseEnter)
       editBox.addEventListener('mouseleave', handleMouseLeave)
     })
 
     return () => {
       editables.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter)
+        //el.removeEventListener('mousemove', handleMouseEnter)
         editBox.removeEventListener('mouseleave', handleMouseLeave)
       })
     }
@@ -93,9 +95,6 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
   }
 
   const deleteBlock = (e, editable: any) => {
-    e.stopPropagation()
-    console.log(editable);
-
     onRemove(editable.id)
   }
 

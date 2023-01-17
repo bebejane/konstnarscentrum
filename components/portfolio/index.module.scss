@@ -1,0 +1,33 @@
+.newBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 100%;
+  padding: 0rem;
+  margin-bottom: 2rem;
+  min-height: 10rem;
+  margin-right: calc(var(--full-margin));
+  margin-left: calc(var(--full-margin));
+  background-color: var(--beige-light);
+
+  img {
+    opacity: 0.05;
+    max-width: 30%;
+    min-width: 30%;
+    margin: 4rem;
+  }
+}
+
+.addButtons {
+  margin-bottom: var(--space);
+
+  buttont {
+    width: 100%;
+  }
+
+  .addSection {
+    width: 100%;
+    margin-top: 1rem;
+
+  }
+}
