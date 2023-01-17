@@ -1,11 +1,13 @@
 import s from "./[member].module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection, EditBox } from "/components";
+import { Article, Block, MetaSection, RelatedSection, EditBox, EditBlock, Portfolio, Loader } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
+
 import useStore from "/lib/store";
 
 export type Props = {
@@ -30,49 +32,64 @@ export default function Member({ member: {
 }, member, related }: Props) {
 
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
-	const [content, setContent] = useState<MemberModelContentField[] | undefined>()
+	const [content, setContent] = useState<MemberModelContentField[] | undefined>(contentFromProps)
+	const [block, setBlock] = useState<ImageRecord | VideoRecord | undefined>()
+	const [error, setError] = useState<Error | undefined>()//(new Error('lots of errors'))
+	const [saving, setSaving] = useState(false)
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
-	const handleSave = useCallback(async () => {
-
-		if (JSON.stringify(member.content) === JSON.stringify(content) || status !== 'authenticated')
+	const handleSave = useCallback(async (data, silent = false) => {
+		silent = false
+		if (status !== 'authenticated')
 			return
 
+		console.log('save content');
+		const rollbackContent = [...content]
+		!silent && setSaving(true)
+
 		try {
+
+			setContent(data)
 			const res = await fetch('/api/account', {
 				method: 'POST',
 				body: JSON.stringify({
 					id: member.id,
-					content
+					content: data
 				}),
 				headers: { 'Content-Type': 'application/json' },
 			})
-			const newMember = await res.json()
-			console.log(newMember);
+
+			const updatedMember = await res.json()
+			console.log(updatedMember);
+
+			setContent(updatedMember.content)
 		} catch (err) {
-			console.log(err);
+			console.error(err)
+			setContent(rollbackContent)
+			setError(err)
 		}
 
-	}, [status, content, member,])
+		!silent && setSaving(false)
 
+	}, [status, content, member])
 
-	useEffect(() => {
-		setContent(contentFromProps)
-	}, [contentFromProps])
+	const handleBlockChange = (block) => {
+		console.log('block change', block);
 
+		handleSave(content.map((b) => b.id === block.id ? block : b))
+	}
+	const handleContentChange = (content) => {
+		handleSave(content, true)
+	}
+	const handleRemove = (id) => {
+		handleSave(content.filter((block) => block.id !== id), true)
+	}
 
-	useEffect(() => {
-		if (!content) return
-		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
-		setImages(images)
-	}, [content, image, setImages])
+	useEffect(() => setContent(contentFromProps), [contentFromProps])
+	useEffect(() => error && console.error(error), [error])
 
-	useEffect(() => {
-		if (!content) return
-		handleSave()
-	}, [content, handleSave])
-
+	//console.log(content);
 
 	return (
 		<div className={s.container}>
@@ -98,7 +115,7 @@ export default function Member({ member: {
 				/>
 
 				<h2 className="noPadding">Utvalda verk</h2>
-				{content?.map((block, idx) =>
+				{(content)?.map((block, idx) =>
 					<Block
 						key={`${id}-${idx}`}
 						data={block}
@@ -109,24 +126,65 @@ export default function Member({ member: {
 							id: block.id,
 							type: block.__typename,
 							index: idx
-						}}
-					/>
+						}} />
 				)}
+				{isEditable && !saving &&
+					<>
+
+						<Portfolio
+							show={block !== undefined}
+							block={block}
+							setBlock={setBlock}
+							content={content || contentFromProps}
+							onContentChange={handleContentChange}
+							onChange={handleBlockChange}
+							onRemove={handleRemove}
+							onClose={() => setBlock(undefined)}
+							onSave={() => { }}
+						/>
+
+						{content?.filter((b) => (b.__typename === 'ImageRecord' && b.image.length === 0) || (b.__typename === 'VideoRecord' && !b.video)).map((block, idx) =>
+							block.__typename === 'ImageRecord' ?
+								<div className={s.newBlock} data-editable={JSON.stringify(block)}>
+									<img src={'/images/noimage.svg'} />
+								</div>
+								:
+								block.__typename === 'VideoRecord' ?
+									<div className={s.newBlock} data-editable={JSON.stringify(block)}>
+										Redigera video
+									</div>
+									: null
+						)}
+
+						<button
+							className={s.addSection}
+							onClick={() => handleSave([...content, { __typename: 'ImageRecord', image: [] }])}
+						>
+							Lägg till sektion
+						</button>
+					</>
+				}
 			</Article>
 
-			{isEditable &&
-				<>
-					<EditBox
-						onChange={(content) => setContent(content)}
-						onDelete={(id) => setContent(content.filter((block) => block.id !== id))}
-						blocks={content}
-					/>
+			{error &&
+				<div className={s.overlay}>
+					<div className={s.error}>
+						<h3>Det uppstod ett fel</h3>
+						<div className={s.message}>{error.message}</div>
+						<button onClick={() => setError(undefined)}>Close</button>
+					</div>
 
-					<button className={s.addSection} onClick={() => setContent([...content, { __typename: 'ImageRecord', image: [] }])}>
-						Lägg till sektion
-					</button>
-				</>
+				</div>
 			}
+
+			{saving &&
+				<div className={cn(s.overlay, s.transparent)}>
+					<div className={s.loader}>
+						<Loader />
+					</div>
+				</div>
+			}
+
 			<RelatedSection
 				key={`${id}-related`}
 				title="Upptäck fler konstnärer"

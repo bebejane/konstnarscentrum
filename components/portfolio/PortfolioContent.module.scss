@@ -11,7 +11,8 @@
   background-color: rgba(0, 0, 0, 0.8);
   padding: var(--outer-margin);
 
-  form {
+  >div {
+    position: relative;
     display: flex;
     flex-direction: column;
     color: var(--black);
@@ -35,6 +36,7 @@
 
       header {
         flex: 1 1 auto;
+
         span {
           padding-left: 1.5em;
         }
@@ -133,6 +135,7 @@
 
         .meta {
           margin-top: var(--outer-margin);
+
           input {
             font-size: 1rem;
             padding: 0.2rem;

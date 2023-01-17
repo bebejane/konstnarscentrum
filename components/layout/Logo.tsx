@@ -4,7 +4,7 @@ import { useScrollInfo } from 'dato-nextjs-utils/hooks'
 import { isServer, randomInt } from '/lib/utils'
 import Link from 'next/link'
 import { useStore } from '/lib/store'
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
@@ -124,7 +124,7 @@ export default function Logo({ }: Props) {
   const regionPerc = (pageRegion?.name.length / letters.length)
   const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
 
-  function handleMouseOver(e) {
+  function handleMouseOver(e: React.MouseEvent<HTMLSpanElement>): void {
     const { type, target } = e;
     const nodes = target.parentNode.childNodes
     const id = target.parentNode.id

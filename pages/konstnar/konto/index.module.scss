@@ -1,14 +1,16 @@
 .container {
 
+  input[type="text"],
+  textarea,
+  select,
+  button {
+    width: 100%;
+  }
+
   form {
     margin-bottom: 2rem;
 
-    input[type="text"],
-    textarea,
-    select,
-    button {
-      width: 100%;
-    }
+
 
     button {
       margin-top: 2rem;
@@ -48,11 +50,15 @@
     }
   }
 
+  .portfolioButton {
+    display: block;
+    margin-bottom: 1rem;
+  }
+
   .error {
     color: red;
     margin-top: -0.8rem;
     margin-bottom: 1rem;
     font-size: 0.7em;
   }
-
 }

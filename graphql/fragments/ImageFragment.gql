@@ -3,6 +3,7 @@ fragment ImageFragment on FileField {
 	mimeType
 	url
 	title
+	alt
 	responsiveImage(imgixParams: { auto: format }) {
 		src
 		width

@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { RevealText } from "/components";
+import { RevealText, Loader } from "/components";
 
 export type Props = {
 	csrfToken: string,
@@ -48,26 +48,18 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		})
-			.then(async (res) => setMember((await res.json()).member))
+			.then(async (res) => setMember((await res.json())))
 			.catch((err) => setError(err))
 			.finally(() => setSaving(false))
 	}
 
 	useEffect(() => {
-		Object.keys(errors).forEach(k => {
-
-		})
 
 	}, [formState, errors])
 
 	return (
 		<div className={s.container}>
 			<h1><RevealText>Konto</RevealText></h1>
-			<p>
-				<Link href={recordToSlug(member)}>
-					Gå till din portfolio
-				</Link>
-			</p>
 			<h3>Uppdatera uppgifter</h3>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<input
@@ -172,9 +164,12 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 					)}
 				</div>
 				<ErrorMessage id="memberCategory" errors={errors} />
-				<button disabled={saving}>Spara</button>
+				<button disabled={saving}>{saving ? <Loader /> : 'Spara'}</button>
 			</form >
 			<h3>Övrigt</h3>
+			<Link href={recordToSlug(member)} className={s.portfolioButton}>
+				<button>Gå till din portfolio</button>
+			</Link>
 			<SignOut />
 		</div >
 	);
@@ -191,11 +186,14 @@ const ErrorMessage = ({ errors, id }) => {
 	)
 }
 
-
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [AllMemberCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 	const res = await getCsrfToken(context)
 	const csrfToken = res
 	const session = await getSession(context);
+
+	if (!session)
+		return { redirect: { destination: '/konstnar/konto/logga-in', permanent: false } }
+
 	const { member } = await apiQuery(MemberDocument, { variables: { email: session.user.email } })
 
 	if (!member)

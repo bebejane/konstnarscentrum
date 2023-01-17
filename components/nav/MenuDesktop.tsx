@@ -9,6 +9,7 @@ import { RegionSelector, RegionLink, User } from '/components'
 import Link from 'next/link'
 import { regions } from '/lib/region'
 import { useTheme } from 'next-themes'
+import { isServer } from '/lib/utils'
 
 export type MenuDesktopProps = { items: Menu, home: boolean }
 
@@ -64,6 +65,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		setSelected(undefined)
 		setShowMenu(true)
 	}, [router])
+
 
 	return (
 		<>

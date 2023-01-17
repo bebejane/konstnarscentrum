@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useMediaQuery } from 'usehooks-ts'
+import { useMediaQuery, useWindowSize } from 'usehooks-ts'
 import { breakpoints } from '/lib/utils'
 
 export default function useDevice() {
 
-  const mobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
-  const desktop = useMediaQuery(`(max-width: ${breakpoints.desktop}px)`)
+  const mobile = !useMediaQuery(`(min-width: ${breakpoints.mobile}px)`)
+  const desktop = !useMediaQuery(`(min-width: ${breakpoints.desktop}px)`)
+  const tablet = !useMediaQuery(`(min-width: ${breakpoints.tablet}px)`)
+  const { width, height } = useWindowSize()
   const [isMobile, setIsMobile] = useState(false)
   const [isDesktop, setIsDesktop] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
 
   useEffect(() => {
     setIsMobile(mobile)
-    setIsDesktop(desktop)
-  }, [mobile, desktop])
+    setIsDesktop(!mobile && !tablet ? true : false)
+    setIsTablet(desktop && !mobile ? true : false)
+  }, [mobile, desktop, tablet, width, height])
 
-  return { isMobile, isDesktop }
+  return { isMobile, isDesktop, isTablet }
 }
 

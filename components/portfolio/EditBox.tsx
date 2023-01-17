@@ -2,14 +2,21 @@ import s from "./EditBox.module.scss";
 import cn from 'classnames'
 import { useEffect, useState } from "react";
 import { arrayMoveImmutable } from 'array-move';
-import { PortfolioEditor } from "/components";
-import EditIcon from '/public/images/edit.svg'
+import useDevice from "/lib/hooks/useDevice";
 
-export default function EditBox({ onChange, onDelete, blocks }) {
+type EditBoxProps = {
+  onContentChange: (content: MemberModelContentField[]) => void,
+  onSelect: (image: MemberModelContentField) => void,
+  onRemove: (id: string) => void,
+  content: MemberModelContentField[]
+}
+
+export default function EditBox({ onSelect, onContentChange, onRemove, content }: EditBoxProps) {
 
   const [editBoxStyle, setEditBoxStyle] = useState<any | undefined>()
   const [editable, setEditable] = useState<any | undefined>()
-  const [images, setImages] = useState<FileField[] | undefined>()
+  const [block, setBlock] = useState<MemberModelContentField | undefined>()
+  const { isDesktop, isTablet, isMobile } = useDevice()
 
   const findElement = (id) => {
     const editables = Array.from(document.querySelectorAll('[data-editable]')) as HTMLElement[]
@@ -29,14 +36,14 @@ export default function EditBox({ onChange, onDelete, blocks }) {
       const computedStyle = getComputedStyle(target)
       const height = target.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom))
       const width = target.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight))
-
       const bounds = target.getBoundingClientRect();
+      const padding = 20;
 
       setEditBoxStyle({
-        top: bounds.top + window.scrollY - 99,
-        left: bounds.left,
-        width,
-        height
+        top: (bounds.top - padding) + window.scrollY - (isTablet || isMobile ? 0 : 99),
+        left: bounds.left - padding,
+        width: width + (padding * 2),
+        height: height + (padding * 2)
       })
 
       setEditable(JSON.parse(target.dataset.editable))
@@ -70,10 +77,10 @@ export default function EditBox({ onChange, onDelete, blocks }) {
     if (!editable) return
 
     const from = parseInt(editable.index)
-    const to = up ? (from - 1 >= 0 ? from - 1 : 0) : (from + 1) < blocks.length - 1 ? (from + 1) : blocks.length - 1
-    const newBlocks = arrayMoveImmutable(blocks, from, to)
+    const to = up ? (from - 1 >= 0 ? from - 1 : 0) : (from + 1) < content.length - 1 ? (from + 1) : content.length - 1
+    const newContent = arrayMoveImmutable(content, from, to)
 
-    onChange(newBlocks)
+    onContentChange(newContent)
     reset()
 
     setTimeout(() => {
@@ -84,44 +91,43 @@ export default function EditBox({ onChange, onDelete, blocks }) {
 
   const deleteBlock = (e, editable: any) => {
     e.stopPropagation()
-    onDelete(editable.id)
+    onRemove(editable.id)
   }
 
-  useEffect(() => { init() }, [blocks])
+  useEffect(() => { init() }, [content, isDesktop])
+  useEffect(() => { onSelect(block) }, [block])
 
   return (
-    <>
-      <div
-        id="edit-box"
-        className={cn(s.editBox, editBoxStyle && s.show)}
-        style={editBoxStyle}
-        onClick={() => setImages(editable.image)}
-      >
-        <div className={s.toolbar}>
-          <div className={s.edit}>
-            <button>Redigera</button>
-            <button className={s.delete} onClick={(e) => deleteBlock(e, editable)}>Ta bort</button>
-          </div>
-          {editable?.index !== undefined &&
-            <div className={cn(s.order)}>
-              <button
-                className={s.up}
-                disabled={editable?.index === 0}
-                onClick={(e) => moveBlock(e, editable, true)}
-              >Upp</button>
-              <button
-                className={s.down}
-                disabled={editable?.index === blocks.length - 1}
-                onClick={(e) => moveBlock(e, editable, false)}
-              >Ner</button>
-            </div>
-          }
+    <div
+      id="edit-box"
+      className={cn(s.editBox, editBoxStyle && s.show)}
+      style={editBoxStyle}
+    >
+      <div className={s.toolbar}>
+        <div className={s.edit}>
+          <button onClick={() => setBlock(editable as MemberModelContentField)}>
+            Redigera
+          </button>
+          <button className={s.delete} onClick={(e) => { deleteBlock(e, editable); setEditBoxStyle(undefined) }}>
+            Ta bort
+          </button>
         </div>
+        {editable?.index !== undefined &&
+          <div className={cn(s.order)}>
+            <button
+              className={s.up}
+              disabled={editable?.index === 0}
+              onClick={(e) => moveBlock(e, editable, true)}
+            >Upp</button>
+            <button
+              className={s.down}
+              disabled={editable?.index === content.length - 1}
+              onClick={(e) => moveBlock(e, editable, false)}
+            >Ner</button>
+          </div>
+        }
       </div>
-      {
-        images &&
-        <PortfolioEditor images={images} onClose={() => setImages(undefined)} onSave={() => { }} />
-      }
-    </>
+    </div>
+
   )
 }

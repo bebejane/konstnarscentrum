@@ -100,6 +100,27 @@ query AllPastMemberNews($first: IntType = 10, $skip: IntType = 0, $regionId: Ite
 	}
 }
 
+query MemberImages($email: String!) {
+	member(filter: { email: { eq: $email } }) {
+		content {
+			... on ImageRecord {
+				image {
+					...ImageFragment
+				}
+				thumb: image {
+					...ImageThumbnailFragment
+				}
+			}
+		}
+	}
+	uploads: allUploads(filter: { tags: { anyIn: [$email] } }) {
+		...ImageFragment
+	}
+	thumbs: allUploads(filter: { tags: { anyIn: [$email] } }) {
+		...ImageThumbnailFragment
+	}
+}
+
 query AllPresentMemberNews(
 	$first: IntType = 100
 	$skip: IntType = 0

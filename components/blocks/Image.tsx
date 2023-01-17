@@ -13,6 +13,9 @@ export type ImageBlockProps = {
 
 export default function Image({ id, data: { image: images }, onClick, editable }: ImageBlockProps) {
 
+	if (!images || !images.length)
+		return null
+
 	const isSingle = images.length === 1
 	const isDouble = images.length === 2
 	const isGallery = images.length > 2;

@@ -3,7 +3,7 @@ import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
 
-export default function Video({ data }) {
+export default function Video({ data, editable }) {
 
 	const ref = useRef()
 	const [height, setHeight] = useState(360);
@@ -25,7 +25,8 @@ export default function Video({ data }) {
 			allowFullScreen
 			allow="autoplay; fullscreen; picture-in-picture"
 			src={`https://www.youtube.com/embed/${providerUid}?autoplay=0&origin=http://example.com`}
-			frameBorder="0"
+			frameBorder={0}
+			data-editable={editable}
 		/>
 		: provider === 'vimeo' ?
 			<iframe
@@ -37,6 +38,7 @@ export default function Video({ data }) {
 				frameBorder="0"
 				allow="autoplay; fullscreen; picture-in-picture"
 				allowFullScreen
+				data-editable={editable}
 			/>
 			: null;
 

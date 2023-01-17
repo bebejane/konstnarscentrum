@@ -1,1 +1,13 @@
-.container {}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

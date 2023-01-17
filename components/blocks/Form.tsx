@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { buildClient } from '@datocms/cma-client-browser';
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
-import { Upload } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
+import { Loader } from '/components';
 
 const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
 
@@ -106,7 +106,7 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 					}
 
 					<button type="submit" disabled={loading}>
-						{loading ? 'Skickar...' : 'Skicka'}
+						{loading ? <Loader /> : 'Skicka'}
 					</button>
 
 				</form>

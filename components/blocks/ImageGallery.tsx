@@ -46,7 +46,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				)}
 			</SwiperReact>
 			{images.length > 3 &&
-				<div className={s.next}>→</div>
+				<div className={s.next} onClick={() => swiperRef.current?.slideNext()}>→</div>
 			}
 		</div>
 	)
