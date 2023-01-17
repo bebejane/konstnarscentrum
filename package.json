@@ -6,6 +6,7 @@
 		"dev": "npm run dev:watch",
 		"dev:watch": "LOG_GRAPHQL=false next dev & npm run barrel:watch & graphql-codegen --watch",
 		"dev:emails": "npx mailing",
+		"dev:portfolio": "GRAPHQL_ENVIRONMENT=dev NEXT_PUBLIC_GRAPHQL_ENVIRONMENT=dev next dev & npm run barrel:watch & graphql-codegen --watch",
 		"prebuild": "node ./prebuild",
 		"build": "npm run prebuild && next build",
 		"codegen": "graphql-codegen",
