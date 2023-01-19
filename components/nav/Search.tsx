@@ -63,7 +63,7 @@ export default function Search({ }: Props) {
   }, [router])
 
   useEffect(() => {
-    setShowSearch(query.length > 0)
+    setShowSearch(query?.length > 0)
   }, [query])
 
   return (
