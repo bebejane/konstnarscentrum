@@ -9,6 +9,7 @@ import { useRouter } from 'next/router'
 import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
 import { regions } from '/lib/region'
+import { useTheme } from 'next-themes'
 
 export type Props = {
 
@@ -19,13 +20,14 @@ const letters = ['K', 'O', 'N', 'S', 'T', 'N', 'Ä', 'R', 'S', 'C', 'E', 'N', 'T
 export default function Logo({ }: Props) {
 
   const router = useRouter()
+  const { theme } = useTheme()
   const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
   const ref = useRef<HTMLDivElement | null>(null)
   const region = useRegion()
   const pageRegion = regions.find(r => router.asPath.startsWith(`/${r.slug}`))
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
   const { isMobile } = useDevice()
-  const { scrolledPosition, viewportHeight, documentHeight, isScrolling } = useScrollInfo()
+  const { scrolledPosition, viewportHeight, documentHeight, isScrolling, isPageBottom } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
   const isFixed = isHome ? false : atBottom ? false : true
@@ -137,7 +139,7 @@ export default function Logo({ }: Props) {
 
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
-      <div className={s.back}></div>
+      <div className={cn(s.back, isPageBottom && s[theme])}></div>
       <div className={s.logo}>
         <div className={s.horizontal}>
           <Link id="horizontal" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>

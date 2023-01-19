@@ -6,6 +6,7 @@ export interface StoreState {
   showMenu: boolean,
   showSubMenu: boolean,
   showMenuMobile: boolean,
+  showSearch: boolean,
   images: FileField[],
   imageId: string,
   darkMode: boolean,
@@ -16,13 +17,16 @@ export interface StoreState {
   setInvertedMenu: (invetedMenu: boolean) => void,
   setRegion: (region: Region | undefined) => void,
   setImages: (images: FileField[] | undefined) => void
-  setImageId: (imageId: string | undefined) => void
+  setImageId: (imageId: string | undefined) => void,
+  setShowSearch: (showSearch: boolean) => void
 }
+
 
 const useStore = create<StoreState>((set) => ({
   showMenu: true,
   showSubMenu: false,
   showMenuMobile: false,
+  showSearch: false,
   region: undefined,
   images: [],
   imageId: undefined,
@@ -67,7 +71,13 @@ const useStore = create<StoreState>((set) => ({
     set((state) => ({
       invertedMenu
     })
+    ),
+  setShowSearch: (showSearch: boolean) =>
+    set((state) => ({
+      showSearch
+    })
     )
+
 }));
 
 export default useStore;

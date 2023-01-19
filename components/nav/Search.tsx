@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Loader from '/components/common/Loader'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
+import useStore from '/lib/store'
 
 export type Props = {
 
@@ -16,7 +17,8 @@ export type Props = {
 export default function Search({ }: Props) {
 
   const router = useRouter()
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState<boolean>(false)
+  const [showSearch, setShowSearch] = useStore((state) => [state.showSearch, state.setShowSearch])
   const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
@@ -49,15 +51,20 @@ export default function Search({ }: Props) {
 
   useEffect(() => {
     if (open) {
-      setQuery('')
-      setResults(undefined)
       ref.current?.focus()
+    } else {
+      setResults(undefined)
+      setQuery('')
     }
   }, [open])
 
   useEffect(() => {
     setOpen(false)
   }, [router])
+
+  useEffect(() => {
+    setShowSearch(query.length > 0)
+  }, [query])
 
   return (
     <>

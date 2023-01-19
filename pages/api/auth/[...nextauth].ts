@@ -40,8 +40,8 @@ export const authOptions: NextAuthOptions = {
           const user = await findUser(email)
 
           if (!user) return null
-
-          const checkPassword = true//await comparePassword(password, user.password);
+          const isDev = process.env.GRAPHQL_ENVIRONMENT === 'dev'
+          const checkPassword = isDev ? true : await comparePassword(password, user.password);
 
           if (!checkPassword) {
             console.error('not a valid password!')

@@ -1,6 +1,7 @@
 import s from './Breadcrumbs.module.scss'
 import cn from 'classnames'
 import { usePage } from '/lib/context/page';
+import useStore from '/lib/store';
 import { RegionLink } from '/components'
 import React from 'react';
 
@@ -12,7 +13,9 @@ export type Props = {
 export default function Breadcrumbs({ show }: Props) {
 
   const page = usePage()
-  if (!page.crumbs)
+  const [showSearch] = useStore((state) => [state.showSearch])
+
+  if (!page.crumbs || showSearch)
     return null
 
   const crumbs = [{ slug: '', title: 'Hem', regional: true }, ...page.crumbs]
