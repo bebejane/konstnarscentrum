@@ -1,8 +1,8 @@
 import s from "./VideoBlockEditor.module.scss";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { PortfolioContent } from "/components";
 import YouTube from 'react-youtube';
-import { isValidUrl } from "is-youtube-url";
+import Vimeo from '@u-wave/react-vimeo'
 
 export type Props = {
   block: VideoRecord
@@ -10,47 +10,84 @@ export type Props = {
   onChange: (video: VideoRecord) => void
 }
 
+const providers = ['youtube', 'vimeo']
+
 export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
 
   const { video, id, title } = block
+  const [videoData, setVideoData] = useState(video)
   const [videoUrl, setVideoUrl] = useState(video?.url)
   const [titleText, setTitleText] = useState(title)
-  const [youtubeId, setYoutubeId] = useState<string | undefined>()
-  const [error, setError] = useState<string | undefined>()
+  const [providerUid, setProviderUid] = useState<string | undefined>()
+  const [error, setError] = useState<Error | undefined>()
 
-  const handleChange = ({ target: { value } }) => {
-
-    setVideoUrl(value)
+  const parseVideoUrl = useCallback((videoUrl: string): any => {
 
     try {
-      if (!isValidUrl(value))
-        throw 'not valid'
+      let u: URL;
 
-      const u = new URL(value)
-      const id = u.searchParams.get('v')
-      setYoutubeId(id)
+      try {
+        u = new URL(videoUrl)
+      } catch (err) {
+        throw new Error('URL är ej giltig...')
+      }
 
-      setError(undefined)
+      if (!providers.find(provider => u.hostname.indexOf(provider) > -1))
+        throw new Error('URL är ej giltig...')
+      if (u.hostname.indexOf('youtube') > -1) {
+        if (!u.searchParams.get('v'))
+          throw new Error('Youtube URL är ej giltig...')
+      }
+      if (u.hostname.indexOf('vimeo') > -1) {
+        if (isNaN(parseInt(u.pathname.slice(1))))
+          throw new Error('Vimeo URL är ej giltig...')
+      }
+      const url = u.href;
+      const title = titleText
+      const provider = u.hostname.indexOf('youtube') > -1 ? 'youtube' : 'vimeo'
+      const providerUid = u.hostname.indexOf('youtube') > -1 ? u.searchParams.get('v') : u.pathname.slice(1);
+
+      return {
+        url,
+        title,
+        provider,
+        providerUid,
+        height: undefined,
+        width: undefined,
+        thumbnailUrl: undefined
+      }
+
 
     } catch (err) {
-      setError('Url är ej en giltig youtube url...')
+      setVideoData(undefined)
+      throw new Error(err)
     }
-  }
-  const handleSave = () => {
-    onChange({
-      ...block,
-      video: {
-        url: videoUrl,
-        title: titleText,
-      }
-    })
-  }
-  const handleReady = (e) => console.log(e.target.getPlayerState());
+
+  }, [titleText])
+
+  const handleChange = useCallback(({ target: { value } }) => {
+
+    setVideoUrl(value)
+    setError(undefined)
+    if (!value) return
+
+    try {
+      const videoData = parseVideoUrl(value)
+      setVideoData(videoData)
+    } catch (err) {
+      setError(err)
+    }
+  }, [parseVideoUrl])
+
+  const handleSave = () => onChange({ ...block, video: { ...videoData, title: titleText } })
 
   useEffect(() => {
+    if (!video) return
     handleChange({ target: { value: video?.url } })
     setTitleText(video?.title)
-  }, [])
+  }, [handleChange, setTitleText, video])
+
+
 
   return (
     <PortfolioContent
@@ -58,21 +95,24 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
       save={'Spara'}
       onClose={onClose}
       onSave={handleSave}
-      saveDisabled={false}
+      saveDisabled={!videoData || !titleText}
     >
       <div className={s.container}>
 
         <div className={s.youtube}>
-          {youtubeId &&
-            <YouTube videoId={youtubeId} onReady={handleReady} />
+          {videoData && videoData.provider === 'youtube' &&
+            <YouTube videoId={videoData.providerUid} style={{ height: '100%' }} />
+          }
+          {videoData && videoData.provider === 'vimeo' &&
+            <Vimeo video={videoData.providerUid} style={{ height: '100%' }} />
           }
         </div>
         <label htmlFor="title">Titel</label>
         <input name="titel" type="text" value={titleText} onChange={({ target: { value } }) => setTitleText(value)} />
 
-        <label htmlFor="url">Youtube URL</label>
-        <input name="url" type="text" value={videoUrl} onChange={handleChange} />
-        {error && <div className={s.error}>{error}</div>}
+        <label htmlFor="url">Video URL (Youtube, Vimeo)</label>
+        <input name="url" type="text" value={videoUrl} onChange={(e) => handleChange(e)} />
+        {<div className={s.error}>{error?.message}</div>}
       </div>
     </PortfolioContent>
 

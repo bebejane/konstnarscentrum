@@ -1,5 +1,4 @@
 
-import type { NextRequest, NextResponse } from 'next/server'
 import { unstable_getServerSession } from "next-auth/next"
 import { Session } from 'next-auth'
 import { authOptions } from '/pages/api/auth/[...nextauth]'
@@ -22,4 +21,3 @@ export type authenticationHandler = (
   res: NextApiResponse,
   session: Session
 ) => Promise<void>
-

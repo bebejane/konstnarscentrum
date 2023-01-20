@@ -26,14 +26,13 @@ export default function Article({
   id,
   children,
   title,
-  subtitle,
   blackHeadline = false,
   text,
   image,
   content,
   showImage = true,
   editable,
-  onClick
+  onClick,
 }: ArticleProps) {
 
   const { scrolledPosition } = useScrollInfo()

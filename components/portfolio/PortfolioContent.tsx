@@ -9,12 +9,13 @@ export type Props = {
   onBack?: () => void
   header: string
   save: string
+  back?: string
   saveDisabled: boolean
   children: React.ReactNode
   loading?: string
 }
 
-export default function PortfolioContent({ header, save, saveDisabled, children, onClose, onSave, onBack, loading }: Props) {
+export default function PortfolioContent({ header, save, back, saveDisabled, children, onClose, onSave, onBack, loading }: Props) {
 
   return (
     <div id="edit-photo" className={s.photoEditor}>
@@ -28,7 +29,7 @@ export default function PortfolioContent({ header, save, saveDisabled, children,
         </div>
         <div className={cn(s.bar, s.bottom)}>
           <header>
-            {onBack && <button type="button" onClick={() => onBack?.()}>Tillbaka</button>}
+            {back && <button type="button" onClick={() => onBack?.()}>{back}</button>}
           </header>
           <button type="button" disabled={saveDisabled} onClick={() => onSave()}>{save}</button>
         </div>

@@ -60,6 +60,10 @@
 
           figcaption {
             flex: 1 1 100%;
+
+            p {
+              margin: 0
+            }
           }
 
           .image {

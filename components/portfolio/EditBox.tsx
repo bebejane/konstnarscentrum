@@ -1,22 +1,24 @@
 import s from "./EditBox.module.scss";
 import cn from 'classnames'
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { arrayMoveImmutable } from 'array-move';
 import useDevice from "/lib/hooks/useDevice";
 
 type EditBoxProps = {
   onContentChange: (content: MemberModelContentField[]) => void,
   onSelect: (image: MemberModelContentField) => void,
+  onImageSelect: (image: FileField) => void,
   onRemove: (id: string) => void,
   content: MemberModelContentField[]
+  disable: boolean
 }
 
-export default function EditBox({ onSelect, onContentChange, onRemove, content }: EditBoxProps) {
+export default function EditBox({ onSelect, onImageSelect, onContentChange, onRemove, content, disable }: EditBoxProps) {
 
   const [editBoxStyle, setEditBoxStyle] = useState<any | undefined>()
   const [editable, setEditable] = useState<any | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
-  const { isDesktop, isTablet, isMobile } = useDevice()
+  const { isTablet, isMobile } = useDevice()
 
   const findElement = (id) => {
     const editables = Array.from(document.querySelectorAll('[data-editable]')) as HTMLElement[]
@@ -27,11 +29,16 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
     setEditBoxStyle(undefined)
     setEditable(undefined)
   }
-
-  const init = () => {
+  const handleEdit = (e) => {
+    if (editable.nodelete)
+      onImageSelect(editable)
+    else
+      setBlock(editable as MemberModelContentField)
+  }
+  const init = useCallback(() => {
 
     const handleMouseEnter = (e) => {
-
+      if (disable) return
       const target = e.target as HTMLElement
       const computedStyle = getComputedStyle(target)
       const height = target.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom))
@@ -62,18 +69,16 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
 
     editables.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter)
-      //el.addEventListener('mousemove', handleMouseEnter)
       editBox.addEventListener('mouseleave', handleMouseLeave)
     })
 
     return () => {
       editables.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter)
-        //el.removeEventListener('mousemove', handleMouseEnter)
         editBox.removeEventListener('mouseleave', handleMouseLeave)
       })
     }
-  }
+  }, [isMobile, isTablet, disable])
 
   const moveBlock = (e, editable: any, up: boolean) => {
 
@@ -94,11 +99,9 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
     }, 100)
   }
 
-  const deleteBlock = (e, editable: any) => {
-    onRemove(editable.id)
-  }
+  const deleteBlock = (e, editable: any) => onRemove(editable.id)
 
-  useEffect(() => { init() }, [content, isDesktop])
+  useEffect(() => { return init() }, [content, isMobile, isTablet, init, disable])
   useEffect(() => { onSelect(block) }, [block])
 
   return (
@@ -109,12 +112,14 @@ export default function EditBox({ onSelect, onContentChange, onRemove, content }
     >
       <div className={s.toolbar}>
         <div className={s.edit}>
-          <button onClick={() => setBlock(editable as MemberModelContentField)}>
+          <button onClick={handleEdit}>
             Redigera
           </button>
-          <button className={s.delete} onClick={(e) => { deleteBlock(e, editable); setEditBoxStyle(undefined) }}>
-            Ta bort
-          </button>
+          {!editable?.nodelete &&
+            <button className={s.delete} onClick={(e) => { deleteBlock(e, editable); setEditBoxStyle(undefined) }}>
+              Ta bort
+            </button>
+          }
         </div>
         {editable?.index !== undefined &&
           <div className={cn(s.order)}>

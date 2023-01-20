@@ -10,10 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const errors = []
     const { fromEmail, fromName, fields, recordId } = req.body
-    console.log(req.body);
-
     const { memberNews }: { memberNews: MemberNewsRecord } = await apiQuery(MemberNewsByIdDocument, { variables: { id: recordId } })
-    console.log(memberNews);
 
     if (!memberNews)
       throw new Error(`Post kunde inte hittas med id: ${id}`)

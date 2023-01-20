@@ -16,6 +16,8 @@
   }
 
   figcaption {
+    line-height: 0 !important;
+
     @include mq($until: tablet) {
       padding-left: var(--outer-margin);
       padding-right: var(--outer-margin);
@@ -68,6 +70,7 @@
   img {
     cursor: pointer;
   }
+
   figcaption {
     p {
       margin-bottom: 0;

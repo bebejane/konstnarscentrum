@@ -1,51 +1,31 @@
 import s from "./Video.module.scss"
-import cn from "classnames";
 import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
+import Youtube from 'react-youtube'
+import Vimeo from '@u-wave/react-vimeo'
 
 export default function Video({ data, editable }) {
 
 	const ref = useRef()
 	const [height, setHeight] = useState(360);
-	const { innerWidth } = useWindowSize()
+	const { innerWidth, innerHeight } = useWindowSize()
 
-	useEffect(() => setHeight((ref.current?.clientWidth / 16) * 9), [innerWidth]) // Set to 16:9
+	useEffect(() => setHeight((ref.current?.clientWidth / 16) * 9), [innerWidth, innerHeight, data, ref]) // Set to 16:9
 
-	if (!data.video) return null
+	if (!data || !data.video) return null
 
-	const { provider, providerUid, title, url, thumbnailUrl } = data.video
-	const vimeoId = provider === 'vimeo' && url.indexOf('/') > -1 ? url.substring(url.lastIndexOf('/') + 1) : undefined
+	const { provider, providerUid, title } = data.video
+	const style = { height: `${height}px`, width: '100%' }
 
-	const video = provider === 'youtube' ?
-		<iframe
-			ref={ref}
-			id="ytplayer"
-			type="text/html"
-			width="100%"
-			height={height}
-			allowFullScreen
-			allow="autoplay; fullscreen; picture-in-picture"
-			src={`https://www.youtube.com/embed/${providerUid}?autoplay=0&origin=http://example.com`}
-			frameBorder={0}
-
-		/>
-		: provider === 'vimeo' ?
-			<iframe
-				ref={ref}
-				type="text/html"
-				src={`https://player.vimeo.com/video/${providerUid}?h=${vimeoId}`}
-				width="100%"
-				height={height}
-				frameBorder="0"
-				allow="autoplay; fullscreen; picture-in-picture"
-				allowFullScreen
-			/>
-			: null;
-
-	if (!video) return null
 	return (
-		<section className={s.video} data-editable={editable}>
-			{video}
+		<section className={s.video} data-editable={editable} ref={ref} >
+			{provider === 'youtube' ?
+				<Youtube videoId={providerUid} className={s.player} style={style} />
+				: provider === 'vimeo' ?
+					<Vimeo video={providerUid} className={s.player} style={style} />
+					:
+					null
+			}
 			{title && <div className={s.caption}>{title}</div>}
 		</section>
 	)

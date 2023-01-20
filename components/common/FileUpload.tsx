@@ -11,7 +11,7 @@ const client = buildClient({
 export type Props = {
   customData?: any,
   accept: string,
-  tags?: [],
+  tags?: string[],
   onDone: (upload: Upload) => void,
   onUploading: (uploading: boolean) => void,
   onProgress: (percentage: number) => void,

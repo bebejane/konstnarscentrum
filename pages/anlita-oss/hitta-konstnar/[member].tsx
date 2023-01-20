@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection, EditBox, EditBlock, Portfolio, Loader } from "/components";
+import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 
@@ -20,26 +20,24 @@ export default function Member({ member: {
 	id,
 	firstName,
 	lastName,
-	image,
 	bio,
-	yearOfBirth,
 	birthPlace,
 	memberCategory,
-	region,
 	email,
 	city,
-	content: contentFromProps
-}, member, related }: Props) {
+}, member: memberFromProps, related }: Props) {
 
-	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
-	const [content, setContent] = useState<MemberModelContentField[] | undefined>(contentFromProps)
+	const [imageId, setImageId, setImages] = useStore((state) => [state.imageId, state.setImageId, state.setImages])
+	const [member, setMember] = useState<MemberRecord | undefined>(memberFromProps)
+	const [mainImage, setMainImage] = useState<FileField | undefined>()
 	const [block, setBlock] = useState<ImageRecord | VideoRecord | undefined>()
-	const [error, setError] = useState<Error | undefined>()//(new Error('lots of errors'))
+	const [error, setError] = useState<Error | undefined>()
 	const [saving, setSaving] = useState(false)
+	const [preview, setPreview] = useState(false)
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 
-	const handleSave = useCallback(async (data) => {
+	const handleSave = useCallback(async (data: MemberModelContentField[], image?: FileField) => {
 
 		if (status !== 'authenticated')
 			return
@@ -49,18 +47,17 @@ export default function Member({ member: {
 
 		setSaving(true)
 		setBlock(undefined)
+		setMainImage(undefined)
 
-		const rollbackContent = [...content]
+		const rollbackData = { ...member }
 
 		try {
 
-			setContent(data)
+			setMember({ ...member, content: data, image })
+
 			const res = await fetch('/api/account', {
 				method: 'POST',
-				body: JSON.stringify({
-					id: member.id,
-					content: data
-				}),
+				body: JSON.stringify({ id: member.id, image, content: data }),
 				headers: { 'Content-Type': 'application/json' },
 			})
 
@@ -69,44 +66,47 @@ export default function Member({ member: {
 				throw new Error(error)
 			}
 			const updatedMember = await res.json()
-			console.log(updatedMember);
+			setMember(updatedMember)
 
-			setContent(updatedMember.content)
 		} catch (err) {
-			console.error(err)
-			setContent(rollbackContent)
-			setError(err)
 
+			setMember(rollbackData)
+			setError(err)
 		}
 
 		setSaving(false)
 
-	}, [status, content, member])
+	}, [status, member])
 
-	const handleBlockChange = (block) => {
-		console.log('block change', block);
-		handleSave(content.map((b) => b.id === block.id ? block : b))
-	}
-	const handleContentChange = (content) => {
-		handleSave(content)
-	}
-	const handleRemove = (id) => {
-		handleSave(content.filter((block) => block.id !== id))
+	const handleBlockChange = (block: MemberModelContentField) => handleSave(member.content.map((b) => b.id === block.id ? block : b))
+	const handleContentChange = (content: MemberModelContentField[]) => handleSave(content)
+	const handleRemove = (id: string) => handleSave(member.content.filter((block) => block.id !== id))
+
+	const handleMainImageChange = async (image: FileField) => {
+		setMainImage(undefined)
+		handleSave(null, image)
 	}
 
-	useEffect(() => setContent(contentFromProps), [contentFromProps])
+	useEffect(() => setMember(memberFromProps), [memberFromProps])
 	useEffect(() => error && console.error(error), [error])
+
+	useEffect(() => {
+		const images = [member.image]
+		member.content.forEach(el => el.__typename === 'ImageRecord' && images.push.apply(images, el.image))
+		setImages(imageId ? images : undefined)
+
+	}, [imageId])
 
 	return (
 		<div className={s.container}>
 			<Article
 				id={id}
 				key={id}
-				image={image}
+				image={member.image}
 				title={`${firstName} ${lastName}`}
 				text={bio}
 				noBottom={true}
-				editable={JSON.stringify({ ...image, type: image.__typename, image: [image] })}
+				editable={JSON.stringify({ ...member.image, nodelete: true })}
 				onClick={(id) => setImageId(id)}
 			>
 				<MetaSection
@@ -121,7 +121,7 @@ export default function Member({ member: {
 				/>
 
 				<h2 className="noPadding">Utvalda verk</h2>
-				{(content)?.map((block, idx) =>
+				{member.content?.map((block, idx) =>
 					<Block
 						key={`${id}-${idx}`}
 						data={block}
@@ -136,18 +136,34 @@ export default function Member({ member: {
 				)}
 				{isEditable &&
 					<Portfolio
-						show={block !== undefined}
 						block={block}
 						setBlock={setBlock}
-						content={content || contentFromProps}
+						content={member.content || memberFromProps.content}
 						onContentChange={handleContentChange}
 						onChange={handleBlockChange}
+						onChangeMainImage={handleMainImageChange}
 						onRemove={handleRemove}
+						mainImage={mainImage}
+						setMainImage={setMainImage}
+						preview={preview}
+						onPreview={() => setPreview(!preview)}
 						onClose={() => setBlock(undefined)}
-						saving={saving}
+						onError={(err) => setError(err)}
 					/>
 				}
 			</Article>
+
+			<RelatedSection
+				key={`${id}-related`}
+				title="Upptäck fler konstnärer"
+				slug={'/anlita-oss/hitta-konstnar'}
+				regional={false}
+				items={related.map(({ firstName, lastName, image, slug }) => ({
+					title: `${firstName} ${lastName}`,
+					image,
+					slug: `/anlita-oss/hitta-konstnar/${slug}`
+				}))}
+			/>
 
 			{error &&
 				<div className={cn(s.overlay, s.transparent)}>
@@ -167,17 +183,6 @@ export default function Member({ member: {
 				</div>
 			}
 
-			<RelatedSection
-				key={`${id}-related`}
-				title="Upptäck fler konstnärer"
-				slug={'/anlita-oss/hitta-konstnar'}
-				regional={false}
-				items={related.map(({ firstName, lastName, image, slug }) => ({
-					title: `${firstName} ${lastName}`,
-					image,
-					slug: `/anlita-oss/hitta-konstnar/${slug}`
-				}))}
-			/>
 		</div>
 	);
 }
