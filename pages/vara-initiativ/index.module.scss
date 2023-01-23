@@ -5,9 +5,15 @@
 
   .image {
     min-width: 100%;
+    @include mq($until: tablet) {
+      margin-left: calc(-1 * var(--outer-margin));
+      margin-right: calc(-1 * var(--outer-margin));
+      min-width: calc(100% + calc(2 * var(--outer-margin)));
+      margin-bottom: 0.5em;
+    }
   }
 
-  >ul {
+  > ul {
     @include mq($from: tablet) {
       margin-left: calc(-1 * var(--grid-unit) - var(--gutter));
       margin-right: calc(-1 * var(--grid-unit) - var(--gutter));
@@ -19,7 +25,7 @@
     flex-direction: row;
     flex-wrap: wrap;
 
-    >li {
+    > li {
       display: flex;
       flex-direction: column;
 
@@ -55,7 +61,7 @@
         flex: 1 1 auto;
       }
 
-      >a>button {
+      > a > button {
         width: 100%;
       }
     }
@@ -74,7 +80,7 @@
     }
 
     @include mq($until: tablet) {
-      >li {
+      > li {
         flex: 0 0 100%;
       }
 
