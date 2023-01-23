@@ -55,6 +55,10 @@ html {
 	&[data-theme="dark"] {
 		--background: var(--black);
 		--foreground: var(--white);
+
+		button:hover {
+			color: var(--black) !important;
+		}
 	}
 }
 
@@ -124,7 +128,7 @@ button {
 
 	&:hover {
 		background-color: var(--foreground);
-		color: var(--white) !important;
+		color: var(--white);
 	}
 
 	&.wide {

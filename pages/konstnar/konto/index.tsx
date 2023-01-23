@@ -61,7 +61,8 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 		<div className={s.container}>
 			<h1><RevealText>Konto</RevealText></h1>
 
-			<h3>Redigera portfolio</h3>
+			<h3>Välkommen, du är nu inloggad som {firstName} {lastName}.</h3>
+			<p className="intro">Här kan du redigera din portfolio och de uppgifter som visas på vår hemsida.</p>
 			<Link href={recordToSlug(member)} className={s.portfolioButton}>
 				<button>Gå till din portfolio</button>
 			</Link>

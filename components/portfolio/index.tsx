@@ -98,12 +98,21 @@ export default function Portfolio({
         >
           Lägg till video
         </button>
-        <button
-          className={s.addSection}
-          onClick={onPreview}
-        >
-          {!preview ? 'Preview' : 'Redigera'}
-        </button>
+        <div>
+          <button
+            className={s.addSection}
+            onClick={onPreview}
+          >
+            {!preview ? 'Förhandsvisa' : 'Redigera'}
+          </button>
+          <button
+            className={s.back}
+          >
+            Tillbaka till konto-sidan
+          </button>
+        </div>
+
+
       </div>
     </>
   )
