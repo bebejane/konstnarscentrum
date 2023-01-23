@@ -27,7 +27,7 @@ export default function Logo({ }: Props) {
   const region = useRegion()
   const pageRegion = regions.find(r => router.asPath.startsWith(`/${r.slug}`))
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
-  const { isMobile } = useDevice()
+  const { isTablet } = useDevice()
   const { scrolledPosition, viewportHeight, documentHeight, isScrolling, isPageBottom } = useScrollInfo()
   const [manualMode, setManualMode] = useState(false)
   const [atBottom, setAtBottom] = useState(false)
@@ -56,10 +56,10 @@ export default function Logo({ }: Props) {
   const letterReducer = (direction: 'horizontal' | 'vertical') => {
     const l = letters.length;
 
-    if (isFixed || (isMobile && !manualMode)) {
-      if (isMobile && !manualMode)
+    if (isFixed || (isTablet && !manualMode)) {
+      if (isTablet && !manualMode)
         return direction === 'horizontal' ? letters : showMenuMobile ? letters : []
-      if (!isMobile && !manualMode && !showMenuMobile)
+      if (!isTablet && !manualMode && !showMenuMobile)
         return direction === 'vertical' ? letters : []
     }
 
@@ -96,9 +96,9 @@ export default function Logo({ }: Props) {
   }, [menuMobileSwitch])
 
   useEffect(() => {
-    if (isMobile || scrolledPosition === 0) return
+    if (isTablet || scrolledPosition === 0) return
     setManualMode(false)
-  }, [scrolledPosition, isMobile])
+  }, [scrolledPosition, isTablet])
 
   useEffect(() => {
     setShowMenuMobile(false)
@@ -125,7 +125,7 @@ export default function Logo({ }: Props) {
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
   const regionPerc = (pageRegion?.name.length / letters.length)
-  const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && !isMobile ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
+  const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && !isTablet ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
 
   function handleMouseOver(e: React.MouseEvent<HTMLSpanElement>): void {
     const { type, target } = e;

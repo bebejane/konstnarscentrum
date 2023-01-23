@@ -3,7 +3,6 @@ import { buildClient, buildBlockRecord } from '@datocms/cma-client'
 import withAuthentication from '/lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberDocument, MemberImagesDocument } from '/graphql'
-import type { Session } from 'next-auth'
 import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes'
 
 export const client = buildClient({
@@ -11,39 +10,18 @@ export const client = buildClient({
   environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main'
 })
 
-const userMediaLibrary = async (session: Session) => {
-  const { member, uploads } = await apiQuery(MemberImagesDocument, {
-    variables: { email: session.user.email },
-    environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main'
-  })
-  const allImages = [...member.content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), []), ...uploads]
-  const images = []
-  allImages.sort((a, b) => a.id > b.id ? 1 : -1).forEach(i => !images.find(({ id }) => i.id === id) && images.push(i))
-  return images
-}
-
-const parseDatoError = (err: any) => {
+export const parseDatoError = (err: any) => {
   const apiError = err.response?.body.data;
   if (!apiError) return err?.message ?? err
-  const error = apiError.map(({ attributes: { details: { field, code, messages, message, errors } } }) => `${messages?.join('. ') || message}: ${Array.isArray(errors) ? errors?.join('. ') : errors} (${code})`)
+  const error = {
+    _error: apiError,
+    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors } } }) => `${messages?.join('. ') || message}: ${Array.isArray(errors) ? errors?.join('. ') : errors} (${code})`),
+    codes: apiError.map(({ attributes: { code } }) => code),
+  }
   return error
 }
 
 export default withAuthentication(async (req, res, session) => {
-
-  const { medialibrary, ping } = req.query;
-
-  if (ping)
-    return res.status(200).json({ ping })
-
-  if (medialibrary) {
-    try {
-      const images = await userMediaLibrary(session)
-      return res.status(200).json({ images })
-    } catch (err) {
-      return res.status(500).json({ error: parseDatoError(err) })
-    }
-  }
 
   if (!req.body || !req.body?.id)
     return res.status(500).json({ error: `Invalid empty request` })

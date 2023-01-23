@@ -9,7 +9,10 @@ const { buildClient } = require("@datocms/cma-client-node");
 	const roles = await client.roles.list();
 	const editor = roles.filter((r) => r.name.toLowerCase() === "editor")[0];
 	const tokens = await client.accessTokens.list();
-	const districts = await client.items.list({ filter: { type: "region" } });
+	const districts = await client.items.list({
+		filter: { type: "region" },
+		order_by: "position_DESC",
+	});
 
 	const regions = roles
 		.filter((r) => r.inherits_permissions_from?.find(({ id }) => id === editor.id))
@@ -21,7 +24,9 @@ const { buildClient } = require("@datocms/cma-client-node");
 			tokenId: tokens.find((t) => t.role?.id === roleId)?.id,
 			slug: slugify(name, { lower: true }),
 			global: districts.find((el) => el.slug === slugify(name, { lower: true })).global || false,
-		}));
+			position: districts.find((el) => el.slug === slugify(name, { lower: true })).position,
+		}))
+		.sort((a, b) => (a.position > b.position ? 1 : -1));
 
 	if (!regions.length) throw new Error("No regions found!");
 

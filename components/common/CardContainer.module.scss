@@ -3,7 +3,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   margin-left: calc(-1 * var(--outer-margin));
-
   margin-right: calc(-1 * var(--outer-margin));
   width: calc(100% + (2 * var(--outer-margin)));
 
@@ -25,14 +24,15 @@
     color: var(--black) !important;
   }
 
-  > li {
+  >li {
     border-right: 1px solid var(--beige-mid);
   }
 
-  &.two > li {
-    width: 50%;
+  &.two>li {
 
     @include mq($from: tablet) {
+      width: 50%;
+
       &:nth-of-type(2n) {
         border-right: none;
       }
@@ -48,7 +48,7 @@
     }
   }
 
-  &.three > li {
+  &.three>li {
     width: 33.333%;
 
     @include mq($from: tablet) {
@@ -86,7 +86,7 @@
   }
 
   &.whiteBorder {
-    & > li {
+    &>li {
       border-color: var(--white) !important;
     }
 

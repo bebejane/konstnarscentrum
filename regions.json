@@ -1,11 +1,12 @@
 [
   {
-    "id": "143662355",
-    "roleId": "133331",
-    "name": "Mitt",
-    "tokenId": "138887",
-    "slug": "mitt",
-    "global": false
+    "id": "143707759",
+    "roleId": "133283",
+    "name": "Riks",
+    "tokenId": "181463",
+    "slug": "riks",
+    "global": true,
+    "position": 1
   },
   {
     "id": "143662356",
@@ -13,23 +14,8 @@
     "name": "Nord",
     "tokenId": "138889",
     "slug": "nord",
-    "global": false
-  },
-  {
-    "id": "143707759",
-    "roleId": "133283",
-    "name": "Riks",
-    "tokenId": "181463",
-    "slug": "riks",
-    "global": true
-  },
-  {
-    "id": "143662358",
-    "roleId": "133333",
-    "name": "Syd",
-    "tokenId": "138888",
-    "slug": "syd",
-    "global": false
+    "global": false,
+    "position": 2
   },
   {
     "id": "143685113",
@@ -37,7 +23,17 @@
     "name": "Väst",
     "tokenId": "115326",
     "slug": "vast",
-    "global": false
+    "global": false,
+    "position": 3
+  },
+  {
+    "id": "143662355",
+    "roleId": "133331",
+    "name": "Mitt",
+    "tokenId": "138887",
+    "slug": "mitt",
+    "global": false,
+    "position": 4
   },
   {
     "id": "143685114",
@@ -45,6 +41,16 @@
     "name": "Öst",
     "tokenId": "115327",
     "slug": "ost",
-    "global": false
+    "global": false,
+    "position": 5
+  },
+  {
+    "id": "143662358",
+    "roleId": "133333",
+    "name": "Syd",
+    "tokenId": "138888",
+    "slug": "syd",
+    "global": false,
+    "position": 6
   }
 ]

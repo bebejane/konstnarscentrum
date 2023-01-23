@@ -34,7 +34,7 @@ export default function Portfolio({
 }: PortfolioProps) {
 
   return (
-    <>
+    <div className={s.container}>
       {!preview &&
         <EditBox
           content={content}
@@ -114,6 +114,6 @@ export default function Portfolio({
 
 
       </div>
-    </>
+    </div>
   )
 }

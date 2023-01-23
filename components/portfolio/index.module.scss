@@ -1,3 +1,16 @@
+.container {
+  button {
+    color: var(--black);
+    background-color: var(--white);
+    border-color: var(--black);
+
+    &:hover {
+      color: var(--white) !important;
+      background-color: var(--black);
+    }
+  }
+}
+
 .newBlock {
   display: flex;
   align-items: center;
@@ -21,7 +34,7 @@
 .addButtons {
   margin-bottom: var(--space);
 
-  buttont {
+  button {
     width: 100%;
   }
 

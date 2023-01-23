@@ -43,7 +43,7 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
   const fetchUserImages = async (): Promise<FileField[]> => {
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await fetch('/api/account?medialibrary=true', { method: 'GET' })
+        const res = await fetch('/api/account/images', { method: 'GET' })
         if (res.status !== 200) reject(new Error('Det uppstod ett fel vid hämtning av bilder'))
         const { images } = await res.json()
         resolve(images)

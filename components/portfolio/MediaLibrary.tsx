@@ -19,7 +19,7 @@ export type Props = {
 export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected: selectedFromProps = [] }: Props) {
 
   const { data: session, status } = useSession()
-  const [selected, setSelected] = useState<FileField[]>()
+  const [selected, setSelected] = useState<FileField[]>(selectedFromProps)
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<Error | undefined>()
@@ -33,12 +33,10 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     setError(undefined)
 
     try {
-      const res = await fetch('/api/account?medialibrary=true', { method: 'GET' })
+      const res = await fetch('/api/account/images', { method: 'GET' })
       if (res.status !== 200)
         throw new Error('Det uppstod ett fel vid hämtning av bilder')
       const { images } = await res.json()
-      console.log(images);
-
       setImages(images)
     } catch (err) {
       setError(err)
@@ -46,16 +44,33 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     setLoading(false)
   }
 
-  const handleRemove = (e, id) => {
+  const handleRemove = async (e, id) => {
     e.stopPropagation()
 
-    if (showLibrary)
-      console.log('remove for real');
-    else {
-      onRemove(id)
-      setSelected(selected.filter((img) => img.id !== id))
+    const rollbackSelected = [...selected]
+    setSelected(selected.filter((img) => img.id !== id))
 
+    if (!showLibrary) return onRemove(id)
+
+    setLoading(true)
+
+    try {
+      const res = await fetch(`/api/account/images?removeId=${encodeURIComponent(id)}`, { method: 'GET' })
+      const { images, error } = await res.json()
+
+      if (res.status !== 200 || error) {
+        console.log(error);
+        if (error.codes.includes('UPLOAD_IS_CURRENTLY_IN_USE'))
+          throw new Error('Det går ej att ta bort bilden. Bilden används i din portfolio redan. För att ta bort bilden måste du ta bort den där den används i portfolion.')
+        throw new Error('Det uppstod ett fel när bilden togs bort')
+      }
+      setImages(images)
+    } catch (err) {
+      setError(err)
+      setSelected(rollbackSelected)
     }
+    setLoading(false)
+
   }
 
   const handleClick = (e, img) => {
@@ -70,20 +85,23 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleUploading = (upload: boolean) => setUploading(upload)
   const handleUploadError = (err: Error) => setUploadError(err)
 
-  useEffect(() => {
-    console.log('set selected from props');
-    setSelected(selectedFromProps)
-  }, [selectedFromProps])
 
   useEffect(() => {
     onSelection?.(selected)
   }, [selected])
 
   useEffect(() => {
+    console.log('set selected from props');
+    setSelected(selectedFromProps)
+  }, [selectedFromProps])
+
+
+  useEffect(() => {
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
 
+  error && console.error(error)
   return (
     <>
       <ul className={s.gallery}>
@@ -135,6 +153,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
           <Loader />
         </div>
       }
+
       <FileInput
         ref={uploadRef}
         customData={{}}

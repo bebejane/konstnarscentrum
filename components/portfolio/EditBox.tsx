@@ -114,10 +114,11 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
       id="edit-box"
       className={cn(s.editBox, editBoxStyle && s.show)}
       style={editBoxStyle}
+      onClick={handleEdit}
     >
       <div className={s.toolbar}>
         <div className={s.edit}>
-          <button onClick={handleEdit}>
+          <button >
             Redigera
           </button>
           {!editable?.nodelete &&

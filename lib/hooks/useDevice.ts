@@ -5,7 +5,7 @@ import { breakpoints } from '/lib/utils'
 
 export default function useDevice() {
 
-  const mobile = !useMediaQuery(`(min-width: ${breakpoints.mobile}px)`)
+  const mobile = useMediaQuery(`(max-width: ${breakpoints.tablet}px)`)
   const desktop = !useMediaQuery(`(min-width: ${breakpoints.desktop}px)`)
   const tablet = !useMediaQuery(`(min-width: ${breakpoints.tablet}px)`)
 
