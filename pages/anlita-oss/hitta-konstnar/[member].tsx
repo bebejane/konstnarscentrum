@@ -62,8 +62,8 @@ export default function Member({ member: {
 			})
 
 			if (res.status !== 200) {
-				const { error } = await res.json()
-				throw new Error(error)
+				const error = await res.json()
+				throw error
 			}
 			const updatedMember = await res.json()
 			setMember(updatedMember)
@@ -94,9 +94,10 @@ export default function Member({ member: {
 		const images = [member.image]
 		member.content.forEach(el => el.__typename === 'ImageRecord' && images.push.apply(images, el.image))
 		setImages(imageId ? images : undefined)
-
 	}, [imageId])
 
+	if (error)
+		console.log(error)
 	return (
 		<div className={s.container}>
 			<Article
@@ -139,8 +140,8 @@ export default function Member({ member: {
 						block={block}
 						setBlock={setBlock}
 						content={member.content || memberFromProps.content}
-						onContentChange={handleContentChange}
 						onChange={handleBlockChange}
+						onContentChange={handleContentChange}
 						onChangeMainImage={handleMainImageChange}
 						onRemove={handleRemove}
 						mainImage={mainImage}
@@ -170,7 +171,7 @@ export default function Member({ member: {
 					<div className={s.error}>
 						<h3>Det uppstod ett fel</h3>
 						<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
-						<button onClick={() => setError(undefined)}>Close</button>
+						<button onClick={() => setError(undefined)}>Stäng</button>
 					</div>
 				</div>
 			}

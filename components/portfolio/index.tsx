@@ -1,5 +1,8 @@
+import { useEffect } from 'react';
 import s from './index.module.scss'
+import Link from 'next/link';
 import { VideoBlockEditor, PhotoBlockEditor, EditBox, MainImageEditor } from "/components";
+import Line from '/lib/emails/components/Line';
 
 type PortfolioProps = {
   setMainImage: (image: FileField) => void
@@ -32,6 +35,10 @@ export default function Portfolio({
   preview,
   onPreview,
 }: PortfolioProps) {
+
+  useEffect(() => {
+    preview && window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  }, [preview])
 
   return (
     <div className={s.container}>
@@ -72,7 +79,7 @@ export default function Portfolio({
         />
       }
 
-      {content?.filter((b) => (b.__typename === 'ImageRecord' && b.image?.length === 0) || (b.__typename === 'VideoRecord' && !b.video)).map((block, idx) =>
+      {content?.filter((b) => (b.__typename === 'ImageRecord' && (!b.image || b.image?.length === 0)) || (b.__typename === 'VideoRecord' && !b.video)).map((block, idx) =>
         <div key={idx} className={s.newBlock} data-editable={JSON.stringify(block)}>
           {block.__typename === 'ImageRecord' ?
             <img src={'/images/noimage.svg'} />
@@ -84,20 +91,24 @@ export default function Portfolio({
         </div>
       )}
       <div className={s.addButtons}>
-        <button
-          className={s.addSection}
-          //@ts-ignore
-          onClick={() => onContentChange([...content, { __typename: 'ImageRecord', image: undefined }])}
-        >
-          Lägg till bild
-        </button>
-        <button
-          className={s.addSection}
-          //@ts-ignore
-          onClick={() => onContentChange([...content, { __typename: 'VideoRecord', video: undefined }])}
-        >
-          Lägg till video
-        </button>
+        {!preview &&
+          <>
+            <button
+              className={s.addSection}
+              //@ts-ignore
+              onClick={() => onContentChange([...content, { __typename: 'ImageRecord', image: undefined }])}
+            >
+              Lägg till bild
+            </button>
+            <button
+              className={s.addSection}
+              //@ts-ignore
+              onClick={() => onContentChange([...content, { __typename: 'VideoRecord', video: undefined }])}
+            >
+              Lägg till video
+            </button>
+          </>
+        }
         <div>
           <button
             className={s.addSection}
@@ -105,11 +116,11 @@ export default function Portfolio({
           >
             {!preview ? 'Förhandsvisa' : 'Redigera'}
           </button>
-          <button
-            className={s.back}
-          >
-            Tillbaka till konto-sidan
-          </button>
+          <Link href={`/konstnar/konto`}>
+            <button className={s.back}>
+              Tillbaka till konto-sidan
+            </button>
+          </Link>
         </div>
 
 

@@ -85,12 +85,13 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
     }
   }, [isMobile, isTablet, disable])
 
-  const moveBlock = (e, editable: any, up: boolean) => {
+  const handleMoveBlock = (e) => {
 
     e.stopPropagation()
 
     if (!editable) return
 
+    const up = e.target.id === 'editbox-up'
     const from = parseInt(editable.index)
     const to = up ? (from - 1 >= 0 ? from - 1 : 0) : (from + 1) < content.length - 1 ? (from + 1) : content.length - 1
     const newContent = arrayMoveImmutable(content, from, to)
@@ -101,10 +102,15 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
     setTimeout(() => {
       const el = findElement(editable.id)
       el.scrollIntoView({ behavior: "smooth", block: 'center' })
-    }, 100)
+    }, 250)
   }
 
-  const deleteBlock = (e, editable: any) => onRemove(editable.id)
+  const handleRemoveBlock = (e) => {
+    e.stopPropagation();
+    onRemove(editable.id)
+    setEditBoxStyle(undefined);
+  }
+
 
   useEffect(() => { return init() }, [content, isMobile, isTablet, init, disable])
   useEffect(() => { onSelect(block) }, [block])
@@ -118,26 +124,30 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
     >
       <div className={s.toolbar}>
         <div className={s.edit}>
-          <button >
+          <button onClick={handleEdit}>
             Redigera
           </button>
           {!editable?.nodelete &&
-            <button className={s.delete} onClick={(e) => { deleteBlock(e, editable); setEditBoxStyle(undefined) }}>
+            <button className={s.delete} onClick={handleRemoveBlock}>
               Ta bort
             </button>
           }
         </div>
         {editable?.index !== undefined &&
-          <div className={cn(s.order)}>
+          <div className={s.order}>
             <button
+              id="editbox-up"
               className={s.up}
+              onClick={handleMoveBlock}
               disabled={editable?.index === 0}
-              onClick={(e) => moveBlock(e, editable, true)}
+
             >↑</button>
             <button
+              id="editbox-down"
               className={s.down}
+              onClick={handleMoveBlock}
               disabled={editable?.index === content.length - 1}
-              onClick={(e) => moveBlock(e, editable, false)}
+
             >↓</button>
           </div>
         }

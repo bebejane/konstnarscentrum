@@ -12,6 +12,7 @@ fragment ImageMediumFragment on FileField {
 		width
 		height
 		alt
+		title
 		base64
 		bgColor
 		sizes

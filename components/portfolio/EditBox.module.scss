@@ -15,6 +15,10 @@
     display: flex;
   }
 
+  button[disabled] {
+    pointer-events: all !important;
+  }
+
   button {
     margin: 1rem;
     border: 0;
@@ -28,6 +32,8 @@
         color: var(--white);
       }
     }
+
+
   }
 
   .toolbar {

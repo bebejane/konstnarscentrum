@@ -32,7 +32,7 @@ export default function PhotoEditor({ image, onUpdate, onChoose }: Props) {
         <label className="small" htmlFor="description">
           Bildtext <span>Tips! Du kan kursivera titlar med *titel*.</span>
         </label>
-        <input name="title" type="text" value={image.title} onChange={(e) => onUpdate({ ...image, title: e.target.value })} />
+        <input key={image.id} name="title" type="text" value={image.title} onChange={(e) => onUpdate({ ...image, title: e.target.value })} />
       </div>
     </div>
   )

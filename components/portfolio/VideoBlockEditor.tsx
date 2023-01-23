@@ -17,7 +17,7 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
   const { video, id, title } = block
   const [videoData, setVideoData] = useState(video)
   const [videoUrl, setVideoUrl] = useState(video?.url)
-  const [titleText, setTitleText] = useState(title)
+  const [titleText, setTitleText] = useState<string | undefined>()
   const [providerUid, setProviderUid] = useState<string | undefined>()
   const [error, setError] = useState<Error | undefined>()
 
@@ -85,9 +85,7 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
     if (!video) return
     handleChange({ target: { value: video?.url } })
     setTitleText(video?.title)
-  }, [handleChange, setTitleText, video])
-
-
+  }, [setTitleText, video])
 
   return (
     <PortfolioContent
@@ -98,7 +96,6 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
       saveDisabled={!videoData || !titleText}
     >
       <div className={s.container}>
-
         <div className={s.youtube}>
           {videoData && videoData.provider === 'youtube' &&
             <YouTube videoId={videoData.providerUid} style={{ height: '100%' }} />
@@ -107,11 +104,23 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
             <Vimeo video={videoData.providerUid} style={{ height: '100%' }} />
           }
         </div>
+
         <label htmlFor="title">Titel</label>
-        <input name="titel" type="text" value={titleText} onChange={({ target: { value } }) => setTitleText(value)} />
+        <input
+          name="titel"
+          type="text"
+          value={titleText}
+          onChange={({ target: { value } }) => setTitleText(value)}
+        />
 
         <label htmlFor="url">Video URL (Youtube, Vimeo)</label>
-        <input name="url" type="text" value={videoUrl} onChange={(e) => handleChange(e)} />
+        <input
+          name="url"
+          type="text"
+          value={videoUrl}
+          onChange={(e) => handleChange(e)}
+        />
+
         {<div className={s.error}>{error?.message}</div>}
       </div>
     </PortfolioContent>

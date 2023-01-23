@@ -14,9 +14,16 @@ export const client = buildClient({
 export const parseDatoError = (err: any) => {
   const apiError = err.response?.body.data;
   if (!apiError) return err?.message ?? err
+
   const error = {
     _error: apiError,
-    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors } } }) => `${messages?.join('. ') || message}: ${Array.isArray(errors) ? errors?.join('. ') : errors} (${code})`),
+    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors }, details } }) => {
+      return `
+        Messages: ${messages?.join('. ') || message || ''}: ${Array.isArray(errors) ? errors?.join('. ') : errors || ''}
+        Code: ${code}
+        Details: ${!details ? '' : (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)}
+      `
+    }),
     codes: apiError.map(({ attributes: { code } }) => code),
   }
   return error
@@ -105,15 +112,15 @@ export default withAuthentication(async (req, res, session) => {
           })
           ) : undefined,
           video: block.__typename === 'VideoRecord' && block.video ? {
-            ...block.video,
-            __typename: undefined,
+            ...block.video || {},
             provider: block.video.provider,
             provider_uid: block.video.providerUid,
-            providerUid: undefined,
-            thumbnailUrl: undefined,
             width: 0,
             height: 0,
             thumbnail_url: 'https://youtube.com',
+            __typename: undefined,
+            providerUid: undefined,
+            thumbnailUrl: undefined,
           } : undefined
         },
       })
@@ -123,6 +130,7 @@ export default withAuthentication(async (req, res, session) => {
 
   // Remove undefined
   Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
+  console.log(JSON.stringify(newRecord, null, 2));
 
   try {
     await client.items.update(record.id, newRecord)
@@ -130,12 +138,13 @@ export default withAuthentication(async (req, res, session) => {
     const slug = recordToSlug(member)
     console.log('revalidating', slug);
 
-    await res.revalidate(slug)
+    res.revalidate(slug).then(() => console.log('revalidated', slug))
     console.log('updated', record.email)
     return res.status(200).json(member)
 
   } catch (err) {
-    return res.status(500).json({ error: parseDatoError(err) })
+    console.error(JSON.stringify(parseDatoError(err), null, 2))
+    return res.status(500).json({ ...parseDatoError(err) })
   }
 })
 

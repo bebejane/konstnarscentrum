@@ -139,7 +139,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       {error &&
         <div className={s.error}>
           <div>{error.message}</div>
-          <button type="button" onClick={handleRefresh}>Försök igen</button>
+          <button type="button" onClick={handleRefresh}>Stäng</button>
         </div>
       }
       {uploadError &&

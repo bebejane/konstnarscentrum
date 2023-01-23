@@ -60,13 +60,16 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     else if (image)
       setImage(undefined)
   }
+
   const handleSelection = (images: FileField[]) => {
     setSelected(images)
   }
+
   const handleRemove = (id: string) => {
     if (block.__typename !== 'ImageRecord') return
     onUpdate({ ...block, image: block.image.filter((i) => i.id !== id) })
   }
+
   useEffect(() => setBlock(blockFromProps), [blockFromProps])
 
   if (!block) return null
@@ -77,7 +80,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
         onClose={onClose}
         header={!isMediaLibrary ? 'Redigera' : 'Välj bild(er)'}
         back={!isMediaLibrary ? undefined : 'Tillbaka'}
-        save={!isMediaLibrary ? 'Spara' : 'Ok'}
+        save={!isMediaLibrary ? 'Spara' : 'Välj'}
         onBack={handleBack}
         saveDisabled={selected?.length === 0}
         onSave={handleSave}
@@ -105,6 +108,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
         onSave={handleSaveImage}
       >
         <PhotoEditor
+          key={image.id}
           image={image}
           onClose={() => setImage(undefined)}
           onUpdate={handleUpdateImage}
