@@ -37,24 +37,25 @@ export default function Article({
 
   const { scrolledPosition } = useScrollInfo()
   const hideCaption = scrolledPosition > 100;
-
+  const haveImage = image?.responsiveImage !== undefined
 
   return (
     <div className={cn(s.article, 'article')}>
-      {showImage ?
+      {showImage &&
         <header>
-          {text &&
-            <h1 className={cn(s.title, blackHeadline && s.black)}>
+          {title &&
+            <h1 className={cn(s.title, haveImage && s.absolute, blackHeadline || !haveImage && s.black)}>
               <RevealText>
                 <BalanceText>
                   {title}
                 </BalanceText>
               </RevealText>
-              <div className={s.fade}></div>
+              {haveImage && <div className={s.fade}></div>}
             </h1>
           }
+
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
-            {image ?
+            {haveImage ?
               <>
                 <Image
                   className={s.image}
@@ -72,10 +73,6 @@ export default function Article({
           </figure>
           <div className={s.colorBg} style={{ backgroundColor: image?.responsiveImage.bgColor }}></div>
         </header>
-        : title &&
-        <h1>
-          <RevealText>{title}</RevealText>
-        </h1>
       }
       {text &&
         <Markdown className="intro">

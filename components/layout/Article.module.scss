@@ -58,11 +58,15 @@
     }
 
     .title {
-      position: absolute;
+      position: relative;
       z-index: 2;
       color: var(--white);
       padding-top: 1em;
       width: 100%;
+
+      &.absolute {
+        position: absolute;
+      }
 
       &.black {
         color: var(--black);
