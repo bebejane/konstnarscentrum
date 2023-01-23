@@ -21,11 +21,11 @@
     margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
   }
 
-  >li {
+  > li {
     border-right: 1px solid var(--beige-mid);
   }
 
-  &.two>li {
+  &.two > li {
     width: 50%;
 
     @include mq($from: tablet) {
@@ -39,11 +39,12 @@
 
       &:nth-child(1n) {
         border-right: none;
+        //margin-bottom: 2em;
       }
     }
   }
 
-  &.three>li {
+  &.three > li {
     width: 33.333%;
 
     @include mq($from: tablet) {
@@ -81,7 +82,7 @@
   }
 
   &.whiteBorder {
-    &>li {
+    & > li {
       border-color: var(--white) !important;
     }
 

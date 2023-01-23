@@ -155,7 +155,7 @@ export default function Member({ member: {
 
 			<RelatedSection
 				key={`${id}-related`}
-				title="Upptäck fler konstnärer"
+				title="Upptäck fler"
 				slug={'/anlita-oss/hitta-konstnar'}
 				regional={false}
 				items={related.map(({ firstName, lastName, image, slug }) => ({

@@ -51,11 +51,14 @@
     left: 0;
     color: var(--black);
 
-    >a {
+    > a {
       max-height: var(--logo-size);
+      &:hover {
+        color: var(--black);
+      }
     }
 
-    >a span {
+    > a span {
       display: inline-block;
       transition: transform 0.3s ease-out;
     }

@@ -13,7 +13,7 @@ export default function LatestMemberNews({ data: { memberNews } }: LatestMemberB
 
   return (
     <section className={s.container}>
-      <SectionHeader title="Aktuellt för medlemmar" slug={"/anlita-oss/uppdrag"} margin={true} />
+      <SectionHeader title="För medlemmar" slug={"/anlita-oss/uppdrag"} margin={true} />
       <CardContainer columns={2}>
         {memberNews.map(({ date, title, intro, slug, region, image }, idx) =>
           <NewsCard
