@@ -38,9 +38,10 @@ export default function Article({
   const { scrolledPosition } = useScrollInfo()
   const hideCaption = scrolledPosition > 100;
 
+
   return (
     <div className={cn(s.article, 'article')}>
-      {image && showImage ?
+      {showImage ?
         <header>
           {text &&
             <h1 className={cn(s.title, blackHeadline && s.black)}>
@@ -53,16 +54,23 @@ export default function Article({
             </h1>
           }
           <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
-            <Image
-              className={s.image}
-              data={image.responsiveImage}
-              objectFit="cover"
-            />
-            <figcaption className={cn(hideCaption && s.hide)}>
-              <Markdown>{image.title}</Markdown>
-            </figcaption>
+            {image ?
+              <>
+                <Image
+                  className={s.image}
+                  data={image.responsiveImage}
+                  objectFit="cover"
+                />
+                <figcaption className={cn(hideCaption && s.hide)}>
+                  <Markdown>{image.title}</Markdown>
+                </figcaption>
+              </>
+              : editable ?
+                <div className={s.emptyEditable}></div>
+                : null
+            }
           </figure>
-          <div className={s.colorBg} style={{ backgroundColor: image.responsiveImage.bgColor }}></div>
+          <div className={s.colorBg} style={{ backgroundColor: image?.responsiveImage.bgColor }}></div>
         </header>
         : title &&
         <h1>

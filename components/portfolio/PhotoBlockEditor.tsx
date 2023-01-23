@@ -10,16 +10,23 @@ export type Props = {
   onClose: () => void
 }
 
-export default function PhotoBlockEditor({ block, onError, onChange, onUpdate, onClose }: Props) {
+export default function PhotoBlockEditor({ block: blockFromProps, onError, onChange, onUpdate, onClose }: Props) {
 
   const [image, setImage] = useState<FileField | undefined>()
+  const [block, setBlock] = useState<MemberModelContentField | undefined>(blockFromProps)
   const [selected, setSelected] = useState<FileField[] | undefined>(block.image)
   const [showMediaLibrary, setShowMediaLibrary] = useState(false)
 
   const handleSave = async () => {
+    if (block.__typename !== 'ImageRecord') return
 
-    if (showMediaLibrary) return setShowMediaLibrary(false)
-    if (image) return setImage(undefined)
+    if (showMediaLibrary) {
+      if (selected.length)
+        setBlock({ ...block, image: selected })
+      return setShowMediaLibrary(false)
+    }
+    if (image)
+      return setImage(undefined)
 
     const images = [...selected?.map(el => el.id === image?.id ? image : el).filter(i => i)]
     const b = { ...block, image: images }
@@ -27,7 +34,7 @@ export default function PhotoBlockEditor({ block, onError, onChange, onUpdate, o
   }
 
   const handleUpdateImage = async (image: FileField) => {
-    const sel = [...selected?.map(el => el.id === image?.id ? image : el).filter(i => i)]
+    if (block.__typename !== 'ImageRecord') return
     onUpdate({ ...block, image: block.image.map(i => i.id === image.id ? image : i) })
     setImage(image)
   }
@@ -55,7 +62,7 @@ export default function PhotoBlockEditor({ block, onError, onChange, onUpdate, o
       saveDisabled={selected?.length === 0}
       onSave={handleSave}
     >
-      {image ?
+      {image?.responsiveImage ?
         <PhotoEditor
           image={image}
           onClose={() => setImage(undefined)}
