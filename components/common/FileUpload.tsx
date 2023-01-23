@@ -3,6 +3,8 @@ import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import type { Upload } from '@datocms/cma-client-browser/dist/types/generated/resources';
 
+const MAX_ALLOWED_IMAGES = 7
+
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,
   environment: process.env.NEXT_PUBLIC_GRAPHQL_ENVIRONMENT === 'dev' ? 'dev' : 'main'
@@ -36,11 +38,34 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
     onUploading(false)
     setError(undefined)
     ref.current.value = ''
-  }, [setUpload, setError, ref])
+  }, [setUpload, setError, ref, onUploading])
 
-  const createUpload = useCallback((file: File): Promise<Upload> => {
-    if (!file) return Promise.reject(new Error('No file selected'))
+  const fetchUserImages = async (): Promise<FileField[]> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await fetch('/api/account?medialibrary=true', { method: 'GET' })
+        if (res.status !== 200) reject(new Error('Det uppstod ett fel vid hämtning av bilder'))
+        const { images } = await res.json()
+        resolve(images)
+      } catch (err) {
+        reject(err)
+      }
+    })
+  }
 
+  const createUpload = useCallback(async (file: File): Promise<Upload> => {
+
+    if (!file) return Promise.reject(new Error('Ingen bild vald'))
+
+    try {
+      const images = await fetchUserImages()
+      if (images.length > MAX_ALLOWED_IMAGES)
+        return Promise.reject(new Error(`Det går max att ladda upp ${MAX_ALLOWED_IMAGES} antal bilder`))
+    } catch (err) {
+      setError(err as Error)
+      return
+    }
+    console.log('createupload');
     resetInput()
     onUploading(true)
 
@@ -66,30 +91,20 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
   }, [customData, onUploading, onProgress, tags, resetInput])
 
   const handleChange = useCallback((event) => {
-
     const file = event.target.files[0];
     if (!file) return
-
     createUpload(file).then((upload) => onDone(upload)).catch((err) => onError(err)).finally(() => onUploading(false))
-
-  }, [createUpload])
+  }, [createUpload, onUploading, onDone, onError])
 
   useEffect(() => {
-
     if (!ref.current) return
 
     ref.current.removeEventListener('change', handleChange);
     ref.current.addEventListener('change', handleChange);
+  }, [ref])
 
-  }, [ref, createUpload, handleChange])
-
-  useEffect(() => {
-    onDone(upload)
-  }, [upload])
-
-  useEffect(() => {
-    onError(error)
-  }, [error])
+  useEffect(() => { onDone(upload) }, [upload])
+  useEffect(() => { onError(error) }, [error])
 
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })

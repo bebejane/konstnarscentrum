@@ -15,10 +15,10 @@ export type Props = {
   multi: boolean
 }
 
-export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onError, multi, selected: selectedFromProps = [] }: Props) {
+export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected: selectedFromProps = [] }: Props) {
 
   const { data: session, status } = useSession()
-  const [selected, setSelected] = useState<FileField[]>([])
+  const [selected, setSelected] = useState<FileField[]>()
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<Error | undefined>()
@@ -45,6 +45,11 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     setLoading(false)
   }
 
+  const handleRemove = (e, id) => {
+    console.log('remove', id);
+    e.stopPropagation()
+
+  }
   const handleUploadDone = (upload: any) => handleRefresh()
   const handleUploadProgress = (progress: number) => setProgress(progress)
   const handleUploading = (upload: boolean) => setUploading(upload)
@@ -56,18 +61,20 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     else
       onSelect(img)
   }
+
   useEffect(() => {
     onSelection?.(selected)
   }, [selected])
+
+  useEffect(() => {
+    setSelected(selectedFromProps)
+  }, [selectedFromProps])
 
   useEffect(() => {
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
 
-  useEffect(() => {
-    setSelected(selectedFromProps)
-  }, [selectedFromProps])
 
   return (
     <>
@@ -85,6 +92,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               objectFit="contain"
               sizes="(min-width: 66em) 400px"
             />
+            <div className={s.remove} onClick={(e) => handleRemove(e, img.id)}>X</div>
           </li>
         )}
         <li className={s.upload}>
@@ -106,6 +114,12 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         <div className={s.error}>
           <div>{error.message}</div>
           <button type="button" onClick={handleRefresh}>Försök igen</button>
+        </div>
+      }
+      {uploadError &&
+        <div className={s.error}>
+          <div>{uploadError.message}</div>
+          <button type="button" onClick={() => setUploadError(undefined)}>Stäng</button>
         </div>
       }
       {loading &&

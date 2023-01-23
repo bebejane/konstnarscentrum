@@ -16,7 +16,8 @@
 
   li {
     --width: 25%;
-    --padding: 0.5rem;
+    --padding: 0.2rem;
+    position: relative;
     display: flex;
     flex: 0 0 calc(var(--width) - var(--padding));
     min-height: 33.333%;
@@ -62,6 +63,16 @@
       align-items: center;
       justify-content: center;
       background-color: var(--beige-light);
+    }
+
+    .remove {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0;
+      right: 0;
+
     }
   }
 }

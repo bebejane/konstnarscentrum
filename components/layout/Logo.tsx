@@ -10,6 +10,7 @@ import useDevice from '/lib/hooks/useDevice'
 import { useRegion } from '/lib/context/region'
 import { regions } from '/lib/region'
 import { useTheme } from 'next-themes'
+import { RegionLink } from '/components'
 
 export type Props = {
 
@@ -136,15 +137,14 @@ export default function Logo({ }: Props) {
       node.style.transform = type === 'mouseenter' ? `${translateType}(${randomInt(-15, 15)}%)` : `${translateType}(0%)`
     })
   }
-
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
       <div className={cn(s.back, isPageBottom && s[theme])}></div>
       <div className={s.logo}>
         <div className={s.horizontal}>
-          <Link id="horizontal" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
+          <RegionLink id="horizontal" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
             {horizontal.map((l, idx) => <span key={idx}>{l}</span>)}
-          </Link>
+          </RegionLink>
           {pageRegion && !pageRegion?.global &&
             <Link href={`/${pageRegion?.slug}`} className={cn(s.region, horizontal.length === 0 && s.end)}>
               {pageRegion.name.substring(0, (pageRegion.name.length) * regionRatio)}
@@ -152,9 +152,9 @@ export default function Logo({ }: Props) {
           }
         </div>
         <div className={s.vertical} ref={ref}>
-          <Link id="vertical" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
+          <RegionLink id="vertical" href="/" onMouseEnter={handleMouseOver} onMouseLeave={handleMouseOver}>
             {vertical.map((l, idx) => <span key={idx}>{l}</span>)}
-          </Link>
+          </RegionLink>
           {horizontal.length > 0 &&
             <div className={s.space}></div>
           }

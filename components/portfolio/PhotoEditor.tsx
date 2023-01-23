@@ -1,6 +1,5 @@
 import s from "./PhotoBlockEditor.module.scss";
-import { useEffect, useState } from "react";
-import { KCImage as Image, PortfolioContent } from '/components'
+import { KCImage as Image } from '/components'
 
 export type Props = {
   image: FileField,
