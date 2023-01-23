@@ -124,7 +124,10 @@
 
       ul {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
+        @include mq($from: tablet) {
+          flex-direction: row;
+        }
         list-style: none;
 
         li {
@@ -132,9 +135,13 @@
           max-height: 1rem;
 
           .image {
-            min-height: 1rem;
-            max-height: 1rem;
-            height: 1rem;
+            min-height: 0.8rem;
+            max-height: 0.8rem;
+            margin-top: 0.4em;
+            @include mq($from: tablet) {
+              min-height: 1rem;
+              max-height: 1rem;
+            }
           }
         }
       }

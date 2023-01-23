@@ -21,6 +21,10 @@
     margin-left: calc((-1 * var(--grid-unit)) - var(--gutter));
   }
 
+  li a:hover {
+    color: var(--black) !important;
+  }
+
   > li {
     border-right: 1px solid var(--beige-mid);
   }
