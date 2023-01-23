@@ -134,10 +134,15 @@
           margin-right: 1rem;
           max-height: 1rem;
 
+          @include mq($until: tablet) {
+            &:not(:first-of-type) {
+              margin-top: 0.4em;
+            }
+          }
+
           .image {
             min-height: 0.8rem;
             max-height: 0.8rem;
-            margin-top: 0.4em;
             @include mq($from: tablet) {
               min-height: 1rem;
               max-height: 1rem;

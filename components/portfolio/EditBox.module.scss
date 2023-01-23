@@ -6,9 +6,9 @@
   top: 0;
   left: 0;
   z-index: 102;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.2);
   padding: 20px;
-
+  border-radius: 1rem;
   &.show {
     display: flex;
   }

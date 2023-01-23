@@ -60,6 +60,13 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 	return (
 		<div className={s.container}>
 			<h1><RevealText>Konto</RevealText></h1>
+
+			<h3>Redigera portfolio</h3>
+			<Link href={recordToSlug(member)} className={s.portfolioButton}>
+				<button>Gå till din portfolio</button>
+			</Link>
+
+
 			<h3>Uppdatera uppgifter</h3>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<input
@@ -167,9 +174,6 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 				<button disabled={saving}>{saving ? <Loader /> : 'Spara'}</button>
 			</form >
 			<h3>Övrigt</h3>
-			<Link href={recordToSlug(member)} className={s.portfolioButton}>
-				<button>Gå till din portfolio</button>
-			</Link>
 			<SignOut />
 		</div >
 	);

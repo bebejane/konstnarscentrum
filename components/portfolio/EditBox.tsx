@@ -132,12 +132,12 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
               className={s.up}
               disabled={editable?.index === 0}
               onClick={(e) => moveBlock(e, editable, true)}
-            >Upp</button>
+            >↑</button>
             <button
               className={s.down}
               disabled={editable?.index === content.length - 1}
               onClick={(e) => moveBlock(e, editable, false)}
-            >Ner</button>
+            >↓</button>
           </div>
         }
       </div>

@@ -1,5 +1,4 @@
 .container {
-
   input[type="text"],
   textarea,
   select,
@@ -7,10 +6,12 @@
     width: 100%;
   }
 
+  h3:not(:first-of-type) {
+    padding-top: var(--small-space);
+  }
+
   form {
     margin-bottom: 2rem;
-
-
 
     button {
       margin-top: 2rem;
@@ -28,7 +29,6 @@
       align-items: center;
       background-color: var(--beige-light);
       padding: 0.5rem;
-
 
       div {
         flex: 0 0 33.333%;

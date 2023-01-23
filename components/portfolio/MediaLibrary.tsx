@@ -95,7 +95,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               </button>
               :
               <button type="button" onClick={() => onShowLibrary?.(true)}>
-                Välj bild(er)
+                Lägg till bild(er)
               </button>
             :
             <Loader message={progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'} />
