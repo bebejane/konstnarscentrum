@@ -11,7 +11,7 @@ export type Props = {
 
 export default function PhotoEditor({ image, onUpdate, onChoose }: Props) {
 
-  if (!image) return null
+  if (!image?.responsiveImage) return null
 
   return (
     <div className={s.editor}>

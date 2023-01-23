@@ -22,7 +22,7 @@ export default function Search({ }: Props) {
   const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
-  const [query, setQuery] = useState<string | undefined>()
+  const [query, setQuery] = useState<string | undefined>('')
   const ref = useRef<HTMLInputElement | undefined>()
 
   useEffect(() => {

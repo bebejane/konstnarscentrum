@@ -22,7 +22,8 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
 
   const findElement = (id) => {
     const editables = Array.from(document.querySelectorAll('[data-editable]')) as HTMLElement[]
-    return editables.find(el => JSON.parse(el.dataset.editable).id === id)
+
+    return editables.find(el => el.dataset.editable && JSON.parse(el.dataset.editable).id === id)
   }
 
   const reset = () => {
@@ -38,8 +39,10 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
   const init = useCallback(() => {
 
     const handleMouseEnter = (e) => {
-      if (disable) return
       const target = e.target as HTMLElement
+
+      if (disable || !target.dataset.editable) return
+
       const computedStyle = getComputedStyle(target)
       const height = target.clientHeight - (parseFloat(computedStyle.paddingTop) + parseFloat(computedStyle.paddingBottom))
       const width = target.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight))
@@ -69,12 +72,14 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
 
     editables.forEach(el => {
       el.addEventListener('mouseenter', handleMouseEnter)
+      el.addEventListener('mousemove', handleMouseEnter)
       editBox.addEventListener('mouseleave', handleMouseLeave)
     })
 
     return () => {
       editables.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter)
+        el.removeEventListener('mousemove', handleMouseEnter)
         editBox.removeEventListener('mouseleave', handleMouseLeave)
       })
     }
