@@ -54,6 +54,9 @@ query ApplyForMembership {
 		id
 		title
 		intro
+		image {
+			...ImageFragment
+		}
 		content {
 			value
 			blocks

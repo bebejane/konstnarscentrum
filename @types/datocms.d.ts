@@ -340,6 +340,7 @@ type ApplyRecord = RecordInterface & {
   content: ApplyModelContentField;
   createdAt: Scalars['DateTime'];
   id: Scalars['ItemId'];
+  image?: Maybe<FileField>;
   intro?: Maybe<Scalars['String']>;
   slug: Scalars['String'];
   title: Scalars['String'];
@@ -946,9 +947,9 @@ type FileFieldaltArgs = {
 
 type FileFieldblurUpThumbArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
-  punch?: InputMaybe<Scalars['Float']>;
-  quality?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  punch?: Scalars['Float'];
+  quality?: Scalars['Int'];
+  size?: Scalars['Int'];
 };
 
 
@@ -1021,9 +1022,9 @@ type FileFieldInterfacealtArgs = {
 
 type FileFieldInterfaceblurUpThumbArgs = {
   imgixParams?: InputMaybe<ImgixParams>;
-  punch?: InputMaybe<Scalars['Float']>;
-  quality?: InputMaybe<Scalars['Int']>;
-  size?: InputMaybe<Scalars['Int']>;
+  punch?: Scalars['Float'];
+  quality?: Scalars['Int'];
+  size?: Scalars['Int'];
 };
 
 
@@ -5543,7 +5544,7 @@ type AllMemberCategoriesQuery = { __typename?: 'Query', memberCategories: Array<
 type ApplyForMembershipQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, intro?: string | null, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } } | null };
+type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, intro?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, bgColor?: string | null, sizes: string } | null } | null, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } } | null };
 
 type MemberNewsQueryVariables = Exact<{
   slug: Scalars['String'];
