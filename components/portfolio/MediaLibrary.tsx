@@ -10,6 +10,7 @@ export type Props = {
   onSelection?: (images: FileField[]) => void
   onShowLibrary?: (show: boolean) => void
   onError?: (err: Error) => void
+  onRemove?: (id: string) => void
   showLibrary: boolean
   selected?: FileField[]
   multi: boolean
@@ -46,14 +47,16 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   }
 
   const handleRemove = (e, id) => {
-    console.log('remove', id);
     e.stopPropagation()
 
+    if (showLibrary)
+      console.log('remove for real');
+    else {
+      onRemove(id)
+      setSelected(selected.filter((img) => img.id !== id))
+
+    }
   }
-  const handleUploadDone = (upload: any) => handleRefresh()
-  const handleUploadProgress = (progress: number) => setProgress(progress)
-  const handleUploading = (upload: boolean) => setUploading(upload)
-  const handleUploadError = (err: Error) => setUploadError(err)
 
   const handleClick = (e, img) => {
     if (multi && showLibrary)
@@ -62,19 +65,24 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       onSelect(img)
   }
 
+  const handleUploadDone = (upload: any) => handleRefresh()
+  const handleUploadProgress = (progress: number) => setProgress(progress)
+  const handleUploading = (upload: boolean) => setUploading(upload)
+  const handleUploadError = (err: Error) => setUploadError(err)
+
+  useEffect(() => {
+    console.log('set selected from props');
+    setSelected(selectedFromProps)
+  }, [selectedFromProps])
+
   useEffect(() => {
     onSelection?.(selected)
   }, [selected])
 
   useEffect(() => {
-    setSelected(selectedFromProps)
-  }, [selectedFromProps])
-
-  useEffect(() => {
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
-
 
   return (
     <>
@@ -92,7 +100,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               objectFit="contain"
               sizes="(min-width: 66em) 400px"
             />
-            <div className={s.remove} onClick={(e) => handleRemove(e, img.id)}>X</div>
+            <div className={s.remove} onClick={(e) => handleRemove(e, img.id)}>×  </div>
           </li>
         )}
         <li className={s.upload}>
@@ -103,7 +111,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               </button>
               :
               <button type="button" onClick={() => onShowLibrary?.(true)}>
-                Lägg till bild(er)
+                Välj bild(er)
               </button>
             :
             <Loader message={progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'} />

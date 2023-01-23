@@ -72,7 +72,14 @@
       justify-content: center;
       top: 0;
       right: 0;
+      margin: 0.3rem;
+      font-size: 1.5rem;
 
+      color: var(--beige-dark);
+
+      &:hover {
+        color: var(--black);
+      }
     }
   }
 }
