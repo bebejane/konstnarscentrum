@@ -2,6 +2,7 @@
 import { buildClient, buildBlockRecord } from '@datocms/cma-client'
 import withAuthentication from '/lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
+import { recordToSlug } from '/lib/utils'
 import { MemberDocument, MemberImagesDocument } from '/graphql'
 import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes'
 
@@ -126,6 +127,10 @@ export default withAuthentication(async (req, res, session) => {
   try {
     await client.items.update(record.id, newRecord)
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
+    const slug = recordToSlug(member)
+    console.log('revalidating', slug);
+
+    await res.revalidate(slug)
     console.log('updated', record.email)
     return res.status(200).json(member)
 

@@ -92,7 +92,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
 
   useEffect(() => {
     console.log('set selected from props');
-    setSelected(selectedFromProps)
+    //setSelected(selectedFromProps)
   }, [selectedFromProps])
 
 
