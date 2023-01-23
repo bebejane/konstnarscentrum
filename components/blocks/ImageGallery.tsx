@@ -16,6 +16,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 
 	return (
 		<div className={s.gallery} data-editable={editable}>
+			<div className={s.fade}></div>
 			<SwiperReact
 				id={`${id}-swiper-wrap`}
 				className={cn(s.swiper)}

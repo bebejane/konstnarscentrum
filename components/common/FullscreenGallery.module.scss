@@ -75,9 +75,11 @@
       z-index: 100000;
       padding-top: 0.5em;
       padding-bottom: 0.8em;
-      padding-left: 1.5em;
-      padding-right: 1.5em;
-      border-radius: 1.5em;
+      @include mq($from: tablet) {
+        padding-left: 1.5em;
+        padding-right: 1.5em;
+        border-radius: 1.5em;
+      }
       background-color: var(--black);
 
       p {

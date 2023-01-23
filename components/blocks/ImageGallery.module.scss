@@ -14,6 +14,18 @@
     margin-right: calc(-1 * var(--grid-unit));
   }
 
+  .fade {
+    @include mq($from: tablet) {
+      display: none;
+    }
+    height: 100%;
+    width: calc(2 * var(--outer-margin));
+    background: linear-gradient(270deg, rgba(252, 252, 252, 1) 0%, rgba(252, 252, 252, 0) 100%);
+    position: absolute;
+    right: 0;
+    z-index: 100;
+  }
+
   .next {
     @include mq($until: tablet) {
       display: none;
@@ -41,7 +53,7 @@
     user-select: none;
     cursor: pointer;
 
-    >div {
+    > div {
       display: flex;
       flex-direction: row;
 
@@ -51,7 +63,7 @@
         padding-right: var(--gutter);
         //max-height: 20vw;
 
-        >figure {
+        > figure {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -62,7 +74,7 @@
             flex: 1 1 100%;
 
             p {
-              margin: 0
+              margin: 0;
             }
           }
 

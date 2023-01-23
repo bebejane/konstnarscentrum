@@ -5,17 +5,18 @@
   margin-bottom: calc(var(--small-space) + 1rem);
 
   @include mq($until: desktop) {
-    max-width: 100%;
     overflow: hidden;
-
+    width: calc(100% + var(--outer-margin) * 2);
+    margin-left: calc(var(--outer-margin) * -1);
+    margin-right: calc(var(--outer-margin) * -1);
+    padding-left: var(--outer-margin);
   }
 
-  >ul {
+  > ul {
     list-style: none;
     display: flex;
     overflow: hidden;
     padding-left: 0 !important;
-
 
     @include mq($until: tablet) {
       margin-right: calc(-1 * var(--outer-margin));

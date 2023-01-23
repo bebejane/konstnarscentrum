@@ -8,7 +8,9 @@
 
   table {
     columns: 2;
-    display: block;
+    @include mq($from: tablet) {
+      display: block;
+    }
     list-style: none;
     padding-left: 0;
 
@@ -17,9 +19,10 @@
 
       span {
         color: var(--beige-dark);
-        padding-right: 0.5em;
+        padding-right: 1em;
 
         @include mq($from: tablet) {
+          padding-right: 0.5em;
           width: 30%;
         }
 
