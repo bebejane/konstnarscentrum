@@ -2,7 +2,7 @@ import s from "./index.module.scss";
 import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import SignIn from "../../../../components/account/SignIn";
+import SignIn from "/components/account/SignIn";
 import { ClientSafeProvider, getCsrfToken, getProviders, useSession } from "next-auth/react";
 import { RevealText } from "/components";
 import { useEffect, useState } from "react";

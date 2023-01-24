@@ -1,7 +1,7 @@
 import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import SignOut from "../../../components/account/SignOut";
+import SignOut from "/components/account/SignOut";
 import { ClientSafeProvider, getCsrfToken, getSession } from "next-auth/react";
 import { MemberDocument, AllMemberCategoriesDocument } from "/graphql";
 import { apiQuery } from "dato-nextjs-utils/api";
