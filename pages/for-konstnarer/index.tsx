@@ -4,6 +4,7 @@ import { GetStaticProps } from "next";
 import { AllMembersWithPortfolioDocument } from "/graphql";
 import { apiQueryAll, isServer, recordToSlug } from "/lib/utils";
 import Link from "next/link";
+import React from 'react';
 
 export type Props = {
   membersByRegion: MemberRecord[][]
@@ -18,21 +19,20 @@ export default function ForArtistsHome({ membersByRegion, region }: Props) {
 
       {membersByRegion.map((members, i) => {
         return (
-          <>
+          <React.Fragment key={i}>
             {membersByRegion.length > 1 &&
-              <h2>{members[0].region.name}</h2>
+              <h2 key={`h${i}`}>{members[0].region.name}</h2>
             }
             <p key={i}>
               {members?.map((member, idx) =>
-                <Link key={idx} href={recordToSlug(member)}>
+                <Link key={member.id} href={recordToSlug(member)}>
                   {member.fullName}
                 </Link>
               )}
             </p>
-          </>
+          </React.Fragment>
         )
       })}
-
     </div>
   );
 }

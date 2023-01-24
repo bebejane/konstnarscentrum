@@ -130,7 +130,7 @@ export default withAuthentication(async (req, res, session) => {
 
   // Remove undefined
   Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
-  console.log(JSON.stringify(newRecord, null, 2));
+  //console.log(JSON.stringify(newRecord, null, 2));
 
   try {
     await client.items.update(record.id, newRecord)
@@ -138,7 +138,7 @@ export default withAuthentication(async (req, res, session) => {
     const slug = recordToSlug(member)
     console.log('revalidating', slug);
 
-    res.revalidate(slug).then(() => console.log('revalidated', slug))
+    res.revalidate(slug).then(() => console.log('done', slug))
     console.log('updated', record.email)
     return res.status(200).json(member)
 

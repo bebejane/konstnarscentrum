@@ -20,7 +20,18 @@ export default function Video({ data, editable }) {
 	return (
 		<section className={s.video} data-editable={editable} ref={ref} >
 			{provider === 'youtube' ?
-				<Youtube videoId={providerUid} className={s.player} style={style} />
+				<Youtube
+					opts={{
+						playerVars: {
+							autoplay: false,
+							controls: 0,
+							rel: 0
+						}
+					}}
+					videoId={providerUid}
+					className={s.player}
+					style={style}
+				/>
 				: provider === 'vimeo' ?
 					<Vimeo video={providerUid} className={s.player} style={style} />
 					:
