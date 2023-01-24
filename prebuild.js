@@ -21,6 +21,7 @@ const { buildClient } = require("@datocms/cma-client-node");
 			id: districts.find((el) => el.slug === slugify(name, { lower: true })).id,
 			roleId,
 			name,
+			email: districts.find((el) => el.slug === slugify(name, { lower: true })).email,
 			tokenId: tokens.find((t) => t.role?.id === roleId)?.id,
 			slug: slugify(name, { lower: true }),
 			global: districts.find((el) => el.slug === slugify(name, { lower: true })).global || false,
