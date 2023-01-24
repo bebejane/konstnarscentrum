@@ -16,10 +16,10 @@ export type Props = {
   multi: boolean
 }
 
-export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected: selectedFromProps = [] }: Props) {
+export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected = [] }: Props) {
 
   const { data: session, status } = useSession()
-  const [selected, setSelected] = useState<FileField[]>(selectedFromProps)
+  //const [selected, setSelected] = useState<FileField[]>()
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<Error | undefined>()
@@ -48,7 +48,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     e.stopPropagation()
 
     const rollbackSelected = [...selected]
-    setSelected(selected.filter((img) => img.id !== id))
+    onSelection(selected.filter((img) => img.id !== id))
 
     if (!showLibrary) return onRemove(id)
 
@@ -67,7 +67,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       setImages(images)
     } catch (err) {
       setError(err)
-      setSelected(rollbackSelected)
+      onSelection(rollbackSelected)
     }
     setLoading(false)
 
@@ -75,7 +75,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
 
   const handleClick = (e, img) => {
     if (multi && showLibrary)
-      setSelected((s) => s.find(el => el.id === img.id) ? [...s.filter(el => el.id !== img.id)] : [...s, img])
+      onSelection(selected.find(el => el.id === img.id) ? [...selected.filter(el => el.id !== img.id)] : [...selected, img])
     else
       onSelect(img)
   }
@@ -87,13 +87,16 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
 
 
   useEffect(() => {
-    onSelection?.(selected)
-  }, [selected])
+    //console.log('onSel');
+
+    //onSelection?.(selected)
+  }, [selected, onSelection])
 
   useEffect(() => {
     console.log('set selected from props');
     //setSelected(selectedFromProps)
-  }, [selectedFromProps])
+
+  }, [selected])
 
 
   useEffect(() => {

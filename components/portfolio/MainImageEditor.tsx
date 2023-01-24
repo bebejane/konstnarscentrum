@@ -28,7 +28,7 @@ export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Pr
     >
       {!showMediaLibrary ?
         <PhotoEditor
-          key={image.title}
+          key={image.id}
           image={image}
           onUpdate={onUpdate}
           onChoose={() => setShowMediaLibrary(true)}

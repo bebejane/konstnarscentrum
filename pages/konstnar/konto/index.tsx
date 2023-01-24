@@ -3,7 +3,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignOut from "/components/auth/SignOut";
 import { ClientSafeProvider, getCsrfToken, getSession } from "next-auth/react";
-import { MemberDocument, AllMemberCategoriesDocument } from "/graphql";
+import { AllMembersDocument, MemberDocument, AllMemberCategoriesDocument } from "/graphql";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
 import { recordToSlug } from "/lib/utils";

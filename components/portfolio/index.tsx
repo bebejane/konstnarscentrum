@@ -39,6 +39,7 @@ export default function Portfolio({
   useEffect(() => {
     preview && window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [preview])
+  console.log(block);
 
   return (
     <div className={s.container}>
@@ -54,6 +55,7 @@ export default function Portfolio({
       }
       {block?.__typename === 'ImageRecord' ?
         <PhotoBlockEditor
+          key={block.id}
           block={block}
           content={content}
           onClose={onClose}
@@ -72,6 +74,7 @@ export default function Portfolio({
       }
       {mainImage &&
         <MainImageEditor
+          key={mainImage.id}
           image={mainImage}
           onUpdate={(image) => setMainImage(image)}
           onClose={() => setMainImage(undefined)}

@@ -14,7 +14,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
 
   const [image, setImage] = useState<FileField | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
-  const [selected, setSelected] = useState<FileField[] | undefined>(blockFromProps.image)
+  const [selected, setSelected] = useState<FileField[] | undefined>()
   const [isMediaLibrary, setIsMediaLibrary] = useState(false)
 
   const handleSave = async () => {
@@ -29,6 +29,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     }
     if (image)
       return setImage(undefined)
+    console.log(selected);
 
     const images = [...selected?.map(el => el.id === image?.id ? image : el).filter(i => i)]
     const b = { ...block, image: images }
@@ -37,21 +38,17 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
 
   const handleSaveImage = () => {
     if (block.__typename !== 'ImageRecord') return
-    onUpdate({ ...block, image: block.image.map((i) => i.id === image.id ? image : i) })
+    const updatedBlock = { ...block, image: block.image.map((i) => i.id === image.id ? image : i) }
+    onUpdate(updatedBlock)
     setImage(undefined)
   }
 
   const handleUpdateImage = async (image: FileField) => {
     if (block.__typename !== 'ImageRecord') return
-    const updatedBlock = { ...block, image: block.image.map(i => i.id === image.id ? image : i) }
-    setSelected(selected?.map((i) => i.id === image.id ? image : i))
-    onUpdate(updatedBlock)
     setImage(image)
   }
 
   const handleBack = () => {
-    console.log('back', isMediaLibrary, block.image);
-
     if (isMediaLibrary) {
       setImage(undefined)
       setSelected(undefined)
@@ -70,7 +67,10 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     onUpdate({ ...block, image: block.image.filter((i) => i.id !== id) })
   }
 
-  useEffect(() => setBlock(blockFromProps), [blockFromProps])
+  useEffect(() => {
+    setBlock(blockFromProps)
+    setSelected(blockFromProps.image)
+  }, [blockFromProps])
 
   if (!block) return null
 
@@ -99,6 +99,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
       </PortfolioContent>
       :
       <PortfolioContent
+
         onClose={onClose}
         header={'Redigera bild'}
         save={'Ok'}
