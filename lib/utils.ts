@@ -2,7 +2,7 @@ import { TypedDocumentNode } from "@apollo/client/core";
 import { datoError } from "dato-nextjs-utils/api";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { regions } from "/lib/region";
-import { format, isAfter, isBefore } from "date-fns";
+import { isAfter, isBefore } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import type { ApiQueryOptions } from "dato-nextjs-utils/api";
 import React from "react";
@@ -179,14 +179,9 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     for (let i = 0; i < props.length; i++) {
       const k = props[i]
       const el = res[props[i]];
-      if (Array.isArray(el)) {
-        if (!results[k])
-          results[k] = [...el]
-        else
-          results[k] = results[k].concat([...el])
-        console.log('x', results[k].length);
-
-      } else
+      if (Array.isArray(el))
+        results[k] = !results[k] ? [...el] : results[k].concat([...el])
+      else
         results[k] = el;
     }
 
