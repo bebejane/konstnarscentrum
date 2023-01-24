@@ -22,12 +22,12 @@ export default catchErrorsFrom(async (req, res) => {
     else if (!accessToken)
       throw `Access token is empty`
 
-    const roleClient = buildClient({apiToken:accessToken})
+    const roleClient = buildClient({ apiToken: accessToken })
     const hashedPassword = await hashPassword(password)
     const member = await roleClient.items.create({
-      item_type: { 
-        type: 'item_type', 
-        id: process.env.DATOCMS_APPLICATION_MODEL_ID 
+      item_type: {
+        type: 'item_type',
+        id: process.env.DATOCMS_APPLICATION_MODEL_ID
       },
       firstName,
       lastName,

@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import s from "./MediaLibrary.module.scss";
 import cn from 'classnames'
 import { KCImage as Image } from '/components'
-import { Loader, FileInput } from "/components";
+import { Loader, FileUpload } from "/components";
 import { useSession } from "next-auth/react"
 
 export type Props = {
@@ -157,7 +157,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         </div>
       }
 
-      <FileInput
+      <FileUpload
         ref={uploadRef}
         customData={{}}
         tags={[session?.user.email]}
@@ -166,6 +166,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         onProgress={handleUploadProgress}
         onUploading={handleUploading}
         onError={handleUploadError}
+        mediaLibrary={true}
       />
     </>
   )

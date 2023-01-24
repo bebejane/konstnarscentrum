@@ -1,20 +1,27 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
 import text from './text.json'
 import memberService from "/lib/services/member";
-import Link from "next/link";
 import { SubmitButton } from "./Auth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
+import { FileUpload } from '/components'
+import { isEmail } from "/lib/utils";
+import type { Upload } from '/components/common/FileUpload'
 
 export default function Apply({ regions = [] }) {
-
 	const [application, setApplication] = useState();
+	const successRef = useRef<HTMLDivElement | undefined>()
+
+	useEffect(() => {
+		application && successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+	}, [application, successRef])
+
 	return (
-		<div className={styles.container}>
+		<div className={s.container}>
 			{!application ? (
 				<ApplicationForm regions={regions} setApplication={setApplication} />
 			) : (
-				<div className={styles.success}>
+				<div className={s.success} ref={successRef}>
 					<h1>{text.thanksForRegistering}</h1>
 					<p>{text.reviewYourRegistration}</p>
 				</div>
@@ -24,8 +31,27 @@ export default function Apply({ regions = [] }) {
 }
 
 const ApplicationForm = ({ regions, setApplication }) => {
+
 	const [error, setError] = useState<undefined | Error>();
-	const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
+	const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
+	const [upload, setUpload] = useState<Upload | undefined>()
+	const [uploading, setUploading] = useState(false)
+	const [progress, setProgress] = useState<number | undefined>()
+	const [uploadError, setUploadError] = useState<Error | undefined>()
+	const uploadRef = useRef<HTMLInputElement | undefined>()
+	const email = watch("email");
+
+	const handleUploadDone = (upload: Upload) => {
+		setUpload(upload)
+		setProgress(undefined)
+		setUploading(false)
+	}
+	useEffect(() => { uploading && setUpload(undefined) }, [uploading])
+	useEffect(() => {
+		if (!uploadError) return
+		setProgress(undefined)
+		setUploading(false)
+	}, [uploadError])
 
 	useEffect(() => {
 		isSubmitting && setError(undefined)
@@ -33,17 +59,27 @@ const ApplicationForm = ({ regions, setApplication }) => {
 
 	const onSubmitApplication = async ({ email, firstName, lastName, education, webpage, message, regionId }) => {
 		try {
-			const app = await memberService.apply({ email, firstName, lastName, education, webpage, message, regionId });
+			const app = await memberService.apply({
+				email,
+				firstName,
+				lastName,
+				education,
+				webpage,
+				message,
+				regionId,
+				pdf: upload ? { upload_id: upload.id } : undefined
+			});
 			setApplication(app);
 		} catch (err) {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+
 	return (
 		<>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitApplication)}>
+			<form className={s.form} onSubmit={handleSubmit(onSubmitApplication)}>
 				<input
-					className={errors.email && styles.error}
+					className={errors.email && s.error}
 					placeholder={`${text.email}...`}
 					{...register("email", {
 						required: true,
@@ -53,40 +89,41 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				/>
 				<input
 					{...register("firstName", { required: true })}
-					className={errors.firstName && styles.error}
+					className={errors.firstName && s.error}
 					placeholder={`${text.firstName}...`}
 
 				/>
 				<input
 					{...register("lastName", { required: true })}
-					className={errors.lastName && styles.error}
+					className={errors.lastName && s.error}
 					placeholder={`${text.lastName}...`}
 
 				/>
 				<input
 					{...register("webpage", { required: false })}
-					className={errors.webpage && styles.error}
+					className={errors.webpage && s.error}
 					placeholder={`${text.webpage}...`}
 
 				/>
 				<textarea
 					{...register("education", { required: false })}
 					rows={5}
-					className={errors.education && styles.error}
+					className={errors.education && s.error}
 					placeholder={`${text.education}...`}
 				/>
 				<textarea
 					{...register("message", { required: true })}
 					rows={10}
-					className={errors.message && styles.error}
+					className={errors.message && s.error}
 					placeholder={`${text.message}...`}
 				/>
+
 				<select
 					{...register("regionId", {
 						required: true,
 						validate: (value: string) => regions.find(({ id }) => value === id) !== undefined
 					})}
-					className={errors.roledId && styles.error}
+					className={errors.roledId && s.error}
 					placeholder={`${text.region}...`}
 				>
 					<option value="false">Välj region</option>
@@ -96,9 +133,30 @@ const ApplicationForm = ({ regions, setApplication }) => {
 						</option>
 					))}
 				</select>
+				<button
+					type="button"
+					onClick={() => uploadRef.current?.click()}
+					disabled={progress !== undefined || uploading || !isEmail(email)}
+				>
+					{upload ? upload.basename : progress === undefined ? 'Ladda upp pdf' : `${progress}%`}
+				</button>
+				{uploadError &&
+					<div className={s.formError}>Det uppstod ett fel vid uppladdning!</div>
+				}
+				<FileUpload
+					ref={uploadRef}
+					customData={{}}
+					tags={[]}
+					accept=".pdf"
+					onDone={handleUploadDone}
+					onProgress={setProgress}
+					onUploading={setUploading}
+					onError={setUploadError}
+					mediaLibrary={false}
+				/>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
 				{error &&
-					<p className={styles.formError}>{`${error.error || error.message || error}`}</p>
+					<p className={s.formError}>{`${error.error || error.message || error}`}</p>
 				}
 			</form>
 		</>

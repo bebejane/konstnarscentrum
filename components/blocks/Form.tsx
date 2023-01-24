@@ -1,11 +1,9 @@
 import s from './Form.module.scss'
 import cn from 'classnames'
-import { buildClient } from '@datocms/cma-client-browser';
-import React, { useEffect, useRef, useState, useCallback } from 'react'
-import { OnProgressInfo } from '@datocms/cma-client-browser';
+import React, { useEffect, useRef, useState } from 'react'
 import { Loader } from '/components';
-
-const client = buildClient({ apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN });
+import { FileUpload } from '/components'
+import type { Upload } from '/components/common/FileUpload'
 
 export type ButtonBlockProps = {
 	recordId: string,
@@ -17,10 +15,15 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
 	const [error, setError] = useState<Error | undefined>()
+
 	const [loading, setLoading] = useState(false)
 	const [upload, setUpload] = useState<Upload | undefined>()
+	const [uploading, setUploading] = useState(false)
+	const [progress, setProgress] = useState<number | undefined>()
+	const [uploadError, setUploadError] = useState<Error | undefined>()
 	const [success, setSuccess] = useState<boolean | undefined>()
 	const confirmationRef = useRef<HTMLParagraphElement | undefined>()
+	const uploadRef = useRef<HTMLInputElement | undefined>()
 
 	const handleInputChange = ({ target: { id, value } }) => {
 		setFormValues({ ...formValues, [id]: value })
@@ -54,9 +57,22 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 		}).catch((err) => setError(err)).finally(() => setLoading(false))
 	}
 
+	const handleUploadDone = (upload: Upload) => {
+		setUpload(upload)
+		setProgress(undefined)
+		setUploading(false)
+	}
+
+	useEffect(() => { uploading && setUpload(undefined) }, [uploading])
 	useEffect(() => {
-		if (!success)
-			confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+		if (uploadError) {
+			setProgress(undefined)
+			setUploading(false)
+		}
+	}, [uploading])
+
+	useEffect(() => {
+		!success && confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 	}, [success])
 
 	return (
@@ -84,12 +100,25 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 											return <textarea rows={6}  {...props} />
 										case 'PdfFormRecord':
 											return (
-												<FileInput
-													{...props}
-													label="Välj fil..."
-													onError={(err) => setError(err)}
-													onChange={(upload) => setFormValues({ ...formValues, [fieldId]: upload?.url })}
-												/>
+												<>
+													<button type="button" onClick={() => uploadRef.current?.click()} disabled={progress !== undefined || uploading}>
+														{upload ? upload.basename : progress === undefined ? 'Ladda upp pdf' : `${progress}%`}
+													</button>
+													{uploadError &&
+														<div className={s.error}>Det uppstod ett fel vid uppladdning!</div>
+													}
+													<FileUpload
+														ref={uploadRef}
+														customData={{}}
+														tags={['form-upload', `${props.formId}`]}
+														accept=".pdf"
+														onDone={handleUploadDone}
+														onProgress={setProgress}
+														onUploading={setUploading}
+														onError={setUploadError}
+														mediaLibrary={false}
+													/>
+												</>
 											)
 										default:
 											return <div key={idx}>Unsupported: {__typename}</div>
@@ -112,88 +141,5 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 				</form>
 			}
 		</section>
-	)
-}
-
-
-const FileInput = ({ label, formId, onChange, onError }) => {
-
-	const [uploading, setUploading] = useState(false)
-	const [error, setError] = useState<Error | undefined>()
-	const [upload, setUpload] = useState<Upload | undefined>()
-	const [progress, setProgress] = useState<number | undefined>()
-	const ref = useRef<HTMLInputElement | null>(null)
-
-	const resetInput = () => {
-		setUpload(undefined)
-		setUploading(false)
-		setProgress(undefined)
-		setError(undefined)
-		ref.current.value = ''
-	}
-
-	const createUpload = useCallback((file: File) => {
-		if (!file) return
-
-		resetInput()
-		setUploading(true)
-
-		return client.uploads.createFromFileOrBlob({
-			fileOrBlob: file,
-			filename: file.name,
-			tags: ['form-upload', `${formId}`],
-			default_field_metadata: {
-				en: {
-					alt: `Form upload: ${formId}`,
-					title: `Form upload: ${formId}`,
-					custom_data: { formId }
-				}
-			},
-			onProgress: (info: OnProgressInfo) => {
-				if (info.payload && 'progress' in info.payload) {
-					setProgress(info.payload.progress)
-					if (info.payload.progress >= 100) {
-						setUploading(false)
-					}
-				}
-			},
-		})
-	}, [formId])
-
-	const handleChange = useCallback((event) => {
-		const file = event.target.files[0];
-		createUpload(file).then((upload) => setUpload(upload)).catch(setError)
-	}, [createUpload])
-
-	useEffect(() => {
-		if (ref.current === null) return
-
-		ref.current?.removeEventListener('change', handleChange);
-		ref.current.addEventListener('change', handleChange);
-
-	}, [ref, createUpload, handleChange])
-
-	useEffect(() => {
-		onChange(upload)
-	}, [upload])
-
-	useEffect(() => {
-		onError(error)
-	}, [error])
-
-	return (
-		<p>
-			{!upload ?
-				<button type="button" onClick={() => ref.current?.click()} disabled={progress !== undefined || uploading}>
-					{progress !== undefined ? `${progress}%` : label}
-				</button>
-				:
-				<div className={s.filename}>
-					<span>{upload.filename}</span>
-					<span onClick={resetInput}>Ta bort</span>
-				</div>
-			}
-			<input type="file" ref={ref} accept={'.pdf'} />
-		</p>
 	)
 }

@@ -4,8 +4,7 @@ import { GetStaticProps } from "next";
 import { regions } from "/lib/region";
 import { Apply } from "/components";
 import { ApplyForMembershipDocument } from "/graphql";
-import { StructuredContent, RevealText, Article } from "/components";
-import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
+import { Article } from "/components";
 
 export type Props = {
 	apply: ApplyRecord

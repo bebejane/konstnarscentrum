@@ -26,8 +26,6 @@ export default function MemberNewsArticle({ memberNews: {
 	region
 } }: Props) {
 
-	console.log(id);
-
 	return (
 		<>
 			<Article

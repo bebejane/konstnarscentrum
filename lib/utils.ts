@@ -74,6 +74,7 @@ export const recordToSlug = (record: any, region?: Region): string => {
 }
 
 export const isEmail = (string: string): boolean => {
+  if (!string) return false
   const matcher = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   if (string.length > 320) return false;
   return matcher.test(string);

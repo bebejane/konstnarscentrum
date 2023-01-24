@@ -7,7 +7,7 @@ import { memberController, applicationController } from '/lib/controllers';
 
 export default catchErrorsFrom(async (req, res) => {
 
-  const { email, firstName, lastName, message, regionId, education, webpage } = req.body
+  const { email, firstName, lastName, message, regionId, education, webpage, pdf } = req.body
   const memberExist = await memberController.exists(email)
 
   if (memberExist)
@@ -23,19 +23,18 @@ export default catchErrorsFrom(async (req, res) => {
   const region = regions.find(r => r.id === regionId)
   const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
   const approvalToken = await generateToken(email)
-  const roleClient = buildClient({ apiToken: roleApiToken });
+  const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main' });
+  console.log(pdf);
 
   const application = await roleClient.items.create({
-    item_type: {
-      type: 'item_type',
-      id: process.env.DATOCMS_APPLICATION_MODEL_ID
-    },
+    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
     email,
     first_name: firstName,
     last_name: lastName,
     education,
     webpage,
     message,
+    pdf,
     approval_token: approvalToken,
     approved: false
   });

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
-import type { Upload } from '@datocms/cma-client-browser/dist/types/generated/resources';
+import { SimpleSchemaTypes } from '@datocms/cma-client';
 
-const MAX_ALLOWED_IMAGES = 7
+const MAX_ALLOWED_IMAGES = 10
 
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,
-  environment: process.env.NEXT_PUBLIC_GRAPHQL_ENVIRONMENT === 'dev' ? 'dev' : 'main'
+  environment: process.env.NEXT_PUBLIC_GRAPHQL_ENVIRONMENT ?? 'main'
 });
 
 export type Props = {
@@ -18,15 +18,19 @@ export type Props = {
   onUploading: (uploading: boolean) => void,
   onProgress: (percentage: number) => void,
   onError: (err: Error) => void,
+  mediaLibrary: boolean
 }
 
-const FileInput = React.forwardRef<HTMLInputElement, Props>(({
+export type Upload = SimpleSchemaTypes.Upload;
+
+const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
   customData = {},
   tags = [],
   accept,
   onDone,
   onUploading,
   onProgress,
+  mediaLibrary,
   onError
 }, ref) => {
 
@@ -55,17 +59,20 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
 
   const createUpload = useCallback(async (file: File): Promise<Upload> => {
 
-    if (!file) return Promise.reject(new Error('Ingen bild vald'))
+    if (!file)
+      return Promise.reject(new Error('Ingen fil vald'))
 
-    try {
-      const images = await fetchUserImages()
-      if (images.length > MAX_ALLOWED_IMAGES)
-        return Promise.reject(new Error(`Det går max att ladda upp ${MAX_ALLOWED_IMAGES} antal bilder`))
-    } catch (err) {
-      setError(err as Error)
-      return
+    if (mediaLibrary) {
+      try {
+        const images = await fetchUserImages()
+        if (images.length > MAX_ALLOWED_IMAGES)
+          return Promise.reject(new Error(`Det går max att ladda upp ${MAX_ALLOWED_IMAGES} antal bilder`))
+      } catch (err) {
+        setError(err as Error)
+        return
+      }
     }
-    console.log('createupload');
+
     resetInput()
     onUploading(true)
 
@@ -88,12 +95,15 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
       }).then(resolve).catch(reject)
     })
 
-  }, [customData, onUploading, onProgress, tags, resetInput])
+  }, [customData, onUploading, onProgress, tags, resetInput, mediaLibrary])
 
   const handleChange = useCallback((event) => {
     const file = event.target.files[0];
     if (!file) return
-    createUpload(file).then((upload) => onDone(upload)).catch((err) => onError(err)).finally(() => onUploading(false))
+    createUpload(file)
+      .then((upload) => onDone(upload))
+      .catch((err) => onError(err))
+      .finally(() => onUploading(false))
   }, [createUpload, onUploading, onDone, onError])
 
   useEffect(() => {
@@ -109,5 +119,5 @@ const FileInput = React.forwardRef<HTMLInputElement, Props>(({
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })
 
-FileInput.displayName = 'FileInput'
-export default FileInput;
+FileUpload.displayName = 'FileUpload'
+export default FileUpload;
