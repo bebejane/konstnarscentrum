@@ -198,7 +198,6 @@ export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [Al
 	if (!session)
 		return { redirect: { destination: '/konstnar/konto/logga-in', permanent: false } }
 
-
 	const { member } = await apiQuery(MemberDocument, { variables: { email: session.user.email } })
 
 	if (!member)
