@@ -8,7 +8,7 @@ import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchema
 
 export const client = buildClient({
   apiToken: process.env.GRAPHQL_API_TOKEN_FULL,
-  environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main'
+  environment: process.env.DATOCMS_ENVIRONMENT ?? 'main'
 })
 
 export const parseDatoError = (err: any) => {

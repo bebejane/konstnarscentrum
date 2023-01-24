@@ -67,7 +67,6 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 				<button>Gå till din portfolio</button>
 			</Link>
 
-
 			<h3>Uppdatera uppgifter</h3>
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<input
@@ -198,6 +197,7 @@ export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [Al
 
 	if (!session)
 		return { redirect: { destination: '/konstnar/konto/logga-in', permanent: false } }
+
 
 	const { member } = await apiQuery(MemberDocument, { variables: { email: session.user.email } })
 

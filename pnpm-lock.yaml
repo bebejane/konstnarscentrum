@@ -68,6 +68,7 @@ specifiers:
   nextjs-cors: ^2.1.2
   nextjs-google-analytics: ^2.2.0
   nodemailer: ^6.8.0
+  nodemailer-postmark-transport: ^5.2.1
   nodemailer-sendgrid-transport: ^0.2.0
   nprogress: ^0.2.0
   react: ^18.2.0
@@ -121,7 +122,7 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79_yqvwvv5fkd7ccxhl6hgbauxp6m
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556_yqvwvv5fkd7ccxhl6hgbauxp6m
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   graphql: 16.6.0
@@ -145,6 +146,7 @@ dependencies:
   nextjs-cors: 2.1.2_next@13.1.0
   nextjs-google-analytics: 2.2.0_next@13.1.0+react@18.2.0
   nodemailer: 6.8.0
+  nodemailer-postmark-transport: 5.2.1_nodemailer@6.8.0
   nodemailer-sendgrid-transport: 0.2.0
   nprogress: 0.2.0
   react: 18.2.0
@@ -2427,8 +2429,8 @@ packages:
     resolution: {integrity: sha512-6iNixFzCndH+Bl4FetQzOMjxCJqg8fs0LAlZviig1K6mIjOWH2m2oPcHcOg1Ta5VCe7Bx5KG1Hs+NrWDUkBt9A==}
     dev: false
 
-  /@next/env/13.1.3:
-    resolution: {integrity: sha512-ye0yvGmlzQQJnzNC7tC/ZhgRMd0s54msgrDOft1SjEG1Fbb+RBxGsalPqG3tUGuchA25z3npAtkFoAP8d2wPnw==}
+  /@next/env/13.1.5:
+    resolution: {integrity: sha512-0Ry4NhJy6qLbXhvxPRUQ1H6RzgtryGdUto7hfgAK0Iw/bScgeVjwLZdfhm2iT7qsOS32apo9cWzLCxjc6iGPsA==}
     dev: false
 
   /@next/eslint-plugin-next/12.3.2:
@@ -3615,6 +3617,10 @@ packages:
     engines: {node: '>=0.4.0'}
     hasBin: true
 
+  /addressparser/1.0.1:
+    resolution: {integrity: sha512-aQX7AISOMM7HFE0iZ3+YnD07oIeJqWGVnJ+ZIKaBZAk03ftmVYVqsGas/rbXKR21n4D/hKCSHypvcyOkds/xzg==}
+    dev: false
+
   /agent-base/6.0.2:
     resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
     engines: {node: '>= 6.0.0'}
@@ -4142,7 +4148,6 @@ packages:
 
   /async/3.2.4:
     resolution: {integrity: sha512-iAB+JbDEGXhyIUavoDl9WP/Jj106Kz9DEn1DPgYw5ruDn0e3Wgi3sKFm55sASdGBNOQB8F59d9qQ7deqrHA8wQ==}
-    dev: true
 
   /asynckit/0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
@@ -4193,6 +4198,14 @@ packages:
 
   /axios/0.21.4:
     resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.15.2
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
+  /axios/0.25.0:
+    resolution: {integrity: sha512-cD8FOb0tRH3uuEe6+evtAbgJtfxr7ly3fQjYcMcuPlgkwVS9xboaVIpcDV+cYQe+yGykgwZCs1pzjntcGa6l5g==}
     dependencies:
       follow-redirects: 1.15.2
     transitivePeerDependencies:
@@ -5657,6 +5670,11 @@ packages:
   /emoji-regex/9.2.2:
     resolution: {integrity: sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg==}
     dev: true
+
+  /encoding-japanese/2.0.0:
+    resolution: {integrity: sha512-++P0RhebUC8MJAwJOsT93dT+5oc5oPImp1HubZpAuCZ5kTLnhuuBhKHj2jJeO/Gj93idPBWmIuQ9QWMe5rX3pQ==}
+    engines: {node: '>=8.10.0'}
+    dev: false
 
   /encoding/0.1.13:
     resolution: {integrity: sha512-ETBauow1T35Y/WZMkio9jiM0Z5xjHHmJ4XmjZOq1l/dXz3lr2sRn87nJy20RupqSh1F2m3HHPSp8ShIPQJrJ3A==}
@@ -8000,6 +8018,23 @@ packages:
       type-check: 0.4.0
     dev: true
 
+  /libbase64/1.2.1:
+    resolution: {integrity: sha512-l+nePcPbIG1fNlqMzrh68MLkX/gTxk/+vdvAb388Ssi7UuUN31MI44w4Yf33mM3Cm4xDfw48mdf3rkdHszLNew==}
+    dev: false
+
+  /libmime/5.2.0:
+    resolution: {integrity: sha512-X2U5Wx0YmK0rXFbk67ASMeqYIkZ6E5vY7pNWRKtnNzqjvdYYG8xtPDpCnuUEnPU9vlgNev+JoSrcaKSUaNvfsw==}
+    dependencies:
+      encoding-japanese: 2.0.0
+      iconv-lite: 0.6.3
+      libbase64: 1.2.1
+      libqp: 2.0.1
+    dev: false
+
+  /libqp/2.0.1:
+    resolution: {integrity: sha512-Ka0eC5LkF3IPNQHJmYBWljJsw0UvM6j+QdKRbWyCdTmYwvIDE6a7bCm0UkTAL/K+3KXK5qXT/ClcInU01OpdLg==}
+    dev: false
+
   /lilconfig/2.0.6:
     resolution: {integrity: sha512-9JROoBW7pobfsx+Sq2JsASvCo6Pfo6WWoUW79HuB1BCoBXD4PLWJPqDF6fNj67pqBYTbAHkE57M1kS/+L1neOg==}
     engines: {node: '>=10'}
@@ -8471,17 +8506,17 @@ packages:
       - supports-color
     dev: false
 
-  /mdast-util-to-hast/12.2.5:
-    resolution: {integrity: sha512-EFNhT35ZR/VZ85/EedDdCNTq0oFM+NM/+qBomVGQ0+Lcg0nhI8xIwmdCzNMlVlCJNXRprpobtKP/IUh8cfz6zQ==}
+  /mdast-util-to-hast/12.2.6:
+    resolution: {integrity: sha512-Kfo1JNUsi6r6CI7ZOJ6yt/IEKMjMK4nNjQ8C+yc8YBbIlDSp9dmj0zY90ryiu6Vy4CVGv0zi1H4ZoIaYVV8cwA==}
     dependencies:
       '@types/hast': 2.3.4
       '@types/mdast': 3.0.10
       mdast-util-definitions: 5.1.1
       micromark-util-sanitize-uri: 1.1.0
       trim-lines: 3.0.1
-      unist-builder: 3.0.0
+      unist-builder: 3.0.1
       unist-util-generated: 2.0.1
-      unist-util-position: 4.0.3
+      unist-util-position: 4.0.4
       unist-util-visit: 4.1.1
     dev: false
 
@@ -9485,6 +9520,34 @@ packages:
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
 
+  /nodemailer-build-attachment/3.0.0:
+    resolution: {integrity: sha512-8hoic5t/tpNMfrRoHW7rwpEpjrp1ZMSYloBZHhCZHnin+Htxr+egR4ufrFeHC0ueSFjmsvMDr5veaQ4KpYvTNA==}
+    engines: {node: '>=10'}
+    dependencies:
+      libbase64: 1.2.1
+      libmime: 5.2.0
+      nodemailer-fetch: 2.1.0
+    dev: false
+
+  /nodemailer-fetch/2.1.0:
+    resolution: {integrity: sha512-XwPvtBfUgIHhrJora9wIRbI4fvx8iYpSE2iItpM3e+SnsVRKm+9UeMfKQbk8I1WcOaT370E8oaLJE/vN15/ggQ==}
+    dev: false
+
+  /nodemailer-postmark-transport/5.2.1_nodemailer@6.8.0:
+    resolution: {integrity: sha512-PG9sXWzY7FKAFVr4VRetzk0PqiToBtDH0Hf7Q9dBoswr+rufpha5yXybLtLEFzmr4y1/5NE3MiwxGE/MdbHREw==}
+    engines: {node: '>=8'}
+    peerDependencies:
+      nodemailer: '>=4.x'
+    dependencies:
+      addressparser: 1.0.1
+      async: 3.2.4
+      nodemailer: 6.8.0
+      nodemailer-build-attachment: 3.0.0
+      postmark: 2.9.5
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /nodemailer-sendgrid-transport/0.2.0:
     resolution: {integrity: sha512-mtLnvTe8Zx1wwyZp7hMzuk+bqMvdH5FOyaEtkkVqj6IfLRqI9tBkFH8OE23cX8KJMfXbB09fOr6dTo0th70Bpg==}
     dependencies:
@@ -10087,6 +10150,14 @@ packages:
       - debug
     dev: false
 
+  /postmark/2.9.5:
+    resolution: {integrity: sha512-F27gc6wrxdn7GADodGpECoWez7FK2Pdach7A9ni5vVZiYz1YUY7T68nvVCzxrbWCjOS7ZujyclYlq1C0a4ar1w==}
+    dependencies:
+      axios: 0.25.0
+    transitivePeerDependencies:
+      - debug
+    dev: false
+
   /preact-render-to-string/5.2.5_preact@10.11.2:
     resolution: {integrity: sha512-rEBn42C3Wh+AjPxXUbDkb6xw0cTJQgxdYlp6ytUR1uBZF647Wn6ykkopMeQlRl7ggX+qnYYjZ4Hs1abZENl7ww==}
     peerDependencies:
@@ -10606,7 +10677,7 @@ packages:
     dependencies:
       '@types/hast': 2.3.4
       '@types/mdast': 3.0.10
-      mdast-util-to-hast: 12.2.5
+      mdast-util-to-hast: 12.2.6
       unified: 10.1.2
     dev: false
 
@@ -11772,8 +11843,8 @@ packages:
       vfile: 5.3.6
     dev: false
 
-  /unist-builder/3.0.0:
-    resolution: {integrity: sha512-GFxmfEAa0vi9i5sd0R2kcrI9ks0r82NasRq5QHh2ysGngrc6GiqD5CDf1FjPenY4vApmFASBIIlk/jj5J5YbmQ==}
+  /unist-builder/3.0.1:
+    resolution: {integrity: sha512-gnpOw7DIpCA0vpr6NqdPvTWnlPTApCTRzr+38E6hCWx3rz/cjo83SsKIlS1Z+L5ttScQ2AwutNnb8+tAvpb6qQ==}
     dependencies:
       '@types/unist': 2.0.6
     dev: false
@@ -11786,8 +11857,8 @@ packages:
     resolution: {integrity: sha512-F5CZ68eYzuSvJjGhCLPL3cYx45IxkqXSetCcRgUXtbcm50X2L9oOWQlfUfDdAf+6Pd27YDblBfdtmsThXmwpbQ==}
     dev: false
 
-  /unist-util-position/4.0.3:
-    resolution: {integrity: sha512-p/5EMGIa1qwbXjA+QgcBXaPWjSnZfQ2Sc3yBEEfgPwsEmJd8Qh+DSk3LGnmOM4S1bY2C0AjmMnB8RuEYxpPwXQ==}
+  /unist-util-position/4.0.4:
+    resolution: {integrity: sha512-kUBE91efOWfIVBo8xzh/uZQ7p9ffYRtUbMRZBNFYwf0RK8koUMx6dGUfwylLOKmaT2cs4wSW96QoYUSXAyEtpg==}
     dependencies:
       '@types/unist': 2.0.6
     dev: false
@@ -12395,11 +12466,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79_yqvwvv5fkd7ccxhl6hgbauxp6m:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/713466ea0791d4ff919fa9a9a4eefc4610f62c79}
-    id: github.com/bebejane/dato-nextjs-utils/713466ea0791d4ff919fa9a9a4eefc4610f62c79
+  github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556_yqvwvv5fkd7ccxhl6hgbauxp6m:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556}
+    id: github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556
     name: dato-nextjs-utils
-    version: 1.0.243
+    version: 1.0.244
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4
@@ -12414,7 +12485,7 @@ packages:
     dependencies:
       '@apollo/client': 3.7.1_gdcq4dv6opitr3wbfwyjmanyra
       '@datocms/cma-client': 1.1.22_encoding@0.1.13
-      '@next/env': 13.1.3
+      '@next/env': 13.1.5
       '@types/node': 18.11.9
       '@types/react': 18.0.24
       markdown-truncate: 1.0.4

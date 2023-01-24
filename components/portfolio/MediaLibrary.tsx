@@ -19,7 +19,6 @@ export type Props = {
 export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected = [] }: Props) {
 
   const { data: session, status } = useSession()
-  //const [selected, setSelected] = useState<FileField[]>()
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
   const [error, setError] = useState<Error | undefined>()
@@ -85,26 +84,11 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleUploading = (upload: boolean) => setUploading(upload)
   const handleUploadError = (err: Error) => setUploadError(err)
 
-
-  useEffect(() => {
-    //console.log('onSel');
-
-    //onSelection?.(selected)
-  }, [selected, onSelection])
-
-  useEffect(() => {
-    console.log('set selected from props');
-    //setSelected(selectedFromProps)
-
-  }, [selected])
-
-
   useEffect(() => {
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
 
-  error && console.error(error)
   return (
     <>
       <ul className={s.gallery}>

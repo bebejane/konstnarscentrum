@@ -18,7 +18,7 @@ import {
   textXl,
 } from "./components/theme";
 
-const ApplicationApproved: React.FC<{ name: string, link:string }> = ({ name, link }) => (
+const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ name, approvalUrl }) => (
   <Mjml>
     <Head />
     <MjmlBody width={600}>
@@ -49,8 +49,8 @@ const ApplicationApproved: React.FC<{ name: string, link:string }> = ({ name, li
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Thank you {name} for joining Konstnärscentrum! We’re excited to help you enjoy
-            great meals without any begging, guessing, waiting or phone calls.
+            Du kan skapa ditt konto här <a href={approvalUrl}>{approvalUrl}</a>
+
           </MjmlText>
           <MjmlSpacer height="24px" />
           <MjmlText

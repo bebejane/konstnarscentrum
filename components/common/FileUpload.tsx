@@ -7,7 +7,7 @@ const MAX_ALLOWED_IMAGES = 10
 
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,
-  environment: process.env.NEXT_PUBLIC_GRAPHQL_ENVIRONMENT ?? 'main'
+  environment: process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT ?? 'main'
 });
 
 export type Props = {

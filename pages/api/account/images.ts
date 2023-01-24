@@ -8,7 +8,7 @@ import { client, parseDatoError } from './'
 const userMediaLibrary = async (session: Session) => {
   const { member, uploads } = await apiQuery(MemberImagesDocument, {
     variables: { email: session.user.email },
-    environment: process.env.GRAPHQL_ENVIRONMENT ?? 'main'
+    environment: process.env.DATOCMS_ENVIRONMENT ?? 'main'
   })
   const allImages = [...member.content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), []), ...uploads]
   const images = []

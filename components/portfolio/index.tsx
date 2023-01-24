@@ -39,7 +39,6 @@ export default function Portfolio({
   useEffect(() => {
     preview && window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [preview])
-  console.log(block);
 
   return (
     <div className={s.container}>

@@ -88,7 +88,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
         <MediaLibrary
           key={isMediaLibrary ? 'medialibrary' : 'mediaselection'}
           multi={true}
-          selected={block.__typename === 'ImageRecord' ? block.image : undefined}
+          selected={selected}
           onShowLibrary={() => setIsMediaLibrary(true)}
           showLibrary={isMediaLibrary}
           onSelection={handleSelection}

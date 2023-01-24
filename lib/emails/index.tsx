@@ -4,7 +4,15 @@ import ResetPassword from './ResetPassword'
 import ApplicationSubmitted from './ApplicationSubmitted'
 import ApplicationApproved from './ApplicationApproved'
 import ContactForm from "./ContactForm";
+import postmarkTransport from 'nodemailer-postmark-transport'
 
+const transport = nodemailer.createTransport(postmarkTransport({
+  auth: {
+    apiKey: process.env.POSTMARK_API_KEY
+  }
+}))
+
+/*
 const transport = nodemailer.createTransport({
   pool: true,
   host: process.env.SMTP_SERVER,
@@ -15,10 +23,11 @@ const transport = nodemailer.createTransport({
     pass: process.env.SMTP_PASSWORD,
   },
 });
+*/
 
 const sendMail = buildSendMail({
   transport,
-  defaultFrom: "dev@konst-teknik.se",
+  defaultFrom: process.env.SMTP_EMAIL,
   configPath: "./mailing.config.json",
 });
 
@@ -68,7 +77,7 @@ export const Email = {
       component:
         <ApplicationApproved
           name={name}
-          link={`${process.env.NEXTAUTH_URL}/auth?type=signup&token=${token}`}
+          approvalUrl={`${process.env.NEXTAUTH_URL}/konstnar/konto/auth?type=signup&token=${token}`}
         />
     }),
   contactForm: ({ fromName, fromEmail, to, subject, fields }: {

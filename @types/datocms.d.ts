@@ -4475,6 +4475,7 @@ type RegionModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   contactIntro?: InputMaybe<TextFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
+  email?: InputMaybe<StringFilter>;
   global?: InputMaybe<BooleanFilter>;
   id?: InputMaybe<ItemIdFilter>;
   name?: InputMaybe<StringFilter>;
@@ -4502,6 +4503,8 @@ enum RegionModelOrderBy {
   _updatedAt_DESC = '_updatedAt_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
+  email_ASC = 'email_ASC',
+  email_DESC = 'email_DESC',
   global_ASC = 'global_ASC',
   global_DESC = 'global_DESC',
   id_ASC = 'id_ASC',
@@ -4532,6 +4535,7 @@ type RegionRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime'];
   contactIntro?: Maybe<Scalars['String']>;
   createdAt: Scalars['DateTime'];
+  email?: Maybe<Scalars['String']>;
   gallery: Array<SlideRecord>;
   global?: Maybe<Scalars['BooleanType']>;
   id: Scalars['ItemId'];
