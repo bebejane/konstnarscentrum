@@ -1,4 +1,4 @@
-import Auth from "/components/auth";
+import Auth from "../../../components/konto";
 import { getCsrfToken, getProviders } from "next-auth/react";
 import { applicationController } from "/lib/controllers";
 import { regions } from "/lib/region";
