@@ -83,6 +83,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
+  console.log(images);
 
   return (
     <>
