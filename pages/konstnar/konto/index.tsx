@@ -98,7 +98,7 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 					rows={6}
 					{...register("bio", {
 						required: true,
-						minLength: { value: 200, message: 'Din biografi måste vara 200 tecken eller längre' }
+						minLength: { value: 50, message: 'Din biografi måste vara 50 tecken eller längre' }
 					})}
 				/>
 				<ErrorMessage id="bio" errors={errors} />

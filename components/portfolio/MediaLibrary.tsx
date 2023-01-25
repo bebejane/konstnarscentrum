@@ -91,7 +91,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         {(showLibrary ? images : selected)?.map((img, idx) =>
           <li
             key={idx}
-            className={cn(selected.find(el => el.id === img.id) && showLibrary && s.selected)}
+            className={cn(selected.find(el => el.id === img.id) && s.selected)}
             onClick={(e) => handleClick(e, img)}
           >
             <Image

@@ -122,8 +122,9 @@ export default function Member({ member: {
 						{ title: 'Besök', value: '' }
 					]}
 				/>
-
-				<h2 className="noPadding">Utvalda verk</h2>
+				{member.content?.length > 0 &&
+					<h2 className="noPadding">Utvalda verk</h2>
+				}
 				{member.content?.map((block, idx) =>
 					<Block
 						key={`${id}-${idx}`}

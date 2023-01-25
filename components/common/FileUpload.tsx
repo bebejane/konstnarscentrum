@@ -3,7 +3,7 @@ import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SimpleSchemaTypes } from '@datocms/cma-client';
 
-const MAX_ALLOWED_IMAGES = 10
+const MAX_ALLOWED_IMAGES = 12
 
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,

@@ -67,7 +67,9 @@ export default function Article({
                 </figcaption>
               </>
               : editable ?
-                <div className={s.emptyEditable}></div>
+                <div className={s.emptyEditable}>
+                  <img src={'/images/noimage.svg'} />
+                </div>
                 : null
             }
           </figure>

@@ -78,7 +78,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     !image?.responsiveImage ?
       <PortfolioContent
         onClose={onClose}
-        header={!isMediaLibrary ? 'Redigera' : 'Välj bild(er)'}
+        header={!isMediaLibrary ? 'Redigera bild(er)' : 'Välj bild(er)'}
         back={!isMediaLibrary ? undefined : 'Tillbaka'}
         save={!isMediaLibrary ? 'Spara' : 'Välj'}
         onBack={handleBack}
@@ -101,7 +101,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
       <PortfolioContent
 
         onClose={onClose}
-        header={'Redigera bild'}
+        header={'Välj bild(er)'}
         save={'Ok'}
         back={'Tillbaka'}
         onBack={() => setImage(undefined)}
