@@ -33,7 +33,7 @@ export default function Article({
   showImage = true,
   editable,
   onClick,
-}: ArticleProps) {
+}, record: ArticleProps) {
 
   const { scrolledPosition } = useScrollInfo()
   const hideCaption = scrolledPosition > 100;
@@ -84,6 +84,7 @@ export default function Article({
       {content &&
         <StructuredContent
           id={id}
+          record={record}
           content={content}
           onClick={(imageId) => onClick?.(imageId)}
         />

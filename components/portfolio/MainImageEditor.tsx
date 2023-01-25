@@ -6,9 +6,10 @@ export type Props = {
   onUpdate: (image: FileField) => void
   onSave: (image: FileField) => void
   onClose: () => void
+  member: MemberRecord
 }
 
-export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Props) {
+export default function MainImageEditor({ image, onUpdate, onClose, onSave, member }: Props) {
 
   const [showMediaLibrary, setShowMediaLibrary] = useState(false)
   const handleSelect = (image: FileField) => {
@@ -41,6 +42,7 @@ export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Pr
         :
         <MediaLibrary
           multi={false}
+          member={member}
           showLibrary={showMediaLibrary}
           onSelect={handleSelect}
         />

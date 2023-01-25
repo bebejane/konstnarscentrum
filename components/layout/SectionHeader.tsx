@@ -8,15 +8,16 @@ export type SectionHeaderProps = {
   title: string,
   slug?: string,
   margin?: boolean;
+  regional?: boolean
 }
 
-export default function SectionHeader({ title, slug, margin }: SectionHeaderProps) {
+export default function SectionHeader({ title, slug, margin, regional }: SectionHeaderProps) {
 
   return (
     <header className={cn(s.header, margin && s.minusMargin)}>
       <h2>{title}</h2>
       {slug &&
-        <ReadMore link={slug} message='Visa alla'></ReadMore>
+        <ReadMore link={slug} regional={true} message='Visa alla'></ReadMore>
       }
     </header>
   )

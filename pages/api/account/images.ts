@@ -4,6 +4,7 @@ import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberImagesDocument } from '/graphql'
 import type { Session } from 'next-auth'
 import { client, parseDatoError } from './'
+import { sleep } from '/lib/utils'
 
 const userMediaLibrary = async (session: Session) => {
   const { member, uploads } = await apiQuery(MemberImagesDocument, {
@@ -21,8 +22,10 @@ export default withAuthentication(async (req, res, session) => {
   const { removeId } = req.query
 
   try {
-    if (removeId)
+    if (removeId) {
       await client.uploads.destroy(removeId as string)
+      await sleep(2000)
+    }
     const images = await userMediaLibrary(session)
     return res.status(200).json({ images })
   } catch (err) {

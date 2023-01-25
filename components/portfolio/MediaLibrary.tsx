@@ -4,6 +4,8 @@ import cn from 'classnames'
 import { KCImage as Image } from '/components'
 import { Loader, FileUpload } from "/components";
 import { useSession } from "next-auth/react"
+import { ImageData } from "/components/common/FileUpload";
+import { regions } from "/lib/region";
 
 export type Props = {
   onSelect?: (image: FileField) => void
@@ -14,13 +16,16 @@ export type Props = {
   showLibrary: boolean
   selected?: FileField[]
   multi: boolean
+  member: MemberRecord
 }
 
-export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, selected = [] }: Props) {
+export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, member, selected = [] }: Props) {
+
 
   const { data: session, status } = useSession()
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
+  const [uploadImageData, setUploadImageData] = useState<ImageData | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState(false)
   const [uploadError, setUploadError] = useState<Error | undefined>()
@@ -59,7 +64,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
           throw new Error('Det går ej att ta bort bilden. Bilden används i din portfolio redan. För att ta bort bilden måste du ta bort den där den används i portfolion.')
         throw new Error('Det uppstod ett fel när bilden togs bort')
       }
-      onRemove(id)
+      onRemove?.(id)
       setImages(images)
     } catch (err) {
       setError(err)
@@ -79,6 +84,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleUploadProgress = (progress: number) => setProgress(progress)
   const handleUploading = (upload: boolean) => setUploading(upload)
   const handleUploadError = (err: Error) => setUploadError(err)
+  const handleUploadImageData = (image: ImageData) => setUploadImageData(image)
 
   useEffect(() => {
     if (status !== 'authenticated') return
@@ -115,7 +121,18 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
                 Välj bild(er)
               </button>
             :
-            <Loader message={progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'} />
+            <>
+              {uploadImageData &&
+                <div className={s.uploadImage}>
+                  <img className={s.thumb} src={uploadImageData.src} />
+                </div>
+              }
+              <Loader
+                className={s.uploadLoader}
+                color={'#ffffff'}
+                message={progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'}
+              />
+            </>
           }
         </li>
       </ul>
@@ -136,16 +153,16 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
           <Loader />
         </div>
       }
-
       <FileUpload
         ref={uploadRef}
         customData={{}}
-        tags={[session?.user.email]}
+        tags={[session.user.email, member.region.name]}
         accept=".jpg,.png"
         onDone={handleUploadDone}
         onProgress={handleUploadProgress}
         onUploading={handleUploading}
         onError={handleUploadError}
+        onImageData={handleUploadImageData}
         mediaLibrary={true}
       />
     </>

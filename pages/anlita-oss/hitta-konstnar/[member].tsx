@@ -98,8 +98,6 @@ export default function Member({ member: {
 		setImages(imageId ? images : undefined)
 	}, [imageId])
 
-	if (error)
-		console.log(error)
 	return (
 		<div className={s.container}>
 			<Article
@@ -129,7 +127,7 @@ export default function Member({ member: {
 					<Block
 						key={`${id}-${idx}`}
 						data={block}
-						recordId={id}
+						record={member}
 						onClick={(id) => setImageId(id)}
 						editable={{
 							...block,
@@ -141,6 +139,7 @@ export default function Member({ member: {
 				{isEditable &&
 					<Portfolio
 						key={member.id}
+						member={member}
 						block={block}
 						setBlock={setBlock}
 						content={member.content || memberFromProps.content}

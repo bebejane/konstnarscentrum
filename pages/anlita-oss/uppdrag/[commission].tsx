@@ -26,7 +26,7 @@ export default function Commission({ commission: {
 	work,
 	commissioner,
 	content
-}, commissions }: CommissionProps) {
+}, commission, commissions }: CommissionProps) {
 
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 
@@ -62,7 +62,7 @@ export default function Commission({ commission: {
 						<Block
 							key={`${id}-${idx}`}
 							data={block}
-							recordId={id}
+							record={commission}
 							onClick={(id) => setImageId(id)}
 						/>
 					)}

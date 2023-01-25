@@ -24,7 +24,7 @@ export default function MemberNewsArticle({ memberNews: {
 	category,
 	blackHeadline,
 	region
-} }: Props) {
+}, memberNews }: Props) {
 
 	return (
 		<>
@@ -45,7 +45,7 @@ export default function MemberNewsArticle({ memberNews: {
 						{ title: 'Slutdatum', value: format(new Date(dateEnd), "d MMMM y") },
 					]}
 				/>
-				<StructuredContent id={id} content={content} />
+				<StructuredContent id={id} record={memberNews} content={content} />
 			</Article>
 			<RegionLink href={'/konstnar/aktuellt'}>
 				<button className="wide">Tillbaka till översikt</button>

@@ -2,6 +2,8 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SimpleSchemaTypes } from '@datocms/cma-client';
+import { resolveObjectURL } from 'buffer';
+import { useRegion } from '/lib/context/region';
 
 const MAX_ALLOWED_IMAGES = 12
 
@@ -10,14 +12,38 @@ const client = buildClient({
   environment: process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT ?? 'main'
 });
 
+const parseImageFile = async (file: File): Promise<ImageData> => {
+  if (!file) return Promise.reject('Invalid file')
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = (err) => reject(err)
+    reader.onload = (e) => {
+      const image = new Image();
+      image.src = e.target.result as string;
+      image.onload = function () {
+        resolve({ width: image.width, height: image.height, src: image.src })
+      };
+    };
+    reader.readAsDataURL(file);
+  })
+}
+
+export type ImageData = {
+  width: number
+  height: number
+  src: string
+}
+
 export type Props = {
-  customData?: any,
-  accept: string,
-  tags?: string[],
-  onDone: (upload: Upload) => void,
-  onUploading: (uploading: boolean) => void,
-  onProgress: (percentage: number) => void,
-  onError: (err: Error) => void,
+  customData?: any
+  accept: string
+  tags?: string[]
+  onDone: (upload: Upload) => void
+  onUploading: (uploading: boolean) => void
+  onImageData?: (image: ImageData) => void
+  onProgress: (percentage: number) => void
+  onError: (err: Error) => void
   mediaLibrary: boolean
 }
 
@@ -29,10 +55,13 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
   accept,
   onDone,
   onUploading,
+  onImageData,
   onProgress,
   mediaLibrary,
-  onError
+  onError,
+  region
 }, ref) => {
+
 
   const [error, setError] = useState<Error | undefined>()
   const [upload, setUpload] = useState<Upload | undefined>()
@@ -76,11 +105,13 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     resetInput()
     onUploading(true)
 
+    const allTags = Array.isArray(tags) ? [...tags, 'upload'] : ['upload']
+
     return new Promise((resolve, reject) => {
       client.uploads.createFromFileOrBlob({
         fileOrBlob: file,
         filename: file.name,
-        tags,
+        tags: allTags,
         default_field_metadata: {
           en: {
             alt: '',
@@ -97,13 +128,22 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
 
   }, [customData, onUploading, onProgress, tags, resetInput, mediaLibrary])
 
-  const handleChange = useCallback((event) => {
-    const file = event.target.files[0];
+  const handleChange = useCallback(async (event) => {
+    const file: File = event.target.files[0];
     if (!file) return
-    createUpload(file)
-      .then((upload) => onDone(upload))
-      .catch((err) => onError(err))
-      .finally(() => onUploading(false))
+
+    try {
+      if (file.type.includes('image')) {
+        const image = await parseImageFile(file)
+        onImageData?.(image)
+      }
+      const upload = await createUpload(file)
+      onDone(upload)
+    } catch (err) {
+      onError(err)
+    }
+
+    onUploading(false)
   }, [createUpload, onUploading, onDone, onError])
 
   useEffect(() => {

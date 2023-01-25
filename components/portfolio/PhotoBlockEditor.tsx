@@ -8,9 +8,10 @@ export type Props = {
   onError: (err: Error) => void
   content: MemberModelContentField[]
   onClose: () => void
+  member: MemberRecord
 }
 
-export default function PhotoBlockEditor({ block: blockFromProps, onError, onChange, onUpdate, onClose }: Props) {
+export default function PhotoBlockEditor({ block: blockFromProps, onError, onChange, onUpdate, onClose, member }: Props) {
 
   const [image, setImage] = useState<FileField | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
@@ -86,7 +87,9 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
         onSave={handleSave}
       >
         <MediaLibrary
+
           key={isMediaLibrary ? 'medialibrary' : 'mediaselection'}
+          member={member}
           multi={true}
           selected={selected}
           onShowLibrary={() => setIsMediaLibrary(true)}

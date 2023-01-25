@@ -17,6 +17,7 @@ type PortfolioProps = {
   content: MemberModelContentField[]
   block: ImageRecord | VideoRecord | undefined
   preview: boolean,
+  member: MemberRecord
   onPreview: () => void
 }
 
@@ -34,6 +35,7 @@ export default function Portfolio({
   onError,
   preview,
   onPreview,
+  member
 }: PortfolioProps) {
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function Portfolio({
       }
       {block?.__typename === 'ImageRecord' ?
         <PhotoBlockEditor
+          member={member}
           key={block.id}
           block={block}
           content={content}
@@ -74,6 +77,7 @@ export default function Portfolio({
       {mainImage &&
         <MainImageEditor
           key={mainImage.id}
+          member={member}
           image={mainImage}
           onUpdate={(image) => setMainImage(image)}
           onClose={() => setMainImage(undefined)}

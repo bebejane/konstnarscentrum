@@ -3,12 +3,13 @@ import { isParagraph, isRoot } from 'datocms-structured-text-utils';
 import Block from '/components/blocks';
 
 export type Props = {
-  id: string,
-  content: any,
+  id: string
+  content: any
+  record: any
   onClick?: (imageId: string) => void
 }
 
-export default function StructuredContent({ id, content, onClick }: Props) {
+export default function StructuredContent({ record, content, onClick }: Props) {
 
   if (!content)
     return null
@@ -16,8 +17,8 @@ export default function StructuredContent({ id, content, onClick }: Props) {
   return (
     <StructuredText
       data={content}
-      renderBlock={({ record }) => {
-        return <Block data={record} recordId={id} onClick={(id) => onClick?.(id)} />
+      renderBlock={({ record: block }) => {
+        return <Block data={block} record={record} onClick={(id) => onClick?.(id)} />
       }}
       renderInlineRecord={({ record }) => {
         switch (record.__typename) {

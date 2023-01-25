@@ -7,7 +7,6 @@ import { NextApiResponse, NextApiRequest } from 'next'
 export default function withAuthentication(callback: authenticationHandler) {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     const session = await unstable_getServerSession(req, res, authOptions)
-
     if (!session?.user)
       return res.status(401).send('Unauthorized')
 
