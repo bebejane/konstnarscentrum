@@ -46,11 +46,6 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleRemove = async (e, id) => {
     e.stopPropagation()
 
-    const rollbackSelected = [...selected]
-    onSelection?.(selected.filter((img) => img.id !== id))
-
-    if (!showLibrary) return onRemove(id)
-
     setLoading(true)
 
     try {
@@ -63,10 +58,10 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
           throw new Error('Det går ej att ta bort bilden. Bilden används i din portfolio redan. För att ta bort bilden måste du ta bort den där den används i portfolion.')
         throw new Error('Det uppstod ett fel när bilden togs bort')
       }
+      onRemove(id)
       setImages(images)
     } catch (err) {
       setError(err)
-      onSelection?.(rollbackSelected)
     }
     setLoading(false)
 
