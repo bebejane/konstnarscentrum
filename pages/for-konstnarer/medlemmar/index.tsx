@@ -15,15 +15,16 @@ export default function ForArtistsHome({ membersByRegion, region }: Props) {
 
   return (
     <div className={s.container}>
-      <h1>Nuvarande medlemmar</h1>
+      <h1>Medlemmar</h1>
+      <p className="intro">Är nog finast om det är en kort text här tror jag. Sophia du får tänka ut vad det ska stå men skulle gissa ungefär så här långt är lagom.</p>
 
       {membersByRegion.map((members, i) => {
         return (
           <React.Fragment key={i}>
             {membersByRegion.length > 1 &&
-              <h2 key={`h${i}`}>{members[0].region.name}</h2>
+              <h3 key={`h${i}`}>{members[0].region.name}</h3>
             }
-            <p key={i}>
+            <p className={s.members} key={i}>
               {members?.map((member, idx) =>
                 <Link key={member.id} href={recordToSlug(member)}>
                   {member.fullName}
