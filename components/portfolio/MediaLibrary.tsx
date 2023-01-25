@@ -25,6 +25,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const [loading, setLoading] = useState(false)
   const [uploadError, setUploadError] = useState<Error | undefined>()
   const [progress, setProgress] = useState<number | undefined>()
+  const [selection, setSelection] = useState(selected)
   const uploadRef = useRef<HTMLInputElement | null>()
 
   async function handleRefresh() {

@@ -138,7 +138,6 @@ export default withAuthentication(async (req, res, session) => {
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
     const slug = recordToSlug(member)
     res.revalidate(slug).then(() => console.log('revalidated', slug))
-    console.log('updated', record.email)
     return res.status(200).json(member)
 
   } catch (err) {

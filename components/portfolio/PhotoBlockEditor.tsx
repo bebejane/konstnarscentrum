@@ -51,7 +51,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
   const handleBack = () => {
     if (isMediaLibrary) {
       setImage(undefined)
-      //setSelected(undefined)
+      setSelected(block.image)
       setIsMediaLibrary(false)
     }
     else if (image)
