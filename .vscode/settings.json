@@ -16,7 +16,6 @@
     "README.md": true,
     "tsconfig.json": true,
     "vercel.json": true,
-    "lib/scripts": true,
     "@types": true
   },
   "workspace.isHidden": true
