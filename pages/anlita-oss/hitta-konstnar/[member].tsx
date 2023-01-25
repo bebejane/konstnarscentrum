@@ -66,6 +66,8 @@ export default function Member({ member: {
 				throw error
 			}
 			const updatedMember = await res.json()
+			console.log(updatedMember.content);
+
 			setMember(updatedMember)
 
 		} catch (err) {
@@ -137,6 +139,7 @@ export default function Member({ member: {
 				)}
 				{isEditable &&
 					<Portfolio
+						key={member.id}
 						block={block}
 						setBlock={setBlock}
 						content={member.content || memberFromProps.content}
