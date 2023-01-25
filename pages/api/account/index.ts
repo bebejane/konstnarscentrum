@@ -130,11 +130,11 @@ export default withAuthentication(async (req, res, session) => {
 
   // Remove undefined
   Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
-  console.log(JSON.stringify(newRecord, null, 2));
+  //  console.log(JSON.stringify(newRecord, null, 2));
 
   try {
     await client.items.update(record.id, newRecord)
-    await sleep(1000)
+    await sleep(2000)
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
     const slug = recordToSlug(member)
     res.revalidate(slug).then(() => console.log('revalidated', slug))
