@@ -47,7 +47,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     e.stopPropagation()
 
     const rollbackSelected = [...selected]
-    onSelection(selected.filter((img) => img.id !== id))
+    onSelection?.(selected.filter((img) => img.id !== id))
 
     if (!showLibrary) return onRemove(id)
 
@@ -66,7 +66,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       setImages(images)
     } catch (err) {
       setError(err)
-      onSelection(rollbackSelected)
+      onSelection?.(rollbackSelected)
     }
     setLoading(false)
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { KCImage as Image, MediaLibrary, PortfolioContent, PhotoEditor } from '/components'
 
 export type Props = {
@@ -15,6 +15,9 @@ export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Pr
     onUpdate(image)
     setShowMediaLibrary(false)
   }
+  useEffect(() => {
+    !image?.id && setShowMediaLibrary(true)
+  }, [image])
 
   return (
     <PortfolioContent

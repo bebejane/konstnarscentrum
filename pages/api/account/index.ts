@@ -138,7 +138,7 @@ export default withAuthentication(async (req, res, session) => {
     const slug = recordToSlug(member)
     console.log('revalidating', slug);
 
-    res.revalidate(slug).then(() => console.log('done', slug))
+    await res.revalidate(slug)
     console.log('updated', record.email)
     return res.status(200).json(member)
 
