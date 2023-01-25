@@ -15,10 +15,6 @@ export type RelatedMemberNewsBlockProps = {
 
 export default function RelatedMemberNews({ data: { memberNews }, data, onClick }: RelatedMemberNewsBlockProps) {
   const { id, content, date, dateEnd, intro, slug, title, region, createdAt, blackHeadline } = memberNews
-
-  console.log(data);
-
-  //  return null
   return (
 
     <Article
