@@ -2,10 +2,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SimpleSchemaTypes } from '@datocms/cma-client';
-import { resolveObjectURL } from 'buffer';
-import { useRegion } from '/lib/context/region';
-
-const MAX_ALLOWED_IMAGES = 12
+import { MAX_ALLOWED_IMAGES, MIN_IMAGE_HEIGHT, MIN_IMAGE_WIDTH } from '/lib/constant'
 
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,
@@ -135,26 +132,31 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     try {
       if (file.type.includes('image')) {
         const image = await parseImageFile(file)
+        if (image && (image.width < MIN_IMAGE_WIDTH || image.height < MIN_IMAGE_HEIGHT))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar stor.`)
         onImageData?.(image)
       }
+
       const upload = await createUpload(file)
       onDone(upload)
     } catch (err) {
-      onError(err)
+      setError(err)
     }
-
     onUploading(false)
-  }, [createUpload, onUploading, onDone, onError])
+
+  }, [createUpload, onUploading, onDone, setError, onImageData])
 
   useEffect(() => {
     if (!ref.current) return
-
-    ref.current.removeEventListener('change', handleChange);
     ref.current.addEventListener('change', handleChange);
+    return () => ref.current?.removeEventListener('change', handleChange)
   }, [ref])
 
   useEffect(() => { onDone(upload) }, [upload])
-  useEffect(() => { onError(error) }, [error])
+  useEffect(() => {
+    onError(error)
+    ref.current.value = ''
+  }, [error])
 
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })

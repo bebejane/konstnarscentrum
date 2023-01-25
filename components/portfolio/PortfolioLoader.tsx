@@ -9,7 +9,6 @@ type PortfolioProps = {
 
 export default function PortfolioLoader({ message }: PortfolioProps) {
 
-
   return (
     <div className={s.loader}>
       <Loader message={message} />

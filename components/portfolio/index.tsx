@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import s from './index.module.scss'
 import Link from 'next/link';
 import { VideoBlockEditor, PhotoBlockEditor, EditBox, MainImageEditor } from "/components";
-import Line from '/lib/emails/components/Line';
 
 type PortfolioProps = {
   setMainImage: (image: FileField) => void

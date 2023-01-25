@@ -30,7 +30,6 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const [loading, setLoading] = useState(false)
   const [uploadError, setUploadError] = useState<Error | undefined>()
   const [progress, setProgress] = useState<number | undefined>()
-  const [selection, setSelection] = useState(selected)
   const uploadRef = useRef<HTMLInputElement | null>()
 
   async function handleRefresh() {
@@ -59,7 +58,6 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       const { images, error } = await res.json()
 
       if (res.status !== 200 || error) {
-        console.log(error);
         if (error.codes.includes('UPLOAD_IS_CURRENTLY_IN_USE'))
           throw new Error('Det går ej att ta bort bilden. Bilden används i din portfolio redan. För att ta bort bilden måste du ta bort den där den används i portfolion.')
         throw new Error('Det uppstod ett fel när bilden togs bort')
