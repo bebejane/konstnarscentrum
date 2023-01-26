@@ -42,7 +42,6 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	const email = watch("email");
 	const regionId = watch("regionId");
 
-
 	const handleUploadDone = (upload: Upload) => {
 		setUpload(upload)
 		setProgress(undefined)
@@ -148,7 +147,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				<FileUpload
 					ref={uploadRef}
 					customData={{}}
-					tags={regionId ? [regions.find(el => el.id === regionId).name] : []}
+					tags={regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).name] : []}
 					accept=".pdf"
 					onDone={handleUploadDone}
 					onProgress={setProgress}
