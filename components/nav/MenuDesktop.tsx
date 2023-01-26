@@ -66,7 +66,6 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		setShowMenu(true)
 	}, [router])
 
-
 	return (
 		<>
 			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)} data-theme={theme}>

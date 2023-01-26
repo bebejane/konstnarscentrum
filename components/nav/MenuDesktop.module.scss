@@ -31,7 +31,7 @@
     color: var(--beige-dark) !important;
   }
 
-  > ul {
+  >ul {
     position: relative;
     list-style: none;
     display: flex;
@@ -40,7 +40,7 @@
     padding: 0;
     padding-top: 1.7rem;
 
-    > li {
+    >li {
       flex: 0 0;
       margin-right: 1rem;
       white-space: pre;
@@ -67,6 +67,7 @@
     left: 0;
     width: 100%;
     background-color: var(--background);
+    transition: background-color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 
     .sub {
       display: none;
@@ -85,7 +86,7 @@
         display: flex;
       }
 
-      > li {
+      >li {
         pointer-events: all;
       }
     }
@@ -106,7 +107,7 @@
     display: none;
   }
 
-  > ul {
+  >ul {
     list-style: none;
     display: flex;
     flex-direction: row;
