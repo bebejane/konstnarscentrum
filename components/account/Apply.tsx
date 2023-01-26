@@ -40,6 +40,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	const [uploadError, setUploadError] = useState<Error | undefined>()
 	const uploadRef = useRef<HTMLInputElement | undefined>()
 	const email = watch("email");
+	const regionId = watch("regionId");
 
 	const handleUploadDone = (upload: Upload) => {
 		setUpload(upload)
@@ -136,7 +137,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				<button
 					type="button"
 					onClick={() => uploadRef.current?.click()}
-					disabled={progress !== undefined || uploading || !isEmail(email)}
+					disabled={progress !== undefined || uploading || !isEmail(email) || !regionId}
 				>
 					{upload ? upload.basename : progress === undefined ? 'Ladda upp pdf' : `${progress}%`}
 				</button>
@@ -146,7 +147,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				<FileUpload
 					ref={uploadRef}
 					customData={{}}
-					tags={[]}
+					tags={regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).name] : []}
 					accept=".pdf"
 					onDone={handleUploadDone}
 					onProgress={setProgress}

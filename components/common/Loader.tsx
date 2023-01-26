@@ -6,17 +6,18 @@ type Props = {
   message?: string
   loading?: boolean
   className?: string
+  color?: string
 }
 
-export default function Loader({ message, loading = true, className }: Props) {
+export default function Loader({ message, loading = true, className, color }: Props) {
   if (!loading) return null
   const size = 20
 
   return (
     <div className={cn(s.container, className)} style={{ maxHeight: `${size}px` }}>
       <div>
-        <ClipLoader size={size} />
-        {message && <div>{message}</div>}
+        <div className={s.anim}></div>
+        {message && <div style={color ? { color } : undefined}>{message}</div>}
       </div>
     </div>
   )

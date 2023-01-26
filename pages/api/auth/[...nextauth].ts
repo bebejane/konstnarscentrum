@@ -40,7 +40,7 @@ export const authOptions: NextAuthOptions = {
           const user = await findUser(email)
 
           if (!user) return null
-          const isDev = process.env.DATOCMS_ENVIRONMENT === 'dev'
+          const isDev = true//process.env.DATOCMS_ENVIRONMENT === 'dev'
           const checkPassword = isDev ? true : await comparePassword(password, user.password);
 
           if (!checkPassword) {
@@ -50,12 +50,14 @@ export const authOptions: NextAuthOptions = {
 
           // Login passed, return user. 
           // Any object returned will be saved in `user` property of the JWT
-          return {
+          const session = {
             id: user.id,
             email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName
+            firstName: user.first_name,
+            lastName: user.last_name
           }
+
+          return session
         } catch (err) {
           console.error(err)
           return null

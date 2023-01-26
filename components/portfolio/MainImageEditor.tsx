@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { KCImage as Image, MediaLibrary, PortfolioContent, PhotoEditor } from '/components'
 
 export type Props = {
@@ -6,15 +6,19 @@ export type Props = {
   onUpdate: (image: FileField) => void
   onSave: (image: FileField) => void
   onClose: () => void
+  member: MemberRecord
 }
 
-export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Props) {
+export default function MainImageEditor({ image, onUpdate, onClose, onSave, member }: Props) {
 
   const [showMediaLibrary, setShowMediaLibrary] = useState(false)
   const handleSelect = (image: FileField) => {
     onUpdate(image)
     setShowMediaLibrary(false)
   }
+  useEffect(() => {
+    !image?.id && setShowMediaLibrary(true)
+  }, [image])
 
   return (
     <PortfolioContent
@@ -38,6 +42,7 @@ export default function MainImageEditor({ image, onUpdate, onClose, onSave }: Pr
         :
         <MediaLibrary
           multi={false}
+          member={member}
           showLibrary={showMediaLibrary}
           onSelect={handleSelect}
         />

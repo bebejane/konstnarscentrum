@@ -3,33 +3,32 @@
   padding-top: 1rem;
   padding-bottom: 1.2rem;
   margin-bottom: calc(var(--small-space) + 1rem);
-  overflow: hidden;
 
   @include mq($until: desktop) {
-    overflow-x: scroll;
+    overflow: hidden;
     width: calc(100% + var(--outer-margin) * 2);
     margin-left: calc(var(--outer-margin) * -1);
     margin-right: calc(var(--outer-margin) * -1);
     padding-left: var(--outer-margin);
-    scrollbar-width: 0px;
-    overflow-x: scroll;
-
-    &::-webkit-scrollbar {
-      height: 0px;
-    }
-
-    &::-webkit-scrollbar-thumb,
-    &::-webkit-scrollbar-track {
-      background: transparent;
-    }
   }
 
-  >ul {
+  > ul {
     list-style: none;
     display: flex;
     padding-left: 0 !important;
 
     @include mq($until: tablet) {
+      scrollbar-width: 0px;
+      overflow-x: scroll;
+
+      &::-webkit-scrollbar {
+        height: 0px;
+      }
+
+      &::-webkit-scrollbar-thumb,
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
       margin-right: calc(-1 * var(--outer-margin));
     }
 

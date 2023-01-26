@@ -2,6 +2,7 @@
   overflow: hidden;
   display: inline-block;
   white-space: nowrap;
+  color: var(--foreground);
 
   &:hover {
     .square {
@@ -19,9 +20,29 @@
     margin-bottom: 0.1em;
     transition: all 0.1s;
 
-    &.invert {
-      background: var(--background);
+    &[data-theme='dark'] {
+      background-color: var(--foreground);
+    }
+  }
+
+  span {
+    color: var(--foreground);
+
+    &[data-theme='dark'] {
+      color: var(--foreground);
+    }
+  }
+
+  &.invert {
+    .square {
+      background-color: var(--white);
+    }
+
+    span {
+      color: var(--white) !important;
       width: 0.45em;
     }
   }
+
+
 }

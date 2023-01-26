@@ -23,7 +23,14 @@
   color: var(--black);
   align-items: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.8);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+
+  &.show {
+    opacity: 1;
+  }
 
   .transparent {
     background-color: transparent !important;

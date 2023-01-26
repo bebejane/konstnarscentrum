@@ -1,5 +1,5 @@
 import { regions } from "/lib/region";
-export { default, getStaticProps } from '/pages/for-konstnarer'
+export { default, getStaticProps } from '/pages/for-konstnarer/medlemmar'
 
 export async function getStaticPaths() {
 

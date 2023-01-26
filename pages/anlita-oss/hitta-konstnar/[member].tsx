@@ -42,8 +42,7 @@ export default function Member({ member: {
 		if (status !== 'authenticated')
 			return
 
-		console.log('save content');
-		console.log(data);
+		//console.log('save content', data);
 
 		setSaving(true)
 		setBlock(undefined)
@@ -66,6 +65,8 @@ export default function Member({ member: {
 				throw error
 			}
 			const updatedMember = await res.json()
+			//console.log('UPDATED CONTENT', updatedMember.content);
+
 			setMember(updatedMember)
 
 		} catch (err) {
@@ -96,8 +97,6 @@ export default function Member({ member: {
 		setImages(imageId ? images : undefined)
 	}, [imageId])
 
-	if (error)
-		console.log(error)
 	return (
 		<div className={s.container}>
 			<Article
@@ -120,13 +119,14 @@ export default function Member({ member: {
 						{ title: 'Besök', value: '' }
 					]}
 				/>
-
-				<h2 className="noPadding">Utvalda verk</h2>
+				{member.content?.length > 0 &&
+					<h2 className="noPadding">Utvalda verk</h2>
+				}
 				{member.content?.map((block, idx) =>
 					<Block
 						key={`${id}-${idx}`}
 						data={block}
-						recordId={id}
+						record={member}
 						onClick={(id) => setImageId(id)}
 						editable={{
 							...block,
@@ -137,6 +137,8 @@ export default function Member({ member: {
 				)}
 				{isEditable &&
 					<Portfolio
+						key={member.id}
+						member={member}
 						block={block}
 						setBlock={setBlock}
 						content={member.content || memberFromProps.content}
@@ -153,7 +155,6 @@ export default function Member({ member: {
 					/>
 				}
 			</Article>
-
 			<RelatedSection
 				key={`${id}-related`}
 				title="Upptäck fler"
@@ -166,6 +167,12 @@ export default function Member({ member: {
 				}))}
 			/>
 
+			<div className={cn(s.overlay, saving && s.show)}>
+				<div className={s.loader}>
+					<Loader />
+				</div>
+			</div>
+
 			{error &&
 				<div className={cn(s.overlay, s.transparent)}>
 					<div className={s.error}>
@@ -175,15 +182,6 @@ export default function Member({ member: {
 					</div>
 				</div>
 			}
-
-			{saving &&
-				<div className={cn(s.overlay)}>
-					<div className={s.loader}>
-						<Loader />
-					</div>
-				</div>
-			}
-
 		</div>
 	);
 }

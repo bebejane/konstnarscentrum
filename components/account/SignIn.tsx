@@ -27,7 +27,7 @@ export default function SignIn({ csrfToken, providers }) {
 	};
 
 	useEffect(() => {
-		router.query.error && setError("Username or password incorrect")
+		router.query.error && setError("Användarnamn eller lösnord är felaktigt")
 	}, [router]);
 
 	return (
@@ -56,15 +56,6 @@ export default function SignIn({ csrfToken, providers }) {
 				<SubmitButton loading={isSubmitting}>
 					{text.send}
 				</SubmitButton>
-				{/*}
-				<ul className={styles.providers}>
-					{Object.keys(providers).filter(id => id !== 'credentials').map((id, idx) =>
-						<li key={idx} onClick={() => signIn(id, { callbackUrl: `${window.location.origin}/member` })}>
-							{providers[id].name}
-						</li>
-					)}
-				</ul>
-				*/}
 				{error &&
 					<p className={styles.formError}>
 						{`${typeof error === 'string' ? error : error.message}`}

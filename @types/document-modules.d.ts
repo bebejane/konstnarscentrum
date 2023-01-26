@@ -248,6 +248,7 @@ export const LatestMemberNews: DocumentNode;
 export const RelatedMembers: DocumentNode;
 export const SearchMembers: DocumentNode;
 export const SearchMembersFree: DocumentNode;
+export const MembersList: DocumentNode;
 
   export default defaultDocument;
 }

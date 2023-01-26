@@ -11,4 +11,10 @@
   height: 100%;
   background-color: var(--beige-dark);
   color: var(--black);
+  opacity: 0;
+
+  &.show {
+    opacity: 1;
+  }
+
 }

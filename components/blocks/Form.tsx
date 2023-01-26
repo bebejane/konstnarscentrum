@@ -6,12 +6,13 @@ import { FileUpload } from '/components'
 import type { Upload } from '/components/common/FileUpload'
 
 export type ButtonBlockProps = {
-	recordId: string,
-	data: FormRecord,
+	record: any
+	data: FormRecord
+	region: Region
 	onClick: Function
 }
 
-export default function Form({ recordId, data: { id, formFields, subject, confirmation }, onClick }: ButtonBlockProps) {
+export default function Form({ record, region, data: { id, formFields, subject, confirmation }, onClick }: ButtonBlockProps) {
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
 	const [error, setError] = useState<Error | undefined>()
@@ -65,10 +66,9 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 
 	useEffect(() => { uploading && setUpload(undefined) }, [uploading])
 	useEffect(() => {
-		if (uploadError) {
-			setProgress(undefined)
-			setUploading(false)
-		}
+		if (!uploadError) return
+		setProgress(undefined)
+		setUploading(false)
 	}, [uploading])
 
 	useEffect(() => {
@@ -77,6 +77,7 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 
 	return (
 		<section className={s.form}>
+			<h3>Dina uppgifter</h3>
 			{success ?
 				<p ref={confirmationRef} className={s.confirmation}>{confirmation}</p>
 				:
@@ -110,7 +111,7 @@ export default function Form({ recordId, data: { id, formFields, subject, confir
 													<FileUpload
 														ref={uploadRef}
 														customData={{}}
-														tags={['form-upload', `${props.formId}`]}
+														tags={[record?.region?.name, record?.title].filter(el => el)}
 														accept=".pdf"
 														onDone={handleUploadDone}
 														onProgress={setProgress}

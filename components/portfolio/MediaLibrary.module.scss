@@ -6,51 +6,83 @@
   align-items: flex-start;
   padding: 0;
   width: 100%;
+  //height: 100%;
   max-height: 100%;
   overflow: hidden;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   button {
     white-space: pre;
   }
 
   li {
-    --width: 25%;
+
+
     --padding: 0.2rem;
+    --height: 6rem;
+    --border-width: 2px;
+    --width: calc(25% - var(--border-width) - var(--padding));
     position: relative;
     display: flex;
-    flex: 0 0 calc(var(--width) - var(--padding));
-    min-height: 33.333%;
-    max-height: 33.333%;
-    max-width: calc(var(--width) - var(--padding));
+
+    position: relative;
+    max-width: var(--width);
+    width: var(--width);
+    min-height: var(--height);
+    max-height: var(--height);
+    height: var(--height);
     padding: 1rem;
     background-color: var(--beige-light);
-    border: 2px solid transparent;
-    margin-right: var(--padding);
+    border: var(--border-width) solid transparent;
     margin-bottom: var(--padding);
     z-index: 10;
     border-radius: 1rem;
     cursor: pointer;
-
-    &:hover {
-      background-color: var(--beige-mid);
-    }
+    margin-right: var(--padding);
 
     &:nth-child(4) {
       margin-right: 0;
+    }
+
+    &:hover {
+      background-color: var(--beige-mid);
     }
 
     .thumb {
       aspect-ratio: 4/4;
       background-color: rgba(255, 255, 255, 0.05);
       max-height: 100%;
+      max-width: 100%;
     }
 
     &.upload {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      color: var(--white);
+
+      button {
+        flex: 0 0;
+      }
+
+      .uploadImage {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+      }
+
+      .uploadLoader {
+        color: var(--white) !important;
+      }
     }
 
     &.selected {
@@ -62,6 +94,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       background-color: var(--beige-light);
     }
 
@@ -97,9 +130,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--white) !important;
+  background-color: rgba(255, 255, 255, 1) !important;
 
   button {
     margin-top: 1rem;
   }
+}
+
+.help {
+  margin-top: calc(-1 * var(--outer-margin) + 1rem);
+  margin-bottom: 1rem;
+  color: var(--beige-dark);
+  font-size: 0.7em;
 }

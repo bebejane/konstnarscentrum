@@ -8,9 +8,10 @@ export type Props = {
   onError: (err: Error) => void
   content: MemberModelContentField[]
   onClose: () => void
+  member: MemberRecord
 }
 
-export default function PhotoBlockEditor({ block: blockFromProps, onError, onChange, onUpdate, onClose }: Props) {
+export default function PhotoBlockEditor({ block: blockFromProps, onError, onChange, onUpdate, onClose, member }: Props) {
 
   const [image, setImage] = useState<FileField | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
@@ -51,7 +52,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
   const handleBack = () => {
     if (isMediaLibrary) {
       setImage(undefined)
-      //setSelected(undefined)
+      setSelected(block.image)
       setIsMediaLibrary(false)
     }
     else if (image)
@@ -78,7 +79,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     !image?.responsiveImage ?
       <PortfolioContent
         onClose={onClose}
-        header={!isMediaLibrary ? 'Redigera' : 'Välj bild(er)'}
+        header={!isMediaLibrary ? 'Redigera bild(er)' : 'Välj bild(er)'}
         back={!isMediaLibrary ? undefined : 'Tillbaka'}
         save={!isMediaLibrary ? 'Spara' : 'Välj'}
         onBack={handleBack}
@@ -87,6 +88,7 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
       >
         <MediaLibrary
           key={isMediaLibrary ? 'medialibrary' : 'mediaselection'}
+          member={member}
           multi={true}
           selected={selected}
           onShowLibrary={() => setIsMediaLibrary(true)}
@@ -99,9 +101,8 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
       </PortfolioContent>
       :
       <PortfolioContent
-
         onClose={onClose}
-        header={'Redigera bild'}
+        header={'Redigera bild text'}
         save={'Ok'}
         back={'Tillbaka'}
         onBack={() => setImage(undefined)}

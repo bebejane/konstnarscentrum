@@ -11,7 +11,12 @@ export default function SelectedMember({ data: { selectedMembers } }: SelectedMe
 
   return (
     <section className={s.container}>
-      <SectionHeader title="Upptäck konstnärer" slug={"/anlita-oss/uppdrag"} margin={true} />
+      <SectionHeader
+        title="Upptäck konstnärer"
+        slug={"/anlita-oss/hitta-konstnar"}
+        regional={true}
+        margin={true}
+      />
       <CardContainer columns={3} whiteBorder={true}>
         {selectedMembers?.map(({ firstName, lastName, image, slug }, idx) =>
           <Card key={idx}>

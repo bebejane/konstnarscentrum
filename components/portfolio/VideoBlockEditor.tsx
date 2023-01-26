@@ -10,15 +10,14 @@ export type Props = {
   onChange: (video: VideoRecord) => void
 }
 
-const providers = ['youtube', 'vimeo']
+const providers = ['youtube', 'vimeo', 'youtu.be']
 
 export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
 
-  const { video, id, title } = block
+  const { video } = block
   const [videoData, setVideoData] = useState(video)
   const [videoUrl, setVideoUrl] = useState(video?.url)
   const [titleText, setTitleText] = useState<string | undefined>()
-  const [providerUid, setProviderUid] = useState<string | undefined>()
   const [error, setError] = useState<Error | undefined>()
 
   const parseVideoUrl = useCallback((videoUrl: string): any => {
@@ -35,8 +34,8 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
       if (!providers.find(provider => u.hostname.indexOf(provider) > -1))
         throw new Error('URL är ej giltig...')
       if (u.hostname.indexOf('youtube') > -1) {
-        if (!u.searchParams.get('v'))
-          throw new Error('Youtube URL är ej giltig...')
+        //if (!u.searchParams.get('v'))
+        //throw new Error('Youtube URL är ej giltig...')
       }
       if (u.hostname.indexOf('vimeo') > -1) {
         if (isNaN(parseInt(u.pathname.slice(1))))
@@ -44,9 +43,8 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
       }
       const url = u.href;
       const title = titleText
-      const provider = u.hostname.indexOf('youtube') > -1 ? 'youtube' : 'vimeo'
-      const providerUid = u.hostname.indexOf('youtube') > -1 ? u.searchParams.get('v') : u.pathname.slice(1);
-
+      const provider = ['youtube', 'youtu.be'].find(el => u.hostname.indexOf(el) > -1) ? 'youtube' : 'vimeo'
+      const providerUid = provider === 'youtube' ? u.searchParams.get('v') : u.pathname.slice(1);
       return {
         url,
         title,
@@ -56,7 +54,6 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
         width: undefined,
         thumbnailUrl: undefined
       }
-
 
     } catch (err) {
       setVideoData(undefined)

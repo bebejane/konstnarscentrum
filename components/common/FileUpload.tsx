@@ -2,22 +2,45 @@ import React, { useEffect, useState, useCallback, useRef } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SimpleSchemaTypes } from '@datocms/cma-client';
-
-const MAX_ALLOWED_IMAGES = 10
+import { MAX_ALLOWED_IMAGES, MIN_IMAGE_HEIGHT, MIN_IMAGE_WIDTH } from '/lib/constant'
 
 const client = buildClient({
   apiToken: process.env.NEXT_PUBLIC_UPLOADS_API_TOKEN,
   environment: process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT ?? 'main'
 });
 
+const parseImageFile = async (file: File): Promise<ImageData> => {
+  if (!file) return Promise.reject('Invalid file')
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = (err) => reject(err)
+    reader.onload = (e) => {
+      const image = new Image();
+      image.src = e.target.result as string;
+      image.onload = function () {
+        resolve({ width: image.width, height: image.height, src: image.src })
+      };
+    };
+    reader.readAsDataURL(file);
+  })
+}
+
+export type ImageData = {
+  width: number
+  height: number
+  src: string
+}
+
 export type Props = {
-  customData?: any,
-  accept: string,
-  tags?: string[],
-  onDone: (upload: Upload) => void,
-  onUploading: (uploading: boolean) => void,
-  onProgress: (percentage: number) => void,
-  onError: (err: Error) => void,
+  customData?: any
+  accept: string
+  tags?: string[]
+  onDone: (upload: Upload) => void
+  onUploading: (uploading: boolean) => void
+  onImageData?: (image: ImageData) => void
+  onProgress: (percentage: number) => void
+  onError: (err: Error) => void
   mediaLibrary: boolean
 }
 
@@ -29,10 +52,13 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
   accept,
   onDone,
   onUploading,
+  onImageData,
   onProgress,
   mediaLibrary,
-  onError
+  onError,
+  region
 }, ref) => {
+
 
   const [error, setError] = useState<Error | undefined>()
   const [upload, setUpload] = useState<Upload | undefined>()
@@ -76,11 +102,13 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     resetInput()
     onUploading(true)
 
+    const allTags = Array.isArray(tags) ? [...tags, 'upload'] : ['upload']
+
     return new Promise((resolve, reject) => {
       client.uploads.createFromFileOrBlob({
         fileOrBlob: file,
         filename: file.name,
-        tags,
+        tags: allTags,
         default_field_metadata: {
           en: {
             alt: '',
@@ -97,24 +125,44 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
 
   }, [customData, onUploading, onProgress, tags, resetInput, mediaLibrary])
 
-  const handleChange = useCallback((event) => {
-    const file = event.target.files[0];
+  const handleChange = useCallback(async (event) => {
+    const file: File = event.target.files[0];
     if (!file) return
-    createUpload(file)
-      .then((upload) => onDone(upload))
-      .catch((err) => onError(err))
-      .finally(() => onUploading(false))
-  }, [createUpload, onUploading, onDone, onError])
+
+    try {
+      if (file.type.includes('image')) {
+        const image = await parseImageFile(file)
+
+        if (image && (image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar.`)
+        if (image && (image.width < MIN_IMAGE_WIDTH && image.width > image.height))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste  minst vara ${MIN_IMAGE_WIDTH} pixlar bred.`)
+        if (image && (image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_HEIGHT} pixlar hög.`)
+
+        onImageData?.(image)
+      }
+
+      const upload = await createUpload(file)
+      onDone(upload)
+    } catch (err) {
+      setError(err)
+    }
+    onUploading(false)
+
+  }, [createUpload, onUploading, onDone, setError, onImageData])
 
   useEffect(() => {
     if (!ref.current) return
-
-    ref.current.removeEventListener('change', handleChange);
     ref.current.addEventListener('change', handleChange);
+    return () => ref.current?.removeEventListener('change', handleChange)
   }, [ref])
 
   useEffect(() => { onDone(upload) }, [upload])
-  useEffect(() => { onError(error) }, [error])
+  useEffect(() => {
+    onError(error)
+    ref.current.value = ''
+  }, [error])
 
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })

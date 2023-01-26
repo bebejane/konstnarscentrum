@@ -20,7 +20,7 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
 
   const [hover, setHover] = useState<undefined | boolean>();
   const [ratio, setRatio] = useState<number>(0)
-  const { isMobile } = useDevice()
+  const { isDesktop } = useDevice()
   const horizontal = title.split('').slice((title.length * ratio))
   const vertical = title.split('').slice(title.length - (title.length * ratio))
   const readMore = subtitle || 'Visa'
@@ -49,8 +49,8 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
       className={s.thumbnail}
       href={slug}
       regional={regional}
-      onMouseOver={() => !isMobile && setHover(true)}
-      onMouseLeave={() => !isMobile && setHover(false)}
+      onMouseOver={() => isDesktop && setHover(true)}
+      onMouseLeave={() => isDesktop && setHover(false)}
     >
       {image &&
         <Image

@@ -23,7 +23,7 @@ export default function Home({ regionStart, menu }: Props) {
 			<MenuDesktop items={menu} home={true} />
 			<div className={s.margins}>
 				{regionStart.sections?.map((block, idx) =>
-					<Block key={idx} recordId={regionStart.id} data={block} />
+					<Block key={idx} record={regionStart} data={block} />
 				)}
 			</div>
 		</div>
