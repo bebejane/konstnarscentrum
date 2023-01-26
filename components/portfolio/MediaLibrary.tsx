@@ -51,6 +51,8 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleRemove = async (e, id) => {
     e.stopPropagation()
 
+    if (!showLibrary) return onRemove?.(id)
+
     setLoading(true)
 
     try {
@@ -68,7 +70,6 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       setError(err)
     }
     setLoading(false)
-
   }
 
   const handleClick = (e, img) => {
@@ -91,6 +92,13 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
 
   return (
     <>
+      <div className={s.help}>
+        {showLibrary ?
+          <>Hjälp text välj bilder</>
+          :
+          <>Hjälp text redigera text</>
+        }
+      </div>
       <ul className={s.gallery}>
         {(showLibrary ? images : selected)?.map((img, idx) =>
           <li

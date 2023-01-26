@@ -127,8 +127,6 @@ export default function Portfolio({
             </button>
           </Link>
         </div>
-
-
       </div>
     </div>
   )

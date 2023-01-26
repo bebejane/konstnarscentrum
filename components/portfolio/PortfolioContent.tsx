@@ -10,12 +10,13 @@ export type Props = {
   header: string
   save: string
   back?: string
+  help?: string
   saveDisabled: boolean
   children: React.ReactNode
   loading?: string
 }
 
-export default function PortfolioContent({ header, save, back, saveDisabled, children, onClose, onSave, onBack, loading }: Props) {
+export default function PortfolioContent({ header, save, back, help, saveDisabled, children, onClose, onSave, onBack, loading }: Props) {
 
   return (
     <div id="edit-photo" className={s.photoEditor}>

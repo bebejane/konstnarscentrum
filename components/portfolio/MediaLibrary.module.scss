@@ -123,3 +123,10 @@
     margin-top: 1rem;
   }
 }
+
+.help {
+  margin-top: calc(-1 * var(--outer-margin) + 1rem);
+  margin-bottom: 1rem;
+  color: var(--beige-dark);
+  font-size: 0.7em;
+}

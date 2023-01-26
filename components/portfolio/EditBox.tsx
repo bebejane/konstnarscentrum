@@ -3,6 +3,7 @@ import cn from 'classnames'
 import { useCallback, useEffect, useState } from "react";
 import { arrayMoveImmutable } from 'array-move';
 import useDevice from "/lib/hooks/useDevice";
+import { useWindowSize } from "rooks";
 
 type EditBoxProps = {
   onContentChange: (content: MemberModelContentField[]) => void,
@@ -19,6 +20,7 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
   const [editable, setEditable] = useState<any | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
   const { isDesktop } = useDevice()
+  const { innerHeight, innerWidth } = useWindowSize()
 
   const findElement = (id) => {
     const editables = Array.from(document.querySelectorAll('[data-editable]')) as HTMLElement[]
