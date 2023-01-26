@@ -42,8 +42,7 @@ export default function Member({ member: {
 		if (status !== 'authenticated')
 			return
 
-		console.log('save content');
-		console.log(data);
+		//console.log('save content', data);
 
 		setSaving(true)
 		setBlock(undefined)
@@ -66,7 +65,7 @@ export default function Member({ member: {
 				throw error
 			}
 			const updatedMember = await res.json()
-			console.log(updatedMember.content);
+			//console.log('UPDATED CONTENT', updatedMember.content);
 
 			setMember(updatedMember)
 

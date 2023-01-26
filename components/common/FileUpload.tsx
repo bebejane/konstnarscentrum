@@ -132,8 +132,14 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     try {
       if (file.type.includes('image')) {
         const image = await parseImageFile(file)
-        if (image && (image.width < MIN_IMAGE_WIDTH || image.height < MIN_IMAGE_HEIGHT))
-          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar stor.`)
+
+        if (image && (image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar.`)
+        if (image && (image.width < MIN_IMAGE_WIDTH && image.width > image.height))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste  minst vara ${MIN_IMAGE_WIDTH} pixlar bred.`)
+        if (image && (image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
+          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_HEIGHT} pixlar hög.`)
+
         onImageData?.(image)
       }
 

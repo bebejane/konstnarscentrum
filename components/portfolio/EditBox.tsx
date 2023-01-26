@@ -18,7 +18,7 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
   const [editBoxStyle, setEditBoxStyle] = useState<any | undefined>()
   const [editable, setEditable] = useState<any | undefined>()
   const [block, setBlock] = useState<MemberModelContentField | undefined>()
-  const { isTablet, isMobile } = useDevice()
+  const { isDesktop } = useDevice()
 
   const findElement = (id) => {
     const editables = Array.from(document.querySelectorAll('[data-editable]')) as HTMLElement[]
@@ -53,7 +53,7 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
       const padding = 20;
 
       setEditBoxStyle({
-        top: (bounds.top - padding) + offsetTop + window.scrollY - (isTablet || isMobile ? 0 : 99),
+        top: (bounds.top - padding) + offsetTop + window.scrollY - (!isDesktop ? 0 : 99),
         left: bounds.left - padding + offsetLeft,
         width: width + (padding * 2),
         height: height + (padding * 2)
@@ -83,7 +83,7 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
         editBox.removeEventListener('mouseleave', handleMouseLeave)
       })
     }
-  }, [isMobile, isTablet, disable])
+  }, [isDesktop, disable])
 
   const handleMoveBlock = (e) => {
 
@@ -112,7 +112,7 @@ export default function EditBox({ onSelect, onImageSelect, onContentChange, onRe
   }
 
 
-  useEffect(() => { return init() }, [content, isMobile, isTablet, init, disable])
+  useEffect(() => { return init() }, [content, isDesktop, init, disable])
   useEffect(() => { onSelect(block) }, [block])
 
   return (

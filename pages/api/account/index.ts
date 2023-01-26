@@ -5,6 +5,8 @@ import { apiQuery } from 'dato-nextjs-utils/api'
 import { sleep } from '/lib/utils'
 import { MemberDocument } from '/graphql'
 import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes'
+import { getYouTubeThumbnail } from 'yt-vimeo-thumbnail/dist/youtube/getYouTube'
+import { getVimeoThumbnail } from 'yt-vimeo-thumbnail/dist/vimeo/getVimeo'
 
 export const client = buildClient({
   apiToken: process.env.GRAPHQL_API_TOKEN_FULL,
@@ -70,6 +72,9 @@ export default withAuthentication(async (req, res, session) => {
   if (!record)
     return res.status(500).json({ error: `User with id "${id}" not found!` })
 
+  const images: FileField[] = [image];
+  content.forEach(el => el.__typename === 'ImageRecord' && el.image && images.push.apply(images, el.image))
+
   const newRecord = {
     first_name: firstName,
     last_name: lastName,
@@ -81,15 +86,7 @@ export default withAuthentication(async (req, res, session) => {
     webpage,
     instagram,
     member_category: memberCategory,
-    image: image ? {
-      upload_id: image.id, title: image.title, default_field_metadata: {
-        en: {
-          alt: image.alt,
-          title: image.title,
-          custom_data: image.customData || {},
-        },
-      },
-    } : undefined,
+    image: image ? { upload_id: image.id } : undefined,
     content: content ? content.map((block) =>
       buildBlockRecord({
         item_type: { type: 'item_type', id: block.__typename === 'ImageRecord' ? imageBlockId : videoBlockId },
@@ -99,25 +96,16 @@ export default withAuthentication(async (req, res, session) => {
           type: undefined,
           index: undefined,
           image: block.__typename === 'ImageRecord' ? block.image?.map((i) => ({
-            title: i.title,
-            alt: i.alt,
-            upload_id: i.id,
-            default_field_metadata: {
-              en: {
-                alt: i.alt,
-                title: i.title,
-                custom_data: i.customData || {},
-              },
-            },
+            upload_id: i.id
           })
           ) : undefined,
           video: block.__typename === 'VideoRecord' && block.video ? {
             ...block.video || {},
             provider: block.video.provider,
             provider_uid: block.video.providerUid,
+            thumbnail_url: block.video.provider === 'youtube' ? getYouTubeThumbnail(block.video.url) : getVimeoThumbnail(block.video.url),
             width: 0,
             height: 0,
-            thumbnail_url: 'https://youtube.com',
             __typename: undefined,
             providerUid: undefined,
             thumbnailUrl: undefined,
@@ -130,12 +118,18 @@ export default withAuthentication(async (req, res, session) => {
 
   // Remove undefined
   Object.keys(newRecord).forEach(k => newRecord[k] === undefined && delete newRecord[k])
-  //  console.log(JSON.stringify(newRecord, null, 2));
 
   try {
 
-    await client.items.update(record.id, newRecord)
-    await sleep(2000)
+
+    await Promise.all([
+      client.items.update(record.id, newRecord),
+      ...images.filter(i => i).map(({ id, title, alt }) =>
+        client.uploads.update(id, {
+          default_field_metadata: { en: { alt, title, custom_data: {} } },
+        }))])
+
+    await sleep(2000) // Sleept ot wait for GraphQL api to update
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
     return res.status(200).json(member)
 
