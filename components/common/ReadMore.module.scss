@@ -18,10 +18,12 @@
     margin-right: 0.4em;
     margin-bottom: 0.1em;
     transition: all 0.1s;
-
-    &.invert {
-      background: var(--background);
-      width: 0.45em;
-    }
   }
+
+  .invert,
+  [data-theme='dark'] {
+    color: var(--white) !important;
+    width: 0.45em;
+  }
+
 }
