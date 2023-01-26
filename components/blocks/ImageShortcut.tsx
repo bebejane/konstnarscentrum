@@ -10,6 +10,8 @@ export type ImageShortcutBlockProps = {
 
 export default function ImageShortcut({ data: { headline, image, link, text, blackHeadline } }: ImageShortcutBlockProps) {
 
+  console.log(blackHeadline);
+
   return (
     <section className={s.container}>
       <figure>
@@ -25,8 +27,8 @@ export default function ImageShortcut({ data: { headline, image, link, text, bla
           <h2 className={cn(blackHeadline && s.black)}>
             {headline}
           </h2>
-          <p className="intro">{text}</p><br />
-          <ReadMore link={link} message='Läs mer' invert={true} />
+          <p className={cn(blackHeadline && s.black, "intro")}>{text}</p><br />
+          <ReadMore link={link} message='Läs mer' invert={blackHeadline && false} />
         </figcaption>
       </figure>
     </section >

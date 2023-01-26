@@ -71,6 +71,7 @@ query Region($regionId: ItemId) {
 				id
 				headline
 				text
+				blackHeadline
 				image {
 					...ImageFragment
 				}

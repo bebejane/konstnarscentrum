@@ -36,10 +36,6 @@
         position: relative;
       }
 
-      h2.black {
-        color: var(--black);
-      }
-
       p {
         margin-bottom: 0;
         padding-right: var(--grid-unit);
@@ -68,5 +64,8 @@
         }
       }
     }
+  }
+  .black {
+    color: var(--black);
   }
 }
