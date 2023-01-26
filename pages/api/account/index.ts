@@ -73,7 +73,7 @@ export default withAuthentication(async (req, res, session) => {
     return res.status(500).json({ error: `User with id "${id}" not found!` })
 
   const images: FileField[] = [image];
-  content.forEach(el => el.__typename === 'ImageRecord' && el.image && images.push.apply(images, el.image))
+  content?.forEach(el => el.__typename === 'ImageRecord' && el.image && images.push.apply(images, el.image))
 
   const newRecord = {
     first_name: firstName,
