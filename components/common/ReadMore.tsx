@@ -10,9 +10,10 @@ type Props = {
   link: string,
   invert?: boolean
   regional?: boolean
+  external?: boolean
 }
 
-export default function ReadMore({ message, link, invert = false, regional }: Props) {
+export default function ReadMore({ message, link, invert = false, regional, external = false }: Props) {
 
   const region = useRegion()
   const { theme } = useTheme()
@@ -24,6 +25,7 @@ export default function ReadMore({ message, link, invert = false, regional }: Pr
       href={recordToSlug(link, region)}
       className={cn(styles.more, 'small', invert && styles.invert)}
       regional={regional}
+      external={external}
     >
       <div className={cn(styles.square)} data-theme={theme}></div>
       <span data-theme={theme}>{message}</span>
