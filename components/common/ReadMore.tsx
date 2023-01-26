@@ -22,11 +22,11 @@ export default function ReadMore({ message, link, invert = false, regional }: Pr
   return (
     <RegionLink
       href={recordToSlug(link, region)}
-      className={cn(styles.more, 'small')}
+      className={cn(styles.more, 'small', invert && styles.invert)}
       regional={regional}
     >
-      <div className={cn(styles.square, invert && styles.invert)} data-theme={theme}></div>
-      <span data-theme={theme} className={cn(invert && styles.invert)}>{message}</span>
+      <div className={cn(styles.square)} data-theme={theme}></div>
+      <span data-theme={theme}>{message}</span>
     </RegionLink>
   )
 }
