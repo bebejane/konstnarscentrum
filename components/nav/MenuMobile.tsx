@@ -28,18 +28,18 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const { scrolledPosition } = useScrollInfo()
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
-	const { isMobile } = useDevice()
+	const { isDesktop } = useDevice()
 	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
 	const regionsRef = useRef<HTMLLIElement | null>(null)
 
 	useEffect(() => {
-		if (!isHome || !isMobile)
+		if (!isHome || isDesktop)
 			return setInvertedMenu(false)
 
 		const homeGallery = document.getElementById('home-gallery')
 		setInvertedMenu(!showMenuMobile && scrolledPosition < homeGallery.getBoundingClientRect().height)
 
-	}, [isMobile, isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
+	}, [isDesktop, isHome, scrolledPosition, setInvertedMenu, showMenuMobile])
 
 	useEffect(() => {
 		if (showMenuMobile)

@@ -37,6 +37,7 @@ export default function PhotoEditor({ image, onUpdate, onChoose }: Props) {
           name="title"
           type="text"
           value={image.title}
+          maxLength={160}
           onChange={(e) => onUpdate({ ...image, title: e.target.value })}
         />
       </div>

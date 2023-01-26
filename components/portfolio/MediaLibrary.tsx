@@ -154,7 +154,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       <FileUpload
         ref={uploadRef}
         customData={{}}
-        tags={[session.user.email, member.region.name]}
+        tags={[session.user.email, member.region.name, 'portfolio']}
         accept=".jpg,.png"
         onDone={handleUploadDone}
         onProgress={handleUploadProgress}
