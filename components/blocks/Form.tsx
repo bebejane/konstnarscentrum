@@ -77,6 +77,7 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 
 	return (
 		<section className={s.form}>
+			<h3>Dina uppgifter</h3>
 			{success ?
 				<p ref={confirmationRef} className={s.confirmation}>{confirmation}</p>
 				:

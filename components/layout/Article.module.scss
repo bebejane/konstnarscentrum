@@ -1,5 +1,5 @@
 .article {
-  >header {
+  > header {
     display: block;
     position: relative;
     padding-bottom: var(--small-space);
@@ -72,11 +72,12 @@
       position: relative;
       z-index: 2;
       color: var(--white);
-      padding-top: 1em;
+      //padding-top: 1em;
       width: 100%;
 
       &.absolute {
         position: absolute;
+        padding-top: 1em;
       }
 
       &.black {

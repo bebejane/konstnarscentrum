@@ -155,7 +155,6 @@ export default function Member({ member: {
 					/>
 				}
 			</Article>
-
 			<RelatedSection
 				key={`${id}-related`}
 				title="Upptäck fler"

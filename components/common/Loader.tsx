@@ -16,7 +16,7 @@ export default function Loader({ message, loading = true, className, color }: Pr
   return (
     <div className={cn(s.container, className)} style={{ maxHeight: `${size}px` }}>
       <div>
-        <ClipLoader size={size} color={color || '#000000'} />
+        <div className={s.anim}></div>
         {message && <div style={color ? { color } : undefined}>{message}</div>}
       </div>
     </div>

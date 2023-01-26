@@ -24,12 +24,6 @@ export default function ForArtists({ members, forArtist: { id, image, title, cre
         subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
         content={content}
       >
-        <h1>Nuvarande medlemmar</h1>
-        <ul>
-          {members.map(({ fullName }, idx) =>
-            <li key={idx}>{fullName}</li>
-          )}
-        </ul>
       </Article>
     </>
   );
