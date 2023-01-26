@@ -18,6 +18,10 @@
     margin-right: 0.4em;
     margin-bottom: 0.1em;
     transition: all 0.1s;
+
+    &.invert {
+      background: var(--background);
+    }
   }
 
   .invert,
