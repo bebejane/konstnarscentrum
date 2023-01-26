@@ -168,6 +168,12 @@ export default function Member({ member: {
 				}))}
 			/>
 
+			<div className={cn(s.overlay, saving && s.show)}>
+				<div className={s.loader}>
+					<Loader />
+				</div>
+			</div>
+
 			{error &&
 				<div className={cn(s.overlay, s.transparent)}>
 					<div className={s.error}>
@@ -177,15 +183,6 @@ export default function Member({ member: {
 					</div>
 				</div>
 			}
-
-			{saving &&
-				<div className={cn(s.overlay)}>
-					<div className={s.loader}>
-						<Loader />
-					</div>
-				</div>
-			}
-
 		</div>
 	);
 }
