@@ -18,6 +18,7 @@
     @include mq($from: tablet) {
       display: none;
     }
+
     height: 100%;
     width: calc(2 * var(--outer-margin));
     background: linear-gradient(270deg, rgba(252, 252, 252, 1) 0%, rgba(252, 252, 252, 0) 100%);
@@ -37,10 +38,12 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: calc(50% - var(--space));
+    top:0;
     right: 0;
     z-index: 1000;
+    margin:0;
     margin-right: calc(-1 * var(--grid-unit));
+    transform: translateY(-50%);
     cursor: pointer;
   }
 
@@ -53,7 +56,7 @@
     user-select: none;
     cursor: pointer;
 
-    > div {
+    >div {
       display: flex;
       flex-direction: row;
 
@@ -63,7 +66,7 @@
         padding-right: var(--gutter);
         //max-height: 20vw;
 
-        > figure {
+        >figure {
           display: flex;
           flex-direction: column;
           align-items: flex-start;

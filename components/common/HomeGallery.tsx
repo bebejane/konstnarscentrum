@@ -114,6 +114,7 @@ const Mask = ({ id, size, start }) => {
 
   const numBlobs = 200
   const animationTime = 850
+  let timeoutRef = useRef<NodeJS.Timer | undefined>()
 
   useEffect(() => {
     if (!start) return
@@ -133,19 +134,20 @@ const Mask = ({ id, size, start }) => {
     clipPath.innerHTML = ''
 
     const blobIt = async () => {
-
-      for (let i = 0; i < paths.length; i++) {
+      for (let i = 0; timeoutRef.current && i < paths.length; i++) {
         const path = paths[i];
         clipPath.innerHTML += `<path d="${path}" transform="translate(${randomInt(-200, size.width)},${randomInt(-200, size.height)})"/>`
         await sleep(animationTime / numBlobs)
       }
       await sleep(100)
       clipPath.innerHTML = ''
-
     }
 
-    const timeout = setTimeout(blobIt, slideTime - animationTime)
-    return () => clearTimeout(timeout)
+    timeoutRef.current = setTimeout(blobIt, slideTime - animationTime)
+    return () => {
+      clearTimeout(timeoutRef.current)
+      timeoutRef.current = undefined
+    }
 
   }, [start, id, size])
 

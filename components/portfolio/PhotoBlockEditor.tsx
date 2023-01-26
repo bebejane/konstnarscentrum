@@ -87,7 +87,6 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
         onSave={handleSave}
       >
         <MediaLibrary
-
           key={isMediaLibrary ? 'medialibrary' : 'mediaselection'}
           member={member}
           multi={true}
@@ -102,9 +101,8 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
       </PortfolioContent>
       :
       <PortfolioContent
-
         onClose={onClose}
-        header={'Välj bild(er)'}
+        header={'Redigera bild text'}
         save={'Ok'}
         back={'Tillbaka'}
         onBack={() => setImage(undefined)}
