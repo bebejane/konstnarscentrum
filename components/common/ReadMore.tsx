@@ -25,7 +25,8 @@ export default function ReadMore({ message, link, invert = false, regional }: Pr
       className={cn(styles.more, 'small')}
       regional={regional}
     >
-      <div className={cn(styles.square, invert && styles.invert)} data-theme={theme}></div>{message}
+      <div className={cn(styles.square, invert && styles.invert)} data-theme={theme}></div>
+      <span className={cn(invert && styles.invert)}>{message}</span>
     </RegionLink>
   )
 }
