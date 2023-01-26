@@ -36,12 +36,6 @@ export default function Members({ members, memberCategories, cities, regions, re
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
 
-		if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
-			return setResults(undefined)
-
-		//Object.keys(variables).forEach(k => variables[k] === undefined && delete variables[k])
-		console.log(variables);
-
 		setLoading(true)
 
 		fetch('/api/search', {
