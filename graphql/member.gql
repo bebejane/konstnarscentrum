@@ -149,6 +149,7 @@ query AllMemberNewsCategories {
 		category
 	}
 }
+
 query LatestMemberNews($first: IntType = 2, $skip: IntType = 0, $regionId: ItemId) {
 	memberNews: allMemberNews(
 		filter: { region: { eq: $regionId } }
@@ -209,3 +210,10 @@ query SearchMembersFree($first: IntType = 10, $skip: IntType = 0, $query: String
 		...MemberLightFragment
 	}
 }
+
+query MembersList {
+	  membersList {
+    intro(markdown:false)
+  }
+}
+

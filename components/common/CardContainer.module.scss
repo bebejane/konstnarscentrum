@@ -24,12 +24,11 @@
     color: var(--black) !important;
   }
 
-  >li {
+  > li {
     border-right: 1px solid var(--beige-mid);
   }
 
-  &.two>li {
-
+  &.two > li {
     @include mq($from: tablet) {
       width: 50%;
 
@@ -40,15 +39,28 @@
 
     @include mq($until: tablet) {
       width: 100%;
+      border-right: none;
+      a:last-of-type {
+        margin-bottom: 2rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--beige-mid);
+      }
 
-      &:nth-child(1n) {
-        border-right: none;
-        //margin-bottom: 2em;
+      &:last-of-type a:last-of-type {
+        margin-bottom: 0;
       }
     }
   }
 
-  &.three>li {
+  &.two {
+    @include mq($until: tablet) {
+      hr {
+        display: none;
+      }
+    }
+  }
+
+  &.three > li {
     width: 33.333%;
 
     @include mq($from: tablet) {
@@ -77,7 +89,8 @@
     margin-right: var(--gutter);
 
     @include mq($until: tablet) {
-      //display: none;
+      margin-top: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     &:last-child {
@@ -86,7 +99,7 @@
   }
 
   &.whiteBorder {
-    &>li {
+    & > li {
       border-color: var(--white) !important;
     }
 

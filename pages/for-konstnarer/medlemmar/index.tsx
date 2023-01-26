@@ -1,7 +1,7 @@
 import s from './index.module.scss'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { AllMembersWithPortfolioDocument } from "/graphql";
+import { AllMembersWithPortfolioDocument, MembersListDocument } from "/graphql";
 import { apiQueryAll, isServer, recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import React from 'react';
@@ -9,14 +9,15 @@ import React from 'react';
 export type Props = {
   membersByRegion: MemberRecord[][]
   region: Region
+  membersList: MembersListRecord
 }
 
-export default function ForArtistsHome({ membersByRegion, region }: Props) {
+export default function ForArtistsHome({ membersByRegion, region, membersList: { intro } }: Props) {
 
   return (
     <div className={s.container}>
       <h1>Medlemmar</h1>
-      <p className="intro">Är nog finast om det är en kort text här tror jag. Sophia du får tänka ut vad det ska stå men skulle gissa ungefär så här långt är lagom.</p>
+      <p className="intro">{intro}</p>
 
       {membersByRegion.map((members, i) => {
         return (
@@ -40,7 +41,7 @@ export default function ForArtistsHome({ membersByRegion, region }: Props) {
 
 ForArtistsHome.page = { crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer', regional: true }] } as PageProps
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [MembersListDocument] }, async ({ props, revalidate, context }: any) => {
 
   const { region } = props
   console.log(region);

@@ -3456,6 +3456,38 @@ type MemberRecordbioArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** Record of type Medlemslista (members_list) */
+type MembersListRecord = RecordInterface & {
+  __typename?: 'MembersListRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  intro?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Medlemslista (members_list) */
+type MembersListRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Medlemslista (members_list) */
+type MembersListRecordintroArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Block of type Meta (meta_block) */
 type MetaBlockRecord = RecordInterface & {
   __typename?: 'MetaBlockRecord';
@@ -3865,6 +3897,8 @@ type Query = {
   memberNews?: Maybe<MemberNewsRecord>;
   /** Returns a specific record */
   memberNewsCategory?: Maybe<MemberNewsCategoryRecord>;
+  /** Returns the single instance record */
+  membersList?: Maybe<MembersListRecord>;
   /** Returns a specific record */
   news?: Maybe<NewsRecord>;
   /** Returns a specific record */
@@ -4396,6 +4430,13 @@ type QuerymemberNewsCategoryArgs = {
   filter?: InputMaybe<MemberNewsCategoryModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QuerymembersListArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 
@@ -5642,6 +5683,11 @@ type SearchMembersFreeQueryVariables = Exact<{
 
 
 type SearchMembersFreeQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
+
+type MembersListQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type MembersListQuery = { __typename?: 'Query', membersList?: { __typename?: 'MembersListRecord', intro?: string | null } | null };
 
 type AllNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
