@@ -20,28 +20,37 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	const [captionHeight, setCaptionHeight] = useState<number | undefined>()
 
 	const calculatePositions = useCallback(() => {
+		console.log('update');
+
 		Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('picture>img')).forEach(img => {
 			setArrowMarginTop((state) => img.clientHeight > state ? img.clientHeight / 2 : state)
 		})
 
-		Array.from(containerRef.current.querySelectorAll<HTMLElement>('figure>figcaption')).forEach(caption => {
-			setCaptionHeight((prevState) => caption.clientHeight > prevState || !prevState ? caption.clientHeight : prevState)
+		let figcaptionHeight = 0
+		Array.from(containerRef.current.querySelectorAll<HTMLDivElement>('figure>figcaption')).forEach(caption => {
+			caption.style.minHeight = '0px'
+			figcaptionHeight = caption.clientHeight > figcaptionHeight || !figcaptionHeight ? caption.clientHeight : figcaptionHeight
+			caption.style.minHeight = `${figcaptionHeight}px`
 		})
+
+		//setCaptionHeight(figcaptionHeight)
+		console.log(figcaptionHeight);
 
 	}, [setArrowMarginTop, setCaptionHeight])
 
 	useEffect(() => {
+		console.log('change');
+
 		calculatePositions()
 	}, [innerHeight, innerWidth, calculatePositions])
 
-	//console.log(captionHeight);
 
 	return (
 		<div className={s.gallery} data-editable={editable} ref={containerRef}>
 			<div className={s.fade}></div>
 			<SwiperReact
 				id={`${id}-swiper-wrap`}
-				className={cn(s.swiper)}
+				className={s.swiper}
 				loop={true}
 				noSwiping={false}
 				simulateTouch={true}
@@ -51,8 +60,8 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				onSwiper={(swiper) => swiperRef.current = swiper}
 			>
 				{images.map((item, idx) =>
-					<SwiperSlide key={`${idx}`} className={cn(s.slide)} >
-						<figure id={`${id}-${item.id}`} onClick={() => onClick?.(item.id)}>
+					<SwiperSlide key={`${idx}-${captionHeight}`} className={cn(s.slide)} >
+						<figure id={`${id}-${item.id}`} onClick={() => onClick?.(item.id)} >
 							<Image
 								data={item.responsiveImage}
 								className={s.image}
@@ -60,7 +69,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								objectFit={'cover'}
 								onLoad={calculatePositions}
 							/>
-							<figcaption style={{ minHeight: `${captionHeight}px` }}>
+							<figcaption>
 								{item.title && <Markdown allowedElements={['em', 'p']}>{item.title}</Markdown>}
 							</figcaption>
 						</figure>
