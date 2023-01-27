@@ -15,5 +15,5 @@ export default function Block({ data, record, onClick, editable }: BlockProps) {
   if (!BlockComponent)
     return <div>No block match {data.__typename}</div>
 
-  return <BlockComponent data={data} record={record} onClick={onClick} editable={JSON.stringify(editable)} />
+  return <BlockComponent id={record.id} data={data} record={record} onClick={onClick} editable={JSON.stringify(editable)} />
 }
