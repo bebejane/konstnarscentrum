@@ -25,7 +25,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 		})
 
 		Array.from(containerRef.current.querySelectorAll<HTMLElement>('figure>figcaption')).forEach(caption => {
-			setCaptionHeight((prevState) => caption.clientHeight > prevState ? caption.clientHeight : prevState)
+			setCaptionHeight((prevState) => caption.clientHeight > prevState || !prevState ? caption.clientHeight : prevState)
 		})
 
 	}, [setArrowMarginTop, setCaptionHeight])
@@ -33,6 +33,8 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	useEffect(() => {
 		calculatePositions()
 	}, [innerHeight, innerWidth, calculatePositions])
+
+	//console.log(captionHeight);
 
 	return (
 		<div className={s.gallery} data-editable={editable} ref={containerRef}>
@@ -49,7 +51,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				onSwiper={(swiper) => swiperRef.current = swiper}
 			>
 				{images.map((item, idx) =>
-					<SwiperSlide key={captionHeight} className={cn(s.slide)} >
+					<SwiperSlide key={`${idx}`} className={cn(s.slide)} >
 						<figure id={`${id}-${item.id}`} onClick={() => onClick?.(item.id)}>
 							<Image
 								data={item.responsiveImage}
