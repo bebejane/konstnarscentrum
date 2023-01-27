@@ -16,10 +16,8 @@
   }
 
   li {
-
-
     --padding: 0.2rem;
-    --height: 6rem;
+    --height: 12vw;
     --border-width: 2px;
     --width: calc(25% - var(--border-width) - var(--padding));
     position: relative;
