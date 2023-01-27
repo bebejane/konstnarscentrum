@@ -15,7 +15,7 @@ export default function RegionLink(props: Props) {
   const href = (region && isRegional && !props.external && !props.href.toLowerCase().startsWith('http')) ? `/${region.slug}${props.href}` : props.external && !props.href.startsWith('http') ? `https://${props.href}` : props.href
 
   return (
-    <Link {...props} regional={undefined} href={href} >
+    <Link {...props} href={href} regional={undefined} external={undefined} >
       {props.children}
     </Link >
   )
