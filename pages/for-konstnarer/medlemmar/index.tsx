@@ -12,7 +12,7 @@ export type Props = {
   membersList: MembersListRecord
 }
 
-export default function ForArtistsHome({ membersByRegion, region, membersList: { intro } }: Props) {
+export default function ForArtistsHome({ membersByRegion, membersList: { intro } }: Props) {
 
   return (
     <div className={s.container}>
