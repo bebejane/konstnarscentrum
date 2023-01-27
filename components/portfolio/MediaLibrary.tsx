@@ -94,9 +94,9 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     <>
       <div className={s.help}>
         {showLibrary ?
-          <>Hjälp text välj bilder</>
+          <>Klicka för att välja bild(er) eller ladda upp en ny bild. Max 12 bilder totalt per portfolio. Släng bilder med krysset.</>
           :
-          <>Hjälp text redigera text</>
+          <>Lägg till eller ta bort bilder till din sektion (max 5). Klicka för att ändra bildtexten.</>
         }
       </div>
       <ul className={s.gallery}>

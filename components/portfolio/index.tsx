@@ -103,14 +103,14 @@ export default function Portfolio({
               //@ts-ignore
               onClick={() => onContentChange([...content, { __typename: 'ImageRecord', image: undefined }])}
             >
-              Lägg till bild(er)
+              Lägg till bild-sektion
             </button>
             <button
               className={s.addSection}
               //@ts-ignore
               onClick={() => onContentChange([...content, { __typename: 'VideoRecord', video: undefined }])}
             >
-              Lägg till video
+              Lägg till video-sektion
             </button>
           </>
         }
