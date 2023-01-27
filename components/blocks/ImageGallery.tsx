@@ -17,16 +17,22 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	const [index, setIndex] = useState(0)
 	const [arrowMarginTop, setArrowMarginTop] = useState(0)
 	const { innerHeight, innerWidth } = useWindowSize()
+	const [captionHeight, setCaptionHeight] = useState<number | undefined>()
 
-	const calculateNextArrowPosition = useCallback(() => {
-		Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('picture>img')).forEach(img =>
+	const calculatePositions = useCallback(() => {
+		Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('picture>img')).forEach(img => {
 			setArrowMarginTop((state) => img.clientHeight > state ? img.clientHeight / 2 : state)
-		)
-	}, [setArrowMarginTop])
+		})
+
+		Array.from(containerRef.current.querySelectorAll<HTMLElement>('figure>figcaption')).forEach(caption => {
+			setCaptionHeight((prevState) => caption.clientHeight > prevState ? caption.clientHeight : prevState)
+		})
+
+	}, [setArrowMarginTop, setCaptionHeight])
 
 	useEffect(() => {
-		calculateNextArrowPosition()
-	}, [innerHeight, innerWidth, calculateNextArrowPosition])
+		calculatePositions()
+	}, [innerHeight, innerWidth, calculatePositions])
 
 	return (
 		<div className={s.gallery} data-editable={editable} ref={containerRef}>
@@ -43,20 +49,18 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 				onSwiper={(swiper) => swiperRef.current = swiper}
 			>
 				{images.map((item, idx) =>
-					<SwiperSlide key={`${idx}`} className={cn(s.slide)}>
+					<SwiperSlide key={captionHeight} className={cn(s.slide)} >
 						<figure id={`${id}-${item.id}`} onClick={() => onClick?.(item.id)}>
 							<Image
 								data={item.responsiveImage}
 								className={s.image}
 								pictureClassName={s.picture}
 								objectFit={'cover'}
-								onLoad={calculateNextArrowPosition}
+								onLoad={calculatePositions}
 							/>
-							{item.title &&
-								<figcaption>
-									<Markdown allowedElements={['em', 'p']}>{item.title}</Markdown>
-								</figcaption>
-							}
+							<figcaption style={{ minHeight: `${captionHeight}px` }}>
+								{item.title && <Markdown allowedElements={['em', 'p']}>{item.title}</Markdown>}
+							</figcaption>
 						</figure>
 					</SwiperSlide>
 				)}
@@ -66,7 +70,6 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 					className={s.next}
 					style={{ top: `${arrowMarginTop}px` }}
 					onClick={() => swiperRef.current?.slideNext()}
-
 				>→</div>
 			}
 		</div>

@@ -1,6 +1,7 @@
 #import "./fragment/MemberFragment.gql"
 #import "./fragment/MemberLightFragment.gql"
 #import "./fragment/MemberNewsLightFragment.gql"
+#import "./fragment/MediaGalleryFragment.gql"
 
 query AllMembers {
 	members: allMembers {
@@ -108,19 +109,19 @@ query MemberImages($email: String!) {
 		content {
 			... on ImageRecord {
 				image {
-					...ImageThumbnailFragment
+					...MediaGalleryFragment
 				}
 				thumb: image {
-					...ImageThumbnailFragment
+					...MediaGalleryFragment
 				}
 			}
 		}
 	}
 	uploads: allUploads(filter: { tags: { anyIn: [$email] } }) {
-		...ImageThumbnailFragment
+		...MediaGalleryFragment
 	}
 	uploadsThumbs: allUploads(filter: { tags: { anyIn: [$email] } }) {
-		...ImageThumbnailFragment
+		...MediaGalleryFragment
 	}
 }
 
@@ -212,8 +213,7 @@ query SearchMembersFree($first: IntType = 10, $skip: IntType = 0, $query: String
 }
 
 query MembersList {
-	  membersList {
-    intro(markdown:false)
-  }
+	membersList {
+		intro(markdown: false)
+	}
 }
-

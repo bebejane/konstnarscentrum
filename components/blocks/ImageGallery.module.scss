@@ -52,11 +52,12 @@
     max-width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
     overflow: hidden;
     user-select: none;
     cursor: pointer;
 
-    > div {
+    >div {
       display: flex;
       flex-direction: row;
       align-items: flex-end;
@@ -66,8 +67,9 @@
         width: calc((100% - (var(--gutter) * 2)) / 3);
         padding-right: var(--gutter);
         //max-height: 20vw;
+        height: 100%;
 
-        > figure {
+        >figure {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
@@ -76,6 +78,7 @@
 
           figcaption {
             flex: 1 1 100%;
+            //min-height: 3rem;
 
             p {
               margin: 0;
