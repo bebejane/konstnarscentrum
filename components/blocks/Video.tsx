@@ -37,7 +37,12 @@ export default function Video({ data, editable }) {
 					:
 					null
 			}
-			{title && <div className={s.caption}>{title}</div>}
+			{title && <div className={s.caption}>
+				<figcaption>
+					{title}
+				</figcaption>
+
+			</div>}
 		</section>
 	)
 }
