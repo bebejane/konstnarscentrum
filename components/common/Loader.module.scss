@@ -13,11 +13,27 @@
 }
 
 .anim {
-  display: block;
-  width: 1rem;
-  height: 1rem;
-  background-color: var(--black);
-  animation: rotation 2s infinite linear;
+  position: relative;
+  div {
+    position: absolute;
+  }
+  div:last-of-type {
+    transform: rotate(90deg);
+    transform-origin: center;
+    animation: rotation 1.5s infinite ease-in-out;
+  }
+  div:first-of-type {
+    transform: rotate(0deg);
+    transform-origin: center;
+    animation: rotation 1.5s infinite linear;
+  }
+  span {
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: var(--black);
+    margin: 1.5rem;
+  }
 }
 
 @keyframes rotation {

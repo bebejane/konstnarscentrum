@@ -16,7 +16,10 @@ export default function Loader({ message, loading = true, className, color }: Pr
   return (
     <div className={cn(s.container, className)} style={{ maxHeight: `${size}px` }}>
       <div>
-        <div className={s.anim}></div>
+        <div className={s.anim}>
+          <div><span></span><span></span></div>
+          <div><span></span><span></span></div>
+        </div>
         {message && <div style={color ? { color } : undefined}>{message}</div>}
       </div>
     </div>

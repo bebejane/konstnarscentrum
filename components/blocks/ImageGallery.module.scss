@@ -38,10 +38,10 @@
     justify-content: center;
     align-items: center;
     position: absolute;
-    top:0;
+    top: 0;
     right: 0;
     z-index: 1000;
-    margin:0;
+    margin: 0;
     margin-right: calc(-1 * var(--grid-unit));
     transform: translateY(-50%);
     cursor: pointer;
@@ -56,9 +56,10 @@
     user-select: none;
     cursor: pointer;
 
-    >div {
+    > div {
       display: flex;
       flex-direction: row;
+      align-items: flex-end;
 
       .slide {
         position: relative;
@@ -66,7 +67,7 @@
         padding-right: var(--gutter);
         //max-height: 20vw;
 
-        >figure {
+        > figure {
           display: flex;
           flex-direction: column;
           align-items: flex-start;
