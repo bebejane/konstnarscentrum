@@ -119,13 +119,9 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         <li className={s.upload}>
           {progress === undefined || progress === 100 && !uploading ?
             showLibrary ?
-              <button type="button" onClick={() => uploadRef.current.click()}>
-                Ladda upp
-              </button>
+              <button type="button" onClick={() => uploadRef.current.click()}>Ladda upp</button>
               :
-              <button type="button" onClick={() => onShowLibrary?.(true)}>
-                Välj bild(er)
-              </button>
+              <button type="button" onClick={() => onShowLibrary?.(true)}>Välj bild(er)</button>
             :
             <>
               {uploadImageData &&

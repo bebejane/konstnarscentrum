@@ -37,11 +37,12 @@ const memberSearch = async (opt) => {
   const variables = {
     regionId,
     memberCategoryIds,
-    query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
+    query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined,
+    first: 100
   };
 
-  if (isEmptyObject(variables))
-    return []
+  //if (isEmptyObject(variables))
+  //return []
 
   const { members } = await apiQuery(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables })
   return members
