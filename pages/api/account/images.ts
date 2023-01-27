@@ -24,7 +24,7 @@ export default withAuthentication(async (req, res, session) => {
   try {
     if (removeId) {
       await client.uploads.destroy(removeId as string)
-      await sleep(2000)
+      await sleep(3000)
     }
     const images = await userMediaLibrary(session)
     return res.status(200).json({ images })

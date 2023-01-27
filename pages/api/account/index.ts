@@ -129,7 +129,7 @@ export default withAuthentication(async (req, res, session) => {
           default_field_metadata: { en: { alt, title, custom_data: {} } },
         }))])
 
-    await sleep(2000) // Sleept ot wait for GraphQL api to update
+    await sleep(3000) // Sleept ot wait for GraphQL api to update
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
     return res.status(200).json(member)
 

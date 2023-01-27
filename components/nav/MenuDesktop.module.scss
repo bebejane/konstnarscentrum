@@ -22,6 +22,7 @@
   padding-right: var(--outer-margin);
   background-color: var(--background);
   color: var(--foreground);
+  transition: background-color 0.5s ease-in-out;
 
   @include mq($until: nav-break) {
     display: none;
@@ -67,7 +68,7 @@
     left: 0;
     width: 100%;
     background-color: var(--background);
-    transition: background-color 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
 
     .sub {
       display: none;
