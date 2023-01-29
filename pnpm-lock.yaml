@@ -51,6 +51,7 @@ specifiers:
   graphql-request: ^4.3.0
   graphql-tag: ^2.12.6
   hamburger-react: ^2.5.0
+  in-view: ^0.6.1
   is-youtube-url: ^1.0.5
   jsonwebtoken: ^8.5.1
   lodash-es: 4.17.21
@@ -128,6 +129,7 @@ dependencies:
   graphql-request: 4.3.0_rjjjs2nwgns3bcvnnqb5eu5nry
   graphql-tag: 2.12.6_graphql@16.6.0
   hamburger-react: 2.5.0_react@18.2.0
+  in-view: 0.6.1
   is-youtube-url: 1.0.5
   jsonwebtoken: 8.5.1
   lodash-es: 4.17.21
@@ -7090,6 +7092,12 @@ packages:
     resolution: {integrity: sha512-JmXMZ6wuvDmLiHEml9ykzqO6lwFbof0GG4IkcGaENdCRDDmMVnny7s5HsIgHCbaq0w2MyPhDqkhTUgS2LU2PHA==}
     engines: {node: '>=0.8.19'}
     dev: true
+
+  /in-view/0.6.1:
+    resolution: {integrity: sha512-vgoymXcD8MY7PBOnd1fflA6vYGlNi16ZNgFR6dt8Ayr2i6kChFh1CiqDFRNgGGd10tzn8sH4QoqsqNIszmpGOQ==}
+    dependencies:
+      lodash: 4.17.21
+    dev: false
 
   /indent-string/3.2.0:
     resolution: {integrity: sha512-BYqTHXTGUIvg7t1r4sJNKcbDZkL92nkXA8YtRpbjFHRHGDL/NtUeiBJMeE60kIFN/Mg8ESaWQvftaYMGJzQZCQ==}

@@ -8,7 +8,6 @@
     "districts.json": true,
     "middleware.js": true,
     ".eslintrc.json": true,
-    ".gitignore": true,
     "graphql.config.js": true,
     "next-env.d.ts": true,
     "next-sitemap.config.js": true,

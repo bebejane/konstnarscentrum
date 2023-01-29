@@ -27,8 +27,8 @@ export default function Search({ }: Props) {
 
   useEffect(() => {
 
-    setLoading(true)
-    setResults(undefined)
+
+
 
     const variables = {
       type: 'site',
@@ -36,14 +36,23 @@ export default function Search({ }: Props) {
     };
 
     if (!Object.keys(variables).filter(k => variables[k] !== undefined).length)
-      return setResults(undefined)
+      return
+
+    setResults(undefined)
+    setLoading(true)
 
     fetch('/api/search', {
       body: JSON.stringify(variables),
       method: 'POST',
       headers: { 'Content-Type': 'application/json' }
     })
-      .then(async (res) => setResults(await res.json()))
+      .then(async (res) => {
+        if (res.status === 200) {
+          const results = await res.json()
+          setResults(results)
+        } else
+          setError(new Error('error in search'))
+      })
       .catch((err) => setError(err))
       .finally(() => setLoading(false))
 
@@ -81,7 +90,7 @@ export default function Search({ }: Props) {
               <nav>Sökresultat: &quot;{query}&quot;</nav>
             </header>
             <div className={s.matches}>
-              {results ?
+              {results && Object.keys(results).length > 0 ?
                 Object.keys(results).map((type, idx) =>
                   <ul key={idx}>
                     {results[type]?.map(({ category, title, text, image, slug }, i) =>

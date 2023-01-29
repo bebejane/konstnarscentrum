@@ -171,6 +171,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
   let skip = 0;
 
   while (pagesLeft) {
+    console.log(opt.variables);
 
     const res = await apiQuery(doc, { variables: { ...opt.variables, first: size, skip } });
     const { count } = res.pagination
@@ -179,14 +180,15 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     for (let i = 0; i < props.length; i++) {
       const k = props[i]
       const el = res[props[i]];
-      if (Array.isArray(el))
-        results[k] = !results[k] ? [...el] : results[k].concat([...el])
-      else
+      if (Array.isArray(el)) {
+        results[k] = !results[k] ? el : results[k].concat(el)
+      } else
         results[k] = el;
     }
 
     pagesLeft = skip + size < count;
     skip += (size)
+    console.log(pagesLeft, skip, size, count);
   }
   return results
 }
