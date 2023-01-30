@@ -175,7 +175,9 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
 
   const { count } = res.pagination
 
-  const mergeProps = (props) => {
+  const mergeProps = (res) => {
+    const props = Object.keys(res);
+
     for (let i = 0; i < props.length; i++) {
       const k = props[i]
       const el = res[props[i]];
@@ -186,7 +188,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     }
   }
 
-  mergeProps(Object.keys(res))
+  mergeProps(res)
 
   let reqs = []
   for (let skip = size; skip < count; skip += size) {
@@ -197,7 +199,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
       if (res.find(el => el.status === 'rejected'))
         throw new Error(res.find(el => el.status === 'rejected')?.reason)
       for (let x = 0; x < res.length; x++)
-        mergeProps(Object.keys(res[x].value));
+        mergeProps(res[x].value);
       await sleep(1000)
       reqs = []
     }

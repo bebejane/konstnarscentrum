@@ -131,6 +131,8 @@ const Mask = ({ id, size, start }) => {
     })
 
     const clipPath = document.getElementById(id)
+    if (!clipPath) return
+
     clipPath.innerHTML = ''
 
     const blobIt = async () => {
@@ -144,6 +146,7 @@ const Mask = ({ id, size, start }) => {
     }
 
     timeoutRef.current = setTimeout(blobIt, slideTime - animationTime)
+
     return () => {
       clearTimeout(timeoutRef.current)
       timeoutRef.current = undefined
