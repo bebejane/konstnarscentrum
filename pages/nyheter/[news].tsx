@@ -5,15 +5,17 @@ import { NewsDocument, AllNewsDocument } from "/graphql";
 import { Article, RegionLink } from "/components";
 import { format } from "date-fns";
 import { getStaticPagePaths } from "/lib/utils";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 export type Props = {
   news: NewsRecord
 }
 
-export default function NewsItem({ news: { id, createdAt, title, image, intro, content, region, blackHeadline } }: Props) {
+export default function NewsItem({ news: { id, createdAt, title, image, intro, content, region, blackHeadline, _seoMetaTags } }: Props) {
 
   return (
     <>
+      <DatoSEO title={title} description={intro} seo={_seoMetaTags} />
       <Article
         id={id}
         image={image}

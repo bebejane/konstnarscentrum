@@ -4,22 +4,26 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { ConsultDocument, AllConsultsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
 import { Article } from "/components";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 type ConsultProps = {
 	consult: ConsultRecord
 }
 
-export default function Consult({ consult: { id, title, image, intro, content } }: ConsultProps) {
+export default function Consult({ consult: { id, title, image, intro, content, _seoMetaTags } }: ConsultProps) {
 
 	return (
-		<Article
-			id={id}
-			key={id}
-			title={title}
-			image={image}
-			text={intro}
-			content={content}
-		/>
+		<>
+			<DatoSEO title={title} description={intro} seo={_seoMetaTags} />
+			<Article
+				id={id}
+				key={id}
+				title={title}
+				image={image}
+				text={intro}
+				content={content}
+			/>
+		</>
 	);
 }
 

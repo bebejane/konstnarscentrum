@@ -5,6 +5,7 @@ import { MemberNewsDocument, AllMemberNewsDocument } from "/graphql";
 import { format } from "date-fns";
 import { Article, MetaSection, StructuredContent, RegionLink } from "/components";
 import { getStaticPagePaths } from "/lib/utils";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 export type Props = {
 	memberNews: MemberNewsRecord,
@@ -23,11 +24,13 @@ export default function MemberNewsArticle({ memberNews: {
 	location,
 	category,
 	blackHeadline,
-	region
+	region,
+	_seoMetaTags
 }, memberNews }: Props) {
 
 	return (
 		<>
+			<DatoSEO title={title} description={intro} seo={_seoMetaTags} />
 			<Article
 				id={id}
 				image={image}

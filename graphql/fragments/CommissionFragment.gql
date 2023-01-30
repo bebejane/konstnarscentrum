@@ -53,4 +53,9 @@ fragment CommissionFragment on CommissionRecord {
 	region {
 		...RegionFragment
 	}
+	_seoMetaTags {
+		attributes
+		content
+		tag
+	}
 }

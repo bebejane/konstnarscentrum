@@ -7,6 +7,7 @@ import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDo
 import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 import useStore from "/lib/store";
 
@@ -98,91 +99,94 @@ export default function Member({ member: {
 	}, [imageId])
 
 	return (
-		<div className={s.container}>
-			<Article
-				id={id}
-				key={id}
-				image={member.image}
-				title={`${firstName} ${lastName}`}
-				text={bio}
-				noBottom={true}
-				editable={JSON.stringify({ ...member.image, nodelete: true })}
-				onClick={(id) => setImageId(id)}
-			>
-				<MetaSection
-					key={`${id}-meta`}
-					items={[
-						{ title: 'Född', value: birthPlace },
-						{ title: 'Verksam', value: city },
-						{ title: 'Kontakt', value: email },
-						{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => categoryType).join(', ') },
-						{ title: 'Besök', value: '' }
-					]}
-				/>
-				{member.content?.length > 0 &&
-					<h2 className="noPadding">Utvalda verk</h2>
-				}
-				{member.content?.map((block, idx) =>
-					<Block
-						key={`${id}-${idx}`}
-						data={block}
-						record={member}
-						onClick={(id) => setImageId(id)}
-						editable={{
-							...block,
-							id: block.id,
-							type: block.__typename,
-							index: idx
-						}} />
-				)}
-				{isEditable &&
-					<Portfolio
-						key={member.id}
-						member={member}
-						block={block}
-						setBlock={setBlock}
-						content={member.content || memberFromProps.content}
-						onChange={handleBlockChange}
-						onContentChange={handleContentChange}
-						onChangeMainImage={handleMainImageChange}
-						onRemove={handleRemove}
-						mainImage={mainImage}
-						setMainImage={setMainImage}
-						preview={preview}
-						onPreview={() => setPreview(!preview)}
-						onClose={() => setBlock(undefined)}
-						onError={(err) => setError(err)}
+		<>
+			<DatoSEO title={member.fullName} description={member.bio} seo={member._seoMetaTags} />
+			<div className={s.container}>
+				<Article
+					id={id}
+					key={id}
+					image={member.image}
+					title={`${firstName} ${lastName}`}
+					text={bio}
+					noBottom={true}
+					editable={JSON.stringify({ ...member.image, nodelete: true })}
+					onClick={(id) => setImageId(id)}
+				>
+					<MetaSection
+						key={`${id}-meta`}
+						items={[
+							{ title: 'Född', value: birthPlace },
+							{ title: 'Verksam', value: city },
+							{ title: 'Kontakt', value: email },
+							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => categoryType).join(', ') },
+							{ title: 'Besök', value: '' }
+						]}
 					/>
-				}
-			</Article>
-			<RelatedSection
-				key={`${id}-related`}
-				title="Upptäck fler"
-				slug={'/anlita-oss/hitta-konstnar'}
-				regional={false}
-				items={related.map(({ firstName, lastName, image, slug }) => ({
-					title: `${firstName} ${lastName}`,
-					image,
-					slug: `/anlita-oss/hitta-konstnar/${slug}`
-				}))}
-			/>
+					{member.content?.length > 0 &&
+						<h2 className="noPadding">Utvalda verk</h2>
+					}
+					{member.content?.map((block, idx) =>
+						<Block
+							key={`${id}-${idx}`}
+							data={block}
+							record={member}
+							onClick={(id) => setImageId(id)}
+							editable={{
+								...block,
+								id: block.id,
+								type: block.__typename,
+								index: idx
+							}} />
+					)}
+					{isEditable &&
+						<Portfolio
+							key={member.id}
+							member={member}
+							block={block}
+							setBlock={setBlock}
+							content={member.content || memberFromProps.content}
+							onChange={handleBlockChange}
+							onContentChange={handleContentChange}
+							onChangeMainImage={handleMainImageChange}
+							onRemove={handleRemove}
+							mainImage={mainImage}
+							setMainImage={setMainImage}
+							preview={preview}
+							onPreview={() => setPreview(!preview)}
+							onClose={() => setBlock(undefined)}
+							onError={(err) => setError(err)}
+						/>
+					}
+				</Article>
+				<RelatedSection
+					key={`${id}-related`}
+					title="Upptäck fler"
+					slug={'/anlita-oss/hitta-konstnar'}
+					regional={false}
+					items={related.map(({ firstName, lastName, image, slug }) => ({
+						title: `${firstName} ${lastName}`,
+						image,
+						slug: `/anlita-oss/hitta-konstnar/${slug}`
+					}))}
+				/>
 
-			<div className={cn(s.overlay, saving && s.show)}>
-				<div className={s.loader}>
-					<Loader />
-				</div>
-			</div>
-
-			{error &&
-				<div className={cn(s.overlay, s.transparent)}>
-					<div className={s.error}>
-						<h3>Det uppstod ett fel</h3>
-						<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
-						<button onClick={() => setError(undefined)}>Stäng</button>
+				<div className={cn(s.overlay, saving && s.show)}>
+					<div className={s.loader}>
+						<Loader />
 					</div>
 				</div>
-			}
-		</div>
+
+				{error &&
+					<div className={cn(s.overlay, s.transparent)}>
+						<div className={s.error}>
+							<h3>Det uppstod ett fel</h3>
+							<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
+							<button onClick={() => setError(undefined)}>Stäng</button>
+						</div>
+					</div>
+				}
+			</div>
+		</>
 	);
 }
 

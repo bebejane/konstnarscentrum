@@ -7,6 +7,7 @@ import { Article, Block, MetaSection, RelatedSection } from "/components";
 import { useEffect, useState } from "react";
 import { getStaticPagePaths } from '/lib/utils'
 import { useStore } from "/lib/store";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 type CommissionProps = {
 	commission: CommissionRecord
@@ -25,7 +26,8 @@ export default function Commission({ commission: {
 	consultant,
 	work,
 	commissioner,
-	content
+	content,
+	_seoMetaTags
 }, commission, commissions }: CommissionProps) {
 
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
@@ -36,50 +38,54 @@ export default function Commission({ commission: {
 	}, [content, image, setImages])
 
 	return (
-		<div className={s.container}>
-			<Article
-				id={id}
-				key={id}
-				title={`${title} i ${city}, ${year}`}
-				image={image}
-				text={intro}
-				blackHeadline={blackHeadline}
-				onClick={(id) => setImageId(id)}
-			>
-				<MetaSection
-					items={[
-						{ title: 'Konstnär', value: artist },
-						{ title: 'År', value: year },
-						{ title: 'Titel', value: work },
-						{ title: 'Plats', value: city },
-						{ title: 'Beställare', value: commissioner },
-						{ title: 'Konsulent', value: consultant }
-					]}
+		<>
+			<DatoSEO title={title} description={intro} seo={_seoMetaTags} />
+
+			<div className={s.container}>
+				<Article
+					id={id}
+					key={id}
+					title={`${title} i ${city}, ${year}`}
+					image={image}
+					text={intro}
+					blackHeadline={blackHeadline}
+					onClick={(id) => setImageId(id)}
+				>
+					<MetaSection
+						items={[
+							{ title: 'Konstnär', value: artist },
+							{ title: 'År', value: year },
+							{ title: 'Titel', value: work },
+							{ title: 'Plats', value: city },
+							{ title: 'Beställare', value: commissioner },
+							{ title: 'Konsulent', value: consultant }
+						]}
+					/>
+					<section className={s.documentation}>
+						<h2 className="noPadding">Dokumentation</h2>
+						{content.map((block, idx) =>
+							<Block
+								key={`${id}-${idx}`}
+								data={block}
+								record={commission}
+								onClick={(id) => setImageId(id)}
+							/>
+						)}
+					</section>
+				</Article>
+				<RelatedSection
+					key={`${id}-related`}
+					title="Fler uppdrag"
+					slug="/anlita-oss/uppdrag"
+					items={commissions.map(({ title, city, year, image, slug }) => ({
+						title,
+						subtitle: `${city} ${year}`,
+						image,
+						slug: `/anlita-oss/uppdrag/${slug}`
+					}))}
 				/>
-				<section className={s.documentation}>
-					<h2 className="noPadding">Dokumentation</h2>
-					{content.map((block, idx) =>
-						<Block
-							key={`${id}-${idx}`}
-							data={block}
-							record={commission}
-							onClick={(id) => setImageId(id)}
-						/>
-					)}
-				</section>
-			</Article>
-			<RelatedSection
-				key={`${id}-related`}
-				title="Fler uppdrag"
-				slug="/anlita-oss/uppdrag"
-				items={commissions.map(({ title, city, year, image, slug }) => ({
-					title,
-					subtitle: `${city} ${year}`,
-					image,
-					slug: `/anlita-oss/uppdrag/${slug}`
-				}))}
-			/>
-		</div>
+			</div>
+		</>
 	);
 }
 

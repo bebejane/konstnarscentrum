@@ -6,12 +6,13 @@ import type { GetStaticProps } from 'next'
 import { Article } from "/components";
 import { useEffect, useState } from "react";
 import useStore from "/lib/store";
+import { DatoSEO } from "dato-nextjs-utils/components";
 
 type AboutProps = {
 	about: AboutRecord
 }
 
-export default function About({ about: { id, title, image, intro, content } }: AboutProps) {
+export default function About({ about: { id, title, image, intro, content, _seoMetaTags } }: AboutProps) {
 
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 
@@ -21,15 +22,18 @@ export default function About({ about: { id, title, image, intro, content } }: A
 	}, [image, content, setImages])
 
 	return (
-		<Article
-			id={id}
-			key={id}
-			title={title}
-			image={image}
-			text={intro}
-			content={content}
-			onClick={(imageId) => setImageId(imageId)}
-		/>
+		<>
+			<DatoSEO title={title} description={intro} seo={_seoMetaTags} />
+			<Article
+				id={id}
+				key={id}
+				title={title}
+				image={image}
+				text={intro}
+				content={content}
+				onClick={(imageId) => setImageId(imageId)}
+			/>
+		</>
 	);
 }
 

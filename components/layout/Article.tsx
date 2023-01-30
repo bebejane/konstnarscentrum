@@ -6,6 +6,7 @@ import { KCImage as Image } from '/components'
 import cn from 'classnames'
 import BalanceText from 'react-balance-text'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
+import DatoSEO from 'dato-nextjs-utils/components';
 
 export type ArticleProps = {
   id: string,
@@ -40,6 +41,7 @@ export default function Article({
   const haveImage = image?.responsiveImage !== undefined
 
   return (
+
     <div className={cn(s.article, 'article')}>
       {showImage &&
         <header>
@@ -91,5 +93,6 @@ export default function Article({
       }
       {children}
     </div>
+
   )
 }

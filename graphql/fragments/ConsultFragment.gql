@@ -48,4 +48,9 @@ fragment ConsultFragment on ConsultRecord {
 			}
 		}
 	}
+	_seoMetaTags {
+		attributes
+		content
+		tag
+	}
 }

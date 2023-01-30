@@ -83,4 +83,9 @@ fragment MemberNewsFragment on MemberNewsRecord {
 	region {
 		...RegionFragment
 	}
+	_seoMetaTags {
+		attributes
+		content
+		tag
+	}
 }

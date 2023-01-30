@@ -5,15 +5,15 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
 import { Block, HomeGallery, MenuDesktop } from "/components";
-
 import type { Menu } from "/lib/menu";
 
 export type Props = {
 	regionStart: RegionRecord
-	menu: Menu
+	menu: Menu,
+	region: RegionRecord
 }
 
-export default function Home({ regionStart, menu }: Props) {
+export default function Home({ regionStart, region, menu }: Props) {
 
 	return (
 		<div className={s.container}>
