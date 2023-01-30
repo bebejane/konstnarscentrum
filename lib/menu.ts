@@ -51,11 +51,12 @@ export const buildMenu = async () => {
     forArtists: ForArtistRecord[]
   } = await apiQuery([
     LatestNewsDocument,
+    LatestProjectsDocument,
     AllAboutsMenuDocument,
     AllConsultsDocument,
-    LatestProjectsDocument,
+
     AllForArtistDocument
-  ], { variables: [{ first: 4 }] });
+  ], { variables: [{ first: 5 }, { first: 5 }] });
 
   const menu = base.map(item => {
     let sub: MenuItem[];
