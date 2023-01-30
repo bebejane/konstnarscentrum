@@ -69,13 +69,22 @@
 	}
 }
 
-.submitButton {}
+.submitButton {
+	.loader {
+		display: inline-block;
+		max-width: 20px;
+		max-height: 20px;
+	}
 
-.loader {
-	display: inline-block;
-	max-width: 16px;
-	max-height: 16px;
+	&:hover {
+		.loader {
+			filter: invert(1);
+		}
+
+	}
+
 }
+
 
 .loader:after {
 	content: " ";

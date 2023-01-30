@@ -61,7 +61,7 @@ specifiers:
   mjml: ^4.13.0
   mjml-react: ^2.0.8
   next: 13.1.0
-  next-auth: 4.18.4
+  next-auth: 4.19.0
   next-compose-plugins: ^2.2.1
   next-plugin-graphql: ^0.0.2
   next-seo: ^5.13.0
@@ -138,7 +138,7 @@ dependencies:
   mjml: 4.13.0_encoding@0.1.13
   mjml-react: 2.0.8_7tbcn2mecc3yvuxakflodiks3m
   next: 13.1.0_orpxj3vgaelozwpc7iiuainqz4
-  next-auth: 4.18.4_idzega45vxhfgiuuxa3rl6d5b4
+  next-auth: 4.19.0_idzega45vxhfgiuuxa3rl6d5b4
   next-compose-plugins: 2.2.1
   next-plugin-graphql: 0.0.2_graphql@16.6.0
   next-seo: 5.13.0_s75y6mxmikaw2mhqmuko6w7njm
@@ -9068,9 +9068,8 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /next-auth/4.18.4_idzega45vxhfgiuuxa3rl6d5b4:
-    resolution: {integrity: sha512-tvXOabxv5U/y6ib56XPkOnc/48tYc+xT6GNOLREIme8WVGYHDTc3CGEfe2+0bVCWAm0ax/GYXH0By5NFoaJDww==}
-    engines: {node: ^12.19.0 || ^14.15.0 || ^16.13.0 || ^18.12.0}
+  /next-auth/4.19.0_idzega45vxhfgiuuxa3rl6d5b4:
+    resolution: {integrity: sha512-56Pc/Ni0cxfrVDAz2KeWdj+VXvABbHF1grgFR4+ktXbRmKQOiMU9uyMwhasBQkbL+pRrWujO0Ib/bwkP0oZS4g==}
     peerDependencies:
       next: ^12.2.5 || ^13
       nodemailer: ^6.6.5
@@ -9080,7 +9079,7 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@babel/runtime': 7.19.4
+      '@babel/runtime': 7.20.13
       '@panva/hkdf': 1.0.2
       cookie: 0.5.0
       jose: 4.10.3
