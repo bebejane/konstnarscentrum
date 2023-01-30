@@ -97,6 +97,7 @@ export default function Logo({ }: Props) {
 
   useEffect(() => {
     if (!isDesktop || scrolledPosition === 0) return
+
     setManualMode(false)
   }, [scrolledPosition, isDesktop])
 
@@ -127,8 +128,8 @@ export default function Logo({ }: Props) {
   const regionPerc = pageRegion?.name.length ?? letters.length / letters.length
   const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && isDesktop ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
 
-
   function handleMouseOver(e: React.MouseEvent<HTMLSpanElement>): void {
+
     const { type, target } = e;
     const nodes = target.parentNode.childNodes
     const id = target.parentNode.id
