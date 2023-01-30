@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import Link from "next/link";
 
 export default function Reset({ token }) {
-	const [status, setStatus] = useState(false);
+	const [status, setStatus] = useState();
 	return (
 		<div className={styles.container}>
 			{!status && !token ? (
@@ -16,7 +16,6 @@ export default function Reset({ token }) {
 				<UpdatePasswordForm setStatus={setStatus} token={token} />
 			) : (
 				<div className={styles.success}>
-					<h1>{text.requestPasswordReset}</h1>
 					<p>
 						{status === "requestSent" && text.passwordEmailSent}
 						{status === "resetPassword" && text.yourPasswordHasBeenUpdated}
@@ -36,12 +35,12 @@ const ResetForm = ({ setStatus }) => {
 	} = useForm();
 
 	useEffect(() => {
-		isSubmitting && setError(false)
+		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
 
 	const onSubmitReset = async ({ email }) => {
 		try {
-			const res = await memberService.reset({ email });
+			await memberService.reset({ email });
 			setStatus("requestSent");
 		} catch (err) {
 			setError(err && err.response ? err.response.data : err.messsage || err);
@@ -49,7 +48,7 @@ const ResetForm = ({ setStatus }) => {
 	};
 	return (
 		<>
-			<h2>{text.requestPasswordReset}</h2>
+
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitReset)}>
 				<input
 					className={errors.email && styles.error}
@@ -77,7 +76,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 	} = useForm();
 
 	useEffect(() => {
-		isSubmitting && setError(false)
+		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
 
 	const onSubmitUpdate = async ({ password, password2 }) => {
@@ -90,28 +89,22 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 	};
 	return (
 		<>
-			<h2>{text.updatePassword}</h2>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitUpdate)}>
 				<input
 					type="password"
-					placeholder="Password..."
+					placeholder="Lösenord..."
 					{...register("password", { required: true })}
 					className={errors.passsord && styles.error}
 				/>
 				<input
 					type="password"
-					placeholder="Re-type..."
+					placeholder="Upprepa lösenord..."
 					{...register("password2", { required: true })}
 					className={errors.password2 && styles.error}
 				/>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
 				<p className={styles.formError}>
 					{error && `Error: ${error.error || error}`}
-				</p>
-				<p className={styles.formLinks}>
-					<Link href={"/auth/signin"}>
-						{text.signIn}
-					</Link>
 				</p>
 			</form>
 		</>

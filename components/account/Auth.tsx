@@ -7,6 +7,7 @@ import SignOut from "./SignOut";
 import SignUp from "./SignUp";
 import Link from "next/link";
 import React from "react";
+import Loader from "/components/common/Loader";
 
 const components = {
   'apply': Apply,
@@ -78,7 +79,7 @@ export function AuthLinks({ type, domain }) {
 export function SubmitButton({ loading, children, onClick }: { loading: boolean, children: React.ReactNode, onClick?: () => void }) {
   return (
     <button className={styles.submitButton} type="submit" onClick={onClick}>
-      {!loading ? children : <div className={styles.loader}></div>}
+      {!loading ? children : <Loader />}
     </button>
   )
 }

@@ -12,19 +12,6 @@ const transport = nodemailer.createTransport(postmarkTransport({
   }
 }))
 
-/*
-const transport = nodemailer.createTransport({
-  pool: true,
-  host: process.env.SMTP_SERVER,
-  port: process.env.SMTP_PORT,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_EMAIL,
-    pass: process.env.SMTP_PASSWORD,
-  },
-});
-*/
-
 const sendMail = buildSendMail({
   transport,
   defaultFrom: process.env.SMTP_EMAIL,
@@ -52,12 +39,12 @@ export const Email = {
       subject: 'Reset your password',
       component:
         <ResetPassword
-          link={`${process.env.NEXTAUTH_URL}/auth?type=reset&token=${token}`}
-          ctaText={'Reset password'}
+          link={`${process.env.NEXTAUTH_URL}/konstnar/konto/aterstall-losenord?token=${token}`}
+          ctaText={'Återställ lösenord'}
           body={
             <>
-              We&apos;ve received your request to change your password.
-              Use the link below to set up a new password for your account.
+              Vi har tagit emot din begäran om att ändra ditt lösenord.
+              Använd länken nedan för att skapa ett nytt lösenord för ditt konto.
             </>
           }
         />
@@ -66,18 +53,18 @@ export const Email = {
   applicationSubmitted: ({ email, name }: { email: string, name: string }) =>
     sendMail({
       to: email,
-      subject: 'Thanks for your application',
+      subject: 'Tack för din ansökan!',
       component: <ApplicationSubmitted name={name} />
     })
   ,
   applicationApproved: ({ email, name, token }: { email: string, name: string, token: string }) =>
     sendMail({
       to: email,
-      subject: 'Your application have been approved!',
+      subject: 'Din ansökan har blivit godkänd!',
       component:
         <ApplicationApproved
           name={name}
-          approvalUrl={`${process.env.NEXTAUTH_URL}/konstnar/konto/auth?type=signup&token=${token}`}
+          approvalUrl={`${process.env.NEXTAUTH_URL}/konstnar/konto/registrera?token=${token}`}
         />
     }),
   contactForm: ({ fromName, fromEmail, to, subject, fields }: {
@@ -99,6 +86,5 @@ export const Email = {
         />
     })
 }
-
 
 export default sendMail;

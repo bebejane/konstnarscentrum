@@ -7,6 +7,7 @@ import { ClientSafeProvider, getCsrfToken, getProviders, useSession } from "next
 import { RevealText } from "/components";
 import { useEffect, useState } from "react";
 import { Loader } from "/components";
+import Link from "next/link";
 
 export type Props = {
 	csrfToken: string,
@@ -31,7 +32,9 @@ export default function Login({ providers }: Props) {
 					<h1><RevealText>Logga in</RevealText></h1>
 					<p className="intro">Här kan du som är medlem logga in och redigera din portfolio.</p>
 					<SignIn csrfToken={csrfToken} providers={providers} />
-					<span className={cn('small', s.forgot)}>Har du glömt ditt lösenord? Återställ här.</span>
+					<span className={cn('small', s.forgot)}>
+						Har du glömt ditt lösenord? <Link href={'/konstnar/konto/aterstall-losenord'}>Återställ här.</Link>
+					</span>
 				</>
 			}
 		</div>

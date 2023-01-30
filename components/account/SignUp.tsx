@@ -47,7 +47,6 @@ const SignupForm = ({ regions, application, setMember }) => {
 
 	return (
 		<>
-			<h2>Sign up</h2>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitSignup)}>
 				<input placeholder={`${text.email}...`} {...register("email", { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} className={errors.email && styles.error} />
 				<input placeholder={`${text.password}...`}  {...register("password", { required: true })} type="password" className={errors.password && styles.error} />

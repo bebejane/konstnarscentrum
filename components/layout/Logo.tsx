@@ -80,7 +80,7 @@ export default function Logo({ }: Props) {
     else
       r = Math.max(isFixed ? 1 - (maxR - maxRegionR) + Math.min(scrolledPosition / viewportHeight, maxRegionR) : 0, Math.min(scrolledPosition / viewportHeight, maxR))
 
-    setRatio(r)
+    requestAnimationFrame(() => setRatio(r))
 
   }, [scrolledPosition, viewportHeight, maxRegionR, documentHeight, isFixed, atBottom, setRatio, manualMode, height, region, maxR])
 

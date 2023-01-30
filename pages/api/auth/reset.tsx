@@ -17,7 +17,7 @@ const requestReset = async (email) => {
     return false
 
   const token = await generateToken(email)
-  const updatedMember = await client.items.update(member.id, { resettoken: token });
+  await client.items.update(member.id, { resettoken: token });
   await Email.resetPassword({ email, token })
   return true
 }
