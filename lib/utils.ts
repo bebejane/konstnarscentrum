@@ -169,6 +169,10 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
   let size = 100;
   let skip = 0;
   const res = await apiQuery(doc, { variables: { ...opt.variables, first: size, skip } });
+
+  if (res.pagination?.count === undefined)
+    throw new Error('Not a pagable query')
+
   const { count } = res.pagination
 
   const mergeProps = (props) => {
