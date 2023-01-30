@@ -37,7 +37,7 @@ export default function ForArtistsHome({ members: membersFromProps, membersByReg
                   </Link>
                   :
                   <span key={`${idx}-m`}>
-                    {member.fullName}
+                    <RevealText key={member.id} speed={1.0} opacity={0.0}>{member.fullName}</RevealText>
                   </span>
               )}
             </p>
