@@ -18,7 +18,7 @@ export default function WorkWithUs({ }: Props) {
 	);
 }
 
-WorkWithUs.page = { crumbs: [{ title: 'Arbeta med oss', regional: false }] } as PageProps
+WorkWithUs.page = { title: 'Arbeta med oss', regional: false, crumbs: [{ title: 'Arbeta med oss' }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 

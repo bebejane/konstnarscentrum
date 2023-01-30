@@ -16,6 +16,7 @@ type Pagination = {
 type PageProps = {
   noBottom?: boolean
   regional?: boolean
+  title?: string
   crumbs: {
     slug?: string,
     title: string,

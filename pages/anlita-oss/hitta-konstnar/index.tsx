@@ -131,7 +131,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 }
 
 
-Members.page = { crumbs: [{ title: 'Hitta konstnär' }], regional: false } as PageProps
+Members.page = { title: 'Hitta konstnär', crumbs: [{ title: 'Hitta konstnär' }], regional: false } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({
 	queries: [

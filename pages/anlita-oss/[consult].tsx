@@ -23,7 +23,7 @@ export default function Consult({ consult: { id, title, image, intro, content } 
 	);
 }
 
-Consult.page = { crumbs: [{ title: 'Anlita oss', regional: false }] } as PageProps
+Consult.page = { regional: false, crumbs: [{ title: 'Anlita en konstkonsult', regional: false }] } as PageProps
 
 export async function getStaticPaths() {
 	const { consults } = await apiQuery(AllConsultsDocument)
@@ -43,7 +43,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	return {
 		props: {
 			...props,
-			consult
+			consult,
+			pageTitle: consult.title
 		},
 		revalidate
 	};

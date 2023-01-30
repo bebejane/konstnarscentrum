@@ -29,7 +29,7 @@ export default function ForArtists({ members, forArtist: { id, image, title, cre
   );
 }
 
-ForArtists.page = { crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer', regional: false }] } as PageProps
+ForArtists.page = { title: 'För konstnärer', crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer', regional: false }] } as PageProps
 
 export async function getStaticPaths() {
   return getStaticPagePaths(AllForArtistDocument, 'forartists')

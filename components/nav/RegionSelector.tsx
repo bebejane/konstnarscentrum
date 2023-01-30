@@ -40,7 +40,7 @@ export default function RegionSelector({ }: Props) {
       setOpen(false)
   }, [showMenu, open])
 
-  const pageSlug = page.regional ? `${router.asPath.substring(router.asPath.indexOf('/', 1))}` : ''
+  const pageSlug = ''//page.regional ? `${router.asPath.substring(router.asPath.indexOf('/', 1))}` : ''
 
   return (
     <div className={s.container} ref={ref}>

@@ -179,7 +179,7 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 	);
 }
 
-Account.page = { crumbs: [{ title: 'Konto', regional: false }] } as PageProps
+Account.page = { title: 'Konto', crumbs: [{ title: 'Konto', regional: false }] } as PageProps
 
 const ErrorMessage = ({ errors, id }) => {
 	if (!errors[id])

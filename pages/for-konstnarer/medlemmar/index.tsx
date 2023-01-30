@@ -13,8 +13,7 @@ export type Props = {
   membersList: MembersListRecord
 }
 
-export default function ForArtistsHome({ members: membersFromProps, membersByRegion, membersList: { intro } }: Props) {
-  console.log(membersFromProps?.map(el => el.image));
+export default function ForArtistsHome({ membersByRegion, membersList: { intro } }: Props) {
 
   return (
     <div className={s.container}>
@@ -22,7 +21,6 @@ export default function ForArtistsHome({ members: membersFromProps, membersByReg
       <p className="intro">{intro}</p>
       {membersByRegion.map((members, i) => {
         const region = members[0].region
-
 
         return (
           <React.Fragment key={i}>
@@ -37,7 +35,7 @@ export default function ForArtistsHome({ members: membersFromProps, membersByReg
                   </Link>
                   :
                   <span key={`${idx}-m`}>
-                    <RevealText key={member.id} speed={1.0} opacity={0.0}>{member.fullName}</RevealText>
+                    {member.fullName}
                   </span>
               )}
             </p>
@@ -48,7 +46,7 @@ export default function ForArtistsHome({ members: membersFromProps, membersByReg
   );
 }
 
-ForArtistsHome.page = { crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer' }], regional: true } as PageProps
+ForArtistsHome.page = { regional: true, crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer' }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [MembersListDocument] }, async ({ props, revalidate, context }: any) => {
 
@@ -65,7 +63,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [Member
   return {
     props: {
       ...props,
-      members,
       membersByRegion: membersByRegion.filter(el => el)
     },
     revalidate

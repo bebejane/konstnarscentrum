@@ -37,7 +37,6 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 	useEffect(() => { // Toggle menu bar on scroll
 
 		const menuTop = menuRef.current.getBoundingClientRect().top
-		console.log(isNearBottom);
 
 		if (menuTop > 0 || isNearBottom || (scrolledPosition < 100 && showMenu))
 			return

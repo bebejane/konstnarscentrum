@@ -43,7 +43,7 @@ export default function Register({ token, application }: Props) {
 	);
 }
 
-Register.page = { pageTitle: 'Registrera dig', crumbs: [{ slug: 'konstnar/konto', title: 'Konto', regional: false }] } as PageProps
+Register.page = { title: 'Registrera dig', crumbs: [{ slug: 'konstnar/konto', title: 'Konto', regional: false }] } as PageProps
 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 	const { token } = context.query

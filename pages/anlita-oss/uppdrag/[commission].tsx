@@ -99,16 +99,17 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const slug = context.params.commission;
-	const { commission } = await apiQuery(CommissionDocument, { variables: { slug }, preview: context.preview });
+	const { commission }: { commission: CommissionRecord } = await apiQuery(CommissionDocument, { variables: { slug }, preview: context.preview });
 
 	if (!commission)
 		return { notFound: true }
 
-	const { commissions } = await apiQuery(RelatedCommissionsDocument, {
+	const { commissions }: { commissions: CommissionRecord[] } = await apiQuery(RelatedCommissionsDocument, {
 		variables: {
 			first: 100,
 			regionId,
-			commissionId: commission.id
+			commissionId: commission.id,
+
 		}
 	});
 
@@ -116,7 +117,8 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 		props: {
 			...props,
 			commission,
-			commissions: commissions.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 6)
+			commissions: commissions.sort(() => Math.random() > 0.5 ? 1 : -1).slice(0, 6),
+			pageTitle: commission.title
 		},
 		revalidate
 	};

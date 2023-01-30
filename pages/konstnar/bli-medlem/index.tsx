@@ -29,7 +29,7 @@ export default function Member({ apply: { id, content, title, intro, image } }: 
 	);
 }
 
-Member.page = { crumbs: [{ title: 'Bli medlem', regional: false }] } as PageProps
+Member.page = { title: 'Bli medlem', crumbs: [{ title: 'Bli medlem', regional: false }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [ApplyForMembershipDocument] }, async ({ props, revalidate, context }: any) => {
 

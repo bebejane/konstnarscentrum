@@ -42,7 +42,7 @@ export default function CommissionArchive({ commissions, commissionCategories, p
 	);
 }
 
-CommissionArchive.page = { crumbs: [{ title: 'Utvalda uppdrag' }], regional: true } as PageProps
+CommissionArchive.page = { title: 'Utvalda uppdrag', crumbs: [{ title: 'Utvalda uppdrag' }], regional: true } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 

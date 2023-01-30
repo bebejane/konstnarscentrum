@@ -34,11 +34,12 @@ function App({ Component, pageProps }) {
 
   if (isError)
     return <Component {...pageProps} />
-  console.log(page);
+
+  const title = pageTitle ?? page.title ?? page.crumbs?.[0].title
 
   return (
     <>
-      <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" />
+      <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" title={title} />
       <SessionProvider session={session}>
         <PageProvider value={page}>
           <RegionProvider value={region}>
