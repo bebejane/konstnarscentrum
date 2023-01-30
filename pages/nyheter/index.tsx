@@ -44,7 +44,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
                 <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
               </Link>
-              <ReadMore link={`/${region.slug}/nyheter/${slug}`} message='Läs mer' />
+              <ReadMore link={`/nyheter/${slug}`} regional={true} message='Läs mer' />
             </li>
           ) :
             <>Det finns inga nyheter...</>

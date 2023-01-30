@@ -81,7 +81,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 				onChange={(ids) => setMemberCategoryIds(ids)}
 			/>
 			{loading ?
-				<Loader />
+				<Loader className={s.loader} />
 				: results ?
 					<>
 						{results.length === 0 && <>Vi hittade ingenting...</>}

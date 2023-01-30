@@ -27,9 +27,6 @@ export default function Search({ }: Props) {
 
   useEffect(() => {
 
-
-
-
     const variables = {
       type: 'site',
       query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
@@ -75,6 +72,8 @@ export default function Search({ }: Props) {
     setShowSearch(query?.length > 0)
   }, [query])
 
+
+
   return (
     <>
       <nav className={cn(s.search, open && s.open)}>
@@ -119,7 +118,19 @@ export default function Search({ }: Props) {
 
                 )
                 :
-                loading ? <Loader /> : <>Inga resultat för &quot;{query}&quot;</>
+                loading ?
+                  <div className={s.loader}>
+                    <Loader invert={true} />
+                  </div>
+                  : <>Inga träffar för: &quot;{query}&quot;</>
+              }
+              {error &&
+                <div className={s.error}>
+                  <p>
+                    {typeof error === 'string' ? error : error.message}
+                  </p>
+                  <button onClick={() => setError(undefined)}>Stäng</button>
+                </div>
               }
             </div>
           </div>

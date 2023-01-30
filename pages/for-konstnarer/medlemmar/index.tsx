@@ -33,11 +33,11 @@ export default function ForArtistsHome({ membersByRegion, membersList: { intro }
               {members?.map((member, idx) =>
                 member.image ?
                   <Link key={`${idx}-m`} href={recordToSlug(member)}>
-                    <RevealText key={member.id} delay={idx * 0.005} speed={1.0} opacity={0.1}>{member.fullName}</RevealText>
+                    <RevealText key={member.id} speed={1.0} opacity={0.0}>{member.fullName}</RevealText>
                   </Link>
                   :
                   <span key={`${idx}-m`}>
-                    <RevealText key={member.id} speed={1.0} delay={idx * 0.005} opacity={0.1}>{member.fullName}</RevealText>
+                    {member.fullName}
                   </span>
               )}
             </p>

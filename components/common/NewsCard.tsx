@@ -31,7 +31,7 @@ export default function NewsCard({ title, subtitle, text, slug, image, label }: 
         <h4><BalanceText>{title}</BalanceText></h4>
       </Link>
       <p className="mid">{text}</p>
-      <ReadMore link={slug} message='Läs mer'></ReadMore>
+      <ReadMore link={slug} regional={false} message='Läs mer'></ReadMore>
     </Card>
   )
 }
