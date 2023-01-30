@@ -16,13 +16,13 @@ export default function Loader({ message, loading = true, className, color, inve
 
   return (
     <div className={cn(s.container, className, invert && s.invert)} style={{ maxHeight: `${size}px` }}>
-      <div>
-        <div className={s.anim}>
-          <div><span></span><span></span></div>
-          <div><span></span><span></span></div>
-        </div>
-        {message && <div style={color ? { color } : undefined}>{message}</div>}
+
+      <div className={s.anim}>
+        <div><span></span><span></span></div>
+        <div><span></span><span></span></div>
       </div>
+      {message && <div style={color ? { color } : undefined}>{message}</div>}
+
     </div>
   )
 }

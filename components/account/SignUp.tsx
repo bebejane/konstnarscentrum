@@ -47,13 +47,41 @@ const SignupForm = ({ regions, application, setMember }) => {
 
 	return (
 		<>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitSignup)}>
-				<input placeholder={`${text.email}...`} {...register("email", { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} className={errors.email && styles.error} />
-				<input placeholder={`${text.password}...`}  {...register("password", { required: true })} type="password" className={errors.password && styles.error} />
-				<input placeholder={`${text.reTypePassword}...`} {...register("password2", { required: true })} type="password" className={errors.password2 && styles.error} />
-				<input placeholder={`${text.firstName}...`} {...register("firstName", { required: true })} className={errors.firstName && styles.error} />
-				<input placeholder={`${text.lastName}...`} {...register("lastName", { required: true })} className={errors.lastName && styles.error} />
-				<select placeholder={`${text.region}...`} {...register("roleId", { required: true })} className={errors.roleId && styles.error}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmitSignup)} autoComplete="off">
+				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
+				<input
+					placeholder={`${text.email}...`} {...register("email", { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+					className={errors.email ? styles.error : undefined}
+					autoComplete="off"
+					autoCorrect="off"
+				/>
+				<input
+					placeholder={`${text.password}...`}  {...register("password", { required: true })}
+					type="password"
+					autoComplete="off"
+					className={errors.password ? styles.error : undefined}
+				/>
+				<input
+					placeholder={`${text.reTypePassword}...`} {...register("password2", { required: true })}
+					type="password"
+					autoComplete="off"
+					className={errors.password2 ? styles.error : undefined}
+				/>
+				<input
+					autoComplete="off"
+					placeholder={`${text.firstName}...`} {...register("firstName", { required: true })}
+					className={errors.firstName ? styles.error : undefined}
+				/>
+				<input
+					autoComplete="off"
+					placeholder={`${text.lastName}...`} {...register("lastName", { required: true })}
+					className={errors.lastName ? styles.error : undefined}
+				/>
+				<select
+					autoComplete="off"
+					placeholder={`${text.region}...`} {...register("roleId", { required: true })}
+					className={errors.roleId ? styles.error : undefined}
+				>
 					{regions.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
 				</select>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>

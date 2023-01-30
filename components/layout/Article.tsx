@@ -56,7 +56,7 @@ export default function Article({
             </h1>
           }
 
-          <figure data-editable={editable} onClick={() => onClick?.(image.id)}>
+          <figure data-editable={editable} onClick={() => onClick?.(image?.id)}>
             {haveImage ?
               <>
                 <Image
@@ -75,7 +75,7 @@ export default function Article({
                 : null
             }
           </figure>
-          <div className={s.colorBg} style={{ backgroundColor: image?.responsiveImage.bgColor }}></div>
+          <div className={s.colorBg} style={{ backgroundColor: image?.responsiveImage?.bgColor }}></div>
         </header>
       }
       {text &&

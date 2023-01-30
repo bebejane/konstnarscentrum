@@ -171,7 +171,7 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 					)}
 				</div>
 				<ErrorMessage id="memberCategory" errors={errors} />
-				<button disabled={saving}>{saving ? <Loader /> : 'Spara'}</button>
+				<button disabled={saving}>{saving ? <Loader size={10} /> : 'Spara'}</button>
 			</form >
 			<h3>Övrigt</h3>
 			<SignOut />

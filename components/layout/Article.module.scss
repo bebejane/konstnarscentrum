@@ -1,5 +1,5 @@
 .article {
-  > header {
+  >header {
     display: block;
     position: relative;
     padding-bottom: var(--small-space);
@@ -27,15 +27,17 @@
           max-width: none !important;
         }
 
-        .emptyEditable {
-          display: flex;
-          align-items: center;
-          justify-content: center;
 
-          img {
-            opacity: 0.05;
-            max-height: 300px;
-          }
+      }
+
+      .emptyEditable {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          opacity: 0.05;
+          max-height: 300px;
         }
       }
 

@@ -18,7 +18,12 @@ export default function Reset({ token }) {
 				<div className={styles.success}>
 					<p>
 						{status === "requestSent" && text.passwordEmailSent}
-						{status === "resetPassword" && text.yourPasswordHasBeenUpdated}
+						{status === "resetPassword" &&
+							<>
+								{text.yourPasswordHasBeenUpdated}
+								<Link href={'/konstnar/konto/logga-in'}><button>Logga in</button></Link>
+							</>
+						}
 					</p>
 				</div>
 			)}
@@ -49,10 +54,11 @@ const ResetForm = ({ setStatus }) => {
 	return (
 		<>
 
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitReset)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmitReset)} autoComplete="off">
+				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				<input
 					className={errors.email && styles.error}
-					placeholder="E-mail"
+					placeholder="E-post..."
 					{...register("email", {
 						required: true,
 						pattern:
@@ -81,7 +87,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 
 	const onSubmitUpdate = async ({ password, password2 }) => {
 		try {
-			const res = await memberService.reset({ token, password, password2 });
+			await memberService.reset({ token, password, password2 });
 			setStatus("resetPassword");
 		} catch (err) {
 			setError(err && err.response ? err.response.data : err.messsage || err);
@@ -89,7 +95,8 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 	};
 	return (
 		<>
-			<form className={styles.form} onSubmit={handleSubmit(onSubmitUpdate)}>
+			<form className={styles.form} onSubmit={handleSubmit(onSubmitUpdate)} autoComplete="off">
+				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				<input
 					type="password"
 					placeholder="Lösenord..."

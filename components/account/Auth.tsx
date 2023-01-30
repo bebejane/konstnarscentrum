@@ -80,7 +80,7 @@ export function SubmitButton({ loading, children, onClick }: { loading: boolean,
 
   return (
     <button className={styles.submitButton} type="submit" onClick={onClick}>
-      {!loading ? children : <div className={styles.loader}></div>}
+      {!loading ? children : <Loader size={10} />}
     </button>
   )
 }

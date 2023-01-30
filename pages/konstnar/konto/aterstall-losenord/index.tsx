@@ -31,7 +31,8 @@ export default function ResetPassword({ token }: Props) {
         <>
           <h1><RevealText>Återställ lösenord</RevealText></h1>
           <p className="intro">
-            intro text
+            Skriv in den e-postadress du använde när du skapade kontot. Om mejlet inte kommer fram kan du
+            behöva kolla din skräppost.
           </p>
           <Reset token={token} />
         </>
