@@ -33,7 +33,7 @@ export default function ForArtistsHome({ members: membersFromProps, membersByReg
               {members?.map((member, idx) =>
                 member.image ?
                   <Link key={`${idx}-m`} href={recordToSlug(member)}>
-                    <RevealText key={member.id} speed={1.0} opacity={0.0}>{member.fullName}</RevealText>
+                    {member.fullName}
                   </Link>
                   :
                   <span key={`${idx}-m`}>

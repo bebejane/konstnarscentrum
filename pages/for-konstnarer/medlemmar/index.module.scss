@@ -7,13 +7,9 @@
     }
 
     a,
-    >span {
+    > span {
       display: block;
       padding-bottom: 0.2em;
-    }
-
-    a {
-      font-weight: bold;
     }
 
     .letter {
@@ -24,6 +20,4 @@
   h3:not(:first-of-type) {
     padding-top: 2rem;
   }
-
-
 }
