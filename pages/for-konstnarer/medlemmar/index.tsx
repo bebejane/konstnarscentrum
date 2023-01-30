@@ -6,9 +6,6 @@ import { apiQueryAll, isServer, recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 import { RevealText } from '/components';
-import { useRef } from 'react';
-import inView from 'in-view'
-
 
 export type Props = {
   membersByRegion: MemberRecord[][]
@@ -16,7 +13,8 @@ export type Props = {
   membersList: MembersListRecord
 }
 
-export default function ForArtistsHome({ membersByRegion, membersList: { intro } }: Props) {
+export default function ForArtistsHome({ members: membersFromProps, membersByRegion, membersList: { intro } }: Props) {
+  console.log(membersFromProps?.map(el => el.image));
 
   return (
     <div className={s.container}>
@@ -24,6 +22,8 @@ export default function ForArtistsHome({ membersByRegion, membersList: { intro }
       <p className="intro">{intro}</p>
       {membersByRegion.map((members, i) => {
         const region = members[0].region
+
+
         return (
           <React.Fragment key={i}>
             {membersByRegion.length > 1 &&
@@ -44,7 +44,6 @@ export default function ForArtistsHome({ membersByRegion, membersList: { intro }
           </React.Fragment>
         )
       })}
-
     </div>
   );
 }

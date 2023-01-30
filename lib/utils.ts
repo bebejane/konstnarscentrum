@@ -188,14 +188,15 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     }
   }
 
-
   mergeProps(res)
 
   let reqs = []
   for (let skip = size; skip < count; skip += size) {
-    if (reqs.length < 50 && skip + size < count)
+
+    if (reqs.length < 50 && skip + size < count) {
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
-    else {
+    } else {
+      reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
       const res = await Promise.allSettled(reqs)
       if (res.find(el => el.status === 'rejected'))
         throw new Error(res.find(el => el.status === 'rejected')?.reason)
