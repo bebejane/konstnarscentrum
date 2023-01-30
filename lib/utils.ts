@@ -188,6 +188,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     }
   }
 
+
   mergeProps(res)
 
   let reqs = []

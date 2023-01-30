@@ -8,7 +8,7 @@ import {
 } from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail, Loader, RevealText } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export type Props = {
 	memberCategories: MemberCategoryRecord[]
@@ -27,6 +27,8 @@ export default function Members({ members, memberCategories, cities, regions, re
 	const [query, setQuery] = useState<string | undefined>()
 	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id)
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
+	const searchTimeout = useRef<NodeJS.Timer | undefined>()
+
 
 	useEffect(() => {
 		const region = regions.find(({ id }) => id === regionId)
@@ -36,18 +38,26 @@ export default function Members({ members, memberCategories, cities, regions, re
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
 
-		setLoading(true)
 
-		fetch('/api/search', {
-			body: JSON.stringify({ ...variables, type: 'member' }),
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' }
-		})
-			.then(async (res) => setResults((await res.json()).members))
-			.catch((err) => console.error(err))
-			.finally(() => setLoading(false))
+		clearTimeout(searchTimeout.current)
 
-	}, [query, regionId, memberCategoryIds, setResults])
+		searchTimeout.current = setTimeout(async () => {
+			setLoading(true)
+			fetch('/api/search', {
+				body: JSON.stringify({ ...variables, type: 'member' }),
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' }
+			})
+				.then(async (res) => {
+					if (res.status !== 200)
+						throw new Error('Internal server error')
+					setResults((await res.json()).members)
+				})
+				.catch((err) => setError(err))
+				.finally(() => setLoading(false))
+		}, 250)
+
+	}, [query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
 
 
 	return (
