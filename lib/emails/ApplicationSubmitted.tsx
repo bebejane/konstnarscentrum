@@ -24,21 +24,16 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
     <Head />
     <MjmlBody width={600}>
       <Header loose />
-      <MjmlSection padding="0">
+      <MjmlSection padding="0 0" cssClass="smooth">
         <MjmlColumn>
-          <MjmlImage
-            cssClass="hero"
-            padding="0 0 40px"
-            align="left"
-            src="https://s3.amazonaws.com/lab.campsh.com/bb-hero%402x.jpg"
-          />
-        </MjmlColumn>
-      </MjmlSection>
-      <MjmlSection padding="0 24px" cssClass="smooth">
-        <MjmlColumn>
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="0 0 40px 0"
+          ></MjmlDivider>
           <MjmlText
             cssClass="paragraph"
-            padding="0"
+            padding="0 0 0 0"
             fontSize={textXl}
             lineHeight={leadingTight}
           >
@@ -50,8 +45,7 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Thank you {name} for joining Konstnärscentrum! We’re excited to help you enjoy
-            great meals without any begging, guessing, waiting or phone calls.
+            Vi kommer att återkomma när vi har tittat på din ansökan. Detta sker oftast inom en vecka.
           </MjmlText>
           <MjmlSpacer height="24px" />
           <MjmlText
@@ -60,7 +54,7 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Enjoy!
+            Vänligen!
             <br />
             Konstnärscentrum
           </MjmlText>
