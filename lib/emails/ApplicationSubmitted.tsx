@@ -54,7 +54,8 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Vänligen!
+            Vänligen
+            !
             <br />
             Konstnärscentrum
           </MjmlText>
