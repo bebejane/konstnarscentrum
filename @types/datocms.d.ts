@@ -5545,10 +5545,14 @@ type GlobalQueryVariables = Exact<{ [key: string]: never; }>;
 
 type GlobalQuery = { __typename?: 'Query', site: { __typename?: 'Site', favicon: Array<{ __typename?: 'Tag', attributes?: any | null, content?: string | null, tag: string }>, globalSeo?: { __typename?: 'GlobalSeoField', facebookPageUrl?: string | null, siteName?: string | null, titleSuffix?: string | null, twitterAccount?: string | null, fallbackSeo?: { __typename?: 'SeoField', description?: string | null, title?: string | null, twitterCard?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null, sizes: string } | null } | null } | null } | null } };
 
-type AllMembersQueryVariables = Exact<{ [key: string]: never; }>;
+type AllMembersQueryVariables = Exact<{
+  regionId?: InputMaybe<Scalars['ItemId']>;
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+}>;
 
 
-type AllMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
+type AllMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type AllMembersWithPortfolioQueryVariables = Exact<{
   regionId?: InputMaybe<Scalars['ItemId']>;

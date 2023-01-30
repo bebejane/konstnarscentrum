@@ -25,6 +25,12 @@
     }
   }
 
+  .loader {
+    margin-top: calc(2 * var(--space));
+    margin-bottom: var(--space);
+    height: 100%;
+  }
+
   form {
     width: 100%;
 

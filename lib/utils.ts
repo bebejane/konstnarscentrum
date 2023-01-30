@@ -166,27 +166,44 @@ export const sleep = (ms: number) => new Promise((resolve, refject) => setTimeou
 export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions = {}): Promise<any> => {
 
   const results = {}
-  let pagesLeft = true;
   let size = 100;
   let skip = 0;
+  const res = await apiQuery(doc, { variables: { ...opt.variables, first: size, skip } });
 
-  while (pagesLeft) {
+  if (res.pagination?.count === undefined)
+    throw new Error('Not a pagable query')
 
-    const res = await apiQuery(doc, { variables: { ...opt.variables, first: size, skip } });
-    const { count } = res.pagination
-    const props = Object.keys(res)
+  const { count } = res.pagination
+
+  const mergeProps = (res) => {
+    const props = Object.keys(res);
 
     for (let i = 0; i < props.length; i++) {
       const k = props[i]
       const el = res[props[i]];
-      if (Array.isArray(el))
-        results[k] = !results[k] ? [...el] : results[k].concat([...el])
-      else
+      if (Array.isArray(el)) {
+        results[k] = !results[k] ? el : results[k].concat(el)
+      } else
         results[k] = el;
     }
+  }
 
-    pagesLeft = skip + size < count;
-    skip += (size)
+
+  mergeProps(res)
+
+  let reqs = []
+  for (let skip = size; skip < count; skip += size) {
+    if (reqs.length < 50 && skip + size < count)
+      reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
+    else {
+      const res = await Promise.allSettled(reqs)
+      if (res.find(el => el.status === 'rejected'))
+        throw new Error(res.find(el => el.status === 'rejected')?.reason)
+      for (let x = 0; x < res.length; x++)
+        mergeProps(res[x].value);
+      await sleep(1000)
+      reqs = []
+    }
   }
   return results
 }

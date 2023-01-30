@@ -51,6 +51,7 @@ specifiers:
   graphql-request: ^4.3.0
   graphql-tag: ^2.12.6
   hamburger-react: ^2.5.0
+  in-view: ^0.6.1
   is-youtube-url: ^1.0.5
   jsonwebtoken: ^8.5.1
   lodash-es: 4.17.21
@@ -121,13 +122,14 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556_yqvwvv5fkd7ccxhl6hgbauxp6m
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/3f417a70f34cfbaebee7310f479e5f23df3f0e64_yqvwvv5fkd7ccxhl6hgbauxp6m
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   graphql: 16.6.0
   graphql-request: 4.3.0_rjjjs2nwgns3bcvnnqb5eu5nry
   graphql-tag: 2.12.6_graphql@16.6.0
   hamburger-react: 2.5.0_react@18.2.0
+  in-view: 0.6.1
   is-youtube-url: 1.0.5
   jsonwebtoken: 8.5.1
   lodash-es: 4.17.21
@@ -7091,6 +7093,12 @@ packages:
     engines: {node: '>=0.8.19'}
     dev: true
 
+  /in-view/0.6.1:
+    resolution: {integrity: sha512-vgoymXcD8MY7PBOnd1fflA6vYGlNi16ZNgFR6dt8Ayr2i6kChFh1CiqDFRNgGGd10tzn8sH4QoqsqNIszmpGOQ==}
+    dependencies:
+      lodash: 4.17.21
+    dev: false
+
   /indent-string/3.2.0:
     resolution: {integrity: sha512-BYqTHXTGUIvg7t1r4sJNKcbDZkL92nkXA8YtRpbjFHRHGDL/NtUeiBJMeE60kIFN/Mg8ESaWQvftaYMGJzQZCQ==}
     engines: {node: '>=4'}
@@ -12049,11 +12057,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556_yqvwvv5fkd7ccxhl6hgbauxp6m:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556}
-    id: github.com/bebejane/dato-nextjs-utils/cd27c8b9b8fe028d9180b3cedf5a5c9fa3fe1556
+  github.com/bebejane/dato-nextjs-utils/3f417a70f34cfbaebee7310f479e5f23df3f0e64_yqvwvv5fkd7ccxhl6hgbauxp6m:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/3f417a70f34cfbaebee7310f479e5f23df3f0e64}
+    id: github.com/bebejane/dato-nextjs-utils/3f417a70f34cfbaebee7310f479e5f23df3f0e64
     name: dato-nextjs-utils
-    version: 1.0.244
+    version: 1.0.255
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4

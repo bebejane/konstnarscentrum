@@ -67,7 +67,7 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 	);
 }
 
-MemberNews.page = { crumbs: [{ title: 'Aktuellt', regional: true }] } as PageProps
+MemberNews.page = { crumbs: [{ title: 'Aktuellt' }], regional: true } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 

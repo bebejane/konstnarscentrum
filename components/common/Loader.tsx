@@ -7,14 +7,15 @@ type Props = {
   loading?: boolean
   className?: string
   color?: string
+  invert?: boolean
 }
 
-export default function Loader({ message, loading = true, className, color }: Props) {
+export default function Loader({ message, loading = true, className, color, invert = false }: Props) {
   if (!loading) return null
   const size = 20
 
   return (
-    <div className={cn(s.container, className)} style={{ maxHeight: `${size}px` }}>
+    <div className={cn(s.container, className, invert && s.invert)} style={{ maxHeight: `${size}px` }}>
       <div>
         <div className={s.anim}>
           <div><span></span><span></span></div>

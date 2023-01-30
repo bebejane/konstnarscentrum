@@ -124,8 +124,9 @@ export default function Logo({ }: Props) {
 
   const vertical = letterReducer('vertical')
   const horizontal = letterReducer('horizontal')
-  const regionPerc = (pageRegion?.name.length / letters.length)
+  const regionPerc = pageRegion?.name.length ?? letters.length / letters.length
   const regionRatio = ratio === undefined ? 0 : (ratio > 1 && !isFixed && isDesktop ? 1 - ((ratio - 1) / regionPerc) : isFixed) ? 1 - ((1 + regionPerc) * ratio) : 1
+
 
   function handleMouseOver(e: React.MouseEvent<HTMLSpanElement>): void {
     const { type, target } = e;
@@ -137,6 +138,7 @@ export default function Logo({ }: Props) {
       node.style.transform = type === 'mouseenter' ? `${translateType}(${randomInt(-15, 15)}%)` : `${translateType}(0%)`
     })
   }
+
   return (
     <div className={cn(s.container, invertedMenu && s.inverted)}>
       <div className={cn(s.back, isPageBottom && s[theme])}></div>

@@ -4,30 +4,42 @@
   justify-content: center;
   text-align: center;
   font-size: 0.7rem;
+  height: 100%;
+}
+
+.invert {
+  filter: invert(1);
+  color: var(--white) !important;
 }
 
 .spinner {
   display: flex;
   align-items: center;
   justify-content: center;
+
+
 }
 
 .anim {
   position: relative;
+
   div {
     position: absolute;
     margin-top: -1rem;
   }
+
   div:last-of-type {
     transform: rotate(45deg);
     transform-origin: center;
     animation: rotation 1s infinite ease-in-out;
   }
+
   div:first-of-type {
     transform: rotate(0deg);
     transform-origin: center;
     animation: rotation 1.5s infinite linear;
   }
+
   span {
     display: block;
     width: 0.3rem;
@@ -41,6 +53,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }

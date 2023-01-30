@@ -54,7 +54,7 @@ export default function MemberNewsArticle({ memberNews: {
 	);
 }
 
-MemberNewsArticle.page = { crumbs: [{ slug: 'konstnar/aktuellt', title: 'Aktuellt', regional: true }] } as PageProps
+MemberNewsArticle.page = { crumbs: [{ slug: 'konstnar/aktuellt', title: 'Aktuellt' }], regional: true } as PageProps
 
 export async function getStaticPaths() {
 	return getStaticPagePaths(AllMemberNewsDocument, 'memberNews')

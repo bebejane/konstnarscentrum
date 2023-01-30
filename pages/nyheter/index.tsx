@@ -37,14 +37,14 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
       <h1 className="noPadding"><RevealText>Nyheter</RevealText></h1>
       <div className={styles.container}>
         <ul>
-          {news.length > 0 ? news.map(({ slug, title, intro, createdAt, region }, idx) =>
-            <li key={idx} >
+          {news.length > 0 ? news.map(({ id, slug, title, intro, createdAt, region }, idx) =>
+            <li key={id} >
               <Link href={`/${region.slug}/nyheter/${slug}`}>
                 <h5>{format(new Date(createdAt), "d MMMM y")} &#8226; {region.name}</h5>
                 <h3><BalanceText>{title}</BalanceText></h3>
                 <p>{intro}</p>
               </Link>
-              <ReadMore link={`/${region.slug}/nyheter/${slug}`} message='Läs mer' />
+              <ReadMore link={`/nyheter/${slug}`} regional={true} message='Läs mer' />
             </li>
           ) :
             <>Det finns inga nyheter...</>
@@ -56,12 +56,13 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
   );
 }
 
-News.page = { crumbs: [{ title: 'Nyheter', regional: true }] } as PageProps
+News.page = { crumbs: [{ title: 'Nyheter' }], regional: true } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
   const page = parseInt(context.params?.page) || 1;
   const regionId = props.region.global ? undefined : props.region.id;
+
   const { news, pagination } = await apiQuery(AllNewsDocument, {
     variables: {
       regionId,

@@ -2,9 +2,9 @@
   display: inline;
   position: relative;
   opacity: 0;
-  //animation-name: show;
   animation-duration: 0s;
   animation-fill-mode: forwards;
+  will-change: opacity;
 
   @keyframes show {
     to {

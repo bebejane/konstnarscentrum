@@ -71,6 +71,7 @@
   .results {
     --header-height: var(--navbar-height);
     width: 100%;
+
     padding-right: var(--outer-margin);
 
     header {
@@ -81,8 +82,12 @@
     }
 
     .matches {
+      display: flex;
+      flex-direction: column;
       overflow-y: auto;
       max-height: calc(100vh - var(--header-height) - var(--navbar-height)) !important;
+      min-height: calc(100vh - var(--header-height) - var(--navbar-height)) !important;
+      height: 100%;
 
       &::-webkit-scrollbar {
         background: var(--beige-light);
@@ -100,6 +105,15 @@
       width: 100%;
       max-height: calc(100vh - var(--navbar-height) - var(--outer-margin));
       padding-right: var(--total-outer-margin);
+
+      .loader {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        flex: 1 1 100%;
+      }
     }
 
     h2 {
@@ -176,4 +190,15 @@
       outline: 0;
     }
   }
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  flex: 1 1 100%;
+  color: var(--red);
 }

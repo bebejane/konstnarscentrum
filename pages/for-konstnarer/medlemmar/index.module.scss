@@ -5,14 +5,25 @@
     @include mq($from: tablet) {
       column-count: 3;
     }
+
+    a,
+    >span {
+      display: block;
+      padding-bottom: 0.2em;
+    }
+
+    a {
+      font-weight: bold;
+    }
+
+    .letter {
+      opacity: 0;
+    }
   }
 
   h3:not(:first-of-type) {
     padding-top: 2rem;
   }
 
-  a {
-    display: block;
-    padding-bottom: 0.2em;
-  }
+
 }
