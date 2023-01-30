@@ -56,13 +56,11 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [Member
   const { region } = props
   const { members }: { members: MemberRecord[] } = await apiQueryAll(AllMembersDocument, { variables: { regionId: region.global ? undefined : region.id } })
   const membersByRegion: MemberRecord[][] = []
-  console.log(members.length);
 
   members.sort((a, b) => a.region.position > b.region.position ? 1 : -1).forEach((m) => {
     !membersByRegion[m.region.position] && (membersByRegion[m.region.position] = [])
     membersByRegion[m.region.position].push(m)
     membersByRegion[m.region.position].sort((a, b) => a.firstName > b.firstName ? 1 : -1)
-
   })
 
   return {

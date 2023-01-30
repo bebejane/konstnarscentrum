@@ -9,8 +9,10 @@ import { useRouter } from 'next/router';
 import { DefaultDatoSEO } from 'dato-nextjs-utils/components';
 import { sv } from 'date-fns/locale'
 import { PageProvider } from '/lib/context/page';
+
+console.log(`DATOCMS_ENVIRONMENT=${process.env.DATOCMS_ENVIRONMENT}`)
+
 import setDefaultOptions from 'date-fns/setDefaultOptions';
-console.log('DATOCMS_ENVIRONMENT=', process.env.DATOCMS_ENVIRONMENT)
 setDefaultOptions({ locale: sv })
 
 function App({ Component, pageProps }) {
