@@ -33,7 +33,7 @@
 
 .logo {
   position: fixed;
-  z-index: 300;
+  z-index: 3000;
   top: 0.9em;
   left: 0;
   margin-left: var(--outer-margin);
@@ -51,16 +51,18 @@
     left: 0;
     color: var(--black);
 
-    > a {
+    >a {
       max-height: var(--logo-size);
+
       &:hover {
         color: var(--foreground);
       }
     }
 
-    > a span {
+    >a span {
       display: inline-block;
       transition: transform 0.3s ease-out;
+
       &:first-of-type {
         margin-right: -0.05em;
       }

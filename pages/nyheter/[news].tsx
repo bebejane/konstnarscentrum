@@ -30,7 +30,7 @@ export default function NewsItem({ news: { id, createdAt, title, image, intro, c
   );
 }
 
-NewsItem.page = { crumbs: [{ slug: 'nyheter', title: 'Nyheter', regional: true }] } as PageProps
+NewsItem.page = { crumbs: [{ slug: 'nyheter', title: 'Nyheter' }], regional: true } as PageProps
 
 export async function getStaticPaths() {
   return getStaticPagePaths(AllNewsDocument, 'news')

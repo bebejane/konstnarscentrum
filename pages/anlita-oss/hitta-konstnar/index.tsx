@@ -59,6 +59,10 @@ export default function Members({ members, memberCategories, cities, regions, re
 
 	}, [query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
 
+	useEffect(() => {
+		setRegionId(regionFromProps?.id)
+	}, [regionFromProps])
+	console.log(regionId);
 
 	return (
 		<div className={s.container}>
@@ -76,7 +80,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 					<span>Plats: </span>
-					<select value={regionId} onChange={(e) => setRegionId(e.target.value)}>
+					<select key={regionId} value={regionId} onChange={(e) => setRegionId(e.target.value)}>
 						<option value={"false"}>Inte vald</option>
 						{regions.map(({ id, name, global }, idx) =>
 							<option key={idx} value={id}>{name}</option>
@@ -127,7 +131,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 }
 
 
-Members.page = { crumbs: [{ title: 'Hitta konstnär', regional: true }] } as PageProps
+Members.page = { crumbs: [{ title: 'Hitta konstnär' }], regional: false } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({
 	queries: [

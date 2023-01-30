@@ -15,7 +15,7 @@
   flex-direction: column;
   top: 0px;
   left: 0;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   min-height: var(--navbar-height);
   padding-left: calc(2 * var(--grid-unit) + var(--total-outer-margin));
@@ -101,7 +101,7 @@
   align-items: center;
   top: 0;
   right: var(--outer-margin);
-  z-index: 101;
+  z-index: 1001;
   min-height: var(--navbar-height);
 
   @include mq($until: nav-break) {

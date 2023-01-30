@@ -18,16 +18,16 @@ export default function Breadcrumbs({ show }: Props) {
   if (!page.crumbs || showSearch)
     return null
 
-  const crumbs = [{ slug: '', title: 'Hem', regional: true }, ...page.crumbs]
+  const crumbs = [{ slug: '', title: 'Hem' }, ...page.crumbs]
 
   return (
     <div className={cn(s.container, 'mid', show && s.show)}>
-      {crumbs.map(({ slug, title, regional }, idx) =>
+      {crumbs.map(({ slug, title }, idx) =>
         <React.Fragment key={idx}>
           {slug === undefined ?
             <><span>{title}</span></>
             :
-            <RegionLink href={`/${slug}`} regional={regional}>
+            <RegionLink href={`/${slug}`} regional={page.regional}>
               {title}
             </RegionLink>
           }

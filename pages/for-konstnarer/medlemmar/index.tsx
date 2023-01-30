@@ -49,7 +49,7 @@ export default function ForArtistsHome({ membersByRegion, membersList: { intro }
   );
 }
 
-ForArtistsHome.page = { crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer', regional: true }] } as PageProps
+ForArtistsHome.page = { crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer' }], regional: true } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [MembersListDocument] }, async ({ props, revalidate, context }: any) => {
 

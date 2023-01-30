@@ -186,7 +186,7 @@ export default function Member({ member: {
 	);
 }
 
-Member.page = { noBottom: true, crumbs: [{ slug: 'anlita-oss/hitta-konstnar', title: 'Hitta konstnär', regional: true }] } as PageProps
+Member.page = { noBottom: true, crumbs: [{ slug: 'anlita-oss/hitta-konstnar', title: 'Hitta konstnär' }], regional: false } as PageProps
 
 export async function getStaticPaths(context) {
 	const { members }: { members: MemberRecord[] } = await apiQuery(AllMembersWithPortfolioDocument)

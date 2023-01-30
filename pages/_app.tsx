@@ -34,6 +34,7 @@ function App({ Component, pageProps }) {
 
   if (isError)
     return <Component {...pageProps} />
+  console.log(page);
 
   return (
     <>
