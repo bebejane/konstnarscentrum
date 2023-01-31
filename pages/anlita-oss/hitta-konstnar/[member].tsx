@@ -4,7 +4,7 @@ import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
-import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader } from "/components";
+import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader, ErrorModal } from "/components";
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { DatoSEO } from "dato-nextjs-utils/components";
@@ -66,8 +66,6 @@ export default function Member({ member: {
 				throw error
 			}
 			const updatedMember = await res.json()
-			//console.log('UPDATED CONTENT', updatedMember.content);
-
 			setMember(updatedMember)
 
 		} catch (err) {
@@ -175,16 +173,7 @@ export default function Member({ member: {
 						<Loader />
 					</div>
 				</div>
-
-				{error &&
-					<div className={cn(s.overlay, s.transparent)}>
-						<div className={s.error}>
-							<h3>Det uppstod ett fel</h3>
-							<div className={s.message}>{Array.isArray(error) ? error.join('. ') : error.message}</div>
-							<button onClick={() => setError(undefined)}>Stäng</button>
-						</div>
-					</div>
-				}
+				{error && <ErrorModal error={error} onClose={() => setError(undefined)} />}
 			</div>
 		</>
 	);

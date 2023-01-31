@@ -2,23 +2,22 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignOut from "/components/account/SignOut";
-import { ClientSafeProvider, getCsrfToken, getSession } from "next-auth/react";
+import { getCsrfToken, getSession } from "next-auth/react";
 import { MemberDocument, AllMemberCategoriesDocument } from "/graphql";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
 import { recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { RevealText, Loader } from "/components";
+import { RevealText, Loader, ErrorModal } from "/components";
 
 export type Props = {
 	csrfToken: string,
-	providers: ClientSafeProvider[],
 	member: MemberRecord,
 	memberCategories: MemberCategoryRecord[]
 }
 
-export default function Account({ csrfToken, providers, member: memberFromProps, memberCategories }: Props) {
+export default function Account({ member: memberFromProps, memberCategories }: Props) {
 
 	const [error, setError] = useState<undefined | Error>();
 	const [saving, setSaving] = useState(false);
@@ -48,134 +47,147 @@ export default function Account({ csrfToken, providers, member: memberFromProps,
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		})
-			.then(async (res) => setMember((await res.json())))
+			.then(async (res) => {
+				const el = await res.json()
+				console.log(el);
+
+				if (res.status === 200)
+					setMember(el)
+				else
+					setError(new Error(el.message.join('. ')))
+
+			})
 			.catch((err) => setError(err))
 			.finally(() => setSaving(false))
 	}
 
-	useEffect(() => {
-
-	}, [formState, errors])
-
 	return (
-		<div className={s.container}>
-			<h1><RevealText>Konto</RevealText></h1>
+		<>
+			<div className={s.container}>
+				<h1><RevealText>Konto</RevealText></h1>
 
-			<h3>Välkommen, du är nu inloggad som {firstName} {lastName}.</h3>
-			<p className="intro">Här kan du redigera din portfolio och de uppgifter som visas på vår hemsida.</p>
-			<Link href={recordToSlug(member)} className={s.portfolioButton}>
-				<button>Gå till din portfolio</button>
-			</Link>
+				<h3>Välkommen, du är nu inloggad som {firstName} {lastName}.</h3>
 
-			<h3>Uppdatera uppgifter</h3>
-			<form onSubmit={handleSubmit(onSubmit)}>
-				<input
-					id="id"
-					name="id"
-					type="hidden"
-					{...register("id", { required: true })}
-				/>
-				<label htmlFor="firstName">Förnamn</label>
-				<input
-					id="firstName"
-					name="firstName"
-					type="text"
-					{...register("firstName", { required: 'Förnamn saknas' })}
-				/>
-				<ErrorMessage id="firstName" errors={errors} />
-				<label htmlFor="lastName">Efternamn</label>
-				<input
-					id="lastName"
-					name="lastName"
-					type="text"
-					{...register("lastName", { required: 'Efternamn saknas' })}
-				/>
-				<ErrorMessage id="lastName" errors={errors} />
-				<label htmlFor="bio">Bio</label>
-				<textarea
-					id="bio"
-					name="bio"
-					rows={6}
-					{...register("bio", {
-						required: true,
-						minLength: { value: 100, message: 'Din biografi måste vara 50 tecken eller längre' }
-					})}
-				/>
-				<ErrorMessage id="bio" errors={errors} />
-				<label htmlFor="birthPlace">Födelsestad</label>
-				<input
-					id="birthPlace"
-					name="birthPlace"
-					type="text"
-					{...register("birthPlace", { required: 'Födelsort är obligatoriskt' })}
-				/>
-				<ErrorMessage id="birthPlace" errors={errors} />
-				<label htmlFor="city">Arbetar i</label>
-				<input
-					id="city"
-					name="city"
-					type="text"
-					{...register("city", { required: false })}
-				/>
-				<ErrorMessage id="city" errors={errors} />
-				<label htmlFor="yearOfBirth">Födelseår</label>
-				<input
-					id="yearOfBirth"
-					name="yearOfBirth"
-					type="text"
-					{...register("yearOfBirth", { required: false })}
-				/>
-				<ErrorMessage id="yearOfBirth" errors={errors} />
-				<label htmlFor="webpage">Hemsida</label>
-				<input
-					id="webpage"
-					name="webpage"
-					type="text"
-					{...register("webpage", {
-						required: false,
-						pattern: {
-							value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
-							message: 'Värde måste vara en URL'
-						}
-					})}
-				/>
-				<ErrorMessage id="webpage" errors={errors} />
-				<label htmlFor="instagram">Instagram</label>
-				<input
-					id="instagram"
-					name="instagram"
-					type="text"
-					{...register("instagram", {
-						required: false,
-						pattern: {
-							value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
-							message: 'Värde måste vara en URL'
-						}
-					})}
-				/>
-				<ErrorMessage id="instagram" errors={errors} />
-				<label htmlFor="instagram">Typer av konst</label>
-				<div className={s.checkboxGroup}>
-					{memberCategories?.map(({ id, categoryType }, idx) =>
-						<div key={idx}>
-							<input
-								type="checkbox"
-								value={id}
-								name="memberCategory"
-								{...register("memberCategory", { required: false })}
-							/>
-							<label>
-								{categoryType}
-							</label>
-						</div>
-					)}
-				</div>
-				<ErrorMessage id="memberCategory" errors={errors} />
-				<button disabled={saving}>{saving ? <Loader size={10} /> : 'Spara'}</button>
-			</form >
-			<h3>Övrigt</h3>
-			<SignOut />
-		</div >
+				<p className="intro">
+					Här kan du redigera din portfolio och de uppgifter som visas på vår hemsida.
+				</p>
+
+				<Link href={recordToSlug(member)} className={s.portfolioButton}>
+					<button>Gå till din portfolio</button>
+				</Link>
+
+				<h3>Uppdatera uppgifter</h3>
+				<form onSubmit={handleSubmit(onSubmit)}>
+					<input
+						id="id"
+						name="id"
+						type="hidden"
+						{...register("id", { required: true })}
+					/>
+					<label htmlFor="firstName">Förnamn</label>
+					<input
+						id="firstName"
+						name="firstName"
+						type="text"
+						{...register("firstName", { required: 'Förnamn saknas' })}
+					/>
+					<ErrorMessage id="firstName" errors={errors} />
+					<label htmlFor="lastName">Efternamn</label>
+					<input
+						id="lastName"
+						name="lastName"
+						type="text"
+						{...register("lastName", { required: 'Efternamn saknas' })}
+					/>
+					<ErrorMessage id="lastName" errors={errors} />
+					<label htmlFor="bio">Bio</label>
+					<textarea
+						id="bio"
+						name="bio"
+						rows={6}
+						{...register("bio", {
+							required: true,
+							minLength: { value: 50, message: 'Din biografi måste vara 50 tecken eller längre' },
+							maxLength: { value: 800, message: 'Din biografi får högst vara 800 tecken lång' }
+						})}
+					/>
+					<ErrorMessage id="bio" errors={errors} />
+					<label htmlFor="birthPlace">Födelsestad</label>
+					<input
+						id="birthPlace"
+						name="birthPlace"
+						type="text"
+						{...register("birthPlace", { required: 'Födelsort är obligatoriskt' })}
+					/>
+					<ErrorMessage id="birthPlace" errors={errors} />
+					<label htmlFor="city">Arbetar i</label>
+					<input
+						id="city"
+						name="city"
+						type="text"
+						{...register("city", { required: false })}
+					/>
+					<ErrorMessage id="city" errors={errors} />
+					<label htmlFor="yearOfBirth">Födelseår</label>
+					<input
+						id="yearOfBirth"
+						name="yearOfBirth"
+						type="text"
+						{...register("yearOfBirth", { required: false })}
+					/>
+					<ErrorMessage id="yearOfBirth" errors={errors} />
+					<label htmlFor="webpage">Hemsida</label>
+					<input
+						id="webpage"
+						name="webpage"
+						type="text"
+						{...register("webpage", {
+							required: false,
+							pattern: {
+								value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+								message: 'Värde måste vara en URL'
+							}
+						})}
+					/>
+					<ErrorMessage id="webpage" errors={errors} />
+					<label htmlFor="instagram">Instagram</label>
+					<input
+						id="instagram"
+						name="instagram"
+						type="text"
+						{...register("instagram", {
+							required: false,
+							pattern: {
+								value: /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+								message: 'Värde måste vara en URL'
+							}
+						})}
+					/>
+					<ErrorMessage id="instagram" errors={errors} />
+					<label htmlFor="instagram">Typer av konst</label>
+					<div className={s.checkboxGroup}>
+						{memberCategories?.map(({ id, categoryType }, idx) =>
+							<div key={idx}>
+								<input
+									type="checkbox"
+									value={id}
+									name="memberCategory"
+									{...register("memberCategory", { required: false })}
+								/>
+								<label>
+									{categoryType}
+								</label>
+							</div>
+						)}
+					</div>
+					<ErrorMessage id="memberCategory" errors={errors} />
+					<button disabled={saving}>{saving ? <Loader size={10} /> : 'Spara'}</button>
+				</form >
+				<h3>Övrigt</h3>
+				<SignOut />
+			</div >
+			{error && <ErrorModal error={error} onClose={() => setError(undefined)} />}
+		</>
 	);
 }
 

@@ -20,11 +20,10 @@ export const parseDatoError = (err: any) => {
   const error = {
     _error: apiError,
     message: apiError.map(({ attributes: { details: { field, code, messages, message, errors }, details } }) => {
-      return `
-        Messages: ${messages?.join('. ') || message || ''}: ${Array.isArray(errors) ? errors?.join('. ') : errors || ''}
-        Code: ${code}
-        Details: ${!details ? '' : (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)}
-      `
+      const m = !messages ? undefined : (!Array.isArray(messages) ? [messages] : messages).join('. ')
+      const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)
+      return `${m ?? ''} ${d ?? ''}`
+
     }),
     codes: apiError.map(({ attributes: { code } }) => code),
   }

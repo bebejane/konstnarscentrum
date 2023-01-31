@@ -8,7 +8,7 @@ type Props = {
   className?: string
   color?: string
   invert?: boolean
-  size: number
+  size?: number
 }
 
 export default function Loader({ message, loading = true, className, color, invert = false, size = 20 }: Props) {
