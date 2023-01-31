@@ -16,7 +16,8 @@ export default function LatestNews({ data: { news } }: LatestNewsBlockProps) {
 
   return (
     <section className={s.container}>
-      <SectionHeader title="Nyheter" slug={"/anlita-oss/uppdrag"} margin={true} />
+      <SectionHeader title="Nyheter" slug={"/nyheter"} margin={true} regional={true}
+      />
       <CardContainer columns={2}>
         {news.map(({ id, region, intro, slug, title, createdAt }, idx) =>
           <NewsCard
