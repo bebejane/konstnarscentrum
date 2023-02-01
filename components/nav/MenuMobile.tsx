@@ -29,9 +29,13 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const [selected, setSelected] = useState<MenuItem | undefined>();
 	const [showRegions, setShowRegions] = useState<boolean>(false);
 	const { isDesktop } = useDevice()
-	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu])
+	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu, setShowSearch] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu, state.setShowSearch])
 	const regionsRef = useRef<HTMLLIElement | null>(null)
 
+	const handleSearch = (e) => {
+		setShowSearch(true)
+		setShowMenuMobile(false)
+	}
 	useEffect(() => {
 		if (!isHome || isDesktop)
 			return setInvertedMenu(false)
@@ -94,7 +98,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 						)}
 					</ul>
 					<ul className={s.footer}>
-						<li>
+						<li onClick={handleSearch}>
 							Sök
 						</li>
 						<li ref={regionsRef} onClick={() => setShowRegions(!showRegions)}>

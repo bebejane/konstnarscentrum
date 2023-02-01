@@ -49,8 +49,6 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 		})
 			.then(async (res) => {
 				const el = await res.json()
-				console.log(el);
-
 				if (res.status === 200)
 					setMember(el)
 				else

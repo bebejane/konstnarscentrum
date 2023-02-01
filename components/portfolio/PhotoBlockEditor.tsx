@@ -30,7 +30,6 @@ export default function PhotoBlockEditor({ block: blockFromProps, onError, onCha
     }
     if (image)
       return setImage(undefined)
-    console.log(selected);
 
     const images = [...selected?.map(el => el.id === image?.id ? image : el).filter(i => i)]
     const b = { ...block, image: images }

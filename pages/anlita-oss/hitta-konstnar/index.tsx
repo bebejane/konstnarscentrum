@@ -62,7 +62,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 	useEffect(() => {
 		setRegionId(regionFromProps?.id)
 	}, [regionFromProps])
-	console.log(regionId);
+
 
 	return (
 		<div className={s.container}>

@@ -20,8 +20,6 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	const [captionHeight, setCaptionHeight] = useState<number | undefined>()
 
 	const calculatePositions = useCallback(() => {
-		console.log('update');
-
 		Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('picture>img')).forEach(img => {
 			setArrowMarginTop((state) => img.clientHeight > state ? img.clientHeight / 2 : state)
 		})
@@ -33,14 +31,9 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 			caption.style.minHeight = `${figcaptionHeight}px`
 		})
 
-		//setCaptionHeight(figcaptionHeight)
-		console.log(figcaptionHeight);
-
 	}, [setArrowMarginTop, setCaptionHeight])
 
 	useEffect(() => {
-		console.log('change');
-
 		calculatePositions()
 	}, [innerHeight, innerWidth, calculatePositions])
 

@@ -21,7 +21,6 @@ export type Props = {
 }
 
 export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
-	console.log(presentMemberNews, date);
 
 	const { inView, ref } = useInView({ triggerOnce: false })
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
@@ -93,8 +92,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 
 	if (!pastMemberNews.length && !presentMemberNews.length)
 		return { notFound: true }
-
-	console.log('present member news', presentMemberNews.length);
 
 	return {
 		props: {

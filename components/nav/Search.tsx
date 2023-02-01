@@ -72,8 +72,9 @@ export default function Search({ }: Props) {
     setShowSearch(query?.length > 0)
   }, [query])
 
-
-
+  useEffect(() => {
+    setOpen(showSearch)
+  }, [showSearch])
   return (
     <>
       <nav className={cn(s.search, open && s.open)}>
