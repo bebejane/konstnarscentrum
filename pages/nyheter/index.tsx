@@ -20,27 +20,20 @@ export type Props = {
 
 export default function News({ news: newsFromProps, region, pagination }: Props) {
 
-  const { inView, ref } = useInView({ triggerOnce: false })
   const { data: { news }, loading, error, nextPage, page } = useApiQuery<{ news: NewsRecord[] }>(AllNewsDocument, {
     initialData: { news: newsFromProps, pagination },
     variables: { first: pageSize, regionId: region.id },
     pageSize
   });
 
+  const { inView, ref } = useInView({ triggerOnce: false, skip: loading })
+
   useEffect(() => {
     if (inView && !page.end && !loading) {
-      console.log('next');
-
       nextPage()
-    } else
-      console.log(loading, inView, page);
-
+    }
   }, [inView, page, loading, nextPage])
 
-  useEffect(() => {
-    //console.log('h');
-
-  }, [inView])
   return (
     <>
       <h1 className="noPadding"><RevealText>Nyheter</RevealText></h1>
