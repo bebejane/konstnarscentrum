@@ -28,9 +28,19 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
   });
 
   useEffect(() => {
-    if (inView && !page.end) nextPage()
-  }, [inView, page, nextPage])
+    if (inView && !page.end && !loading) {
+      console.log('next');
 
+      nextPage()
+    } else
+      console.log(loading, inView, page);
+
+  }, [inView, page, loading, nextPage])
+
+  useEffect(() => {
+    //console.log('h');
+
+  }, [inView])
   return (
     <>
       <h1 className="noPadding"><RevealText>Nyheter</RevealText></h1>
