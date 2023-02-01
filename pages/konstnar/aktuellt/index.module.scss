@@ -17,7 +17,18 @@
   h2 {
     padding-bottom: 0.5em;
   }
+
   p {
     margin-bottom: 0em;
   }
+
+
+}
+
+.error {
+  color: var(--red);
+  width: 100%;
+  margin-left: calc(-2 * var(--outer-margin));
+  margin-right: calc(-2 * var(--outer-margin));
+  margin-top: 1rem;
 }

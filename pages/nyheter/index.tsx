@@ -1,4 +1,4 @@
-import styles from "./index.module.scss";
+import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
@@ -29,16 +29,14 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
   const { inView, ref } = useInView({ triggerOnce: true })
 
   useEffect(() => {
-    if (inView && !page.end && !loading) {
-      console.log('next');
+    if (inView && !page.end && !loading)
       nextPage()
-    }
-  }, [inView, page, loading])
+  }, [inView, page, loading, nextPage])
 
   return (
     <>
       <h1 className="noPadding"><RevealText>Nyheter</RevealText></h1>
-      <div className={styles.container}>
+      <div className={s.container}>
         <ul>
           {news.length > 0 ? news.map(({ id, slug, title, intro, createdAt, region }, idx) =>
             <li key={id} >
@@ -54,6 +52,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
           }
         </ul>
         {!page.end && <div ref={ref} key={page.no}>{loading && <Loader />}</div>}
+        {error && <div className={s.error}><>Error: {error.message || error}</></div>}
       </div>
     </>
   );

@@ -22,18 +22,24 @@ export type Props = {
 
 export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
 
-	const { inView, ref } = useInView({ triggerOnce: false })
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
-	const { data: { pastMemberNews }, loading, error, nextPage, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
+	const { data: { pastMemberNews }, loading, error, nextPage, loadMore, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
 		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
 		variables: { first: pageSize, date },
 		pageSize
 	});
 
+	const { inView, ref } = useInView({ triggerOnce: true })
+
 	useEffect(() => {
-		if (inView && !page.end)
+		if (inView && !page.end && !loading)
 			nextPage()
-	}, [inView, page.end])
+	}, [inView, page, loading, nextPage])
+
+	//console.log(pastMemberNews.map(el => el.id));
+	console.log(page);
+
+
 
 	return (
 		<>
@@ -47,10 +53,10 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 
 			<CardContainer columns={2} className={s.memberNews} key={page.no}>
 				{presentMemberNews.concat(pastMemberNews).map((el, idx) => {
-					const { date, title, intro, slug, region, image, category, status } = el
+					const { id, date, title, intro, slug, region, image, category, status } = el
 					return (
 						<NewsCard
-							key={idx}
+							key={id}
 							title={title}
 							subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
 							label={memberNewsStatus(el).label}
@@ -62,7 +68,8 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 					)
 				})}
 			</CardContainer>
-			<div ref={ref}>{loading && <Loader />}</div>
+			{!page.end && <div ref={ref} key={`page-${page.no}`}>{loading && <Loader />}</div>}
+			{error && <div className={s.error}><>Error: {error.message || error}</></div>}
 		</>
 	);
 }

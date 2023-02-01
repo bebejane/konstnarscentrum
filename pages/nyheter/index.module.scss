@@ -10,10 +10,12 @@
       margin-bottom: 2em;
       padding-bottom: 2em;
       border-bottom: 1px solid var(--beige-mid);
+
       h3:hover {
         text-underline-offset: 0.1em;
         text-decoration: underline;
       }
+
       a:hover {
         color: var(--black) !important;
       }
@@ -27,4 +29,13 @@
   p {
     //margin-bottom: 0.5em;
   }
+
+}
+
+.error {
+  color: var(--red);
+  width: 100%;
+  margin-left: calc(-2 * var(--outer-margin));
+  margin-right: calc(-2 * var(--outer-margin));
+  margin-top: 1rem;
 }
