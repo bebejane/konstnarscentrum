@@ -52,7 +52,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
             <>Det finns inga nyheter...</>
           }
         </ul>
-        {!loading ? <div ref={ref}></div> : <Loader />}
+        <div ref={ref} key={page.no}>{loading && <Loader />}</div>
       </div>
     </>
   );
