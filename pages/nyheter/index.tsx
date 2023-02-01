@@ -33,8 +33,10 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
       console.log('next');
       nextPage()
     }
-  }, [inView, page, loading, nextPage])
-  console.log(loading);
+  }, [inView, page, loading])
+  console.log(error);
+  console.log(page);
+
 
   return (
     <>
