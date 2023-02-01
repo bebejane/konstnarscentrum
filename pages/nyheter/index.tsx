@@ -30,9 +30,11 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
 
   useEffect(() => {
     if (inView && !page.end && !loading) {
+      console.log('next');
       nextPage()
     }
   }, [inView, page, loading, nextPage])
+  console.log(loading);
 
   return (
     <>
