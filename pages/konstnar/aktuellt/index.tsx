@@ -21,6 +21,7 @@ export type Props = {
 }
 
 export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
+	console.log(presentMemberNews);
 
 	const { inView, ref } = useInView({ triggerOnce: false })
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
