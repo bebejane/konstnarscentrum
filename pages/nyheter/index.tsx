@@ -34,9 +34,6 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
       nextPage()
     }
   }, [inView, page, loading])
-  console.log(error);
-  console.log(page);
-
 
   return (
     <>
@@ -56,7 +53,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
             <>Det finns inga nyheter...</>
           }
         </ul>
-        <div ref={ref} key={page.no}>{loading && <Loader />}</div>
+        {!page.end && <div ref={ref} key={page.no}>{loading && <Loader />}</div>}
       </div>
     </>
   );
