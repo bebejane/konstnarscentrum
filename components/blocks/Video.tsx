@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useWindowSize } from "rooks"
 import Youtube from 'react-youtube'
 import Vimeo from '@u-wave/react-vimeo'
-
+import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 export default function Video({ data, editable }) {
 
 	const ref = useRef()
@@ -39,9 +39,8 @@ export default function Video({ data, editable }) {
 			}
 			{title && <div className={s.caption}>
 				<figcaption>
-					{title}
+					<Markdown allowedElements={['em', 'p']}>{title}</Markdown>
 				</figcaption>
-
 			</div>}
 		</section>
 	)

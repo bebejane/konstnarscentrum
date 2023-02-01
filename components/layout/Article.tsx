@@ -1,25 +1,24 @@
 import s from './Article.module.scss'
+import cn from 'classnames'
 import React from 'react'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import { StructuredContent, RevealText } from "/components";
 import { KCImage as Image } from '/components'
-import cn from 'classnames'
 import BalanceText from 'react-balance-text'
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
-import DatoSEO from 'dato-nextjs-utils/components';
 
 export type ArticleProps = {
   id: string,
-  children?: React.ReactNode,
+  children?: React.ReactNode | React.ReactNode[]
   title?: string,
   subtitle?: string,
   blackHeadline?: boolean,
   text?: string,
-  image?: FileField,
+  image?: FileField
   showImage?: boolean,
-  content?: any,
-  editable?: any,
-  noBottom?: boolean,
+  content?: any
+  editable?: any
+  noBottom?: boolean
   onClick?: (id: string) => void
 }
 
@@ -79,7 +78,7 @@ export default function Article({
         </header>
       }
       {text &&
-        <Markdown className="intro">
+        <Markdown className="intro" disableBreaks={true}>
           {text}
         </Markdown>
       }

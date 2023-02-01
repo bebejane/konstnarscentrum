@@ -37,7 +37,6 @@ export default function MemberNewsArticle({ memberNews: {
 				title={title}
 				text={intro}
 				blackHeadline={blackHeadline}
-				subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
 			>
 				<MetaSection
 					items={[
@@ -45,7 +44,7 @@ export default function MemberNewsArticle({ memberNews: {
 						{ title: 'Plats', value: location },
 						{ title: 'Region', value: region?.name },
 						{ title: 'Datum', value: format(new Date(date), "d MMMM y") },
-						{ title: 'Slutdatum', value: format(new Date(dateEnd), "d MMMM y") },
+						{ title: 'Slutdatum', value: dateEnd ? format(new Date(dateEnd), "d MMMM y") : undefined },
 					]}
 				/>
 				<StructuredContent id={id} record={memberNews} content={content} />

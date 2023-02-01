@@ -43,8 +43,6 @@ export default function Member({ member: {
 		if (status !== 'authenticated')
 			return
 
-		//console.log('save content', data);
-
 		setSaving(true)
 		setBlock(undefined)
 		setMainImage(undefined)
@@ -105,8 +103,7 @@ export default function Member({ member: {
 					key={id}
 					image={member.image}
 					title={`${firstName} ${lastName}`}
-					text={bio}
-					noBottom={true}
+					text={bio.replaceAll('\n', '')}
 					editable={JSON.stringify({ ...member.image, nodelete: true })}
 					onClick={(id) => setImageId(id)}
 				>
