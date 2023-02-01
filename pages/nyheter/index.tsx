@@ -26,7 +26,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
     pageSize
   });
 
-  const { inView, ref } = useInView({ triggerOnce: false, skip: loading })
+  const { inView, ref } = useInView({ triggerOnce: true })
 
   useEffect(() => {
     if (inView && !page.end && !loading) {
@@ -52,7 +52,7 @@ export default function News({ news: newsFromProps, region, pagination }: Props)
             <>Det finns inga nyheter...</>
           }
         </ul>
-        <div ref={ref}>{loading && <Loader />}</div>
+        {!loading ? <div ref={ref}></div> : <Loader />}
       </div>
     </>
   );
