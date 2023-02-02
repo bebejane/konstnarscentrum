@@ -11,6 +11,7 @@ const sassOptions = {
     @import "./lib/styles/fonts";
   `,
 };
+
 const nextOptions = {
 	typescript: {
 		ignoreBuildErrors: true,
@@ -79,5 +80,8 @@ const nextOptions = {
 	},
 };
 
+/**
+ * @type {import('next').NextConfig}
+ */
 const config = { sassOptions, ...nextOptions };
-module.exports = withBundleAnalyzer(config);
+module.exports = config;
