@@ -19,7 +19,10 @@ const userMediaLibrary = async (session: Session) => {
 
 export default withAuthentication(async (req, res, session) => {
 
-  const { removeId } = req.query
+  const { removeId, ping } = req.query
+
+  if (ping)
+    return res.status(200).json({ pong: true })
 
   try {
     if (removeId) {

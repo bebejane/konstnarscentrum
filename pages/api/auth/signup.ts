@@ -3,7 +3,7 @@ import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
 
 export default catchErrorsFrom(async (req, res) => {
-  const { email, password, password2, firstName, lastName, roleId, ping } = req.body
+  const { email, password, password2, firstName, lastName, roleId, ping } = JSON.parse(req.body)
 
   if (ping) return res.status(200).json({ pong: true });
 
