@@ -1,60 +1,56 @@
 import { validateSignUp, hashPassword } from '/lib/auth'
+import { regions } from '/lib/region'
 import { catchErrorsFrom } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
+import slugify from 'slugify';
 
 export default catchErrorsFrom(async (req, res) => {
-  const { email, password, password2, firstName, lastName, roleId, ping } = req.body
+  const { email, password, password2, firstName, lastName, regionId, ping } = req.body
 
   if (ping) return res.status(200).json({ pong: true });
 
-  console.log({ email, password, password2, firstName, lastName, roleId, ping })
+  validateSignUp({ email, password, password2, firstName, lastName })
 
-  try {
+  const region = regions.find(el => el.id === regionId)
+  const memberExist = (await client.items.list({ filter: { type: "member", fields: { email: { eq: email } } } })).length > 0
+  const accessTokens = await client.accessTokens.list()
+  const accessToken = accessTokens.find((t) => t.role?.id === region.roleId).token
+  const applications = await client.items.list({ filter: { type: "application", fields: { email: { eq: email } } } });
+  const application = applications && applications.length ? applications[0] : undefined
 
-    validateSignUp({ email, password, password2, firstName, lastName })
+  if (memberExist)
+    throw 'Medlem med den här e-post adressen finns redan.'
+  else if (!application)
+    throw 'Det går ej att registerara sig utan att först ansöka om medlemskap.'
+  else if (!application.approved)
+    throw 'Din ansökan är inte godkänd än.'
+  else if (!accessToken)
+    throw `Access token is empty`
 
-    const memberExist = (await client.items.list({ filter: { type: "member", fields: { email: { eq: email } } } })).length > 0
-    const accessToken = (await client.accessTokens.list()).find((t) => t.role.id === roleId)?.token
-    const applications = await client.items.list({ filter: { type: "application", fields: { email: { eq: email } } } });
-    const application = applications && applications.length ? applications[0] : undefined
+  const models = await client.itemTypes.list()
+  console.log(models);
 
-    if (memberExist)
-      throw 'Medlem med den här e-post adressen finns redan.'
-    else if (!application)
-      throw 'Det går ej att registerara sig utan att först ansöka om medlemskap.'
-    else if (!application.approved)
-      throw 'Din ansökan är inte godkänd än.'
-    else if (!accessToken)
-      throw `Access token is empty`
+  const memberModelId = models.find(el => el.api_key === 'member').id
+  const roleClient = buildClient({ apiToken: accessToken })
+  const hashedPassword = await hashPassword(password)
 
-    const models = await client.itemTypes.list()
-    console.log('MODELS:', models);
+  console.log({ memberModelId, hashedPassword, id: application.id, body: req.body });
 
-    const applicationModelId = models.find(el => el.api_key === 'application').id
-    const roleClient = buildClient({ apiToken: accessToken })
-    const hashedPassword = await hashPassword(password)
+  const member = await roleClient.items.create({
+    item_type: {
+      type: 'item_type',
+      id: memberModelId
+    },
+    first_name: firstName,
+    last_name: lastName,
+    full_name: `${firstName} ${lastName}`,
+    region: regionId,
+    slug: slugify(`${firstName} ${lastName}`, { lower: true, trim: true, strict: true }),
+    email,
+    password: hashedPassword,
+    application: application.id,
+    resettoken: undefined
+  });
 
-    console.log({ applicationModelId });
-
-    const member = await roleClient.items.create({
-      item_type: {
-        type: 'item_type',
-        id: applicationModelId
-      },
-      firstName,
-      lastName,
-      email,
-      password: hashedPassword,
-      application: application.id,
-      resettoken: null
-    });
-
-    return res.status(200).json(member)
-
-  } catch (err) {
-    console.log(req.body)
-    console.error(err)
-    const error = err.message || err
-    return res.status(500).json({ error })
-  }
+  return res.status(200).json(member)
 })

@@ -26,8 +26,6 @@ export default function Register({ token, application }: Props) {
 		getCsrfToken().then(token => setCsrfToken(token))
 	})
 
-	console.log(token, application);
-
 	return (
 		<div className={s.container}>
 			{status === 'loading' ?

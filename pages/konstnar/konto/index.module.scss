@@ -1,4 +1,5 @@
 .container {
+
   input[type="text"],
   textarea,
   select,
@@ -57,9 +58,13 @@
   }
 
   .error {
-    color: red;
+    color: var(--red);
     margin-top: -0.8rem;
     margin-bottom: 1rem;
     font-size: 0.7em;
+  }
+
+  .errorMuted {
+    color: var(--beige-dark);
   }
 }

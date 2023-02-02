@@ -1,4 +1,5 @@
 import s from "./index.module.scss";
+import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignOut from "/components/account/SignOut";
@@ -21,6 +22,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 
 	const [error, setError] = useState<undefined | Error>();
 	const [saving, setSaving] = useState(false);
+	const [saved, setSaved] = useState(false);
 	const [member, setMember] = useState<MemberRecord>(memberFromProps)
 	const { id, firstName, lastName, bio, birthPlace, city, yearOfBirth, webpage, instagram, memberCategory } = member
 
@@ -56,7 +58,13 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 
 			})
 			.catch((err) => setError(err))
-			.finally(() => setSaving(false))
+			.finally(() => {
+				setSaved(true)
+				setTimeout(() => {
+					setSaving(false)
+					setSaved(false)
+				}, 2000)
+			})
 	}
 
 	return (
@@ -82,6 +90,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						type="hidden"
 						{...register("id", { required: true })}
 					/>
+
 					<label htmlFor="firstName">Förnamn</label>
 					<input
 						id="firstName"
@@ -90,6 +99,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						{...register("firstName", { required: 'Förnamn saknas' })}
 					/>
 					<ErrorMessage id="firstName" errors={errors} />
+
 					<label htmlFor="lastName">Efternamn</label>
 					<input
 						id="lastName"
@@ -98,6 +108,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						{...register("lastName", { required: 'Efternamn saknas' })}
 					/>
 					<ErrorMessage id="lastName" errors={errors} />
+
 					<label htmlFor="bio">Bio</label>
 					<textarea
 						id="bio"
@@ -105,11 +116,12 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						rows={6}
 						{...register("bio", {
 							required: true,
-							minLength: { value: 50, message: 'Din biografi måste vara 50 tecken eller längre' },
+							minLength: { value: 50, message: 'Din biografi måste minst vara 50 tecken lång' },
 							maxLength: { value: 800, message: 'Din biografi får högst vara 800 tecken lång' }
 						})}
 					/>
 					<ErrorMessage id="bio" errors={errors} />
+
 					<label htmlFor="birthPlace">Födelsestad</label>
 					<input
 						id="birthPlace"
@@ -118,6 +130,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						{...register("birthPlace", { required: 'Födelsort är obligatoriskt' })}
 					/>
 					<ErrorMessage id="birthPlace" errors={errors} />
+
 					<label htmlFor="city">Arbetar i</label>
 					<input
 						id="city"
@@ -126,6 +139,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						{...register("city", { required: false })}
 					/>
 					<ErrorMessage id="city" errors={errors} />
+
 					<label htmlFor="yearOfBirth">Födelseår</label>
 					<input
 						id="yearOfBirth"
@@ -134,6 +148,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						{...register("yearOfBirth", { required: false })}
 					/>
 					<ErrorMessage id="yearOfBirth" errors={errors} />
+
 					<label htmlFor="webpage">Hemsida</label>
 					<input
 						id="webpage"
@@ -148,6 +163,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						})}
 					/>
 					<ErrorMessage id="webpage" errors={errors} />
+
 					<label htmlFor="instagram">Instagram</label>
 					<input
 						id="instagram"
@@ -162,6 +178,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 						})}
 					/>
 					<ErrorMessage id="instagram" errors={errors} />
+
 					<label htmlFor="instagram">Typer av konst</label>
 					<div className={s.checkboxGroup}>
 						{memberCategories?.map(({ id, categoryType }, idx) =>
@@ -178,8 +195,12 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 							</div>
 						)}
 					</div>
-					<ErrorMessage id="memberCategory" errors={errors} />
-					<button disabled={saving}>{saving ? <Loader size={10} /> : 'Spara'}</button>
+					<ErrorMessage id="memberCategory" errors={errors} className={s.errorMuted} />
+
+					<button disabled={saving}>
+						{saved ? 'Sparad' : saving ? <Loader size={10} /> : <>Spara</>}
+					</button>
+
 				</form >
 				<h3>Övrigt</h3>
 				<SignOut />
@@ -191,12 +212,12 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 
 Account.page = { title: 'Konto', crumbs: [{ title: 'Konto', regional: false }] } as PageProps
 
-const ErrorMessage = ({ errors, id }) => {
+const ErrorMessage = ({ errors, id, className }: { errors: any, id: string, className: string }) => {
 	if (!errors[id])
 		return null
 
 	return (
-		<div className={s.error}>{errors[id].message}</div>
+		<div className={cn(s.error, className)}>{errors[id].message}</div>
 	)
 }
 

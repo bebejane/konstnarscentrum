@@ -80,9 +80,6 @@ const nextOptions = {
 	},
 };
 
-console.log(nextOptions);
-console.log("DATOCMS_ENVIRONMENT", process.env.DATOCMS_ENVIRONMENT);
-
 /**
  * @type {import('next').NextConfig}
  */

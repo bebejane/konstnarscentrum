@@ -10,6 +10,7 @@ import { pingEndpoint } from "/lib/utils";
 export default function SignUp({ regions = [], application, token }) {
 
 	const [member, setMember] = useState();
+
 	return (
 		<div className={styles.container}>
 			{!member ? (
@@ -22,7 +23,7 @@ export default function SignUp({ regions = [], application, token }) {
 				<div className={styles.success}>
 					<h1>{text.thanksSigningUp}</h1>
 					<p>
-						<Link href={'/auth/signin'}>
+						<Link href={'/konstnar/konto/logga-in'}>
 							<button>{text.signIn}</button>
 						</Link>
 					</p>
@@ -49,7 +50,7 @@ const SignupForm = ({ regions, application, setMember }) => {
 			lastName: application.last_name,
 			password: '',
 			password2: '',
-			roleId: application.region
+			regionId: application.region
 		},
 		mode: 'onChange'
 	});
@@ -62,23 +63,26 @@ const SignupForm = ({ regions, application, setMember }) => {
 		pingEndpoint('/api/auth/signup')
 	}, [])
 
-	const onSubmitSignup = async ({ email, password, password2, firstName, lastName, roleId }) => {
+	const onSubmitSignup = async ({ email, password, password2, firstName, lastName, regionId }) => {
 		try {
-			const member = await memberService.signUp({ email, password, password2, firstName, lastName, roleId });
+			const member = await memberService.signUp({ email, password, password2, firstName, lastName, regionId });
 			setMember(member)
 			reset({});
 		} catch (err) {
+			console.log(err);
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
-	console.log(formState);
 
 	return (
 		<>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitSignup)} autoComplete="off">
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				<input
-					placeholder={`${text.email}...`} {...register("email", { required: true, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })}
+					placeholder={`${text.email}...`} {...register("email", {
+						required: true,
+						pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					})}
 					className={errors.email ? styles.error : undefined}
 					autoComplete="off"
 					autoCorrect="off"
@@ -110,11 +114,11 @@ const SignupForm = ({ regions, application, setMember }) => {
 				/>
 				<select
 					autoComplete="off"
-					placeholder={`${text.region}...`} {...register("roleId", {
+					placeholder={`${text.region}...`} {...register("regionId", {
 						required: true,
 						validate: (val) => val && val !== 'false'
 					})}
-					className={errors.roleId ? styles.error : undefined}
+					className={errors.regionId ? styles.error : undefined}
 				>
 					<option value="false" data-header={true}>Välj region</option>
 					{regions.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}

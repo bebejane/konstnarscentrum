@@ -53,6 +53,8 @@ export const catchErrorsFrom = (handler) => {
         _originalError: typeof error === 'string' ? error : { ...error }
       }
       res.status(500).send(err);
+      console.log(JSON.stringify(err, null, 2));
+
     });
   }
 }

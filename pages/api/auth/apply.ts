@@ -29,7 +29,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
 
   const tokens = await client.accessTokens.list();
   const models = await client.itemTypes.list()
-  const applicationModelId = models.find(el => el.api_key === 'application')?.id
+  const applicationModelId = models.find(el => el.api_key === 'application').id
 
   if (!applicationModelId)
     throw 'Cat\'t find application model id'
