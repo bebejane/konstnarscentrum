@@ -12,8 +12,6 @@ export default catchErrorsFrom(async (req, res) => {
 
   if (ping) return res.status(200).json({ pong: true })
 
-
-
   const memberExist = await memberController.exists(email)
 
   if (memberExist)
