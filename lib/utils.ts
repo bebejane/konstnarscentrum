@@ -45,8 +45,11 @@ export const parseDatoError = (err: any) => {
 export const catchErrorsFrom = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     return handler(req, res).catch((error) => {
+
       const err = parseDatoError(error)
-      res.status(500).send(error);
+      console.error(err)
+      console.error(error)
+      res.status(500).send(err);
     });
   }
 }

@@ -47,6 +47,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approval_token: approvalToken,
     approved: false
   });
+
   await Email.applicationSubmitted({ email, name: firstName })
   res.status(200).json(application)
 })
