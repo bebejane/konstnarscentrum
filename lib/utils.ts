@@ -35,7 +35,7 @@ export const parseDatoError = (err: any) => {
       const { messages } = details
       const m = !messages ? undefined : (!Array.isArray(messages) ? [messages] : messages).join('. ')
       const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code, extraneous_attributes }) =>
-        extraneous_attributes ? `Error fields: ${extraneous_attributes.join('')}` : `${field_label} (${field_type}): ${code}`
+        extraneous_attributes ? `Error fields: ${extraneous_attributes.join(', ')}` : `${field_label} (${field_type}): ${code}`
       )
       return `${m ?? ''} ${d ?? ''}`
     }),
@@ -47,10 +47,8 @@ export const parseDatoError = (err: any) => {
 export const catchErrorsFrom = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     return handler(req, res).catch((error) => {
-
       const err = parseDatoError(error)
-      console.error(err)
-      console.error(error)
+      //console.error(err)
       res.status(500).send(err);
     });
   }
