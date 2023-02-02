@@ -28,7 +28,7 @@ export default catchErrorsFrom(async (req, res) => {
       throw `Access token is empty`
 
     const models = await client.itemTypes.list()
-    console.log(models);
+    console.log('MODELS:', models);
 
     const applicationModelId = models.find(el => el.api_key === 'application').id
     const roleClient = buildClient({ apiToken: accessToken })
