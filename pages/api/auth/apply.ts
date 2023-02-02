@@ -32,19 +32,25 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
 
-  const application = await roleClient.items.create({
-    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
-    email,
-    first_name: firstName,
-    last_name: lastName,
-    education,
-    webpage,
-    message,
-    pdf,
-    region: region.id,
-    approval_token: approvalToken,
-    approved: false
-  });
-  await Email.applicationSubmitted({ email, name: firstName })
-  res.status(200).json(application)
+  try {
+    const application = await roleClient.items.create({
+      item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
+      email,
+      first_name: firstName,
+      last_name: lastName,
+      education,
+      webpage,
+      message,
+      pdf,
+      region: region.id,
+      approval_token: approvalToken,
+      approved: false
+    });
+    await Email.applicationSubmitted({ email, name: firstName })
+    res.status(200).json(application)
+  } catch (err) {
+    console.error(err)
+    res.status(500).json({ error: err })
+  }
+
 })
