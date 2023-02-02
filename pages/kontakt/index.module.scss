@@ -1,4 +1,5 @@
-.employee {
+.employee,
+.consultant {
   &:last-of-type p {
     margin-bottom: 0 !important;
   }
@@ -37,10 +38,6 @@
       width: 50%;
     }
   }
-}
-
-.consultants {
-  .image {}
 }
 
 .info {

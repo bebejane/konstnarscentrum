@@ -63,8 +63,12 @@ export default function Contact({ consultants, contactIntro, employees }: Props)
 								<h3>Konstkonsulter</h3>
 								<ul className={s.consultants}>
 									{consultants.map(({ id, name, title, email }, i) =>
-										<li key={id}>
-											{name} {title} {email}
+										<li key={id} className={s.consultant}>
+											<Card>
+												<p>{name}</p>
+												<p className="mid">{title}</p>
+												<p className="mid"><a href="mailto:{email}">{email}</a></p>
+											</Card>
 										</li>
 									)}
 								</ul>
