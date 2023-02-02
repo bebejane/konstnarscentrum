@@ -8,9 +8,15 @@ import { memberController, applicationController } from '/lib/controllers';
 
 export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse) => {
 
+  if (!req.body) {
+    console.log(req);
+    throw 'Ogiltig request'
+  }
+
   const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = req.body
 
   if (ping) return res.status(200).json({ pong: true })
+
 
   console.log(email, firstName, lastName, message, regionId, education, webpage, pdf, ping);
   console.log(req.body?.data);
@@ -26,31 +32,26 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
   if (applicationExist)
     throw 'Du har redan skickat in din ansökning om medlemskap'
 
+
   const tokens = await client.accessTokens.list();
   const region = regions.find(r => r.id === regionId)
   const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
 
-  try {
-    const application = await roleClient.items.create({
-      item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
-      email,
-      first_name: firstName,
-      last_name: lastName,
-      education,
-      webpage,
-      message,
-      pdf,
-      region: region.id,
-      approval_token: approvalToken,
-      approved: false
-    });
-    await Email.applicationSubmitted({ email, name: firstName })
-    res.status(200).json(application)
-  } catch (err) {
-    console.error(err)
-    res.status(500).json({ error: err })
-  }
-
+  const application = await roleClient.items.create({
+    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
+    email,
+    first_name: firstName,
+    last_name: lastName,
+    education,
+    webpage,
+    message,
+    pdf,
+    region: region.id,
+    approval_token: approvalToken,
+    approved: false
+  });
+  await Email.applicationSubmitted({ email, name: firstName })
+  res.status(200).json(application)
 })
