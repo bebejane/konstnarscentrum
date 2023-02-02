@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+//import { NextRequest, NextResponse } from 'next/server';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 import { Email } from "/lib/emails";
@@ -11,10 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		const { email, approval_token, first_name, last_name, approved, ping } = JSON.parse(req.body);
 
-		if (ping) {
-			console.log('ping');
-			return res.status(200).json({ pong: true });
-		}
+		if (ping) return res.status(200).json({ pong: true });
 
 		const basicAuth = req.headers.authorization
 
