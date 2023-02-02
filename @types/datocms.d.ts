@@ -723,7 +723,6 @@ type ConsultantModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  image?: InputMaybe<FileFilter>;
   name?: InputMaybe<StringFilter>;
   position?: InputMaybe<PositionFilter>;
   title?: InputMaybe<StringFilter>;
@@ -780,7 +779,6 @@ type ConsultantRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['ItemId'];
-  image?: Maybe<FileField>;
   name: Scalars['String'];
   position?: Maybe<Scalars['IntType']>;
   title?: Maybe<Scalars['String']>;
@@ -5600,7 +5598,7 @@ type AllConsultsMenuQuery = { __typename?: 'Query', consults: Array<{ __typename
 type AllConsultantsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type AllConsultantsQuery = { __typename?: 'Query', consultants: Array<{ __typename?: 'ConsultantRecord', id: any, email: string, name: string, title?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null, sizes: string } | null } | null }> };
+type AllConsultantsQuery = { __typename?: 'Query', consultants: Array<{ __typename?: 'ConsultantRecord', id: any, email: string, name: string, title?: string | null }> };
 
 type InEnglishQueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -62,12 +62,9 @@ export default function Contact({ consultants, contactIntro, employees }: Props)
 							<>
 								<h3>Konstkonsulter</h3>
 								<ul className={s.consultants}>
-									{consultants.map(({ id, title, email, image }, i) =>
+									{consultants.map(({ id, name, title, email }, i) =>
 										<li key={id}>
-											{title} {email}
-											{image &&
-												<Image data={image.responsiveImage} className={s.image} />
-											}
+											{name} {title} {email}
 										</li>
 									)}
 								</ul>
