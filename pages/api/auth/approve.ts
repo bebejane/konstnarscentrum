@@ -5,7 +5,7 @@ import { Email } from "/lib/emails";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-	await NextCors(req, res, { methods: ['POST'], origin: '*', optionsSuccessStatus: 200 });
+	await NextCors(req, res, { methods: ['POST', 'GET'], origin: '*', optionsSuccessStatus: 200 });
 
 	try {
 
@@ -37,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if (!email || !approval_token || !first_name || !last_name)
 			throw 'Ogitltig data'
 
+
 		if (approved)
 			await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
 		else
@@ -46,9 +47,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		res.status(200).json({ approved });
 
 	} catch (err) {
+		console.log(req.body)
 		console.error(err);
 		res.status(500).json({ error: err?.message || err });
-		res.status(500).send(err);
+		//res.status(500).send(err);
 	}
 }
 
