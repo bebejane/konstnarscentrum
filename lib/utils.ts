@@ -26,7 +26,7 @@ export const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) 
 }
 
 export const parseDatoError = (err: any) => {
-  const apiError = err.response?.body.data;
+  const apiError = err.response?.body?.data;
   if (!apiError) return err?.message ?? err
 
   const error = {

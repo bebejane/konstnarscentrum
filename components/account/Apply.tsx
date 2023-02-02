@@ -73,7 +73,8 @@ const ApplicationForm = ({ regions, setApplication }) => {
 			});
 			setApplication(app);
 		} catch (err) {
-			console.log(err);
+			console.log(err.response?.data);
+
 
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}

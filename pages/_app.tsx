@@ -10,7 +10,7 @@ import { DefaultDatoSEO } from 'dato-nextjs-utils/components';
 import { sv } from 'date-fns/locale'
 import { PageProvider } from '/lib/context/page';
 
-console.log(`DATOCMS_ENVIRONMENT=${process.env.DATOCMS_ENVIRONMENT}`)
+console.log(`DATOCMS_ENVIRONMENT=${process.env.NEXT_PUBLIC_DATOCMS_ENVIRONMENT}`)
 
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 setDefaultOptions({ locale: sv })
