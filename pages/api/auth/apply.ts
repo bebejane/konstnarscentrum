@@ -17,11 +17,6 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
 
   if (ping) return res.status(200).json({ pong: true })
 
-
-  console.log(email, firstName, lastName, message, regionId, education, webpage, pdf, ping);
-  console.log(req.body?.data);
-
-
   const memberExist = await memberController.exists(email)
 
   if (memberExist)
