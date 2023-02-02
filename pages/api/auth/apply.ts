@@ -51,7 +51,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approved: false
   });
 
-  const application = await client.items.create({
+  const application = await roleClient.items.create({
     item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
     email,
     first_name: firstName,
