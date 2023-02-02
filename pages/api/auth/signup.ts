@@ -19,11 +19,11 @@ export default catchErrorsFrom(async (req, res) => {
     const application = applications && applications.length ? applications[0] : undefined
 
     if (memberExist)
-      throw 'Medlem med denna e-post adress finns redan'
+      throw 'Medlem med den här e-post adressen finns redan.'
     else if (!application)
-      throw 'Det går ej att registerara sig utan att först ansöka om medlemskap'
+      throw 'Det går ej att registerara sig utan att först ansöka om medlemskap.'
     else if (!application.approved)
-      throw 'Application has not been approved yet'
+      throw 'Din ansökan är inte godkänd än.'
     else if (!accessToken)
       throw `Access token is empty`
 
