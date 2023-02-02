@@ -69,7 +69,7 @@ specifiers:
   next-themes: ^0.2.1
   nextjs-cors: ^2.1.2
   nextjs-google-analytics: ^2.2.0
-  nodemailer: ^6.8.0
+  nodemailer: ^6.9.1
   nodemailer-postmark-transport: ^5.2.1
   react: ^18.2.0
   react-balance-text: ^2.0.1
@@ -138,7 +138,7 @@ dependencies:
   mjml: 4.13.0_encoding@0.1.13
   mjml-react: 2.0.8_7tbcn2mecc3yvuxakflodiks3m
   next: 13.1.6_orpxj3vgaelozwpc7iiuainqz4
-  next-auth: 4.19.0_c4v6q43ng4hlgw5hv5ak7m4z7a
+  next-auth: 4.19.0_phzvn2nhb6zk7o4ds4z4gvqlei
   next-compose-plugins: 2.2.1
   next-plugin-graphql: 0.0.2_graphql@16.6.0
   next-seo: 5.13.0_3vryta7zmbcsw4rrqf4axjqggm
@@ -146,8 +146,8 @@ dependencies:
   next-themes: 0.2.1_3vryta7zmbcsw4rrqf4axjqggm
   nextjs-cors: 2.1.2_next@13.1.6
   nextjs-google-analytics: 2.2.0_next@13.1.6+react@18.2.0
-  nodemailer: 6.8.0
-  nodemailer-postmark-transport: 5.2.1_nodemailer@6.8.0
+  nodemailer: 6.9.1
+  nodemailer-postmark-transport: 5.2.1_nodemailer@6.9.1
   react: 18.2.0
   react-balance-text: 2.0.1_react@18.2.0
   react-datocms: 4.0.8_react@18.2.0
@@ -2447,10 +2447,6 @@ packages:
 
   /@next/env/13.0.5:
     resolution: {integrity: sha512-F3KLtiDrUslAZhTYTh8Zk5ZaavbYwLUn3NYPBnOjAXU8hWm0QVGVzKIOuURQ098ofRU4e9oglf3Sj9pFx5nI5w==}
-
-  /@next/env/13.1.5:
-    resolution: {integrity: sha512-0Ry4NhJy6qLbXhvxPRUQ1H6RzgtryGdUto7hfgAK0Iw/bScgeVjwLZdfhm2iT7qsOS32apo9cWzLCxjc6iGPsA==}
-    dev: false
 
   /@next/env/13.1.6:
     resolution: {integrity: sha512-s+W9Fdqh5MFk6ECrbnVmmAOwxKQuhGMT7xXHrkYIBMBcTiOqNWhv5KbJIboKR5STXxNXl32hllnvKaffzFaWQg==}
@@ -9068,7 +9064,7 @@ packages:
     engines: {node: '>= 0.6'}
     dev: false
 
-  /next-auth/4.19.0_c4v6q43ng4hlgw5hv5ak7m4z7a:
+  /next-auth/4.19.0_phzvn2nhb6zk7o4ds4z4gvqlei:
     resolution: {integrity: sha512-56Pc/Ni0cxfrVDAz2KeWdj+VXvABbHF1grgFR4+ktXbRmKQOiMU9uyMwhasBQkbL+pRrWujO0Ib/bwkP0oZS4g==}
     peerDependencies:
       next: ^12.2.5 || ^13
@@ -9084,7 +9080,7 @@ packages:
       cookie: 0.5.0
       jose: 4.10.3
       next: 13.1.6_orpxj3vgaelozwpc7iiuainqz4
-      nodemailer: 6.8.0
+      nodemailer: 6.9.1
       oauth: 0.9.15
       openid-client: 5.2.1
       preact: 10.11.2
@@ -9282,7 +9278,7 @@ packages:
     resolution: {integrity: sha512-XwPvtBfUgIHhrJora9wIRbI4fvx8iYpSE2iItpM3e+SnsVRKm+9UeMfKQbk8I1WcOaT370E8oaLJE/vN15/ggQ==}
     dev: false
 
-  /nodemailer-postmark-transport/5.2.1_nodemailer@6.8.0:
+  /nodemailer-postmark-transport/5.2.1_nodemailer@6.9.1:
     resolution: {integrity: sha512-PG9sXWzY7FKAFVr4VRetzk0PqiToBtDH0Hf7Q9dBoswr+rufpha5yXybLtLEFzmr4y1/5NE3MiwxGE/MdbHREw==}
     engines: {node: '>=8'}
     peerDependencies:
@@ -9290,7 +9286,7 @@ packages:
     dependencies:
       addressparser: 1.0.1
       async: 3.2.4
-      nodemailer: 6.8.0
+      nodemailer: 6.9.1
       nodemailer-build-attachment: 3.0.0
       postmark: 2.9.5
     transitivePeerDependencies:
@@ -9299,6 +9295,11 @@ packages:
 
   /nodemailer/6.8.0:
     resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
+    engines: {node: '>=6.0.0'}
+    dev: false
+
+  /nodemailer/6.9.1:
+    resolution: {integrity: sha512-qHw7dOiU5UKNnQpXktdgQ1d3OFgRAekuvbJLcdG5dnEo/GtcTHRYM7+UfJARdOFU9WUQO8OiIamgWPmiSFHYAA==}
     engines: {node: '>=6.0.0'}
     dev: false
 
@@ -12075,7 +12076,7 @@ packages:
     dependencies:
       '@apollo/client': 3.7.1_gdcq4dv6opitr3wbfwyjmanyra
       '@datocms/cma-client': 1.1.22_encoding@0.1.13
-      '@next/env': 13.1.5
+      '@next/env': 13.1.6
       '@types/node': 18.11.9
       '@types/react': 18.0.24
       markdown-truncate: 1.0.4

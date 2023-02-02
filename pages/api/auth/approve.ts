@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-//import { withBasicAuth } from 'dato-nextjs-utils/hoc'
-//import NextCors from 'nextjs-cors';
+import { NextApiRequest, NextApiResponse } from 'next';
+import NextCors from 'nextjs-cors';
 import { Email } from "/lib/emails";
-/*
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	await NextCors(req, res, { methods: ['POST'], origin: '*', optionsSuccessStatus: 200 });
@@ -41,7 +41,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	}
 
 }
-*/
+
+/*
 export default async function handler(req: NextRequest, res: NextResponse) {
 
 	//await NextCors(req, res, { methods: ['POST'], origin: '*', optionsSuccessStatus: 200 });
@@ -98,3 +99,4 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 export const config = {
 	runtime: 'edge'
 }
+*/
