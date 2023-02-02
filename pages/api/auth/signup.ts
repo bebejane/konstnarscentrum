@@ -28,6 +28,8 @@ export default catchErrorsFrom(async (req, res) => {
       throw `Access token is empty`
 
     const models = await client.itemTypes.list()
+    console.log(models);
+
     const applicationModelId = models.find(el => el.api_key === 'application').id
     const roleClient = buildClient({ apiToken: accessToken })
     const hashedPassword = await hashPassword(password)
