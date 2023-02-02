@@ -12,23 +12,25 @@ export default catchErrorsFrom(async (req, res) => {
     validateSignUp({ email, password, password2, firstName, lastName })
 
     const memberExist = (await client.items.list({ filter: { type: "member", fields: { email: { eq: email } } } })).length > 0
-    const accessToken = (await client.accessTokens.list()).filter((t) => t.role === roleId)[0].token
+    const accessToken = (await client.accessTokens.list()).find((t) => t.role === roleId)?.token
     const applications = await client.items.list({ filter: { type: "application", fields: { email: { eq: email } } } });
     const application = applications && applications.length ? applications[0] : undefined
 
     if (memberExist)
-      throw 'Member already exist'
+      throw 'Medlem med denna e-post adress finns redan'
     else if (!application)
-      throw 'You must apply before becoming a member'
+      throw 'Det går ej att registerara sig utan att först ansöka om medlemskap'
     else if (!application.approved)
       throw 'Application has not been approved yet'
     else if (!accessToken)
       throw `Access token is empty`
 
     const models = await client.itemTypes.list()
-    const applicationModelId = models.find(el => el.api_key === 'application')?.id
+    const applicationModelId = models.find(el => el.api_key === 'application').id
     const roleClient = buildClient({ apiToken: accessToken })
     const hashedPassword = await hashPassword(password)
+
+    console.log({ applicationModelId });
 
     const member = await roleClient.items.create({
       item_type: {
