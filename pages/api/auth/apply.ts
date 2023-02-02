@@ -28,27 +28,19 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     throw 'Du har redan skickat in din ansökning om medlemskap'
 
   const tokens = await client.accessTokens.list();
+  const models = await client.itemTypes.list()
+  const applicationModelId = models.find(el => el.api_key === 'application')?.id
+
+  if (!applicationModelId)
+    throw 'Cat\'t find application model id'
+
   const region = regions.find(r => r.id === regionId)
   const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
 
-  console.log({
-    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
-    email,
-    first_name: firstName,
-    last_name: lastName,
-    education,
-    webpage,
-    message,
-    pdf,
-    region: region.id,
-    approval_token: approvalToken,
-    approved: false
-  });
-
   const application = await roleClient.items.create({
-    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
+    item_type: { type: 'item_type', id: applicationModelId },
     email,
     first_name: firstName,
     last_name: lastName,
@@ -60,7 +52,6 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approval_token: approvalToken,
     approved: false
   });
-
   await Email.applicationSubmitted({ email, name: firstName })
   res.status(200).json(application)
 })
