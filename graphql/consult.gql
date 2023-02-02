@@ -18,3 +18,15 @@ query AllConsultsMenu {
 		slug
 	}
 }
+
+query AllConsultants {
+	consultants: allConsultants {
+		id
+		email
+		name
+		title
+		image {
+			...ImageFragment
+		}
+	}
+}

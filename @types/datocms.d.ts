@@ -710,6 +710,89 @@ type ConsultRecordintroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+type ConsultantModelFilter = {
+  OR?: InputMaybe<Array<InputMaybe<ConsultantModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  image?: InputMaybe<FileFilter>;
+  name?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum ConsultantModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  email_ASC = 'email_ASC',
+  email_DESC = 'email_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  name_ASC = 'name_ASC',
+  name_DESC = 'name_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Konstkonsulter (consultant) */
+type ConsultantRecord = RecordInterface & {
+  __typename?: 'ConsultantRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  id: Scalars['ItemId'];
+  image?: Maybe<FileField>;
+  name: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Konstkonsulter (consultant) */
+type ConsultantRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Block of type Kontakt (contact) */
 type ContactRecord = RecordInterface & {
   __typename?: 'ContactRecord';
@@ -3794,6 +3877,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allCommissionsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allConsultantsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allConsultsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allEmployeesMeta: CollectionMetadata;
@@ -3838,6 +3923,8 @@ type Query = {
   /** Returns a collection of records */
   allCommissions: Array<CommissionRecord>;
   /** Returns a collection of records */
+  allConsultants: Array<ConsultantRecord>;
+  /** Returns a collection of records */
   allConsults: Array<ConsultRecord>;
   /** Returns a collection of records */
   allEmployees: Array<EmployeeRecord>;
@@ -3875,6 +3962,8 @@ type Query = {
   commissionCategory?: Maybe<CommissionCategoryRecord>;
   /** Returns a specific record */
   consult?: Maybe<ConsultRecord>;
+  /** Returns a specific record */
+  consultant?: Maybe<ConsultantRecord>;
   /** Returns a specific record */
   employee?: Maybe<EmployeeRecord>;
   /** Returns the single instance record */
@@ -3948,6 +4037,14 @@ type Query_allCommissionCategoriesMetaArgs = {
 type Query_allCommissionsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CommissionModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allConsultantsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ConsultantModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -4139,6 +4236,17 @@ type QueryallCommissionsArgs = {
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<CommissionModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+type QueryallConsultantsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ConsultantModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ConsultantModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -4337,6 +4445,15 @@ type QueryconsultArgs = {
   filter?: InputMaybe<ConsultModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ConsultModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
+type QueryconsultantArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<ConsultantModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<ConsultantModelOrderBy>>>;
 };
 
 
@@ -5479,6 +5596,11 @@ type AllConsultsMenuQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type AllConsultsMenuQuery = { __typename?: 'Query', consults: Array<{ __typename?: 'ConsultRecord', title: string, slug: string }> };
+
+type AllConsultantsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AllConsultantsQuery = { __typename?: 'Query', consultants: Array<{ __typename?: 'ConsultantRecord', id: any, email: string, name: string, title?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null, sizes: string } | null } | null }> };
 
 type InEnglishQueryVariables = Exact<{ [key: string]: never; }>;
 

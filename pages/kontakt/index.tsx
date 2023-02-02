@@ -3,15 +3,16 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { RegionMetaDocument } from "/graphql";
+import { RegionMetaDocument, AllConsultantsDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
-import { Card, RevealText } from "/components";
+import { Card, RevealText, KCImage as Image } from "/components";
 
 export type Props = {
 	contactIntro: RegionRecord['contactIntro'],
 	info: RegionRecord['info'],
 	employees: EmployeeRecord[],
 	region: Region
+	consultants: ConsultantRecord[] | undefined
 }
 
 export type EmployeesByRegion = {
@@ -19,7 +20,7 @@ export type EmployeesByRegion = {
 	region: RegionRecord
 }[]
 
-export default function Contact({ contactIntro, employees }: Props) {
+export default function Contact({ consultants, contactIntro, employees }: Props) {
 
 	const employeesByRegion: EmployeesByRegion = []
 
@@ -48,7 +49,7 @@ export default function Contact({ contactIntro, employees }: Props) {
 								)}
 							</ul>
 						}
-						<ul className={s.region}>
+						<ul className={s.list}>
 							{employees.map(({ name, email, image, title }, idx) =>
 								<Card key={idx} className={s.employee}>
 									<p>{name}</p>
@@ -57,11 +58,24 @@ export default function Contact({ contactIntro, employees }: Props) {
 								</Card>
 							)}
 						</ul>
+						{idx === 0 && consultants &&
+							<>
+								<h3>Konstkonsulter</h3>
+								<ul className={s.consultants}>
+									{consultants.map(({ id, title, email, image }, i) =>
+										<li key={id}>
+											{title} {email}
+											{image &&
+												<Image data={image.responsiveImage} className={s.image} />
+											}
+										</li>
+									)}
+								</ul>
+							</>
+						}
 					</React.Fragment>
 				)
-			}
-			)}
-
+			})}
 		</div >
 	);
 }
@@ -72,10 +86,13 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const { region: { contactIntro, info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId } });
+	const { consultants } = await apiQuery(AllConsultantsDocument);
+
 
 	return {
 		props: {
 			...props,
+			consultants: !regionId ? consultants : null,
 			contactIntro,
 			info,
 			employees

@@ -30,6 +30,7 @@ declare module '*/consult.gql' {
   export const Consult: DocumentNode;
 export const AllConsults: DocumentNode;
 export const AllConsultsMenu: DocumentNode;
+export const AllConsultants: DocumentNode;
 
   export default defaultDocument;
 }
