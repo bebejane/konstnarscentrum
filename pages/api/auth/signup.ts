@@ -25,12 +25,15 @@ export default catchErrorsFrom(async (req, res) => {
     else if (!accessToken)
       throw `Access token is empty`
 
+    const models = await client.itemTypes.list()
+    const applicationModelId = models.find(el => el.api_key === 'application')?.id
     const roleClient = buildClient({ apiToken: accessToken })
     const hashedPassword = await hashPassword(password)
+
     const member = await roleClient.items.create({
       item_type: {
         type: 'item_type',
-        id: process.env.DATOCMS_APPLICATION_MODEL_ID
+        id: applicationModelId
       },
       firstName,
       lastName,
@@ -39,9 +42,11 @@ export default catchErrorsFrom(async (req, res) => {
       application: application.id,
       resettoken: null
     });
+
     return res.status(200).json(member)
 
   } catch (err) {
+    console.log(req.body)
     console.error(err)
     const error = err.message || err
     return res.status(500).json({ error })
