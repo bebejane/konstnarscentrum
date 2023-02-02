@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	try {
 
-		const { email, approval_token, first_name, last_name, approved, ping } = JSON.parse(req.body);
+		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
 
 		if (ping) return res.status(200).json({ pong: true });
 

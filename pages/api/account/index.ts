@@ -50,7 +50,7 @@ export default withAuthentication(async (req, res, session) => {
     yearOfBirth,
     webpage,
     instagram,
-    memberCategory
+    memberCategory,
   } = req.body as MemberRecord
 
   let record: Item;

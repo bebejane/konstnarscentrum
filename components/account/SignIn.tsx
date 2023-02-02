@@ -28,7 +28,9 @@ export default function SignIn({ csrfToken, providers }) {
 
 	useEffect(() => {
 		fetch('/api/auth/ping').then(() => console.log('pinged auth endpoint')).catch(err => console.error(err))
+		fetch('/api/account').then(() => console.log('pinged account endpoint')).catch(err => console.error(err))
 	}, [])
+
 	useEffect(() => {
 		router.query.error && setError("Användarnamn eller lösnord är felaktigt")
 	}, [router]);
