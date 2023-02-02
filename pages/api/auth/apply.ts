@@ -35,7 +35,22 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
 
   console.log(roleApiToken);
-  console.log(email, firstName, lastName, message, regionId, education, webpage, pdf, ping);
+  console.log(process.env.DATOCMS_APPLICATION_MODEL_ID);
+  console.log(email, firstName, lastName, message, regionId, education, webpage, pdf);
+
+  console.log({
+    item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
+    email,
+    first_name: firstName,
+    last_name: lastName,
+    education,
+    webpage,
+    message,
+    pdf,
+    region: region.id,
+    approval_token: approvalToken,
+    approved: false
+  });
 
   const application = await roleClient.items.create({
     item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
