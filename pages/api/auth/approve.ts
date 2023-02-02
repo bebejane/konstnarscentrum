@@ -10,7 +10,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 	try {
 
 		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
-		console.log(req.body)
+
 		if (ping) {
 			console.log('ping')
 			return res.status(200).json({ pong: true });
@@ -36,7 +36,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		if (!email || !approval_token || !first_name || !last_name)
 			throw 'Ogitltig data'
-
 
 		if (approved)
 			await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });

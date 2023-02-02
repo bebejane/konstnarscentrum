@@ -110,7 +110,6 @@ const SignupForm = ({ regions, application, setMember }) => {
 				/>
 				<select
 					autoComplete="off"
-					disabled={true}
 					placeholder={`${text.region}...`} {...register("roleId", { required: true })}
 					className={errors.roleId ? styles.error : undefined}
 				>

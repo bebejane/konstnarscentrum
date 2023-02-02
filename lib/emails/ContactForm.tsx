@@ -19,8 +19,6 @@ import {
   textXl,
 } from "./components/theme";
 
-import { isValidUrl } from "./";
-
 const ContactForm: React.FC<{
   subject: string,
   fromName: string,
