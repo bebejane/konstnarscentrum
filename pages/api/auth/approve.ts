@@ -9,6 +9,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	try {
 
+		console.log(req.body);
+
+		if (req.body?.ping) {
+			console.log('ping');
+			return res.status(200).json({ pong: true });
+		}
+
 		const basicAuth = req.headers.authorization
 
 		if (!basicAuth)
@@ -21,12 +28,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if (!isAuthorized)
 			return res.status(401).send('Access denied')
 
-		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
-
-		if (ping) {
-			console.log('ping');
-			return res.status(200).json({ pong: true });
-		}
+		const { email, approval_token, first_name, last_name, approved } = req.body;
 
 		console.log('approve application', email);
 
