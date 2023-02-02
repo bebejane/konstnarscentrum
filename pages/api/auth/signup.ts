@@ -14,7 +14,7 @@ export default catchErrorsFrom(async (req, res) => {
     validateSignUp({ email, password, password2, firstName, lastName })
 
     const memberExist = (await client.items.list({ filter: { type: "member", fields: { email: { eq: email } } } })).length > 0
-    const accessToken = (await client.accessTokens.list()).find((t) => t.role === roleId)?.token
+    const accessToken = (await client.accessTokens.list()).find((t) => t.role.id === roleId)?.token
     const applications = await client.items.list({ filter: { type: "application", fields: { email: { eq: email } } } });
     const application = applications && applications.length ? applications[0] : undefined
 
