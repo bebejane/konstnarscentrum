@@ -33,6 +33,7 @@ export default catchErrorsFrom(async (req, res) => {
     webpage,
     message,
     pdf,
+    region: region.id,
     approval_token: approvalToken,
     approved: false
   });

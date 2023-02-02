@@ -76,10 +76,10 @@ export function AuthLinks({ type, domain }) {
     </>
   )
 }
-export function SubmitButton({ loading, children, onClick }: { loading: boolean, children: React.ReactNode, onClick?: () => void }) {
+export function SubmitButton({ loading, disabled, children, onClick }: { loading: boolean, disabled: boolean, children: React.ReactNode, onClick?: () => void }) {
 
   return (
-    <button className={styles.submitButton} type="submit" onClick={onClick}>
+    <button className={styles.submitButton} type="submit" onClick={onClick} disabled={disabled}>
       {!loading ? children : <Loader size={10} />}
     </button>
   )

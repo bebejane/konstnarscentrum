@@ -230,6 +230,8 @@ type ApplicationModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   lastName?: InputMaybe<StringFilter>;
   message?: InputMaybe<TextFilter>;
+  pdf?: InputMaybe<FileFilter>;
+  region?: InputMaybe<LinkFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
   webpage?: InputMaybe<StringFilter>;
 };
@@ -294,6 +296,8 @@ type ApplicationRecord = RecordInterface & {
   id: Scalars['ItemId'];
   lastName: Scalars['String'];
   message: Scalars['String'];
+  pdf: FileField;
+  region: RegionRecord;
   updatedAt: Scalars['DateTime'];
   webpage?: Maybe<Scalars['String']>;
 };

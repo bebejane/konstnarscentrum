@@ -8,13 +8,14 @@ import { FileUpload } from '/components'
 import { isEmail } from "/lib/utils";
 import type { Upload } from '/components/common/FileUpload'
 
-export default function Apply({ regions = [] }) {
+export default function Apply({ regions = [], onSuccess }) {
 	const [application, setApplication] = useState();
 	const successRef = useRef<HTMLDivElement | undefined>()
 
 	useEffect(() => {
 		application && successRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-	}, [application, successRef])
+		application && onSuccess(application)
+	}, [application, successRef, onSuccess])
 
 	return (
 		<div className={s.container}>
@@ -75,6 +76,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+	console.log(regionId);
 
 	return (
 		<>
@@ -137,7 +139,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				<button
 					type="button"
 					onClick={() => uploadRef.current?.click()}
-					disabled={progress !== undefined || uploading || !isEmail(email) || !regionId}
+					disabled={progress !== undefined || uploading || !isEmail(email) || !regionId || regionId === 'false'}
 				>
 					{upload ? upload.basename : progress === undefined ? 'Ladda upp pdf' : `${progress}%`}
 				</button>
@@ -155,7 +157,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					onError={setUploadError}
 					mediaLibrary={false}
 				/>
-				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
+				<SubmitButton loading={isSubmitting} disabled={!upload}>{text.send}</SubmitButton>
 				{error &&
 					<p className={s.formError}>{`${error.error || error.message || error}`}</p>
 				}

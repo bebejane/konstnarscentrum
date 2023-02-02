@@ -11,7 +11,7 @@ export default function Grid() {
 			return
 
 		const toggleGrid = ({ key, target }) => {
-			if (target.tagName === 'INPUT' || key !== 'g')
+			if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || key !== 'g')
 				return
 
 			if (showGrid) {
