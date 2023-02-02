@@ -110,9 +110,13 @@ const SignupForm = ({ regions, application, setMember }) => {
 				/>
 				<select
 					autoComplete="off"
-					placeholder={`${text.region}...`} {...register("roleId", { required: true })}
+					placeholder={`${text.region}...`} {...register("roleId", {
+						required: true,
+						validate: (val) => val && val !== 'false'
+					})}
 					className={errors.roleId ? styles.error : undefined}
 				>
+					<option value="false" data-header={true}>Välj region</option>
 					{regions.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
 				</select>
 				<SubmitButton loading={isSubmitting} disabled={!isValid}>{text.send}</SubmitButton>
