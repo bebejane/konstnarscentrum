@@ -7,6 +7,8 @@ export default catchErrorsFrom(async (req, res) => {
 
   if (ping) return res.status(200).json({ pong: true });
 
+  console.log({ email, password, password2, firstName, lastName, roleId, ping })
+
   try {
 
     validateSignUp({ email, password, password2, firstName, lastName })
