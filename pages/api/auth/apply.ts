@@ -7,7 +7,7 @@ import { memberController, applicationController } from '/lib/controllers';
 
 export default catchErrorsFrom(async (req, res) => {
 
-  const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = JSON.parse(req.body)
+  const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = req.body
 
   if (ping) return res.status(200).json({ pong: true })
 

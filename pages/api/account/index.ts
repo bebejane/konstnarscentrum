@@ -51,7 +51,7 @@ export default withAuthentication(async (req, res, session) => {
     webpage,
     instagram,
     memberCategory
-  } = JSON.parse(req.body) as MemberRecord
+  } = req.body as MemberRecord
 
   let record: Item;
   let imageBlockId: string
