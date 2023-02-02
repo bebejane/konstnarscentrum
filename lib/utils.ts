@@ -31,11 +31,13 @@ export const parseDatoError = (err: any) => {
 
   const error = {
     _error: apiError,
-    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors }, details } }) => {
+    message: apiError.map(({ attributes: { details } }) => {
+      const { messages } = details
       const m = !messages ? undefined : (!Array.isArray(messages) ? [messages] : messages).join('. ')
-      const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)
+      const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code, extraneous_attributes }) =>
+        extraneous_attributes ? `Error fields: ${extraneous_attributes.join('')}` : `${field_label} (${field_type}): ${code}`
+      )
       return `${m ?? ''} ${d ?? ''}`
-
     }),
     codes: apiError.map(({ attributes: { code } }) => code),
   }
