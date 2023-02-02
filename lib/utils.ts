@@ -52,6 +52,15 @@ export const catchErrorsFrom = (handler) => {
   }
 }
 
+export const pingEndpoint = async (path: string | string[], method: 'GET' | 'POST' = 'POST') => {
+  path = !Array.isArray(path) ? [path] : path;
+  path.forEach(p =>
+    fetch(p, { method, body: JSON.stringify({ ping: true }) })
+      .then(() => console.log(`pinged ${path} endpoint`))
+      .catch(err => console.error(`Failed: ping ${path} endpoint`, err))
+  )
+}
+
 export const recordToSlug = (record: any, region?: Region): string => {
 
   let url;

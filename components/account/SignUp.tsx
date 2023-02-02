@@ -5,6 +5,7 @@ import { SubmitButton } from "./Auth";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from 'next/link'
+import { pingEndpoint } from "/lib/utils";
 
 export default function SignUp({ regions = [], application, token }) {
 
@@ -56,6 +57,10 @@ const SignupForm = ({ regions, application, setMember }) => {
 	useEffect(() => {
 		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
+
+	useEffect(() => {
+		pingEndpoint('/api/auth/signup')
+	}, [])
 
 	const onSubmitSignup = async ({ email, password, password2, firstName, lastName, roleId }) => {
 		try {

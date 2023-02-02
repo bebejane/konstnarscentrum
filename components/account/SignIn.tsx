@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
+import { pingEndpoint } from "/lib/utils";
 
 export default function SignIn({ csrfToken, providers }) {
 
@@ -27,8 +28,7 @@ export default function SignIn({ csrfToken, providers }) {
 	};
 
 	useEffect(() => {
-		fetch('/api/auth/ping').then(() => console.log('pinged auth endpoint')).catch(err => console.error(err))
-		fetch('/api/account').then(() => console.log('pinged account endpoint')).catch(err => console.error(err))
+		pingEndpoint(['/api/auth/ping', '/api/account'])
 	}, [])
 
 	useEffect(() => {

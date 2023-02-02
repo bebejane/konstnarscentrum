@@ -25,8 +25,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if (!isAuthorized)
 			return res.status(401).send('Access denied')
 
-
-
 		console.log('approve application', email);
 
 		if (!email || !approval_token || !first_name || !last_name)
