@@ -33,10 +33,6 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
 
-  console.log(roleApiToken);
-  console.log(process.env.DATOCMS_APPLICATION_MODEL_ID);
-  console.log(email, firstName, lastName, message, regionId, education, webpage, pdf);
-
   console.log({
     item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
     email,
