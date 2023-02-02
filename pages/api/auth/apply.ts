@@ -1,16 +1,20 @@
 import { catchErrorsFrom } from '/lib/utils'
+import { NextApiRequest, NextApiResponse } from "next";
 import client, { buildClient } from '/lib/client'
 import { regions } from '/lib/region'
 import { Email } from "/lib/emails";
 import { generateToken } from '/lib/auth'
 import { memberController, applicationController } from '/lib/controllers';
 
-export default catchErrorsFrom(async (req, res) => {
+export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse) => {
 
   const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = req.body
-  console.log(req.body);
 
   if (ping) return res.status(200).json({ pong: true })
+
+  console.log(email, firstName, lastName, message, regionId, education, webpage, pdf, ping);
+  console.log(req.body?.data);
+
 
   const memberExist = await memberController.exists(email)
 

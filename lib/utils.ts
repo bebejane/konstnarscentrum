@@ -1,5 +1,4 @@
 import { TypedDocumentNode } from "@apollo/client/core";
-import { datoError } from "dato-nextjs-utils/api";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { regions } from "/lib/region";
 import { isAfter, isBefore } from "date-fns";
@@ -26,10 +25,27 @@ export const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) 
   return newArr
 }
 
+export const parseDatoError = (err: any) => {
+  const apiError = err.response?.body.data;
+  if (!apiError) return err?.message ?? err
+
+  const error = {
+    _error: apiError,
+    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors }, details } }) => {
+      const m = !messages ? undefined : (!Array.isArray(messages) ? [messages] : messages).join('. ')
+      const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)
+      return `${m ?? ''} ${d ?? ''}`
+
+    }),
+    codes: apiError.map(({ attributes: { code } }) => code),
+  }
+  return error
+}
+
 export const catchErrorsFrom = (handler) => {
   return async (req: NextApiRequest, res: NextApiResponse) => {
     return handler(req, res).catch((error) => {
-      const err = datoError(error)
+      const err = parseDatoError(error)
       console.log(err)
       res.status(500).send(err);
     });

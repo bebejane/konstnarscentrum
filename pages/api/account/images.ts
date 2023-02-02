@@ -3,8 +3,8 @@ import withAuthentication from '/lib/auth/withAuthentication'
 import { apiQuery } from 'dato-nextjs-utils/api'
 import { MemberImagesDocument } from '/graphql'
 import type { Session } from 'next-auth'
-import { client, parseDatoError } from './'
-import { sleep } from '/lib/utils'
+import { client } from './'
+import { sleep, parseDatoError } from '/lib/utils'
 
 const userMediaLibrary = async (session: Session) => {
   const { member, uploads } = await apiQuery(MemberImagesDocument, {

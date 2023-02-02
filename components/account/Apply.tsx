@@ -76,7 +76,6 @@ const ApplicationForm = ({ regions, setApplication }) => {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
-	console.log(regionId);
 
 	return (
 		<>

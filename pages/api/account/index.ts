@@ -2,7 +2,7 @@
 import withAuthentication from '/lib/auth/withAuthentication'
 import { buildClient, buildBlockRecord } from '@datocms/cma-client'
 import { apiQuery } from 'dato-nextjs-utils/api'
-import { sleep } from '/lib/utils'
+import { sleep, parseDatoError } from '/lib/utils'
 import { MemberDocument } from '/graphql'
 import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes'
 import { getYouTubeThumbnail } from 'yt-vimeo-thumbnail/dist/youtube/getYouTube'
@@ -12,23 +12,6 @@ export const client = buildClient({
   apiToken: process.env.GRAPHQL_API_TOKEN_FULL,
   environment: process.env.DATOCMS_ENVIRONMENT ?? 'main'
 })
-
-export const parseDatoError = (err: any) => {
-  const apiError = err.response?.body.data;
-  if (!apiError) return err?.message ?? err
-
-  const error = {
-    _error: apiError,
-    message: apiError.map(({ attributes: { details: { field, code, messages, message, errors }, details } }) => {
-      const m = !messages ? undefined : (!Array.isArray(messages) ? [messages] : messages).join('. ')
-      const d = (!Array.isArray(details) ? [details] : details)?.map(({ field_label, field_type, code }) => `${field_label} (${field_type}): ${code}`)
-      return `${m ?? ''} ${d ?? ''}`
-
-    }),
-    codes: apiError.map(({ attributes: { code } }) => code),
-  }
-  return error
-}
 
 export default withAuthentication(async (req, res, session) => {
 
