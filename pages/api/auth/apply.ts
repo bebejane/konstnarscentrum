@@ -8,10 +8,11 @@ import { memberController, applicationController } from '/lib/controllers';
 export default catchErrorsFrom(async (req, res) => {
 
   const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = req.body
+  console.log(req.body);
 
   if (ping) return res.status(200).json({ pong: true })
 
-  console.log(req.body);
+
 
   const memberExist = await memberController.exists(email)
 
