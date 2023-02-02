@@ -35,6 +35,9 @@ export default withAuthentication(async (req, res, session) => {
   if (!req.body || !req.body?.id)
     return res.status(500).json({ error: `Invalid empty request` })
 
+  if (req.body.ping)
+    return res.status(200).json({ pong: true })
+
   const {
     id,
     image,
@@ -47,7 +50,7 @@ export default withAuthentication(async (req, res, session) => {
     yearOfBirth,
     webpage,
     instagram,
-    memberCategory
+    memberCategory,
   } = req.body as MemberRecord
 
   let record: Item;

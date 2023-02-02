@@ -26,18 +26,27 @@ export default function Register({ token, application }: Props) {
 		getCsrfToken().then(token => setCsrfToken(token))
 	})
 
+	console.log(token, application);
+
 	return (
 		<div className={s.container}>
 			{status === 'loading' ?
 				<Loader />
 				:
-				<>
-					<h1><RevealText>Registrera dig</RevealText></h1>
-					<p className="intro">
-						Intro text
-					</p>
-					<SignUp token={token} application={application} regions={regions.filter(({ global }) => !global)} />
-				</>
+				!application ?
+					<div className={s.error}>Ogiltig ansöknings adress</div>
+					:
+					<>
+						<h1><RevealText>Registrera dig</RevealText></h1>
+						<p className="intro">
+							Intro text
+						</p>
+						<SignUp
+							token={token}
+							application={application}
+							regions={regions.filter(({ global }) => !global)}
+						/>
+					</>
 			}
 		</div>
 	);
@@ -46,14 +55,16 @@ export default function Register({ token, application }: Props) {
 Register.page = { title: 'Registrera dig', crumbs: [{ slug: 'konstnar/konto', title: 'Konto', regional: false }] } as PageProps
 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+
 	const { token } = context.query
 	const application = token ? await applicationController.getByToken(token) : undefined
+	console.log(application);
 
 	return {
 		props: {
 			...props,
+			application: application ?? null,
 			token: token ?? null,
-
 		}
 
 	};

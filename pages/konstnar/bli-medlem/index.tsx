@@ -5,12 +5,15 @@ import { regions } from "/lib/region";
 import { Apply } from "/components";
 import { ApplyForMembershipDocument } from "/graphql";
 import { Article } from "/components";
+import { useState } from "react";
 
 export type Props = {
 	apply: ApplyRecord
 }
 
 export default function Member({ apply: { id, content, title, intro, image } }: Props) {
+
+	const [application, setApplication] = useState<ApplicationRecord | undefined>()
 
 	return (
 		<div className={s.container}>
@@ -22,9 +25,11 @@ export default function Member({ apply: { id, content, title, intro, image } }: 
 				text={intro}
 				content={content}
 			/>
-
-			<h3>Skicka in ansökan</h3>
-			<Apply regions={regions.filter(({ global }) => !global)} />
+			{!application && <h3>Skicka in ansökan</h3>}
+			<Apply
+				regions={regions.filter(({ global }) => !global)}
+				onSuccess={(application) => setApplication(application)}
+			/>
 		</div>
 	);
 }

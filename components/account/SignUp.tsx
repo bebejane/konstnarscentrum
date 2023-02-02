@@ -12,7 +12,11 @@ export default function SignUp({ regions = [], application, token }) {
 	return (
 		<div className={styles.container}>
 			{!member ? (
-				<SignupForm regions={regions} setMember={setMember} application={application} />
+				<SignupForm
+					regions={regions.filter(el => !el.global)}
+					setMember={setMember}
+					application={application}
+				/>
 			) : (
 				<div className={styles.success}>
 					<h1>{text.thanksSigningUp}</h1>
@@ -28,8 +32,26 @@ export default function SignUp({ regions = [], application, token }) {
 }
 
 const SignupForm = ({ regions, application, setMember }) => {
+
 	const [error, setError] = useState();
-	const { register, handleSubmit, formState: { errors, isSubmitting }, reset } = useForm();
+
+	const { register, handleSubmit, reset, watch,
+		formState: {
+			errors,
+			isSubmitting,
+			isValid,
+		}, formState
+	} = useForm({
+		defaultValues: {
+			email: application.email,
+			firstName: application.first_name,
+			lastName: application.last_name,
+			password: '',
+			password2: '',
+			roleId: application.region
+		},
+		mode: 'onChange'
+	});
 
 	useEffect(() => {
 		isSubmitting && setError(undefined)
@@ -44,6 +66,7 @@ const SignupForm = ({ regions, application, setMember }) => {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+	console.log(formState);
 
 	return (
 		<>
@@ -58,13 +81,16 @@ const SignupForm = ({ regions, application, setMember }) => {
 				<input
 					placeholder={`${text.password}...`}  {...register("password", { required: true })}
 					type="password"
-					autoComplete="off"
+					autoComplete="new-password"
 					className={errors.password ? styles.error : undefined}
 				/>
 				<input
-					placeholder={`${text.reTypePassword}...`} {...register("password2", { required: true })}
+					placeholder={`${text.reTypePassword}...`} {...register("password2", {
+						required: true,
+						validate: (val: string) => watch('password') !== val ? "Lösenordet är ej samma värde" : true
+					})}
 					type="password"
-					autoComplete="off"
+					autoComplete="new-password"
 					className={errors.password2 ? styles.error : undefined}
 				/>
 				<input
@@ -79,12 +105,13 @@ const SignupForm = ({ regions, application, setMember }) => {
 				/>
 				<select
 					autoComplete="off"
+					disabled={true}
 					placeholder={`${text.region}...`} {...register("roleId", { required: true })}
 					className={errors.roleId ? styles.error : undefined}
 				>
 					{regions.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
 				</select>
-				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
+				<SubmitButton loading={isSubmitting} disabled={!isValid}>{text.send}</SubmitButton>
 				{error && <p className={styles.formError}>{`${error.error || error.message || error}`}</p>}
 			</form>
 		</>

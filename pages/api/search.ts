@@ -5,26 +5,33 @@ import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } 
 import { truncateParagraph, isEmptyObject, recordToSlug } from '/lib/utils';
 
 export const config = {
-  runtime: 'experimental-edge',
+  runtime: 'edge',
 }
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
-  const params = await req.json();
+  try {
+    const params = await req.json();
 
-  if (params.type === 'member') {
+    if (params.type === 'member') {
 
-    const members = await memberSearch(params)
-    return new Response(JSON.stringify({ members }), {
-      status: 200,
-      headers: { 'content-type': 'application/json' }
-    })
+      const members = await memberSearch(params)
+      return new Response(JSON.stringify({ members }), {
+        status: 200,
+        headers: { 'content-type': 'application/json' }
+      })
 
-  } else if (params.type === 'site') {
+    } else if (params.type === 'site') {
 
-    const results = await siteSearch(params)
-    return new Response(JSON.stringify(results), {
-      status: 200,
+      const results = await siteSearch(params)
+      return new Response(JSON.stringify(results), {
+        status: 200,
+        headers: { 'content-type': 'application/json' }
+      })
+    }
+  } catch (err) {
+    return new Response(JSON.stringify(err), {
+      status: 500,
       headers: { 'content-type': 'application/json' }
     })
   }
