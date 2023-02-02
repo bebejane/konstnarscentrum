@@ -21,7 +21,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if (!isAuthorized)
 			return res.status(401).send('Access denied')
 
-		const { email, approval_token, first_name, last_name, approved } = req.body;
+		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
+
+		if (ping) {
+			console.log('ping');
+			return res.status(200).json({ pong: true });
+		}
 
 		console.log('approve application', email);
 
