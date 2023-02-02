@@ -27,7 +27,6 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
   if (applicationExist)
     throw 'Du har redan skickat in din ansökning om medlemskap'
 
-
   const tokens = await client.accessTokens.list();
   const region = regions.find(r => r.id === regionId)
   const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
@@ -52,7 +51,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approved: false
   });
 
-  const application = await roleClient.items.create({
+  const application = await client.items.create({
     item_type: { type: 'item_type', id: process.env.DATOCMS_APPLICATION_MODEL_ID },
     email,
     first_name: firstName,
