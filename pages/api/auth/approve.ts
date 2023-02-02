@@ -11,21 +11,28 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
 
-		if (ping) return res.status(200).json({ pong: true });
+		if (ping) {
+			console.log('ping')
+			return res.status(200).json({ pong: true });
+		}
+
+		console.log('approve application', email);
 
 		const basicAuth = req.headers.authorization
 
-		if (!basicAuth)
+		if (!basicAuth) {
+			console.error('Access denied: no headers')
 			return res.status(401).json({ error: 'Access denied' })
+		}
 
 		const auth = basicAuth.split(' ')[1]
 		const [user, pwd] = Buffer.from(auth, 'base64').toString().split(':')
 		const isAuthorized = user === process.env.BASIC_AUTH_USER && pwd === process.env.BASIC_AUTH_PASSWORD
 
-		if (!isAuthorized)
+		if (!isAuthorized) {
+			console.error('Access denied: wrong user/pass', process.env.BASIC_AUTH_USER, process.env.BASIC_AUTH_PASSWORD)
 			return res.status(401).send('Access denied')
-
-		console.log('approve application', email);
+		}
 
 		if (!email || !approval_token || !first_name || !last_name)
 			throw 'Ogitltig data'
@@ -35,13 +42,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		else
 			console.log('already approved')
 
+		console.log('application successfully approved', email)
 		res.status(200).json({ approved });
 
 	} catch (err) {
 		console.error(err);
-		res.status(501).json({ error: err?.message || err });
+		res.status(500).json({ error: err?.message || err });
+		res.status(500).send(err);
 	}
-
 }
 
 /*
