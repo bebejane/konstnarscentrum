@@ -9,6 +9,7 @@ import { pageSize, apiQueryAll, memberNewsStatus, isServer } from "/lib/utils";
 import { CardContainer, NewsCard, FilterBar, RevealText, Loader } from '/components'
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { useRouter } from "next/router";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
@@ -22,6 +23,7 @@ export type Props = {
 
 export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
 
+	const router = useRouter()
 	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
 	const { data: { pastMemberNews }, loading, error, nextPage, loadMore, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
 		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
@@ -36,10 +38,11 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 			nextPage()
 	}, [inView, page, loading, nextPage])
 
-	//console.log(pastMemberNews.map(el => el.id));
-	console.log(page);
-
-
+	useEffect(() => {
+		console.log(memberNewsCategoryIds);
+		router.replace(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
+		console.log(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
+	}, [memberNewsCategoryIds])
 
 	return (
 		<>
@@ -76,8 +79,9 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 
 MemberNews.page = { title: 'Aktuellt', crumbs: [{ title: 'Aktuellt' }], regional: true } as PageProps
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
+export const getServerSideProps: GetServerSideProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 
+	const newsCategories = context.params?.categories?.split(',')
 	const page = parseInt(context.params?.page) || 1;
 	const isFirstPage = page === 1
 	const regionId = props.region.global ? undefined : props.region.id;

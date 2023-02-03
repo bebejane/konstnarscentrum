@@ -52,6 +52,15 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approval_token: approvalToken,
     approved: false
   });
-  await Email.applicationSubmitted({ email, name: firstName })
+
+
+  await Promise.all([
+    Email.applicationSubmitted({ email, name: firstName }),
+    Email.contactFormNotification({
+      name: `${firstName} ${lastName}`,
+      datoUrl: `https://konstnarscentrum.admin.datocms.com/environments/${process.env.DATOCMS_ENVIRONMENT}/editor/item_types/${applicationModelId}/items/${application.id}`,
+      to: 'bjorn@konst-teknik.se' // region.email
+    })
+  ])
   res.status(200).json(application)
 })

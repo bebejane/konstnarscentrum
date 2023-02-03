@@ -5,6 +5,7 @@ import ApplicationSubmitted from './ApplicationSubmitted'
 import ApplicationApproved from './ApplicationApproved'
 import ContactForm from "./ContactForm";
 import postmarkTransport from 'nodemailer-postmark-transport'
+import ContactFormRegionNotification from "/lib/emails/ContactFormRegionNotification";
 
 const transport = nodemailer.createTransport(postmarkTransport({
   auth: {
@@ -83,6 +84,20 @@ export const Email = {
           fromEmail={fromEmail}
           subject={subject}
           fields={fields}
+        />
+    }),
+  contactFormNotification: ({ datoUrl, name, to }: {
+    to: string
+    name: string
+    datoUrl: string
+  }) =>
+    sendMail({
+      to,
+      subject: 'Ny ansökning',
+      component:
+        <ContactFormRegionNotification
+          name={name}
+          datoUrl={datoUrl}
         />
     })
 }

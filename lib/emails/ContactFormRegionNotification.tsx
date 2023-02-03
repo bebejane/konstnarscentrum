@@ -11,6 +11,7 @@ import {
   MjmlText,
   MjmlImage,
   MjmlSpacer,
+  MjmlDivider
 } from "mjml-react";
 
 import {
@@ -20,30 +21,28 @@ import {
   textXl,
 } from "./components/theme";
 
-const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ name, approvalUrl }) => (
+const ContactFormRegionNotification: React.FC<{
+  name: string
+  datoUrl: string
+}> = ({ name, datoUrl }) => (
   <Mjml>
     <Head />
     <MjmlBody width={600}>
       <Header loose />
-      <MjmlSection padding="0">
+      <MjmlSection padding="0 24px">
         <MjmlColumn>
-          <MjmlImage
-            cssClass="hero"
-            padding="0 0 40px"
-            align="left"
-            src="https://s3.amazonaws.com/lab.campsh.com/bb-hero%402x.jpg"
-          />
-        </MjmlColumn>
-      </MjmlSection>
-      <MjmlSection padding="0 24px" cssClass="smooth">
-        <MjmlColumn>
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="8px 0 32px 0"
+          ></MjmlDivider>
           <MjmlText
-            cssClass="paragraph"
-            padding="0"
+            padding="18px 0 0 0"
             fontSize={textXl}
             lineHeight={leadingTight}
+            cssClass="paragraph"
           >
-            Hej {name}, din ansökan har blivit godkänd!
+            Ny ansökning
           </MjmlText>
           <MjmlText
             padding="24px 0 0"
@@ -51,22 +50,18 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Du kan skapa ditt konto här
+            Det har inkommit en ny ansökning från {name}
+          </MjmlText>
 
-          </MjmlText>
           <MjmlSpacer height="24px" />
-          <ButtonPrimary link={approvalUrl} uiText={'Skapa konto'} />
+          <ButtonPrimary link={datoUrl} uiText={'Visa ansökning'} />
           <MjmlSpacer height="8px" />
-          <MjmlText
-            padding="0"
-            fontSize={textBase}
-            lineHeight={leadingRelaxed}
-            cssClass="paragraph"
-          >
-            Enjoy!
-            <br />
-            Konstnärscentrum
-          </MjmlText>
+
+          <MjmlDivider
+            borderColor="#666"
+            borderWidth="1px"
+            padding="40px 0 0 0"
+          ></MjmlDivider>
         </MjmlColumn>
       </MjmlSection>
       <Footer />
@@ -74,4 +69,4 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
   </Mjml>
 );
 
-export default ApplicationApproved
+export default ContactFormRegionNotification

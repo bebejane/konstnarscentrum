@@ -18,7 +18,6 @@ export default function withGlobalProps(opt: any, callback: Function): GetStatic
     queries.push(SEOQuery(opt.seo))
 
   return async (context) => {
-
     const props = await apiQuery(queries, { preview: context.preview });
     const region = regions.find(({ slug }) => slug === context.params?.region)
     props.menu = await buildMenu()
