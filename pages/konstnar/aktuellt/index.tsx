@@ -10,6 +10,7 @@ import { CardContainer, NewsCard, FilterBar, RevealText, Loader } from '/compone
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { useRouter } from "next/router";
+import { el } from "date-fns/locale";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
@@ -23,8 +24,7 @@ export type Props = {
 
 export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
 
-	const router = useRouter()
-	const [memberNewsCategoryIds, setMemberNewsCategoryIds] = useState<string | string[] | undefined>()
+	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | undefined>()
 	const { data: { pastMemberNews }, loading, error, nextPage, loadMore, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
 		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
 		variables: { first: pageSize, date },
@@ -38,24 +38,21 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 			nextPage()
 	}, [inView, page, loading, nextPage])
 
-	useEffect(() => {
-		//console.log(memberNewsCategoryIds);
-		//router.replace(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
-		//console.log(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
-	}, [memberNewsCategoryIds])
+
+	const memberNews = presentMemberNews.concat(pastMemberNews).filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
 
 			<FilterBar
-				multi={true}
+				multi={false}
 				options={memberNewsCategories.map(({ id, category }) => ({ label: category, id }))}
-				onChange={(ids) => setMemberNewsCategoryIds(ids)}
+				onChange={(id) => setMemberNewsCategoryId(id)}
 			/>
 
-			<CardContainer columns={2} className={s.memberNews} key={page.no}>
-				{presentMemberNews.concat(pastMemberNews).map((el, idx) => {
+			<CardContainer columns={2} className={s.memberNews} key={`${page.no}${memberNewsCategoryId}`}>
+				{memberNews.length > 0 ? memberNews.map((el, idx) => {
 					const { id, date, title, intro, slug, region, image, category, status } = el
 					return (
 						<NewsCard
@@ -69,7 +66,8 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 							regionName={region.name}
 						/>
 					)
-				})}
+				}) : <div className={s.nomatches}>Inga träffar...</div>
+				}
 			</CardContainer>
 			{!page.end && <div ref={ref} key={`page-${page.no}`}>{loading && <Loader />}</div>}
 			{error && <div className={s.error}><>Error: {error.message || error}</></div>}

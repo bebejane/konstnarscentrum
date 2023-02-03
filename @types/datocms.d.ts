@@ -5748,6 +5748,7 @@ type AllPastMemberNewsQueryVariables = Exact<{
   first?: InputMaybe<Scalars['IntType']>;
   skip?: InputMaybe<Scalars['IntType']>;
   regionId?: InputMaybe<Scalars['ItemId']>;
+  categoryId?: InputMaybe<Scalars['ItemId']>;
   date?: InputMaybe<Scalars['Date']>;
 }>;
 

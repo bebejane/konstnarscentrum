@@ -98,8 +98,9 @@ export default function Members({ members, memberCategories, cities, regions, re
 				<Loader className={s.loader} />
 				: results ?
 					<>
-						{results.length === 0 && <>Vi hittade ingenting...</>}
-						<CardContainer columns={3} className={s.results} key={Math.random()}>
+						{results.length === 0 && <div className={s.nomatches}>Vi hittade ingenting...</div>}
+
+						<CardContainer columns={3} className={s.results} key={JSON.stringify(query)}>
 							{results.map(({ id, firstName, lastName, image, region, slug }) =>
 								<Card key={id}>
 									<Thumbnail
