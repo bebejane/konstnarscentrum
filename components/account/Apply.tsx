@@ -34,14 +34,14 @@ export default function Apply({ regions = [], onSuccess }) {
 const ApplicationForm = ({ regions, setApplication }) => {
 
 	const [error, setError] = useState<undefined | Error>();
-	const { register, handleSubmit, watch, formState: { errors, isSubmitting } } = useForm();
+	const { register, handleSubmit, watch, getValues, formState: { errors, isSubmitting } } = useForm();
 	const [upload, setUpload] = useState<Upload | undefined>()
 	const [uploading, setUploading] = useState(false)
 	const [progress, setProgress] = useState<number | undefined>()
 	const [uploadError, setUploadError] = useState<Error | undefined>()
 	const uploadRef = useRef<HTMLInputElement | undefined>()
-	const email = watch("email");
-	const regionId = watch("regionId");
+	const email = watch('email')
+	const regionId = watch('regionId')
 
 	const handleUploadDone = (upload: Upload) => {
 		setUpload(upload)
@@ -60,6 +60,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	}, [isSubmitting]);
 
 	const onSubmitApplication = async ({ email, firstName, lastName, education, webpage, message, regionId }) => {
+
 		try {
 			const app = await memberService.apply({
 				email,
@@ -74,11 +75,11 @@ const ApplicationForm = ({ regions, setApplication }) => {
 			setApplication(app);
 		} catch (err) {
 			console.log(err.response?.data);
-
-
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+
+	const uploadTags = regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).slug] : []
 
 	return (
 		<>
@@ -151,7 +152,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				<FileUpload
 					ref={uploadRef}
 					customData={{}}
-					tags={regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).name] : []}
+					tags={uploadTags}
 					accept=".pdf"
 					onDone={handleUploadDone}
 					onProgress={setProgress}

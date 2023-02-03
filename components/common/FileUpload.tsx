@@ -46,21 +46,22 @@ export type Props = {
 
 export type Upload = SimpleSchemaTypes.Upload;
 
-const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
-  customData = {},
-  tags = [],
-  accept,
-  onDone,
-  onUploading,
-  onImageData,
-  onProgress,
-  mediaLibrary,
-  onError,
-  region
-}, ref) => {
+const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
 
+  const {
+    customData = {},
+    tags,
+    accept,
+    onDone,
+    onUploading,
+    onImageData,
+    onProgress,
+    mediaLibrary,
+    onError
+  } = props
 
   const [error, setError] = useState<Error | undefined>()
+  const [allTags, setAllTags] = useState<string[]>(['upload'])
   const [upload, setUpload] = useState<Upload | undefined>()
 
   const resetInput = useCallback(() => {
@@ -83,7 +84,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     })
   }
 
-  const createUpload = useCallback(async (file: File): Promise<Upload> => {
+  const createUpload = useCallback(async (file: File, allTags): Promise<Upload> => {
 
     if (!file)
       return Promise.reject(new Error('Ingen fil vald'))
@@ -102,7 +103,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
     resetInput()
     onUploading(true)
 
-    const allTags = Array.isArray(tags) ? [...tags, 'upload'] : ['upload']
+    console.log(allTags)
 
     return new Promise((resolve, reject) => {
       client.uploads.createFromFileOrBlob({
@@ -123,7 +124,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
       }).then(resolve).catch(reject)
     })
 
-  }, [customData, onUploading, onProgress, tags, resetInput, mediaLibrary])
+  }, [customData, onUploading, onProgress, resetInput, mediaLibrary])
 
   const handleChange = useCallback(async (event) => {
     const file: File = event.target.files[0];
@@ -143,26 +144,31 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>(({
         onImageData?.(image)
       }
 
-      const upload = await createUpload(file)
+      const upload = await createUpload(file, allTags)
       onDone(upload)
     } catch (err) {
       setError(err)
     }
     onUploading(false)
 
-  }, [createUpload, onUploading, onDone, setError, onImageData])
+  }, [createUpload, onUploading, onDone, setError, onImageData, allTags])
 
   useEffect(() => {
     if (!ref.current) return
     ref.current.addEventListener('change', handleChange);
     return () => ref.current?.removeEventListener('change', handleChange)
-  }, [ref])
+  }, [ref, handleChange])
+
 
   useEffect(() => { onDone(upload) }, [upload])
   useEffect(() => {
     onError(error)
     ref.current.value = ''
   }, [error])
+
+  useEffect(() => { setAllTags((s) => tags ? [...tags, 'upload'] : ['upload']) }, [tags])
+  //console.log(allTags);
+
 
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })
