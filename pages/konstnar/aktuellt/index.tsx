@@ -39,9 +39,9 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 	}, [inView, page, loading, nextPage])
 
 	useEffect(() => {
-		console.log(memberNewsCategoryIds);
-		router.replace(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
-		console.log(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
+		//console.log(memberNewsCategoryIds);
+		//router.replace(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
+		//console.log(`${document.location.pathname}?categories=${memberNewsCategoryIds?.join(',')}`)
 	}, [memberNewsCategoryIds])
 
 	return (
@@ -79,9 +79,8 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 
 MemberNews.page = { title: 'Aktuellt', crumbs: [{ title: 'Aktuellt' }], regional: true } as PageProps
 
-export const getServerSideProps: GetServerSideProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMemberNewsCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 
-	const newsCategories = context.params?.categories?.split(',')
 	const page = parseInt(context.params?.page) || 1;
 	const isFirstPage = page === 1
 	const regionId = props.region.global ? undefined : props.region.id;
