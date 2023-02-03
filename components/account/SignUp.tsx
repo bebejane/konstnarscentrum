@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Link from 'next/link'
 import { pingEndpoint } from "/lib/utils";
+import { validatePassword } from "/lib/auth/validate";
 
 export default function SignUp({ regions = [], application, token }) {
 
@@ -79,30 +80,6 @@ const SignupForm = ({ regions, application, setMember }) => {
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitSignup)} autoComplete="off">
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				<input
-					placeholder={`${text.email}...`} {...register("email", {
-						required: true,
-						pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-					})}
-					className={errors.email ? styles.error : undefined}
-					autoComplete="off"
-					autoCorrect="off"
-				/>
-				<input
-					placeholder={`${text.password}...`}  {...register("password", { required: true })}
-					type="password"
-					autoComplete="new-password"
-					className={errors.password ? styles.error : undefined}
-				/>
-				<input
-					placeholder={`${text.reTypePassword}...`} {...register("password2", {
-						required: true,
-						validate: (val: string) => watch('password') !== val ? "Lösenordet är ej samma värde" : true
-					})}
-					type="password"
-					autoComplete="new-password"
-					className={errors.password2 ? styles.error : undefined}
-				/>
-				<input
 					autoComplete="off"
 					placeholder={`${text.firstName}...`} {...register("firstName", { required: true })}
 					className={errors.firstName ? styles.error : undefined}
@@ -112,8 +89,38 @@ const SignupForm = ({ regions, application, setMember }) => {
 					placeholder={`${text.lastName}...`} {...register("lastName", { required: true })}
 					className={errors.lastName ? styles.error : undefined}
 				/>
+				<input
+					placeholder={`${text.email}...`} {...register("email", {
+						required: true,
+						pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+					})}
+					disabled={true}
+					className={errors.email ? styles.error : undefined}
+					autoComplete="off"
+					autoCorrect="off"
+				/>
+				<input
+					placeholder={`${text.password}...`}  {...register("password", {
+						required: true,
+						validate: (val: string) => validatePassword(val) ?? true
+					})}
+					type="password"
+					autoComplete="new-password"
+					className={errors.password ? styles.error : undefined}
+				/>
+				<input
+					placeholder={`${text.reTypePassword}...`} {...register("password2", {
+						required: true,
+						validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
+					})}
+					type="password"
+					autoComplete="new-password"
+					className={errors.password2 ? styles.error : undefined}
+				/>
+
 				<select
 					autoComplete="off"
+					disabled={true}
 					placeholder={`${text.region}...`} {...register("regionId", {
 						required: true,
 						validate: (val) => val && val !== 'false'

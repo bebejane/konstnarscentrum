@@ -4,6 +4,7 @@ import { SubmitButton } from "./Auth";
 import memberService from "/lib/services/member";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { validatePassword } from "/lib/auth/validate";
 import Link from "next/link";
 
 export default function Reset({ token }) {
@@ -77,8 +78,8 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors, isSubmitting },
-		reset,
+		watch,
+		formState: { errors, isSubmitting, isValid }
 	} = useForm();
 
 	useEffect(() => {
@@ -100,16 +101,22 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 				<input
 					type="password"
 					placeholder="Lösenord..."
-					{...register("password", { required: true })}
+					{...register("password", {
+						required: true,
+						validate: (val: string) => validatePassword(val) ?? true
+					})}
 					className={errors.passsord && styles.error}
 				/>
 				<input
 					type="password"
 					placeholder="Upprepa lösenord..."
-					{...register("password2", { required: true })}
+					{...register("password2", {
+						required: true,
+						validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
+					})}
 					className={errors.password2 && styles.error}
 				/>
-				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
+				<SubmitButton loading={isSubmitting} disabled={!isValid}>{text.send}</SubmitButton>
 				<p className={styles.formError}>
 					{error && `Error: ${error.error || error}`}
 				</p>

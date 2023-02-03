@@ -19,15 +19,17 @@ const validateSignUp = (params) => {
 
 	return params;
 };
-const validatePassword = (password, password2) => {
+
+const validatePassword = (password: string, password2?: string) => {
 	if (!password)
 		return 'Lösenordet är tomt'
 	else if (password2 !== undefined && password !== password2)
 		return 'Lösenordet matchar ej';
-	else if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password))
-		return 'Fel format på lösenordet'
+	else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password))
+		return 'Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra'
 	else return null;
 };
+
 const validateEmail = (email) => {
 	if (!email)
 		return 'E-post adress är tom'
