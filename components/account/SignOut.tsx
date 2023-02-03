@@ -1,14 +1,14 @@
 import styles from "./index.module.scss";
 import text from "./text.json"
 import { SubmitButton } from "./Auth";
-import {signOut} from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { useState } from "react";
 
-export default function SignOut({}) {
+export default function SignOut({ }) {
 	const [isSubmitting, setIsSubmitting] = useState(false)
 	const handleSubmit = () => {
 		setIsSubmitting(true);
-		signOut({callbackUrl: `${window.location.origin}`})
+		signOut({ callbackUrl: `${window.location.origin}` })
 	}
 	return (
 		<div className={styles.container}>

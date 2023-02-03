@@ -76,7 +76,9 @@ export function AuthLinks({ type, domain }) {
     </>
   )
 }
-export function SubmitButton({ loading, disabled, children, onClick }: { loading: boolean, disabled: boolean, children: React.ReactNode, onClick?: () => void }) {
+
+export type SubmitButtonProps = { loading: boolean, disabled?: boolean, children: React.ReactNode, onClick?: () => void }
+export function SubmitButton({ loading, disabled = false, children, onClick }: SubmitButtonProps) {
 
   return (
     <button className={styles.submitButton} type="submit" onClick={onClick} disabled={disabled}>
