@@ -14,14 +14,15 @@
     white-space: pre;
   }
 
-  li {
+
+
+  .item {
     --padding: 0.2rem;
     --height: 12vw;
     --border-width: 2px;
     --width: calc(25% - var(--border-width) - var(--padding));
     position: relative;
     display: flex;
-
     position: relative;
     max-width: var(--width);
     width: var(--width);
@@ -36,6 +37,7 @@
     border-radius: 1rem;
     cursor: pointer;
     margin-right: var(--padding);
+    user-select: none;
 
     &:nth-child(4) {
       margin-right: 0;

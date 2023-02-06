@@ -72,6 +72,7 @@
 		"react-balance-text": "^2.0.1",
 		"react-datocms": "^4.0.8",
 		"react-dom": "^18.2.0",
+		"react-easy-sort": "^1.5.1",
 		"react-hook-form": "^7.15.4",
 		"react-intersection-observer": "^9.4.0",
 		"react-orphanage": "^1.1.1",

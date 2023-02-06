@@ -5,6 +5,8 @@ import { KCImage as Image } from '/components'
 import { Loader, FileUpload } from "/components";
 import { useSession } from "next-auth/react"
 import { ImageData } from "/components/common/FileUpload";
+import SortableList, { SortableItem } from "react-easy-sort";
+import * as arrayMove from "array-move";
 import { regions } from "/lib/region";
 
 export type Props = {
@@ -85,6 +87,11 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const handleUploadError = (err: Error) => setUploadError(err)
   const handleUploadImageData = (image: ImageData) => setUploadImageData(image)
 
+  const handleSortEnd = (from: number, to: number) => {
+    const sortedImages = arrayMove.arrayMoveImmutable(selected, from, to)
+    onSelection(sortedImages)
+  }
+
   useEffect(() => {
     if (status !== 'authenticated') return
     handleRefresh()
@@ -99,24 +106,29 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
           <>Lägg till eller ta bort bilder till din sektion (max 5). Klicka för att ändra bildtexten.</>
         }
       </div>
-      <ul className={s.gallery}>
+      <SortableList
+        onSortEnd={handleSortEnd}
+        className={s.gallery}
+        draggedItemClassName={'dragged'}
+      >
         {(showLibrary ? images : selected)?.map((img, idx) =>
-          <li
-            key={idx}
-            className={cn(selected.find(el => el.id === img.id) && s.selected)}
-            onClick={(e) => handleClick(e, img)}
-          >
-            <Image
-              data={{ ...img.responsiveImage, sizes: undefined }}
-              className={s.thumb}
-              usePlaceholder={false}
-              objectFit="contain"
-              sizes="(min-width: 66em) 400px"
-            />
-            <div className={s.remove} onClick={(e) => handleRemove(e, img.id)}>×  </div>
-          </li>
+          <SortableItem key={idx}>
+            <div
+              className={cn(s.item, selected.find(el => el.id === img.id) && s.selected)}
+              onClick={(e) => handleClick(e, img)}
+            >
+              <Image
+                data={{ ...img.responsiveImage, sizes: undefined }}
+                className={s.thumb}
+                usePlaceholder={false}
+                objectFit="contain"
+                sizes="(min-width: 66em) 400px"
+              />
+              <div className={s.remove} onClick={(e) => handleRemove(e, img.id)}>×</div>
+            </div>
+          </SortableItem>
         )}
-        <li className={s.upload}>
+        <div className={cn(s.item, s.upload)}>
           {progress === undefined || progress === 100 && !uploading ?
             showLibrary ?
               <button type="button" onClick={() => uploadRef.current.click()}>Ladda upp</button>
@@ -136,8 +148,8 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               />
             </>
           }
-        </li>
-      </ul>
+        </div>
+      </SortableList>
       {error &&
         <div className={s.error}>
           <div>{error.message}</div>
