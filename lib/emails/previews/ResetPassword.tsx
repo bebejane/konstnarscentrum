@@ -12,7 +12,7 @@ export function resetPassword() {
         </>
       }
       link={'https://localhost:3000'}
-      ctaText="Reset Password"
+      ctaText="Återställ lösenord"
     />
   );
 }

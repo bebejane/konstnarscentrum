@@ -37,6 +37,8 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
           <MjmlColumn>
             <Line
               padding="0 0 32px 0"
+              borderColor="#666"
+
             ></Line>
             <MjmlText
               cssClass="paragraph"
@@ -44,10 +46,14 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               fontSize={textBase}
               lineHeight={leadingRelaxed}
             >
-              <>{body}</>
+              Hej, <br /><br />
+
+              Vi har mottagit din begäran om att byta lösenord!<br /><br />
+
+              Använd länken nedan för att ställa in ett nytt lösenord till ditt konto.
             </MjmlText>
             <MjmlSpacer height="24px" />
-            <ButtonPrimary link={link} uiText={ctaText} />
+            <ButtonPrimary link={link} uiText="Återställ lösenord" />
             <MjmlSpacer height="8px" />
             <MjmlText
               padding="16px 0"
@@ -55,16 +61,19 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               lineHeight={leadingRelaxed}
               cssClass="paragraph"
             >
+              Tänk på att länken bara går att använda en gång. Om du behöver kan du återuppta lösenords-processen igen här[Länk?].<br /><br />
               Konstnärscentrum
             </MjmlText>
             <Line
               padding="16px 0 0"
+              borderColor="#666"
+
             ></Line>
           </MjmlColumn>
         </MjmlSection>
         <Footer />
       </MjmlBody>
-    </Mjml>
+    </Mjml >
   );
 };
 
