@@ -26,7 +26,7 @@ export default function Members({ members, memberCategories, regions, region: re
 	const [mounted, setMounted] = useState(false)
 	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
-	const [regionId, setRegionId] = useState<string | undefined>()
+	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id)
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
 	const searchTimeout = useRef<NodeJS.Timer | undefined>()
 
@@ -65,8 +65,8 @@ export default function Members({ members, memberCategories, regions, region: re
 	}, [query, regionId, memberCategoryIds, handleSearch])
 
 	useEffect(() => {
-		setRegionId(regionFromProps?.id)
-	}, [regionFromProps])
+		//setRegionId((s) => s !== regionFromProps?.id ? regionFromProps?.id : s)
+	}, [])
 
 	useEffect(() => {
 		setMounted(true)
@@ -101,6 +101,7 @@ export default function Members({ members, memberCategories, regions, region: re
 				options={memberCategories.map(({ id, categoryType }) => ({ label: categoryType, id }))}
 				onChange={(ids) => setMemberCategoryIds(ids)}
 			/>
+			{error && <div className={s.error}><>{error?.message ?? error}</></div>}
 			{loading ?
 				<Loader className={s.loader} />
 				: results ?
@@ -134,6 +135,7 @@ export default function Members({ members, memberCategories, regions, region: re
 						)}
 					</CardContainer>
 			}
+
 		</div>
 	);
 }
