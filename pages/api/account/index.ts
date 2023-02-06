@@ -5,8 +5,8 @@ import { apiQuery } from 'dato-nextjs-utils/api'
 import { sleep, parseDatoError } from '/lib/utils'
 import { MemberDocument } from '/graphql'
 import type { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes'
+import getVimeoThumbnail from 'get-vimeo-thumbnail';
 import { getYouTubeThumbnail } from 'yt-vimeo-thumbnail/dist/youtube/getYouTube'
-import { getVimeoThumbnail } from 'yt-vimeo-thumbnail/dist/vimeo/getVimeo'
 
 export const client = buildClient({
   apiToken: process.env.GRAPHQL_API_TOKEN_FULL,
@@ -60,6 +60,19 @@ export default withAuthentication(async (req, res, session) => {
   const images: FileField[] = [image];
   content?.forEach(el => el.__typename === 'ImageRecord' && el.image && images.push.apply(images, el.image))
 
+  try {
+    for (let i = 0; i < content?.length; i++) {
+      if (content[i].__typename === 'VideoRecord') {
+        const thumbnailUrl = content[i].video.provider === 'youtube' ? getYouTubeThumbnail(content[i].video.url) : (await getVimeoThumbnail(content[i].video.url))[0]
+        content[i].video = {
+          ...content[i].video,
+          thumbnailUrl
+        }
+      }
+    }
+  } catch (err) {
+    throw new Error('Can\'t get thumnail url for videos')
+  }
   const newRecord = {
     first_name: firstName,
     last_name: lastName,
@@ -88,7 +101,7 @@ export default withAuthentication(async (req, res, session) => {
             ...block.video || {},
             provider: block.video.provider,
             provider_uid: block.video.providerUid,
-            thumbnail_url: block.video.provider === 'youtube' ? getYouTubeThumbnail(block.video.url) : getVimeoThumbnail(block.video.url),
+            thumbnail_url: block.video.thumbnailUrl ?? 'https://konstnarscentrum.org/image/noimage.png',
             width: 0,
             height: 0,
             __typename: undefined,
