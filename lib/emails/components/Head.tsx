@@ -26,6 +26,7 @@ const Head: React.FC<HeadProps> = ({ children }) => {
         <MjmlStyle>{`
         strong {
           font-weight: 700;
+          font-style: bold;
         }
         .smooth {
           -webkit-font-smoothing: antialiased;
