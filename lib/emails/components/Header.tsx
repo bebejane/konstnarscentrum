@@ -13,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ loose }) => {
           //width="500px"
           //height="54px"
           align="center"
-          src={`${process.env.NEXT_PUBLIC_SITE_URL}/images/logo.png`}
+          src={`${process.env.NEXT_PUBLIC_LIVE_URL}/images/logo.png`}
           cssClass="logo"
         />
       </MjmlColumn>

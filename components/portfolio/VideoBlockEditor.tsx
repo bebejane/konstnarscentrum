@@ -66,6 +66,8 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
 
     setVideoUrl(value)
     setError(undefined)
+    setVideoData(undefined)
+
     if (!value) return
 
     try {

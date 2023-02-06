@@ -21,7 +21,7 @@ const Head: React.FC<HeadProps> = ({ children }) => {
         </MjmlRaw>
         <MjmlFont
           name="Jazz"
-          href={`${process.env.NEXT_PUBLIC_SITE_URL}/fonts/email.css`}
+          href={`${process.env.NEXT_PUBLIC_LIVE_URL}/fonts/email.css`}
         />
         <MjmlStyle>{`
         strong {

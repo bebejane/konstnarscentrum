@@ -31,13 +31,13 @@ export default function Members({ members, memberCategories, cities, regions, re
 
 
 	useEffect(() => {
+		console.log('q')
 		const region = regions.find(({ id }) => id === regionId)
 		const variables = {
 			regionId: region && !region.global ? region.id : undefined,
 			memberCategoryIds: memberCategoryIds?.length ? memberCategoryIds : undefined,
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
-
 
 		clearTimeout(searchTimeout.current)
 
