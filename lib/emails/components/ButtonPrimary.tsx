@@ -15,7 +15,7 @@ const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({ link, uiText }) => {
         fontSize={textBase}
         height={32}
         padding="0"
-        align="left"
+        align="center"
         href={link}
         backgroundColor={black}
         color={white}

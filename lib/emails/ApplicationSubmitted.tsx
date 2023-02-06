@@ -45,7 +45,9 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Vi kommer att återkomma när vi har tittat på din ansökan. Detta sker oftast inom en vecka.
+
+            Handläggningstiderna kan variera beroende på vilken region du ansökt om medlemskap i. Vi återkommer med ett beslut så snart vi gått igenom din ansökan.
+
           </MjmlText>
           <MjmlSpacer height="24px" />
           <MjmlText
@@ -54,8 +56,8 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Vänligen
-            !
+            Med vänliga hälsningar,
+
             <br />
             Konstnärscentrum
           </MjmlText>
