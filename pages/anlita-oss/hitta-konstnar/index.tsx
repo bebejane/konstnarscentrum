@@ -23,15 +23,16 @@ export default function Members({ members, memberCategories, regions, region: re
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
 	const [error, setError] = useState<Error | undefined>()
-	const [mounted, setMounted] = useState(false)
 	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
 	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id)
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
 	const searchTimeout = useRef<NodeJS.Timer | undefined>()
+	const initRef = useRef<boolean>(false)
 
 	const handleSearch = useCallback(() => {
-		if (!mounted) return
+
+		if (!initRef.current) return
 
 		const region = regions.find(({ id }) => id === regionId)
 		const variables = {
@@ -40,10 +41,11 @@ export default function Members({ members, memberCategories, regions, region: re
 			query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
 		};
 
+		setLoading(true)
+
 		clearTimeout(searchTimeout.current)
 
-		searchTimeout.current = setTimeout(async () => {
-			setLoading(true)
+		searchTimeout.current = setTimeout(() => {
 			fetch('/api/search', {
 				body: JSON.stringify({ ...variables, type: 'member' }),
 				method: 'POST',
@@ -58,18 +60,14 @@ export default function Members({ members, memberCategories, regions, region: re
 				.finally(() => setLoading(false))
 		}, 250)
 
-	}, [mounted, query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
+	}, [query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
 
 	useEffect(() => {
 		handleSearch()
 	}, [query, regionId, memberCategoryIds, handleSearch])
 
 	useEffect(() => {
-		//setRegionId((s) => s !== regionFromProps?.id ? regionFromProps?.id : s)
-	}, [])
-
-	useEffect(() => {
-		setMounted(true)
+		setTimeout(() => initRef.current = true, 200)
 	}, [])
 
 	return (

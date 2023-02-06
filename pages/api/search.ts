@@ -49,7 +49,9 @@ const memberSearch = async (opt) => {
     first: 100
   };
 
+  console.time('search')
   const { members } = await apiQueryAll(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables })
+  console.timeEnd('search')
   return members
 }
 

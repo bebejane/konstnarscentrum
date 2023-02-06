@@ -15,7 +15,7 @@
   .back {
     display: block;
     width: 100vw;
-    height: var(--navbar-height);
+    height: calc(var(--navbar-height) + 0.5rem);
     background-color: var(--black);
     position: fixed;
     opacity: 0;
