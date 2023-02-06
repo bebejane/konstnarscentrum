@@ -45,9 +45,8 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-
-            Handläggningstiderna kan variera beroende på vilken region du ansökt om medlemskap i. Vi återkommer med ett beslut så snart vi gått igenom din ansökan.
-
+            Handläggningstiderna kan variera beroende på vilken region du ansökt om medlemskap i.
+            Vi återkommer med ett beslut så snart vi gått igenom din ansökan.
           </MjmlText>
           <MjmlSpacer height="24px" />
           <MjmlText
@@ -57,7 +56,6 @@ const ApplicationSubmitted: React.FC<{ name: string }> = ({ name }) => (
             cssClass="paragraph"
           >
             Med vänliga hälsningar,
-
             <br />
             Konstnärscentrum
           </MjmlText>
