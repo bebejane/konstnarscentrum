@@ -5745,11 +5745,11 @@ type AllMemberNewsQueryVariables = Exact<{
 type AllMemberNewsQuery = { __typename?: 'Query', memberNews: Array<{ __typename: 'MemberNewsRecord', _modelApiKey: string, id: any, createdAt: any, title: string, intro: string, date: any, dateEnd?: any | null, location?: string | null, slug: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null, category: { __typename?: 'MemberNewsCategoryRecord', id: any, category: string }, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
 type AllPastMemberNewsQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['IntType']>;
-  skip?: InputMaybe<Scalars['IntType']>;
   regionId?: InputMaybe<Scalars['ItemId']>;
   categoryId?: InputMaybe<Scalars['ItemId']>;
   date?: InputMaybe<Scalars['Date']>;
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
 }>;
 
 

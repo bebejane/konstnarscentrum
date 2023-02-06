@@ -125,7 +125,7 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/ed59e051bcca0b92c974e0fc251e08e89f8bec7b_yqvwvv5fkd7ccxhl6hgbauxp6m
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82_yqvwvv5fkd7ccxhl6hgbauxp6m
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
   get-vimeo-thumbnail: 1.0.1
@@ -12096,11 +12096,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/ed59e051bcca0b92c974e0fc251e08e89f8bec7b_yqvwvv5fkd7ccxhl6hgbauxp6m:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/ed59e051bcca0b92c974e0fc251e08e89f8bec7b}
-    id: github.com/bebejane/dato-nextjs-utils/ed59e051bcca0b92c974e0fc251e08e89f8bec7b
+  github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82_yqvwvv5fkd7ccxhl6hgbauxp6m:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/19c8796ffc1007c53443fd8d490cd6072ef4de82}
+    id: github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82
     name: dato-nextjs-utils
-    version: 1.0.258
+    version: 1.0.259
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4

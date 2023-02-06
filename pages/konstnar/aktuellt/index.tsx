@@ -2,15 +2,14 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { useApiQuery } from 'dato-nextjs-utils/hooks'
+import { useApiQuery } from "dato-nextjs-utils/hooks";
+//import useApiQuery from "/lib/hooks/useApiQuery";
 import { AllPresentMemberNewsDocument, AllPastMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format } from "date-fns";
 import { pageSize, apiQueryAll, memberNewsStatus, isServer } from "/lib/utils";
 import { CardContainer, NewsCard, FilterBar, RevealText, Loader } from '/components'
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { useRouter } from "next/router";
-import { el } from "date-fns/locale";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
@@ -31,13 +30,12 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 		pageSize
 	});
 
-	const { inView, ref } = useInView({ triggerOnce: true })
+	const { inView, ref } = useInView({ triggerOnce: true, rootMargin: '0px 0px 2000px 0px' })
 
 	useEffect(() => {
 		if (inView && !page.end && !loading)
 			nextPage()
 	}, [inView, page, loading, nextPage])
-
 
 	const memberNews = presentMemberNews.concat(pastMemberNews).filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
@@ -51,15 +49,15 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 				onChange={(id) => setMemberNewsCategoryId(id)}
 			/>
 
-			<CardContainer columns={2} className={s.memberNews} key={`${page.no}${memberNewsCategoryId}`}>
+			<CardContainer columns={2} className={s.memberNews} key={`${page.no}-${memberNewsCategoryId}`}>
 				{memberNews.length > 0 ? memberNews.map((el, idx) => {
-					const { id, date, title, intro, slug, region, image, category, status } = el
+					const { id, date, title, intro, slug, region, image, category } = el
 					return (
 						<NewsCard
 							key={id}
 							title={title}
 							subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
-							label={memberNewsStatus(el).label}
+							label={memberNewsStatus(el.date, el.dateEnd).label}
 							text={intro}
 							image={image}
 							slug={`/${region.slug}/konstnar/aktuellt/${slug}`}
@@ -69,7 +67,7 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 				}) : <div className={s.nomatches}>Inga träffar...</div>
 				}
 			</CardContainer>
-			{!page.end && <div ref={ref} key={`page-${page.no}`}>{loading && <Loader />}</div>}
+			{!page.end && <div ref={ref} className={s.loader} key={`page-${page.no}`}>{loading && <Loader />}</div>}
 			{error && <div className={s.error}><>Error: {error.message || error}</></div>}
 		</>
 	);
@@ -90,12 +88,14 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	let start = (isFirstPage ? 0 : (page - 1) * pageSize)
 	let end = isFirstPage ? pageSize : ((pageSize * (page)))
 
+	const count = pastMemberNews.length
+
 	pastMemberNews = pastMemberNews
-		.map(el => ({ ...el, status: memberNewsStatus(el) }))
+		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
 		.slice(start, end)
 
 	presentMemberNews = presentMemberNews
-		.map(el => ({ ...el, status: memberNewsStatus(el) }))
+		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
 		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
 
 	if (!pastMemberNews.length && !presentMemberNews.length)
@@ -107,7 +107,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 			presentMemberNews,
 			pastMemberNews,
 			date,
-			pagination: { ...pagination, page, size: pageSize }
+			pagination: { ...pagination, page, size: pageSize, count }
 		},
 		revalidate
 	};
