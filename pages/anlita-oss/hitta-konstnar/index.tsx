@@ -8,7 +8,7 @@ import {
 } from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail, Loader, RevealText } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Props = {
 	memberCategories: MemberCategoryRecord[]
@@ -19,19 +19,20 @@ export type Props = {
 	cities: { name: string }[]
 }
 
-export default function Members({ members, memberCategories, cities, regions, region: regionFromProps, pagination }: Props) {
+export default function Members({ members, memberCategories, regions, region: regionFromProps, pagination }: Props) {
 
 	const [results, setResults] = useState<MemberRecord[] | undefined>()
 	const [error, setError] = useState<Error | undefined>()
+	const [mounted, setMounted] = useState(false)
 	const [loading, setLoading] = useState<boolean>(false)
 	const [query, setQuery] = useState<string | undefined>()
-	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id)
+	const [regionId, setRegionId] = useState<string | undefined>()
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>()
 	const searchTimeout = useRef<NodeJS.Timer | undefined>()
 
-
-	useEffect(() => {
-		console.log('q')
+	const handleSearch = useCallback(() => {
+		if (!mounted) return
+		console.log('hej')
 		const region = regions.find(({ id }) => id === regionId)
 		const variables = {
 			regionId: region && !region.global ? region.id : undefined,
@@ -57,12 +58,19 @@ export default function Members({ members, memberCategories, cities, regions, re
 				.finally(() => setLoading(false))
 		}, 250)
 
-	}, [query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
+	}, [mounted, query, regionId, memberCategoryIds, setResults, regions, searchTimeout])
+
+	useEffect(() => {
+		handleSearch()
+	}, [query, regionId, memberCategoryIds, handleSearch])
 
 	useEffect(() => {
 		setRegionId(regionFromProps?.id)
 	}, [regionFromProps])
 
+	useEffect(() => {
+		setMounted(true)
+	}, [])
 
 	return (
 		<div className={s.container}>
@@ -80,7 +88,7 @@ export default function Members({ members, memberCategories, cities, regions, re
 						onChange={(e) => setQuery(e.target.value)}
 					/>
 					<span>Plats: </span>
-					<select key={regionId} value={regionId} onChange={(e) => setRegionId(e.target.value)}>
+					<select key={regionId} value={regionId} onChange={({ target: { value } }) => setRegionId(value)}>
 						{regions.map(({ id, name, global }, idx) =>
 							<option key={idx} value={id}>{name}</option>
 						)}
