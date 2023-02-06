@@ -9,6 +9,7 @@ import { RegionSelector, RegionLink, User } from '/components'
 import Link from 'next/link'
 import { regions } from '/lib/region'
 import { useTheme } from 'next-themes'
+import { lowerFirst } from 'lodash-es'
 
 export type MenuDesktopProps = { items: Menu, home: boolean }
 
@@ -16,6 +17,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 
 	const menuRef = useRef<HTMLDivElement | null>(null);
 	const subRef = useRef<HTMLDivElement | null>(null);
+	const menuBarRef = useRef<HTMLUListElement | null>(null);
 	const { theme } = useTheme()
 	const router = useRouter()
 	const [paddingLeft, setPaddingLeft] = useState<string>('0px')
@@ -47,15 +49,17 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 		if (typeof selected === 'undefined')
 			return
 
-		const isAtBottom = menuRef.current.getBoundingClientRect().bottom >= viewportHeight //subRef.current.getBoundingClientRect().top
+		const isAtBottom = menuRef.current.getBoundingClientRect().bottom >= viewportHeight
 		const el = document.querySelector<HTMLUListElement>(`[data-menu-type="${selected.type}"]`)
+		const ul = menuRef.current.querySelector<HTMLUListElement>(`ul.${s.show}`)
 		const bounds = el.getBoundingClientRect()
 
 		setPaddingLeft(`${bounds.left}px`)
 
-		if (isAtBottom) {
-			const height = subRef.current.getBoundingClientRect().height / 2
-			window.scrollTo({ top: height, behavior: 'smooth' })
+		if (isAtBottom && ul) {
+			const paddingTop = parseInt(getComputedStyle(ul).paddingTop)
+			const paddingBottom = parseInt(getComputedStyle(ul).paddingBottom)
+			window.scrollTo({ top: subRef.current.clientHeight - menuBarRef.current.clientHeight - paddingTop + paddingBottom, behavior: 'smooth' })
 		}
 
 	}, [selected, viewportHeight])
@@ -70,6 +74,7 @@ export default function MenuDesktop({ items, home }: MenuDesktopProps) {
 			<nav id="menu" ref={menuRef} className={cn(s.menu, showMenu && s.show)} data-theme={theme}>
 				<ul
 					className={s.nav}
+					ref={menuBarRef}
 					onMouseLeave={() => setSelected(undefined)}
 				>
 					{items.map((item, idx) =>

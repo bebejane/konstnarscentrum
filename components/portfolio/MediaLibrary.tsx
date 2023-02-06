@@ -33,6 +33,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
   const [uploadError, setUploadError] = useState<Error | undefined>()
   const [progress, setProgress] = useState<number | undefined>()
   const uploadRef = useRef<HTMLInputElement | null>()
+  const loaderMessage = progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'
 
   async function handleRefresh() {
     setLoading(true)
@@ -144,7 +145,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               <Loader
                 className={s.uploadLoader}
                 color={'#ffffff'}
-                message={progress === undefined ? 'Laddar upp...' : progress === 100 ? 'Sparar...' : progress + '%'}
+                message={loaderMessage}
               />
             </>
           }

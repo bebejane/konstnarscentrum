@@ -4,6 +4,7 @@ import ResetPassword from './ResetPassword'
 import ApplicationSubmitted from './ApplicationSubmitted'
 import ApplicationApproved from './ApplicationApproved'
 import ContactForm from "./ContactForm";
+import MemberInvitation from "./MemberInvitation";
 import postmarkTransport from 'nodemailer-postmark-transport'
 import ContactFormRegionNotification from "/lib/emails/ContactFormRegionNotification";
 
@@ -66,6 +67,16 @@ export const Email = {
         <ApplicationApproved
           name={name}
           approvalUrl={`${process.env.NEXTAUTH_URL}/konstnar/konto/registrera?token=${token}`}
+        />
+    }),
+  memberInvitation: ({ email, name, link }: { email: string, name: string, link: string }) =>
+    sendMail({
+      to: email,
+      subject: 'Inbjudan till Konstnärscentrum',
+      component:
+        <MemberInvitation
+          name={name}
+          link={`${process.env.NEXTAUTH_URL}/konstnar/konto/inbjudan?email=${email}`}
         />
     }),
   contactForm: ({ fromName, fromEmail, to, subject, fields }: {

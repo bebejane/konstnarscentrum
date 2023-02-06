@@ -7,8 +7,14 @@ import { useForm } from "react-hook-form";
 import { validatePassword } from "/lib/auth/validate";
 import Link from "next/link";
 
-export default function Reset({ token }) {
+export default function Reset({ token, onSuccess }) {
 	const [status, setStatus] = useState();
+
+	useEffect(() => {
+		if (status === 'requestSent')
+			onSuccess?.()
+	}, [status, onSuccess])
+
 	return (
 		<div className={styles.container}>
 			{!status && !token ? (

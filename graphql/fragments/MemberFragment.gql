@@ -52,6 +52,7 @@ fragment MemberFragment on MemberRecord {
 		}
 	}
 	slug
+	resettoken
 	_status
 	_firstPublishedAt
 	_seoMetaTags {

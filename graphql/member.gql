@@ -114,6 +114,28 @@ query AllPastMemberNews(
 	}
 }
 
+query AllPresentMemberNews(
+	$first: IntType = 100
+	$skip: IntType = 0
+	$regionId: ItemId
+	$date: Date
+) {
+	presentMemberNews: allMemberNews(
+		filter: {
+			region: { eq: $regionId }
+			OR: [{ dateEnd: { gt: $date } }, { dateEnd: { exists: false } }]
+		}
+		orderBy: [date_DESC]
+		first: $first
+		skip: $skip
+	) {
+		...MemberNewsLightFragment
+	}
+	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId } }) {
+		count
+	}
+}
+
 query MemberImages($email: String!) {
 	member(filter: { email: { eq: $email } }) {
 		content {
@@ -132,25 +154,6 @@ query MemberImages($email: String!) {
 	}
 	uploadsThumbs: allUploads(filter: { tags: { anyIn: [$email] } }) {
 		...MediaGalleryFragment
-	}
-}
-
-query AllPresentMemberNews(
-	$first: IntType = 100
-	$skip: IntType = 0
-	$regionId: ItemId
-	$date: Date
-) {
-	presentMemberNews: allMemberNews(
-		filter: { region: { eq: $regionId }, dateEnd: { gt: $date } }
-		orderBy: [date_DESC]
-		first: $first
-		skip: $skip
-	) {
-		...MemberNewsLightFragment
-	}
-	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId } }) {
-		count
 	}
 }
 

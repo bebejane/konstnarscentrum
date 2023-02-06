@@ -1,7 +1,7 @@
 import { TypedDocumentNode } from "@apollo/client/core";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { regions } from "/lib/region";
-import { isAfter, isBefore } from "date-fns";
+import { isAfter, isBefore, isEqual } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import type { ApiQueryOptions } from "dato-nextjs-utils/api";
 import React from "react";
@@ -243,8 +243,8 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
 
 export const memberNewsStatus = ({ date, dateEnd }): { value: string, label: string, order: number } => {
   const start = new Date(date);
-  const end = new Date(dateEnd);
-  return isAfter(new Date(), end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
+  const end = !dateEnd ? start : new Date(dateEnd);
+  return isAfter(new Date(), end) && !isEqual(start, end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
 }
 
 export const randomInt = (min, max) => {
