@@ -8,8 +8,8 @@ export const white = "#fcfcfc";
 // Typography
 export const textSm = 14;
 export const textBase = 16;
-export const textLg = 24;
-export const textXl = 24;
+export const textLg = 22;
+export const textXl = 22;
 export const leadingTight = "120%";
 export const leadingRelaxed = "160%";
 
