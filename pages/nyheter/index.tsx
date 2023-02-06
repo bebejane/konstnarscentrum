@@ -21,16 +21,17 @@ export type Props = {
 export default function News({ news: newsFromProps, region, pagination }: Props) {
 
   const { data: { news }, loading, error, nextPage, page } = useApiQuery<{ news: NewsRecord[] }>(AllNewsDocument, {
-    initialData: { news: newsFromProps, pagination },
-    variables: { first: pageSize, regionId: region.id },
+    initialData: { news: newsFromProps, pagination: { ...pagination } },
+    variables: { first: pageSize, regionId: region.global ? undefined : region.id },
     pageSize
   });
 
-  const { inView, ref } = useInView({ triggerOnce: true })
+  const { inView, ref } = useInView({ triggerOnce: true, rootMargin: '0px 0px 2000px 0px' })
 
   useEffect(() => {
-    if (inView && !page.end && !loading)
+    if (inView && !page.end && !loading) {
       nextPage()
+    }
   }, [inView, page, loading, nextPage])
 
   return (

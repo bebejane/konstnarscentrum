@@ -13,7 +13,7 @@ import { useInView } from "react-intersection-observer";
 
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
-	presentMemberNews: MemberNewsRecordWithStatus[],
+	presentMemberNews: MemberNewsRecord[],
 	pastMemberNews: MemberNewsRecord[],
 	memberNewsCategories: MemberNewsCategoryRecord[]
 	date: string
@@ -21,12 +21,12 @@ export type Props = {
 	pagination: Pagination
 }
 
-export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination }: Props) {
+export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination, region }: Props) {
 
-	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | undefined>()
-	const { data: { pastMemberNews }, loading, error, nextPage, loadMore, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
+	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | string[] | undefined>()
+	const { data: { pastMemberNews }, loading, error, nextPage, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
 		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
-		variables: { first: pageSize, date },
+		variables: { first: pageSize, date, regionId: region.global ? undefined : region.id },
 		pageSize
 	});
 
@@ -37,7 +37,9 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 			nextPage()
 	}, [inView, page, loading, nextPage])
 
-	const memberNews = presentMemberNews.concat(pastMemberNews).filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
+	const memberNews = presentMemberNews
+		.concat(pastMemberNews)
+		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
 	return (
 		<>
