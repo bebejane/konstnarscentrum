@@ -5796,25 +5796,6 @@ type RelatedMembersQueryVariables = Exact<{
 
 type RelatedMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
 
-type SearchMembersQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['IntType']>;
-  skip?: InputMaybe<Scalars['IntType']>;
-  memberCategoryIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
-  regionId?: InputMaybe<Scalars['ItemId']>;
-}>;
-
-
-type SearchMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
-
-type SearchMembersFreeQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['IntType']>;
-  skip?: InputMaybe<Scalars['IntType']>;
-  query: Scalars['String'];
-}>;
-
-
-type SearchMembersFreeQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
-
 type MembersListQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -5882,7 +5863,27 @@ type SiteSearchQueryVariables = Exact<{
   newsIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
   memberNewsIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
   first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
 }>;
 
 
 type SiteSearchQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, slug: string, title: string, text?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, news: Array<{ __typename: 'NewsRecord', _modelApiKey: string, title: string, slug: string, text: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, memberNews: Array<{ __typename: 'MemberNewsRecord', _modelApiKey: string, title: string, slug: string, text: string, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }> };
+
+type SearchMembersQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  memberCategoryIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;
+  regionId?: InputMaybe<Scalars['ItemId']>;
+}>;
+
+
+type SearchMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
+
+type SearchMembersFreeQueryVariables = Exact<{
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+  query: Scalars['String'];
+}>;
+
+
+type SearchMembersFreeQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, pagination: { __typename?: 'CollectionMetadata', count: any } };

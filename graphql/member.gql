@@ -190,41 +190,6 @@ query RelatedMembers(
 	}
 }
 
-query SearchMembers(
-	$first: IntType = 10
-	$skip: IntType = 0
-	$memberCategoryIds: [ItemId]
-	$regionId: ItemId
-) {
-	members: allMembers(
-		filter: {
-			image: { exists: true }
-			region: { eq: $regionId }
-			memberCategory: { anyIn: $memberCategoryIds }
-		}
-		first: $first
-		skip: $skip
-	) {
-		...MemberLightFragment
-	}
-}
-
-query SearchMembersFree($first: IntType = 10, $skip: IntType = 0, $query: String!) {
-	members: allMembers(
-		filter: {
-			image: { exists: true }
-			OR: [
-				{ firstName: { matches: { pattern: $query, caseSensitive: false } } }
-				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }
-			]
-		}
-		first: $first
-		skip: $skip
-	) {
-		...MemberLightFragment
-	}
-}
-
 query MembersList {
 	membersList {
 		intro(markdown: false)

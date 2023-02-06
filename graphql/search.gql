@@ -5,8 +5,9 @@ query SiteSearch(
 	$newsIds: [ItemId]
 	$memberNewsIds: [ItemId]
 	$first: IntType = 100
+	$skip: IntType = 0
 ) {
-	members: allMembers(first: $first, filter: { id: { in: $memberIds } }) {
+	members: allMembers(first: $first, skip: $skip, filter: { id: { in: $memberIds } }) {
 		__typename
 		_modelApiKey
 		title: fullName
@@ -16,7 +17,7 @@ query SiteSearch(
 			...ImageThumbnailFragment
 		}
 	}
-	news: allNews(first: $first, filter: { id: { in: $newsIds } }) {
+	news: allNews(first: $first, skip: $skip, filter: { id: { in: $newsIds } }) {
 		__typename
 		_modelApiKey
 		title
@@ -26,7 +27,7 @@ query SiteSearch(
 			...ImageThumbnailFragment
 		}
 	}
-	memberNews: allMemberNews(first: $first, filter: { id: { in: $memberNewsIds } }) {
+	memberNews: allMemberNews(first: $first, skip: $skip, filter: { id: { in: $memberNewsIds } }) {
 		__typename
 		_modelApiKey
 		title
@@ -35,5 +36,60 @@ query SiteSearch(
 		image {
 			...ImageThumbnailFragment
 		}
+	}
+}
+
+query SearchMembers(
+	$first: IntType = 100
+	$skip: IntType = 0
+	$memberCategoryIds: [ItemId]
+	$regionId: ItemId
+) {
+	members: allMembers(
+		filter: {
+			image: { exists: true }
+			region: { eq: $regionId }
+			memberCategory: { anyIn: $memberCategoryIds }
+		}
+		first: $first
+		skip: $skip
+	) {
+		...MemberLightFragment
+	}
+	pagination: _allMembersMeta(
+		filter: {
+			image: { exists: true }
+			region: { eq: $regionId }
+			memberCategory: { anyIn: $memberCategoryIds }
+		}
+	) {
+		count
+	}
+}
+
+query SearchMembersFree($first: IntType = 100, $skip: IntType = 0, $query: String!) {
+	members: allMembers(
+		first: $first
+		skip: $skip
+		filter: {
+			image: { exists: true }
+			OR: [
+				{ firstName: { matches: { pattern: $query, caseSensitive: false } } }
+				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }
+			]
+		}
+	) {
+		...MemberLightFragment
+	}
+	pagination: _allMembersMeta(
+		filter: {
+			image: { exists: true }
+			OR: [
+				{ firstName: { matches: { pattern: $query, caseSensitive: false } } }
+				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }
+			]
+		}
+	) {
+		count
 	}
 }

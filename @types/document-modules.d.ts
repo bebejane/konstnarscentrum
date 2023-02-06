@@ -256,8 +256,6 @@ export const MemberImages: DocumentNode;
 export const AllMemberNewsCategories: DocumentNode;
 export const LatestMemberNews: DocumentNode;
 export const RelatedMembers: DocumentNode;
-export const SearchMembers: DocumentNode;
-export const SearchMembersFree: DocumentNode;
 export const MembersList: DocumentNode;
 
   export default defaultDocument;
@@ -300,6 +298,8 @@ declare module '*/search.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const SiteSearch: DocumentNode;
+export const SearchMembers: DocumentNode;
+export const SearchMembersFree: DocumentNode;
 
   export default defaultDocument;
 }

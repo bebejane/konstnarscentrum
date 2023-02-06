@@ -81,7 +81,6 @@ export default function Members({ members, memberCategories, cities, regions, re
 					/>
 					<span>Plats: </span>
 					<select key={regionId} value={regionId} onChange={(e) => setRegionId(e.target.value)}>
-						<option value={"false"}>Inte vald</option>
 						{regions.map(({ id, name, global }, idx) =>
 							<option key={idx} value={id}>{name}</option>
 						)}
