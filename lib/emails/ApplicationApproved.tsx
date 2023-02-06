@@ -25,16 +25,6 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
     <Head />
     <MjmlBody width={600}>
       <Header loose />
-      <MjmlSection padding="0">
-        <MjmlColumn>
-          <MjmlImage
-            cssClass="hero"
-            padding="0 0 40px"
-            align="left"
-            src="https://s3.amazonaws.com/lab.campsh.com/bb-hero%402x.jpg"
-          />
-        </MjmlColumn>
-      </MjmlSection>
       <MjmlSection padding="0 24px" cssClass="smooth">
         <MjmlColumn>
           <MjmlText
@@ -43,7 +33,8 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
             fontSize={textXl}
             lineHeight={leadingTight}
           >
-            Hej {name}, din ansökan har blivit godkänd!
+            Hej {name},
+
           </MjmlText>
           <MjmlText
             padding="24px 0 0"
@@ -51,22 +42,36 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Du kan skapa ditt konto här
-
+            Varmt välkommen som ny medlem i Konstnärscentrum!<br /><br />
+            Som medlem har du möjlighet att skapa en egen konstnärsportfolio på vår hemsida. Portfolion är synlig för både allmänhet och potentiella uppdragsgivare.
+            <br /><br />
+            Följ denna länk för att skapa ditt användarkonto på Konstnärscentrums hemsida:
           </MjmlText>
           <MjmlSpacer height="24px" />
           <ButtonPrimary link={approvalUrl} uiText={'Skapa konto'} />
           <MjmlSpacer height="8px" />
           <MjmlText
-            padding="0"
+            padding="24px 0 0"
             fontSize={textBase}
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Enjoy!
-            <br />
+            Här kan du även läsa en guide för hur du skapar din konstnärsportfolio.
+          </MjmlText>
+
+          <MjmlSpacer height="24px" />
+          <ButtonPrimary link={approvalUrl} uiText={'Skapa konto'} />
+          <MjmlSpacer height="8px" />
+          <MjmlText
+            padding="24px 0 0"
+            fontSize={textBase}
+            lineHeight={leadingRelaxed}
+            cssClass="paragraph"
+          >
+            Med vänliga hälsningar,
             Konstnärscentrum
           </MjmlText>
+
         </MjmlColumn>
       </MjmlSection>
       <Footer />
