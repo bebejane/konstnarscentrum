@@ -53,7 +53,6 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approved: false
   });
 
-
   await Promise.all([
     Email.applicationSubmitted({ email, name: firstName }),
     Email.contactFormNotification({

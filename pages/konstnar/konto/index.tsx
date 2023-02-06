@@ -63,7 +63,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 				setTimeout(() => {
 					setSaving(false)
 					setSaved(false)
-				}, 2000)
+				}, 1000)
 			})
 	}
 
