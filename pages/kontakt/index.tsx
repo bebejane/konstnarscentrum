@@ -54,7 +54,7 @@ export default function Contact({ consultants, contactIntro, employees }: Props)
 								<Card key={idx} className={s.employee}>
 									<p>{name}</p>
 									<p className="mid">{title}</p>
-									<p className="mid"><a href="mailto:{email}">{email}</a></p>
+									<p className="mid"><a href={`mailto:${email}`}>{email}</a></p>
 								</Card>
 							)}
 						</ul>
