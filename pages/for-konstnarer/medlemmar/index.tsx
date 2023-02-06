@@ -15,9 +15,13 @@ export type Props = {
 
 export default function ForArtistsHome({ membersByRegion, membersList: { intro } }: Props) {
 
+  const count = membersByRegion.reduce((prev, curr) => prev + curr.length, 0)
+
   return (
     <div className={s.container}>
-      <h1>Medlemmar</h1>
+      <h1>
+        <RevealText>Medlemmar</RevealText><sup className="amount">{count}</sup>
+      </h1>
       <p className="intro">{intro}</p>
       {membersByRegion.map((members, i) => {
         const region = members[0].region

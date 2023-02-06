@@ -47,12 +47,7 @@
       background-color: var(--beige-mid);
     }
 
-    .thumb {
-      aspect-ratio: 4/4;
-      background-color: rgba(255, 255, 255, 0.05);
-      max-height: 100%;
-      max-width: 100%;
-    }
+
 
     &.upload {
       position: relative;
@@ -61,6 +56,7 @@
       align-items: center;
       justify-content: center;
       width: 100%;
+      height: 100%;
       color: var(--white);
 
       button {
@@ -77,6 +73,7 @@
         height: 100%;
         top: 0;
         left: 0;
+        padding: 1rem;
       }
 
       .uploadLoader {
@@ -141,4 +138,11 @@
   margin-bottom: 1rem;
   color: var(--beige-dark);
   font-size: 0.7em;
+}
+
+.thumb {
+  aspect-ratio: 4/4;
+  background-color: rgba(255, 255, 255, 0.05);
+  max-height: 100%;
+  max-width: 100%;
 }

@@ -144,8 +144,8 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
               }
               <Loader
                 className={s.uploadLoader}
-                color={'#ffffff'}
-                message={loaderMessage}
+                color={'#000000'}
+              //message={loaderMessage}
               />
             </>
           }
@@ -172,7 +172,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
         ref={uploadRef}
         customData={{}}
         tags={[session.user.email, member.region.name, 'portfolio']}
-        accept=".jpg,.png"
+        accept=".jpg,.png,.jpeg"
         onDone={handleUploadDone}
         onProgress={handleUploadProgress}
         onUploading={handleUploading}

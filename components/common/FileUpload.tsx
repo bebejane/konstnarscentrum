@@ -17,6 +17,8 @@ const parseImageFile = async (file: File): Promise<ImageData> => {
     reader.onerror = (err) => reject(err)
     reader.onload = (e) => {
       const image = new Image();
+      if (e.target.result === 'data:')
+        return reject('invalid')
       image.src = e.target.result as string;
       image.onload = function () {
         resolve({ width: image.width, height: image.height, src: image.src })
@@ -103,8 +105,6 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
     resetInput()
     onUploading(true)
 
-    console.log(allTags)
-
     return new Promise((resolve, reject) => {
       client.uploads.createFromFileOrBlob({
         fileOrBlob: file,
@@ -132,16 +132,20 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
 
     try {
       if (file.type.includes('image')) {
-        const image = await parseImageFile(file)
+        try {
+          const image = await parseImageFile(file)
 
-        if (image && (image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
-          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar.`)
-        if (image && (image.width < MIN_IMAGE_WIDTH && image.width > image.height))
-          throw new Error(`Bildens upplösning är för låg. Bilder måste  minst vara ${MIN_IMAGE_WIDTH} pixlar bred.`)
-        if (image && (image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
-          throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_HEIGHT} pixlar hög.`)
+          if (image && (image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
+            throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar.`)
+          if (image && (image.width < MIN_IMAGE_WIDTH && image.width > image.height))
+            throw new Error(`Bildens upplösning är för låg. Bilder måste  minst vara ${MIN_IMAGE_WIDTH} pixlar bred.`)
+          if (image && (image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
+            throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_HEIGHT} pixlar hög.`)
 
-        onImageData?.(image)
+          onImageData?.(image)
+        } catch (err) {
+          //console.error(err)
+        }
       }
 
       const upload = await createUpload(file, allTags)
@@ -167,8 +171,6 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
   }, [error])
 
   useEffect(() => { setAllTags((s) => tags ? [...tags, 'upload'] : ['upload']) }, [tags])
-  //console.log(allTags);
-
 
   return <input type="file" ref={ref} accept={accept} style={{ display: 'none' }} />
 })
