@@ -61,8 +61,8 @@ export default withAuthentication(async (req, res, session) => {
   content?.forEach(el => el.__typename === 'ImageRecord' && el.image && images.push.apply(images, el.image))
 
   try {
-    for (let i = 0; i < content?.length; i++) {
-      if (content[i].__typename === 'VideoRecord') {
+    for (let i = 0; content && i < content.length; i++) {
+      if (content[i].__typename === 'VideoRecord' && content[i].video?.url !== undefined) {
         const thumbnailUrl = content[i].video.provider === 'youtube' ? getYouTubeThumbnail(content[i].video.url) : (await getVimeoThumbnail(content[i].video.url))[0]
         content[i].video = {
           ...content[i].video,
