@@ -32,7 +32,7 @@ export default function Members({ members, memberCategories, regions, region: re
 
 	const handleSearch = useCallback(() => {
 		if (!mounted) return
-		console.log('hej')
+
 		const region = regions.find(({ id }) => id === regionId)
 		const variables = {
 			regionId: region && !region.global ? region.id : undefined,
