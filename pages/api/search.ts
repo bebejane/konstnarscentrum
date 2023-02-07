@@ -1,7 +1,7 @@
 import type { NextRequest, NextResponse } from 'next/server'
 import { apiQuery } from 'dato-nextjs-utils/api';
 import { apiQueryAll } from '/lib/utils';
-import { buildClient } from '@datocms/cma-client-browser';
+import { buildClient } from '@datocms/cma-client';
 import { SearchMembersDocument, SearchMembersFreeDocument, SiteSearchDocument } from '/graphql';
 import { truncateParagraph, isEmptyObject, recordToSlug } from '/lib/utils';
 
