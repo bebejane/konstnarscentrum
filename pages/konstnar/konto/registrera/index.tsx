@@ -37,7 +37,7 @@ export default function Register({ token, application }: Props) {
 					<>
 						<h1><RevealText>Registrera dig</RevealText></h1>
 						<p className="intro">
-							Intro text
+							Fyll i ditt lösenord för att skapa ditt konto.
 						</p>
 						<SignUp
 							token={token}

@@ -22,7 +22,7 @@ export default function SignUp({ regions = [], application, token }) {
 				/>
 			) : (
 				<div className={styles.success}>
-					<h1>{text.thanksSigningUp}</h1>
+					<p>{text.thanksSigningUp}</p>
 					<p>
 						<Link href={'/konstnar/konto/logga-in'}>
 							<button>{text.signIn}</button>
@@ -70,7 +70,7 @@ const SignupForm = ({ regions, application, setMember }) => {
 			setMember(member)
 			reset({});
 		} catch (err) {
-			console.log(err);
+			console.error(err);
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
@@ -81,11 +81,13 @@ const SignupForm = ({ regions, application, setMember }) => {
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				<input
 					autoComplete="off"
+					type="hidden"
 					placeholder={`${text.firstName}...`} {...register("firstName", { required: true })}
 					className={errors.firstName ? styles.error : undefined}
 				/>
 				<input
 					autoComplete="off"
+					type="hidden"
 					placeholder={`${text.lastName}...`} {...register("lastName", { required: true })}
 					className={errors.lastName ? styles.error : undefined}
 				/>
@@ -99,6 +101,7 @@ const SignupForm = ({ regions, application, setMember }) => {
 					autoComplete="off"
 					autoCorrect="off"
 				/>
+
 				<input
 					placeholder={`${text.password}...`}  {...register("password", {
 						required: true,
@@ -108,6 +111,7 @@ const SignupForm = ({ regions, application, setMember }) => {
 					autoComplete="new-password"
 					className={errors.password ? styles.error : undefined}
 				/>
+
 				<input
 					placeholder={`${text.reTypePassword}...`} {...register("password2", {
 						required: true,
@@ -117,19 +121,17 @@ const SignupForm = ({ regions, application, setMember }) => {
 					autoComplete="new-password"
 					className={errors.password2 ? styles.error : undefined}
 				/>
-
-				<select
+				<label>Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra</label>
+				<input
 					autoComplete="off"
+					type="hidden"
 					disabled={true}
 					placeholder={`${text.region}...`} {...register("regionId", {
 						required: true,
 						validate: (val) => val && val !== 'false'
 					})}
 					className={errors.regionId ? styles.error : undefined}
-				>
-					<option value="false" data-header={true}>Välj region</option>
-					{regions.map((r, i) => <option key={i} value={r.id}>{r.name}</option>)}
-				</select>
+				/>
 				<SubmitButton loading={isSubmitting} disabled={!isValid}>{text.send}</SubmitButton>
 				{error && <p className={styles.formError}>{`${error.error || error.message || error}`}</p>}
 			</form>
