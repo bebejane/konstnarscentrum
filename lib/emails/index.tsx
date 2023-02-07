@@ -38,7 +38,7 @@ export const Email = {
   resetPassword: ({ email, token }: { email: string, token: string }) =>
     sendMail({
       to: email,
-      subject: 'Reset your password',
+      subject: 'Återställ ditt lösenord',
       component:
         <ResetPassword
           link={`${process.env.NEXTAUTH_URL}/konstnar/konto/aterstall-losenord?token=${token}`}
@@ -104,7 +104,7 @@ export const Email = {
   }) =>
     sendMail({
       to,
-      subject: 'Ny ansökning',
+      subject: `Ny medlemsansökning från ${name}`,
       component:
         <ContactFormRegionNotification
           name={name}
