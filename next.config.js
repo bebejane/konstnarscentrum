@@ -59,68 +59,16 @@ const nextOptions = {
 		];
 	},
 	async rewrites() {
-		return {
-			beforeFiles: [
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "host",
-							value: "kc-vast.se",
-						},
-					],
-					destination: "/vast",
-				},
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "host",
-							value: "kc-mitt.se",
-						},
-					],
-					destination: "/mitt",
-				},
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "host",
-							value: "kc-nord.se",
-						},
-					],
-					destination: "/nord",
-				},
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "host",
-							value: "kcsyd.se",
-						},
-					],
-					destination: "/syd",
-				},
-				{
-					source: "/:path*",
-					has: [
-						{
-							type: "host",
-							value: "kcost.se",
-						},
-					],
-					destination: "/ost",
-				},
-				{
-					source: "/riks",
-					destination: "/",
-				},
-				{
-					source: "/riks/:path*",
-					destination: "/:path*",
-				},
-			],
-		};
+		return [
+			{
+				source: "/riks",
+				destination: "/",
+			},
+			{
+				source: "/riks/:path*",
+				destination: "/:path*",
+			},
+		];
 	},
 	async headers() {
 		return [
