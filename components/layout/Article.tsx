@@ -62,6 +62,7 @@ export default function Article({
                   className={s.image}
                   data={image.responsiveImage}
                   objectFit="cover"
+                  placeholderClassName={s.placeholder}
                 />
                 <figcaption className={cn(hideCaption && s.hide)}>
                   <Markdown>{image.title}</Markdown>

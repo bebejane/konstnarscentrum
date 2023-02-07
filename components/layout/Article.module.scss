@@ -12,22 +12,26 @@
       margin-left: calc(-1 * var(--outer-margin));
       margin-right: calc(-1 * var(--outer-margin));
 
+
       @include mq($from: tablet) {
         margin-left: var(--full-margin);
         margin-right: var(--full-margin);
 
         .image,
+        .placeholder,
         .emptyEditable {
           width: auto !important;
-          min-height: calc(100vh - (2 * var(--navbar-height)));
+
+          //min-height: calc(100vh - (2 * var(--navbar-height)));
           max-height: calc(100vh - (2 * var(--navbar-height)));
-          min-width: calc(100% + (2 * var(--outer-margin)));
-          width: auto !important;
+          //min-width: calc(100% + (2 * var(--outer-margin)));
           min-width: calc(100% + (2 * var(--full-margin)));
           max-width: none !important;
         }
 
-
+        .placeholder {
+          width: 110% !important;
+        }
       }
 
       .emptyEditable {
