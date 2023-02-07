@@ -34,6 +34,8 @@ export const isValidUrl = (str: string): boolean => {
   return pattern.test(str);
 }
 
+export const portfolioGuidePdffUrl = 'https://www.datocms-assets.com/55629/1675722618-kc_manual_portfolio.pdf'
+
 export const Email = {
   resetPassword: ({ email, token }: { email: string, token: string }) =>
     sendMail({

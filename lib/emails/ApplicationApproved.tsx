@@ -2,6 +2,7 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ButtonPrimary from "./components/ButtonPrimary";
+import { portfolioGuidePdffUrl } from "./";
 
 import {
   Mjml,
@@ -9,7 +10,6 @@ import {
   MjmlSection,
   MjmlColumn,
   MjmlText,
-  MjmlImage,
   MjmlSpacer,
   MjmlDivider
 } from "mjml-react";
@@ -62,11 +62,11 @@ const ApplicationApproved: React.FC<{ name: string, approvalUrl: string }> = ({ 
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Här kan du läsa en <a href="#">guide för hur du skapar din konstnärsportfolio</a>.
+            Här kan du läsa en <a href={portfolioGuidePdffUrl}>guide för hur du skapar din konstnärsportfolio</a>.
 
             <br /><br />
 
-            Med vänliga hälsningar,
+            Med vänliga hälsningar,<br />
             Konstnärscentrum
           </MjmlText>
           <MjmlDivider

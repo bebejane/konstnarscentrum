@@ -7,7 +7,12 @@ import { useForm } from "react-hook-form";
 import { validatePassword } from "/lib/auth/validate";
 import Link from "next/link";
 
-export default function Reset({ token, onSuccess }) {
+export type Props = {
+	token: string,
+	onSuccess?: () => void
+}
+
+export default function Reset({ token, onSuccess }: Props) {
 	const [status, setStatus] = useState();
 
 	useEffect(() => {

@@ -42,7 +42,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
             >
               Hej, <br /><br />
 
-              Vi har mottagit din begäran om att byta lösenord!<br /><br />
+              Vi har mottagit din begäran om att byta lösenord<br /><br />
 
               Använd länken nedan för att ställa in ett nytt lösenord till ditt konto.
             </MjmlText>
@@ -57,7 +57,16 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
             >
               Tänk på att länken bara går att använda en gång. Om du behöver kan du återuppta
               lösenords-processen igen <a href={`${process.env.NEXT_PUBLIC_LIVE_URL}/konstnar/konto/aterstall-losenord`}>här.</a>
-              <br /><br />
+
+            </MjmlText>
+            <MjmlText
+              padding="0"
+              fontSize={textBase}
+              lineHeight={leadingRelaxed}
+              cssClass="paragraph"
+            >
+              Med vänliga hälsningar,
+              <br />
               Konstnärscentrum
             </MjmlText>
             <Line padding="16px 0 0"></Line>

@@ -2,6 +2,7 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ButtonPrimary from "./components/ButtonPrimary";
+import { portfolioGuidePdffUrl } from "./";
 
 import {
   Mjml,
@@ -111,7 +112,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
 
             Nu är din portfolio publicerad på Konstnärscentrums hemsida! <br /><br />
 
-            För en mer detaljerad guide till hur du skapar en portfolio, se denna guide med bilder: <a href={`${process.env.NEXT_PUBLIC_LIVE_URL}/`}>Gå till guide</a>
+            För en mer detaljerad guide till hur du skapar en portfolio, se denna guide med bilder: <a href={portfolioGuidePdffUrl}>Gå till guide</a>
 
           </MjmlText>
           <MjmlText
@@ -120,7 +121,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Hälsningar,
+            Med vänliga hälsningar,
             <br />
             Konstnärscentrum
           </MjmlText>
