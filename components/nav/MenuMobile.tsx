@@ -68,7 +68,9 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	}, [showRegions, regionsRef])
 
 	useEffect(() => {
-		const menuItem = [...items, englishMenuItem].find(({ slug, sub }) => slug === router.asPath || sub.find(({ slug }) => slug === router.asPath))
+		//console.log([...items, englishMenuItem])
+		return
+		const menuItem = [...items, englishMenuItem]?.find?.(({ slug, sub }) => slug === router.asPath || sub.find(({ slug }) => slug === router.asPath))
 		const item = menuItem.slug === router.asPath ? menuItem : menuItem.sub.find(({ slug }) => slug === router.asPath)
 		item && setSelected(item)
 	}, [router, items])
