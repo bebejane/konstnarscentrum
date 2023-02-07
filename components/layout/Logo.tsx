@@ -26,7 +26,7 @@ export default function Logo({ }: Props) {
   const ref = useRef<HTMLDivElement | null>(null)
   const wobbleTimeout = useRef<NodeJS.Timer | undefined>()
 
-  const [wobble, setWobble] = useState(0)
+
   const region = useRegion()
   const pageRegion = regions.find(r => router.asPath.startsWith(`/${r.slug}`))
   const [showMenuMobile, setShowMenuMobile, invertedMenu] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu])
@@ -137,16 +137,11 @@ export default function Logo({ }: Props) {
     const nodes = target.parentNode.childNodes
     const id = target.parentNode.id
 
-    Array.from(nodes).forEach(node => {
+    Array.from(nodes).forEach((node: HTMLAnchorElement) => {
       const translateType = `translate${id === 'vertical' ? 'X' : 'Y'}`
-      const axis = randomInt(-15, 15) * (1 - wobble)
+      const axis = randomInt(-15, 15)
       node.style.transform = type === 'mouseenter' ? `${translateType}(${axis}%)` : `${translateType}(0%)`
     })
-
-
-    setWobble(w => w + 1.34)
-    clearTimeout(wobbleTimeout.current)
-    wobbleTimeout.current = setTimeout(() => setWobble(0), 1000)
   }
 
   return (

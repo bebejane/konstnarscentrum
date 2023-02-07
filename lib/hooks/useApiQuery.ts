@@ -21,19 +21,20 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
   const [data, setData] = useState<T>(initialData)
   const [page, setPage] = useState<Pagination | undefined>(pageSize ? {
     no: 1,
-    count: initialData.pagination?.count || 0,
+    count: initialData?.pagination?.count || 0,
     size: pageSize,
-    end: initialData.pagination?.count > 0 ? initialData.pagination?.count <= pageSize : false
+    end: initialData?.pagination?.count > 0 ? initialData?.pagination?.count <= pageSize : false
   } : undefined)
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (JSON.stringify(initialData) !== JSON.stringify(initial)) {
-      setData(initialData)
-      setInitial(initialData)
+      console.log('initialdata', initialData)
+      setData({ ...initialData })
+      setInitial({ ...initialData })
     }
-  }, [initialData])
+  }, [initialData, initial])
 
   const loadMore = (vars: any) => load(vars)
 
@@ -42,6 +43,7 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
 
     return apiQuery(document, { variables: { ...variables, ...vars } })
       .then(res => {
+        console.log({ ...res })
         const d = mergeData(res, data)
         setData(d)
         return d
@@ -82,9 +84,8 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
 
     Object.keys(newData).forEach(k => {
       if (oldData[k] && Array.isArray(oldData[k]))
-        newData[k] = oldData[k].concat(newData[k])
+        newData[k] = [...oldData[k], ...newData[k]]
     })
-
     return newData;
   }
 

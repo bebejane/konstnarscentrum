@@ -2,8 +2,8 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { useApiQuery } from "dato-nextjs-utils/hooks";
-//import useApiQuery from "/lib/hooks/useApiQuery";
+//import { useApiQuery } from "dato-nextjs-utils/hooks";
+import useApiQuery from "/lib/hooks/useApiQuery";
 import { AllPresentMemberNewsDocument, AllPastAndFutureMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format } from "date-fns";
 import { pageSize, apiQueryAll, memberNewsStatus, isServer } from "/lib/utils";
@@ -24,23 +24,28 @@ export type Props = {
 export default function MemberNews({ presentMemberNews, memberNews: memberNewsFromProps, memberNewsCategories, date, pagination, region }: Props) {
 
 	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | string[] | undefined>()
+
 	const { data: { memberNews }, loading, error, nextPage, page } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllPastAndFutureMemberNewsDocument, {
-		initialData: { memberNews: memberNewsFromProps, pagination },
+		initialData: { memberNews: memberNewsFromProps },
 		variables: { first: pageSize, date, regionId: region.global ? undefined : region.id },
 		pageSize
 	});
 
 	const { inView, ref } = useInView({ triggerOnce: true, rootMargin: '0px 0px 2000px 0px' })
 
+	//console.log(pagination)
+	console.log(page)
+
+
 	useEffect(() => {
 		if (inView && !page.end && !loading)
 			nextPage()
 	}, [inView, page, loading, nextPage])
 
-	const allNews = presentMemberNews
-		.concat(memberNews)
+	const allNews = [...presentMemberNews, ...memberNews]
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
+	console.log('rend', allNews.length)
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
@@ -51,12 +56,12 @@ export default function MemberNews({ presentMemberNews, memberNews: memberNewsFr
 				onChange={(id) => setMemberNewsCategoryId(id)}
 			/>
 
-			<CardContainer columns={2} className={s.memberNews} key={`${page.no}-${memberNewsCategoryId}-${allNews.length}`}>
+			<CardContainer columns={2} className={s.memberNews} key={`${page.no}-${memberNewsCategoryId}`}>
 				{allNews.length > 0 ? allNews.map((el, idx) => {
 					const { id, date, title, intro, slug, region, image, category } = el
 					return (
 						<NewsCard
-							key={id}
+							key={idx}
 							title={title}
 							subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
 							label={memberNewsStatus(el.date, el.dateEnd).label}

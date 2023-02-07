@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { KCImage as Image } from '/components'
 import { Card, ReadMore, RegionLink } from '/components'
 import BalanceText from 'react-balance-text'
+import { truncateParagraph } from '/lib/utils'
 
 export type NewsCardProps = {
   title: string,
@@ -30,7 +31,7 @@ export default function NewsCard({ title, subtitle, text, slug, image, label }: 
       <Link href={slug}>
         <h4><BalanceText>{title}</BalanceText></h4>
       </Link>
-      <p className="mid">{text}</p>
+      <p className="mid">{truncateParagraph(text, 1, false)}</p>
       <ReadMore link={slug} regional={false} message='Läs mer'></ReadMore>
     </Card>
   )

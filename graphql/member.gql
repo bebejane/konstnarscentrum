@@ -105,7 +105,7 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
+			OR: [{ dateEnd: { lt: $date, exists: true } }]
 		}
 		orderBy: [date_DESC]
 		first: $first
@@ -117,7 +117,7 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
+			OR: [{ dateEnd: { lt: $date, exists: true } }]
 		}
 	) {
 		count
@@ -131,14 +131,14 @@ query AllPresentMemberNews(
 	$date: Date
 ) {
 	presentMemberNews: allMemberNews(
-		filter: { region: { eq: $regionId }, dateEnd: { gt: $date } }
+		filter: { region: { eq: $regionId }, dateEnd: { gte: $date } }
 		orderBy: [date_DESC]
 		first: $first
 		skip: $skip
 	) {
 		...MemberNewsLightFragment
 	}
-	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId }, dateEnd: { gt: $date } }) {
+	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId }, dateEnd: { gte: $date } }) {
 		count
 	}
 }
