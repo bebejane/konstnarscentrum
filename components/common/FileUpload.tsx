@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { OnProgressInfo } from '@datocms/cma-client-browser';
 import { buildClient } from '@datocms/cma-client-browser';
 import { SimpleSchemaTypes } from '@datocms/cma-client';

@@ -1,10 +1,9 @@
 import s from './ImageGallery.module.scss'
 import cn from 'classnames'
-import React, { useCallback } from 'react'
+import React, { useCallback, useState, useRef, useEffect } from 'react'
 import { Swiper as SwiperReact, SwiperSlide } from 'swiper/react';
 import type { Swiper } from 'swiper';
 import { KCImage as Image } from '/components'
-import { useState, useRef, useEffect } from 'react';
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components';
 import { useWindowSize } from 'rooks';
 

@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { AllMembersDocument, MembersListDocument } from "/graphql";
 import { apiQueryAll, isServer, recordToSlug } from "/lib/utils";
 import Link from "next/link";
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { RevealText } from '/components';
 
 export type Props = {
