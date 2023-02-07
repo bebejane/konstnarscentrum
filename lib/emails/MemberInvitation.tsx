@@ -47,9 +47,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-
             Nu kan medlemmar i Konstnärscentrum skapa en portfolio på Konstnärscentrums nya hemsida. <br /><br />
-
           </MjmlText>
           <MjmlText
             cssClass="paragraph"
@@ -113,7 +111,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
 
             Nu är din portfolio publicerad på Konstnärscentrums hemsida! <br /><br />
 
-            För en mer detaljerad guide till hur du skapar en portfolio, se denna guide med bilder: (Länk till PDF / bifogad PDF)
+            För en mer detaljerad guide till hur du skapar en portfolio, se denna guide med bilder: <a href={`${process.env.NEXT_PUBLIC_LIVE_URL}/`}>Gå till guide</a>
 
           </MjmlText>
           <MjmlText

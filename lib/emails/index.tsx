@@ -16,7 +16,7 @@ const transport = nodemailer.createTransport(postmarkTransport({
 
 const sendMail = buildSendMail({
   transport,
-  defaultFrom: process.env.SMTP_EMAIL,
+  defaultFrom: process.env.POSTMARK_FROM_EMAIL,
   configPath: "./mailing.config.json",
 });
 

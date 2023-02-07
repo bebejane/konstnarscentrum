@@ -10,8 +10,6 @@ const Header: React.FC<HeaderProps> = ({ loose }) => {
       <MjmlColumn>
         <MjmlImage
           padding="0 20% 0"
-          //width="500px"
-          //height="54px"
           align="center"
           src={`${process.env.NEXT_PUBLIC_LIVE_URL}/images/logo.png`}
           cssClass="logo"
