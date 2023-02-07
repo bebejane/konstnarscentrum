@@ -20,7 +20,7 @@ export default function Text({ data: { text, headline, url } }: TextBlockProps) 
           {text}
         </Markdown>
       </h3>
-      <ReadMore link={url} message='Läs mer'></ReadMore>
+      <ReadMore link={url} message='Läs mer' regional={false}></ReadMore>
     </div>
   )
 }
