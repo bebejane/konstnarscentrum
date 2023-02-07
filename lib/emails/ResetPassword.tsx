@@ -61,7 +61,9 @@ const ResetPassword: React.FC<ResetPasswordProps> = ({
               lineHeight={leadingRelaxed}
               cssClass="paragraph"
             >
-              Tänk på att länken bara går att använda en gång. Om du behöver kan du återuppta lösenords-processen igen här[Länk?].<br /><br />
+              Tänk på att länken bara går att använda en gång. Om du behöver kan du återuppta
+              lösenords-processen igen <a href={`${process.env.NEXT_PUBLIC_LIVE_URL}/konstnar/konto/aterstall-losenord`}>här.</a>
+              <br /><br />
               Konstnärscentrum
             </MjmlText>
             <Line

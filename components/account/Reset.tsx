@@ -122,7 +122,8 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 					})}
 					className={errors.password2 && styles.error}
 				/>
-				<SubmitButton loading={isSubmitting} disabled={!isValid}>{text.send}</SubmitButton>
+				<label>Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra</label>
+				<SubmitButton loading={isSubmitting} >{text.send}</SubmitButton>
 				<p className={styles.formError}>
 					{error && `Error: ${error.error || error}`}
 				</p>
