@@ -15,11 +15,12 @@ export const client = buildClient({
 
 export default withAuthentication(async (req, res, session) => {
 
+
+  if (req.body?.ping || req.query?.ping)
+    return res.status(200).json({ pong: true })
+
   if (!req.body || !req.body?.id)
     return res.status(500).json({ error: `Invalid empty request` })
-
-  if (req.body.ping)
-    return res.status(200).json({ pong: true })
 
   const {
     id,

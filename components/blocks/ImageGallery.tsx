@@ -36,7 +36,6 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 		calculatePositions()
 	}, [innerHeight, innerWidth, calculatePositions])
 
-
 	return (
 		<div className={s.gallery} data-editable={editable} ref={containerRef}>
 			<div className={s.fade}></div>

@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { pingEndpoint } from "/lib/utils";
+import { log } from "console";
 
 export default function SignIn({ csrfToken, providers }) {
 
@@ -27,7 +28,9 @@ export default function SignIn({ csrfToken, providers }) {
 	};
 
 	useEffect(() => {
-		pingEndpoint(['/api/auth/ping', '/api/account'])
+		pingEndpoint(['/api/account?ping=1', '/konstnar/konto/aterstall-losenord'], 'POST')
+		pingEndpoint('/api/auth/session', 'GET')
+
 	}, [])
 
 	useEffect(() => {

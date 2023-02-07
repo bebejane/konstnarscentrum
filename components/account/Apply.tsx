@@ -144,7 +144,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					onClick={() => uploadRef.current?.click()}
 					disabled={progress !== undefined || uploading || !isEmail(email) || !regionId || regionId === 'false'}
 				>
-					{upload ? upload.basename : progress === undefined ? 'Ladda upp pdf' : `${progress}%`}
+					{upload ? upload.basename : progress === undefined ? 'Ladda upp Pdf' : `${progress}%`}
 				</button>
 				{uploadError &&
 					<div className={s.formError}>Det uppstod ett fel vid uppladdning!</div>

@@ -38,6 +38,7 @@
         margin: 0;
         object-fit: contain;
         max-height: var(--height);
+        cursor: pointer;
 
         &.portrait {
           object-fit: contain;
@@ -75,11 +76,13 @@
       z-index: 100000;
       padding-top: 0.5em;
       padding-bottom: 0.8em;
+
       @include mq($from: tablet) {
         padding-left: 1.5em;
         padding-right: 1.5em;
         border-radius: 1.5em;
       }
+
       background-color: var(--black);
 
       p {
@@ -102,6 +105,5 @@
     writing-mode: vertical-lr;
   }
 
-  @include mq($until: tablet) {
-  }
+  @include mq($until: tablet) {}
 }
