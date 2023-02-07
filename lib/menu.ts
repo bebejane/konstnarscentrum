@@ -25,9 +25,9 @@ const base: Menu = [
   {
     type: 'for-artists', label: 'För konstnärer', slug: '/konstnar', sub: [
       { type: 'for-artists', label: 'Bli medlem', slug: '/konstnar/bli-medlem', regional: false },
-      { type: 'for-artists', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
+      //{ type: 'for-artists', label: 'Logga in', slug: '/konstnar/konto/logga-in', regional: false },
       { type: 'for-artists', label: 'Aktuellt', slug: '/konstnar/aktuellt', regional: true },
-      { type: 'for-artists', label: 'Medlemmar', slug: '/for-konstnarer/medlemmar', regional: true }
+      //{ type: 'for-artists', label: 'Medlemmar', slug: '/for-konstnarer/medlemmar', regional: true }
     ]
   },
   { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, external: true, sub: [] },
@@ -54,7 +54,6 @@ export const buildMenu = async () => {
     LatestProjectsDocument,
     AllAboutsMenuDocument,
     AllConsultsDocument,
-
     AllForArtistDocument
   ], { variables: [{ first: 5 }, { first: 5 }] });
 
