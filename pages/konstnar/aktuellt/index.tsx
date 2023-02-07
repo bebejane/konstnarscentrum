@@ -4,7 +4,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useApiQuery } from "dato-nextjs-utils/hooks";
 //import useApiQuery from "/lib/hooks/useApiQuery";
-import { AllPresentMemberNewsDocument, AllPastMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
+import { AllPresentMemberNewsDocument, AllPastAndFutureMemberNewsDocument, AllMemberNewsCategoriesDocument } from "/graphql";
 import { format } from "date-fns";
 import { pageSize, apiQueryAll, memberNewsStatus, isServer } from "/lib/utils";
 import { CardContainer, NewsCard, FilterBar, RevealText, Loader } from '/components'
@@ -14,18 +14,18 @@ import { useInView } from "react-intersection-observer";
 export type MemberNewsRecordWithStatus = MemberNewsRecord & { status: { value: string, label: string } }
 export type Props = {
 	presentMemberNews: MemberNewsRecord[],
-	pastMemberNews: MemberNewsRecord[],
+	memberNews: MemberNewsRecord[],
 	memberNewsCategories: MemberNewsCategoryRecord[]
 	date: string
 	region?: Region,
 	pagination: Pagination
 }
 
-export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemberNewsFromProps, memberNewsCategories, date, pagination, region }: Props) {
+export default function MemberNews({ presentMemberNews, memberNews: memberNewsFromProps, memberNewsCategories, date, pagination, region }: Props) {
 
 	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | string[] | undefined>()
-	const { data: { pastMemberNews }, loading, error, nextPage, page } = useApiQuery<{ pastMemberNews: MemberNewsRecord[] }>(AllPastMemberNewsDocument, {
-		initialData: { pastMemberNews: pastMemberNewsFromProps, pagination },
+	const { data: { memberNews }, loading, error, nextPage, page } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllPastAndFutureMemberNewsDocument, {
+		initialData: { memberNews: memberNewsFromProps, pagination },
 		variables: { first: pageSize, date, regionId: region.global ? undefined : region.id },
 		pageSize
 	});
@@ -37,11 +37,11 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 			nextPage()
 	}, [inView, page, loading, nextPage])
 
-	const memberNews = presentMemberNews
-		.concat(pastMemberNews)
+	const allNews = presentMemberNews
+		.concat(memberNews)
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
-
+	console.log(allNews.length)
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
@@ -52,8 +52,8 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 				onChange={(id) => setMemberNewsCategoryId(id)}
 			/>
 
-			<CardContainer columns={2} className={s.memberNews} key={`${page.no}-${memberNewsCategoryId}`}>
-				{memberNews.length > 0 ? memberNews.map((el, idx) => {
+			<CardContainer columns={2} className={s.memberNews} key={`${page.no}-${memberNewsCategoryId}-${allNews.length}`}>
+				{allNews.length > 0 ? allNews.map((el, idx) => {
 					const { id, date, title, intro, slug, region, image, category } = el
 					return (
 						<NewsCard
@@ -70,8 +70,16 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 				}) : <div className={s.nomatches}>Inga träffar...</div>
 				}
 			</CardContainer>
-			{!page.end && <div ref={ref} className={s.loader} key={`page-${page.no}`}>{loading && <Loader />}</div>}
-			{error && <div className={s.error}><>Error: {error.message || error}</></div>}
+
+			{!page.end &&
+				<div ref={ref} className={s.loader} key={`page-${page.no}`}>
+					{loading && <Loader />}
+				</div>
+			}
+
+			{error &&
+				<div className={s.error}><>Error: {error.message || error}</></div>
+			}
 		</>
 	);
 }
@@ -86,14 +94,14 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	const date = format(new Date(), 'yyyy-MM-dd')
 
 	let { presentMemberNews } = await apiQuery(AllPresentMemberNewsDocument, { variables: { regionId, date } });
-	let { pastMemberNews, pagination } = await apiQueryAll(AllPastMemberNewsDocument, { variables: { regionId, date } });
+	let { memberNews, pagination } = await apiQueryAll(AllPastAndFutureMemberNewsDocument, { variables: { regionId, date } });
 
 	let start = (isFirstPage ? 0 : (page - 1) * pageSize)
 	let end = isFirstPage ? pageSize : ((pageSize * (page)))
 
-	const count = pastMemberNews.length
+	const count = memberNews.length
 
-	pastMemberNews = pastMemberNews
+	memberNews = memberNews
 		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
 		.slice(start, end)
 
@@ -101,14 +109,15 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 		.map(el => ({ ...el, status: memberNewsStatus(el.date, el.dateEnd) }))
 		.sort((a, b) => a.status.order > b.status.order ? -1 : 1)
 
-	if (!pastMemberNews.length && !presentMemberNews.length)
+	if (!memberNews.length && !presentMemberNews.length)
 		return { notFound: true }
 
+	console.log(presentMemberNews.length)
 	return {
 		props: {
 			...props,
 			presentMemberNews,
-			pastMemberNews,
+			memberNews,
 			date,
 			pagination: { ...pagination, page, size: pageSize, count }
 		},

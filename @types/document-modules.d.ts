@@ -250,7 +250,7 @@ export const ApplyForMembership: DocumentNode;
 export const MemberNews: DocumentNode;
 export const MemberNewsById: DocumentNode;
 export const AllMemberNews: DocumentNode;
-export const AllPastMemberNews: DocumentNode;
+export const AllPastAndFutureMemberNews: DocumentNode;
 export const AllPresentMemberNews: DocumentNode;
 export const MemberImages: DocumentNode;
 export const AllMemberNewsCategories: DocumentNode;
