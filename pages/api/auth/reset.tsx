@@ -6,6 +6,7 @@ import { hashPassword, generateToken } from '/lib/auth'
 
 export default catchErrorsFrom(async (req, res) => {
   const { email, token, password, password2 } = req.body
+  console.log(req.body)
   const success = !token ? await requestReset(email) : await updatePassword(token, password, password2)
   return res.status(!success ? 500 : 200).json(!success ? { error: 'Användaren hittades ej' } : { success: true })
 })

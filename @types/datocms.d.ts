@@ -914,7 +914,6 @@ type EmployeeModelFilter = {
   createdAt?: InputMaybe<CreatedAtFilter>;
   email?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
-  image?: InputMaybe<FileFilter>;
   name?: InputMaybe<StringFilter>;
   position?: InputMaybe<PositionFilter>;
   region?: InputMaybe<LinkFilter>;
@@ -972,7 +971,6 @@ type EmployeeRecord = RecordInterface & {
   createdAt: Scalars['DateTime'];
   email: Scalars['String'];
   id: Scalars['ItemId'];
-  image?: Maybe<FileField>;
   name: Scalars['String'];
   position?: Maybe<Scalars['IntType']>;
   region: RegionRecord;
@@ -5856,7 +5854,7 @@ type RegionMetaQueryVariables = Exact<{
 }>;
 
 
-type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, title?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null, region: { __typename?: 'RegionRecord', position?: any | null, contactIntro?: string | null, id: any, name: string, slug: string, global?: any | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } }> };
+type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, title?: string | null, region: { __typename?: 'RegionRecord', position?: any | null, contactIntro?: string | null, id: any, name: string, slug: string, global?: any | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } }> };
 
 type SiteSearchQueryVariables = Exact<{
   memberIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;

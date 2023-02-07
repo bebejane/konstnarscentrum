@@ -24,7 +24,6 @@ export default function SignIn({ csrfToken, providers }) {
 			username,
 			password,
 		});
-		console.log('signin done');
 	};
 
 	useEffect(() => {

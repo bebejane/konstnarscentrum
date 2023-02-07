@@ -41,6 +41,7 @@ export default function MemberNews({ presentMemberNews, pastMemberNews: pastMemb
 		.concat(pastMemberNews)
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
+
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>

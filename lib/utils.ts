@@ -242,9 +242,11 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
 }
 
 export const memberNewsStatus = (date, dateEnd): { value: string, label: string, order: number } => {
+  const today = new Date()
   const start = new Date(date);
   const end = !dateEnd ? start : new Date(dateEnd);
-  return isAfter(new Date(), end) && !isEqual(start, end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(new Date(), start) ? { value: 'upcoming', label: 'Kommander', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
+  const status = isAfter(today, end) ? { value: 'past', label: 'Avslutat', order: -1 } : isBefore(today, start) ? { value: 'upcoming', label: 'Kommande', order: 0 } : { value: 'present', label: 'Nu', order: 1 }
+  return status
 }
 
 export const randomInt = (min, max) => {

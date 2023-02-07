@@ -116,9 +116,6 @@ query RegionMeta($regionId: ItemId) {
 		name
 		email
 		title
-		image {
-			...ImageThumbnailFragment
-		}
 		region {
 			...RegionFragment
 			position

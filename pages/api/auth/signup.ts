@@ -29,9 +29,8 @@ export default catchErrorsFrom(async (req, res) => {
 
   const models = await client.itemTypes.list()
   const memberModelId = models.find(el => el.api_key === 'member').id
-  const roleClient = buildClient({ apiToken: accessToken })
+  const roleClient = buildClient({ apiToken: accessToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' })
   const hashedPassword = await hashPassword(password)
-
   const member = await roleClient.items.create({
     item_type: {
       type: 'item_type',
@@ -49,4 +48,5 @@ export default catchErrorsFrom(async (req, res) => {
   });
 
   return res.status(200).json(member)
+
 })
