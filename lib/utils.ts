@@ -54,7 +54,6 @@ export const catchErrorsFrom = (handler) => {
       }
       res.status(500).send(err);
       console.log(JSON.stringify(err, null, 2));
-
     });
   }
 }
@@ -234,7 +233,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
         throw new Error(res.find(el => el.status === 'rejected')?.reason)
       for (let x = 0; x < res.length; x++)
         mergeProps(res[x].value);
-      await sleep(1000)
+      await sleep(100)
       reqs = []
     }
   }

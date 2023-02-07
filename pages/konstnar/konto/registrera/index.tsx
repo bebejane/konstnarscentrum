@@ -56,7 +56,6 @@ export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] 
 
 	const { token } = context.query
 	const application = token ? await applicationController.getByToken(token) : undefined
-	console.log(application);
 
 	return {
 		props: {

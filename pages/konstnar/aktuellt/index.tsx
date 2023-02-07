@@ -111,7 +111,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	if (!memberNews.length && !presentMemberNews.length)
 		return { notFound: true }
 
-	console.log(presentMemberNews.length)
 	return {
 		props: {
 			...props,

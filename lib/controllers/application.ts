@@ -11,7 +11,6 @@ const applicationController = {
 	},
 	exists: async (email: string) => {
 		const application = await client.items.list({ filter: { type: 'application', fields: { email: { eq: email } } } })
-		console.log(email)
 		return application.length > 0;
 	},
 	getByToken: async (token: string) => {

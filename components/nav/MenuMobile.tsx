@@ -10,6 +10,8 @@ import { useRouter } from 'next/router';
 import { useScrollInfo } from 'dato-nextjs-utils/hooks';
 import useDevice from '/lib/hooks/useDevice';
 import { useTheme } from 'next-themes';
+import { setCookie, getCookie } from 'cookies-next';
+import { useRegion } from '/lib/context/region';
 
 export type MenuMobileProps = { items: Menu, home: boolean }
 
@@ -24,6 +26,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 
 	const router = useRouter()
 	const { theme, setTheme } = useTheme()
+	const region = useRegion()
 	const isHome = router.asPath === '/' || regions?.find(({ slug }) => slug === router.asPath.replace('/', '')) !== undefined
 	const { scrolledPosition } = useScrollInfo()
 	const [selected, setSelected] = useState<MenuItem | undefined>();
@@ -32,10 +35,19 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 	const [showMenuMobile, setShowMenuMobile, invertedMenu, setInvertedMenu, setShowSearch] = useStore((state) => [state.showMenuMobile, state.setShowMenuMobile, state.invertedMenu, state.setInvertedMenu, state.setShowSearch])
 	const regionsRef = useRef<HTMLLIElement | null>(null)
 
+	const allItems = [...items, englishMenuItem]
+
 	const handleSearch = (e) => {
 		setShowSearch(true)
 		setShowMenuMobile(false)
 	}
+
+	const handleRegionChange = (regionId) => {
+		const region = regions.find(({ id }) => id === regionId)
+		setCookie('region', region.slug)
+		setShowRegions(false)
+	}
+
 	useEffect(() => {
 		if (!isHome || isDesktop)
 			return setInvertedMenu(false)
@@ -55,6 +67,12 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 			regionsRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
 	}, [showRegions, regionsRef])
 
+	useEffect(() => {
+		const menuItem = [...items, englishMenuItem].find(({ slug, sub }) => slug === router.asPath || sub.find(({ slug }) => slug === router.asPath))
+		const item = menuItem.slug === router.asPath ? menuItem : menuItem.sub.find(({ slug }) => slug === router.asPath)
+		item && setSelected(item)
+	}, [router, items])
+
 	return (
 		<>
 			<div className={s.hamburger}>
@@ -70,7 +88,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 			<div className={cn(s.mobileMenu, showMenuMobile && s.show)}>
 				<nav>
 					<ul className={s.nav}>
-						{[...items, englishMenuItem].map((item, idx) =>
+						{allItems.map((item, idx) =>
 							<React.Fragment key={idx}>
 								<li
 									data-slug={item.slug}
@@ -104,9 +122,12 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 						<li ref={regionsRef} onClick={() => setShowRegions(!showRegions)}>
 							Region <img className={cn(s.caret, showRegions && s.open)} src="/images/caret.png" />
 						</li>
-						{showRegions && regions.map(({ name, slug }, idx) =>
-							<li key={idx} className={s.sub}>
-								<Link href={`/${slug}`} onClick={() => setShowRegions(false)}>
+						{showRegions && regions.map(({ id, name, slug }, idx) =>
+							<li key={idx} className={cn(s.sub, region.id === id && s.selected)}>
+								<Link
+									href={`/${slug}`}
+									onClick={() => handleRegionChange(id)}
+								>
 									{name}
 								</Link>
 							</li>
