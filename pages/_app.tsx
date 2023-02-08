@@ -37,7 +37,11 @@ function App({ Component, pageProps }) {
   return (
     <>
       <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" title={title} />
-      <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
+      <GoogleAnalytics
+        strategy={'afterInteractive'}
+        trackPageViews={{ ignoreHashChange: true }}
+        gaMeasurementId={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}
+      />
       <SessionProvider session={session}>
         <PageProvider value={page}>
           <RegionProvider value={region}>
