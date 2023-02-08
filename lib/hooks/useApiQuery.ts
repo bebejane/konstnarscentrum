@@ -43,8 +43,10 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
 
     return apiQuery(document, { variables: { ...variables, ...vars } })
       .then(res => {
+        console.log({ ...data })
         console.log({ ...res })
         const d = mergeData(res, data)
+
         setData(d)
         return d
       })

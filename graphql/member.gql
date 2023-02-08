@@ -105,7 +105,8 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			OR: [{ dateEnd: { lt: $date, exists: true } }]
+			dateEnd: { lt: $date }
+			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
 		}
 		orderBy: [date_DESC]
 		first: $first
@@ -117,7 +118,8 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			OR: [{ dateEnd: { lt: $date, exists: true } }]
+			dateEnd: { lt: $date }
+			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
 		}
 	) {
 		count

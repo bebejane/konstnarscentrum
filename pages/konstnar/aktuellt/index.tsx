@@ -26,26 +26,22 @@ export default function MemberNews({ presentMemberNews, memberNews: memberNewsFr
 	const [memberNewsCategoryId, setMemberNewsCategoryId] = useState<string | string[] | undefined>()
 
 	const { data: { memberNews }, loading, error, nextPage, page } = useApiQuery<{ memberNews: MemberNewsRecord[] }>(AllPastAndFutureMemberNewsDocument, {
-		initialData: { memberNews: memberNewsFromProps },
+		initialData: { memberNews: memberNewsFromProps, pagination },
 		variables: { first: pageSize, date, regionId: region.global ? undefined : region.id },
 		pageSize
 	});
 
 	const { inView, ref } = useInView({ triggerOnce: true, rootMargin: '0px 0px 2000px 0px' })
 
-	//console.log(pagination)
-	console.log(page)
-
-
 	useEffect(() => {
-		if (inView && !page.end && !loading)
-			nextPage()
+		if (inView && !page.end && !loading) nextPage()
 	}, [inView, page, loading, nextPage])
 
 	const allNews = [...presentMemberNews, ...memberNews]
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
-	console.log('rend', allNews.length)
+	//allNews.forEach(({ title, id }) => console.log(id, title))
+
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
