@@ -75,6 +75,7 @@ export default function Search({ }: Props) {
   useEffect(() => {
     setOpen(showSearch)
   }, [showSearch])
+
   return (
     <>
       <nav className={cn(s.search, open && s.open)}>

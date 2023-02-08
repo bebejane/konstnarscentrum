@@ -9,6 +9,7 @@ import { useRouter } from 'next/router';
 import { DefaultDatoSEO } from 'dato-nextjs-utils/components';
 import { sv } from 'date-fns/locale'
 import { PageProvider } from '/lib/context/page';
+import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import setDefaultOptions from 'date-fns/setDefaultOptions';
 setDefaultOptions({ locale: sv })
@@ -36,6 +37,7 @@ function App({ Component, pageProps }) {
   return (
     <>
       <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" title={title} />
+      <GoogleAnalytics trackPageViews={{ ignoreHashChange: true }} />
       <SessionProvider session={session}>
         <PageProvider value={page}>
           <RegionProvider value={region}>
