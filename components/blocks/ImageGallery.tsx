@@ -57,6 +57,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								data={item.responsiveImage}
 								className={s.image}
 								pictureClassName={s.picture}
+								placeholderClassName={s.picture}
 								objectFit={'cover'}
 								onLoad={calculatePositions}
 							/>
