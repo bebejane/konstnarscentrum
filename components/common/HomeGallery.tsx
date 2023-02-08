@@ -44,6 +44,7 @@ const slideTime = 6000
 export default function HomeGallery({ slides }: Props) {
 
   const [index, setIndex] = useState(0)
+  const [mounted, setMounted] = useState(false)
   const [loaded, setLoaded] = useState({})
   const [size, setSize] = useState({ width: 0, height: 0 })
   const ref = useRef<HTMLUListElement | null>(null)
@@ -66,6 +67,9 @@ export default function HomeGallery({ slides }: Props) {
     })
   }, [ref, innerWidth, innerHeight])
 
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     <section className={s.gallery} id="home-gallery">
@@ -84,27 +88,32 @@ export default function HomeGallery({ slides }: Props) {
           const maskId = `mask${idx}`
 
           return (
-            <li key={idx}>
+            <li key={id}>
               <Link href={slug} className={cn(isCurrent ? s.current : isNext ? s.next : undefined)}>
                 <header className={cn(blackText && s.blackText, !isCurrent && s.hide)}>
                   <h5>{type}</h5>
                   <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
                   <div className={s.fade}></div>
                 </header>
-                <Image
-                  className={cn(s.image, isCurrent && s.pan)}
-                  data={image.responsiveImage}
-                  onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
-                  pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
-                  placeholderClassName={s.image}
-                  objectFit="cover"
-                  fadeInDuration={0}
-                />
-                <Mask
-                  id={maskId}
-                  size={size}
-                  start={isNext}
-                />
+                {mounted &&
+                  <>
+                    <Image
+                      className={cn(s.image, isCurrent && s.pan)}
+                      data={image.responsiveImage}
+                      onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
+                      pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
+                      placeholderClassName={s.image}
+                      objectFit="cover"
+                      lazyLoad={true}
+                      fadeInDuration={100}
+                    />
+                    <Mask
+                      id={maskId}
+                      size={size}
+                      start={isNext}
+                    />
+                  </>
+                }
               </Link>
             </li>
           )
