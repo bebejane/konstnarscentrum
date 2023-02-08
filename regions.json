@@ -1,62 +1,62 @@
 [
-  {
-    "id": "143707759",
-    "roleId": "133283",
-    "name": "Riks",
-    "email": "",
-    "tokenId": "181463",
-    "slug": "riks",
-    "global": true,
-    "position": 1
-  },
-  {
-    "id": "143662356",
-    "roleId": "133332",
-    "name": "Nord",
-    "email": "nord@konstnarscentrum.org",
-    "tokenId": "138889",
-    "slug": "nord",
-    "global": false,
-    "position": 2
-  },
-  {
-    "id": "143685113",
-    "roleId": "111106",
-    "name": "Väst",
-    "email": "vast@konstnarscentrum.org",
-    "tokenId": "115326",
-    "slug": "vast",
-    "global": false,
-    "position": 3
-  },
-  {
-    "id": "143662355",
-    "roleId": "133331",
-    "name": "Mitt",
-    "email": "mitt@konstnarscentrum.org",
-    "tokenId": "138887",
-    "slug": "mitt",
-    "global": false,
-    "position": 4
-  },
-  {
-    "id": "143685114",
-    "roleId": "111107",
-    "name": "Öst",
-    "email": "ost@konstnarscentrum.org",
-    "tokenId": "115327",
-    "slug": "ost",
-    "global": false,
-    "position": 5
-  },
-  {
-    "id": "143662358",
-    "roleId": "133333",
-    "name": "Syd",
-    "email": "syd@konstnarscentrum.org",
-    "tokenId": "138888",
-    "slug": "syd",
-    "global": false,
-    "position": 6
-  }
+	{
+		"id": "143707759",
+		"roleId": "133283",
+		"name": "Riks",
+		"email": "",
+		"tokenId": "181463",
+		"slug": "riks",
+		"global": true,
+		"position": 1
+	},
+	{
+		"id": "143662356",
+		"roleId": "133332",
+		"name": "Nord",
+		"email": "nord@konstnarscentrum.org",
+		"tokenId": "138889",
+		"slug": "nord",
+		"global": false,
+		"position": 2
+	},
+	{
+		"id": "143685113",
+		"roleId": "111106",
+		"name": "Väst",
+		"email": "vast@konstnarscentrum.org",
+		"tokenId": "115326",
+		"slug": "vast",
+		"global": false,
+		"position": 3
+	},
+	{
+		"id": "143662355",
+		"roleId": "133331",
+		"name": "Mitt",
+		"email": "mitt@konstnarscentrum.org",
+		"tokenId": "138887",
+		"slug": "mitt",
+		"global": false,
+		"position": 4
+	},
+	{
+		"id": "143685114",
+		"roleId": "111107",
+		"name": "Öst",
+		"email": "ost@konstnarscentrum.org",
+		"tokenId": "115327",
+		"slug": "ost",
+		"global": false,
+		"position": 5
+	},
+	{
+		"id": "143662358",
+		"roleId": "133333",
+		"name": "Syd",
+		"email": "syd@konstnarscentrum.org",
+		"tokenId": "138888",
+		"slug": "syd",
+		"global": false,
+		"position": 6
+	}
 ]

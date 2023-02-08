@@ -1,21 +1,27 @@
 //import { hashPassword, generateToken } from "../lib/auth";
 
-require("dotenv").config({ path: "./.env" });
-const { buildClient, LogLevel } = require("@datocms/cma-client-node");
-const regions = require("../../regions.json");
-const jwt = require("jsonwebtoken");
-const slugify = require("slugify");
-const ExcelJS = require("exceljs");
-const fs = require("fs");
+import * as dotenv from 'dotenv'
+dotenv.config({ path: "./.env" });
 
-const sleep = (ms) => new Promise((resolve, refject) => setTimeout(resolve, ms));
+import { buildClient } from '@datocms/cma-client'
+import regions from '../../regions.json';
+import jwt from 'jsonwebtoken';
+import slugify from 'slugify'
+import ExcelJS from 'exceljs';
+import fs from 'fs';
+import { Email } from '../emails'
+import { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
+
+
+console.log(process.env)
+
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const workbook = new ExcelJS.Workbook();
-
 const allMembers = [];
 const errors = [];
 const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023).xlsx`;
 const environment = "dev";
-const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL, environment });
+const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as string, environment });
 
 const generateToken = async (email) => {
 	return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
@@ -63,6 +69,7 @@ workbook.xlsx.readFile(excelFile).then((doc) => {
 });
 
 async function importMembers() {
+
 	let currentMembers = []; //await mainclient.items.list({ filter: { type: "member" } });
 	console.log("get current members...");
 	for await (const record of mainclient.items.listPagedIterator({ filter: { type: "member" } })) {
@@ -73,6 +80,7 @@ async function importMembers() {
 	const slugs = {};
 	const failed = [];
 	let insertCount = 0;
+
 	allMembers
 		.filter((m) => !currentMembers.find((el) => el.email === m.email))
 		.forEach((member) => {
@@ -89,8 +97,7 @@ async function importMembers() {
 
 	//return;
 	console.log(
-		`Creating ${insertCount} members (${currentMembers.length}), ${
-			Object.keys(r).length
+		`Creating ${insertCount} members (${currentMembers.length}), ${Object.keys(r).length
 		} regions...`
 	);
 
@@ -100,11 +107,14 @@ async function importMembers() {
 		const { members } = r[Object.keys(r)[x]];
 		const apiToken = process.env[`GRAPHQL_API_TOKEN_${members[0].region.slug.toUpperCase()}`];
 		const client = buildClient({ apiToken, environment });
-		let reqs = [];
+		let reqs: Promise<Item>[] = [];
 
 		for (let i = 0; i < members.length; i++) {
 			const member = members[i];
 			if (reqs.length < 50 && i + 1 < members.length) {
+				console.log('create member:', member.first_name, member.last_name, member.email)
+				continue;
+				/*
 				reqs.push(
 					client.items.create({
 						item_type: { type: "item_type", id: "1185543" },
@@ -113,6 +123,8 @@ async function importMembers() {
 						region: member.region.id,
 					})
 				);
+				*/
+				// TODO Skicka email till member.
 			} else {
 				try {
 					const res = await Promise.allSettled(reqs);
@@ -135,6 +147,9 @@ async function importMembers() {
 		}
 	}
 	fs.writeFileSync("./failed.json", JSON.stringify(failed, null, 2));
+
+	await Email.memberInvitation({ email: 'bjorn@konst-teknik.se', name: 'Björn Berglund', link: 'https://localhost:3000' })
+
 	console.timeEnd("import");
 	process.exit(0);
 }

@@ -1,3 +1,4 @@
+import * as dotenv from 'dotenv'
 import nodemailer from "nodemailer";
 import { buildSendMail } from "mailing-core";
 import ResetPassword from './ResetPassword'
@@ -6,7 +7,8 @@ import ApplicationApproved from './ApplicationApproved'
 import ContactForm from "./ContactForm";
 import MemberInvitation from "./MemberInvitation";
 import postmarkTransport from 'nodemailer-postmark-transport'
-import ContactFormRegionNotification from "/lib/emails/ContactFormRegionNotification";
+import ContactFormRegionNotification from "./ContactFormRegionNotification";
+dotenv.config({ path: "./.env" });
 
 const transport = nodemailer.createTransport(postmarkTransport({
   auth: {
