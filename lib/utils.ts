@@ -176,15 +176,31 @@ export const getStaticPagePaths = async (query: TypedDocumentNode, segment: stri
 }
 
 
-export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: boolean = true, minLength = 50) => {
-  if (!s || s.indexOf('.') === -1)
-    return s;
-  if (s.length < minLength)
+
+export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: boolean = true, minLength = 200): string => {
+  if (!s || s.length < minLength)
     return s;
 
-  let str = `${s.substring(0, minLength - 1)}${s.substring(minLength - 1).split('.').slice(0, sentances).join('. ')}`
-  return ellipsis ? (str + '...') : str + '.';
+  let dotIndex = s.split('.')?.slice(0, sentances + 1).join('.').lastIndexOf('.')
+  let qIndex = s.split('? ')?.slice(0, sentances + 1).join('? ').lastIndexOf('? ')
+  const isQuestion = qIndex !== -1 && qIndex < dotIndex || (dotIndex === -1 && qIndex > -1)
+
+  if (dotIndex === -1 && qIndex === -1) {
+    dotIndex = minLength - 1
+    ellipsis = true
+  }
+
+  let str = s.substring(0, isQuestion ? qIndex : dotIndex) //`${s.substring(0, minLength - 1)}${s.substring(minLength - 1).split('.').slice(0, sentances).join('. ')}`
+  return `${str}${ellipsis ? '...' : isQuestion ? '?' : '.'}`;
 }
+/*
+console.log(truncateParagraph(`
+  Lorem Ipsum is simply dummy text of the printing and? typesetting industry Lorem Ipsum has been the 
+  industry's standard dummy text ever since the 1500s?? Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the 
+  industry's standard dummy text ever since the 1500s`, 1, false
+))
+*/
+
 
 export const isEmptyObject = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
 

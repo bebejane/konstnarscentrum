@@ -9,7 +9,7 @@ import { pageSize } from "/lib/utils";
 import Link from "next/link";
 import BalanceText from 'react-balance-text'
 import { useInView } from "react-intersection-observer";
-import { useApiQuery } from "dato-nextjs-utils/hooks";
+import useApiQuery from "/lib/hooks/useApiQuery";
 import { useEffect } from "react";
 
 export type Props = {

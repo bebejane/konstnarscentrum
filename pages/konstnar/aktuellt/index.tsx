@@ -57,7 +57,7 @@ export default function MemberNews({ presentMemberNews, memberNews: memberNewsFr
 					const { id, date, title, intro, slug, region, image, category } = el
 					return (
 						<NewsCard
-							key={idx}
+							key={id}
 							title={title}
 							subtitle={`${category.category} • ${format(new Date(date), "d MMM").replace('.', '')} • ${region.name}`}
 							label={memberNewsStatus(el.date, el.dateEnd).label}
