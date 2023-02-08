@@ -58,7 +58,7 @@ export default function Commission({ commission: {
 							{ title: 'Titel', value: work },
 							{ title: 'Plats', value: city },
 							{ title: 'Beställare', value: commissioner },
-							{ title: 'Konsulent', value: consultant }
+							{ title: 'Konstkonsult', value: consultant }
 						]}
 					/>
 					<section className={s.documentation}>
