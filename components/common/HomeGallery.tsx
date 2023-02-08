@@ -66,6 +66,7 @@ export default function HomeGallery({ slides }: Props) {
     })
   }, [ref, innerWidth, innerHeight])
 
+
   return (
     <section className={s.gallery} id="home-gallery">
       <ul ref={ref}>
@@ -93,7 +94,7 @@ export default function HomeGallery({ slides }: Props) {
                 <Image
                   className={cn(s.image, isCurrent && s.pan)}
                   data={image.responsiveImage}
-                  onLoad={() => setLoaded({ ...loaded, [id]: true })}
+                  onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
                   pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
                   placeholderClassName={s.image}
                   objectFit="cover"

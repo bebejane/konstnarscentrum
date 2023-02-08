@@ -56,11 +56,11 @@
         }
 
         img[role="presentation"] {
-          height: 100% !important;
+          height: var(--height) !important;
           width: 100% !important;
           min-width: 100% !important;
-          max-height: 100% !important;
-          min-height: 100% !important;
+          max-height: var(--height) !important;
+          min-height: var(--height) !important;
         }
 
         &.current {
