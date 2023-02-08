@@ -9,7 +9,7 @@
     margin-right: calc(-1 * var(--outer-margin));
   }
 
-  > ul {
+  >ul {
     height: 70vh;
 
     @include mq($from: tablet) {
@@ -56,8 +56,16 @@
         &.current {
           z-index: 1;
 
-          .image {
-          }
+
+        }
+
+        .image,
+        img[role="presentation"] {
+          min-height: calc(100vh - (2 * var(--navbar-height)));
+          max-height: calc(100vh - (2 * var(--navbar-height)));
+          min-width: calc(100% + (2 * var(--outer-margin)));
+          min-width: calc(100% + (2 * var(--full-margin)));
+          max-width: none !important;
         }
 
         &.next {
