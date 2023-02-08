@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from 'react'
 import { RevealText } from '/components';
 import { sleep } from '/lib/utils'
 import blobshape from "blobshape";
+import { useWindowSize } from 'rooks'
 
 export type Props = {
   slides: SlideRecord[]
@@ -46,6 +47,7 @@ export default function HomeGallery({ slides }: Props) {
   const [loaded, setLoaded] = useState({})
   const [size, setSize] = useState({ width: 0, height: 0 })
   const ref = useRef<HTMLUListElement | null>(null)
+  const { innerWidth, innerHeight } = useWindowSize()
 
   useEffect(() => {
 
@@ -62,7 +64,7 @@ export default function HomeGallery({ slides }: Props) {
       width: ref.current.clientWidth,
       height: ref.current.clientHeight
     })
-  }, [ref])
+  }, [ref, innerWidth, innerHeight])
 
   return (
     <section className={s.gallery} id="home-gallery">
