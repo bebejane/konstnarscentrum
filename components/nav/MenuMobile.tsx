@@ -76,9 +76,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 		if (!menuItem) return
 
 		const item = menuItem.slug === router.asPath ? menuItem : menuItem.sub?.find(({ slug }) => slug === router.asPath)
-
 		item && setSelected(item)
-
 	}, [router, items])
 
 	return (
@@ -113,7 +111,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 								</li>
 								{item.type === selected?.type && !item.index &&
 									item.sub?.map(({ slug, label }, idx) =>
-										<li className={s.sub} key={`sub-${idx}`}>
+										<li className={cn(slug === router.asPath && s.selectedSub)} key={`sub-${idx}`}>
 											<Link href={slug}>
 												{label}
 											</Link>
@@ -131,7 +129,7 @@ export default function MenuMobile({ items, home }: MenuMobileProps) {
 							Region <img className={cn(s.caret, showRegions && s.open)} src="/images/caret.png" />
 						</li>
 						{showRegions && regions.map(({ id, name, slug }, idx) =>
-							<li key={idx} className={cn(s.sub, region.id === id && s.selected)}>
+							<li key={idx} className={cn(s.sub, region.id === id && s.selectedSub)}>
 								<Link
 									href={`/${slug}`}
 									onClick={() => handleRegionChange(id)}

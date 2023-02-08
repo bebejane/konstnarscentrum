@@ -68,9 +68,7 @@
         width: 100%;
         border-bottom: 1px solid var(--beige-mid);
 
-        &.selected {
-          color: var(--beige-dark);
-        }
+
 
         &:last-child {
           border-bottom: none;
@@ -122,6 +120,17 @@
   ::-webkit-scrollbar-thumb {
     background: var(--white);
   }
+}
+
+.selected {
+  color: var(--beige-dark) !important;
+}
+
+.selectedSub {
+  a {
+    color: var(--beige-dark) !important;
+  }
+
 }
 
 @include mq($from: nav-break) {
