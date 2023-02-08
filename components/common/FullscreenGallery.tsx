@@ -1,13 +1,12 @@
 import "swiper/css";
 import s from './FullscreenGallery.module.scss'
 import cn from 'classnames'
-import React from 'react'
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { KCImage as Image } from '/components'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectFade, EffectCube } from 'swiper'
+import { EffectFade } from 'swiper'
 import SwiperCore from 'swiper'
-import { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import type { Swiper as SwiperType } from 'swiper'
 import { Modal } from "/components";
 
