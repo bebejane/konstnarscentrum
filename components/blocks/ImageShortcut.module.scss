@@ -10,6 +10,10 @@
       margin-left: calc(-1 * var(--outer-margin));
       width: calc(100% + (2 * var(--outer-margin))) !important;
 
+      @include mq($until: tablet) {
+        height: 60vh;
+      }
+
       @include mq($from: tablet) {
         min-width: calc(100% - (2 * var(--full-margin)));
         margin-right: var(--full-margin);
