@@ -95,6 +95,7 @@ export default function HomeGallery({ slides }: Props) {
                   data={image.responsiveImage}
                   onLoad={() => setLoaded({ ...loaded, [id]: true })}
                   pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
+                  placeholderClassName={s.image}
                   objectFit="cover"
                   fadeInDuration={0}
                 />
