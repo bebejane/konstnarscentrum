@@ -1,7 +1,7 @@
 import { TypedDocumentNode } from "@apollo/client/core";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { regions } from "/lib/region";
-import { isAfter, isBefore, isEqual } from "date-fns";
+import { isAfter, isBefore } from "date-fns";
 import { NextApiRequest, NextApiResponse } from "next";
 import type { ApiQueryOptions } from "dato-nextjs-utils/api";
 import React from "react";
@@ -235,6 +235,12 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
     }
   }
 
+  const isRejected = (input: PromiseSettledResult<unknown>): input is PromiseRejectedResult =>
+    input.status === 'rejected'
+
+  const isFulfilled = <T>(input: PromiseSettledResult<T>): input is PromiseFulfilledResult<T> =>
+    input.status === 'fulfilled'
+
   mergeProps(res)
 
   let reqs = []
@@ -244,11 +250,16 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
     } else {
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
-      const res = await Promise.allSettled(reqs)
-      if (res.find(el => el.status === 'rejected'))
-        throw new Error(res.find(el => el.status === 'rejected')?.reason)
-      for (let x = 0; x < res.length; x++)
-        mergeProps(res[x].value);
+      const data = await Promise.allSettled(reqs)
+
+      const response = data.find(isFulfilled)?.value
+      const error = data.find(isRejected)?.reason
+
+      if (error)
+        throw new Error(error)
+
+      for (let x = 0; x < response.length; x++)
+        mergeProps(response[x].value);
       await sleep(100)
       reqs = []
     }

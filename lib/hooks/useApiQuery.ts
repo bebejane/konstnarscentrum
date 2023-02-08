@@ -30,7 +30,6 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
 
   useEffect(() => {
     if (JSON.stringify(initialData) !== JSON.stringify(initial)) {
-      console.log('initialdata', initialData)
       setData({ ...initialData })
       setInitial({ ...initialData })
     }
@@ -43,10 +42,7 @@ const useApiQuery = <T>(document: TypedDocumentNode, { variables, initialData, p
 
     return apiQuery(document, { variables: { ...variables, ...vars } })
       .then(res => {
-        console.log({ ...data })
-        console.log({ ...res })
         const d = mergeData(res, data)
-
         setData(d)
         return d
       })
