@@ -20,12 +20,10 @@
         .image,
         .placeholder,
         .emptyEditable {
-          width: auto !important;
-
           min-height: calc(100vh - (2 * var(--navbar-height)));
-          //max-height: calc(100vh - (2 * var(--navbar-height)));
+          max-height: calc(100vh - (2 * var(--navbar-height)));
           min-width: calc(100% + (2 * var(--outer-margin)));
-          //max-width: calc(100% + (2 * var(--full-margin)));
+          min-width: calc(100% + (2 * var(--full-margin)));
           max-width: none !important;
         }
 
