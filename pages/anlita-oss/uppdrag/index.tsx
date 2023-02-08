@@ -5,7 +5,7 @@ import { AllCommissionsDocument, AllCommissionCategoriesDocument } from "/graphq
 import { FilterBar, Thumbnail, CardContainer, Card, RevealText } from '/components'
 import { useState } from "react";
 import { pageSize } from "/lib/utils";
-import { apiQuery } from "dato-nextjs-utils/api";
+import { apiQueryAll } from "/lib/utils";
 
 export type Props = {
 	commissions: CommissionRecord[],
@@ -32,6 +32,7 @@ export default function CommissionArchive({ commissions, commissionCategories, p
 							key={idx}
 							image={image}
 							title={title}
+							regional={false}
 							subtitle={`${city} ${year}`}
 							slug={`/anlita-oss/uppdrag/${slug}`}
 						/>
@@ -42,18 +43,12 @@ export default function CommissionArchive({ commissions, commissionCategories, p
 	);
 }
 
-CommissionArchive.page = { title: 'Utvalda uppdrag', crumbs: [{ title: 'Utvalda uppdrag' }], regional: true } as PageProps
+CommissionArchive.page = { title: 'Utvalda uppdrag', crumbs: [{ title: 'Utvalda uppdrag', regional: false }], regional: false } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllCommissionCategoriesDocument] }, async ({ props, revalidate, context }: any) => {
 
 	const page = parseInt(context.params?.page) || 1;
-	const regionId = props.region.global ? undefined : props.region.id;
-	const { commissions, pagination } = await apiQuery(AllCommissionsDocument, {
-		variables: {
-			regionId,
-			first: 100
-		}
-	});
+	const { commissions, pagination } = await apiQueryAll(AllCommissionsDocument)
 
 	return {
 		props: {

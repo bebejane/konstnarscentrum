@@ -11,13 +11,13 @@ export type SectionHeaderProps = {
   regional?: boolean
 }
 
-export default function SectionHeader({ title, slug, margin, regional }: SectionHeaderProps) {
+export default function SectionHeader({ title, slug, margin, regional = true }: SectionHeaderProps) {
 
   return (
     <header className={cn(s.header, margin && s.minusMargin)}>
       <h2>{title}</h2>
       {slug &&
-        <ReadMore link={slug} regional={true} message='Visa alla'></ReadMore>
+        <ReadMore link={slug} regional={regional} message='Visa alla'></ReadMore>
       }
     </header>
   )

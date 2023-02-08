@@ -77,6 +77,7 @@ export default function Commission({ commission: {
 					key={`${id}-related`}
 					title="Fler uppdrag"
 					slug="/anlita-oss/uppdrag"
+					regional={false}
 					items={commissions.map(({ title, city, year, image, slug }) => ({
 						title,
 						subtitle: `${city} ${year}`,

@@ -38,7 +38,7 @@ export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] 
 	const email = context.query.email
 	const { member } = await apiQuery(MemberDocument, { variables: { email } })
 
-	if (!member)
+	if (!member || !email)
 		return { notFound: true }
 
 	return {
