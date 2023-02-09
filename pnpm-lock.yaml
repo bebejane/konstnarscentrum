@@ -56,8 +56,8 @@ specifiers:
   is-youtube-url: ^1.0.5
   jsonwebtoken: ^8.5.1
   lodash-es: 4.17.21
-  mailing: ^0.9.7
-  mailing-core: ^0.9.7
+  mailing: ^0.9.10
+  mailing-core: ^0.9.10
   markdown-truncate: ^1.0.4
   mjml: ^4.13.0
   mjml-react: ^2.0.8
@@ -91,6 +91,7 @@ specifiers:
   swiper: ^8.4.4
   thumbnail-youtube-vimeo: ^1.1.1
   ts-node: ^10.9.1
+  tsx: ^3.12.3
   typescript: ^4.9.4
   uglify-js: ^3.17.4
   universal-base64: ^2.1.0
@@ -138,7 +139,7 @@ dependencies:
   is-youtube-url: 1.0.5
   jsonwebtoken: 8.5.1
   lodash-es: 4.17.21
-  mailing: 0.9.7_rgrdbujxlk6q7bs7dqgjykga5u
+  mailing: 0.9.10_rgrdbujxlk6q7bs7dqgjykga5u
   markdown-truncate: 1.0.4
   mjml: 4.13.0_encoding@0.1.13
   mjml-react: 2.0.8_7tbcn2mecc3yvuxakflodiks3m
@@ -200,8 +201,9 @@ devDependencies:
   eslint-config-next: 12.3.2_v5bglvupnukcksncywgdzapdrq
   exceljs: 4.3.0
   glob: 8.0.3
-  mailing-core: 0.9.7_a37btljrart7w22t3urww6glry
+  mailing-core: 0.9.10_a37btljrart7w22t3urww6glry
   ts-node: 10.9.1_3v2cms72gsblw7jmali7btb3pu
+  tsx: 3.12.3
   typescript: 4.9.4
   uglify-js: 3.17.4
   watch: 1.0.2
@@ -1684,13 +1686,33 @@ packages:
       - typescript
     dev: true
 
+  /@esbuild-kit/cjs-loader/2.4.2:
+    resolution: {integrity: sha512-BDXFbYOJzT/NBEtp71cvsrGPwGAMGRB/349rwKuoxNSiKjPraNNnlK6MIIabViCjqZugu6j+xeMDlEkWdHHJSg==}
+    dependencies:
+      '@esbuild-kit/core-utils': 3.0.0
+      get-tsconfig: 4.4.0
+    dev: true
+
+  /@esbuild-kit/core-utils/3.0.0:
+    resolution: {integrity: sha512-TXmwH9EFS3DC2sI2YJWJBgHGhlteK0Xyu1VabwetMULfm3oYhbrsWV5yaSr2NTWZIgDGVLHbRf0inxbjXqAcmQ==}
+    dependencies:
+      esbuild: 0.15.13
+      source-map-support: 0.5.21
+    dev: true
+
+  /@esbuild-kit/esm-loader/2.5.5:
+    resolution: {integrity: sha512-Qwfvj/qoPbClxCRNuac1Du01r9gvNOT+pMYtJDapfB1eoGN1YlJ1BixLyL9WVENRx5RXgNLdfYdx/CuswlGhMw==}
+    dependencies:
+      '@esbuild-kit/core-utils': 3.0.0
+      get-tsconfig: 4.4.0
+    dev: true
+
   /@esbuild/android-arm/0.15.13:
     resolution: {integrity: sha512-RY2fVI8O0iFUNvZirXaQ1vMvK0xhCcl0gqRj74Z6yEiO1zAUa7hbsdwZM1kzqbxHK7LFyMizipfXT3JME+12Hw==}
     engines: {node: '>=12'}
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@esbuild/linux-loong64/0.15.13:
@@ -1699,7 +1721,6 @@ packages:
     cpu: [loong64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /@eslint/eslintrc/1.3.3:
@@ -5646,7 +5667,6 @@ packages:
     cpu: [x64]
     os: [android]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-android-arm64/0.15.13:
@@ -5655,7 +5675,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-darwin-64/0.15.13:
@@ -5664,7 +5683,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-darwin-arm64/0.15.13:
@@ -5673,7 +5691,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-freebsd-64/0.15.13:
@@ -5682,7 +5699,6 @@ packages:
     cpu: [x64]
     os: [freebsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-freebsd-arm64/0.15.13:
@@ -5691,7 +5707,6 @@ packages:
     cpu: [arm64]
     os: [freebsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-32/0.15.13:
@@ -5700,7 +5715,6 @@ packages:
     cpu: [ia32]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-64/0.15.13:
@@ -5709,7 +5723,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-arm/0.15.13:
@@ -5718,7 +5731,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-arm64/0.15.13:
@@ -5727,7 +5739,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-mips64le/0.15.13:
@@ -5736,7 +5747,6 @@ packages:
     cpu: [mips64el]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-ppc64le/0.15.13:
@@ -5745,7 +5755,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-riscv64/0.15.13:
@@ -5754,7 +5763,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-linux-s390x/0.15.13:
@@ -5763,7 +5771,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-netbsd-64/0.15.13:
@@ -5772,7 +5779,6 @@ packages:
     cpu: [x64]
     os: [netbsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-openbsd-64/0.15.13:
@@ -5781,7 +5787,6 @@ packages:
     cpu: [x64]
     os: [openbsd]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-register/3.4.1_esbuild@0.15.13:
@@ -5801,7 +5806,6 @@ packages:
     cpu: [x64]
     os: [sunos]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-windows-32/0.15.13:
@@ -5810,7 +5814,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-windows-64/0.15.13:
@@ -5819,7 +5822,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild-windows-arm64/0.15.13:
@@ -5828,7 +5830,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: false
     optional: true
 
   /esbuild/0.15.13:
@@ -5859,7 +5860,6 @@ packages:
       esbuild-windows-32: 0.15.13
       esbuild-windows-64: 0.15.13
       esbuild-windows-arm64: 0.15.13
-    dev: false
 
   /escalade/3.1.1:
     resolution: {integrity: sha512-k0er2gUkLf8O0zKJiAhmkTnJlTvINGv7ygDNPbeIsX/TJjGJZHuh9B2UxbsaEkmlEo9MfhrSzmhIlhRlI2GXnw==}
@@ -6584,6 +6584,10 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.3
+    dev: true
+
+  /get-tsconfig/4.4.0:
+    resolution: {integrity: sha512-0Gdjo/9+FzsYhXCEFueo2aY1z1tpXrxWZzP7k8ul9qt1U5o8rYJwTJYmaeHdrVosYIVYkOy2iwCJ9FdpocJhPQ==}
     dev: true
 
   /get-vimeo-thumbnail/1.0.1:
@@ -7701,14 +7705,6 @@ packages:
     engines: {node: '>=6'}
     dev: false
 
-  /lambdafs/2.1.1:
-    resolution: {integrity: sha512-x5k8JcoJWkWLvCVBzrl4pzvkEHSgSBqFjg3Dpsc4AcTMq7oUMym4cL/gRTZ6VM4mUMY+M0dIbQ+V1c1tsqqanQ==}
-    engines: {node: '>= 10.16'}
-    hasBin: true
-    dev: false
-    bundledDependencies:
-      - tar-fs
-
   /language-subtag-registry/0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
     dev: true
@@ -8049,8 +8045,8 @@ packages:
     engines: {node: '>=12'}
     dev: true
 
-  /mailing-core/0.9.7_a37btljrart7w22t3urww6glry:
-    resolution: {integrity: sha512-AOPcYH6WHR1PEBcBl9MGhvkepDRrCP9RHwUOe5wD3Xnl6gueG5Q0WbxYVuVsCuWcTmOLdIAV1AHEOx/TW3jY7w==}
+  /mailing-core/0.9.10_a37btljrart7w22t3urww6glry:
+    resolution: {integrity: sha512-9Bxkwvg8Qo2QV6QS/77Vy1exYBQ4LvlGnBzbJKAsKMDrhmpiD3saPe3xrmk/9S0eHB8nYZkTL3W4fHif9/iE8Q==}
     dependencies:
       chalk: 4.1.2
       fs-extra: 10.1.0
@@ -8059,15 +8055,15 @@ packages:
       node-fetch: 2.6.7_encoding@0.1.13
       node-html-parser: 6.1.1
       open: 8.4.0
-      posthog-node: 2.1.0
+      posthog-node: 2.2.3
     transitivePeerDependencies:
       - debug
       - encoding
       - react
       - react-dom
 
-  /mailing/0.9.7_rgrdbujxlk6q7bs7dqgjykga5u:
-    resolution: {integrity: sha512-pRWU9HM5tMxskmHaOqDQfZim3wtKmR5+SO4RD61OhXqe6gGUz7jzyFW1nYhWvxGaYES7DfLNkip5r0bTy9QReQ==}
+  /mailing/0.9.10_rgrdbujxlk6q7bs7dqgjykga5u:
+    resolution: {integrity: sha512-hLG76FSs8NLmLHOsnhEE1WpN6jVAgks/bJTeQafrp5jW2jZsUqUN1Vot06VVNRQHzg/MC/PC+g5G8PPOB/AE7A==}
     hasBin: true
     peerDependencies:
       next: ^12.0.0 || ^13.0.0
@@ -8103,7 +8099,7 @@ packages:
       html-minifier-terser: 7.0.0
       iron-session: 6.3.1_next@13.1.0
       lodash: 4.17.21
-      mailing-core: 0.9.7_a37btljrart7w22t3urww6glry
+      mailing-core: 0.9.10_a37btljrart7w22t3urww6glry
       mjml: 4.13.0_encoding@0.1.13
       mjml-react: 2.0.8_7tbcn2mecc3yvuxakflodiks3m
       next: 13.1.0_orpxj3vgaelozwpc7iiuainqz4
@@ -8111,8 +8107,6 @@ packages:
       node-html-parser: 6.1.1
       nodemailer: 6.8.0
       open: 8.4.0
-      playwright-aws-lambda: 0.9.0_playwright-core@1.28.1
-      playwright-core: 1.28.1
       postcss: 8.4.18
       posthog-node: 2.2.3
       prettier: 2.7.1
@@ -9750,22 +9744,6 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /playwright-aws-lambda/0.9.0_playwright-core@1.28.1:
-    resolution: {integrity: sha512-MnzLTZ4B9I4JdWJ+eq7BbrhFjL6VyT0bF+ccNjBCwjwlBNQaTEXOcrkAe+p8YkOXnYUqBbsrZj5Ene8PqKosiw==}
-    engines: {node: '>= 8.0.0'}
-    peerDependencies:
-      playwright-core: ^1
-    dependencies:
-      lambdafs: 2.1.1
-      playwright-core: 1.28.1
-    dev: false
-
-  /playwright-core/1.28.1:
-    resolution: {integrity: sha512-3PixLnGPno0E8rSBJjtwqTwJe3Yw72QwBBBxNoukIj3lEeBNXwbNiKrNuB1oyQgTBw5QHUhNO3SteEtHaMK6ag==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: false
-
   /postcss-import/14.1.0_postcss@8.4.18:
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
     engines: {node: '>=10.0.0'}
@@ -9846,14 +9824,6 @@ packages:
       source-map-js: 1.0.2
     dev: false
 
-  /posthog-node/2.1.0:
-    resolution: {integrity: sha512-xr56mZRQo7rnL2YdwbipcxTZeyi5dcI6IM4++wIN7JLYwinrJYcQv01nan4gU4kMy33Qz5qT6boWMQRwpKZJVQ==}
-    engines: {node: '>=14.17.0'}
-    dependencies:
-      axios: 0.27.2
-    transitivePeerDependencies:
-      - debug
-
   /posthog-node/2.2.3:
     resolution: {integrity: sha512-dYlLZhrDus+uRov/Hh+EiRlMoMhRKchNjNa7mNE2iWmKg/ryOTipf0XYKS9UKdki7aU1NzWFhnLe11HF615XuA==}
     engines: {node: '>=14.17.0'}
@@ -9861,7 +9831,6 @@ packages:
       axios: 0.27.2
     transitivePeerDependencies:
       - debug
-    dev: false
 
   /postmark/2.9.5:
     resolution: {integrity: sha512-F27gc6wrxdn7GADodGpECoWez7FK2Pdach7A9ni5vVZiYz1YUY7T68nvVCzxrbWCjOS7ZujyclYlq1C0a4ar1w==}
@@ -11312,6 +11281,17 @@ packages:
     dependencies:
       tslib: 1.14.1
       typescript: 4.9.4
+    dev: true
+
+  /tsx/3.12.3:
+    resolution: {integrity: sha512-Wc5BFH1xccYTXaQob+lEcimkcb/Pq+0en2s+ruiX0VEIC80nV7/0s7XRahx8NnsoCnpCVUPz8wrqVSPi760LkA==}
+    hasBin: true
+    dependencies:
+      '@esbuild-kit/cjs-loader': 2.4.2
+      '@esbuild-kit/core-utils': 3.0.0
+      '@esbuild-kit/esm-loader': 2.5.5
+    optionalDependencies:
+      fsevents: 2.3.2
     dev: true
 
   /tty/1.0.1:

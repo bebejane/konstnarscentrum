@@ -73,14 +73,22 @@ export const Email = {
           approvalUrl={`${process.env.NEXTAUTH_URL}/konstnar/konto/registrera?token=${token}`}
         />
     }),
-  memberInvitation: ({ email, name, link }: { email: string, name: string, link: string }) =>
+  memberInvitation: ({ email, name, token }: { email: string, name: string, token: string, }) =>
     sendMail({
       to: email,
       subject: 'Inbjudan till Konstnärscentrum',
+      /*
+      attachments: [{
+        filename: 'kc_manual_portfolio.pdf',
+        cid: 'kc_manual_portfolio.pdf',
+        //@ts-ignore
+        href: portfolioGuidePdffUrl
+      }],
+      */
       component:
         <MemberInvitation
           name={name}
-          link={`${process.env.NEXTAUTH_URL}/konstnar/konto/inbjudan?email=${email}`}
+          link={`${process.env.NEXTAUTH_URL}/konstnar/konto/inbjudan?token=${token}`}
         />
     }),
   contactForm: ({ fromName, fromEmail, to, subject, fields }: {

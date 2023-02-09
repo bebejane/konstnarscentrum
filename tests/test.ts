@@ -1,6 +1,8 @@
-const dotenv = require("dotenv");
-const { buildClient } = require("@datocms/cma-client-node");
+import * as dotenv from "dotenv";
+import { buildClient } from "@datocms/cma-client-node";
+
 dotenv.config({ path: "./.env" });
+console.time('dur');
 
 (async () => {
 	const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL });
@@ -8,4 +10,5 @@ dotenv.config({ path: "./.env" });
 	const tokens = await client.accessTokens.list();
 	const applicationModelId = models.find((el) => el.api_key === "application").id;
 	console.log(applicationModelId);
+	console.timeEnd('dur');
 })();

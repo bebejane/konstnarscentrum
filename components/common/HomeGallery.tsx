@@ -154,7 +154,7 @@ const Mask = ({ id, size, start }) => {
         clipPath.innerHTML += `<path d="${path}" transform="translate(${randomInt(-200, size.width)},${randomInt(-200, size.height)})"/>`
         await sleep(animationTime / numBlobs)
       }
-      await sleep(100)
+      await sleep(1000)
       clipPath.innerHTML = ''
     }
 
