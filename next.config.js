@@ -76,6 +76,14 @@ const nextOptions = {
 				source: "/fonts/:path*",
 				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
 			},
+			{
+				source: "/edit/:path*",
+				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+			},
+			{
+				source: "/themes/:path*",
+				headers: [{ key: "Access-Control-Allow-Origin", value: "*" }],
+			},
 		];
 	},
 };
