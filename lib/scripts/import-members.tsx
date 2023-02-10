@@ -1,31 +1,31 @@
-//import { hashPassword, generateToken } from "../lib/auth";
 
 import * as dotenv from 'dotenv'
 dotenv.config({ path: "./.env" });
 
 import { buildClient } from '@datocms/cma-client'
 import regions from '../../regions.json';
-import jwt from 'jsonwebtoken';
 import slugify from 'slugify'
 import ExcelJS from 'exceljs';
 import fs from 'fs';
+import jwt from 'jsonwebtoken'
+
 import { Email } from '../emails'
 import { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
 
-
-console.log(process.env)
-
+//const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023).xlsx`;
+const excelFile = `${process.cwd()}/medlemslista-test.xlsx`;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const workbook = new ExcelJS.Workbook();
 const allMembers = [];
 const errors = [];
-const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023).xlsx`;
+
 const environment = "dev";
 const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as string, environment });
 
-const generateToken = async (email) => {
+
+const generateToken = async (email: string): Promise<any> => {
 	return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
-};
+}
 
 console.time("import");
 
@@ -68,6 +68,10 @@ workbook.xlsx.readFile(excelFile).then((doc) => {
 	});
 });
 
+async function createMember() {
+
+}
+
 async function importMembers() {
 
 	let currentMembers = []; //await mainclient.items.list({ filter: { type: "member" } });
@@ -79,6 +83,7 @@ async function importMembers() {
 	const r = {};
 	const slugs = {};
 	const failed = [];
+	const success = [];
 	let insertCount = 0;
 
 	allMembers
@@ -110,46 +115,33 @@ async function importMembers() {
 		let reqs: Promise<Item>[] = [];
 
 		for (let i = 0; i < members.length; i++) {
-			const member = members[i];
-			if (reqs.length < 50 && i + 1 < members.length) {
-				console.log('create member:', member.first_name, member.last_name, member.email)
-				continue;
-				/*
-				reqs.push(
-					client.items.create({
-						item_type: { type: "item_type", id: "1185543" },
-						...member,
-						resettoken: await generateToken(member.email),
-						region: member.region.id,
-					})
-				);
-				*/
-				// TODO Skicka email till member.
-			} else {
-				try {
-					const res = await Promise.allSettled(reqs);
 
-					res.forEach((r) => {
-						if (r.status === "rejected") {
-							failed.push({ member, err: r.reason.response.body.data });
-							console.log(JSON.stringify(r.reason.response.body.data, null, 2));
-						}
-					});
+			const member = {
+				item_type: { type: "item_type", id: "1185543" },
+				...members[i],
+				resettoken: await generateToken(members[i].email),
+				region: members[i].region.id,
+			};
 
-					counter += res.length;
-					console.log(counter, insertCount, "failed=", failed.length);
-					reqs = [];
-				} catch (err) {
-					console.log(err);
-				}
-				await sleep(500);
+			console.log(`create member ${i}/${members.length}:`, member.first_name, member.last_name, member.email)
+
+			try {
+				await client.items.create(member)
+				await Email.memberInvitation({
+					email: member.email,
+					name: `${member.first_name} ${member.last_name}`,
+					token: member.resettoken
+				})
+
+				success.push(member)
+			} catch (err) {
+				failed.push({ member, err });
 			}
+			await sleep(100);
 		}
 	}
 	fs.writeFileSync("./failed.json", JSON.stringify(failed, null, 2));
-
-	await Email.memberInvitation({ email: 'bjorn@konst-teknik.se', name: 'Björn Berglund', link: 'https://localhost:3000' })
-
+	fs.writeFileSync("./success.json", JSON.stringify(failed, null, 2));
 	console.timeEnd("import");
 	process.exit(0);
 }

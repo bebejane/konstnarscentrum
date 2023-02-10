@@ -116,11 +116,13 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 						required: true,
 						validate: (val: string) => validatePassword(val) ?? true
 					})}
+					autoComplete={"new-password"}
 					className={errors.passsord && styles.error}
 				/>
 				<input
 					type="password"
 					placeholder="Upprepa lösenord..."
+					autoComplete={"new-password"}
 					{...register("password2", {
 						required: true,
 						validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true

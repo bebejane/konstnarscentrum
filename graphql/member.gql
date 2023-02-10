@@ -40,10 +40,7 @@ query MemberBySlug($slug: String!) {
 
 query MemberByPasswordToken($token: String!) {
 	member(filter: { resettoken: { eq: $token } }) {
-		id
-		email
-		firstName
-		lastName
+		...MemberFragment
 	}
 }
 

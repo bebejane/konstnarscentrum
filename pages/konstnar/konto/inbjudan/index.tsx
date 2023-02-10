@@ -3,7 +3,7 @@ import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import SignOut from "/components/account/SignOut";
-import { MemberDocument } from "/graphql";
+import { MemberDocument, MemberByPasswordTokenDocument } from "/graphql";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -35,12 +35,14 @@ AccountInvitation.page = { title: 'Konto', crumbs: [{ title: 'Konto', regional: 
 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
-	const email = context.query.email
-	const { member } = await apiQuery(MemberDocument, { variables: { email } })
+	const token = context.query.token
+	console.log(token)
+	const { member } = await apiQuery(MemberByPasswordTokenDocument, { variables: { token } })
 
-	if (!member || !email)
+	if (!member)
 		return { notFound: true }
 
+	console.log(member)
 	return {
 		props: {
 			...props,

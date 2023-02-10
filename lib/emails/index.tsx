@@ -77,14 +77,14 @@ export const Email = {
     sendMail({
       to: email,
       subject: 'Inbjudan till Konstnärscentrum',
-      /*
+
       attachments: [{
         filename: 'kc_manual_portfolio.pdf',
         cid: 'kc_manual_portfolio.pdf',
         //@ts-ignore
         href: portfolioGuidePdffUrl
       }],
-      */
+
       component:
         <MemberInvitation
           name={name}
