@@ -36,7 +36,12 @@ function App({ Component, pageProps }) {
 
   return (
     <>
-      <DefaultDatoSEO site={site} path={router.pathname} siteTitle="Konstnärscentrum" title={title} />
+      <DefaultDatoSEO
+        site={site}
+        path={router.pathname}
+        siteTitle="Konstnärscentrum"
+        title={title}
+      />
       <GoogleAnalytics
         strategy={'afterInteractive'}
         trackPageViews={{ ignoreHashChange: true }}

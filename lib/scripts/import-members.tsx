@@ -123,7 +123,7 @@ async function importMembers() {
 				region: members[i].region.id,
 			};
 
-			console.log(`create member ${i}/${members.length}:`, member.first_name, member.last_name, member.email)
+			console.log(`[${i}/${members.length} (${x}/${Object.keys(r).length})]`, member.first_name, member.last_name, member.email)
 
 			try {
 				await client.items.create(member)
@@ -135,6 +135,7 @@ async function importMembers() {
 
 				success.push(member)
 			} catch (err) {
+				console.log('FAILED', member.email)
 				failed.push({ member, err });
 			}
 			await sleep(100);
