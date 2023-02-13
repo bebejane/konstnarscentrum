@@ -26,6 +26,7 @@ const generateToken = async (email: string): Promise<any> => {
 	return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
 }
 
+process.exit(0)
 console.time("import");
 
 workbook.xlsx.readFile(excelFile).then((doc) => {
