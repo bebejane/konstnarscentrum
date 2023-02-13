@@ -131,7 +131,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 					/>
 					<ErrorMessage id="birthPlace" errors={errors} />
 
-					<label htmlFor="city">Arbetar i</label>
+					<label htmlFor="city">Verksam i stad</label>
 					<input
 						id="city"
 						name="city"
