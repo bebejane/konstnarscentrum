@@ -193,14 +193,6 @@ export const truncateParagraph = (s: string, sentances: number = 1, ellipsis: bo
   let str = s.substring(0, isQuestion ? qIndex : dotIndex) //`${s.substring(0, minLength - 1)}${s.substring(minLength - 1).split('.').slice(0, sentances).join('. ')}`
   return `${str}${ellipsis ? '...' : isQuestion ? '?' : '.'}`;
 }
-/*
-console.log(truncateParagraph(`
-  Lorem Ipsum is simply dummy text of the printing and? typesetting industry Lorem Ipsum has been the 
-  industry's standard dummy text ever since the 1500s?? Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the 
-  industry's standard dummy text ever since the 1500s`, 1, false
-))
-*/
-
 
 export const isEmptyObject = (obj: any) => Object.keys(obj).filter(k => obj[k] !== undefined).length === 0
 

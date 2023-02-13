@@ -8,7 +8,7 @@ import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader, ErrorMo
 import { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { DatoSEO } from "dato-nextjs-utils/components";
-
+import { capitalize } from "/lib/utils";
 import useStore from "/lib/store";
 
 export type Props = {
@@ -99,6 +99,7 @@ export default function Member({ member: {
 		setImages(imageId ? images : undefined)
 	}, [imageId])
 
+
 	return (
 		<>
 			<DatoSEO title={member.fullName} description={member.bio} seo={member._seoMetaTags} />
@@ -118,7 +119,7 @@ export default function Member({ member: {
 							{ title: 'Född', value: `${yearOfBirth}${birthPlace ? `, ${birthPlace}` : ''}` },
 							{ title: 'Verksam', value: city },
 							{ title: 'Kontakt', value: email },
-							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => categoryType).join(', ') },
+							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => capitalize(categoryType)).join(', ') },
 							{ title: 'Besök', value: !weblinks.length ? undefined : weblinks.map(({ label, url }, idx) => <><a key={idx} href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</>) }
 						]}
 					/>
