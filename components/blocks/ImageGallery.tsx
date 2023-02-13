@@ -19,21 +19,25 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 	const [captionHeight, setCaptionHeight] = useState<number | undefined>()
 
 	const calculatePositions = useCallback(() => {
+
+		console.log(Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('img')))
 		Array.from(containerRef.current.querySelectorAll<HTMLImageElement>('picture>img')).forEach(img => {
-			setArrowMarginTop((state) => img.clientHeight > state ? img.clientHeight / 2 : state)
+			setArrowMarginTop((state) => img.clientHeight / 2 > state ? img.clientHeight / 2 : state)
 		})
 
 		let figcaptionHeight = 0
+
 		Array.from(containerRef.current.querySelectorAll<HTMLDivElement>('figure>figcaption')).forEach(caption => {
 			caption.style.minHeight = '0px'
 			figcaptionHeight = caption.clientHeight > figcaptionHeight || !figcaptionHeight ? caption.clientHeight : figcaptionHeight
 			caption.style.minHeight = `${figcaptionHeight}px`
 		})
 
-	}, [setArrowMarginTop, setCaptionHeight])
+	}, [setArrowMarginTop])
 
 	useEffect(() => {
 		calculatePositions()
+
 	}, [innerHeight, innerWidth, calculatePositions])
 
 	return (
@@ -71,7 +75,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 			{images.length > 3 &&
 				<div
 					className={s.next}
-					style={{ top: `${arrowMarginTop}px` }}
+					style={{ top: `${arrowMarginTop}px`, display: arrowMarginTop ? 'flex' : 'none' }}
 					onClick={() => swiperRef.current?.slideNext()}
 				>→</div>
 			}
