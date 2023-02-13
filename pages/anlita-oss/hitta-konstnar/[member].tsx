@@ -37,6 +37,7 @@ export default function Member({ member: {
 	const [preview, setPreview] = useState(false)
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
+	const isIncomplete = member.content.length === 0 || member.content.filter((block) => block.image.length > 0 || block.video).length === 0
 
 	const handleSave = useCallback(async (data: MemberModelContentField[], image?: FileField) => {
 
@@ -117,22 +118,24 @@ export default function Member({ member: {
 							{ title: 'Besök', value: '' }
 						]}
 					/>
-					{member.content?.length > 0 &&
-						<h2 className="noPadding">Utvalda verk</h2>
+					{!isIncomplete &&
+						<>
+							<h2 className="noPadding">Utvalda verk</h2>
+							{member.content?.map((block, idx) =>
+								<Block
+									key={`${id}-${idx}`}
+									data={block}
+									record={member}
+									onClick={(id) => setImageId(id)}
+									editable={{
+										...block,
+										id: block.id,
+										type: block.__typename,
+										index: idx
+									}} />
+							)}
+						</>
 					}
-					{member.content?.map((block, idx) =>
-						<Block
-							key={`${id}-${idx}`}
-							data={block}
-							record={member}
-							onClick={(id) => setImageId(id)}
-							editable={{
-								...block,
-								id: block.id,
-								type: block.__typename,
-								index: idx
-							}} />
-					)}
 					{isEditable &&
 						<Portfolio
 							key={member.id}
