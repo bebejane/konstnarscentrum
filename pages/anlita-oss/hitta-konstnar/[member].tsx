@@ -23,6 +23,7 @@ export default function Member({ member: {
 	lastName,
 	bio,
 	birthPlace,
+	instagram,
 	yearOfBirth,
 	webpage,
 	memberCategory,
@@ -40,6 +41,7 @@ export default function Member({ member: {
 	const { data, status } = useSession()
 	const isEditable = (status === 'authenticated' && data.user.email === email)
 	const isIncomplete = !member.content || member.content?.length === 0 || member.content?.filter((block) => block.image?.length > 0 || block.video).length === 0
+	const weblinks = [webpage ? { label: 'Hemsida', url: webpage } : undefined, instagram ? { label: 'Instagram', url: instagram } : undefined].filter(el => el)
 
 	const handleSave = useCallback(async (data: MemberModelContentField[], image?: FileField) => {
 
@@ -117,7 +119,7 @@ export default function Member({ member: {
 							{ title: 'Verksam', value: city },
 							{ title: 'Kontakt', value: email },
 							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => categoryType).join(', ') },
-							{ title: 'Besök', value: webpage }
+							{ title: 'Besök', value: !weblinks.length ? undefined : weblinks.map(({ label, url }, idx) => <><a key={idx} href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</>) }
 						]}
 					/>
 					{!isIncomplete &&
