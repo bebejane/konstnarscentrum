@@ -16,7 +16,7 @@ export default function MetaSection({ items = [] }: Props) {
         <tbody>
           {items.filter(({ value, title }) => value && title).map(({ title, value }, idx) =>
             <tr key={idx}>
-              <td><span>{title}:</span></td>
+              <td><span>{title}</span></td>
               <td>{isEmail(value) ? <a href={`mailto:${value}`}>E-post</a> : <>{value}</>}</td>
             </tr>
           )}
