@@ -245,21 +245,19 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
 
   let reqs = []
   for (let skip = size; skip < count; skip += size) {
-
+    console.log(skip, count)
     if (reqs.length < 50 && skip + size < count) {
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
     } else {
+
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
       const data = await Promise.allSettled(reqs)
-
-      const response = data.find(isFulfilled)?.value
       const error = data.find(isRejected)?.reason
-
       if (error)
         throw new Error(error)
 
-      for (let x = 0; x < response.length; x++)
-        mergeProps(response[x].value);
+      for (let x = 0; x < data.length; x++)
+        mergeProps(data[x].value);
       await sleep(100)
       reqs = []
     }

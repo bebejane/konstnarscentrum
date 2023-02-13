@@ -104,7 +104,6 @@ async function importMembers() {
 		} regions...`
 	);
 
-	//return
 	for (let x = 0; x < Object.keys(r).length; x++) {
 		const { members } = r[Object.keys(r)[x]];
 		const apiToken = process.env[`GRAPHQL_API_TOKEN_${members[0].region.slug.toUpperCase()}`];
@@ -122,7 +121,7 @@ async function importMembers() {
 			console.log(`[${i}/${members.length} (${x}/${Object.keys(r).length})]`, member.first_name, member.last_name, member.email)
 
 			try {
-				/*
+
 				await client.items.create(member)
 				await Email.memberInvitation({
 					email: member.email,
@@ -132,7 +131,7 @@ async function importMembers() {
 
 				success.push(member)
 				fs.writeFileSync("./success.json", JSON.stringify(success, null, 2));
-				*/
+
 			} catch (err) {
 				console.log('FAILED', member.email)
 				failed.push({ member, err });
