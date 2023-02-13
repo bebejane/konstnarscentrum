@@ -1,0 +1,1141 @@
+[
+  {
+    "id": "115755806",
+    "type": "item",
+    "first_name": "Saad",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "42767416"
+    },
+    "password": "",
+    "content": [
+      "115822339",
+      "115822446",
+      "115824520"
+    ],
+    "last_name": "Hajo",
+    "resettoken": "",
+    "full_name": "Saad Hajo",
+    "email": "info@saadhajo.com",
+    "bio": "Independent Syrian-Swedish cartoonist and animator \nBorn in Damascus 1968, based in Norrköping, Sweden, since 2005.\nWorking more than two decades as editorial cartoonist. Published on a daily basis mostly in Arabic or Arabic-speaking journals.\nPublished on Folkbladet newspaper, Norrköping, Sweden and Courrier International, Paris, France.\nHeld and/or participated in many international exhibitions\n",
+    "slug": "saad-hajou",
+    "year_of_birth": "1968",
+    "birth_place": "Damaskus",
+    "city": "Norrköping",
+    "webpage": "https://www.saadhajo.com/",
+    "instagram": "https://www.instagram.com/cartoonist_saad_hajo/",
+    "member_category": [
+      "143696851",
+      "143696850"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662355",
+      "roleId": "133331",
+      "name": "Mitt",
+      "email": "mitt@konstnarscentrum.org",
+      "tokenId": "138887",
+      "slug": "mitt",
+      "global": false,
+      "position": 4
+    },
+    "updated_at": "2023-02-07T17:53:09.447+01:00",
+    "created_at": "2023-02-07T14:26:13.100+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "37886",
+      "type": "user"
+    },
+    "meta": {
+      "created_at": "2023-02-07T14:26:13.100+01:00",
+      "updated_at": "2023-02-07T17:53:09.447+01:00",
+      "published_at": "2023-02-07T17:53:09.498+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-02-07T14:26:13.150+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "223790837",
+      "stage": null
+    }
+  },
+  {
+    "id": "109287739",
+    "type": "item",
+    "first_name": "Klara",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "40381746"
+    },
+    "password": "",
+    "content": [
+      "113296764",
+      "113539132",
+      "113262925",
+      "113296776",
+      "114810053"
+    ],
+    "last_name": "Ström",
+    "resettoken": "",
+    "full_name": "Klara Ström",
+    "email": "klarastrom@live.se",
+    "bio": "Klara Ström (f: 1990, Tanum, Sverige) är konstnär med bas i Göteborg. Hennes arbete tar form i varierande medium såsom performance, skulptur och installation. Ström arbetar tematisk med text och röst i performance där karaktärer skildras med hjälp av kostym och scenografi. Hon utforskar teman som rädsla, hämnd, arv och förlust genom mytologiska och religiösa berättelser, samt sagor och folklore. Ströms skulpturer och installationer tar form i historietunga material såsom tenn, trä och sten. Hon är utbildad vid Konstfack i Stockholm och Kunsthøgskolen i Oslo. ",
+    "slug": "klara-strom",
+    "year_of_birth": "1990",
+    "birth_place": "Tanum",
+    "city": "Göteborg",
+    "webpage": "https://klarastrom.se",
+    "instagram": "https://www.instagram.com/klara_strom_din_drom/",
+    "member_category": [
+      "77987805",
+      "65724291",
+      "143696850"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685113",
+      "roleId": "111106",
+      "name": "Väst",
+      "email": "vast@konstnarscentrum.org",
+      "tokenId": "115326",
+      "slug": "vast",
+      "global": false,
+      "position": 3
+    },
+    "updated_at": "2023-02-06T17:19:34.910+01:00",
+    "created_at": "2023-02-01T10:56:12.703+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "36152",
+      "type": "user"
+    },
+    "meta": {
+      "created_at": "2023-02-01T10:56:12.703+01:00",
+      "updated_at": "2023-02-06T17:19:34.910+01:00",
+      "published_at": "2023-02-06T17:19:34.968+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-02-01T10:56:12.731+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "222281973",
+      "stage": null
+    }
+  },
+  {
+    "id": "107666236",
+    "type": "item",
+    "first_name": "Sahar",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "38162406"
+    },
+    "password": "",
+    "content": [
+      "107745153",
+      "107745157",
+      "107745160",
+      "107745178",
+      "107745438"
+    ],
+    "last_name": "Burhan",
+    "resettoken": "",
+    "full_name": "Sahar Burhan",
+    "email": "saharburhan@gmail.com",
+    "bio": "Sahar Burhan, visuell konstnär (f. 1967, Damaskus)\nHar Filosofie Masterexamen, Linköpings Universitet, 2013 - 2015. En generell examen på avancerad nivå. Kandidatexamen i fri konst, måleriinriktning, 1985 - 1989. Fakulteten för konst, Damaskus Universitet.\nHar grundat och drivit Galleri Kameleont i Norrköping 2010 - 2022 producerat och koordinerat utställningar, föreläsningar, workshops, seminarier och konstprojekt.\nHar fått Moa Martinsons stora kulturstipendium, 2022, Norrköpings Kommun.  \n",
+    "slug": "sahar-burhan",
+    "year_of_birth": "1967",
+    "birth_place": "Damaskus",
+    "city": "Norrköping",
+    "webpage": "https://gallerikameleont.wordpress.com/",
+    "instagram": "https://www.instagram.com/saharburhan/",
+    "member_category": [
+      "77987805",
+      "65700100",
+      "143696850",
+      "143696849"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662355",
+      "roleId": "133331",
+      "name": "Mitt",
+      "email": "mitt@konstnarscentrum.org",
+      "tokenId": "138887",
+      "slug": "mitt",
+      "global": false,
+      "position": 4
+    },
+    "updated_at": "2023-01-31T11:49:07.715+01:00",
+    "created_at": "2023-01-30T13:55:10.820+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "36152",
+      "type": "user"
+    },
+    "meta": {
+      "created_at": "2023-01-30T13:55:10.820+01:00",
+      "updated_at": "2023-01-31T11:49:07.715+01:00",
+      "published_at": "2023-01-31T11:49:07.773+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-01-30T13:55:10.857+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "211212964",
+      "stage": null
+    }
+  },
+  {
+    "id": "107665355",
+    "type": "item",
+    "first_name": "Anna",
+    "image": null,
+    "password": "",
+    "content": [],
+    "last_name": "Ridderstad",
+    "resettoken": "",
+    "full_name": "Anna Ridderstad",
+    "email": "anna.ridderstad@gmail.com",
+    "bio": "",
+    "slug": "anna-ridderstad",
+    "year_of_birth": "",
+    "birth_place": "",
+    "city": "",
+    "webpage": "",
+    "instagram": "",
+    "member_category": [],
+    "application": null,
+    "region": {
+      "id": "143685114",
+      "roleId": "111107",
+      "name": "Öst",
+      "email": "ost@konstnarscentrum.org",
+      "tokenId": "115327",
+      "slug": "ost",
+      "global": false,
+      "position": 5
+    },
+    "updated_at": "2023-01-30T13:49:06.892+01:00",
+    "created_at": "2023-01-30T13:49:06.889+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "36152",
+      "type": "user"
+    },
+    "meta": {
+      "created_at": "2023-01-30T13:49:06.889+01:00",
+      "updated_at": "2023-01-30T13:49:06.892+01:00",
+      "published_at": "2023-01-30T13:49:06.919+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-01-30T13:49:06.919+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "210110190",
+      "stage": null
+    }
+  },
+  {
+    "id": "143696912",
+    "type": "item",
+    "first_name": "Elisabeth",
+    "image": {
+      "alt": null,
+      "title": "Elisabeth Moritz, Postmemory. Installation på Avesta Art, 2021. Foto: Elisabeth Moritz",
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "48797065"
+    },
+    "password": "",
+    "content": [
+      "143702669",
+      "143702671",
+      "143702670"
+    ],
+    "last_name": "Moritz",
+    "resettoken": "",
+    "full_name": "Elisabeth Moritz",
+    "email": "emoritz.elisabeth@gmail.com",
+    "bio": "Elisabeth Moritz är konstnär baserad i Malmö, utbildad vid konstakademin i Paris, som primärt arbetar med teckning och cut-outs i fotografi. Moritz arbete utforskar genom bearbetning av gamla familjefotografier kopplingar mellan historia och samtid, där den personliga familjehistorien blir bakgrund till bredare reflektioner om nutidens antidemokratiska politiska strömningar och historiens kollektiva skuld.",
+    "slug": "elisabeth-moritz",
+    "year_of_birth": "1956",
+    "birth_place": "Lund",
+    "city": "Malmö",
+    "webpage": "https://elisabethmoritz.com/",
+    "instagram": "https://www.instagram.com/emoritz.elisabeth/",
+    "member_category": [
+      "143696849",
+      "143696850"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662358",
+      "roleId": "133333",
+      "name": "Syd",
+      "email": "syd@konstnarscentrum.org",
+      "tokenId": "138888",
+      "slug": "syd",
+      "global": false,
+      "position": 6
+    },
+    "updated_at": "2023-01-24T10:44:52.891+01:00",
+    "created_at": "2022-11-24T23:04:44.316+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-11-24T23:04:44.316+01:00",
+      "updated_at": "2023-01-24T10:44:52.891+01:00",
+      "published_at": "2023-01-24T10:44:52.935+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-11-24T23:04:44.341+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "199809412",
+      "stage": null
+    }
+  },
+  {
+    "id": "98085006",
+    "type": "item",
+    "first_name": "Jakob",
+    "image": {
+      "alt": null,
+      "title": "Offentligt verk för Istaskolan i Västerås. Foto: Jakob Ojanen",
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "35096268"
+    },
+    "password": "",
+    "content": [
+      "98085004",
+      "98085005"
+    ],
+    "last_name": "Ojanen",
+    "resettoken": "",
+    "full_name": "Jakob Ojanen",
+    "email": "jakob@jakobojanen.com",
+    "bio": "Jakob Ojanen är konstnär utbildad vid Konstfack (MFA, 2008) och Kungl. Konsthögskolan (projektstudent grafik, 2016).",
+    "slug": "jakob-ojanen",
+    "year_of_birth": "1980",
+    "birth_place": "Västerås",
+    "city": "Stockholm",
+    "webpage": "https://jakobojanen.com",
+    "instagram": "https://www.instagram.com/jakobojanen/",
+    "member_category": [
+      "143696849",
+      "65724291"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685114",
+      "roleId": "111107",
+      "name": "Öst",
+      "email": "ost@konstnarscentrum.org",
+      "tokenId": "115327",
+      "slug": "ost",
+      "global": false,
+      "position": 5
+    },
+    "updated_at": "2023-01-24T10:39:18.923+01:00",
+    "created_at": "2023-01-19T18:17:47.605+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2023-01-19T18:17:47.605+01:00",
+      "updated_at": "2023-01-24T10:39:18.923+01:00",
+      "published_at": "2023-01-24T10:39:18.979+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-01-19T18:17:47.649+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "199805437",
+      "stage": null
+    }
+  },
+  {
+    "id": "71185733",
+    "type": "item",
+    "first_name": "Stina",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "28531317"
+    },
+    "password": "",
+    "content": [
+      "77368257",
+      "71185732"
+    ],
+    "last_name": "Siljing",
+    "resettoken": "",
+    "full_name": "Stina Siljing",
+    "email": "stinasiljing@yahoo.se",
+    "bio": "Stina Siljing arbetar med måleri, skulptur, objekt, installationer samt offentliga gestaltningar, och är verksam i Kalmar på Lindöateljéerna. Siljing är representerad på Moderna museet, Smålands konstarkiv och ett flertal regioner och kommuner i hel landet.",
+    "slug": "stina-siljing",
+    "year_of_birth": "",
+    "birth_place": "",
+    "city": "Kalmar",
+    "webpage": "https://stinasiljing.com",
+    "instagram": "https://www.instagram.com/stinasiljingart/",
+    "member_category": [
+      "143696849",
+      "65724291",
+      "143696850"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662358",
+      "roleId": "133333",
+      "name": "Syd",
+      "email": "syd@konstnarscentrum.org",
+      "tokenId": "138888",
+      "slug": "syd",
+      "global": false,
+      "position": 6
+    },
+    "updated_at": "2023-01-24T10:38:19.866+01:00",
+    "created_at": "2022-12-13T19:13:41.692+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-13T19:13:41.692+01:00",
+      "updated_at": "2023-01-24T10:38:19.866+01:00",
+      "published_at": "2023-01-24T10:38:19.911+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-13T19:13:41.729+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "199804880",
+      "stage": null
+    }
+  },
+  {
+    "id": "98091936",
+    "type": "item",
+    "first_name": "Åsa",
+    "image": {
+      "alt": null,
+      "title": "Åsa Cederqvist, Tecken (sinnligheten), 2022. Foto: Daniel Ekbladh",
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "35096385"
+    },
+    "password": "",
+    "content": [
+      "98091934",
+      "98091935"
+    ],
+    "last_name": "Cederqvist",
+    "resettoken": "",
+    "full_name": "Åsa Cederqvist",
+    "email": "mail@asacederqvist.com",
+    "bio": "Åsa Cederqvists konstnärskap verkar i skärningspunkten mellan visuell konst, film och koreografi. Hennes pågående undersökning av tillblivelsen genom performativa gester resulterar i skulpturala objekt och film som uppstår i ett symbiotiskt förhållande. Åsa Cederqvist är utbildad vid Konstfack och Kungliga konsthögskolan i Stockholm.",
+    "slug": "asa-cederqvist",
+    "year_of_birth": "1975",
+    "birth_place": "--",
+    "city": "Stockholm",
+    "webpage": "https://asacederqvist.com",
+    "instagram": "https://www.instagram.com/studioasacederqvist/",
+    "member_category": [
+      "143696851",
+      "77987805",
+      "65700100",
+      "143696850"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685114",
+      "roleId": "111107",
+      "name": "Öst",
+      "email": "ost@konstnarscentrum.org",
+      "tokenId": "115327",
+      "slug": "ost",
+      "global": false,
+      "position": 5
+    },
+    "updated_at": "2023-01-24T10:30:51.683+01:00",
+    "created_at": "2023-01-19T18:49:05.273+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2023-01-19T18:49:05.273+01:00",
+      "updated_at": "2023-01-24T10:30:51.683+01:00",
+      "published_at": "2023-01-24T10:30:51.739+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-01-19T18:49:05.313+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "199800420",
+      "stage": null
+    }
+  },
+  {
+    "id": "65724271",
+    "type": "item",
+    "first_name": "Roxy",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "26931784"
+    },
+    "password": "",
+    "content": [
+      "71976680",
+      "65724270"
+    ],
+    "last_name": "Farhat",
+    "resettoken": "",
+    "full_name": "Roxy Farhat",
+    "email": "roxy@roxyfarhat.com",
+    "bio": "Roxy Farhat (f. 1984, Iran), är en svensk konstnär och regissör. Farhats konstnärliga praktik innefattar en rad olika uttryckssätt: performance, videokonst, musikvideos, film, med mera, där feminism, antikapitalism och absurditet är återkommande teman. Hon är utbildad vid Konstfack i Stockholm och UCLA i Los Angeles, USA.",
+    "slug": "roxy-farhat",
+    "year_of_birth": "1984",
+    "birth_place": "Tehran",
+    "city": "Stockholm",
+    "webpage": "https://www.roxyfarhat.com",
+    "instagram": "",
+    "member_category": [
+      "143696850",
+      "77987805",
+      "143696851"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685114",
+      "roleId": "111107",
+      "name": "Öst",
+      "email": "ost@konstnarscentrum.org",
+      "tokenId": "115327",
+      "slug": "ost",
+      "global": false,
+      "position": 5
+    },
+    "updated_at": "2023-01-24T08:30:42.543+01:00",
+    "created_at": "2022-12-06T15:55:01.070+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T15:55:01.070+01:00",
+      "updated_at": "2023-01-24T08:30:42.543+01:00",
+      "published_at": "2023-01-24T08:30:42.587+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T15:55:01.122+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "199705413",
+      "stage": null
+    }
+  },
+  {
+    "id": "87752478",
+    "type": "item",
+    "first_name": "Dan",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "31648928"
+    },
+    "password": "",
+    "content": [
+      "87752475",
+      "87752476",
+      "87752477"
+    ],
+    "last_name": "Lageryd",
+    "resettoken": "",
+    "full_name": "Dan Lageryd",
+    "email": "dan@danlageryd.com",
+    "bio": "Dan Lageryd är konstnär, filmare och fotograf. I sin konstnärliga praktik arbetar han utifrån teman som perception, repetition och urbanitet. Som konstnär och konstkonsult är hans ambition att aktivera seendet samt skapa gemenskaper och nya rumsligheter genom förskjutningar och poetiska interventioner i det offentliga rummet. Dan har bland annat studerat fotografi och skulptur på Konstfack samt arkitekturteori- och historia på Kungl. Konsthögskolan.",
+    "slug": "dan-lageryd",
+    "year_of_birth": "–",
+    "birth_place": "–",
+    "city": "Stockholm",
+    "webpage": "https://danlageryd.com",
+    "instagram": "https://www.instagram.com/danlageryd/",
+    "member_category": [
+      "82805333",
+      "143696851"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685114",
+      "roleId": "111107",
+      "name": "Öst",
+      "email": "ost@konstnarscentrum.org",
+      "tokenId": "115327",
+      "slug": "ost",
+      "global": false,
+      "position": 5
+    },
+    "updated_at": "2023-01-05T10:55:05.391+01:00",
+    "created_at": "2023-01-05T10:53:44.774+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2023-01-05T10:53:44.774+01:00",
+      "updated_at": "2023-01-05T10:55:05.391+01:00",
+      "published_at": "2023-01-05T10:55:05.427+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2023-01-05T10:53:44.811+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "171276879",
+      "stage": null
+    }
+  },
+  {
+    "id": "84144302",
+    "type": "item",
+    "first_name": "Gitte",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "30587170"
+    },
+    "password": "",
+    "content": [
+      "84144299",
+      "84144300",
+      "84144301"
+    ],
+    "last_name": "Eidslott",
+    "resettoken": "",
+    "full_name": "Gitte Eidslott",
+    "email": "eidslottgitte@gmail.com",
+    "bio": "Gitte Eidslott är konstnär baserad i Malmö.",
+    "slug": "gitte-eidslott",
+    "year_of_birth": "--",
+    "birth_place": "--",
+    "city": "Malmö",
+    "webpage": "https://www.instagram.com/gitte_eidslott/",
+    "instagram": "https://www.instagram.com/gitte_eidslott/",
+    "member_category": [
+      "143696849"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662358",
+      "roleId": "133333",
+      "name": "Syd",
+      "email": "syd@konstnarscentrum.org",
+      "tokenId": "138888",
+      "slug": "syd",
+      "global": false,
+      "position": 6
+    },
+    "updated_at": "2023-01-01T12:10:04.793+01:00",
+    "created_at": "2022-12-30T09:42:15.785+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-30T09:42:15.785+01:00",
+      "updated_at": "2023-01-01T12:10:04.793+01:00",
+      "published_at": "2023-01-01T12:10:04.843+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-30T09:42:15.821+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "165816583",
+      "stage": null
+    }
+  },
+  {
+    "id": "65802560",
+    "type": "item",
+    "first_name": "Eric",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "30214217"
+    },
+    "password": "",
+    "content": [
+      "82805367",
+      "82805368"
+    ],
+    "last_name": "Magassa",
+    "resettoken": "",
+    "full_name": "Eric Magassa",
+    "email": "eric@magassa.com",
+    "bio": "Eric Magassa (född 1972) arbetar tvärkonstnärligt med måleri, fotografi och collage genom vilka han utforskar frågor om identitet, mellanförskap och dess koppling till minnen och platser. Tidigare utställningar omfattar bl.a. Göteborgs Konstmuseum (2022), Marres House for Contemporary Culture, Maastricht, Nederländerna (2021), Göteborg International Biennial for Contemporary Art GIBCA (2019), Valongo Festival, Santos, Brasilien (2019), Alingsås konsthall (2019) och medverkat i Modernautställningen på Moderna Museet, Stockholm (2018).",
+    "slug": "eric-magassa",
+    "year_of_birth": "1972",
+    "birth_place": "–",
+    "city": "Göteborg",
+    "webpage": "http://www.magassa.com",
+    "instagram": "https://www.instagram.com/ericmagassa/",
+    "member_category": [
+      "143696849",
+      "82805333"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685113",
+      "roleId": "111106",
+      "name": "Väst",
+      "email": "vast@konstnarscentrum.org",
+      "tokenId": "115326",
+      "slug": "vast",
+      "global": false,
+      "position": 3
+    },
+    "updated_at": "2022-12-28T15:39:36.971+01:00",
+    "created_at": "2022-12-06T16:45:51.983+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T16:45:51.983+01:00",
+      "updated_at": "2022-12-28T15:39:36.971+01:00",
+      "published_at": "2022-12-28T15:39:37.018+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T16:45:52.017+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "160004195",
+      "stage": null
+    }
+  },
+  {
+    "id": "143696826",
+    "type": "item",
+    "first_name": "Carolina",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "48797044"
+    },
+    "password": "",
+    "content": [
+      "143702610",
+      "143702611",
+      "143702612"
+    ],
+    "last_name": "Jonsson",
+    "resettoken": "",
+    "full_name": "Carolina Jonsson",
+    "email": "info@carolinajonsson.com",
+    "bio": "Carolina Jonssons praktik refererar ofta till måleri, och vid första anblick kan en video uppfattas som en målning som rör på sig. Jonsson är arkitekten bakom Ecolonia-arkivet; som samlar material, uppfattningar och förnimmelser funna i vardagslivet och i naturen.",
+    "slug": "carolina-jonsson",
+    "year_of_birth": "1975",
+    "birth_place": "Lidköping",
+    "city": "--",
+    "webpage": "https://www.carolinajonsson.com",
+    "instagram": "https://www.instagram.com/carolinajonssonstudio/",
+    "member_category": [
+      "143696850",
+      "143696851"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685113",
+      "roleId": "111106",
+      "name": "Väst",
+      "email": "vast@konstnarscentrum.org",
+      "tokenId": "115326",
+      "slug": "vast",
+      "global": false,
+      "position": 3
+    },
+    "updated_at": "2022-12-21T11:30:15.437+01:00",
+    "created_at": "2022-11-24T22:21:08.564+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-11-24T22:21:08.564+01:00",
+      "updated_at": "2022-12-21T11:30:15.437+01:00",
+      "published_at": "2022-12-21T11:30:15.491+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-11-24T22:21:08.588+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "149815751",
+      "stage": null
+    }
+  },
+  {
+    "id": "65801312",
+    "type": "item",
+    "first_name": "Maria",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "25171862"
+    },
+    "password": "",
+    "content": [
+      "65801311"
+    ],
+    "last_name": "Lewis",
+    "resettoken": "",
+    "full_name": "Maria Lewis",
+    "email": "info@marialewis.se",
+    "bio": "Maria Lewis är konstnär verksam i Gävle. Lewis är utbildad i textildesign vid Accademia Italiana Moda i Florens 1989-91, samt i metallformgivning (\"jewelry & metalsmithing\") vid Skidmore College i New York 1993-95. Maria Lewis är ordförande i Konstnärscentrum Nord.",
+    "slug": "maria-lewis",
+    "year_of_birth": "1963",
+    "birth_place": "--",
+    "city": "Gävle",
+    "webpage": "http://www.marialewis.se",
+    "instagram": "",
+    "member_category": [
+      "65700100"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662356",
+      "roleId": "133332",
+      "name": "Nord",
+      "email": "nord@konstnarscentrum.org",
+      "tokenId": "138889",
+      "slug": "nord",
+      "global": false,
+      "position": 2
+    },
+    "updated_at": "2022-12-21T10:57:31.579+01:00",
+    "created_at": "2022-12-06T16:23:34.686+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T16:23:34.686+01:00",
+      "updated_at": "2022-12-21T10:57:31.579+01:00",
+      "published_at": "2022-12-21T10:57:31.632+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T16:23:34.752+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "149774469",
+      "stage": null
+    }
+  },
+  {
+    "id": "65724348",
+    "type": "item",
+    "first_name": "Eva",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "25036845"
+    },
+    "password": "",
+    "content": [
+      "65724347"
+    ],
+    "last_name": "Fornåå",
+    "resettoken": "",
+    "full_name": "Eva Fornåå",
+    "email": "eva.fornaa@gmail.com",
+    "bio": "Eva Fornåå (f. 1962, Göteborg) är utbildad vid Hovedskous målarskola (1985-87) samt har en Master of Fine Arts från Konsthögskolan i Umeå (1987-92). Eva Fornåå har genomfört ett åttiotal offentliga gestaltningar runt om i Sverige på sjukhus, vårdcentraler, äldre- samt vårdboenden, skolor, förskolor, idrottsplatser, parker, torg, rondeller, bibliotek, bostadsområden, m.m.",
+    "slug": "eva-fornaa",
+    "year_of_birth": "1962",
+    "birth_place": "Göteborg",
+    "city": "Motala",
+    "webpage": "http://www.evafornaa.se",
+    "instagram": "",
+    "member_category": [
+      "65724291"
+    ],
+    "application": null,
+    "region": {
+      "id": "143662355",
+      "roleId": "133331",
+      "name": "Mitt",
+      "email": "mitt@konstnarscentrum.org",
+      "tokenId": "138887",
+      "slug": "mitt",
+      "global": false,
+      "position": 4
+    },
+    "updated_at": "2022-12-14T22:58:28.062+01:00",
+    "created_at": "2022-12-06T16:01:57.829+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T16:01:57.829+01:00",
+      "updated_at": "2022-12-14T22:58:28.062+01:00",
+      "published_at": "2022-12-14T22:58:28.103+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T16:01:57.876+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "138244321",
+      "stage": null
+    }
+  },
+  {
+    "id": "65802511",
+    "type": "item",
+    "first_name": "Joel",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "25171884"
+    },
+    "password": "",
+    "content": [
+      "65802509",
+      "65802510"
+    ],
+    "last_name": "Danielsson",
+    "resettoken": "",
+    "full_name": "Joel Danielsson",
+    "email": "joel.danielsson@yahoo.se",
+    "bio": "Joel Danielsson är konstnär och jobbar främst med skulptur och måleri från sin ateljé i Götaverkens gamla lokaler i Göteborg. Han har en kandidatexamen från Konstfack 2012 och tog sin MFA från Valand 2017. Han har ställt ut på bland annat Liljevalchs, Avesta Art, Göteborgs Konsthall, Dunkers Kulturhus och Venedigbiennalen.\n\nJoel arbetar ofta med arbetsintensiva processer där det ineffektiva blir meningsbärande både under skapandet och för verkets upplevelse. Återkommande teman i hans konst är vikten av kontemplation och långsamhet, glappet mellan kunskap och förståelse samt konsten som ett sätt att återförtrolla världen.",
+    "slug": "joel-danielsson",
+    "year_of_birth": "--",
+    "birth_place": "--",
+    "city": "Göteborg",
+    "webpage": "https://www.joeldanielsson.com",
+    "instagram": "https://www.instagram.com/joel_daniels/",
+    "member_category": [
+      "143696849",
+      "65724291"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685113",
+      "roleId": "111106",
+      "name": "Väst",
+      "email": "vast@konstnarscentrum.org",
+      "tokenId": "115326",
+      "slug": "vast",
+      "global": false,
+      "position": 3
+    },
+    "updated_at": "2022-12-14T22:58:22.865+01:00",
+    "created_at": "2022-12-06T16:41:02.085+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T16:41:02.085+01:00",
+      "updated_at": "2022-12-14T22:58:22.865+01:00",
+      "published_at": "2022-12-14T22:58:22.911+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T16:41:02.136+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "138244319",
+      "stage": null
+    }
+  },
+  {
+    "id": "65707427",
+    "type": "item",
+    "first_name": "Ellen",
+    "image": {
+      "alt": null,
+      "title": null,
+      "custom_data": {},
+      "focal_point": null,
+      "upload_id": "25026799"
+    },
+    "password": "",
+    "content": [
+      "65707425",
+      "65707426"
+    ],
+    "last_name": "Dynebrink",
+    "resettoken": "",
+    "full_name": "Ellen Dynebrink",
+    "email": "info@ellendynebrink.se",
+    "bio": "Jag är textilkonstnär baserad i Göteborg där jag har min ateljé. Jag arbetar mot utställningar, offentlig gestaltning och uppdrag inom scenkonst. Mitt huvudområde är lappteknik, främst på grund av min förkärlek för det textila materialet och intresse för relationen mellan det textila fältet och kvinnohistoria.\n \nJag har en MFA i textilkonst från HDK-Valand vid Göteborgs Universitet 2017 och en BFA i textildesign från Textilhögskolan 2014. Mina arbeten har ställts ut på gallerier och museer, nationellt såväl som internationellt.",
+    "slug": "ellen-dynebrink",
+    "year_of_birth": "1986",
+    "birth_place": "Göteborg",
+    "city": "Göteborg",
+    "webpage": "https://ellendynebrink.se",
+    "instagram": "https://www.instagram.com/ellendynebrink/",
+    "member_category": [
+      "65700100"
+    ],
+    "application": null,
+    "region": {
+      "id": "143685113",
+      "roleId": "111106",
+      "name": "Väst",
+      "email": "vast@konstnarscentrum.org",
+      "tokenId": "115326",
+      "slug": "vast",
+      "global": false,
+      "position": 3
+    },
+    "updated_at": "2022-12-14T22:56:30.293+01:00",
+    "created_at": "2022-12-06T15:49:18.609+01:00",
+    "item_type": {
+      "id": "1185543",
+      "type": "item_type"
+    },
+    "creator": {
+      "id": "76862",
+      "type": "account"
+    },
+    "meta": {
+      "created_at": "2022-12-06T15:49:18.609+01:00",
+      "updated_at": "2022-12-14T22:56:30.293+01:00",
+      "published_at": "2022-12-14T22:56:30.342+01:00",
+      "publication_scheduled_at": null,
+      "unpublishing_scheduled_at": null,
+      "first_published_at": "2022-12-06T15:49:18.657+01:00",
+      "is_valid": true,
+      "is_current_version_valid": true,
+      "is_published_version_valid": true,
+      "status": "published",
+      "current_version": "138244299",
+      "stage": null
+    }
+  }
+]

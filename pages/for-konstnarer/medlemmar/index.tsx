@@ -1,8 +1,8 @@
 import s from './index.module.scss'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
-import { AllMembersDocument, MembersListDocument } from "/graphql";
-import { apiQueryAll, isServer, recordToSlug } from "/lib/utils";
+import { AllMembersListDocument, MembersListDocument } from "/graphql";
+import { apiQueryAll, recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import React from 'react';
 import { RevealText } from '/components';
@@ -55,9 +55,9 @@ ForArtistsHome.page = { regional: true, crumbs: [{ slug: 'for-konstnarer', title
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [MembersListDocument] }, async ({ props, revalidate, context }: any) => {
 
   const { region } = props
-  const { members }: { members: MemberRecord[] } = await apiQueryAll(AllMembersDocument, { variables: { regionId: region.global ? undefined : region.id } })
+  const { members }: { members: MemberRecord[] } = await apiQueryAll(AllMembersListDocument, { variables: { regionId: region.global ? undefined : region.id } })
   const membersByRegion: MemberRecord[][] = []
-  console.log(members.length)
+
   members.sort((a, b) => a.region.position > b.region.position ? 1 : -1).forEach((m) => {
     !membersByRegion[m.region.position] && (membersByRegion[m.region.position] = [])
     membersByRegion[m.region.position].push(m)

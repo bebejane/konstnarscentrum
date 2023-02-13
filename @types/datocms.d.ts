@@ -5676,6 +5676,15 @@ type AllMembersQueryVariables = Exact<{
 
 type AllMembersQuery = { __typename?: 'Query', members: Array<{ __typename: 'MemberRecord', _modelApiKey: string, id: any, firstName: string, lastName: string, fullName: string, email: string, slug: string, _status: ItemStatus, _firstPublishedAt?: any | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null }, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null } | null } | null }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
 
+type AllMembersListQueryVariables = Exact<{
+  regionId?: InputMaybe<Scalars['ItemId']>;
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
+}>;
+
+
+type AllMembersListQuery = { __typename?: 'Query', members: Array<{ __typename?: 'MemberRecord', fullName: string, firstName: string, lastName: string, slug: string, image?: { __typename?: 'FileField', id: any } | null, region: { __typename?: 'RegionRecord', id: any, name: string, slug: string, global?: any | null, position?: any | null } }>, pagination: { __typename?: 'CollectionMetadata', count: any } };
+
 type AllMembersWithPortfolioQueryVariables = Exact<{
   regionId?: InputMaybe<Scalars['ItemId']>;
 }>;

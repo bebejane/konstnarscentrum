@@ -240,6 +240,7 @@ declare module '*/member.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const AllMembers: DocumentNode;
+export const AllMembersList: DocumentNode;
 export const AllMembersWithPortfolio: DocumentNode;
 export const AllMembersCities: DocumentNode;
 export const Member: DocumentNode;

@@ -11,6 +11,23 @@ query AllMembers($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
 		count
 	}
 }
+query AllMembersList($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
+	members: allMembers(filter: { region: { eq: $regionId } }, first: $first, skip: $skip) {
+		fullName
+		firstName
+		lastName
+		image {
+			id
+		}
+		slug
+		region {
+			...RegionFragment
+		}
+	}
+	pagination: _allMembersMeta(filter: { region: { eq: $regionId } }) {
+		count
+	}
+}
 
 query AllMembersWithPortfolio($regionId: ItemId) {
 	members: allMembers(

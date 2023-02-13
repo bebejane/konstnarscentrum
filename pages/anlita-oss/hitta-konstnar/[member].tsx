@@ -5,7 +5,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { MemberBySlugDocument, AllMembersWithPortfolioDocument, RelatedMembersDocument } from "/graphql";
 import { Article, Block, MetaSection, RelatedSection, Portfolio, Loader, ErrorModal } from "/components";
-import { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { DatoSEO } from "dato-nextjs-utils/components";
 import { capitalize } from "/lib/utils";
@@ -120,7 +120,7 @@ export default function Member({ member: {
 							{ title: 'Verksam', value: city },
 							{ title: 'Kontakt', value: email },
 							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => capitalize(categoryType)).join(', ') },
-							{ title: 'Besök', value: !weblinks.length ? undefined : weblinks.map(({ label, url }, idx) => <><a key={idx} href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</>) }
+							{ title: 'Besök', value: !weblinks.length ? undefined : weblinks.map(({ label, url }, idx) => <React.Fragment key={idx}><a href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</React.Fragment>) }
 						]}
 					/>
 					{!isIncomplete &&
