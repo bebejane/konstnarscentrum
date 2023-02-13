@@ -93,6 +93,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
+            <strong>OBS!</strong> Du kan inte skapa din portfolio från mobil eller surfplatta, det krävs att du loggar in med en dator. <br /><br />
 
             När du loggat in kommer du in på din användarprofil där du uppdaterar din portfolio. <br /><br />
 
