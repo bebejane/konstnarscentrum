@@ -9,6 +9,8 @@ const { buildClient } = require("@datocms/cma-client-node");
 	const roles = await client.roles.list();
 	const editor = roles.filter((r) => r.name.toLowerCase() === "editor")[0];
 	const tokens = await client.accessTokens.list();
+	const users = await client.users.list();
+
 	const districts = await client.items.list({
 		filter: { type: "region" },
 		order_by: "position_DESC",
@@ -21,6 +23,10 @@ const { buildClient } = require("@datocms/cma-client-node");
 			id: districts.find((el) => el.slug === slugify(name, { lower: true })).id,
 			roleId,
 			name,
+			userId: users.find((el) => el.role.id === roleId && el.email !== "bjornthief@gmail.com")?.id,
+			userName: users.find((el) => el.role.id === roleId && el.email !== "bjornthief@gmail.com")
+				?.full_name,
+			//userId: users.find((el) => el.role.id === roleId)?.id,
 			email: districts.find((el) => el.slug === slugify(name, { lower: true })).email,
 			tokenId: tokens.find((t) => t.role?.id === roleId)?.id,
 			slug: slugify(name, { lower: true }),

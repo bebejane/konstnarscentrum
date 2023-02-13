@@ -17,6 +17,7 @@
 		"barrel:watch": "watch 'node ./lib/scripts/barrel' ./components",
 		"postbuild": "next-sitemap",
 		"importmembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/import-members-old.tsx",
+		"updatemembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/update-members.tsx",
 		"test:emails": "tsx --tsconfig ./tsconfig.node.json ./tests/emails.tsx"
 	},
 	"exports": {
