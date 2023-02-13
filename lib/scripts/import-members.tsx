@@ -124,20 +124,22 @@ async function importMembers() {
 				await client.items.create(member)
 				await Email.memberInvitation({
 					email: member.email,
-					name: `${member.first_name} ${member.last_name}`,
+					name: `${member.first_name}${member.last_name ? ` ${member.last_name}` : ''}`,
 					link: `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${member.resettoken}`
 				})
 
 				success.push(member)
+				fs.writeFileSync("./success.json", JSON.stringify(success, null, 2));
 			} catch (err) {
 				console.log('FAILED', member.email)
 				failed.push({ member, err });
+				fs.writeFileSync("./failed.json", JSON.stringify(failed, null, 2));
 			}
 			await sleep(100);
 		}
 	}
+	fs.writeFileSync("./success.json", JSON.stringify(success, null, 2));
 	fs.writeFileSync("./failed.json", JSON.stringify(failed, null, 2));
-	fs.writeFileSync("./success.json", JSON.stringify(failed, null, 2));
 	console.timeEnd("import");
 	process.exit(0);
 }
