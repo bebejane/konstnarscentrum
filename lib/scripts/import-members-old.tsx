@@ -25,7 +25,7 @@ const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as
 const generateToken = async (email: string): Promise<any> => {
   return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
 }
-
+process.exit(0)
 console.time("import");
 
 workbook.xlsx.readFile(excelFile).then((doc) => {
@@ -70,35 +70,36 @@ workbook.xlsx.readFile(excelFile).then((doc) => {
 async function importMembers() {
 
   let currentMembers = JSON.parse(fs.readFileSync('./current.json', { encoding: 'utf-8' }))
-
+  const failed = []
   for (let x = 0; x < currentMembers.length; x++) {
     const m = currentMembers[x]
+    m.region = regions.find(el => el.id === m.region)
     const apiToken = process.env[`GRAPHQL_API_TOKEN_${m.region.slug.toUpperCase()}`];
     const client = buildClient({ apiToken, environment });
     const member = {
       item_type: { type: "item_type", id: "1185543" },
-      resettoken: await generateToken(m.email),
-      region: m.region.id,
+      resettoken: await generateToken(m.email)
     };
+    console.log(apiToken)
 
     try {
-      console.log('add member', m.email)
-      /*
-      await client.items.update(m.id, {
-        resettoken: m.resettoken,
-      })
+      console.log('update member', m.id, apiToken, m.full_name, m.email, `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${member.resettoken}`)
+
+      await client.items.update(m.id, { resettoken: member.resettoken })
 
       await Email.memberInvitation({
         email: m.email,
         name: `${m.full_name}`,
-        link: `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${m.resettoken}`
+        link: `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${member.resettoken}`
       })
-      */
+
 
 
     } catch (err) {
       console.log('FAILED', m.email)
-      //fs.writeFileSync("./failed-old.json", JSON.stringify(failed, null, 2));
+      console.log(err)
+      failed.push(m)
+      fs.writeFileSync("./failed-old.json", JSON.stringify(failed, null, 2));
     }
   }
 }
