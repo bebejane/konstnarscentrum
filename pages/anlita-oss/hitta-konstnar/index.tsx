@@ -8,6 +8,7 @@ import {
 } from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail, Loader, RevealText } from "/components";
 import { apiQuery } from "dato-nextjs-utils/api";
+import { apiQueryAll } from "/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 export type Props = {
@@ -73,7 +74,7 @@ export default function Members({ members, memberCategories, regions, region: re
 	return (
 		<div className={s.container}>
 			<h1>
-				<RevealText>Hitta konstnärer</RevealText><sup className="amount">{results?.length || pagination.count}</sup>
+				<RevealText>Hitta konstnärer</RevealText><sup className="amount">{results ? results.length : pagination.count}</sup>
 			</h1>
 			<div className={s.search}>
 				<form className="mid">
@@ -149,7 +150,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({
 }, async ({ props, revalidate }: any) => {
 
 	const regionId = !props.region.global ? props.region.id : undefined
-	const { members, pagination } = await apiQuery(AllMembersWithPortfolioDocument, { variables: { regionId } })
+	const { members, pagination } = await apiQueryAll(AllMembersWithPortfolioDocument, { variables: { regionId } })
 
 	return {
 		props: {

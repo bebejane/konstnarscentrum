@@ -29,10 +29,12 @@ query AllMembersList($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0
 	}
 }
 
-query AllMembersWithPortfolio($regionId: ItemId) {
+query AllMembersWithPortfolio($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
 	members: allMembers(
 		filter: { image: { exists: true }, region: { eq: $regionId } }
 		orderBy: firstName_ASC
+		first: $first
+		skip: $skip
 	) {
 		...MemberLightFragment
 	}

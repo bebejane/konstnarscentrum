@@ -5687,6 +5687,8 @@ type AllMembersListQuery = { __typename?: 'Query', members: Array<{ __typename?:
 
 type AllMembersWithPortfolioQueryVariables = Exact<{
   regionId?: InputMaybe<Scalars['ItemId']>;
+  first?: InputMaybe<Scalars['IntType']>;
+  skip?: InputMaybe<Scalars['IntType']>;
 }>;
 
 
