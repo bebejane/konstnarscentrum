@@ -51,6 +51,7 @@ query SearchMembers(
 			region: { eq: $regionId }
 			memberCategory: { anyIn: $memberCategoryIds }
 		}
+		orderBy: firstName_ASC
 		first: $first
 		skip: $skip
 	) {
@@ -78,6 +79,7 @@ query SearchMembersFree($first: IntType = 100, $skip: IntType = 0, $query: Strin
 				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }
 			]
 		}
+		orderBy: firstName_ASC
 	) {
 		...MemberLightFragment
 	}

@@ -13,7 +13,10 @@ query AllMembers($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
 }
 
 query AllMembersWithPortfolio($regionId: ItemId) {
-	members: allMembers(filter: { image: { exists: true }, region: { eq: $regionId } }) {
+	members: allMembers(
+		filter: { image: { exists: true }, region: { eq: $regionId } }
+		orderBy: firstName_ASC
+	) {
 		...MemberLightFragment
 	}
 	pagination: _allMembersMeta(filter: { image: { exists: true }, region: { eq: $regionId } }) {
