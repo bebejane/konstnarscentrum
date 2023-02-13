@@ -73,7 +73,7 @@ export default function Members({ members, memberCategories, regions, region: re
 	return (
 		<div className={s.container}>
 			<h1>
-				<RevealText>Hitta konstnärer</RevealText><sup className="amount">{pagination.count}</sup>
+				<RevealText>Hitta konstnärer</RevealText><sup className="amount">{results?.length || pagination.count}</sup>
 			</h1>
 			<div className={s.search}>
 				<form className="mid">

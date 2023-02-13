@@ -109,7 +109,7 @@ export default function Member({ member: {
 					key={id}
 					image={member.image}
 					title={`${firstName} ${lastName}`}
-					text={bio}
+					text={bio?.replace(/\n/g, ' ')}
 					editable={JSON.stringify({ ...member.image, nodelete: true })}
 					onClick={(id) => setImageId(id)}
 				>
