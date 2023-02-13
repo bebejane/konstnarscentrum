@@ -131,7 +131,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 					/>
 					<ErrorMessage id="birthPlace" errors={errors} />
 
-					<label htmlFor="city">Verksam i stad</label>
+					<label htmlFor="city">Stad du är verksam i</label>
 					<input
 						id="city"
 						name="city"
@@ -212,7 +212,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 
 Account.page = { title: 'Konto', crumbs: [{ title: 'Konto', regional: false }] } as PageProps
 
-const ErrorMessage = ({ errors, id, className }: { errors: any, id: string, className: string }) => {
+const ErrorMessage = ({ errors, id, className }: { errors: any, id: string, className?: string }) => {
 	if (!errors[id])
 		return null
 
