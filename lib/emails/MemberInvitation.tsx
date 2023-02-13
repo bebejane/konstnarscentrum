@@ -77,7 +77,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
             lineHeight={leadingRelaxed}
             cssClass="paragraph"
           >
-            Ditt användarnamn är din e-postadress. Ditt lösenord väljer du själv genom att klicka på länken och följa instruktionerna. <br /><br />
+            Ditt användarnamn är din e-postadress. Ditt lösenord väljer du själv genom att klicka på länken och följa instruktionerna.<br /><br />
           </MjmlText>
           <MjmlText
             cssClass="paragraph"

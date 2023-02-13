@@ -10,16 +10,15 @@ import fs from 'fs';
 import jwt from 'jsonwebtoken'
 
 import { Email } from '../emails'
-import { Item } from '@datocms/cma-client/dist/types/generated/SimpleSchemaTypes';
 
-//const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023).xlsx`;
-const excelFile = `${process.cwd()}/medlemslista-test.xlsx`;
+const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023)-2.xlsx`;
+//const excelFile = `${process.cwd()}/medlemslista-test.xlsx`;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const workbook = new ExcelJS.Workbook();
 const allMembers = [];
 const errors = [];
 
-const environment = "dev";
+const environment = "main";
 const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as string, environment });
 
 
@@ -68,10 +67,6 @@ workbook.xlsx.readFile(excelFile).then((doc) => {
 	});
 });
 
-async function createMember() {
-
-}
-
 async function importMembers() {
 
 	let currentMembers = []; //await mainclient.items.list({ filter: { type: "member" } });
@@ -79,6 +74,9 @@ async function importMembers() {
 	for await (const record of mainclient.items.listPagedIterator({ filter: { type: "member" } })) {
 		currentMembers.push(record);
 	}
+
+	fs.writeFileSync("./current.json", JSON.stringify(currentMembers, null, 2));
+	return
 
 	const r = {};
 	const slugs = {};
@@ -106,13 +104,10 @@ async function importMembers() {
 		} regions...`
 	);
 
-	let counter = 0;
-
 	for (let x = 0; x < Object.keys(r).length; x++) {
 		const { members } = r[Object.keys(r)[x]];
 		const apiToken = process.env[`GRAPHQL_API_TOKEN_${members[0].region.slug.toUpperCase()}`];
 		const client = buildClient({ apiToken, environment });
-		let reqs: Promise<Item>[] = [];
 
 		for (let i = 0; i < members.length; i++) {
 
@@ -130,7 +125,7 @@ async function importMembers() {
 				await Email.memberInvitation({
 					email: member.email,
 					name: `${member.first_name} ${member.last_name}`,
-					token: member.resettoken
+					link: `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${member.resettoken}`
 				})
 
 				success.push(member)
