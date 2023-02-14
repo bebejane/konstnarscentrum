@@ -116,7 +116,7 @@ export default function Member({ member: {
 					<MetaSection
 						key={`${id}-meta`}
 						items={[
-							{ title: 'Född', value: `${yearOfBirth}${birthPlace ? `, ${birthPlace}` : ''}` },
+							{ title: 'Född', value: `${[yearOfBirth, birthPlace].filter(el => el).join(', ')}` },
 							{ title: 'Verksam', value: city },
 							{ title: 'Kontakt', value: email },
 							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => capitalize(categoryType)).join(', ') },
