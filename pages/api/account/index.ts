@@ -85,7 +85,7 @@ export default withAuthentication(async (req, res, session) => {
     webpage,
     instagram,
     member_category: memberCategory,
-    image: image ? { upload_id: image.id } : undefined,
+    image: image && image?.id ? { upload_id: image.id } : undefined,
     content: content ? content.map((block) =>
       buildBlockRecord({
         item_type: { type: 'item_type', id: block.__typename === 'ImageRecord' ? imageBlockId : videoBlockId },
