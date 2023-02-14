@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
+import { regions } from '/lib/region';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -31,10 +32,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.error('Access denied: wrong user/pass', process.env.BASIC_AUTH_USER, process.env.BASIC_AUTH_PASSWORD)
       return res.status(401).send('Access denied')
     }
+    const tags = payload.entity.attributes.tags ?? []
+    const uploadId = payload.entity.id
+    const isUpload = tags.includes('upload')
+    const region = regions.find(({ name }) => tags.includes(name))
 
-    console.log(payload)
-    console.log(payload.entity.attributes.tags)
-    console.log(payload.entity.relationships.creator)
+    if (isUpload && region) {
+      console.log('upload', uploadId, region, tags)
+    }
+
     res.status(200).json({ payload });
 
   } catch (err) {
