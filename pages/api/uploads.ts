@@ -33,6 +33,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     console.log(payload)
+    console.log(payload.entity.attributes.tags)
+    console.log(payload.relationships.creator)
     res.status(200).json({ payload });
 
   } catch (err) {

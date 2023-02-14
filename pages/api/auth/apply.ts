@@ -47,7 +47,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     education,
     webpage,
     message,
-    pdf,
+    pdf: pdf ?? undefined,
     region: region.id,
     approval_token: approvalToken,
     approved: false

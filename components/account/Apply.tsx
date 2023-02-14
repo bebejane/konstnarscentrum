@@ -34,7 +34,7 @@ export default function Apply({ regions = [], onSuccess }) {
 const ApplicationForm = ({ regions, setApplication }) => {
 
 	const [error, setError] = useState<undefined | Error>();
-	const { register, handleSubmit, watch, getValues, formState: { errors, isSubmitting } } = useForm();
+	const { register, handleSubmit, watch, getValues, formState: { errors, isSubmitting, isValid } } = useForm();
 	const [upload, setUpload] = useState<Upload | undefined>()
 	const [uploading, setUploading] = useState(false)
 	const [progress, setProgress] = useState<number | undefined>()
@@ -80,6 +80,8 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	};
 
 	const uploadTags = regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).slug] : []
+
+	console.log(isValid)
 
 	return (
 		<>
@@ -160,7 +162,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					onError={setUploadError}
 					mediaLibrary={false}
 				/>
-				<SubmitButton loading={isSubmitting} disabled={!upload}>{text.send}</SubmitButton>
+				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
 				{error &&
 					<p className={s.formError}>{`${error.error || error.message || error}`}</p>
 				}
