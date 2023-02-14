@@ -34,7 +34,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log(payload)
     console.log(payload.entity.attributes.tags)
-    console.log(payload.relationships.entity.creator)
+    console.log(payload.entity.relationships.creator)
     res.status(200).json({ payload });
 
   } catch (err) {
