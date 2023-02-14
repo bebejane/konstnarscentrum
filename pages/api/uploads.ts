@@ -36,7 +36,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const uploadId = payload.entity.id
     const isUpload = tags.includes('upload')
     const region = regions.find(({ name }) => tags.includes(name))
-
+    console.log(tags)
+    console.log(region)
     if (isUpload && region) {
       console.log('upload', uploadId, region, tags)
     }
