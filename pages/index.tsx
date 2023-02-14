@@ -5,6 +5,7 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { RegionDocument, LatestNewsDocument, LatestMemberNewsDocument } from "/graphql";
 import { Block, HomeGallery, MenuDesktop } from "/components";
+import { regions } from "/lib/region";
 import type { Menu } from "/lib/menu";
 
 export type Props = {
@@ -31,6 +32,9 @@ export default function Home({ regionStart, region, menu }: Props) {
 }
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
+
+	if (context.params?.region && !regions.find(el => el.slug === context.params?.region)) // check 404
+		return { notFound: true }
 
 	const regionId = props.region.global ? undefined : props.region.id;
 

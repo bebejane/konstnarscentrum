@@ -1,10 +1,14 @@
+import s from './_error.module.scss'
+
 function Error({ statusCode }) {
   return (
-    <p>
+    <p className={s.container}>
       {statusCode
-        ? `Det uppstode ett fel på servern: ${statusCode}`
+        ? `Det gick ej att hitta sidan`
         : `Det uppstode ett fel på klienten`
       }
+      <br /><br />
+      <a href="/">Tillbaka hem</a>
     </p>
   )
 }
