@@ -6,7 +6,7 @@ import SignOut from "/components/account/SignOut";
 import { getCsrfToken, getSession } from "next-auth/react";
 import { MemberDocument, AllMemberCategoriesDocument } from "/graphql";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { recordToSlug } from "/lib/utils";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -122,7 +122,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 					/>
 					<ErrorMessage id="bio" errors={errors} />
 
-					<label htmlFor="birthPlace">Födelsestad</label>
+					<label htmlFor="birthPlace">Födelseort</label>
 					<input
 						id="birthPlace"
 						name="birthPlace"

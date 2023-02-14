@@ -120,7 +120,6 @@ export default withAuthentication(async (req, res, session) => {
 
   try {
 
-
     await Promise.all([
       client.items.update(record.id, newRecord),
       ...images.filter(i => i).map(({ id, title, alt }) =>
