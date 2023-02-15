@@ -296,7 +296,7 @@ type ApplicationRecord = RecordInterface & {
   id: Scalars['ItemId'];
   lastName: Scalars['String'];
   message: Scalars['String'];
-  pdf: FileField;
+  pdf?: Maybe<FileField>;
   region: RegionRecord;
   updatedAt: Scalars['DateTime'];
   webpage?: Maybe<Scalars['String']>;

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 import { regions } from '/lib/region';
-
+import client from '/lib/client';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   await NextCors(req, res, { methods: ['POST', 'GET'], origin: '*', optionsSuccessStatus: 200 });
@@ -41,10 +41,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const region = regions.find(({ name }) => tags.includes(name.toLowerCase()))
 
     if (isUpload && region) {
-      console.log('update upload', uploadId, region, tags)
+      console.log('update upload creator', uploadId, region.name, tags)
+      await client.uploads.update(uploadId, { creator: { type: 'user', id: region.userId } })
+      console.log('update upload creator', 'done')
+      return res.status(200).json({ updated: true });
     }
 
-    res.status(200).json({ payload });
+    res.status(200).json({ updated: false });
 
   } catch (err) {
     res.status(500).json({ error: err?.message || err });
