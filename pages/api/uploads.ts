@@ -46,6 +46,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       console.log('update upload creator', 'done')
       return res.status(200).json({ updated: true });
     }
+    else
+      console.log('not user uupload', tags)
 
     res.status(200).json({ updated: false });
 
