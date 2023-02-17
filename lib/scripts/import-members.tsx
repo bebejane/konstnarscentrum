@@ -11,7 +11,7 @@ import jwt from 'jsonwebtoken'
 
 import { Email } from '../emails'
 
-const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023)-2.xlsx`;
+const excelFile = `${process.cwd()}/KOMPLETT MEDLEMSLISTA (KC JANUARI 2023)-3.xlsx`;
 //const excelFile = `${process.cwd()}/medlemslista-test.xlsx`;
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 const workbook = new ExcelJS.Workbook();
@@ -25,8 +25,6 @@ const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as
 const generateToken = async (email: string): Promise<any> => {
 	return jwt.sign({ email }, process.env.JWT_PRIVATE_KEY, { expiresIn: 12000 });
 }
-
-process.exit(0)
 console.time("import");
 
 workbook.xlsx.readFile(excelFile).then((doc) => {
@@ -84,16 +82,18 @@ async function importMembers() {
 	const failed = [];
 	const success = [];
 	let insertCount = 0;
+	console.log(allMembers.length)
 
 	allMembers
-		.filter((m) => !currentMembers.find((el) => el.email === m.email))
+		//.filter((m) => !currentMembers.find((el) => el.email === m.email))
 		.forEach((member) => {
 			!r[member.region.slug] && (r[member.region.slug] = { members: [] });
 			r[member.region.slug].members.push(member);
 			insertCount++;
 		});
 
-	currentMembers.concat(allMembers).forEach((el) => {
+
+	allMembers.forEach((el) => {
 		slugs[el.slug] === undefined && (slugs[el.slug] = 0);
 		slugs[el.slug]++;
 		slugs[el.slug] > 1 && (el.slug = `${el.slug}-${slugs[el.slug]}`);

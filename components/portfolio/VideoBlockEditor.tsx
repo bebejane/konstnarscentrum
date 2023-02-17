@@ -109,6 +109,7 @@ export default function VideoBlockEditor({ block, onClose, onChange }: Props) {
           name="titel"
           type="text"
           value={titleText}
+          maxLength={160}
           onChange={({ target: { value } }) => setTitleText(value)}
         />
 

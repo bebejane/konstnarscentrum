@@ -9,7 +9,7 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const errors = [];
 
-const environment = "dev";
+const environment = "main";
 const mainclient = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN_FULL as string, environment });
 
 const chunkArray = (array: any[] | React.ReactNode[], chunkSize: number) => {

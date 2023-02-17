@@ -3,6 +3,8 @@ import s from './index.module.scss'
 import Link from 'next/link';
 import { VideoBlockEditor, PhotoBlockEditor, EditBox, MainImageEditor } from "/components";
 
+const MAX_VIDEOS = 8
+
 type PortfolioProps = {
   setMainImage: (image: FileField) => void
   mainImage: FileField | undefined
@@ -40,6 +42,18 @@ export default function Portfolio({
   useEffect(() => {
     preview && window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
   }, [preview])
+
+  const addImageBlock = () => {
+    //@ts-ignore
+    onContentChange([...content, { __typename: 'ImageRecord', image: undefined }])
+  }
+
+  const addVideoBlock = () => {
+    if (content.filter(el => el.__typename === 'VideoRecord').length >= MAX_VIDEOS)
+      return onError(new Error(`Du är tillåten max ${MAX_VIDEOS} videos i din portfolio`))
+    //@ts-ignore
+    onContentChange([...content, { __typename: 'VideoRecord', video: undefined }])
+  }
 
   return (
     <div className={s.container}>
@@ -100,15 +114,13 @@ export default function Portfolio({
           <>
             <button
               className={s.addSection}
-              //@ts-ignore
-              onClick={() => onContentChange([...content, { __typename: 'ImageRecord', image: undefined }])}
+              onClick={addImageBlock}
             >
               Lägg till bild-sektion
             </button>
             <button
               className={s.addSection}
-              //@ts-ignore
-              onClick={() => onContentChange([...content, { __typename: 'VideoRecord', video: undefined }])}
+              onClick={addVideoBlock}
             >
               Lägg till video-sektion
             </button>
