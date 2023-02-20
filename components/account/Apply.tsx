@@ -81,11 +81,10 @@ const ApplicationForm = ({ regions, setApplication }) => {
 
 	const uploadTags = regionId && regionId !== 'false' ? [regions.find(el => el.id === regionId).slug] : []
 
-	console.log(isValid)
-
 	return (
 		<>
 			<form className={s.form} onSubmit={handleSubmit(onSubmitApplication)}>
+				{errors.email && <label className={s.formError}>E-post felaktig...</label>}
 				<input
 					className={errors.email && s.error}
 					placeholder={`${text.email}...`}
@@ -95,37 +94,46 @@ const ApplicationForm = ({ regions, setApplication }) => {
 							/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 					})}
 				/>
+
+				{errors.firstName && <label className={s.formError}>Förnam felaktigt...</label>}
 				<input
 					{...register("firstName", { required: true })}
 					className={errors.firstName && s.error}
 					placeholder={`${text.firstName}...`}
 
 				/>
+
+				{errors.lastName && <label className={s.formError}>Efternam felaktigt...</label>}
 				<input
 					{...register("lastName", { required: true })}
 					className={errors.lastName && s.error}
 					placeholder={`${text.lastName}...`}
-
 				/>
+
+				{errors.webpage && <label className={s.formError}>Websida är ogiltig...</label>}
 				<input
 					{...register("webpage", { required: false })}
 					className={errors.webpage && s.error}
 					placeholder={`${text.webpage}...`}
 
 				/>
+
+				{errors.education && <label className={s.formError}>Utbildning felaktigt...</label>}
 				<textarea
 					{...register("education", { required: false })}
 					rows={5}
 					className={errors.education && s.error}
 					placeholder={`${text.education}...`}
 				/>
+
+				{errors.message && <label className={s.formError}>Meddelande tomt...</label>}
 				<textarea
 					{...register("message", { required: true })}
 					rows={10}
 					className={errors.message && s.error}
 					placeholder={`${text.message}...`}
 				/>
-
+				{errors.regionId && <label className={s.formError}>Välj en region...</label>}
 				<select
 					{...register("regionId", {
 						required: true,
@@ -141,6 +149,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 						</option>
 					))}
 				</select>
+
 				<button
 					type="button"
 					onClick={() => uploadRef.current?.click()}

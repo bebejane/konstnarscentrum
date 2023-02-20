@@ -32,7 +32,7 @@ query AllMembersList($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0
 query AllMembersWithPortfolio($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
 	members: allMembers(
 		filter: { image: { exists: true }, region: { eq: $regionId } }
-		orderBy: firstName_ASC
+		orderBy: _createdAt_DESC
 		first: $first
 		skip: $skip
 	) {
@@ -124,8 +124,11 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			dateEnd: { lt: $date }
-			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
+			OR: [
+				{ dateEnd: { lt: $date } }
+				{ dateEnd: { lt: $date, exists: true } }
+				{ date: { gte: $date } }
+			]
 		}
 		orderBy: [date_DESC]
 		first: $first
@@ -137,8 +140,11 @@ query AllPastAndFutureMemberNews(
 		filter: {
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
-			dateEnd: { lt: $date }
-			OR: [{ dateEnd: { lt: $date, exists: true } }, { date: { gte: $date } }]
+			OR: [
+				{ dateEnd: { lt: $date } }
+				{ dateEnd: { lt: $date, exists: true } }
+				{ date: { gte: $date } }
+			]
 		}
 	) {
 		count

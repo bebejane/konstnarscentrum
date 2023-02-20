@@ -237,6 +237,7 @@ export const apiQueryAll = async (doc: TypedDocumentNode, opt: ApiQueryOptions =
 
   let reqs = []
   for (let skip = size; skip < count; skip += size) {
+
     if (reqs.length < 50 && skip + size < count) {
       reqs.push(apiQuery(doc, { variables: { ...opt.variables, first: size, skip } }))
     } else {

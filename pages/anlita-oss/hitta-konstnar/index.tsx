@@ -7,7 +7,6 @@ import {
 	AllMembersCitiesDocument
 } from "/graphql";
 import { FilterBar, CardContainer, Card, Thumbnail, Loader, RevealText } from "/components";
-import { apiQuery } from "dato-nextjs-utils/api";
 import { apiQueryAll } from "/lib/utils";
 import { useCallback, useEffect, useRef, useState } from "react";
 
