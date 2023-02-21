@@ -3,21 +3,19 @@
     padding-top: var(--navbar-height);
   }
 
-}
+  .gallery {}
 
-.gallery {
-  max-height: calc(100vh - calc(2 * var(--navbar-height)));
-}
+  .margins {
+    margin-left: var(--outer-margin);
+    margin-right: var(--outer-margin);
 
-.margins {
-  margin-left: var(--outer-margin);
-  margin-right: var(--outer-margin);
-
-
-  @include mq($from: tablet) {
-    margin-left: calc(var(--total-outer-margin));
-    margin-right: calc(var(--total-outer-margin));
-    padding-left: calc(2 * var(--grid-unit));
-    padding-right: calc(2 * var(--grid-unit));
+    @include mq($from: tablet) {
+      margin-left: calc(var(--total-outer-margin));
+      margin-right: calc(var(--total-outer-margin));
+      padding-left: calc(2 * var(--grid-unit));
+      padding-right: calc(2 * var(--grid-unit));
+    }
   }
 }
+
+.gallery {}

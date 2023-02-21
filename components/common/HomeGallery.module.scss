@@ -11,6 +11,7 @@
 
   >ul {
     height: 70vh;
+    --height: 70vh;
 
     @include mq($from: tablet) {
       --height: calc(100vh - calc(var(--navbar-height) * 2));
