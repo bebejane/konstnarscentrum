@@ -99,7 +99,7 @@ export default function HomeGallery({ slides }: Props) {
                   <>
                     <Image
                       className={cn(s.image, isCurrent && s.pan)}
-                      data={image.responsiveImage}
+                      data={{ ...image.responsiveImage, bgColor: undefined }}
                       onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
                       pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
                       placeholderClassName={s.image}
