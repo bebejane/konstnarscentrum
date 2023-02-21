@@ -10,11 +10,10 @@ import type { Menu } from "/lib/menu";
 
 export type Props = {
 	regionStart: RegionRecord
-	menu: Menu,
-	region: RegionRecord
+	menu: Menu
 }
 
-export default function Home({ regionStart, region, menu }: Props) {
+export default function Home({ regionStart, menu }: Props) {
 
 	return (
 		<div className={s.container}>

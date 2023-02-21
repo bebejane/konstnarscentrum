@@ -1,7 +1,6 @@
 import s from './HomeGallery.module.scss'
 import cn from 'classnames'
-//import { KCImage as Image } from '/components'
-import { Image } from 'react-datocms'
+import { KCImage as Image } from '/components'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
 import { RevealText } from '/components';
