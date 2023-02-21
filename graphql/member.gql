@@ -127,6 +127,7 @@ query AllPastAndFutureMemberNews(
 			OR: [
 				{ date: { gt: $date }, dateEnd: { gt: $date, exists: true } }
 				{ dateEnd: { lt: $date, exists: true } }
+				{ date: { gt: $date } }
 			]
 		}
 		orderBy: [date_DESC]
@@ -142,6 +143,7 @@ query AllPastAndFutureMemberNews(
 			OR: [
 				{ date: { gt: $date }, dateEnd: { gt: $date, exists: true } }
 				{ dateEnd: { lt: $date, exists: true } }
+				{ date: { gt: $date } }
 			]
 		}
 	) {
