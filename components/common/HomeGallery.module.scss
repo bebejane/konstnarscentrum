@@ -2,6 +2,11 @@
   margin-right: var(--full-margin);
   margin-left: var(--full-margin);
   max-width: none;
+  opacity: 0;
+
+  &.show {
+    opacity: 1;
+  }
 
   @include mq($until: tablet) {
     margin-top: calc(-1 * var(--navbar-height));

@@ -68,11 +68,13 @@ export default function HomeGallery({ slides }: Props) {
   }, [ref, innerWidth, innerHeight])
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    if (loaded[slides[0].id])
+      setMounted(true)
+
+  }, [loaded, slides])
 
   return (
-    <section className={s.gallery} id="home-gallery">
+    <section className={cn(s.gallery, mounted && s.show)} id="home-gallery">
       <ul ref={ref}>
         {slides.map(el => ({ ...el, ...parseRecord(el.link) })).map(({
           id,
@@ -95,25 +97,22 @@ export default function HomeGallery({ slides }: Props) {
                   <h2><RevealText start={index === idx}>{headline}</RevealText></h2>
                   <div className={s.fade}></div>
                 </header>
-                {mounted &&
-                  <>
-                    <Image
-                      className={cn(s.image, isCurrent && s.pan)}
-                      data={{ ...image.responsiveImage, bgColor: undefined }}
-                      onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
-                      pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
-                      placeholderClassName={s.image}
-                      objectFit="cover"
-                      lazyLoad={true}
-                      fadeInDuration={100}
-                    />
-                    <Mask
-                      id={maskId}
-                      size={size}
-                      start={isNext}
-                    />
-                  </>
-                }
+
+                <Image
+                  className={cn(s.image, isCurrent && s.pan)}
+                  data={image.responsiveImage}
+                  onLoad={() => setLoaded((s) => ({ ...s, [id]: true }))}
+                  pictureStyle={isNext ? { clipPath: `url(#${maskId})` } : {}}
+                  placeholderClassName={s.image}
+                  objectFit="cover"
+                  lazyLoad={false}
+                  fadeInDuration={100}
+                />
+                <Mask
+                  id={maskId}
+                  size={size}
+                  start={isNext}
+                />
               </Link>
             </li>
           )
