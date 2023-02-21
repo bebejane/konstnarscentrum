@@ -10,8 +10,8 @@
     margin-right: var(--outer-margin);
 
     @include mq($from: tablet) {
-      margin-left: calc(var(--total-outer-margin)) !important;
-      margin-right: calc(var(--total-outer-margin)) !important;
+      margin-left: calc(var(--total-outer-margin));
+      margin-right: calc(var(--total-outer-margin));
       padding-left: calc(2 * var(--grid-unit));
       padding-right: calc(2 * var(--grid-unit));
     }

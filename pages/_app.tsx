@@ -31,8 +31,7 @@ function App({ Component, pageProps }) {
   const errorCode = parseInt(router.pathname.replace('/', ''))
   const isError = (!isNaN(errorCode) && (errorCode > 400 && errorCode < 600)) || router.pathname.replace('/', '') === '_error'
 
-  if (isError)
-    return <Component {...pageProps} />
+  if (isError) return <Component {...pageProps} />
 
   const title = pageTitle ?? page?.title ?? page?.crumbs?.[0].title
 
