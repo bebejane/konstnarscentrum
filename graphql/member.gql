@@ -125,9 +125,8 @@ query AllPastAndFutureMemberNews(
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
 			OR: [
-				{ dateEnd: { lt: $date } }
+				{ date: { gt: $date }, dateEnd: { gt: $date, exists: true } }
 				{ dateEnd: { lt: $date, exists: true } }
-				{ date: { gte: $date } }
 			]
 		}
 		orderBy: [date_DESC]
@@ -141,9 +140,8 @@ query AllPastAndFutureMemberNews(
 			region: { eq: $regionId }
 			category: { eq: $categoryId }
 			OR: [
-				{ dateEnd: { lt: $date } }
+				{ date: { gt: $date }, dateEnd: { gt: $date, exists: true } }
 				{ dateEnd: { lt: $date, exists: true } }
-				{ date: { gte: $date } }
 			]
 		}
 	) {
@@ -158,14 +156,24 @@ query AllPresentMemberNews(
 	$date: Date
 ) {
 	presentMemberNews: allMemberNews(
-		filter: { region: { eq: $regionId }, dateEnd: { gte: $date } }
+		filter: {
+			region: { eq: $regionId }
+			date: { lte: $date }
+			dateEnd: { gte: $date, exists: true }
+		}
 		orderBy: [date_DESC]
 		first: $first
 		skip: $skip
 	) {
 		...MemberNewsLightFragment
 	}
-	pagination: _allMemberNewsMeta(filter: { region: { eq: $regionId }, dateEnd: { gte: $date } }) {
+	pagination: _allMemberNewsMeta(
+		filter: {
+			region: { eq: $regionId }
+			date: { lte: $date }
+			dateEnd: { gte: $date, exists: true }
+		}
+	) {
 		count
 	}
 }

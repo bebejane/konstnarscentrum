@@ -40,7 +40,8 @@ export default function MemberNews({ presentMemberNews, memberNews: memberNewsFr
 	const allNews = [...presentMemberNews, ...memberNews]
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
-	//allNews.forEach(({ title, id }) => console.log(id, title))
+	//presentMemberNews.forEach(({ date, dateEnd, title, id }) => console.log(id, date, dateEnd))
+	//console.log(memberNews)
 
 	return (
 		<>
@@ -112,6 +113,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	if (!memberNews.length && !presentMemberNews.length)
 		return { notFound: true }
 
+	console.log(date)
 	return {
 		props: {
 			...props,
