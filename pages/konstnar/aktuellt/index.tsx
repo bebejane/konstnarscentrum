@@ -40,9 +40,6 @@ export default function MemberNews({ presentMemberNews, memberNews: memberNewsFr
 	const allNews = [...presentMemberNews, ...memberNews]
 		.filter(({ category }) => memberNewsCategoryId ? memberNewsCategoryId === category?.id : true)
 
-	//presentMemberNews.forEach(({ date, dateEnd, title, id }) => console.log(id, date, dateEnd))
-	//console.log(memberNews)
-
 	return (
 		<>
 			<h1><RevealText>Aktuellt för medlemmar</RevealText></h1>
@@ -113,7 +110,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [AllMem
 	if (!memberNews.length && !presentMemberNews.length)
 		return { notFound: true }
 
-	console.log(date)
 	return {
 		props: {
 			...props,
