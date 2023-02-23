@@ -19,6 +19,7 @@ query AllMembersList($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0
 		image {
 			id
 		}
+		active
 		slug
 		region {
 			...RegionFragment
@@ -31,20 +32,24 @@ query AllMembersList($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0
 
 query AllMembersWithPortfolio($regionId: ItemId, $first: IntType = 10, $skip: IntType = 0) {
 	members: allMembers(
-		filter: { image: { exists: true }, region: { eq: $regionId } }
+		filter: { image: { exists: true }, active: { eq: true }, region: { eq: $regionId } }
 		orderBy: _createdAt_DESC
 		first: $first
 		skip: $skip
 	) {
 		...MemberLightFragment
 	}
-	pagination: _allMembersMeta(filter: { image: { exists: true }, region: { eq: $regionId } }) {
+	pagination: _allMembersMeta(
+		filter: { image: { exists: true }, active: { eq: true }, region: { eq: $regionId } }
+	) {
 		count
 	}
 }
 
 query AllMembersCities {
-	cities: allMembers(filter: { image: { exists: true }, city: { isBlank: false } }) {
+	cities: allMembers(
+		filter: { image: { exists: true }, active: { eq: true }, city: { isBlank: false } }
+	) {
 		name: city
 	}
 }
@@ -226,7 +231,12 @@ query RelatedMembers(
 	$memberId: ItemId
 ) {
 	members: allMembers(
-		filter: { image: { exists: true }, region: { eq: $regionId }, id: { neq: $memberId } }
+		filter: {
+			image: { exists: true }
+			active: { eq: true }
+			region: { eq: $regionId }
+			id: { neq: $memberId }
+		}
 		first: $first
 		skip: $skip
 	) {

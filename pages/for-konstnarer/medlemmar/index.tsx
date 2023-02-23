@@ -33,7 +33,7 @@ export default function ForArtistsHome({ membersByRegion, membersList: { intro }
             }
             <p className={s.members} key={i} id={region.id}>
               {members?.map((member, idx) =>
-                member.image ?
+                member.image && member.active ?
                   <Link key={`${idx}-m`} href={recordToSlug(member)}>
                     {member.fullName}
                   </Link>

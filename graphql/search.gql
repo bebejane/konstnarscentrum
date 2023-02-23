@@ -48,6 +48,7 @@ query SearchMembers(
 	members: allMembers(
 		filter: {
 			image: { exists: true }
+			active: { eq: true }
 			region: { eq: $regionId }
 			memberCategory: { anyIn: $memberCategoryIds }
 		}
@@ -60,6 +61,7 @@ query SearchMembers(
 	pagination: _allMembersMeta(
 		filter: {
 			image: { exists: true }
+			active: { eq: true }
 			region: { eq: $regionId }
 			memberCategory: { anyIn: $memberCategoryIds }
 		}
@@ -74,6 +76,7 @@ query SearchMembersFree($first: IntType = 100, $skip: IntType = 0, $query: Strin
 		skip: $skip
 		filter: {
 			image: { exists: true }
+			active: { eq: true }
 			OR: [
 				{ firstName: { matches: { pattern: $query, caseSensitive: false } } }
 				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }
@@ -86,6 +89,7 @@ query SearchMembersFree($first: IntType = 100, $skip: IntType = 0, $query: Strin
 	pagination: _allMembersMeta(
 		filter: {
 			image: { exists: true }
+			active: { eq: true }
 			OR: [
 				{ firstName: { matches: { pattern: $query, caseSensitive: false } } }
 				{ lastName: { matches: { pattern: $query, caseSensitive: false } } }

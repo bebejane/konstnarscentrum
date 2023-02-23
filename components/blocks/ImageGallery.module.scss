@@ -45,6 +45,7 @@
     margin-right: calc(-1 * var(--grid-unit));
     transform: translateY(-50%);
     cursor: pointer;
+    user-select: none;
   }
 
   .swiper {
