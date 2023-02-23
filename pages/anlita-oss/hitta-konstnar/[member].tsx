@@ -60,7 +60,7 @@ export default function Member({ member: {
 
 			const res = await fetch('/api/account', {
 				method: 'POST',
-				body: JSON.stringify({ id: member.id, image, content: data }),
+				body: JSON.stringify({ id: member.id, image, content: data, active: member.active }),
 				headers: { 'Content-Type': 'application/json' },
 			})
 
