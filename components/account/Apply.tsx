@@ -95,7 +95,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					})}
 				/>
 
-				{errors.firstName && <label className={s.formError}>Förnam felaktigt...</label>}
+				{errors.firstName && <label className={s.formError}>Förnamn felaktigt...</label>}
 				<input
 					{...register("firstName", { required: true })}
 					className={errors.firstName && s.error}
@@ -103,7 +103,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 
 				/>
 
-				{errors.lastName && <label className={s.formError}>Efternam felaktigt...</label>}
+				{errors.lastName && <label className={s.formError}>Efternamn felaktigt...</label>}
 				<input
 					{...register("lastName", { required: true })}
 					className={errors.lastName && s.error}
@@ -112,13 +112,16 @@ const ApplicationForm = ({ regions, setApplication }) => {
 
 				{errors.webpage && <label className={s.formError}>Websida är ogiltig...</label>}
 				<input
-					{...register("webpage", { required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/s })}
+					{...register("webpage", {
+						required: false,
+						pattern: /^(?:(ftp|http|https):\/\/)?(?:[\w-]+\.)+[a-z]{2,6}$/s
+					})}
 					className={errors.webpage && s.error}
 					placeholder={`${text.webpage}...`}
 
 				/>
 
-				{errors.education && <label className={s.formError}>Utbildning felaktigt...</label>}
+				{errors.education && <label className={s.formError}>Utbildning felatktigt format...</label>}
 				<textarea
 					{...register("education", { required: false })}
 					rows={5}
