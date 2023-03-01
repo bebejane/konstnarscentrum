@@ -136,6 +136,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					className={errors.message && s.error}
 					placeholder={`${text.message}...`}
 				/>
+
 				{errors.regionId && <label className={s.formError}>Välj en region...</label>}
 				<select
 					{...register("regionId", {
@@ -153,6 +154,9 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					))}
 				</select>
 
+				{uploadError &&
+					<div className={s.formError}>{uploadError.message}</div>
+				}
 				<button
 					type="button"
 					onClick={() => uploadRef.current?.click()}
@@ -160,14 +164,13 @@ const ApplicationForm = ({ regions, setApplication }) => {
 				>
 					{upload ? upload.basename : progress === undefined ? 'Ladda upp Pdf' : `${progress}%`}
 				</button>
-				{uploadError &&
-					<div className={s.formError}>Det uppstod ett fel vid uppladdning!</div>
-				}
+
 				<FileUpload
 					ref={uploadRef}
 					customData={{}}
 					tags={uploadTags}
 					accept=".pdf"
+					sizeLimit={10}
 					onDone={handleUploadDone}
 					onProgress={setProgress}
 					onUploading={setUploading}

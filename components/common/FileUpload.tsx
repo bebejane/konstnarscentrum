@@ -37,6 +37,7 @@ export type ImageData = {
 export type Props = {
   customData?: any
   accept: string
+  sizeLimit?: number
   tags?: string[]
   onDone: (upload: Upload) => void
   onUploading: (uploading: boolean) => void
@@ -54,6 +55,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
     customData = {},
     tags,
     accept,
+    sizeLimit,
     onDone,
     onUploading,
     onImageData,
@@ -131,20 +133,29 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
     if (!file) return
 
     try {
-      if (file.type.includes('image')) {
-        try {
-          const image = await parseImageFile(file)
 
-          if (image && (image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
+      const fileMb = file.size / 1024 ** 2;
+
+      if (sizeLimit && fileMb > sizeLimit)
+        throw new Error(`Storleken på filen får ej vara större än ${sizeLimit}mb`)
+
+      if (file.type.includes('image')) {
+        let image: ImageData;
+        try {
+          image = await parseImageFile(file)
+        } catch (err) {
+          console.log('error getting image dimensions')
+        }
+
+        if (image) {
+          if ((image.width < MIN_IMAGE_WIDTH && image.height < MIN_IMAGE_HEIGHT))
             throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_WIDTH}x${MIN_IMAGE_HEIGHT} pixlar.`)
-          if (image && (image.width < MIN_IMAGE_WIDTH && image.width > image.height))
+          if ((image.width < MIN_IMAGE_WIDTH && image.width > image.height))
             throw new Error(`Bildens upplösning är för låg. Bilder måste  minst vara ${MIN_IMAGE_WIDTH} pixlar bred.`)
-          if (image && (image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
+          if ((image.height < MIN_IMAGE_HEIGHT && image.height > image.width))
             throw new Error(`Bildens upplösning är för låg. Bilder måste minst vara ${MIN_IMAGE_HEIGHT} pixlar hög.`)
 
           onImageData?.(image)
-        } catch (err) {
-          //console.error(err)
         }
       }
 
@@ -155,7 +166,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
     }
     onUploading(false)
 
-  }, [createUpload, onUploading, onDone, setError, onImageData, allTags])
+  }, [createUpload, onUploading, onDone, setError, onImageData, allTags, sizeLimit])
 
   useEffect(() => {
     if (!ref.current) return
@@ -166,6 +177,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
 
   useEffect(() => { onDone(upload) }, [upload])
   useEffect(() => {
+    console.log(error)
     onError(error)
     ref.current.value = ''
   }, [error])
