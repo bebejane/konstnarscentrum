@@ -112,7 +112,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 
 				{errors.webpage && <label className={s.formError}>Websida är ogiltig...</label>}
 				<input
-					{...register("webpage", { required: false })}
+					{...register("webpage", { required: false, pattern: /^(ftp|http|https):\/\/[^ "]+$/s })}
 					className={errors.webpage && s.error}
 					placeholder={`${text.webpage}...`}
 
@@ -126,7 +126,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					placeholder={`${text.education}...`}
 				/>
 
-				{errors.message && <label className={s.formError}>Meddelande tomt...</label>}
+				{errors.message && <label className={s.formError}>Meddelande är tomt...</label>}
 				<textarea
 					{...register("message", { required: true })}
 					rows={10}
