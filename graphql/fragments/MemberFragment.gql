@@ -15,6 +15,7 @@ fragment MemberFragment on MemberRecord {
 	webpage
 	instagram
 	active
+	showContact
 	memberCategory {
 		id
 		categoryType

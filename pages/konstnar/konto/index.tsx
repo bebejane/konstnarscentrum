@@ -24,7 +24,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 	const [saving, setSaving] = useState(false);
 	const [saved, setSaved] = useState(false);
 	const [member, setMember] = useState<MemberRecord>(memberFromProps)
-	const { id, firstName, lastName, bio, birthPlace, city, yearOfBirth, webpage, instagram, memberCategory, active } = member
+	const { id, firstName, lastName, bio, birthPlace, city, yearOfBirth, webpage, instagram, memberCategory, active, showContact } = member
 
 	const { register, handleSubmit, formState: { errors, isSubmitting }, formState } = useForm({
 		defaultValues: {
@@ -38,6 +38,7 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 			webpage,
 			instagram,
 			active,
+			showContact,
 			memberCategory: memberCategory.map(c => c.id)
 		}
 	})
@@ -198,12 +199,19 @@ export default function Account({ member: memberFromProps, memberCategories }: P
 					</div>
 					<ErrorMessage id="memberCategory" errors={errors} className={s.errorMuted} />
 					<br />
+
 					<label htmlFor="active">Synlighet</label>
 					<input
 						type="checkbox"
 						name="active"
 						{...register("active", { required: false })}
 					/> <span className="small">Visa portfolio på konstnarscentrum.org</span>
+					<br />
+					<input
+						type="checkbox"
+						name="showContact"
+						{...register("showContact", { required: false })}
+					/> <span className="small">Visa mina kontaktuppgifter på min portfolio sida</span>
 
 					<button disabled={saving}>
 						{saved ? 'Sparad' : saving ? <Loader size={10} /> : <>Spara</>}

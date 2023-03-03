@@ -29,6 +29,7 @@ export default function Member({ member: {
 	memberCategory,
 	email,
 	city,
+	showContact
 }, member: memberFromProps, related }: Props) {
 
 	const [imageId, setImageId, setImages] = useStore((state) => [state.imageId, state.setImageId, state.setImages])
@@ -99,7 +100,6 @@ export default function Member({ member: {
 		setImages(imageId ? images : undefined)
 	}, [imageId])
 
-
 	return (
 		<>
 			<DatoSEO title={member.fullName} description={member.bio} seo={member._seoMetaTags} />
@@ -118,9 +118,9 @@ export default function Member({ member: {
 						items={[
 							{ title: 'Född', value: `${[yearOfBirth, birthPlace].filter(el => el).join(', ')}` },
 							{ title: 'Verksam', value: city },
-							{ title: 'Kontakt', value: email },
+							{ title: 'Kontakt', value: showContact ? email : undefined },
 							{ title: 'Typ', value: memberCategory?.map(({ categoryType }) => capitalize(categoryType)).join(', ') },
-							{ title: 'Besök', value: !weblinks.length ? undefined : weblinks.map(({ label, url }, idx) => <React.Fragment key={idx}><a href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</React.Fragment>) }
+							{ title: 'Besök', value: !weblinks.length || !showContact ? undefined : weblinks.map(({ label, url }, idx) => <React.Fragment key={idx}><a href={url}>{label}</a>{idx + 1 < weblinks.length ? ', ' : ''}</React.Fragment>) }
 						]}
 					/>
 					{!isIncomplete &&
