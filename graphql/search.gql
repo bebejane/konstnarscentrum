@@ -7,7 +7,11 @@ query SiteSearch(
 	$first: IntType = 100
 	$skip: IntType = 0
 ) {
-	members: allMembers(first: $first, skip: $skip, filter: { id: { in: $memberIds } }) {
+	members: allMembers(
+		first: $first
+		skip: $skip
+		filter: { id: { in: $memberIds }, active: { eq: true }, image: { exists: true } }
+	) {
 		__typename
 		_modelApiKey
 		title: fullName
