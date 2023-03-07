@@ -76,5 +76,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 			memberNews,
 			pageTitle: memberNews.title
 		},
+		revalidate
 	};
 });
