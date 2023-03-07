@@ -4,7 +4,8 @@ import { regions } from '/lib/region'
 export default withRevalidate(async (record, revalidate) => {
 
   const { api_key: apiKey } = record.model;
-  const { slug, region } = record
+  const { slug, region: regionId } = record
+  const region = regions.find(({ id }) => regionId === id)
   const paths = []
 
   switch (apiKey) {
