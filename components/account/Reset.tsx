@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { validatePassword } from "/lib/auth/validate";
 import Link from "next/link";
+import { isEmail } from "/lib/utils";
 
 export type Props = {
 	token: string,
@@ -63,18 +64,19 @@ const ResetForm = ({ setStatus }) => {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+
 	return (
 		<>
 
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitReset)} autoComplete="off">
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
+				{errors.email && <label className={styles.formError}>{errors?.email.message}</label>}
 				<input
 					className={errors.email && styles.error}
 					placeholder="E-post..."
 					{...register("email", {
 						required: true,
-						pattern:
-							/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+						validate: (val: string) => isEmail(val) || 'Ogiltig e-post adress'
 					})}
 				/>
 				<SubmitButton loading={isSubmitting}>{text.send}</SubmitButton>
@@ -105,10 +107,12 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};
+
 	return (
 		<>
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitUpdate)} autoComplete="off">
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
+				{errors.password && <label className={styles.formError}>{errors?.password.message}</label>}
 				<input
 					type="password"
 					placeholder="Lösenord..."
@@ -119,6 +123,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 					autoComplete={"new-password"}
 					className={errors.passsord && styles.error}
 				/>
+				{errors.password2 && <label className={styles.formError}>{errors?.password2.message}</label>}
 				<input
 					type="password"
 					placeholder="Upprepa lösenord..."
@@ -131,9 +136,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 				/>
 				<label>Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra</label>
 				<SubmitButton loading={isSubmitting} >{text.send}</SubmitButton>
-				<p className={styles.formError}>
-					{error && `Error: ${error.error || error}`}
-				</p>
+
 			</form>
 		</>
 	);
