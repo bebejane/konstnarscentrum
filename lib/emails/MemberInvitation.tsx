@@ -2,7 +2,7 @@ import Head from "./components/Head";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ButtonPrimary from "./components/ButtonPrimary";
-import { portfolioGuidePdffUrl } from "./";
+import { portfolioGuidePdfUrl } from "./";
 
 import {
   Mjml,
@@ -116,7 +116,7 @@ const MemberInvitation: React.FC<{ name: string, link: string }> = ({ name, link
             För en mer detaljerad guide till hur du skapar en portfolio, se denna guide med bilder.
 
           </MjmlText>
-          <ButtonPrimary link={portfolioGuidePdffUrl} uiText={'Ladda ner guide'} />
+          <ButtonPrimary link={portfolioGuidePdfUrl} uiText={'Ladda ner guide'} />
           <MjmlSpacer height="24px" />
           <MjmlText
             padding="0"

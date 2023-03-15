@@ -95,6 +95,9 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 		formState: { errors, isSubmitting, isValid }
 	} = useForm();
 
+	const [showPass, setShowPass] = useState(false)
+	const [showPass2, setShowPass2] = useState(false)
+
 	useEffect(() => {
 		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
@@ -113,27 +116,37 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 			<form className={styles.form} onSubmit={handleSubmit(onSubmitUpdate)} autoComplete="off">
 				<input autoComplete="false" name="hidden" type="text" style={{ display: 'none' }} />
 				{errors.password && <label className={styles.formError}>{errors?.password.message}</label>}
-				<input
-					type="password"
-					placeholder="Lösenord..."
-					{...register("password", {
-						required: true,
-						validate: (val: string) => validatePassword(val) ?? true
-					})}
-					autoComplete={"new-password"}
-					className={errors.passsord && styles.error}
-				/>
+				<div className={styles.password}>
+					<input
+						type={showPass ? 'text' : 'password'}
+						placeholder="Lösenord..."
+						{...register("password", {
+							required: true,
+							validate: (val: string) => validatePassword(val) ?? true
+						})}
+						autoComplete={"new-password"}
+						className={errors.passsord && styles.error}
+					/>
+					<button className={styles.toggle} type="button" onClick={() => setShowPass(!showPass)}>
+						<img src={`/images/password-${showPass ? 'show' : 'hide'}.png`} />
+					</button>
+				</div>
 				{errors.password2 && <label className={styles.formError}>{errors?.password2.message}</label>}
-				<input
-					type="password"
-					placeholder="Upprepa lösenord..."
-					autoComplete={"new-password"}
-					{...register("password2", {
-						required: true,
-						validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
-					})}
-					className={errors.password2 && styles.error}
-				/>
+				<div className={styles.password}>
+					<input
+						type={showPass2 ? 'text' : 'password'}
+						placeholder="Upprepa lösenord..."
+						autoComplete={"new-password"}
+						{...register("password2", {
+							required: true,
+							validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
+						})}
+						className={errors.password2 && styles.error}
+					/>
+					<button className={styles.toggle} type="button" onClick={() => setShowPass2(!showPass2)}>
+						<img src={`/images/password-${showPass2 ? 'show' : 'hide'}.png`} />
+					</button>
+				</div>
 				<label>Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra</label>
 				<SubmitButton loading={isSubmitting} >{text.send}</SubmitButton>
 

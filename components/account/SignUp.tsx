@@ -37,6 +37,8 @@ export default function SignUp({ regions = [], application, token }) {
 const SignupForm = ({ regions, application, setMember }) => {
 
 	const [error, setError] = useState();
+	const [showPass, setShowPass] = useState(false)
+	const [showPass2, setShowPass2] = useState(false)
 
 	const { register, handleSubmit, reset, watch,
 		formState: {
@@ -102,25 +104,34 @@ const SignupForm = ({ regions, application, setMember }) => {
 					autoCorrect="off"
 				/>
 
-				<input
-					placeholder={`${text.password}...`}  {...register("password", {
-						required: true,
-						validate: (val: string) => validatePassword(val) ?? true
-					})}
-					type="password"
-					autoComplete="new-password"
-					className={errors.password ? styles.error : undefined}
-				/>
-
-				<input
-					placeholder={`${text.reTypePassword}...`} {...register("password2", {
-						required: true,
-						validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
-					})}
-					type="password"
-					autoComplete="new-password"
-					className={errors.password2 ? styles.error : undefined}
-				/>
+				<div className={styles.password}>
+					<input
+						placeholder={`${text.password}...`}  {...register("password", {
+							required: true,
+							validate: (val: string) => validatePassword(val) ?? true
+						})}
+						type={showPass ? 'text' : 'password'}
+						autoComplete="new-password"
+						className={errors.password ? styles.error : undefined}
+					/>
+					<button className={styles.toggle} type="button" onClick={() => setShowPass(!showPass)}>
+						<img src={`/images/password-${showPass ? 'show' : 'hide'}.png`} />
+					</button>
+				</div>
+				<div className={styles.password}>
+					<input
+						placeholder={`${text.reTypePassword}...`} {...register("password2", {
+							required: true,
+							validate: (val: string) => validatePassword(val) ?? watch('password') !== val ? "Lösenorden överestämmer ej" : true
+						})}
+						type={showPass2 ? 'text' : 'password'}
+						autoComplete="new-password"
+						className={errors.password2 ? styles.error : undefined}
+					/>
+					<button className={styles.toggle} type="button" onClick={() => setShowPass2(!showPass2)}>
+						<img src={`/images/password-${showPass2 ? 'show' : 'hide'}.png`} />
+					</button>
+				</div>
 				<label>Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra</label>
 				<input
 					autoComplete="off"

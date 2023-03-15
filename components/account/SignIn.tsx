@@ -11,6 +11,7 @@ import { log } from "console";
 export default function SignIn({ csrfToken, providers }) {
 
 	const router = useRouter();
+	const [showPass, setShowPass] = useState(false)
 	const [error, setError] = useState<undefined | string | Error>();
 	const {
 		register,
@@ -53,13 +54,18 @@ export default function SignIn({ csrfToken, providers }) {
 					type="text"
 					className={errors.password && styles.error}
 				/>
-				<input
-					{...register("password", { required: true })}
-					placeholder={`${text.password}...`}
-					name="password"
-					type="password"
-					className={errors.password && styles.error}
-				/>
+				<div className={styles.password}>
+					<input
+						{...register("password", { required: true })}
+						placeholder={`${text.password}...`}
+						name="password"
+						type={showPass ? 'text' : 'password'}
+						className={errors.password && styles.error}
+					/>
+					<button className={styles.toggle} type="button" onClick={() => setShowPass(!showPass)}>
+						<img src={`/images/password-${showPass ? 'show' : 'hide'}.png`} />
+					</button>
+				</div>
 				<SubmitButton loading={isSubmitting}>
 					{text.send}
 				</SubmitButton>
