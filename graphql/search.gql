@@ -56,7 +56,7 @@ query SearchMembers(
 			region: { eq: $regionId }
 			memberCategory: { anyIn: $memberCategoryIds }
 		}
-		orderBy: firstName_ASC
+		orderBy: _createdAt_DESC
 		first: $first
 		skip: $skip
 	) {
