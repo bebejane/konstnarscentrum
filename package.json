@@ -19,6 +19,7 @@
 		"importmembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/import-members.tsx",
 		"updatemembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/update-members.tsx",
 		"updateuploads": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/update-uploads.tsx",
+		"test": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/test.tsx",
 		"test:emails": "tsx --tsconfig ./tsconfig.node.json ./tests/emails.tsx"
 	},
 	"exports": {
@@ -54,6 +55,7 @@
 		"dato-nextjs-utils": "github:bebejane/dato-nextjs-utils",
 		"datocms-structured-text-utils": "^2.0.4",
 		"dotenv": "^16.0.0",
+		"email-validator": "^2.0.4",
 		"get-vimeo-thumbnail": "^1.0.1",
 		"graphql": "^16.6.0",
 		"graphql-request": "^4.3.0",

@@ -42,6 +42,7 @@ specifiers:
   dato-nextjs-utils: github:bebejane/dato-nextjs-utils
   datocms-structured-text-utils: ^2.0.4
   dotenv: ^16.0.0
+  email-validator: ^2.0.4
   encoding: ^0.1.13
   eslint: ^8.26.0
   eslint-config-next: ^12.3.1
@@ -127,9 +128,10 @@ dependencies:
   cookies: 0.8.0
   cookies-next: 2.1.1
   date-fns: 2.29.3
-  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82_yqvwvv5fkd7ccxhl6hgbauxp6m
+  dato-nextjs-utils: github.com/bebejane/dato-nextjs-utils/41aa5041ca4c734820bbdb1e95f3e19c52cdb7ab_yqvwvv5fkd7ccxhl6hgbauxp6m
   datocms-structured-text-utils: 2.0.4
   dotenv: 16.0.3
+  email-validator: 2.0.4
   get-vimeo-thumbnail: 1.0.1
   graphql: 16.6.0
   graphql-request: 4.3.0_rjjjs2nwgns3bcvnnqb5eu5nry
@@ -12051,11 +12053,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82_yqvwvv5fkd7ccxhl6hgbauxp6m:
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/19c8796ffc1007c53443fd8d490cd6072ef4de82}
-    id: github.com/bebejane/dato-nextjs-utils/19c8796ffc1007c53443fd8d490cd6072ef4de82
+  github.com/bebejane/dato-nextjs-utils/41aa5041ca4c734820bbdb1e95f3e19c52cdb7ab_yqvwvv5fkd7ccxhl6hgbauxp6m:
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/41aa5041ca4c734820bbdb1e95f3e19c52cdb7ab}
+    id: github.com/bebejane/dato-nextjs-utils/41aa5041ca4c734820bbdb1e95f3e19c52cdb7ab
     name: dato-nextjs-utils
-    version: 1.0.259
+    version: 1.0.262
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4
