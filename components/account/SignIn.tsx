@@ -35,7 +35,7 @@ export default function SignIn({ csrfToken, providers }) {
 	}, [])
 
 	useEffect(() => {
-		router.query.error && setError("Användarnamn eller lösnord är felaktigt")
+		router.query.error && setError("Användarnamn eller lösenord är felaktigt")
 	}, [router]);
 
 	return (
