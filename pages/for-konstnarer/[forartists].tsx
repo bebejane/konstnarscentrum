@@ -28,7 +28,7 @@ export default function ForArtists({ forArtist: { id, image, title, createdAt, c
   );
 }
 
-ForArtists.page = { title: 'För konstnärer', crumbs: [{ slug: 'for-konstnarer', title: 'För konstnärer', regional: false }] } as PageProps
+ForArtists.page = { title: 'För konstnärer', crumbs: [{ title: 'För konstnärer', regional: false }] } as PageProps
 
 export async function getStaticPaths() {
   return getStaticPagePaths(AllForArtistDocument, 'forartists')

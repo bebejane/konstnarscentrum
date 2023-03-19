@@ -41,7 +41,7 @@ export default function ResetPassword({ token }: Props) {
   );
 }
 
-ResetPassword.page = { title: 'Äterställ lösenord', crumbs: [{ slug: 'konstnar/konto', title: 'Konto' }], regional: false } as PageProps
+ResetPassword.page = { title: 'Äterställ lösenord', crumbs: [{ title: 'Äterställ lösenord' }], regional: false } as PageProps
 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
   const { token } = context.query

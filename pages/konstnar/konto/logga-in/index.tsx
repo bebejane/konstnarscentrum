@@ -41,7 +41,7 @@ export default function Login({ providers }: Props) {
 	);
 }
 
-Login.page = { title: 'Logga in', regional: false, crumbs: [{ slug: 'konstnar/konto', title: 'Konto' }] } as PageProps
+Login.page = { title: 'Logga in', regional: false, crumbs: [{ title: 'Logga in' }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 	return {

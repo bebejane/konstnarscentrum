@@ -30,6 +30,7 @@ export default function Article({
   text,
   image,
   content,
+  subtitle,
   showImage = true,
   editable,
   onClick,
