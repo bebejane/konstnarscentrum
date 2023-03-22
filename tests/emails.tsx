@@ -8,7 +8,6 @@ const defaultInvitation = {
 
 console.log('Email.memberInvitation')
 console.log(defaultInvitation);
-console.time('dur')
 
 Email.memberInvitation(defaultInvitation).then(res => {
   console.log('done')
