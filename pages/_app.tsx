@@ -12,6 +12,7 @@ import { PageProvider } from '/lib/context/page';
 import { GoogleAnalytics } from "nextjs-google-analytics";
 
 import setDefaultOptions from 'date-fns/setDefaultOptions';
+
 setDefaultOptions({ locale: sv })
 
 function App({ Component, pageProps }) {
