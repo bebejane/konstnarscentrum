@@ -16,6 +16,7 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
 	const [error, setError] = useState<Error | undefined>()
+	const [errors, setErrors] = useState<string[] | undefined>()
 
 	const [loading, setLoading] = useState(false)
 	const [upload, setUpload] = useState<Upload | undefined>()
@@ -36,24 +37,27 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 		setLoading(false)
 		setSuccess(undefined)
 		setError(undefined)
+		setErrors(undefined)
 
 		const fromName = formValues.fromName;
 		const fromEmail = formValues.fromEmail;
 		const fields = formFields.map(({ title, id }) => ({ title, value: formValues[id] }))
-		const form = { recordId, fromEmail, fromName, fields }
-
+		const form = { recordId: record.id, fromEmail, fromName, fields }
+		//console.log(fields, formFields)
 		setLoading(true)
 		fetch('/api/contact-form', {
 			body: JSON.stringify(form),
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' }
 		}).then(async (res) => {
-			const { success, error } = await res.json()
+			const { success, error, errors } = await res.json()
 
 			if (success === true)
 				setSuccess(true)
 			else if (error)
 				setError(new Error(error))
+			else if (errors)
+				setErrors(errors)
 
 		}).catch((err) => setError(err)).finally(() => setLoading(false))
 	}
@@ -62,6 +66,7 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 		setUpload(upload)
 		setProgress(undefined)
 		setUploading(false)
+
 	}
 
 	useEffect(() => { uploading && setUpload(undefined) }, [uploading])
@@ -72,7 +77,7 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 	}, [uploading])
 
 	useEffect(() => {
-		!success && confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+		success && confirmationRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
 	}, [success])
 
 	return (
@@ -113,7 +118,10 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 														customData={{}}
 														tags={[record?.region?.name, record?.title].filter(el => el)}
 														accept=".pdf"
-														onDone={handleUploadDone}
+														onDone={(u) => {
+															handleUploadDone(u)
+															handleInputChange({ target: { id: fieldId, value: u.url } })
+														}}
 														onProgress={setProgress}
 														onUploading={setUploading}
 														onError={setUploadError}
@@ -129,9 +137,12 @@ export default function Form({ record, region, data: { id, formFields, subject, 
 						)
 					})}
 
-					{error &&
+					{(error || errors) &&
 						<p className={s.error}>
-							{error.message}
+							{error ?
+								<>{error.message}</>
+								: errors.map((err) => <>{err}<br /></>)
+							}
 						</p>
 					}
 

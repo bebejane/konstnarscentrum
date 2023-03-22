@@ -175,7 +175,7 @@ const FileUpload = React.forwardRef<HTMLInputElement, Props>((props, ref) => {
   }, [ref, handleChange])
 
 
-  useEffect(() => { onDone(upload) }, [upload])
+  useEffect(() => { upload && onDone(upload) }, [upload])
   useEffect(() => {
     console.log(error)
     onError(error)

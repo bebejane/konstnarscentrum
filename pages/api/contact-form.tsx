@@ -26,11 +26,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       errors.push('Namn är ogiltig')
     if (!fields)
       errors.push('Det finns inga fält inlaggda')
-    else
-      fields.forEach(({ title, value }) => !value && errors.push(`Fält "${title}" är tomt`))
+    //else
+    //fields.forEach(({ title, value }) => !value && errors.push(`Fält "${title}" är obligatoriskt`))
 
     if (errors.length)
-      throw new Error(errors.join('. '))
+      return res.json({ success: false, errors })
 
     await Email.contactForm({ fromEmail, fromName, fields, to: form.reciever, subject: form.subject })
     res.json({ success: true })

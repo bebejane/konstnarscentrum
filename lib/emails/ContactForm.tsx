@@ -61,7 +61,7 @@ const ContactForm: React.FC<{
             {fields.map(({ title, value }, idx) =>
               <p key={idx}>
                 <span>{title}</span><br />
-                {value}
+                {value ?? 'Ej ifyllt...'}
               </p>
             )}
           </MjmlText>
