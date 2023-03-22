@@ -13,12 +13,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { memberNews }: { memberNews: MemberNewsRecord } = await apiQuery(MemberNewsByIdDocument, { variables: { id: recordId } })
 
     if (!memberNews)
-      throw new Error(`Post kunde inte hittas med id: ${id}`)
+      throw new Error(`Post kunde inte hittas med id: ${recordId}`)
 
     const form = memberNews.content.blocks.find(({ __typename }) => __typename === 'FormRecord') as FormRecord
 
     if (!form)
-      throw new Error(`Formulär kunde inte hittas med id: ${id}`)
+      throw new Error(`Formulär kunde inte hittas med id: ${recordId}`)
 
     if (!fromEmail || !isEmail(fromEmail))
       errors.push('E-post adress är ogiltig')
@@ -26,8 +26,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       errors.push('Namn är ogiltig')
     if (!fields)
       errors.push('Det finns inga fält inlaggda')
-    //else
-    //fields.forEach(({ title, value }) => !value && errors.push(`Fält "${title}" är obligatoriskt`))
+
+    //else fields.forEach(({ title, value }) => !value && errors.push(`Fält "${title}" är obligatoriskt`))
 
     if (errors.length)
       return res.json({ success: false, errors })
