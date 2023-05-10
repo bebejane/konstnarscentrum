@@ -32,6 +32,7 @@ type AboutModelContentField = {
 };
 
 type AboutModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<AboutModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<AboutModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -123,6 +124,7 @@ type AboutRecordintroArgs = {
 };
 
 type ActivityModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ActivityModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ActivityModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -212,6 +214,7 @@ type ActivityRecordintroArgs = {
 };
 
 type ApplicationModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ApplicationModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ApplicationModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -363,6 +366,90 @@ type ApplyRecordintroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
+type BoardModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<BoardModelFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<BoardModelFilter>>>;
+  _createdAt?: InputMaybe<CreatedAtFilter>;
+  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
+  _isValid?: InputMaybe<BooleanFilter>;
+  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _publishedAt?: InputMaybe<PublishedAtFilter>;
+  _status?: InputMaybe<StatusFilter>;
+  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
+  _updatedAt?: InputMaybe<UpdatedAtFilter>;
+  createdAt?: InputMaybe<CreatedAtFilter>;
+  email?: InputMaybe<StringFilter>;
+  id?: InputMaybe<ItemIdFilter>;
+  name?: InputMaybe<StringFilter>;
+  position?: InputMaybe<PositionFilter>;
+  region?: InputMaybe<LinkFilter>;
+  title?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<UpdatedAtFilter>;
+};
+
+enum BoardModelOrderBy {
+  _createdAt_ASC = '_createdAt_ASC',
+  _createdAt_DESC = '_createdAt_DESC',
+  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
+  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
+  _isValid_ASC = '_isValid_ASC',
+  _isValid_DESC = '_isValid_DESC',
+  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
+  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
+  _publishedAt_ASC = '_publishedAt_ASC',
+  _publishedAt_DESC = '_publishedAt_DESC',
+  _status_ASC = '_status_ASC',
+  _status_DESC = '_status_DESC',
+  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
+  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
+  _updatedAt_ASC = '_updatedAt_ASC',
+  _updatedAt_DESC = '_updatedAt_DESC',
+  createdAt_ASC = 'createdAt_ASC',
+  createdAt_DESC = 'createdAt_DESC',
+  email_ASC = 'email_ASC',
+  email_DESC = 'email_DESC',
+  id_ASC = 'id_ASC',
+  id_DESC = 'id_DESC',
+  name_ASC = 'name_ASC',
+  name_DESC = 'name_DESC',
+  position_ASC = 'position_ASC',
+  position_DESC = 'position_DESC',
+  title_ASC = 'title_ASC',
+  title_DESC = 'title_DESC',
+  updatedAt_ASC = 'updatedAt_ASC',
+  updatedAt_DESC = 'updatedAt_DESC'
+}
+
+/** Record of type Styrelse (board) */
+type BoardRecord = RecordInterface & {
+  __typename?: 'BoardRecord';
+  _createdAt: Scalars['DateTime'];
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  createdAt: Scalars['DateTime'];
+  email: Scalars['String'];
+  id: Scalars['ItemId'];
+  name: Scalars['String'];
+  position?: Maybe<Scalars['IntType']>;
+  region: RegionRecord;
+  title?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Styrelse (board) */
+type BoardRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
 /** Specifies how to filter Boolean fields */
 type BooleanFilter = {
   /** Search for records with an exact match */
@@ -420,12 +507,14 @@ type ColorField = {
   __typename?: 'ColorField';
   alpha: Scalars['IntType'];
   blue: Scalars['IntType'];
+  cssRgb: Scalars['String'];
   green: Scalars['IntType'];
   hex: Scalars['String'];
   red: Scalars['IntType'];
 };
 
 type CommissionCategoryModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CommissionCategoryModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CommissionCategoryModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -497,6 +586,7 @@ type CommissionCategoryRecord_seoMetaTagsArgs = {
 type CommissionModelContentField = ImageRecord | VideoRecord;
 
 type CommissionModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CommissionModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CommissionModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -620,6 +710,7 @@ type ConsultModelContentField = {
 };
 
 type ConsultModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ConsultModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ConsultModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -715,6 +806,7 @@ type ConsultRecordintroArgs = {
 };
 
 type ConsultantModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ConsultantModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ConsultantModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -729,6 +821,7 @@ type ConsultantModelFilter = {
   id?: InputMaybe<ItemIdFilter>;
   name?: InputMaybe<StringFilter>;
   position?: InputMaybe<PositionFilter>;
+  region?: InputMaybe<LinkFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
 };
@@ -785,6 +878,7 @@ type ConsultantRecord = RecordInterface & {
   id: Scalars['ItemId'];
   name: Scalars['String'];
   position?: Maybe<Scalars['IntType']>;
+  region: RegionRecord;
   title?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
 };
@@ -902,6 +996,7 @@ type DateFilter = {
 };
 
 type EmployeeModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<EmployeeModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<EmployeeModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -1015,6 +1110,7 @@ type FileField = FileFieldInterface & {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video?: Maybe<UploadVideoField>;
@@ -1090,6 +1186,7 @@ type FileFieldInterface = {
   size: Scalars['IntType'];
   smartTags: Array<Scalars['String']>;
   tags: Array<Scalars['String']>;
+  thumbhash?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   video?: Maybe<UploadVideoField>;
@@ -1197,6 +1294,7 @@ type ForArtistModelContentField = {
 };
 
 type ForArtistModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ForArtistModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ForArtistModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -1284,6 +1382,7 @@ type ForArtistRecordintroArgs = {
 };
 
 type ForMemberModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ForMemberModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ForMemberModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -1476,6 +1575,7 @@ type GlobalSeoField = {
 };
 
 type HelpModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<HelpModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<HelpModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -1643,6 +1743,14 @@ type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/bg)
    */
   bg?: InputMaybe<Scalars['String']>;
+  /**
+   * Background Removal
+   *
+   * Removes background from image.
+   *
+   * [Open Imgix reference »](https://docs.imgix.com/apis/rendering/background-removal/bg-remove)
+   */
+  bgRemove?: InputMaybe<Scalars['BooleanType']>;
   /**
    * Blend
    *
@@ -2096,6 +2204,18 @@ type ImgixParams = {
    */
   fpZ?: InputMaybe<Scalars['FloatType']>;
   /**
+   * Frames Per Second
+   *
+   * Specifies the framerate of the generated image.
+   */
+  fps?: InputMaybe<Scalars['IntType']>;
+  /**
+   * Frame Selection
+   *
+   * Specifies the frame of an animated image to use.
+   */
+  frame?: InputMaybe<Scalars['String']>;
+  /**
    * Gamma
    *
    * Adjusts the gamma of the source image.
@@ -2103,6 +2223,12 @@ type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/gam)
    */
   gam?: InputMaybe<Scalars['IntType']>;
+  /**
+   * Animated Gif Quality
+   *
+   * Depends on: `fm=gif`
+   */
+  gifQ?: InputMaybe<Scalars['IntType']>;
   /**
    * Grid Colors
    *
@@ -2152,6 +2278,12 @@ type ImgixParams = {
    */
   hue?: InputMaybe<Scalars['IntType']>;
   /**
+   * Frame Interval
+   *
+   * Displays every Nth frame starting with the first frame.
+   */
+  interval?: InputMaybe<Scalars['IntType']>;
+  /**
    * Invert
    *
    * Inverts the colors on the source image.
@@ -2165,6 +2297,12 @@ type ImgixParams = {
    * Determine if IPTC data should be passed for JPEG images.
    */
   iptc?: InputMaybe<ImgixParamsIptc>;
+  /**
+   * Animation Loop Count
+   *
+   * Specifies the number of times an animated image should repeat. A value of 0 means infinite looping.
+   */
+  loop?: InputMaybe<Scalars['IntType']>;
   /**
    * Lossless Compression
    *
@@ -2492,6 +2630,12 @@ type ImgixParams = {
    */
   rect?: InputMaybe<Scalars['String']>;
   /**
+   * Reverse
+   *
+   * Reverses the frame order on the source animation.
+   */
+  reverse?: InputMaybe<Scalars['BooleanType']>;
+  /**
    * Rotation
    *
    * Rotates an image by a specified number of degrees.
@@ -2531,6 +2675,12 @@ type ImgixParams = {
    * [Open Imgix reference »](https://docs.imgix.com/apis/url/adjustment/sharp)
    */
   sharp?: InputMaybe<Scalars['FloatType']>;
+  /**
+   * Frame Skip
+   *
+   * Skips every Nth frame starting with the first frame.
+   */
+  skip?: InputMaybe<Scalars['IntType']>;
   /**
    * Transparency
    *
@@ -3156,6 +3306,7 @@ type LinksFilter = {
 };
 
 type MemberCategoryModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MemberCategoryModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MemberCategoryModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3227,6 +3378,7 @@ type MemberCategoryRecord_seoMetaTagsArgs = {
 type MemberModelContentField = ImageRecord | VideoRecord;
 
 type MemberModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MemberModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MemberModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3312,6 +3464,7 @@ enum MemberModelOrderBy {
 }
 
 type MemberNewsCategoryModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MemberNewsCategoryModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3394,6 +3547,7 @@ type MemberNewsModelContentField = {
 };
 
 type MemberNewsModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<MemberNewsModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<MemberNewsModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3622,6 +3776,7 @@ type NewsModelContentField = {
 };
 
 type NewsModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<NewsModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<NewsModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3765,6 +3920,7 @@ type PositionFilter = {
 };
 
 type ProjectModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<ProjectModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -3881,6 +4037,8 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allApplicationsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
+  _allBoardsMeta: CollectionMetadata;
+  /** Returns meta information regarding a record collection */
   _allCommissionCategoriesMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allCommissionsMeta: CollectionMetadata;
@@ -3927,6 +4085,8 @@ type Query = {
   /** Returns a collection of records */
   allApplications: Array<ApplicationRecord>;
   /** Returns a collection of records */
+  allBoards: Array<BoardRecord>;
+  /** Returns a collection of records */
   allCommissionCategories: Array<CommissionCategoryRecord>;
   /** Returns a collection of records */
   allCommissions: Array<CommissionRecord>;
@@ -3964,6 +4124,8 @@ type Query = {
   application?: Maybe<ApplicationRecord>;
   /** Returns the single instance record */
   apply?: Maybe<ApplyRecord>;
+  /** Returns a specific record */
+  board?: Maybe<BoardRecord>;
   /** Returns a specific record */
   commission?: Maybe<CommissionRecord>;
   /** Returns a specific record */
@@ -4029,6 +4191,14 @@ type Query_allActivitiesMetaArgs = {
 type Query_allApplicationsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ApplicationModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
+type Query_allBoardsMetaArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BoardModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -4222,6 +4392,17 @@ type QueryallApplicationsArgs = {
   first?: InputMaybe<Scalars['IntType']>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ApplicationModelOrderBy>>>;
+  skip?: InputMaybe<Scalars['IntType']>;
+};
+
+
+/** The query root for this schema */
+type QueryallBoardsArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BoardModelFilter>;
+  first?: InputMaybe<Scalars['IntType']>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<BoardModelOrderBy>>>;
   skip?: InputMaybe<Scalars['IntType']>;
 };
 
@@ -4430,6 +4611,15 @@ type QueryapplyArgs = {
 
 
 /** The query root for this schema */
+type QueryboardArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  filter?: InputMaybe<BoardModelFilter>;
+  locale?: InputMaybe<SiteLocale>;
+  orderBy?: InputMaybe<Array<InputMaybe<BoardModelOrderBy>>>;
+};
+
+
+/** The query root for this schema */
 type QuerycommissionArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<CommissionModelFilter>;
@@ -4630,6 +4820,7 @@ type RecordInterface_seoMetaTagsArgs = {
 };
 
 type RegionModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<RegionModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<RegionModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -5163,6 +5354,7 @@ type UploadFilenameFilter = {
 };
 
 type UploadFilter = {
+  AND?: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<UploadFilter>>>;
   _createdAt?: InputMaybe<UploadCreatedAtFilter>;
   _updatedAt?: InputMaybe<UploadUpdatedAtFilter>;
@@ -5408,6 +5600,7 @@ type UploadWidthFilter = {
 };
 
 type UserModelFilter = {
+  AND?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<UserModelFilter>>>;
   _createdAt?: InputMaybe<CreatedAtFilter>;
   _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
@@ -5879,7 +6072,7 @@ type RegionMetaQueryVariables = Exact<{
 }>;
 
 
-type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, title?: string | null, region: { __typename?: 'RegionRecord', position?: any | null, contactIntro?: string | null, id: any, name: string, slug: string, global?: any | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } }> };
+type RegionMetaQuery = { __typename?: 'Query', region?: { __typename?: 'RegionRecord', contactIntro?: string | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } | null, employees: Array<{ __typename?: 'EmployeeRecord', name: string, email: string, title?: string | null, region: { __typename?: 'RegionRecord', position?: any | null, contactIntro?: string | null, id: any, name: string, slug: string, global?: any | null, info: Array<{ __typename?: 'MetaBlockRecord', title: string, text: string }> } }>, boardmembers: Array<{ __typename?: 'BoardRecord', name: string, email: string, title?: string | null, region: { __typename?: 'RegionRecord', position?: any | null, id: any, name: string, slug: string, global?: any | null } }> };
 
 type SiteSearchQueryVariables = Exact<{
   memberIds?: InputMaybe<Array<InputMaybe<Scalars['ItemId']>> | InputMaybe<Scalars['ItemId']>>;

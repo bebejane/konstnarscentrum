@@ -1,59 +1,3 @@
-.employee,
-.consultant {
-  &:last-of-type p {
-    margin-bottom: 0 !important;
-  }
-
-  p {
-    margin-bottom: 0;
-  }
-
-  p a {
-    display: inline-block;
-    padding-bottom: 1em;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100%;
-  }
-}
-
-.list,
-.consultants {
-  display: flex;
-  flex-wrap: wrap;
-  list-style: none;
-  padding: 0;
-  margin-left: calc(-1 * var(--outer-margin));
-  margin-right: calc(-1 * var(--outer-margin));
-
-  @include mq($from: tablet) {
-    margin-left: calc(-1 * var(--gutter));
-    margin-right: calc(-1 * var(--gutter));
-  }
-
-  li {
-    @include mq($from: tablet) {
-      width: 50%;
-    }
-  }
-}
-
-.info {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1rem;
-
-  @include mq($from: tablet) {
-    column-count: 2;
-  }
-
-  li {
-    padding-bottom: 0.25em;
-  }
-}
-
 .container {
   h3:first-of-type {
     padding-top: 1rem;
@@ -61,5 +5,46 @@
 
   h3:not(:first-of-type) {
     padding-top: var(--small-space);
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin-left: calc(-1 * var(--outer-margin));
+    margin-right: calc(-1 * var(--outer-margin));
+
+    @include mq($from: tablet) {
+      margin-left: calc(-1 * var(--gutter));
+      margin-right: calc(-1 * var(--gutter));
+    }
+
+    .card {
+      @include mq($from: tablet) {
+        width: 50%;
+      }
+    }
+
+    .employee,
+    .consultant {
+      &:last-of-type p {
+        margin-bottom: 0 !important;
+      }
+
+      p {
+        margin-bottom: 0;
+      }
+
+      p a {
+        display: inline-block;
+        padding-bottom: 1em;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
+    }
   }
 }

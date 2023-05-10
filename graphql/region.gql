@@ -126,4 +126,13 @@ query RegionMeta($regionId: ItemId) {
 			}
 		}
 	}
+	boardmembers: allBoards(filter: { region: { eq: $regionId } }) {
+		name
+		email
+		title
+		region {
+			...RegionFragment
+			position
+		}
+	}
 }

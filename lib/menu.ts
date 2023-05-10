@@ -32,7 +32,13 @@ const base: Menu = [
   },
   { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, external: true, sub: [] },
   { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
-  { type: 'contact', label: 'Kontakt', slug: '/kontakt', index: true, regional: true, sub: [] },
+  {
+    type: 'contact', label: 'Kontakt', slug: '/kontakt', regional: true, sub: [
+      { type: 'contact', label: 'Konstkonsulter', slug: '/kontakt/konstkonsulter', regional: false },
+      { type: 'contact', label: 'Anställda', slug: '/kontakt/anstallda', regional: true },
+      { type: 'contact', label: 'Styrelse', slug: '/kontakt/styrelse', regional: true },
+    ]
+  },
 ]
 
 export const buildMenu = async () => {
@@ -71,9 +77,6 @@ export const buildMenu = async () => {
         break;
       case 'projects':
         sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
-        break;
-      case 'contact':
-        sub = regions.filter(({ global }) => !global).map(el => ({ type: 'contact', label: el.name, slug: `/${el.slug}/kontakt`, regional: false }))
         break;
       case 'for-artists':
         sub = item.sub.concat(forArtists.map(el => ({ type: 'for-artists', label: el.title, slug: `/for-konstnarer/${el.slug}`, regional: false })))

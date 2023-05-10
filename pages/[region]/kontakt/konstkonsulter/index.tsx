@@ -20,7 +20,7 @@ export type EmployeesByRegion = {
 	region: RegionRecord
 }[]
 
-export default function Contact({ consultants, contactIntro, employees }: Props) {
+export default function ArtConsultants({ consultants, contactIntro, employees }: Props) {
 
 	const employeesByRegion: EmployeesByRegion = []
 
@@ -34,59 +34,31 @@ export default function Contact({ consultants, contactIntro, employees }: Props)
 
 	return (
 		<div className={s.container}>
-			<h1><RevealText>Kontakta oss</RevealText></h1>
+			<h1><RevealText>Kontakta vår konstkonsulter</RevealText></h1>
 			<Markdown className="intro">
 				{contactIntro}
 			</Markdown>
-			{employeesByRegion.sort((a, b) => a.region.position > b.region.position ? 1 : -1).map(({ region, employees }, idx) => {
-				return (
-					<React.Fragment key={idx}>
-						<h3>{region.global ? `Förbundet` : `Konstnärscentrum ${region.name}`}</h3>
-						{region.info.length < 0 &&
-							< ul className={s.info}>
-								{region.info.map(({ text, title }, idx) =>
-									<li key={idx}>{title}: {text}</li>
-								)}
-							</ul>
-						}
-						<ul className={s.list}>
-							{employees.map(({ name, email, image, title }, idx) =>
-								<Card key={idx} className={s.employee}>
-									<p>{name}</p>
-									<p className="mid">{title}</p>
-									<p className="mid"><a href={`mailto:${email}`}>{email}</a></p>
-								</Card>
-							)}
-						</ul>
-						{idx === 0 && consultants &&
-							<>
-								<h3>Konstkonsulter</h3>
-								<ul className={s.consultants}>
-									{consultants.map(({ id, name, title, email }, i) =>
-										<Card key={id} className={s.consultant}>
-											<p>{name}</p>
-											<p className="mid">{title}</p>
-											<p className="mid"><a href={`mailto:${email}`}>{email}</a></p>
-										</Card>
-									)}
-								</ul>
-							</>
-						}
-					</React.Fragment>
-				)
-			})}
-		</div >
+			<h3>Konstkonsulter</h3>
+			<ul className={s.consultants}>
+				{consultants.map(({ id, name, title, email }, i) =>
+					<Card key={id} className={s.consultant}>
+						<p>{name}</p>
+						<p className="mid">{title}</p>
+						<p className="mid"><a href={`mailto:${email}`}>{email}</a></p>
+					</Card>
+				)}
+			</ul>
+		</div>
 	);
 }
 
-Contact.page = { title: 'Kontakt', crumbs: [{ title: 'Kontakt', regional: false }] } as PageProps
+ArtConsultants.page = { title: 'Konstkonsulter', crumbs: [{ title: 'Kontakt', regional: false }] } as PageProps
 
 export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;
 	const { region: { contactIntro, info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId } });
 	const { consultants } = await apiQuery(AllConsultantsDocument);
-
 
 	return {
 		props: {
