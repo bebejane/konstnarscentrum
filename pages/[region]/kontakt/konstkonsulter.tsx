@@ -1,5 +1,5 @@
 import { regions } from "/lib/region";
-export { default, getStaticProps } from '/pages/kontakt'
+export { default, getStaticProps } from '/pages/kontakt/konstkonsulter'
 
 export async function getStaticPaths(context) {
 

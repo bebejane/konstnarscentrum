@@ -89,6 +89,8 @@ enum AboutModelOrderBy {
 type AboutRecord = RecordInterface & {
   __typename?: 'AboutRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -180,6 +182,8 @@ enum ActivityModelOrderBy {
 type ActivityRecord = RecordInterface & {
   __typename?: 'ActivityRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -280,6 +284,8 @@ enum ApplicationModelOrderBy {
 type ApplicationRecord = RecordInterface & {
   __typename?: 'ApplicationRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -334,6 +340,8 @@ type ApplyModelContentField = {
 type ApplyRecord = RecordInterface & {
   __typename?: 'ApplyRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -424,6 +432,8 @@ enum BoardModelOrderBy {
 type BoardRecord = RecordInterface & {
   __typename?: 'BoardRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -460,6 +470,8 @@ type BooleanFilter = {
 type ButtonRecord = RecordInterface & {
   __typename?: 'ButtonRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -561,6 +573,8 @@ enum CommissionCategoryModelOrderBy {
 type CommissionCategoryRecord = RecordInterface & {
   __typename?: 'CommissionCategoryRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -659,6 +673,8 @@ enum CommissionModelOrderBy {
 type CommissionRecord = RecordInterface & {
   __typename?: 'CommissionRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -770,6 +786,8 @@ enum ConsultModelOrderBy {
 type ConsultRecord = RecordInterface & {
   __typename?: 'ConsultRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -863,6 +881,8 @@ enum ConsultantModelOrderBy {
 type ConsultantRecord = RecordInterface & {
   __typename?: 'ConsultantRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -889,10 +909,60 @@ type ConsultantRecord_seoMetaTagsArgs = {
   locale?: InputMaybe<SiteLocale>;
 };
 
+/** Record of type Kontakt ingress (contact_intro) */
+type ContactIntroRecord = RecordInterface & {
+  __typename?: 'ContactIntroRecord';
+  _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
+  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
+  _isValid: Scalars['BooleanType'];
+  _modelApiKey: Scalars['String'];
+  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
+  _publishedAt?: Maybe<Scalars['DateTime']>;
+  /** SEO meta tags */
+  _seoMetaTags: Array<Tag>;
+  _status: ItemStatus;
+  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
+  _updatedAt: Scalars['DateTime'];
+  board?: Maybe<Scalars['String']>;
+  consultant?: Maybe<Scalars['String']>;
+  createdAt: Scalars['DateTime'];
+  id: Scalars['ItemId'];
+  staff?: Maybe<Scalars['String']>;
+  updatedAt: Scalars['DateTime'];
+};
+
+
+/** Record of type Kontakt ingress (contact_intro) */
+type ContactIntroRecord_seoMetaTagsArgs = {
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** Record of type Kontakt ingress (contact_intro) */
+type ContactIntroRecordboardArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Record of type Kontakt ingress (contact_intro) */
+type ContactIntroRecordconsultantArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
+
+/** Record of type Kontakt ingress (contact_intro) */
+type ContactIntroRecordstaffArgs = {
+  markdown?: InputMaybe<Scalars['Boolean']>;
+};
+
 /** Block of type Kontakt (contact) */
 type ContactRecord = RecordInterface & {
   __typename?: 'ContactRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -934,6 +1004,8 @@ type ContentModelLayoutField = {
 type ContentRecord = RecordInterface & {
   __typename?: 'ContentRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1053,6 +1125,8 @@ enum EmployeeModelOrderBy {
 type EmployeeRecord = RecordInterface & {
   __typename?: 'EmployeeRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1088,6 +1162,8 @@ enum FaviconType {
 type FileField = FileFieldInterface & {
   __typename?: 'FileField';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -1164,6 +1240,8 @@ type FileFieldurlArgs = {
 
 type FileFieldInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _updatedAt: Scalars['DateTime'];
   alt?: Maybe<Scalars['String']>;
   author?: Maybe<Scalars['String']>;
@@ -1256,6 +1334,8 @@ type FileFilter = {
 type FooterRecord = RecordInterface & {
   __typename?: 'FooterRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1348,6 +1428,8 @@ enum ForArtistModelOrderBy {
 type ForArtistRecord = RecordInterface & {
   __typename?: 'ForArtistRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1427,6 +1509,8 @@ enum ForMemberModelOrderBy {
 type ForMemberRecord = RecordInterface & {
   __typename?: 'ForMemberRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1462,6 +1546,8 @@ type FormModelFormFieldsField = FormTextRecord | FormTextblockRecord | PdfFormRe
 type FormRecord = RecordInterface & {
   __typename?: 'FormRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1491,6 +1577,8 @@ type FormRecord_seoMetaTagsArgs = {
 type FormTextRecord = RecordInterface & {
   __typename?: 'FormTextRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1517,6 +1605,8 @@ type FormTextRecord_seoMetaTagsArgs = {
 type FormTextblockRecord = RecordInterface & {
   __typename?: 'FormTextblockRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1543,6 +1633,8 @@ type FormTextblockRecord_seoMetaTagsArgs = {
 type GalleryRecord = RecordInterface & {
   __typename?: 'GalleryRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1629,6 +1721,8 @@ enum HelpModelOrderBy {
 type HelpRecord = RecordInterface & {
   __typename?: 'HelpRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1664,6 +1758,8 @@ type HelpRecordtextArgs = {
 type ImageRecord = RecordInterface & {
   __typename?: 'ImageRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -1690,6 +1786,8 @@ type ImageRecord_seoMetaTagsArgs = {
 type ImageShortcutRecord = RecordInterface & {
   __typename?: 'ImageShortcutRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3143,6 +3241,8 @@ type InEnglishModelContentField = {
 type InEnglishRecord = RecordInterface & {
   __typename?: 'InEnglishRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3177,6 +3277,8 @@ type InUseFilter = {
 type IntroInitiativeRecord = RecordInterface & {
   __typename?: 'IntroInitiativeRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3229,6 +3331,8 @@ enum ItemStatus {
 type LatestMemberNewsRecord = RecordInterface & {
   __typename?: 'LatestMemberNewsRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3255,6 +3359,8 @@ type LatestMemberNewsRecord_seoMetaTagsArgs = {
 type LatestNewsRecord = RecordInterface & {
   __typename?: 'LatestNewsRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3353,6 +3459,8 @@ enum MemberCategoryModelOrderBy {
 type MemberCategoryRecord = RecordInterface & {
   __typename?: 'MemberCategoryRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3514,6 +3622,8 @@ enum MemberNewsCategoryModelOrderBy {
 type MemberNewsCategoryRecord = RecordInterface & {
   __typename?: 'MemberNewsCategoryRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3612,6 +3722,8 @@ enum MemberNewsModelOrderBy {
 type MemberNewsRecord = RecordInterface & {
   __typename?: 'MemberNewsRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3654,6 +3766,8 @@ type MemberNewsRecordintroArgs = {
 type MemberRecord = RecordInterface & {
   __typename?: 'MemberRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3705,6 +3819,8 @@ type MemberRecordbioArgs = {
 type MembersListRecord = RecordInterface & {
   __typename?: 'MembersListRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3737,6 +3853,8 @@ type MembersListRecordintroArgs = {
 type MetaBlockRecord = RecordInterface & {
   __typename?: 'MetaBlockRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3834,6 +3952,8 @@ enum NewsModelOrderBy {
 type NewsRecord = RecordInterface & {
   __typename?: 'NewsRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3881,6 +4001,8 @@ type OrientationFilter = {
 type PdfFormRecord = RecordInterface & {
   __typename?: 'PdfFormRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -3976,6 +4098,8 @@ enum ProjectModelOrderBy {
 type ProjectRecord = RecordInterface & {
   __typename?: 'ProjectRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -4069,7 +4193,7 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allRegionsMeta: CollectionMetadata;
   /** Returns meta information regarding an assets collection */
-  _allUploadsMeta?: Maybe<CollectionMetadata>;
+  _allUploadsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allUsersMeta: CollectionMetadata;
   /** Returns the single instance record */
@@ -4134,6 +4258,8 @@ type Query = {
   consult?: Maybe<ConsultRecord>;
   /** Returns a specific record */
   consultant?: Maybe<ConsultantRecord>;
+  /** Returns the single instance record */
+  contactIntro?: Maybe<ContactIntroRecord>;
   /** Returns a specific record */
   employee?: Maybe<EmployeeRecord>;
   /** Returns the single instance record */
@@ -4656,6 +4782,13 @@ type QueryconsultantArgs = {
 
 
 /** The query root for this schema */
+type QuerycontactIntroArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+/** The query root for this schema */
 type QueryemployeeArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<EmployeeModelFilter>;
@@ -4801,6 +4934,8 @@ type QueryuserArgs = {
 
 type RecordInterface = {
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -4880,6 +5015,8 @@ type RegionModelSectionsField = ImageShortcutRecord | LatestMemberNewsRecord | L
 type RegionRecord = RecordInterface & {
   __typename?: 'RegionRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -4921,6 +5058,8 @@ type RegionRecordcontactIntroArgs = {
 type RelatedMemberNewsRecord = RecordInterface & {
   __typename?: 'RelatedMemberNewsRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -4981,6 +5120,8 @@ type ResponsiveImage = {
 type SelectedCommissionRecord = RecordInterface & {
   __typename?: 'SelectedCommissionRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5007,6 +5148,8 @@ type SelectedCommissionRecord_seoMetaTagsArgs = {
 type SelectedMemberRecord = RecordInterface & {
   __typename?: 'SelectedMemberRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5066,6 +5209,8 @@ type SlideModelLinkField = AboutRecord | CommissionRecord | ForArtistRecord | Me
 type SlideRecord = RecordInterface & {
   __typename?: 'SlideRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5107,6 +5252,8 @@ type SlugFilter = {
 type SponsorRecord = RecordInterface & {
   __typename?: 'SponsorRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5209,6 +5356,8 @@ type TextFilter = {
 type TextRecord = RecordInterface & {
   __typename?: 'TextRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5651,6 +5800,8 @@ enum UserModelOrderBy {
 type UserRecord = RecordInterface & {
   __typename?: 'UserRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5696,6 +5847,8 @@ enum VideoMp4Res {
 type VideoRecord = RecordInterface & {
   __typename?: 'VideoRecord';
   _createdAt: Scalars['DateTime'];
+  /** Editing URL */
+  _editingUrl?: Maybe<Scalars['String']>;
   _firstPublishedAt?: Maybe<Scalars['DateTime']>;
   _isValid: Scalars['BooleanType'];
   _modelApiKey: Scalars['String'];
@@ -5808,6 +5961,11 @@ type AllConsultantsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type AllConsultantsQuery = { __typename?: 'Query', consultants: Array<{ __typename?: 'ConsultantRecord', id: any, email: string, name: string, title?: string | null }> };
+
+type ContactQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type ContactQuery = { __typename?: 'Query', contactIntro?: { __typename?: 'ContactIntroRecord', id: any, board?: string | null, staff?: string | null, consultant?: string | null } | null };
 
 type InEnglishQueryVariables = Exact<{ [key: string]: never; }>;
 

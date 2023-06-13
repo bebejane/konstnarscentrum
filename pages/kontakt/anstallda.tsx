@@ -3,12 +3,12 @@ import s from "./index.module.scss";
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
-import { RegionMetaDocument } from "/graphql";
+import { RegionMetaDocument, ContactDocument } from "/graphql";
 import { DatoMarkdown as Markdown } from "dato-nextjs-utils/components";
 import { Card, RevealText } from "/components";
 
 export type Props = {
-	contactIntro: RegionRecord['contactIntro'],
+	contactIntro: ContactIntroRecord,
 	info: RegionRecord['info'],
 	employees: EmployeeRecord[],
 	region: RegionRecord
@@ -25,7 +25,7 @@ export default function Employees({ contactIntro, employees }: Props) {
 		<div className={s.container}>
 			<h1><RevealText>Våra anställda</RevealText></h1>
 			<Markdown className="intro">
-				{contactIntro}
+				{contactIntro.staff}
 			</Markdown>
 			<ul>
 				{employees.map(({ name, email, title }, idx) =>
@@ -42,15 +42,14 @@ export default function Employees({ contactIntro, employees }: Props) {
 
 Employees.page = { title: 'Anställda', crumbs: [{ title: 'Kontakt', regional: false }] } as PageProps
 
-export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate }: any) => {
+export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [ContactDocument] }, async ({ props, revalidate }: any) => {
 
 	const regionId = props.region.global ? undefined : props.region.id;
-	const { region: { contactIntro, info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId } });
+	const { region: { info }, employees } = await apiQuery(RegionMetaDocument, { variables: { regionId } });
 
 	return {
 		props: {
 			...props,
-			contactIntro,
 			info,
 			employees
 		},

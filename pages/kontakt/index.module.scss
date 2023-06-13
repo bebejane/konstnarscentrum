@@ -28,6 +28,13 @@
 
     .employee,
     .consultant {
+
+      width: 100%;
+
+      @include mq($from: tablet) {
+        width: 50%;
+      }
+
       &:last-of-type p {
         margin-bottom: 0 !important;
       }

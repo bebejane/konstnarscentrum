@@ -1,6 +1,10 @@
-import { withWebPreviews } from 'dato-nextjs-utils/hoc';
+import { withWebPreviewsEdge } from 'dato-nextjs-utils/hoc';
 
-export default withWebPreviews(async ({ item, itemType }) => {
+export const config = {
+  runtime: 'edge'
+}
+
+export default withWebPreviewsEdge(async ({ item, itemType }) => {
 
   const { slug, global } = item.attributes
 
@@ -56,6 +60,10 @@ export default withWebPreviews(async ({ item, itemType }) => {
       break;
     case 'footer':
       path = `/`
+      break;
+    case 'contact_intro':
+      path = `/kontakt/styrelse`
+      break;
     default:
       break;
   }

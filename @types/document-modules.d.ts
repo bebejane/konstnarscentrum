@@ -36,6 +36,15 @@ export const AllConsultants: DocumentNode;
 }
     
 
+declare module '*/contact.gql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Contact: DocumentNode;
+
+  export default defaultDocument;
+}
+    
+
 declare module '*/english.gql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;

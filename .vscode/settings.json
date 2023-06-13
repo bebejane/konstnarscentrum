@@ -14,7 +14,6 @@
     "pnpm-lock.yaml": true,
     "README.md": true,
     "tsconfig.json": true,
-    "vercel.json": true,
     "@types": true
   },
   "workspace.isHidden": true,

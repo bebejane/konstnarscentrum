@@ -47,6 +47,11 @@ export default withRevalidate(async (record, revalidate) => {
       paths.push(`/anlita-oss/hitta-konstnar/${slug}`)
       paths.push(`/anlita-oss/hitta-konstnar`)
       break;
+    case 'contact_intro':
+      paths.push(`/kontakt/anstallda`)
+      paths.push(`/kontakt/konstkonsulter`)
+      paths.push(`/kontakt/syrelse`)
+      break;
     case 'application':
       break;
     case 'consultant':
