@@ -35,7 +35,7 @@ const base: Menu = [
   {
     type: 'contact', label: 'Kontakt', slug: '/kontakt', regional: true, sub: [
       { type: 'contact', label: 'Konstkonsulter', slug: '/kontakt/konstkonsulter', regional: false },
-      { type: 'contact', label: 'Anställda', slug: '/kontakt/anstallda', regional: true },
+      { type: 'contact', label: 'Personal', slug: '/kontakt/personal', regional: true },
       { type: 'contact', label: 'Styrelse', slug: '/kontakt/styrelse', regional: true },
     ]
   },

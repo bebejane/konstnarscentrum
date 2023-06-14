@@ -10,12 +10,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const payload = req.body;
 
-    if (req.body.ping) {
-      console.log('ping')
+    if (req.body.ping)
       return res.status(200).json({ pong: true });
-    }
-
-
 
     const basicAuth = req.headers.authorization
 

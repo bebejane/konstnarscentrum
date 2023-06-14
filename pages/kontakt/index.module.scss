@@ -27,6 +27,7 @@
     }
 
     .employee,
+    .board,
     .consultant {
 
       width: 100%;
@@ -53,5 +54,16 @@
         width: 100%;
       }
     }
+
+    .board p {
+      padding-bottom: 1em;
+
+      a {
+        padding-bottom: 0;
+      }
+
+    }
   }
+
+
 }

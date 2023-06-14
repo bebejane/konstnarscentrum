@@ -64,6 +64,15 @@ export default withWebPreviewsEdge(async ({ item, itemType }) => {
     case 'contact_intro':
       path = `/kontakt/styrelse`
       break;
+    case 'employee':
+      path = `/kontakt/personal`
+      break;
+    case 'board':
+      path = `/kontakt/styrelse`
+      break;
+    case 'consult':
+      path = `/kontakt/konstkonsulter`
+      break;
     default:
       break;
   }
