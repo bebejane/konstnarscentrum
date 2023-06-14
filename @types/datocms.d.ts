@@ -331,7 +331,7 @@ type ApplicationRecordmessageArgs = {
 
 type ApplyModelContentField = {
   __typename?: 'ApplyModelContentField';
-  blocks: Array<Scalars['String']>;
+  blocks: Array<ButtonRecord>;
   links: Array<Scalars['String']>;
   value: Scalars['JsonField'];
 };
@@ -6093,7 +6093,7 @@ type AllMemberCategoriesQuery = { __typename?: 'Query', memberCategories: Array<
 type ApplyForMembershipQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, intro?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null, sizes: string } | null } | null, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<string> } } | null };
+type ApplyForMembershipQuery = { __typename?: 'Query', apply?: { __typename?: 'ApplyRecord', id: any, title: string, intro?: string | null, image?: { __typename?: 'FileField', id: any, mimeType: string, url: string, title?: string | null, alt?: string | null, responsiveImage?: { __typename?: 'ResponsiveImage', src: string, width: any, height: any, alt?: string | null, title?: string | null, bgColor?: string | null, sizes: string } | null } | null, content: { __typename?: 'ApplyModelContentField', value: any, blocks: Array<{ __typename: 'ButtonRecord', id: any, text: string, url: string }> } } | null };
 
 type MemberNewsQueryVariables = Exact<{
   slug: Scalars['String'];
