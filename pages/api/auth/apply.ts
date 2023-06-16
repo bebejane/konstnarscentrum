@@ -13,7 +13,7 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     throw 'Ogiltig request'
   }
 
-  const { email, firstName, lastName, message, regionId, education, webpage, pdf, ping } = req.body
+  const { email, firstName, lastName, sex, homeCity, birthYear, message, regionId, education, webpage, pdf, ping } = req.body
 
   if (ping) return res.status(200).json({ pong: true })
 
@@ -44,6 +44,9 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     email,
     first_name: firstName,
     last_name: lastName,
+    sex,
+    home_city: homeCity,
+    birth_year: birthYear,
     education,
     webpage,
     message,

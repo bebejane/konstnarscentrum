@@ -230,15 +230,18 @@ type ApplicationModelFilter = {
   _updatedAt?: InputMaybe<UpdatedAtFilter>;
   approvalToken?: InputMaybe<StringFilter>;
   approved?: InputMaybe<BooleanFilter>;
+  birthYear?: InputMaybe<IntegerFilter>;
   createdAt?: InputMaybe<CreatedAtFilter>;
   education?: InputMaybe<TextFilter>;
   email?: InputMaybe<StringFilter>;
   firstName?: InputMaybe<StringFilter>;
+  homeCity?: InputMaybe<StringFilter>;
   id?: InputMaybe<ItemIdFilter>;
   lastName?: InputMaybe<StringFilter>;
   message?: InputMaybe<TextFilter>;
   pdf?: InputMaybe<FileFilter>;
   region?: InputMaybe<LinkFilter>;
+  sex?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<UpdatedAtFilter>;
   webpage?: InputMaybe<StringFilter>;
 };
@@ -264,16 +267,22 @@ enum ApplicationModelOrderBy {
   approvalToken_DESC = 'approvalToken_DESC',
   approved_ASC = 'approved_ASC',
   approved_DESC = 'approved_DESC',
+  birthYear_ASC = 'birthYear_ASC',
+  birthYear_DESC = 'birthYear_DESC',
   createdAt_ASC = 'createdAt_ASC',
   createdAt_DESC = 'createdAt_DESC',
   email_ASC = 'email_ASC',
   email_DESC = 'email_DESC',
   firstName_ASC = 'firstName_ASC',
   firstName_DESC = 'firstName_DESC',
+  homeCity_ASC = 'homeCity_ASC',
+  homeCity_DESC = 'homeCity_DESC',
   id_ASC = 'id_ASC',
   id_DESC = 'id_DESC',
   lastName_ASC = 'lastName_ASC',
   lastName_DESC = 'lastName_DESC',
+  sex_ASC = 'sex_ASC',
+  sex_DESC = 'sex_DESC',
   updatedAt_ASC = 'updatedAt_ASC',
   updatedAt_DESC = 'updatedAt_DESC',
   webpage_ASC = 'webpage_ASC',
@@ -298,15 +307,18 @@ type ApplicationRecord = RecordInterface & {
   _updatedAt: Scalars['DateTime'];
   approvalToken?: Maybe<Scalars['String']>;
   approved?: Maybe<Scalars['BooleanType']>;
+  birthYear?: Maybe<Scalars['IntType']>;
   createdAt: Scalars['DateTime'];
   education?: Maybe<Scalars['String']>;
   email: Scalars['String'];
   firstName: Scalars['String'];
+  homeCity?: Maybe<Scalars['String']>;
   id: Scalars['ItemId'];
   lastName: Scalars['String'];
   message: Scalars['String'];
   pdf?: Maybe<FileField>;
   region: RegionRecord;
+  sex?: Maybe<Scalars['String']>;
   updatedAt: Scalars['DateTime'];
   webpage?: Maybe<Scalars['String']>;
 };
@@ -3271,6 +3283,24 @@ type InEnglishRecord_seoMetaTagsArgs = {
 type InUseFilter = {
   /** Search uploads that are currently used by some record or not */
   eq?: InputMaybe<Scalars['BooleanType']>;
+};
+
+/** Specifies how to filter Integer fields */
+type IntegerFilter = {
+  /** Search for records with an exact match */
+  eq?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with the specified field defined (i.e. with any value) or not */
+  exists?: InputMaybe<Scalars['BooleanType']>;
+  /** Filter records with a value that's strictly greater than the one specified */
+  gt?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's greater than or equal to the one specified */
+  gte?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less than the one specified */
+  lt?: InputMaybe<Scalars['IntType']>;
+  /** Filter records with a value that's less or equal than the one specified */
+  lte?: InputMaybe<Scalars['IntType']>;
+  /** Exclude records with an exact match */
+  neq?: InputMaybe<Scalars['IntType']>;
 };
 
 /** Record of type Våra initiativ (intro_initiative) */
