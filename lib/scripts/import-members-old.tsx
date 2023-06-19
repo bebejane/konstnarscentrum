@@ -80,7 +80,6 @@ async function importMembers() {
       item_type: { type: "item_type", id: "1185543" },
       resettoken: await generateToken(m.email)
     };
-    console.log(apiToken)
 
     try {
       console.log('update member', m.id, apiToken, m.full_name, m.email, `https://www.konstnarscentrum.org/konstnar/konto/inbjudan?token=${member.resettoken}`)

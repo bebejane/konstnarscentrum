@@ -24,19 +24,14 @@ export default function Employees({ contactIntro, employees }: Props) {
 	const employeesByRegion = employees.reduce((acc, employee) => {
 		const region = employee.region;
 		const regionEmployees = acc.find(({ region: { id } }) => id === region.id);
-		if (regionEmployees) {
+		if (regionEmployees)
 			regionEmployees.employees.push(employee);
-		} else {
+		else
+			acc.push({ region, employees: [employee] });
 
-			acc.push({
-				region,
-				employees: [employee]
-			});
-		}
 		return acc;
 	}, [] as EmployeesByRegion).sort((a, b) => a.region.position > b.region.position ? 1 : -1);;
 
-	console.log(employeesByRegion)
 
 	return (
 		<div className={s.container}>

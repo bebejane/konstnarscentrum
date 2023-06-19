@@ -72,7 +72,7 @@ dependencies:
     version: 2.29.3
   dato-nextjs-utils:
     specifier: github:bebejane/dato-nextjs-utils
-    version: github.com/bebejane/dato-nextjs-utils/bd83046cfcda3dde262f52844b1dc6952711fb89(@apollo/client@3.7.1)(@datocms/cma-client@1.1.22)(@types/node@18.11.9)(@types/react-dom@18.2.4)(@types/react@18.0.24)(next-seo@5.13.0)(next@13.1.0)(react-dom@18.2.0)(react@18.2.0)
+    version: github.com/bebejane/dato-nextjs-utils/74ad9cbc20188c79987a03f0057383796bfb7b09(@apollo/client@3.7.1)(@datocms/cma-client@1.1.22)(@types/node@18.11.9)(@types/react-dom@18.2.4)(@types/react@18.0.24)(next-seo@5.13.0)(next@13.1.0)(react-dom@18.2.0)(react@18.2.0)
   datocms-structured-text-utils:
     specifier: ^2.0.4
     version: 2.0.4
@@ -12166,11 +12166,11 @@ packages:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
     dev: false
 
-  github.com/bebejane/dato-nextjs-utils/bd83046cfcda3dde262f52844b1dc6952711fb89(@apollo/client@3.7.1)(@datocms/cma-client@1.1.22)(@types/node@18.11.9)(@types/react-dom@18.2.4)(@types/react@18.0.24)(next-seo@5.13.0)(next@13.1.0)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/bd83046cfcda3dde262f52844b1dc6952711fb89}
-    id: github.com/bebejane/dato-nextjs-utils/bd83046cfcda3dde262f52844b1dc6952711fb89
+  github.com/bebejane/dato-nextjs-utils/74ad9cbc20188c79987a03f0057383796bfb7b09(@apollo/client@3.7.1)(@datocms/cma-client@1.1.22)(@types/node@18.11.9)(@types/react-dom@18.2.4)(@types/react@18.0.24)(next-seo@5.13.0)(next@13.1.0)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/bebejane/dato-nextjs-utils/tar.gz/74ad9cbc20188c79987a03f0057383796bfb7b09}
+    id: github.com/bebejane/dato-nextjs-utils/74ad9cbc20188c79987a03f0057383796bfb7b09
     name: dato-nextjs-utils
-    version: 1.0.299
+    version: 1.0.307
     engines: {node: '>=0.16'}
     peerDependencies:
       '@apollo/client': 3 - 4
