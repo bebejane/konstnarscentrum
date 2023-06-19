@@ -6,10 +6,6 @@
 		{
 			"path": "/api/revalidate?ping=1",
 			"schedule": "* * * * *"
-		},
-		{
-			"path": "/api/backup?max=2",
-			"schedule": "0 22 * * *"
 		}
 	]
 }
