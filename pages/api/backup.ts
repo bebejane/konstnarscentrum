@@ -1,3 +1,1 @@
-import { withBackup } from "dato-nextjs-utils/hoc"
-
-export default withBackup
+export { withBackup as default } from "dato-nextjs-utils/hoc"
