@@ -112,7 +112,7 @@ query RegionMeta($regionId: ItemId) {
 			text
 		}
 	}
-	employees: allEmployees(filter: { region: { eq: $regionId } }) {
+	employees: allEmployees(filter: { region: { eq: $regionId } }, first: 100) {
 		name
 		email
 		title
@@ -126,7 +126,7 @@ query RegionMeta($regionId: ItemId) {
 			}
 		}
 	}
-	boardmembers: allBoards(filter: { region: { eq: $regionId } }) {
+	boardmembers: allBoards(filter: { region: { eq: $regionId } }, first: 100) {
 		name
 		email
 		title
