@@ -19,9 +19,6 @@ export default withRevalidate(async (record, revalidate) => {
       paths.push(`/anlita-oss/uppdrag/${slug}`)
       paths.push(`/${region.slug}/anlita-oss/uppdrag/${slug}`)
       break;
-    case 'consult':
-      paths.push(`/anlita-oss/${slug}`)
-      break;
     case 'apply':
       paths.push(`/konstnar/bli-medlem`)
       break;
@@ -58,7 +55,7 @@ export default withRevalidate(async (record, revalidate) => {
     case 'board':
       paths.push(`/kontakt/styrelse`)
       break;
-    case 'consult':
+    case 'consultant':
       paths.push(`/kontakt/konstkonsulter`)
       break;
     case 'application':

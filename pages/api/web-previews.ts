@@ -50,13 +50,14 @@ export default withWebPreviewsEdge(async ({ item, itemType }) => {
     case 'news':
       path = `/nyheter/${slug}`
       break;
-    case 'consultant': case 'board': case 'employee':
-      path = `/kontakt`
-      break;
     case 'member':
       path = `/anlita-oss/hitta-konstnar/${slug}`
+      break
     case 'member_category':
       path = `/anlita-oss/hitta-konstnar`
+      break;
+    case 'member_news':
+      path = `/konstnar/aktuellt/${slug}`
       break;
     case 'footer':
       path = `/`
@@ -70,7 +71,7 @@ export default withWebPreviewsEdge(async ({ item, itemType }) => {
     case 'board':
       path = `/kontakt/styrelse`
       break;
-    case 'consult':
+    case 'consultant':
       path = `/kontakt/konstkonsulter`
       break;
     default:
