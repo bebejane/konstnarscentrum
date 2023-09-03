@@ -1,16 +1,20 @@
-//import { NextRequest, NextResponse } from 'next/server';
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 import { Email } from "/lib/emails";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-	await NextCors(req, res, { methods: ['POST', 'GET'], origin: '*', optionsSuccessStatus: 200 });
+	console.log(typeof req.body)
+	console.log(req.body)
+
+	await NextCors(req, res, { methods: ['POST', 'GET', 'HEAD', 'OPTIONS'], origin: '*', optionsSuccessStatus: 200 });
 
 	try {
 
 		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
-		console.log('ping', ping)
+		console.log(typeof req.body)
+		console.log(req.body)
+
 		if (ping) {
 			console.log('ping')
 			return res.status(200).json({ pong: true });
