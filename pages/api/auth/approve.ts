@@ -4,19 +4,14 @@ import { Email } from "/lib/emails";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
-	console.log(typeof req.body)
-	console.log(req.body)
-
 	await NextCors(req, res, { methods: ['POST', 'GET', 'HEAD', 'OPTIONS'], origin: '*', optionsSuccessStatus: 200 });
 
 	try {
 
-		const { email, approval_token, first_name, last_name, approved, ping } = req.body;
-		console.log(typeof req.body)
-		console.log(req.body)
+		const { email, approval_token, first_name, last_name, approved, ping } = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
 
 		if (ping) {
-			console.log('ping')
+			console.log('ping endpoint')
 			return res.status(200).json({ pong: true });
 		}
 
