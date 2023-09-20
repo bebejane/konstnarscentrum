@@ -63,6 +63,7 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
           className={s.image}
           pictureClassName={cn(s.picture, hover && s.hover)}
           pictureStyle={{ left: hover ? '1.9rem' : 0 }}
+          intersectionMargin="0px 0px 1000px 0px"
         />
       }
       <span className={cn('mid', s.title, s.vertical)}>
