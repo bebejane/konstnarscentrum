@@ -8,6 +8,8 @@
 	"updatePassword": "Ändra lösenord",
 	"forgotPassword": "Glömt lösenordet?",
 	"email": "E-post",
+	"phone": "Telefonnummer",
+	"address": "Adress",
 	"firstName": "Förnamn",
 	"lastName": "Efternamn",
 	"homeCity": "Bostadsort",

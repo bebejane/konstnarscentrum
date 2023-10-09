@@ -5347,7 +5347,7 @@ type StringMatchesFilter = {
   regexp?: InputMaybe<Scalars['BooleanType']>;
 };
 
-/** Specifies how to filter Structured Text fields */
+/** Specifies how to filter Structured Text fields values */
 type StructuredTextFilter = {
   /** Filter records with the specified field defined (i.e. with any value) or not [DEPRECATED] */
   exists?: InputMaybe<Scalars['BooleanType']>;

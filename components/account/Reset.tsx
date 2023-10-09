@@ -107,6 +107,7 @@ const UpdatePasswordForm = ({ setStatus, token }) => {
 			await memberService.reset({ token, password, password2 });
 			setStatus("resetPassword");
 		} catch (err) {
+			console.log(err)
 			setError(err && err.response ? err.response.data : err.messsage || err);
 		}
 	};

@@ -25,7 +25,7 @@ const validatePassword = (password: string, password2?: string) => {
 		return 'Lösenordet är tomt'
 	else if (password2 !== undefined && password !== password2)
 		return 'Lösenordet matchar ej';
-	else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password))
+	else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,}$/.test(password))
 		return 'Lösenordet måste minst innehålla 8 tecken, en versal, en gemen och en siffra'
 	else return null;
 };

@@ -7,7 +7,6 @@ import { useForm } from "react-hook-form";
 import { FileUpload } from '/components'
 import { isEmail } from "/lib/utils";
 import type { Upload } from '/components/common/FileUpload'
-import { parse } from "path";
 
 export default function Apply({ regions = [], onSuccess }) {
 	const [application, setApplication] = useState();
@@ -60,14 +59,16 @@ const ApplicationForm = ({ regions, setApplication }) => {
 		isSubmitting && setError(undefined)
 	}, [isSubmitting]);
 
-	const onSubmitApplication = async ({ email, firstName, lastName, sex, birthYear, homeCity, education, webpage, message, regionId }) => {
+	const onSubmitApplication = async ({ email, firstName, lastName, phone, sex, address, birthYear, homeCity, education, webpage, message, regionId }) => {
 
 		try {
 			const app = await memberService.apply({
 				email,
 				firstName,
 				lastName,
+				phone,
 				sex,
+				address,
 				birthYear,
 				homeCity,
 				education,
@@ -88,6 +89,19 @@ const ApplicationForm = ({ regions, setApplication }) => {
 	return (
 		<>
 			<form className={s.form} onSubmit={handleSubmit(onSubmitApplication)}>
+				{errors.firstName && <label className={s.formError}>Förnamn är obligatoriskt...</label>}
+				<input
+					{...register("firstName", { required: true })}
+					className={errors.firstName && s.error}
+					placeholder={`${text.firstName}...`}
+
+				/>
+				{errors.lastName && <label className={s.formError}>Efternamn är obligatoriskt...</label>}
+				<input
+					{...register("lastName", { required: true })}
+					className={errors.lastName && s.error}
+					placeholder={`${text.lastName}...`}
+				/>
 				{errors.email && <label className={s.formError}>E-post felaktig...</label>}
 				<input
 					className={errors.email && s.error}
@@ -98,37 +112,20 @@ const ApplicationForm = ({ regions, setApplication }) => {
 							/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
 					})}
 				/>
-
-				{errors.firstName && <label className={s.formError}>Förnamn är obligatoriskt...</label>}
+				{errors.phone && <label className={s.formError}>Telefonnummer är obligatoriskt...</label>}
 				<input
-					{...register("firstName", { required: true })}
-					className={errors.firstName && s.error}
-					placeholder={`${text.firstName}...`}
-
+					className={errors.phone && s.error}
+					placeholder={`${text.phone}...`}
+					{...register("phone", {
+						required: true
+					})}
 				/>
-
-				{errors.lastName && <label className={s.formError}>Efternamn är obligatoriskt...</label>}
-				<input
-					{...register("lastName", { required: true })}
-					className={errors.lastName && s.error}
-					placeholder={`${text.lastName}...`}
-				/>
-
-
 				{errors.birthYear && <label className={s.formError}>Födelsår är felaktigt...</label>}
 				<input
 					{...register("birthYear", { required: true, validate: (val) => !isNaN(val) && parseInt(val) > 1900 && parseInt(val) < 2023 })}
 					className={errors.birthYear && s.error}
 					placeholder={`${text.birthYear}...`}
 				/>
-
-				{errors.homeCity && <label className={s.formError}>Bostadsort är obligatoriskt...</label>}
-				<input
-					{...register("homeCity", { required: true })}
-					className={errors.homeCity && s.error}
-					placeholder={`${text.homeCity}...`}
-				/>
-
 				{errors.sex && <label className={s.formError}>Kön är obligatoriskt...</label>}
 				<select {...register("sex", { required: true, validate: (val) => ['man', 'woman', 'non-binary'].includes(val) })} placeholder={`${text.sex}...`} className={errors.sex && s.error}>
 					<option value="-1">Välj kön</option>
@@ -136,9 +133,22 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					<option value="woman">Kvinna</option>
 					<option value="non-binary">Icke binär</option>
 				</select>
-
-
-				{errors.webpage && <label className={s.formError}>Websida är ogiltig...</label>}
+				{errors.address && <label className={s.formError}>Adress är obligatoriskt...</label>}
+				<textarea
+					className={errors.address && s.error}
+					rows={3}
+					placeholder={`${text.address}...`}
+					{...register("address", {
+						required: true,
+					})}
+				/>
+				{errors.homeCity && <label className={s.formError}>Bostadsort är obligatoriskt...</label>}
+				<input
+					{...register("homeCity", { required: true })}
+					className={errors.homeCity && s.error}
+					placeholder={`${text.homeCity}...`}
+				/>
+				{errors.webpage && <label className={s.formError}>Websida är ogiltig. Använd format &quot;https://www.exempel.se...&quot;</label>}
 				<input
 					{...register("webpage", {
 						required: false,
@@ -146,9 +156,7 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					})}
 					className={errors.webpage && s.error}
 					placeholder={`${text.webpage}...`}
-
 				/>
-
 				{errors.education && <label className={s.formError}>Utbildning felatktigt format...</label>}
 				<textarea
 					{...register("education", { required: false })}
@@ -156,7 +164,6 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					className={errors.education && s.error}
 					placeholder={`${text.education}...`}
 				/>
-
 				{errors.message && <label className={s.formError}>Meddelande är tomt...</label>}
 				<textarea
 					{...register("message", { required: true })}
@@ -164,7 +171,6 @@ const ApplicationForm = ({ regions, setApplication }) => {
 					className={errors.message && s.error}
 					placeholder={`${text.message}...`}
 				/>
-
 				{errors.regionId && <label className={s.formError}>Välj en region...</label>}
 				<select
 					{...register("regionId", {
