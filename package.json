@@ -19,7 +19,7 @@
 		"importmembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/import-members.tsx",
 		"updatemembers": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/update-members.tsx",
 		"updateuploads": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/update-uploads.tsx",
-		"test": "tsx --tsconfig ./tsconfig.node.json ./lib/scripts/test.tsx",
+		"test": "tsx --tsconfig ./tsconfig.node.json ./tests/test.ts",
 		"test:emails": "tsx --tsconfig ./tsconfig.node.json ./tests/emails.tsx"
 	},
 	"exports": {
@@ -80,6 +80,7 @@
 		"nextjs-google-analytics": "^2.2.0",
 		"nodemailer": "^6.9.1",
 		"nodemailer-postmark-transport": "^5.2.1",
+		"password-validator": "^5.3.0",
 		"react": "^18.2.0",
 		"react-balance-text": "^2.0.1",
 		"react-datocms": "^4.0.8",
