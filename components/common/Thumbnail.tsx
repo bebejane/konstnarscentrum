@@ -25,13 +25,14 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
   const vertical = title.split('').slice(0, Math.round(title.length * ratio))
   const readMore = subtitle || 'Visa'
   const more = readMore.split('').slice(readMore.length - (readMore.length * ratio))
-  const interval = useRef<NodeJS.Timer | null>(null)
+  const interval = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
     if (typeof hover === 'undefined')
       return
 
     clearInterval(interval.current)
+
     interval.current = setInterval(() => {
 
       setRatio((ratio) => {
@@ -63,7 +64,7 @@ export default function Thumbnail({ image, slug, title, subtitle, regional = tru
           className={s.image}
           pictureClassName={cn(s.picture, hover && s.hover)}
           pictureStyle={{ left: hover ? '1.9rem' : 0 }}
-          intersectionMargin="0px 0px 1000px 0px"
+          intersectionMargin="0px 0px 200% 0px"
         />
       }
       <span className={cn('mid', s.title, s.vertical)}>

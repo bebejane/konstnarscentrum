@@ -4,8 +4,6 @@ import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { comparePassword, findUser } from '/lib/auth'
 
-//export const config = { runtime: 'experimental-edge' }
-
 export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
@@ -14,7 +12,7 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: '/konstnar/konto/logga-in',
     signOut: '/konstnar/konto',
-    error: '/konstnar/konto/auth?type=error', // Error code passed in query string as ?error=    
+    //error: '/konstnar/konto/auth?type=error', // Error code passed in query string as ?error=    
     //verifyRequest: '/auth/verify-request', // (used for check email message)    
     //newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)  }
   },
@@ -40,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           const user = await findUser(email)
 
           if (!user) return null
-          const isDev = false; ////process.env.DATOCMS_ENVIRONMENT === 'dev'
+          const isDev = false;//process.env.NODE_ENV === 'development'
           const checkPassword = isDev ? true : await comparePassword(password, user.password);
 
           if (!checkPassword) {

@@ -21,11 +21,20 @@ export default function SignIn({ csrfToken, providers }) {
 
 	const onSubmitSignIn = async ({ username, password }) => {
 
+		setError(null)
+
 		await signIn("credentials", {
 			callbackUrl: `${window.location.origin}/konstnar/konto`,
+			redirect: true,
 			username,
 			password,
 		});
+		/*
+		if (res.status === 401)
+			setError("Användarnamn eller lösenord är felaktigt")
+		else
+			setError(res.error)
+		*/
 	};
 
 	useEffect(() => {

@@ -62,7 +62,7 @@ export default function ImageGallery({ id, images, onClick, editable = false }: 
 								placeholderClassName={s.picture}
 								objectFit={'cover'}
 								onLoad={calculatePositions}
-								intersectionMargin="0px 1000px 0px 1000px"
+								intersectionMargin="0px 0px 200% 0px"
 							/>
 							<figcaption>
 								{item.title && <Markdown allowedElements={['em', 'p']}>{item.title}</Markdown>}

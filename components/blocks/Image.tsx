@@ -26,7 +26,7 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 				<DatoImage
 					data={images[0].responsiveImage}
 					className={s.image}
-					intersectionMargin="0px 0px 1000px 0px"
+					intersectionMargin="0px 0px 200% 0px"
 				/>
 				{images[0].title &&
 					<figcaption>
@@ -41,13 +41,14 @@ export default function Image({ id, data: { image: images }, onClick, editable }
 							<DatoImage
 								data={images[0].responsiveImage}
 								className={s.image}
-								intersectionMargin="0px 0px 1000px 0px"
+								intersectionMargin="0px 0px 200% 0px"
 							/>
 						</figure>
 						<figure onClick={() => onClick?.(images[1].id)}>
 							<DatoImage
 								data={images[1].responsiveImage}
 								className={s.image}
+								intersectionMargin="0px 0px 200% 0px"
 							/>
 						</figure>
 					</div>

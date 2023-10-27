@@ -18,6 +18,7 @@ export default function ImageShortcut({ data: { headline, image, link, text, bla
             className={s.image}
             data={image.responsiveImage}
             objectFit={'cover'}
+            intersectionMargin="0px 0px 200% 0px"
           />
         }
         <figcaption>
