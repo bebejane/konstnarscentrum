@@ -26,6 +26,9 @@ export default withWebPreviewsEdge(async ({ item, itemType }) => {
     case 'commission':
       path = `/anlita-oss/uppdrag/${slug}`
       break;
+    case 'commission_category':
+      path = `/anlita-oss/uppdrag`
+      break;
     case 'for_artist':
       path = `/for-konstnarer/${slug}`
       break;
