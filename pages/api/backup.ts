@@ -1,2 +1,6 @@
-export { withBackup as default } from "dato-nextjs-utils/hoc"
-export const config = { maxDuration: 30 }
+export { withBackupEdge as default } from "dato-nextjs-utils/hoc"
+
+export const config = {
+  runtime: 'edge',
+  maxDuration: 90
+}

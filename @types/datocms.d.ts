@@ -1487,83 +1487,6 @@ type ForArtistRecordintroArgs = {
   markdown?: InputMaybe<Scalars['Boolean']>;
 };
 
-type ForMemberModelFilter = {
-  AND?: InputMaybe<Array<InputMaybe<ForMemberModelFilter>>>;
-  OR?: InputMaybe<Array<InputMaybe<ForMemberModelFilter>>>;
-  _createdAt?: InputMaybe<CreatedAtFilter>;
-  _firstPublishedAt?: InputMaybe<PublishedAtFilter>;
-  _isValid?: InputMaybe<BooleanFilter>;
-  _publicationScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _publishedAt?: InputMaybe<PublishedAtFilter>;
-  _status?: InputMaybe<StatusFilter>;
-  _unpublishingScheduledAt?: InputMaybe<PublishedAtFilter>;
-  _updatedAt?: InputMaybe<UpdatedAtFilter>;
-  createdAt?: InputMaybe<CreatedAtFilter>;
-  id?: InputMaybe<ItemIdFilter>;
-  intro?: InputMaybe<TextFilter>;
-  updatedAt?: InputMaybe<UpdatedAtFilter>;
-};
-
-enum ForMemberModelOrderBy {
-  _createdAt_ASC = '_createdAt_ASC',
-  _createdAt_DESC = '_createdAt_DESC',
-  _firstPublishedAt_ASC = '_firstPublishedAt_ASC',
-  _firstPublishedAt_DESC = '_firstPublishedAt_DESC',
-  _isValid_ASC = '_isValid_ASC',
-  _isValid_DESC = '_isValid_DESC',
-  _publicationScheduledAt_ASC = '_publicationScheduledAt_ASC',
-  _publicationScheduledAt_DESC = '_publicationScheduledAt_DESC',
-  _publishedAt_ASC = '_publishedAt_ASC',
-  _publishedAt_DESC = '_publishedAt_DESC',
-  _status_ASC = '_status_ASC',
-  _status_DESC = '_status_DESC',
-  _unpublishingScheduledAt_ASC = '_unpublishingScheduledAt_ASC',
-  _unpublishingScheduledAt_DESC = '_unpublishingScheduledAt_DESC',
-  _updatedAt_ASC = '_updatedAt_ASC',
-  _updatedAt_DESC = '_updatedAt_DESC',
-  createdAt_ASC = 'createdAt_ASC',
-  createdAt_DESC = 'createdAt_DESC',
-  id_ASC = 'id_ASC',
-  id_DESC = 'id_DESC',
-  updatedAt_ASC = 'updatedAt_ASC',
-  updatedAt_DESC = 'updatedAt_DESC'
-}
-
-/** Record of type For member (for_member) */
-type ForMemberRecord = RecordInterface & {
-  __typename?: 'ForMemberRecord';
-  _createdAt: Scalars['DateTime'];
-  /** Editing URL */
-  _editingUrl?: Maybe<Scalars['String']>;
-  _firstPublishedAt?: Maybe<Scalars['DateTime']>;
-  _isValid: Scalars['BooleanType'];
-  _modelApiKey: Scalars['String'];
-  _publicationScheduledAt?: Maybe<Scalars['DateTime']>;
-  _publishedAt?: Maybe<Scalars['DateTime']>;
-  /** Generates SEO and Social card meta tags to be used in your frontend */
-  _seoMetaTags: Array<Tag>;
-  _status: ItemStatus;
-  _unpublishingScheduledAt?: Maybe<Scalars['DateTime']>;
-  _updatedAt: Scalars['DateTime'];
-  content: Array<ContentRecord>;
-  createdAt: Scalars['DateTime'];
-  id: Scalars['ItemId'];
-  intro?: Maybe<Scalars['String']>;
-  updatedAt: Scalars['DateTime'];
-};
-
-
-/** Record of type For member (for_member) */
-type ForMemberRecord_seoMetaTagsArgs = {
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** Record of type For member (for_member) */
-type ForMemberRecordintroArgs = {
-  markdown?: InputMaybe<Scalars['Boolean']>;
-};
-
 type FormModelFormFieldsField = FormTextRecord | FormTextblockRecord | PdfFormRecord;
 
 /** Block of type Formulär (form) */
@@ -4217,8 +4140,6 @@ type Query = {
   /** Returns meta information regarding a record collection */
   _allForArtistsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
-  _allForMembersMeta: CollectionMetadata;
-  /** Returns meta information regarding a record collection */
   _allHelpsMeta: CollectionMetadata;
   /** Returns meta information regarding a record collection */
   _allMemberCategoriesMeta: CollectionMetadata;
@@ -4265,8 +4186,6 @@ type Query = {
   /** Returns a collection of records */
   allForArtists: Array<ForArtistRecord>;
   /** Returns a collection of records */
-  allForMembers: Array<ForMemberRecord>;
-  /** Returns a collection of records */
   allHelps: Array<HelpRecord>;
   /** Returns a collection of records */
   allMemberCategories: Array<MemberCategoryRecord>;
@@ -4308,8 +4227,6 @@ type Query = {
   footer?: Maybe<FooterRecord>;
   /** Returns a specific record */
   forArtist?: Maybe<ForArtistRecord>;
-  /** Returns a specific record */
-  forMember?: Maybe<ForMemberRecord>;
   /** Returns a specific record */
   help?: Maybe<HelpRecord>;
   /** Returns the single instance record */
@@ -4415,14 +4332,6 @@ type Query_allEmployeesMetaArgs = {
 type Query_allForArtistsMetaArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<ForArtistModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-};
-
-
-/** The query root for this schema */
-type Query_allForMembersMetaArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<ForMemberModelFilter>;
   locale?: InputMaybe<SiteLocale>;
 };
 
@@ -4642,17 +4551,6 @@ type QueryallForArtistsArgs = {
 
 
 /** The query root for this schema */
-type QueryallForMembersArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<ForMemberModelFilter>;
-  first?: InputMaybe<Scalars['IntType']>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ForMemberModelOrderBy>>>;
-  skip?: InputMaybe<Scalars['IntType']>;
-};
-
-
-/** The query root for this schema */
 type QueryallHelpsArgs = {
   fallbackLocales?: InputMaybe<Array<SiteLocale>>;
   filter?: InputMaybe<HelpModelFilter>;
@@ -4852,15 +4750,6 @@ type QueryforArtistArgs = {
   filter?: InputMaybe<ForArtistModelFilter>;
   locale?: InputMaybe<SiteLocale>;
   orderBy?: InputMaybe<Array<InputMaybe<ForArtistModelOrderBy>>>;
-};
-
-
-/** The query root for this schema */
-type QueryforMemberArgs = {
-  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
-  filter?: InputMaybe<ForMemberModelFilter>;
-  locale?: InputMaybe<SiteLocale>;
-  orderBy?: InputMaybe<Array<InputMaybe<ForMemberModelOrderBy>>>;
 };
 
 
