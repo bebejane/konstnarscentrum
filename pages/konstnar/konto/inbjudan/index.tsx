@@ -30,7 +30,7 @@ export default function AccountInvitation({ member }: Props) {
 					{error && <ErrorModal error={error} onClose={() => setError(undefined)} />}
 				</>
 				:
-				<>Ogiltig adress</>
+				<>Inbjudnings länk ogiltig</>
 			}
 
 		</div>
@@ -42,6 +42,9 @@ AccountInvitation.page = { title: 'Konto', crumbs: [{ title: 'Konto', regional: 
 export const getServerSideProps: GetStaticProps = withGlobalProps({ queries: [] }, async ({ props, revalidate, context }: any) => {
 
 	const token = context.query.token
+
+	if (!token) return { props }
+
 	const { member } = await apiQuery(MemberByPasswordTokenDocument, { variables: { token } })
 
 	return {
