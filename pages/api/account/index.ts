@@ -15,7 +15,6 @@ export const client = buildClient({
 
 export default withAuthentication(async (req, res, session) => {
 
-
   if (req.body?.ping || req.query?.ping)
     return res.status(200).json({ pong: true })
 
@@ -45,7 +44,7 @@ export default withAuthentication(async (req, res, session) => {
 
   try {
     const res = await Promise.all([
-      client.items.find(id, { nested: 'true' }),
+      client.items.find(id, { nested: true }),
       client.itemTypes.list()
     ])
     record = res[0]
@@ -65,12 +64,12 @@ export default withAuthentication(async (req, res, session) => {
 
   try {
     for (let i = 0; content && i < content.length; i++) {
+      //@ts-ignore
       if (content[i].__typename === 'VideoRecord' && content[i].video?.url !== undefined) {
+        //@ts-ignore
         const thumbnailUrl = content[i].video.provider === 'youtube' ? getYouTubeThumbnail(content[i].video.url) : (await getVimeoThumbnail(content[i].video.url))[0]
-        content[i].video = {
-          ...content[i].video,
-          thumbnailUrl
-        }
+        //@ts-ignore
+        content[i].video = { ...content[i].video, thumbnailUrl }
       }
     }
   } catch (err) {
@@ -98,7 +97,7 @@ export default withAuthentication(async (req, res, session) => {
           __typename: undefined,
           type: undefined,
           index: undefined,
-          image: block.__typename === 'ImageRecord' ? block.image?.map((i) => ({
+          image: block.__typename === 'ImageRecord' ? block.image?.filter(i => i?.id).map((i) => ({
             upload_id: i.id
           })
           ) : undefined,
@@ -131,15 +130,12 @@ export default withAuthentication(async (req, res, session) => {
           default_field_metadata: { en: { alt, title, custom_data: {} } },
         }))])
 
-    await sleep(3000) // Sleept ot wait for GraphQL api to update
+    await sleep(3000) // Sleep to wait for GraphQL api to update
     const { member } = await apiQuery(MemberDocument, { variables: { email: record.email } })
     return res.status(200).json(member)
 
   } catch (err) {
-
-    console.error(JSON.stringify(parseDatoError(err), null, 2))
+    console.log(err)
     return res.status(500).json({ ...parseDatoError(err) })
   }
 })
-
-//export const config = {runtime: 'experimental-edge'}
