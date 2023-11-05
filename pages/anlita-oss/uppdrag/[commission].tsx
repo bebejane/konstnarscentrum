@@ -33,6 +33,7 @@ export default function Commission({ commission: {
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 
 	useEffect(() => {
+		//@ts-ignore
 		const images = [image, ...content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
 		setImages(images)
 	}, [content, image, setImages])

@@ -14,7 +14,6 @@ export type Props = {
 
 export default function MemberNewsArticle({ memberNews: {
 	id,
-	createdAt,
 	date,
 	dateEnd,
 	intro,
@@ -68,7 +67,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const { memberNews }: { memberNews: MemberNewsRecord } = await apiQuery(MemberNewsDocument, { variables: { slug }, preview: context.preview })
 
 	if (!memberNews)
-		return { notFound: true }
+		return { notFound: true, revalidate }
 
 	return {
 		props: {

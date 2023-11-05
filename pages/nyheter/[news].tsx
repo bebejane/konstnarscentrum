@@ -20,7 +20,6 @@ export default function NewsItem({ news: { id, createdAt, title, image, intro, c
         id={id}
         image={image}
         title={title}
-        subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
         blackHeadline={blackHeadline}
         text={intro}
         content={content}
@@ -44,7 +43,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
   const { news } = await apiQuery(NewsDocument, { variables: { slug }, preview: context.preview })
 
   if (!news)
-    return { notFound: true }
+    return { notFound: true, revalidate }
 
   return {
     props: {

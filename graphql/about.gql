@@ -7,13 +7,13 @@ query About($slug: String!) {
 }
 
 query AllAbouts {
-	abouts: allAbouts {
+	abouts: allAbouts(first: 100) {
 		...AboutFragment
 	}
 }
 
 query AllAboutsMenu {
-	abouts: allAbouts {
+	abouts: allAbouts(first: 100) {
 		title
 		slug
 	}

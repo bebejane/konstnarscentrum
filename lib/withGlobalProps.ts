@@ -21,7 +21,7 @@ export default function withGlobalProps(opt: any, callback: Function): GetStatic
     const region = regions.find(({ slug }) => slug === context.params?.region)
 
     if (context.params?.region && !region)
-      return { notFound: true, revalidate }
+      return { notFound: true }
 
     const props = await apiQuery(queries, { preview: context.preview });
     props.menu = await buildMenu()

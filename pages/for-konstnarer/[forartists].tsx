@@ -3,7 +3,6 @@ import { GetStaticProps } from "next";
 import { apiQuery } from "dato-nextjs-utils/api";
 import { AllForArtistDocument, ForArtistDocument } from "/graphql";
 import { Article } from "/components";
-import { format } from "date-fns";
 import { getStaticPagePaths } from "/lib/utils";
 
 export type Props = {
@@ -11,20 +10,16 @@ export type Props = {
   region: Region
 }
 
-export default function ForArtists({ forArtist: { id, image, title, createdAt, content, intro }, region }: Props) {
+export default function ForArtists({ forArtist: { id, image, title, content, intro } }: Props) {
 
   return (
-    <>
-      <Article
-        id={id}
-        image={image}
-        text={intro}
-        title={title}
-        subtitle={`${format(new Date(createdAt), "d MMMM y")} • ${region.name}`}
-        content={content}
-      >
-      </Article>
-    </>
+    <Article
+      id={id}
+      image={image}
+      text={intro}
+      title={title}
+      content={content}
+    />
   );
 }
 
@@ -41,7 +36,7 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
   const { forArtist } = await apiQuery(ForArtistDocument, { variables: { slug }, preview: context.preview })
 
   if (!forArtist)
-    return { notFound: true }
+    return { notFound: true, revalidate }
 
   return {
     props: {

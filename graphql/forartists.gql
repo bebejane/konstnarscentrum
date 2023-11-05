@@ -45,7 +45,7 @@ fragment ForArtistFragment on ForArtistRecord {
 }
 
 query AllForArtist {
-	forArtists: allForArtists(orderBy: [createdAt_DESC]) {
+	forArtists: allForArtists(orderBy: [createdAt_DESC], first: 100) {
 		id
 		createdAt
 		slug

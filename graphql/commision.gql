@@ -22,14 +22,14 @@ query AllCommissions($first: IntType = 10, $skip: IntType = 0, $regionId: ItemId
 }
 
 query AllCommissionsMenu {
-	commissions: allCommissions {
+	commissions: allCommissions(first: 100) {
 		title
 		slug
 	}
 }
 
 query AllCommissionCategories {
-	commissionCategories: allCommissionCategories {
+	commissionCategories: allCommissionCategories(first: 100) {
 		id
 		title
 	}

@@ -5,7 +5,7 @@ query Footer {
 	footer {
 		aboutKc(markdown: false)
 	}
-	regions: allRegions {
+	regions: allRegions(first: 100) {
 		id
 		name
 		slug

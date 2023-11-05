@@ -7,20 +7,20 @@ query Consult($slug: String!) {
 }
 
 query AllConsults {
-	consults: allConsults {
+	consults: allConsults(first: 100) {
 		...ConsultFragment
 	}
 }
 
 query AllConsultsMenu {
-	consults: allConsults {
+	consults: allConsults(first: 100) {
 		title
 		slug
 	}
 }
 
 query AllConsultants {
-	consultants: allConsultants {
+	consultants: allConsultants(first: 100) {
 		id
 		email
 		name

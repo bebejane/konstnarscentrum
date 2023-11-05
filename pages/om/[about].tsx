@@ -4,7 +4,7 @@ import { apiQuery } from "dato-nextjs-utils/api";
 import { AboutDocument, AllAboutsDocument } from "/graphql";
 import type { GetStaticProps } from 'next'
 import { Article } from "/components";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useStore from "/lib/store";
 import { DatoSEO } from "dato-nextjs-utils/components";
 
@@ -17,6 +17,7 @@ export default function About({ about: { id, title, image, intro, content, _seoM
 	const [setImages, setImageId] = useStore((state) => [state.setImages, state.setImageId])
 
 	useEffect(() => {
+		//@ts-ignore
 		const images = [image, ...content.blocks.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), [])]
 		setImages(images)
 	}, [image, content, setImages])
@@ -53,6 +54,9 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 
 	const slug = context.params.about;
 	const { about } = await apiQuery(AboutDocument, { variables: { slug }, preview: context.preview });
+
+	if (!about)
+		return { notFound: true, revalidate }
 
 	return {
 		props: {

@@ -1,9 +1,8 @@
 import s from "./index.module.scss";
-import cn from 'classnames'
 import withGlobalProps from "/lib/withGlobalProps";
 import { GetStaticProps } from "next";
 import Reset from "/components/account/Reset";
-import { ClientSafeProvider, getCsrfToken, getProviders, useSession } from "next-auth/react";
+import { getCsrfToken, useSession } from "next-auth/react";
 import { RevealText } from "/components";
 import { useEffect, useState } from "react";
 import { Loader } from "/components";
@@ -20,8 +19,7 @@ export default function ResetPassword({ token }: Props) {
 
   useEffect(() => {
     getCsrfToken().then(token => setCsrfToken(token))
-
-  })
+  }, [])
 
   return (
     <div className={s.container}>

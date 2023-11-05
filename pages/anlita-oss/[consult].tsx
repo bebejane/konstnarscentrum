@@ -44,6 +44,13 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [] }, a
 	const slug = context.params.consult;
 	const { consult } = await apiQuery(ConsultDocument, { variables: { slug }, preview: context.preview });
 
+	if (!consult) {
+		return {
+			notFound: true,
+			revalidate
+		}
+	}
+
 	return {
 		props: {
 			...props,

@@ -11,7 +11,6 @@ export type ArticleProps = {
   id: string,
   children?: React.ReactNode | React.ReactNode[]
   title?: string,
-  subtitle?: string,
   blackHeadline?: boolean,
   text?: string,
   image?: FileField
@@ -30,11 +29,10 @@ export default function Article({
   text,
   image,
   content,
-  subtitle,
   showImage = true,
   editable,
   onClick,
-}, record: ArticleProps) {
+}: ArticleProps, record: ArticleProps) {
 
   const { scrolledPosition } = useScrollInfo()
   const hideCaption = scrolledPosition > 100;
