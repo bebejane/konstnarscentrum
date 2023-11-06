@@ -36,5 +36,3 @@ export default withAuthentication(async (req, res, session) => {
     return res.status(500).json({ error: parseDatoError(err) })
   }
 })
-
-//export const config = {runtime: 'experimental-edge'}

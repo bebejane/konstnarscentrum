@@ -1,6 +1,11 @@
 import { withRevalidate } from 'dato-nextjs-utils/hoc'
 import { regions } from '/lib/region'
 
+export const config = {
+  runtime: 'nodejs',
+  maxDuration: 30
+};
+
 export default withRevalidate(async (record, revalidate) => {
 
   const { api_key: apiKey } = record.model;

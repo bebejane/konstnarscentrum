@@ -38,7 +38,7 @@ export const authOptions: NextAuthOptions = {
           const user = await findUser(email)
 
           if (!user) return null
-          const isDev = false;//process.env.NODE_ENV === 'development'
+          const isDev = process.env.NODE_ENV === 'development'
           const checkPassword = isDev ? true : await comparePassword(password, user.password);
 
           if (!checkPassword) {
