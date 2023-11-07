@@ -69,6 +69,6 @@ export const getStaticProps: GetStaticProps = withGlobalProps({ queries: [Member
       ...props,
       membersByRegion: membersByRegion.filter(el => el)
     },
-    revalidate: 30
+    revalidate: 120
   };
 });
