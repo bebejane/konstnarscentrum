@@ -57,6 +57,7 @@ export default withRevalidate(async (record, revalidate) => {
     case 'member':
       paths.push(`/anlita-oss/hitta-konstnar/${slug}`)
       paths.push(`/anlita-oss/hitta-konstnar`)
+      paths.push.apply(paths, regionalPaths(`/for-konstnarer/medlemmar`))
       break;
     case 'member_category':
       paths.push.apply(paths, regionalPaths(`/anlita-oss/hitta-konstnar`))
