@@ -7,6 +7,7 @@ import { truncateParagraph, isEmptyObject, recordToSlug } from '/lib/utils';
 
 export const config = {
   runtime: 'edge',
+  maxDuration: 30
 }
 
 export default async function handler(req: NextRequest, res: NextResponse) {
@@ -26,6 +27,11 @@ export default async function handler(req: NextRequest, res: NextResponse) {
 
       const results = await siteSearch(params)
       return new Response(JSON.stringify(results), {
+        status: 200,
+        headers: { 'content-type': 'application/json' }
+      })
+    } else {
+      return new Response(JSON.stringify({}), {
         status: 200,
         headers: { 'content-type': 'application/json' }
       })
