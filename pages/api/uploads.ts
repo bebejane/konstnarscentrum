@@ -37,17 +37,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const region = regions.find(({ name }) => tags.includes(name.toLowerCase()))
 
     if (isUpload && region) {
-      console.log('update upload creator', uploadId, region.name, tags)
+      console.log('update upload creator', uploadId, region.name, region.userId, tags)
       await client.uploads.update(uploadId, { creator: { type: 'user', id: region.userId } })
       console.log('update upload creator', 'done')
       return res.status(200).json({ updated: true });
     }
     else
-      console.log('not user uupload', tags)
+      console.log('not a user upload', tags)
 
     res.status(200).json({ updated: false });
 
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: err?.message || err });
   }
 }
