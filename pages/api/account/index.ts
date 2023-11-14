@@ -125,7 +125,7 @@ export default withAuthentication(async (req, res, session) => {
 
     await Promise.all([
       client.items.update(record.id, newRecord),
-      ...images.filter(i => i).map(({ id, title, alt }) =>
+      ...images.filter(i => i?.id).map(({ id, title, alt }) =>
         client.uploads.update(id, {
           default_field_metadata: { en: { alt, title, custom_data: {} } },
         }))])
