@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import NextCors from 'nextjs-cors';
 import { regions } from '/lib/region';
 import client from '/lib/client';
+import { parseDatoError } from '/lib/utils';
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   await NextCors(req, res, { methods: ['POST', 'GET'], origin: '*', optionsSuccessStatus: 200 });
@@ -49,6 +50,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   } catch (err) {
     console.log(err)
-    res.status(500).json({ error: err?.message || err });
+
+    res.status(500).json({ error: parseDatoError(err) });
+
   }
 }

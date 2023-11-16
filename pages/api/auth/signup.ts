@@ -1,6 +1,6 @@
 import { validateSignUp, hashPassword } from '/lib/auth'
 import { regions } from '/lib/region'
-import { catchErrorsFrom } from '/lib/utils'
+import { catchErrorsFrom, parseDatoError } from '/lib/utils'
 import client, { buildClient } from '/lib/client'
 import slugify from 'slugify';
 
@@ -48,7 +48,11 @@ export default catchErrorsFrom(async (req, res) => {
     resettoken: undefined
   });
 
-  await client.items.update(member.id, { creator: { type: 'user', id: region.userId } })
+  try {
+    await client.items.update(member.id, { creator: { type: 'user', id: region.userId } })
+  } catch (err) {
+    res.status(500).json({ error: parseDatoError(err) });
+  }
   return res.status(200).json(member)
 
 })
