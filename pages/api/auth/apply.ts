@@ -1,4 +1,4 @@
-import { catchErrorsFrom } from '/lib/utils'
+import { catchErrorsFrom, parseDatoError } from '/lib/utils'
 import { NextApiRequest, NextApiResponse } from "next";
 import client, { buildClient } from '/lib/client'
 import { regions } from '/lib/region'
@@ -35,6 +35,10 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     throw 'Cat\'t find application model id'
 
   const region = regions.find(r => r.id === regionId)
+
+  if (!region)
+    throw `Can\'t find region: ${regionId}`
+
   const roleApiToken = tokens.find((t) => t.role && t.role.id === region.roleId).token
   const approvalToken = await generateToken(email)
   const roleClient = buildClient({ apiToken: roleApiToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' });
@@ -58,7 +62,13 @@ export default catchErrorsFrom(async (req: NextApiRequest, res: NextApiResponse)
     approved: false
   });
 
-  await client.items.update(application.id, { creator: { type: 'user', id: region.userId } })
+  try {
+    await client.items.update(application.id, { creator: { type: 'user', id: region.userId } })
+  } catch (err) {
+    console.log(err)
+    console.log(parseDatoError(err))
+    throw parseDatoError(err)
+  }
 
   await Promise.all([
     Email.applicationSubmitted({ email, name: firstName }),
