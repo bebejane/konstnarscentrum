@@ -10,12 +10,13 @@ export default catchErrorsFrom(async (req, res) => {
   return res.status(!success ? 500 : 200).json(!success ? { error: 'Användaren hittades ej' } : { success: true })
 })
 
-const requestReset = async (email) => {
+const requestReset = async (email: string) => {
   const member = await memberController.get(email)
 
-  if (!member)
+  if (!member) {
+    console.log('member not found with token:', email)
     return false
-
+  }
   const token = await generateToken(email)
   await client.items.update(member.id, { resettoken: token });
   await Email.resetPassword({ email, token })
@@ -24,10 +25,12 @@ const requestReset = async (email) => {
 
 const updatePassword = async (token, password, password2) => {
   const member = await memberController.getByPasswordToken(token)
-  if (!member)
+  if (!member) {
+    console.log('member not found with token:', token)
     return false
+  }
   const hashedPassword = await hashPassword(password)
-  const updatedMember = await client.items.update(member.id, {
+  await client.items.update(member.id, {
     resettoken: null,
     password: hashedPassword
   });
