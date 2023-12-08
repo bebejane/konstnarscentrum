@@ -18,7 +18,7 @@ export default function SelectedCommission({ data: { commissions } }: SelectedCo
         title="Utvalda uppdrag"
         slug="/anlita-oss/uppdrag"
         margin={true}
-        regional={true}
+        regional={false}
       />
       <CardContainer columns={3} whiteBorder={true}>
         {commissions.map(({ year, city, image, slug }, idx) =>
