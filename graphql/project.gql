@@ -2,7 +2,7 @@
 #import "./freagments/ProjectFragment.gql"
 
 query AllProjects {
-	projects: allProjects {
+	projects: allProjects(orderBy: [title_ASC]) {
 		...ProjectFragment
 	}
 }

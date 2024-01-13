@@ -1,6 +1,5 @@
-import { regions } from '/lib/region';
 import { apiQuery } from 'dato-nextjs-utils/api';
-import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestProjectsDocument, AllForArtistDocument } from "/graphql";
+import { LatestNewsDocument, AllAboutsMenuDocument, AllConsultsDocument, LatestProjectsDocument, AllForArtistDocument, AllProjectsDocument } from "/graphql";
 
 export type Menu = MenuItem[]
 
@@ -30,7 +29,12 @@ const base: Menu = [
       { type: 'for-artists', label: 'Medlemmar', slug: '/for-konstnarer/medlemmar', regional: true }
     ]
   },
-  { type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: true, index: true, external: true, sub: [] },
+  {
+    type: 'projects', label: 'Våra initiativ', slug: '/vara-initiativ', regional: false, index: false, external: true,
+    sub: [{
+      type: 'projects', label: 'Översikt', slug: '/vara-initiativ', regional: false, external: true
+    }]
+  },
   { type: 'news', label: 'Nyheter', slug: '/nyheter', index: true, regional: true, sub: [] },
   {
     type: 'contact', label: 'Kontakt', slug: '/kontakt', regional: true, sub: [
@@ -57,7 +61,7 @@ export const buildMenu = async () => {
     forArtists: ForArtistRecord[]
   } = await apiQuery([
     LatestNewsDocument,
-    LatestProjectsDocument,
+    AllProjectsDocument,
     AllAboutsMenuDocument,
     AllConsultsDocument,
     AllForArtistDocument
@@ -73,10 +77,10 @@ export const buildMenu = async () => {
         sub = abouts.map(el => ({ type: 'about', label: el.title, slug: `/om/${el.slug}`, regional: false }))
         break;
       case 'consult':
-        sub = consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}`, regional: false })).concat(item.sub)
+        sub = [...consults.map(el => ({ type: 'about', label: el.title, slug: `/anlita-oss/${el.slug}`, regional: false })), ...item.sub]
         break;
       case 'projects':
-        sub = projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))
+        sub = [...item.sub, ...projects.map(el => ({ type: 'projects', label: el.title, slug: el.url }))]
         break;
       case 'for-artists':
         sub = item.sub.concat(forArtists.map(el => ({ type: 'for-artists', label: el.title, slug: `/for-konstnarer/${el.slug}`, regional: false })))

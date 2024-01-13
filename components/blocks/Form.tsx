@@ -12,7 +12,7 @@ export type ButtonBlockProps = {
 	onClick: Function
 }
 
-export default function Form({ record, region, data: { id, formFields, subject, confirmation }, onClick }: ButtonBlockProps) {
+export default function Form({ record, data: { id, formFields, confirmation } }: ButtonBlockProps) {
 
 	const [formValues, setFormValues] = useState({ fromName: '', fromEmail: '' })
 	const [error, setError] = useState<Error | undefined>()

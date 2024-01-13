@@ -36,10 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		if (!email || !approval_token || !first_name || !last_name)
 			throw 'Ogitltig data'
 
-		if (approved)
-			await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
-		else
-			console.log('already approved')
+		await Email.applicationApproved({ email, token: approval_token, name: `${first_name} ${last_name}` });
 
 		console.log('application successfully approved', email)
 		res.status(200).json({ approved });
@@ -48,6 +45,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 		console.log(req.body)
 		console.error(err);
 		res.status(500).json({ error: err?.message || err });
-		//res.status(500).send(err);
 	}
 }
