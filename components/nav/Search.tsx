@@ -6,7 +6,7 @@ import CloseIcon from '/public/images/close.svg'
 import { KCImage as Image } from '/components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useDebouncedValue } from 'rooks'
+import { useDebounceFn } from 'rooks'
 import Loader from '/components/common/Loader'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import useStore from '/lib/store'
@@ -23,13 +23,11 @@ export default function Search({ }: Props) {
   const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
-  const [query, setQuery] = useDebouncedValue<string | undefined>('', 300)
-
+  const [query, setQuery] = useState<string | undefined>('')
   const ref = useRef<HTMLInputElement | undefined>()
   const abortController = useRef<AbortController | null>(null)
 
-  useEffect(() => {
-
+  const siteSearch = async (query: string) => {
     const variables = {
       type: 'site',
       query: query ? `${query.split(' ').filter(el => el).join('|')}` : undefined
@@ -64,8 +62,13 @@ export default function Search({ }: Props) {
         if (err.name === 'AbortError') return
         setError(err)
       })
-
-  }, [query, setResults])
+  }
+  const [debouncedSearch] = useDebounceFn(siteSearch, 300)
+  useEffect(() => {
+    setLoading(true)
+    setResults(undefined)
+    debouncedSearch(query)
+  }, [debouncedSearch, query, setResults])
 
   useEffect(() => {
     if (open) {

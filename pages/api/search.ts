@@ -7,8 +7,10 @@ import { truncateParagraph, isEmptyObject, recordToSlug } from '/lib/utils';
 
 export const config = {
   runtime: 'edge',
-  maxDuration: 30
+  maxDuration: 5
 }
+
+const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
 
 export default async function handler(req: NextRequest, res: NextResponse) {
 
@@ -55,9 +57,7 @@ const memberSearch = async (opt) => {
     first: 100
   };
 
-  console.time('search')
   const { members } = await apiQueryAll(query ? SearchMembersFreeDocument : SearchMembersDocument, { variables })
-  console.timeEnd('search')
   return members
 }
 
@@ -74,7 +74,8 @@ export const siteSearch = async (opt: any) => {
   if (isEmptyObject(variables))
     return {}
 
-  const client = buildClient({ apiToken: process.env.GRAPHQL_API_TOKEN });
+  console.time(`search: "${query}"`)
+
   const itemTypes = await client.itemTypes.list();
 
   const search = (await client.items.list({
@@ -100,8 +101,6 @@ export const siteSearch = async (opt: any) => {
         skip: i,
       }
     })
-
-
     Object.keys(res).forEach((k) => {
       data[k] = data[k] ?? [];
       data[k] = data[k].concat(res[k])
@@ -112,13 +111,13 @@ export const siteSearch = async (opt: any) => {
     if (!data[type].length)
       delete data[type]
     else
-      data[type] = data[type].map(el => ({
+      data[type] = data[type].map((el: any) => ({
         ...el,
         category: itemTypes.find(({ api_key }) => api_key === el._modelApiKey).name,
         text: truncateParagraph(el.text, 1, false),
         slug: recordToSlug(el)
       }))
   })
-
+  console.timeEnd(`search: "${query}"`)
   return data;
 }
