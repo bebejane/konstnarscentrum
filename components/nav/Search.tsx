@@ -6,6 +6,7 @@ import CloseIcon from '/public/images/close.svg'
 import { KCImage as Image } from '/components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useDebouncedValue } from 'rooks'
 import Loader from '/components/common/Loader'
 import { DatoMarkdown as Markdown } from 'dato-nextjs-utils/components'
 import useStore from '/lib/store'
@@ -22,8 +23,10 @@ export default function Search({ }: Props) {
   const [results, setResults] = useState<any | undefined>()
   const [error, setError] = useState<Error | undefined>()
   const [loading, setLoading] = useState<boolean>(false)
-  const [query, setQuery] = useState<string | undefined>('')
+  const [query, setQuery] = useDebouncedValue<string | undefined>('', 300)
+
   const ref = useRef<HTMLInputElement | undefined>()
+  const abortController = useRef<AbortController | null>(null)
 
   useEffect(() => {
 
@@ -38,20 +41,29 @@ export default function Search({ }: Props) {
     setResults(undefined)
     setLoading(true)
 
+    abortController.current?.abort(new DOMException('signal timed out', 'AbortError'));
+    abortController.current = new AbortController()
+
     fetch('/api/search', {
       body: JSON.stringify(variables),
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' }
+      headers: { 'Content-Type': 'application/json' },
+      signal: abortController.current.signal,
+
     })
       .then(async (res) => {
         if (res.status === 200) {
           const results = await res.json()
           setResults(results)
-        } else
-          setError(new Error('error in search'))
+        } else {
+          setError(new Error('Det uppstod ett fel vid sökning. Försök igen senare.'));
+        }
+        setLoading(false)
       })
-      .catch((err) => setError(err))
-      .finally(() => setLoading(false))
+      .catch((err) => {
+        if (err.name === 'AbortError') return
+        setError(err)
+      })
 
   }, [query, setResults])
 
@@ -61,16 +73,13 @@ export default function Search({ }: Props) {
     } else {
       setResults(undefined)
       setQuery('')
+      setShowSearch(false)
     }
-  }, [open])
+  }, [open, setQuery, setShowSearch])
 
   useEffect(() => {
     setOpen(false)
   }, [router])
-
-  useEffect(() => {
-    setShowSearch(query?.length > 0)
-  }, [query])
 
   useEffect(() => {
     setOpen(showSearch)

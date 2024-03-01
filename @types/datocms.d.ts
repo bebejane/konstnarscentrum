@@ -5107,6 +5107,7 @@ type SeoField = {
   __typename?: 'SeoField';
   description?: Maybe<Scalars['String']>;
   image?: Maybe<FileField>;
+  noIndex?: Maybe<Scalars['BooleanType']>;
   title?: Maybe<Scalars['String']>;
   twitterCard?: Maybe<Scalars['String']>;
 };
@@ -5117,6 +5118,7 @@ type Site = {
   faviconMetaTags: Array<Tag>;
   globalSeo?: Maybe<GlobalSeoField>;
   locales: Array<SiteLocale>;
+  noIndex?: Maybe<Scalars['BooleanType']>;
 };
 
 
@@ -5643,13 +5645,34 @@ type UploadUpdatedAtFilter = {
 
 type UploadVideoField = {
   __typename?: 'UploadVideoField';
+  alt?: Maybe<Scalars['String']>;
+  blurUpThumb?: Maybe<Scalars['String']>;
+  blurhash?: Maybe<Scalars['String']>;
   duration?: Maybe<Scalars['Int']>;
   framerate?: Maybe<Scalars['Int']>;
+  height: Scalars['IntType'];
   mp4Url?: Maybe<Scalars['String']>;
   muxAssetId: Scalars['String'];
   muxPlaybackId: Scalars['String'];
   streamingUrl: Scalars['String'];
+  thumbhash?: Maybe<Scalars['String']>;
   thumbnailUrl: Scalars['String'];
+  title?: Maybe<Scalars['String']>;
+  width: Scalars['IntType'];
+};
+
+
+type UploadVideoFieldaltArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
+};
+
+
+type UploadVideoFieldblurUpThumbArgs = {
+  imgixParams?: InputMaybe<ImgixParams>;
+  punch?: Scalars['Float'];
+  quality?: Scalars['Int'];
+  size?: Scalars['Int'];
 };
 
 
@@ -5661,6 +5684,12 @@ type UploadVideoFieldmp4UrlArgs = {
 
 type UploadVideoFieldthumbnailUrlArgs = {
   format?: InputMaybe<MuxThumbnailFormatType>;
+};
+
+
+type UploadVideoFieldtitleArgs = {
+  fallbackLocales?: InputMaybe<Array<SiteLocale>>;
+  locale?: InputMaybe<SiteLocale>;
 };
 
 /** Specifies how to filter by width */
