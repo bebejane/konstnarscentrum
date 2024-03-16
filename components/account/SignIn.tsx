@@ -76,7 +76,7 @@ export default function SignIn({ csrfToken, providers }) {
 					</button>
 				</div>
 				<SubmitButton loading={isSubmitting}>
-					{text.send}
+					{text.signIn}
 				</SubmitButton>
 				{error &&
 					<p className={styles.formError}>
