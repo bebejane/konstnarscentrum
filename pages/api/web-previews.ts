@@ -39,7 +39,7 @@ export default withWebPreviewsEdge(async ({ item, itemType }) => {
       path = `/konstnar/bli-medlem`
       break;
     case 'news':
-      path = `/konstnar/aktuellt/${slug}`
+      path = `/nyheter/${slug}`
       break;
     case 'member_news_category':
       path = `/konstnar/aktuellt`
