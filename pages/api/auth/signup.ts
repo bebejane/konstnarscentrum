@@ -36,7 +36,7 @@ export default catchErrorsFrom(async (req, res) => {
   let slug = slugify(`${firstName} ${lastName}`, { lower: true, trim: true, strict: true })
   console.log('org slug:', slug)
 
-  while ((await roleClient.items.list({ filter: { type: "member", fields: { slug: { eq: slug } } } })).length > 0) {
+  while ((await client.items.list({ filter: { type: "member", fields: { slug: { eq: slug } } } })).length > 0) {
     slug = slugify(`${firstName} ${lastName} ${Math.floor(Math.random() * 100)}`, { lower: true, trim: true, strict: true })
     console.log('new slug', slug)
   }
