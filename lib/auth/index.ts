@@ -25,11 +25,10 @@ export const findUser = async (email: string): Promise<any | null> => {
       type: "member",
       fields: {
         email: {
-          eq: email
+          matches: { pattern: email, caseSensitive: false }
         }
       }
     }
   });
-
   return users[0] ?? null
 }

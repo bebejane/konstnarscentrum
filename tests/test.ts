@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
 import { buildClient } from "@datocms/cma-client-node";
-import { generateToken } from "../lib/auth";
+import { generateToken, comparePassword } from "../lib/auth";
 //import { validatePassword } from "../lib/auth";
 dotenv.config({ path: "./.env" });
 
