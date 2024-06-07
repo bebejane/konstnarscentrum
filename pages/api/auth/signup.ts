@@ -29,8 +29,14 @@ export default catchErrorsFrom(async (req, res) => {
 
   const models = await client.itemTypes.list()
   const memberModelId = models.find(el => el.api_key === 'member').id
+
   const roleClient = buildClient({ apiToken: accessToken, environment: process.env.DATOCMS_ENVIRONMENT ?? 'main' })
   const hashedPassword = await hashPassword(password)
+
+  let slug = slugify(`${firstName} ${lastName}`, { lower: true, trim: true, strict: true })
+  while ((await roleClient.items.list({ filter: { type: "member", fields: { slug: { eq: slug } } } })).length > 0) {
+    slug = slugify(`${firstName} ${lastName} ${Math.floor(Math.random() * 100)}`, { lower: true, trim: true, strict: true })
+  }
 
   const member = await roleClient.items.create({
     item_type: {
@@ -41,7 +47,7 @@ export default catchErrorsFrom(async (req, res) => {
     last_name: lastName,
     full_name: `${firstName} ${lastName}`,
     region: regionId,
-    slug: slugify(`${firstName} ${lastName}`, { lower: true, trim: true, strict: true }),
+    slug,
     email,
     password: hashedPassword,
     application: application.id,
