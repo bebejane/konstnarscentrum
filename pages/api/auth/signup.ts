@@ -34,11 +34,9 @@ export default catchErrorsFrom(async (req, res) => {
   const hashedPassword = await hashPassword(password)
 
   let slug = slugify(`${firstName} ${lastName}`, { lower: true, trim: true, strict: true })
-  console.log('org slug:', slug)
 
-  while ((await client.items.list({ filter: { type: "member", fields: { slug: { eq: slug } } } })).length > 0) {
-    slug = slugify(`${firstName} ${lastName} ${Math.floor(Math.random() * 100)}`, { lower: true, trim: true, strict: true })
-    console.log('new slug', slug)
+  for (let i = 0; (await client.items.list({ filter: { type: "member", fields: { slug: { eq: slug } } } })).length > 0; i++) {
+    slug = slugify(`${firstName} ${lastName} ${i + 2}`, { lower: true, trim: true, strict: true })
   }
 
   const member = await roleClient.items.create({
