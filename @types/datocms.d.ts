@@ -6245,7 +6245,7 @@ type AllMembersCitiesQueryVariables = Exact<{ [key: string]: never; }>;
 type AllMembersCitiesQuery = { __typename?: 'Query', cities: Array<{ __typename?: 'MemberRecord', name?: string | null }> };
 
 type MemberQueryVariables = Exact<{
-  email?: InputMaybe<Scalars['String']>;
+  email: Scalars['String'];
 }>;
 
 

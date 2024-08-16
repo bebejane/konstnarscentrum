@@ -23,7 +23,6 @@ export type Props = {
 
 export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, showLibrary, onRemove, multi, member, selected = [] }: Props) {
 
-
   const { data: session, status } = useSession()
   const [images, setImages] = useState<FileField[]>([])
   const [uploading, setUploading] = useState(false)
@@ -44,6 +43,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
       if (res.status !== 200)
         throw new Error('Det uppstod ett fel vid hämtning av bilder')
       const { images } = await res.json()
+      console.log(images)
       setImages(images)
     } catch (err) {
       setError(err)
@@ -97,6 +97,7 @@ export default function MediaLibrary({ onSelect, onSelection, onShowLibrary, sho
     if (status !== 'authenticated') return
     handleRefresh()
   }, [session, status])
+
 
   return (
     <>

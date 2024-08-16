@@ -54,8 +54,8 @@ query AllMembersCities {
 	}
 }
 
-query Member($email: String) {
-	member(filter: { email: { eq: $email } }) {
+query Member($email: String!) {
+	member(filter: { email: { matches: { pattern: $email, caseSensitive: false } } }) {
 		...MemberFragment
 	}
 }
@@ -193,7 +193,7 @@ query AllPresentMemberNews(
 }
 
 query MemberImages($email: String!) {
-	member(filter: { email: { eq: $email } }) {
+	member(filter: { email: { matches: { pattern: $email, caseSensitive: false } } }) {
 		content {
 			... on ImageRecord {
 				image {

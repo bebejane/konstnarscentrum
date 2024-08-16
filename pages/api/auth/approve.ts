@@ -8,7 +8,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 	try {
 
-		const { email, approval_token, first_name, last_name, approved, ping } = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+		const body = typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
+		const { approval_token, first_name, last_name, approved, ping } = body
+		const email = body?.email?.toLowerCase()
 
 		if (ping) {
 			console.log('ping endpoint')

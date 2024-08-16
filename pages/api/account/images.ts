@@ -8,9 +8,10 @@ import { sleep, parseDatoError } from '/lib/utils'
 
 const userMediaLibrary = async (session: Session) => {
   const { member, uploads } = await apiQuery(MemberImagesDocument, {
-    variables: { email: session.user.email },
+    variables: { email: session.user.email.toLowerCase() },
     environment: process.env.DATOCMS_ENVIRONMENT ?? 'main'
   })
+
   const allImages = [...member.content.filter(({ image }) => image).reduce((imgs, { image }) => imgs = imgs.concat(image), []), ...uploads]
   const images = []
   allImages.sort((a, b) => a.id > b.id ? 1 : -1).forEach(i => !images.find(({ id }) => i.id === id) && images.push(i))

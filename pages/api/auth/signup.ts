@@ -5,7 +5,8 @@ import client, { buildClient } from '/lib/client'
 import slugify from 'slugify';
 
 export default catchErrorsFrom(async (req, res) => {
-  const { email, password, password2, firstName, lastName, regionId, ping } = req.body
+  const { password, password2, firstName, lastName, regionId, ping } = req.body
+  const email = req.body.email?.toLowerCase()
 
   if (ping) return res.status(200).json({ pong: true });
 
