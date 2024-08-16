@@ -13,7 +13,7 @@ export default function ImageShortcut({ data: { headline, image, link, text, bla
   return (
     <section className={s.container}>
       <figure>
-        {image &&
+        {image?.responsiveImage &&
           <Image
             className={s.image}
             data={image.responsiveImage}

@@ -278,6 +278,8 @@ const KCImage = forwardRef<HTMLDivElement, ImagePropTypes>(
       loaded,
     });
 
+    if (!data) return null
+
     const webpSource = data.webpSrcSet && (
       <source
         srcSet={data.webpSrcSet}
