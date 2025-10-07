@@ -1,21 +1,19 @@
-import s from './_error.module.scss'
+import s from "./_error.module.scss";
 
 function Error({ statusCode }) {
-  return (
-    <p className={s.container}>
-      {statusCode
-        ? `Det gick ej att hitta sidan`
-        : `Det uppstode ett fel på klienten`
-      }
-      <br /><br />
-      <a href="/">Tillbaka hem</a>
-    </p>
-  )
+	return (
+		<p className={s.container}>
+			{statusCode ? `Det gick ej att hitta sidan` : `Det uppstode ett fel på klienten`}
+			<br />
+			<br />
+			<a href='/'>Tillbaka hem</a>
+		</p>
+	);
 }
 
 Error.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-  return { statusCode }
-}
+	const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+	return { statusCode };
+};
 
-export default Error
+export default Error;
