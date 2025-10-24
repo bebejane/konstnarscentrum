@@ -21,7 +21,7 @@ export default function Members({ members, memberCategories, regions, region: re
 	const [error, setError] = useState<Error | undefined>();
 	const [loading, setLoading] = useState<boolean>(false);
 	const [query, setQuery] = useState<string | undefined>();
-	const [queryDebounced] = useDebouncedValue(query, 500);
+	const [queryDebounced] = useDebouncedValue(query, 150);
 	const [regionId, setRegionId] = useState<string | undefined>(regionFromProps?.id);
 	const [memberCategoryIds, setMemberCategoryIds] = useState<string | string[] | undefined>();
 	const abortController = useRef<AbortController | undefined>();
@@ -109,7 +109,7 @@ export default function Members({ members, memberCategories, regions, region: re
 				<>
 					{results.length === 0 && <div className={s.nomatches}>Vi hittade ingenting...</div>}
 
-					<CardContainer columns={3} className={s.results} key={JSON.stringify(query)}>
+					<CardContainer columns={3} className={s.results} key={JSON.stringify(queryDebounced)}>
 						{results.map(({ id, firstName, lastName, image, region, slug }) => (
 							<Card key={id}>
 								<Thumbnail

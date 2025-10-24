@@ -44,7 +44,7 @@ body {
 	font-family: $body-font;
 	letter-spacing: -0.01em;
 	-webkit-font-smoothing: antialiased;
-	font-feature-settings: "liga", "kern";
+	font-feature-settings: 'liga', 'kern';
 	overflow-x: hidden;
 	transition: color 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
@@ -52,7 +52,7 @@ body {
 html {
 	box-sizing: border-box;
 
-	&[data-theme="dark"] {
+	&[data-theme='dark'] {
 		--background: var(--black);
 		--foreground: var(--white);
 
@@ -63,7 +63,6 @@ html {
 		span {
 			color: var(--white);
 		}
-
 	}
 }
 
@@ -173,7 +172,7 @@ select {
 	padding: 0.8em;
 	padding-bottom: 0.9em;
 	padding-left: 1em;
-	font-family: "Jazz";
+	font-family: 'Jazz';
 	border: none;
 
 	&:focus {
@@ -229,7 +228,6 @@ select {
 	img {
 		user-select: none !important;
 		pointer-events: none;
-
 	}
 
 	div:nth-child(2) {
@@ -248,4 +246,14 @@ select {
 			color: var(--black);
 		}
 	}
+}
+
+#error-404,
+#error-500 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: calc(100vh - var(--navbar-height));
+	text-align: center;
 }
